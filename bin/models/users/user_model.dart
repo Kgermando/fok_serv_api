@@ -56,6 +56,38 @@ class UserModel {
     required this.passwordHash,
   });
 
+   factory UserModel.fromSQL(List<dynamic> row) {
+    return UserModel(
+      id: row[0],
+      nom: row[1],
+      postNom: row[2],
+      prenom: row[3],
+      email: row[4],
+      telephone: row[5],
+      adresse: row[6],
+      sexe: row[7],
+      role: row[8],
+      matricule: row[9],
+      dateNaissance: row[10],
+      lieuNaissance: row[11],
+      nationalite: row[12],
+      typeContrat: row[13],
+      departement: row[14],
+      servicesAffectation: row[15],
+      dateDebutContrat: row[16],
+      dateFinContrat: row[17],
+      fonctionOccupe: row[18],
+      competance: row[19],
+      experience: row[20],
+      rate: row[21],
+      statutAgent: row[22],
+      isOnline: row[23],
+      createdAt: row[24],
+      passwordHash: row[25]
+    );
+  }
+
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json["id"],
