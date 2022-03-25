@@ -18,6 +18,7 @@ import 'handlers/finances/creance_handlers.dart';
 import 'handlers/finances/depenses_handlers.dart';
 import 'handlers/finances/dette_handlers.dart';
 import 'handlers/finances/fin_exterieur_handlers.dart';
+import 'handlers/rh/agents_handlers.dart';
 import 'handlers/rh/paiement_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
 import 'handlers/rh/salaire_handlers.dart';
@@ -42,7 +43,7 @@ class Service {
             .addHandler(AuthHandlers(repos, serverSecretKey).router));
 
     router.mount(
-        '/api/users/',
+        '/api/user/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
@@ -50,11 +51,19 @@ class Service {
             .addHandler(UserHandlers(repos).router));
 
     router.mount(
+      '/rh/agents/',
+      Pipeline()
+          .addMiddleware(setJsonHeader())
+          .addMiddleware(handleErrors())
+          .addMiddleware(handleAuth(serverSecretKey))
+          .addHandler(AgentsHandlers(repos).router));
+
+    router.mount(
         '/rh/salaires/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(SalaireHandlers(repos).router));
     
     router.mount(
@@ -62,7 +71,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PresenceHandlers(repos).router));
 
     router.mount(
@@ -70,7 +79,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PaiementHandlers(repos).router));
     
     router.mount(
@@ -78,7 +87,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BanqueHandlers(repos).router));
 
     router.mount(
@@ -86,7 +95,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CaissesHandlers(repos).router));
 
     router.mount(
@@ -94,7 +103,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CreanceHandlers(repos).router));
 
     router.mount(
@@ -102,7 +111,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(DepensesHandlers(repos).router));
 
     router.mount(
@@ -110,7 +119,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(DetteHandlers(repos).router));
 
     router.mount(
@@ -118,7 +127,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(FinExterieurHandlers(repos).router));
     
 
@@ -127,7 +136,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(AmortissementHandlers(repos).router));
     
     router.mount(
@@ -135,7 +144,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BilansHandlers(repos).router));
       
     router.mount(
@@ -143,7 +152,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(JournalHandlers(repos).router));
 
     router.mount(
@@ -151,7 +160,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
+            .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ValorisationHandlers(repos).router));
 
 

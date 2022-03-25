@@ -34,11 +34,22 @@ Middleware handleErrors() {
   };
 }
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Origin, Content-Type',
+};
+
 Middleware setJsonHeader() {
   return (Handler innerHandler) {
     return (Request request) async {
       Response response = await innerHandler(request);
-      return response.change(headers: {"Content-Type": 'application/json'});
+      return response.change(
+        headers: {
+          'Content-Type': 'application/json',
+          ...corsHeaders, // add corsHeaders to response headers of each route
+        }
+      );
     };
   };
 }

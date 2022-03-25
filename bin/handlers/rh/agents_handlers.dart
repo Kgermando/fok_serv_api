@@ -1,38 +1,67 @@
 import 'dart:convert';
 
+import 'package:crypto/crypto.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-import 'package:crypto/crypto.dart';
 
 import '../../models/users/user_model.dart';
 import '../../repository/repository.dart';
 
-
-class UserHandlers {
+class AgentsHandlers {
   final Repository repos;
-  UserHandlers(this.repos);
+
+  AgentsHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
-      UserModel selectUser =
-          await repos.user.getFromId(request.context['id'] as int);
-      return Response.ok(jsonEncode(selectUser.toJson()));
+      List<UserModel> data = await repos.agents.getAllData();
+      return Response.ok(jsonEncode(data));
     });
 
-    router.get('/<id>', (Request request, String id) async {
-      late UserModel selectUser;
+    router.post('/insert-new-agent', (Request request) async {
+      var input = jsonDecode(await request.readAsString());
+      UserModel agent = UserModel(
+      nom: input['nom'] ?? '',
+      postNom: input['postNom'],
+      prenom: input['prenom'],
+      email: input['email'],
+      telephone: input['telephone'],
+      adresse: input['adresse'],
+      sexe: input['sexe'] ?? '',
+      role: input['role'] ?? '',
+      matricule: input['matricule'] ?? '',
+      dateNaissance: DateTime.parse(input['dateNaissance'] ?? ''),
+      lieuNaissance: input['lieuNaissance'] ?? '',
+      nationalite: input['nationalite'] ?? '',
+      typeContrat: input['typeContrat'] ?? '',
+      departement: input['departement'] ?? '',
+      servicesAffectation: input['servicesAffectation'],
+      dateDebutContrat: DateTime.parse(input['dateDebutContrat'] ?? ''),
+      dateFinContrat: DateTime.parse(input['dateFinContrat'] ?? ''),
+      fonctionOccupe: input['fonctionOccupe'] ?? '',
+      competance: input['competance'] ?? '',
+      experience: input['experience'] ?? '',
+      rate: input['rate'] ?? '',
+      statutAgent: bool.hasEnvironment(input['statutAgent'] ?? ''),
+      isOnline: bool.hasEnvironment(input['isOnline'] ?? ''),
+      createdAt: DateTime.parse(input['createdAt'] ?? ''),
+      passwordHash:
+          md5.convert(utf8.encode(input['passwordHash'] ?? '')).toString(),
+      );
+
       try {
-        selectUser = await repos.user.getFromId(int.parse(id));
+        await repos.agents.insertData(agent);
       } catch (e) {
         print(e);
-        return Response(404);
+        return Response(422);
       }
-      return Response.ok(jsonEncode(selectUser.toJson()));
+      return Response.ok(jsonEncode(agent.toJson()));
     });
 
-    router.patch('/', (Request request) async {
+
+    router.put('/update-agent/<id>', (Request request) async {
       UserModel selectUser =
           await repos.user.getFromId(request.context['id'] as int);
       dynamic input = jsonDecode(await request.readAsString());
@@ -120,14 +149,21 @@ class UserHandlers {
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
+
+    router.delete('/delete-agent/<id>', (Request request) async {
+      var id = request.params['id'];
+      repos.paiements.deleteData(int.parse(id!));
+      return Response.ok('Agent supprimée');
+    });
+
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page user n\'est pas trouvé'),
+          Response.notFound('La Page Agent n\'est pas trouvé'),
     );
 
     return router;
   }
 
-  
+ 
 }

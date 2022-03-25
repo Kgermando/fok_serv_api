@@ -19,8 +19,8 @@ class UserModel {
   late DateTime dateDebutContrat;
   late DateTime dateFinContrat;
   late String fonctionOccupe;  // Fonction occupé
-  late List? competance;
-  late List? experience;
+  late String? competance;
+  late String? experience;
   late String? rate; // cotes accumullés pour monté en grade
   late bool statutAgent;
   late bool isOnline;
@@ -120,7 +120,7 @@ class UserModel {
   }
 
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'nom': nom,

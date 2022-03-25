@@ -25,7 +25,7 @@ class TableName {
   final vachar = 'VARCHAR NOT NULL';
   final timestamp = 'TIMESTAMP NOT NULL';
   final list = 'JSON NULL';
-  final bool = 'BOOLEAN NOT NULL';
+  final boolean = 'BOOLEAN NOT NULL';
 
   Future openConnection(PostgreSQLConnection connection) async {
     try {
@@ -51,11 +51,11 @@ class TableName {
           "dateDebutContrat" $timestamp,
           "dateFinContrat" $timestamp,
           "fonctionOccupe" $vachar,
-          "competance" $list,
-          "experience" $list,
+          "competance" $vachar,
+          "experience" $vachar,
           "rate" $vachar,
-          "statutAgent" $bool,
-          "isOnline" $bool,
+          "statutAgent" $boolean,
+          "isOnline" $boolean,
           "createdAt" $timestamp,
           "passwordHash" $vachar
       );
@@ -94,7 +94,7 @@ class TableName {
         CREATE TABLE IF NOT EXISTS $tablePaiement(
           "id" $key,
           "matricule" $vachar,
-          "observation" $bool,
+          "observation" $boolean,
           "modePaiement" $vachar,
           "prime" $vachar,
           "created" $timestamp
