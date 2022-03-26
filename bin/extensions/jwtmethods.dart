@@ -6,7 +6,7 @@ String generateAuthToken(UserModel user, String secretServerKey) {
   final jwt = JWT({
     'id': user.id,
     'exp': DateTime.now().add(Duration(minutes: 10)).millisecondsSinceEpoch ~/
-        1000,
+      1000,
     'type': 'auth',
   });
   return jwt.sign(SecretKey(secretServerKey));
