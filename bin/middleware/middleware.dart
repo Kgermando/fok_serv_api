@@ -6,7 +6,7 @@ Middleware handleAuth(String secret) {
     return (Request request) async {
       final Request updatedRequest;
       try {
-        String token = request.headers['Authorization']!;
+        String? token = request.headers['Authorization']!;
         if (token.startsWith('Bearer ')) {
           token = token.substring(7);
         }

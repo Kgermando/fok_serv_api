@@ -51,7 +51,7 @@ class Service {
             .addHandler(UserHandlers(repos).router));
 
     router.mount(
-      '/rh/agents/',
+      '/api/rh/agents/',
       Pipeline()
           .addMiddleware(setJsonHeader())
           .addMiddleware(handleErrors())
