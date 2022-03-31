@@ -19,9 +19,9 @@ import 'handlers/finances/depenses_handlers.dart';
 import 'handlers/finances/dette_handlers.dart';
 import 'handlers/finances/fin_exterieur_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
-import 'handlers/rh/paiement_handlers.dart';
+import 'handlers/rh/paiement_divers_handlers.dart';
+import 'handlers/rh/paiement_salaire_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
-import 'handlers/rh/salaire_handlers.dart';
 import 'middleware/middleware.dart';
 import 'repository/repository.dart';
 
@@ -57,14 +57,6 @@ class Service {
           .addMiddleware(handleErrors())
           .addMiddleware(handleAuth(serverSecretKey))
           .addHandler(AgentsHandlers(repos).router));
-
-    router.mount(
-        '/rh/salaires/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(SalaireHandlers(repos).router));
     
     router.mount(
         '/api/rh/presences/',
@@ -75,12 +67,20 @@ class Service {
             .addHandler(PresenceHandlers(repos).router));
 
     router.mount(
-        '/api/rh/paiements/',
+        '/api/rh/paiement-salaires/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(PaiementHandlers(repos).router));
+            .addHandler(PaiementSalaireHandlers(repos).router));
+
+    router.mount(
+        '/api/rh/paiement-divers/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(PaiementDiversHandlers(repos).router));
     
     router.mount(
         '/api/finances/transactions/banques/',

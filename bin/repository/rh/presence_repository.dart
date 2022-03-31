@@ -21,7 +21,7 @@ class PresenceRepository {
   }
 
   Future<void> insertData(PresenceModel presenceModel) async {
-    var matricule = presenceModel.matricule;
+    var agent = presenceModel.agent;
     var arrive = presenceModel.arrive;
     var sortie = presenceModel.sortie;
     var presence = presenceModel.presence;
@@ -31,14 +31,14 @@ class PresenceRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('presences_id_seq'), '$matricule',"
+        "INSERT INTO $tableName VALUES (nextval('presences_id_seq'), '$agent',"
           "'$arrive','$sortie','$presence', '$motif', '$created');");
     });
   }
 
   Future<void> update(PresenceModel presenceModel) async {
     var id = presenceModel.id;
-    var matricule = presenceModel.matricule;
+    var agent = presenceModel.agent;
     var arrive = presenceModel.arrive;
     var sortie = presenceModel.sortie;
     var presence = presenceModel.presence;
@@ -48,7 +48,7 @@ class PresenceRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"matricule\"='$matricule', \"arrive\"='$arrive',"
+        "UPDATE $tableName SET \"matricule\"='$agent', \"arrive\"='$arrive',"
         "\"sortie\"='$sortie',\"presence\"='$presence', \"motif\"='$motif',"
         "\"created\"='$created' WHERE id=$id;");
     });
@@ -71,7 +71,7 @@ class PresenceRepository {
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return PresenceModel(
       id: data[0][0],
-      matricule: data[0][1],
+      agent: data[0][1],
       arrive: data[0][2],
       sortie: data[0][3],
       presence: data[0][4],

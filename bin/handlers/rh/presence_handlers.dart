@@ -22,7 +22,7 @@ class PresenceHandlers {
       var input = jsonDecode(await request.readAsString());
 
       PresenceModel data = PresenceModel(
-        matricule: input['matricule'],
+        agent: input['agent'],
         arrive: DateTime.parse(input['arrive']),
         sortie: DateTime.parse(input['sortie']),
         presence: input['presence'],
@@ -44,8 +44,9 @@ class PresenceHandlers {
       PresenceModel data =
           await repos.presences.getFromId(int.parse(id!));
 
-      // if (input['matricule'] != null) {
-      //   salaireModel.matricule = input['matricule'];
+      //  on ne modifie pas l'agent
+      // if (input['agent'] != null) {
+      //   salaireModel.matricule = input['agent'];
       // }
       if (input['arrive'] != null) {
         data.arrive = DateTime.parse(input['arrive']);

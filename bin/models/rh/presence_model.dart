@@ -1,6 +1,8 @@
+import 'agent_model.dart';
+
 class PresenceModel {
   late int? id;
-  late String matricule;
+  late AgentModel agent;
   late DateTime arrive;
   late DateTime sortie;
   late bool presence;
@@ -10,7 +12,7 @@ class PresenceModel {
   PresenceModel(
     {
       this.id,
-      required this.matricule,
+      required this.agent,
       required this.arrive,
       required this.sortie,
       required this.presence,
@@ -22,7 +24,7 @@ class PresenceModel {
   factory PresenceModel.fromSQL(List<dynamic> row) {
     return PresenceModel(
       id: row[0], 
-      matricule: row[1], 
+      agent: row[1], 
       arrive: row[2], 
       sortie: row[3], 
       presence: row[4], 
@@ -34,7 +36,7 @@ class PresenceModel {
   factory PresenceModel.fromJson(Map<String, dynamic> json) {
     return PresenceModel(
       id: json['id'],
-      matricule: json['matricule'],
+      agent: json['agent'],
       arrive: DateTime.parse(json['arrive']),
       sortie: DateTime.parse(json['sortie']),
       presence: json['presence'],
@@ -46,7 +48,7 @@ class PresenceModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'matricule': matricule,
+      'agent': agent,
       'arrive': arrive.toIso8601String(),
       'sortie': sortie.toIso8601String(),
       'presence': presence,

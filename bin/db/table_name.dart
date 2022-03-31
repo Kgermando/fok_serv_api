@@ -3,12 +3,12 @@ import 'package:shelf/shelf.dart';
 
 class TableName {
   // Tables
-  final tableUser = 'users';
   final tableToken = 'refresh_tokens';
+  final tableUser = 'users';
+  final tableAgents = 'agents';
   final tableSalaire = 'salaires';
+  final tablePaiementDivers = 'paiement_divers';
   final tablePresence = 'presences';
-  final tablePaiement = 'paiements';
-
   final banquesTable = 'banques';
   final caissesTable = 'caisses';
   final creancesTable = 'creances';
@@ -30,8 +30,35 @@ class TableName {
   Future openConnection(PostgreSQLConnection connection) async {
     try {
       await connection.open();
+
+      // Token
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $tableToken(
+          "id" $key,
+          "owner" $vachar,
+          "token" $vachar
+      );
+      ''');
+
+      // User
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tableUser(
+          "id" $key,
+          "photo" $vachar,
+          "nom" $vachar,
+          "prenom" $vachar,
+          "matricule" $vachar,
+          "role" $vachar,
+          "isOnline" $boolean,
+          "createdAt" $timestamp,
+          "passwordHash" $vachar
+      );
+      ''');
+
+
+      // Agent
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $tableAgents(
           "id" $key,
           "nom" $vachar,
           "postNom" $vachar,
@@ -53,35 +80,42 @@ class TableName {
           "fonctionOccupe" $vachar,
           "competance" $vachar,
           "experience" $vachar,
-          "rate" $vachar,
           "statutAgent" $boolean,
-          "isOnline" $boolean,
           "createdAt" $timestamp,
-          "passwordHash" $vachar
+          "passwordHash" $vachar,
+          "photo" $vachar
       );
       ''');
 
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $tableToken(
-          "id" $key,
-          "owner" $vachar,
-          "token" $vachar
-      );
-      ''');
-
+      
+      // PaiementSalaireModel
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tableSalaire(
           "id" $key,
-          "matricule" $vachar,
-          "salaire" $vachar,
-          "date" $timestamp
+          "agent" $vachar,
+          "observation" $boolean,
+          "modePaiement" $vachar,
+          "createdAt" $timestamp
       );
       ''');
 
+      // PaiementDiversModel
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $tablePaiementDivers(
+          "id" $key,
+          "agent" $vachar,
+          "observation" $boolean,
+          "modePaiement" $vachar,
+          "divers" $vachar,
+          "createdAt" $timestamp
+      );
+      ''');
+
+      // Presence model
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tablePresence(
           "id" $key,
-          "matricule" $vachar,
+          "agent" $vachar,
           "arrive" $timestamp,
           "sortie" $timestamp,
           "presence" $vachar,
@@ -90,17 +124,7 @@ class TableName {
       );
       ''');
 
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $tablePaiement(
-          "id" $key,
-          "matricule" $vachar,
-          "observation" $boolean,
-          "modePaiement" $vachar,
-          "prime" $vachar,
-          "created" $timestamp
-      );
-      ''');
-
+      
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $banquesTable(
           "id" $key,

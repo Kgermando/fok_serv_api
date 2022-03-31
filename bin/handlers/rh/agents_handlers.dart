@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../models/rh/agent_model.dart';
 import '../../models/users/user_model.dart';
 import '../../repository/repository.dart';
 
@@ -16,13 +17,13 @@ class AgentsHandlers {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<UserModel> data = await repos.agents.getAllData();
+      List<AgentModel> data = await repos.agents.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.post('/insert-new-agent', (Request request) async {
       var input = jsonDecode(await request.readAsString());
-      UserModel agent = UserModel(
+      AgentModel agent = AgentModel(
       nom: input['nom'] ?? '',
       postNom: input['postNom'],
       prenom: input['prenom'],
@@ -43,9 +44,7 @@ class AgentsHandlers {
       fonctionOccupe: input['fonctionOccupe'] ?? '',
       competance: input['competance'] ?? '',
       experience: input['experience'] ?? '',
-      rate: input['rate'] ?? '',
       statutAgent: bool.hasEnvironment(input['statutAgent'] ?? ''),
-      isOnline: bool.hasEnvironment(input['isOnline'] ?? ''),
       createdAt: DateTime.parse(input['createdAt'] ?? ''),
       passwordHash:
           md5.convert(utf8.encode(input['passwordHash'] ?? '')).toString(),
@@ -62,11 +61,11 @@ class AgentsHandlers {
 
 
     router.put('/update-agent/<id>', (Request request) async {
-      UserModel selectUser =
-          await repos.user.getFromId(request.context['id'] as int);
+      AgentModel selectUser =
+          await repos.agents.getFromId(request.context['id'] as int);
       dynamic input = jsonDecode(await request.readAsString());
-      if (input['matricule'] != null) {
-        selectUser.matricule = input['matricule'];
+      if (input['photo'] != null) {
+        selectUser.photo = input['photo'];
       }
       if (input['nom'] != null) {
         selectUser.nom = input['nom'];
@@ -128,14 +127,8 @@ class AgentsHandlers {
       if (input['experience'] != null) {
         selectUser.experience = input['experience'];
       }
-      if (input['rate'] != null) {
-        selectUser.rate = input['rate'];
-      }
       if (input['statutAgent'] != null) {
         selectUser.statutAgent = input['statutAgent'];
-      }
-      if (input['isOnline'] != null) {
-        selectUser.isOnline = input['isOnline'];
       }
       if (input['createdAt'] != null) {
         selectUser.createdAt = input['createdAt'];
@@ -145,14 +138,14 @@ class AgentsHandlers {
             md5.convert(utf8.encode(input['passwordHash'])).toString();
         repos.refreshTokens.logoutAll(selectUser.id!);
       }
-      repos.user.update(selectUser);
+      repos.agents.update(selectUser);
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
 
     router.delete('/delete-agent/<id>', (Request request) async {
       var id = request.params['id'];
-      repos.paiements.deleteData(int.parse(id!));
+      repos.agents.deleteData(int.parse(id!));
       return Response.ok('Agent supprimée');
     });
 

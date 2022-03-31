@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../models/rh/paiement_salaire_model.dart';
 import 'comptabilites/amrtissement_repository.dart';
 import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/journal_repository.dart';
@@ -11,20 +12,20 @@ import 'finances/depenses_repository.dart';
 import 'finances/dettes_repository.dart';
 import 'finances/fin_exterieur_repository.dart';
 import 'rh/agents_repository.dart';
-import 'rh/paiement_repository.dart';
+import 'rh/paiement_divers_repository copy.dart';
+import 'rh/paiement_salaire_repository.dart';
 import 'rh/presence_repository.dart';
-import 'rh/salaire_repository.dart';
 import 'user/refresh_token_repository.dart';
 import 'user/user_repository.dart';
 
 class Repository {
   final PostgreSQLConnection executor;
-  late UserRepository user;
-  late AgentsRepository agents;
   late RefreshTokensRepository refreshTokens;
-  late SalaireRpository salaires;
+  late UserRepository users;
+  late AgentsRepository agents;
+  late PaiementSalaireRepository salaires;
+  late PaiementDiversRepository paiementDivers;
   late PresenceRepository presences;
-  late PaiementRepository paiements;
   late BanqueRepository banques;
   late CaissesRepository caisses;
   late CreancesRepository creances;
@@ -37,12 +38,12 @@ class Repository {
   late ValorisationRepository valorisations;
 
   Repository(this.executor) {
-    user = UserRepository(executor, 'users');
-    agents = AgentsRepository(executor, 'users');
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
-    salaires = SalaireRpository(executor, 'salaires');
+    users = UserRepository(executor, 'users');
+    agents = AgentsRepository(executor, 'agents');
+    salaires = PaiementSalaireRepository(executor, 'salaires');
+    paiementDivers = PaiementDiversRepository(executor, 'paiement_divers');
     presences = PresenceRepository(executor, 'presences');
-    paiements = PaiementRepository(executor, 'paiements');
     banques = BanqueRepository(executor, 'banques');
     caisses = CaissesRepository(executor, 'caisses');
     creances = CreancesRepository(executor, 'creances');

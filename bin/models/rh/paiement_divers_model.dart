@@ -1,36 +1,38 @@
-class PaiementModel {
+import 'agent_model.dart';
+
+class PaiementDiversModel {
   late int? id;
-  late String matricule;
+  late AgentModel agent;
   late bool observation; // Payé ou non Payé
-  late String modePaiement;
-  late String prime;
+  late String modePaiement; // mode depayement
+  late String divers; // divers pour agent selon l'ordre
   late DateTime created;
 
-  PaiementModel(
+  PaiementDiversModel(
       {this.id,
-      required this.matricule,
+      required this.agent,
       required this.observation,
       required this.modePaiement,
-      required this.prime,
+      required this.divers,
       required this.created});
 
-  factory PaiementModel.fromSQL(List<dynamic> row) {
-    return PaiementModel(
+  factory PaiementDiversModel.fromSQL(List<dynamic> row) {
+    return PaiementDiversModel(
         id: row[0],
-        matricule: row[1],
+        agent: row[1],
         observation: row[2],
         modePaiement: row[3],
-        prime: row[4],
+        divers: row[4],
         created: row[5]);
   }
 
-  factory PaiementModel.fromJson(Map<String, dynamic> json) {
-    return PaiementModel(
+  factory PaiementDiversModel.fromJson(Map<String, dynamic> json) {
+    return PaiementDiversModel(
         id: json['id'],
-        matricule: json['matricule'],
+        agent: json['agent'],
         observation: json['observation'],
         modePaiement: json['modePaiement'],
-        prime: json['prime'],
+        divers: json['divers'],
         created: DateTime.parse(json['created']),
     );
   }
@@ -38,10 +40,10 @@ class PaiementModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'matricule': matricule,
+      'agent': agent,
       'observation': observation,
       'modePaiement': modePaiement,
-      'prime': prime,
+      'divers': divers,
       'created': created
     };
   }

@@ -1,7 +1,7 @@
 
 import 'package:postgres/postgres.dart';
 
-import '../../models/users/user_model.dart';
+import '../../models/rh/agent_model.dart';
 
 class AgentsRepository {
   final PostgreSQLConnection executor;
@@ -9,86 +9,84 @@ class AgentsRepository {
 
   AgentsRepository(this.executor, this.tableName);
 
-  Future<List<UserModel>> getAllData() async {
-    var data = <UserModel>{};
+  Future<List<AgentModel>> getAllData() async {
+    var data = <AgentModel>{};
 
     var querySQL = "SELECT * FROM $tableName ORDER BY \"createdAt\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
-      data.add(UserModel.fromSQL(row));
+      data.add(AgentModel.fromSQL(row));
     }
     return data.toList();
   }
 
-  Future<void> insertData(UserModel user) async {
-    // var id = user.id;
-    var nom = user.nom;
-    var postNom = user.postNom;
-    var prenom = user.prenom;
-    var email = user.email;
-    var telephone = user.telephone;
-    var adresse = user.adresse;
-    var sexe = user.sexe;
-    var role = user.role;
-    var matricule = user.matricule;
-    var dateNaissance = user.dateNaissance;
-    var lieuNaissance = user.lieuNaissance;
-    var nationalite = user.nationalite;
-    var typeContrat = user.typeContrat;
-    var departement = user.departement;
-    var servicesAffectation = user.servicesAffectation;
-    var dateDebutContrat = user.dateDebutContrat;
-    var dateFinContrat = user.dateFinContrat;
-    var fonctionOccupe = user.fonctionOccupe;
-    var competance = user.competance;
-    var experience = user.experience;
-    var rate = user.rate;
-    var statutAgent = user.statutAgent;
-    var isOnline = user.isOnline;
-    var createdAt = user.createdAt;
-    var passwordHash = user.passwordHash;
+  Future<void> insertData(AgentModel agentModel) async {
+    
+    var nom = agentModel.nom;
+    var postNom = agentModel.postNom;
+    var prenom = agentModel.prenom;
+    var email = agentModel.email;
+    var telephone = agentModel.telephone;
+    var adresse = agentModel.adresse;
+    var sexe = agentModel.sexe;
+    var role = agentModel.role;
+    var matricule = agentModel.matricule;
+    var dateNaissance = agentModel.dateNaissance;
+    var lieuNaissance = agentModel.lieuNaissance;
+    var nationalite = agentModel.nationalite;
+    var typeContrat = agentModel.typeContrat;
+    var departement = agentModel.departement;
+    var servicesAffectation = agentModel.servicesAffectation;
+    var dateDebutContrat = agentModel.dateDebutContrat;
+    var dateFinContrat = agentModel.dateFinContrat;
+    var fonctionOccupe = agentModel.fonctionOccupe;
+    var competance = agentModel.competance;
+    var experience = agentModel.experience;
+    var statutAgent = agentModel.statutAgent;
+    var createdAt = agentModel.createdAt;
+    var passwordHash = agentModel.passwordHash;
+    var photo = agentModel.photo;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('users_id_seq'), '$nom',"
-          "'$postNom', '$prenom', '$email', '$telephone', '$adresse', '$sexe',"
-          "'$role', '$matricule', '$dateNaissance', '$lieuNaissance',"
-          "'$nationalite', '$typeContrat', '$departement','$servicesAffectation',"
-          "'$dateDebutContrat', '$dateFinContrat','$fonctionOccupe',"
-          "'$competance', '$experience', '$rate', '$statutAgent', '$isOnline',"
-          "'$createdAt', '$passwordHash');");
+        "INSERT INTO $tableName VALUES (nextval('agents_id_seq'), '$nom',"
+        "'$postNom', '$prenom', '$email', '$telephone', '$adresse', '$sexe',"
+        "'$role', '$matricule', '$dateNaissance', '$lieuNaissance',"
+        "'$nationalite', '$typeContrat', '$departement','$servicesAffectation',"
+        "'$dateDebutContrat', '$dateFinContrat','$fonctionOccupe',"
+        "'$competance', '$experience', '$statutAgent',"
+        "'$createdAt', '$passwordHash', '$photo');");
     });
   }
 
 
-  Future<void> update(UserModel user) async {
-    var id = user.id;
-    var nom = user.nom;
-    var postNom = user.postNom;
-    var prenom = user.prenom;
-    var email = user.email;
-    var telephone = user.telephone;
-    var adresse = user.adresse;
-    var sexe = user.sexe;
-    var role = user.role;
-    var matricule = user.matricule;
-    var dateNaissance = user.dateNaissance;
-    var lieuNaissance = user.lieuNaissance;
-    var nationalite = user.nationalite;
-    var typeContrat = user.typeContrat;
-    var departement = user.departement;
-    var servicesAffectation = user.servicesAffectation;
-    var dateDebutContrat = user.dateDebutContrat;
-    var dateFinContrat = user.dateFinContrat;
-    var fonctionOccupe = user.fonctionOccupe;
-    var competance = user.competance;
-    var experience = user.experience;
-    var rate = user.rate;
-    var statutAgent = user.statutAgent;
-    var isOnline = user.isOnline;
-    var createdAt = user.createdAt;
-    var passwordHash = user.passwordHash;
+  Future<void> update(AgentModel agentModel) async {
+    var id = agentModel.id;
+    var nom = agentModel.nom;
+    var postNom = agentModel.postNom;
+    var prenom = agentModel.prenom;
+    var email = agentModel.email;
+    var telephone = agentModel.telephone;
+    var adresse = agentModel.adresse;
+    var sexe = agentModel.sexe;
+    var role = agentModel.role;
+    var matricule = agentModel.matricule;
+    var dateNaissance = agentModel.dateNaissance;
+    var lieuNaissance = agentModel.lieuNaissance;
+    var nationalite = agentModel.nationalite;
+    var typeContrat = agentModel.typeContrat;
+    var departement = agentModel.departement;
+    var servicesAffectation = agentModel.servicesAffectation;
+    var dateDebutContrat = agentModel.dateDebutContrat;
+    var dateFinContrat = agentModel.dateFinContrat;
+    var fonctionOccupe = agentModel.fonctionOccupe;
+    var competance = agentModel.competance;
+    var experience = agentModel.experience;
+    var statutAgent = agentModel.statutAgent;
+    var createdAt = agentModel.createdAt;
+    var passwordHash = agentModel.passwordHash;
+    var photo = agentModel.photo;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -103,8 +101,8 @@ class AgentsRepository {
           "\"dateDebutContrat\"='$dateDebutContrat',"
           "\"dateFinContrat\"='$dateFinContrat', \"fonctionOccupe\"='$fonctionOccupe',"
           "\"competance\"='$competance', \"experience\"='$experience',"
-          "\"rate\"='$rate',\"statutAgent\"='$statutAgent',\"isOnline\"='$isOnline'"
-          "\"createdAt\"='$createdAt', \"passwordHash\"='$passwordHash' WHERE id=$id;");
+          "\"statutAgent\"='$statutAgent',"
+          "\"createdAt\"='$createdAt', \"passwordHash\"='$passwordHash', \"photo\"='$photo' WHERE id=$id;");
     });
   }
 
@@ -119,10 +117,10 @@ class AgentsRepository {
     }
   }
 
-  Future<UserModel> getFromId(int id) async {
+  Future<AgentModel> getFromId(int id) async {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
-    return UserModel(
+    return AgentModel(
       id: data[0][0],
       nom: data[0][1],
       postNom: data[0][2],
@@ -144,11 +142,10 @@ class AgentsRepository {
       fonctionOccupe: data[0][18],
       competance: data[0][19],
       experience: data[0][20],
-      rate: data[0][21],
-      statutAgent: data[0][22],
-      isOnline: data[0][23],
-      createdAt: data[0][24],
-      passwordHash: data[0][25],
+      statutAgent: data[0][21],
+      createdAt: data[0][22],
+      passwordHash: data[0][23],
+      photo: data[0][24],
     );
   }
 }
