@@ -3,32 +3,33 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/rh/paiement_salaire_model.dart';
+import '../../models/rh/perfomence_model.dart';
 import '../../repository/repository.dart';
 
-class PaiementSalaireHandlers {
+class PerformenceHandlers {
   final Repository repos;
 
-  PaiementSalaireHandlers(this.repos);
+  PerformenceHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<PaiementSalaireModel> data = await repos.salaires.getAllData();
+      List<PerformenceModel> data = await repos.performences.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
-    router.post('/insert-new-paiement', (Request request) async {
+    router.post('/insert-new-performence', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-      PaiementSalaireModel data = PaiementSalaireModel(
+      PerformenceModel data = PerformenceModel(
           agent: input['agent'],
-          observation: bool.hasEnvironment(input['observation']),
-          modePaiement: input['modePaiement'],
+          hospitalite: input['hospitalite'],
+          ponctualite: input['ponctualite'],
+          travaille: input['travaille'],
           created: DateTime.parse(input['created']));
       try {
-        await repos.salaires.insertData(data);
+        await repos.performences.insertData(data);
       } catch (e) {
         print(e);
         return Response(422);
@@ -36,28 +37,31 @@ class PaiementSalaireHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-paiement/<id>', (Request request) async {
+    router.put('/update-performence/<id>', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
-      PaiementSalaireModel data = await repos.salaires.getFromId(int.parse(id!));
+      PerformenceModel data = await repos.performences.getFromId(int.parse(id!));
 
       if (input['agent'] != null) {
         data.agent = input['agent'];
       }
-      if (input['observation'] != null) {
-        data.observation = bool.hasEnvironment(input['observation']);
+      if (input['hospitalite'] != null) {
+        data.hospitalite = input['hospitalite'];
       }
-      if (input['modePaiement'] != null) {
-        data.modePaiement = input['modePaiement'];
+      if (input['ponctualite'] != null) {
+        data.ponctualite = input['ponctualite'];
+      }
+      if (input['travaille'] != null) {
+        data.travaille = input['travaille'];
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
-      repos.salaires.update(data);
+      repos.performences.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-paiement/<id>', (Request request) async {
+    router.delete('/delete-performence/<id>', (Request request) async {
       var id = request.params['id'];
       repos.salaires.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -66,7 +70,7 @@ class PaiementSalaireHandlers {
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page paiements salaire n\'est pas trouvé'),
+          Response.notFound('La Page performences n\'est pas trouvé'),
     );
     return router;
   }

@@ -14,6 +14,7 @@ import 'finances/fin_exterieur_repository.dart';
 import 'rh/agents_repository.dart';
 import 'rh/paiement_divers_repository copy.dart';
 import 'rh/paiement_salaire_repository.dart';
+import 'rh/performence_repository.dart';
 import 'rh/presence_repository.dart';
 import 'user/refresh_token_repository.dart';
 import 'user/user_repository.dart';
@@ -26,6 +27,7 @@ class Repository {
   late PaiementSalaireRepository salaires;
   late PaiementDiversRepository paiementDivers;
   late PresenceRepository presences;
+  late PerformenceRepository performences;
   late BanqueRepository banques;
   late CaissesRepository caisses;
   late CreancesRepository creances;
@@ -44,6 +46,7 @@ class Repository {
     salaires = PaiementSalaireRepository(executor, 'salaires');
     paiementDivers = PaiementDiversRepository(executor, 'paiement_divers');
     presences = PresenceRepository(executor, 'presences');
+    performences = PerformenceRepository(executor, 'performences');
     banques = BanqueRepository(executor, 'banques');
     caisses = CaissesRepository(executor, 'caisses');
     creances = CreancesRepository(executor, 'creances');

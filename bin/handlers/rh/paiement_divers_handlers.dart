@@ -42,6 +42,9 @@ class PaiementDiversHandlers {
       var id = request.params['id'];
       PaiementDiversModel data = await repos.paiementDivers.getFromId(int.parse(id!));
 
+      if (input['agent'] != null) {
+        data.agent = input['agent'];
+      }
       if (input['observation'] != null) {
         data.observation = bool.hasEnvironment(input['observation']);
       }

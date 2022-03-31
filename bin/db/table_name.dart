@@ -9,6 +9,7 @@ class TableName {
   final tableSalaire = 'salaires';
   final tablePaiementDivers = 'paiement_divers';
   final tablePresence = 'presences';
+  final tablePerformence = 'performences';
   final banquesTable = 'banques';
   final caissesTable = 'caisses';
   final creancesTable = 'creances';
@@ -88,7 +89,7 @@ class TableName {
       ''');
 
       
-      // PaiementSalaireModel
+      // Paiement Salaire
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tableSalaire(
           "id" $key,
@@ -99,7 +100,7 @@ class TableName {
       );
       ''');
 
-      // PaiementDiversModel
+      // Paiement Divers
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tablePaiementDivers(
           "id" $key,
@@ -120,6 +121,18 @@ class TableName {
           "sortie" $timestamp,
           "presence" $vachar,
           "motif" $vachar,
+          "created" $timestamp
+      );
+      ''');
+
+      // Performence model
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $tablePresence(
+          "id" $key,
+          "agent" $vachar,
+          "hospitalite" $vachar,
+          "ponctualite" $vachar,
+          "travaille" $vachar,
           "created" $timestamp
       );
       ''');

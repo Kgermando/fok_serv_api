@@ -44,10 +44,9 @@ class PresenceHandlers {
       PresenceModel data =
           await repos.presences.getFromId(int.parse(id!));
 
-      //  on ne modifie pas l'agent
-      // if (input['agent'] != null) {
-      //   salaireModel.matricule = input['agent'];
-      // }
+      if (input['agent'] != null) {
+        data.agent = input['agent'];
+      }
       if (input['arrive'] != null) {
         data.arrive = DateTime.parse(input['arrive']);
       }

@@ -5,7 +5,6 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
 import '../../models/rh/agent_model.dart';
-import '../../models/users/user_model.dart';
 import '../../repository/repository.dart';
 
 class AgentsHandlers {
@@ -24,30 +23,31 @@ class AgentsHandlers {
     router.post('/insert-new-agent', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       AgentModel agent = AgentModel(
-      nom: input['nom'] ?? '',
+      nom: input['nom'],
       postNom: input['postNom'],
       prenom: input['prenom'],
       email: input['email'],
       telephone: input['telephone'],
       adresse: input['adresse'],
-      sexe: input['sexe'] ?? '',
-      role: input['role'] ?? '',
-      matricule: input['matricule'] ?? '',
-      dateNaissance: DateTime.parse(input['dateNaissance'] ?? ''),
-      lieuNaissance: input['lieuNaissance'] ?? '',
-      nationalite: input['nationalite'] ?? '',
-      typeContrat: input['typeContrat'] ?? '',
-      departement: input['departement'] ?? '',
+      sexe: input['sexe'],
+      role: input['role'],
+      matricule: input['matricule'],
+      dateNaissance: DateTime.parse(input['dateNaissance']),
+      lieuNaissance: input['lieuNaissance'],
+      nationalite: input['nationalite'],
+      typeContrat: input['typeContrat'],
+      departement: input['departement'],
       servicesAffectation: input['servicesAffectation'],
-      dateDebutContrat: DateTime.parse(input['dateDebutContrat'] ?? ''),
-      dateFinContrat: DateTime.parse(input['dateFinContrat'] ?? ''),
-      fonctionOccupe: input['fonctionOccupe'] ?? '',
-      competance: input['competance'] ?? '',
-      experience: input['experience'] ?? '',
-      statutAgent: bool.hasEnvironment(input['statutAgent'] ?? ''),
-      createdAt: DateTime.parse(input['createdAt'] ?? ''),
+      dateDebutContrat: DateTime.parse(input['dateDebutContrat']),
+      dateFinContrat: DateTime.parse(input['dateFinContrat']),
+      fonctionOccupe: input['fonctionOccupe'],
+      competance: input['competance'],
+      experience: input['experience'],
+      statutAgent: input['statutAgent'] as bool,
+      createdAt: DateTime.parse(input['createdAt']),
       passwordHash:
-          md5.convert(utf8.encode(input['passwordHash'] ?? '')).toString(),
+          md5.convert(utf8.encode(input['passwordHash'])).toString(),
+      photo: input['photo']
       );
 
       try {
@@ -64,9 +64,7 @@ class AgentsHandlers {
       AgentModel selectUser =
           await repos.agents.getFromId(request.context['id'] as int);
       dynamic input = jsonDecode(await request.readAsString());
-      if (input['photo'] != null) {
-        selectUser.photo = input['photo'];
-      }
+      
       if (input['nom'] != null) {
         selectUser.nom = input['nom'];
       }
@@ -137,6 +135,9 @@ class AgentsHandlers {
         selectUser.passwordHash =
             md5.convert(utf8.encode(input['passwordHash'])).toString();
         repos.refreshTokens.logoutAll(selectUser.id!);
+      }
+      if (input['photo'] != null) {
+        selectUser.photo = input['photo'];
       }
       repos.agents.update(selectUser);
       return Response.ok(jsonEncode(selectUser.toJson()));
