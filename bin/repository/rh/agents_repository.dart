@@ -1,6 +1,7 @@
 
 import 'package:postgres/postgres.dart';
 
+import '../../models/rh/agent_count_model.dart';
 import '../../models/rh/agent_model.dart';
 
 class AgentsRepository {
@@ -147,5 +148,20 @@ class AgentsRepository {
       passwordHash: data[0][23],
       photo: data[0][24],
     );
+  }
+
+
+  Future<AgentCountModel> getCount() async {
+    try {
+      var data = <AgentCountModel>{};
+      var querySQL =  "SELECT COUNT(*) FROM $tableName;";
+      List<List<dynamic>> results = await executor.query(querySQL);
+      for (var row in results) {
+        data.add(AgentCountModel.fromSQL(row));
+      }
+      return data.single;
+    } catch (e) {
+      throw AgentCountModel;
+    }
   }
 }

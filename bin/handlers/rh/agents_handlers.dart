@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../models/rh/agent_count_model.dart';
 import '../../models/rh/agent_model.dart';
 import '../../repository/repository.dart';
 
@@ -17,6 +18,11 @@ class AgentsHandlers {
 
     router.get('/', (Request request) async {
       List<AgentModel> data = await repos.agents.getAllData();
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/get-count/', (Request request) async {
+      AgentCountModel data = await repos.agents.getCount();
       return Response.ok(jsonEncode(data));
     });
 

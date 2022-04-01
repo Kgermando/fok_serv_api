@@ -14,6 +14,4 @@ class RefreshTokenModel {
     owner = json['owner'];
     token = json['token'];
   }
-
-  
 }

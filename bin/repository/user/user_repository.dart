@@ -72,7 +72,7 @@ class UserRepository {
 
   Future<UserModel> getFromId(int id) async {
     var data = await executor
-        .query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
+        .query("SELECT * FROM  $tableName WHERE \"id\"='$id'");
     return UserModel(
       id: data[0][0],
       photo: data[0][1],
