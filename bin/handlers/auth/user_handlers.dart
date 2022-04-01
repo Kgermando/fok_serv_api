@@ -64,7 +64,7 @@ class UserHandlers {
       repos.users.update(selectUser);
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
-
+ 
     // Add new user
     router.post('/insert-new-user', (Request request) async {
       var input = jsonDecode(await request.readAsString());
