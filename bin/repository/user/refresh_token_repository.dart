@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:postgres/postgres.dart';
 
-import '../../db/config_db.dart';
 import '../../models/users/refresh_token.dart';
 
 class RefreshTokensRepository {
@@ -34,7 +33,6 @@ class RefreshTokensRepository {
       var result = await ctx.execute(
         "INSERT INTO $_tableName VALUES (nextval('refresh_tokens_id_seq'), '$owner', '$token');");
     });
-    await ConnexionDatabase().closeConnection(_executor);
   }
 
   Future<RefreshTokenModel> get(String refreshToken) async {

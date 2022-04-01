@@ -9,7 +9,7 @@ class ConnexionDatabase {
     return connection;
   }
 
-  Future closeConnection(PostgreSQLConnection connection) async {
-    await connection.close();
-  }
+  // Future closeConnection(PostgreSQLConnection connection) async {
+  //   await connection.close();
+  // }
 }
