@@ -28,7 +28,7 @@ class AuthHandlers {
       String refreshToken = generateRefreshToken(user, serverSecretKey);
       await repos.refreshTokens.write(RefreshTokenModel(
         id: null,
-        owner: user.id!,
+        owner: user.id.toString(),
         token: refreshToken,
       ));
 
@@ -39,12 +39,12 @@ class AuthHandlers {
       }));
     });
 
-
     router.post('/reloadToken', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
+      var input = jsonDecode(await request.readAsString());
       RefreshTokenModel refreshToken =
           await repos.refreshTokens.get(input['refresh_token']);
-      UserModel selectUser = await repos.users.getFromId(refreshToken.owner);
+      UserModel selectUser =
+          await repos.users.getFromId(int.parse(refreshToken.owner));
       String authToken = generateAuthToken(selectUser, serverSecretKey);
       refreshToken.token = generateRefreshToken(selectUser, serverSecretKey);
       await repos.refreshTokens.rewrite(refreshToken);
@@ -67,13 +67,20 @@ class AuthHandlers {
       return Response(202);
     });
 
-    
+    router.post('/logout', (Request request) async {
+      dynamic input = jsonDecode(await request.readAsString());
+      RefreshTokenModel refreshToken = await repos.refreshTokens.get(input['refresh_token']);
+      print('refreshToken $refreshToken');
+      RefreshTokenModel token = await repos.refreshTokens.logout(refreshToken);
+      print('token $token');
+      return Response.ok(jsonEncode({'refresh_token': "Deleted success!"}));
+    });
+
     router.all(
       '/<ignored|.*>',
       (Request request) => Response.notFound('La Page auth n\'est pas trouvé'),
     );
-    
+
     return router;
   }
-  
 }
