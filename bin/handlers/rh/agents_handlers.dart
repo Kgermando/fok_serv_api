@@ -26,35 +26,45 @@ class AgentsHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late AgentModel agent;
+      try {
+        agent = await repos.agents.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
     router.post('/insert-new-agent', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       AgentModel agent = AgentModel(
-      nom: input['nom'],
-      postNom: input['postNom'],
-      prenom: input['prenom'],
-      email: input['email'],
-      telephone: input['telephone'],
-      adresse: input['adresse'],
-      sexe: input['sexe'],
-      role: input['role'],
-      matricule: input['matricule'],
-      dateNaissance: DateTime.parse(input['dateNaissance']),
-      lieuNaissance: input['lieuNaissance'],
-      nationalite: input['nationalite'],
-      typeContrat: input['typeContrat'],
-      departement: input['departement'],
-      servicesAffectation: input['servicesAffectation'],
-      dateDebutContrat: DateTime.parse(input['dateDebutContrat']),
-      dateFinContrat: DateTime.parse(input['dateFinContrat']),
-      fonctionOccupe: input['fonctionOccupe'],
-      competance: input['competance'],
-      experience: input['experience'],
-      statutAgent: input['statutAgent'] as bool,
-      createdAt: DateTime.parse(input['createdAt']),
-      passwordHash:
-          md5.convert(utf8.encode(input['passwordHash'])).toString(),
-      photo: input['photo']
-      );
+          nom: input['nom'],
+          postNom: input['postNom'],
+          prenom: input['prenom'],
+          email: input['email'],
+          telephone: input['telephone'],
+          adresse: input['adresse'],
+          sexe: input['sexe'],
+          role: input['role'],
+          matricule: input['matricule'],
+          dateNaissance: DateTime.parse(input['dateNaissance']),
+          lieuNaissance: input['lieuNaissance'],
+          nationalite: input['nationalite'],
+          typeContrat: input['typeContrat'],
+          departement: input['departement'],
+          servicesAffectation: input['servicesAffectation'],
+          dateDebutContrat: DateTime.parse(input['dateDebutContrat']),
+          dateFinContrat: DateTime.parse(input['dateFinContrat']),
+          fonctionOccupe: input['fonctionOccupe'],
+          competance: input['competance'],
+          experience: input['experience'],
+          statutAgent: input['statutAgent'] as bool,
+          createdAt: DateTime.parse(input['createdAt']),
+          passwordHash:
+              md5.convert(utf8.encode(input['passwordHash'])).toString(),
+          photo: input['photo']);
 
       try {
         await repos.agents.insertData(agent);
@@ -65,12 +75,11 @@ class AgentsHandlers {
       return Response.ok(jsonEncode(agent.toJson()));
     });
 
-
-    router.put('/update-agent/<id>', (Request request) async {
+    router.put('/update-agent/<id>', (Request request, String id) async {
       AgentModel selectUser =
           await repos.agents.getFromId(request.context['id'] as int);
       dynamic input = jsonDecode(await request.readAsString());
-      
+
       if (input['nom'] != null) {
         selectUser.nom = input['nom'];
       }
@@ -149,8 +158,7 @@ class AgentsHandlers {
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
-
-    router.delete('/delete-agent/<id>', (Request request) async {
+    router.delete('/delete-agent/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.agents.deleteData(int.parse(id!));
       return Response.ok('Agent supprimée');
@@ -158,12 +166,9 @@ class AgentsHandlers {
 
     router.all(
       '/<ignored|.*>',
-      (Request request) =>
-          Response.notFound('La Page Agent n\'est pas trouvé'),
+      (Request request) => Response.notFound('La Page Agent n\'est pas trouvé'),
     );
 
     return router;
   }
-
- 
 }

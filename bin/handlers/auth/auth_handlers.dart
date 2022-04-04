@@ -43,10 +43,14 @@ class AuthHandlers {
       var input = jsonDecode(await request.readAsString());
       RefreshTokenModel refreshToken =
           await repos.refreshTokens.get(input['refresh_token']);
+      print('refreshToken $refreshToken');
       UserModel selectUser =
           await repos.users.getFromId(int.parse(refreshToken.owner));
+          print('selectUser $selectUser');
       String authToken = generateAuthToken(selectUser, serverSecretKey);
+      print('authToken $authToken');
       refreshToken.token = generateRefreshToken(selectUser, serverSecretKey);
+      print('refreshToken.token ${refreshToken.token}');
       await repos.refreshTokens.rewrite(refreshToken);
       return Response.ok(jsonEncode({
         'id': selectUser.id,
@@ -69,7 +73,8 @@ class AuthHandlers {
 
     router.post('/logout', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
-      RefreshTokenModel refreshToken = await repos.refreshTokens.get(input['refresh_token']);
+      RefreshTokenModel refreshToken =
+          await repos.refreshTokens.get(input['refresh_token']);
       print('refreshToken $refreshToken');
       RefreshTokenModel token = await repos.refreshTokens.logout(refreshToken);
       print('token $token');
