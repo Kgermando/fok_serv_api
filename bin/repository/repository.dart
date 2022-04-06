@@ -37,7 +37,7 @@ class Repository {
   late AmortissementRepository amortissements;
   late BilanRepository bilans;
   late JournalRepository journals;
-  late ValorisationRepository valorisations;
+  late ValorisationRepository valorisations; 
 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
