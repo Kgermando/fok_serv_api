@@ -83,7 +83,6 @@ class TableName {
           "experience" $vachar,
           "statutAgent" $boolean,
           "createdAt" $timestamp,
-          "passwordHash" $vachar,
           "photo" $vachar
       );
       ''');

@@ -47,7 +47,7 @@ class Service {
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            .addMiddleware(handleAuth(serverSecretKey))
+            // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(UserHandlers(repos).router));
 
     router.mount(

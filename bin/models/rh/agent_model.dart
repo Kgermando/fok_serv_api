@@ -22,7 +22,6 @@ class AgentModel {
   late String? experience;
   late bool statutAgent;
   late DateTime createdAt;
-  late String passwordHash;
   late String? photo;
 
   AgentModel({
@@ -49,7 +48,6 @@ class AgentModel {
     this.experience,
     required this.statutAgent,
     required this.createdAt,
-    required this.passwordHash,
     this.photo,
   });
 
@@ -78,8 +76,7 @@ class AgentModel {
       experience: row[20],
       statutAgent: row[21],
       createdAt: row[22],
-      passwordHash: row[23],
-      photo: row[24]
+      photo: row[23]
     );
   }
 
@@ -109,7 +106,6 @@ class AgentModel {
       experience: json["experience"],
       statutAgent: json["statutAgent"],
       createdAt: DateTime.parse(json["createdAt"]),
-      passwordHash: json["passwordHash"],
       photo: json["photo"]
     );
   }
@@ -140,7 +136,6 @@ class AgentModel {
       'experience': experience,
       'statutAgent': statutAgent,
       'createdAt': createdAt.toIso8601String(),
-      'passwordHash': passwordHash,
       'phot': photo
     };
   }

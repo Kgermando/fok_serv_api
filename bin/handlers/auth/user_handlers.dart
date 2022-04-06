@@ -14,6 +14,11 @@ class UserHandlers {
   Router get router {
     final router = Router();
 
+    router.get('/users/', (Request request) async {
+      List<UserModel> data = await repos.users.getAllData();
+      return Response.ok(jsonEncode(data));
+    });
+
     router.get('/', (Request request) async {
       UserModel selectUser =
           await repos.users.getFromId(request.context['id'] as int);
@@ -93,6 +98,12 @@ class UserHandlers {
     router.get('/users/', (Request request) async {
       List<UserModel> data = await repos.users.getAllData();
       return Response.ok(jsonEncode(data));
+    });
+
+    router.delete('/delete-user/<id>', (Request request, String id) async {
+      var id = request.params['id'];
+      repos.users.deleteData(int.parse(id!));
+      return Response.ok('Agent supprimée');
     });
 
     router.all(

@@ -107,4 +107,15 @@ class UserRepository {
     });
   }
 
+  deleteData(int id) async {
+    try {
+      await executor.transaction((conn) async {
+        // ignore: unused_local_variable
+        var result = await conn.execute('DELETE FROM $tableName WHERE id=$id;');
+      });
+    } catch (e) {
+      'erreur $e';
+    }
+  }
+
 }  

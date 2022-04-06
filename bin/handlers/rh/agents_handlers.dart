@@ -62,8 +62,6 @@ class AgentsHandlers {
           experience: input['experience'],
           statutAgent: input['statutAgent'] as bool,
           createdAt: DateTime.parse(input['createdAt']),
-          passwordHash:
-              md5.convert(utf8.encode(input['passwordHash'])).toString(),
           photo: input['photo']);
 
       try {
@@ -76,8 +74,8 @@ class AgentsHandlers {
     });
 
     router.put('/update-agent/<id>', (Request request, String id) async {
-      AgentModel selectUser =
-          await repos.agents.getFromId(request.context['id'] as int);
+      var id = request.params['id'];
+      AgentModel selectUser = await repos.agents.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nom'] != null) {
@@ -108,7 +106,7 @@ class AgentsHandlers {
         selectUser.matricule = input['matricule'];
       }
       if (input['dateNaissance'] != null) {
-        selectUser.dateNaissance = input['dateNaissance'];
+        selectUser.dateNaissance = DateTime.parse(input['dateNaissance']);
       }
       if (input['lieuNaissance'] != null) {
         selectUser.lieuNaissance = input['lieuNaissance'];
@@ -126,10 +124,10 @@ class AgentsHandlers {
         selectUser.servicesAffectation = input['servicesAffectation'];
       }
       if (input['dateDebutContrat'] != null) {
-        selectUser.dateDebutContrat = input['dateDebutContrat'];
+        selectUser.dateDebutContrat = DateTime.parse(input['dateDebutContrat']);
       }
       if (input['dateFinContrat'] != null) {
-        selectUser.dateFinContrat = input['dateFinContrat'];
+        selectUser.dateFinContrat = DateTime.parse(input['dateFinContrat']);
       }
       if (input['fonctionOccupe'] != null) {
         selectUser.fonctionOccupe = input['fonctionOccupe'];
@@ -141,15 +139,10 @@ class AgentsHandlers {
         selectUser.experience = input['experience'];
       }
       if (input['statutAgent'] != null) {
-        selectUser.statutAgent = input['statutAgent'];
+        selectUser.statutAgent = input['statutAgent'] as bool;
       }
       if (input['createdAt'] != null) {
-        selectUser.createdAt = input['createdAt'];
-      }
-      if (input['passwordHash'] != null) {
-        selectUser.passwordHash =
-            md5.convert(utf8.encode(input['passwordHash'])).toString();
-        repos.refreshTokens.logoutAll(selectUser.id!);
+        selectUser.createdAt = DateTime.parse(input['createdAt']);
       }
       if (input['photo'] != null) {
         selectUser.photo = input['photo'];
@@ -158,7 +151,10 @@ class AgentsHandlers {
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
-    router.delete('/delete-agent/<id>', (Request request, String id) async {
+    router.delete('/delete-agent/<id>', (
+      String id,
+      Request request,
+    ) async {
       var id = request.params['id'];
       repos.agents.deleteData(int.parse(id!));
       return Response.ok('Agent supprimée');

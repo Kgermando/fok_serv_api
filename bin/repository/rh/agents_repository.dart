@@ -45,7 +45,6 @@ class AgentsRepository {
     var experience = agentModel.experience;
     var statutAgent = agentModel.statutAgent;
     var createdAt = agentModel.createdAt;
-    var passwordHash = agentModel.passwordHash;
     var photo = agentModel.photo;
 
     await executor.transaction((ctx) async {
@@ -57,7 +56,7 @@ class AgentsRepository {
         "'$nationalite', '$typeContrat', '$departement','$servicesAffectation',"
         "'$dateDebutContrat', '$dateFinContrat','$fonctionOccupe',"
         "'$competance', '$experience', '$statutAgent',"
-        "'$createdAt', '$passwordHash', '$photo');");
+        "'$createdAt', '$photo');");
     });
   }
 
@@ -86,7 +85,6 @@ class AgentsRepository {
     var experience = agentModel.experience;
     var statutAgent = agentModel.statutAgent;
     var createdAt = agentModel.createdAt;
-    var passwordHash = agentModel.passwordHash;
     var photo = agentModel.photo;
 
     await executor.transaction((conn) async {
@@ -103,7 +101,7 @@ class AgentsRepository {
           "\"dateFinContrat\"='$dateFinContrat', \"fonctionOccupe\"='$fonctionOccupe',"
           "\"competance\"='$competance', \"experience\"='$experience',"
           "\"statutAgent\"='$statutAgent',"
-          "\"createdAt\"='$createdAt', \"passwordHash\"='$passwordHash', \"photo\"='$photo' WHERE id=$id;");
+          "\"createdAt\"='$createdAt', \"photo\"='$photo' WHERE id=$id;");
     });
   }
 
@@ -145,7 +143,6 @@ class AgentsRepository {
       experience: data[0][20],
       statutAgent: data[0][21],
       createdAt: data[0][22],
-      passwordHash: data[0][23],
       photo: data[0][24],
     );
   }
