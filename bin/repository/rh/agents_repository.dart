@@ -143,7 +143,7 @@ class AgentsRepository {
       experience: data[0][20],
       statutAgent: data[0][21],
       createdAt: data[0][22],
-      photo: data[0][24],
+      photo: data[0][23],
     );
   }
 
