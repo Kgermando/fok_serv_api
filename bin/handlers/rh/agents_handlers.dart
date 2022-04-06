@@ -146,6 +146,7 @@ class AgentsHandlers {
       if (input['photo'] != null) {
         selectUser.photo = input['photo'];
       }
+      
       repos.agents.update(selectUser);
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
