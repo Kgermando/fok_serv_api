@@ -149,11 +149,30 @@ class PaiementSalaireRepository {
       var result = await conn.execute(
       "UPDATE $tableName SET \"nom\"='$nom', \"postNom\"='$postNom', \"prenom\"='$prenom',"
       "\"telephone\"='$telephone', \"adresse\"='$adresse', \"departement\"='$departement',"
-      "\"modePaiement\"='$modePaiement', \"salaire\"='$salaire',"
+      "\"numeroSecuriteSociale\"='$numeroSecuriteSociale', \"matricule\"='$matricule',"
+      "\"servicesAffectation\"='$servicesAffectation', \"salaire\"='$salaire',"
+      "\"observation\"='$observation', \"modePaiement\"='$modePaiement',"
       "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
-      "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
-      "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
-      "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
+      "\"tauxJourHeureMoisSalaire\"='$tauxJourHeureMoisSalaire',"
+      "\"joursHeuresPayeA100PourecentSalaire\"='$joursHeuresPayeA100PourecentSalaire',"
+      "\"totalDuSalaire\"='$totalDuSalaire', \"nombreHeureSupplementaires\"='$nombreHeureSupplementaires',"
+      "\"tauxHeureSupplementaires\"='$tauxHeureSupplementaires',"
+      "\"totalDuHeureSupplementaires\"='$totalDuHeureSupplementaires',"
+      "\"supplementTravailSamediDimancheJoursFerie\"='$supplementTravailSamediDimancheJoursFerie',"
+      "\"prime\"='$prime', \"divers\"='$divers', \"joursCongesPaye\"='$joursCongesPaye',"
+      "\"tauxCongesPaye\"='$tauxCongesPaye', \"totalDuCongePaye\"='$totalDuCongePaye',"
+      "\"jourPayeMaladieAccident\"='$jourPayeMaladieAccident',"
+      "\"tauxJournalierMaladieAccident\"='$tauxJournalierMaladieAccident',"
+      "\"totalDuMaladieAccident\"='$totalDuMaladieAccident', \"pensionDeduction\"='$pensionDeduction',"
+      "\"indemniteCompensatricesDeduction\"='$indemniteCompensatricesDeduction',"
+      "\"avancesDeduction\"='$avancesDeduction', \"diversDeduction\"='$diversDeduction',"
+      "\"retenuesFiscalesDeduction\"='$retenuesFiscalesDeduction',"
+      "\"nombreEnfantBeneficaireAllocationsFamiliales\"='$nombreEnfantBeneficaireAllocationsFamiliales',"
+      "\"nombreDeJoursAllocationsFamiliales\"='$nombreDeJoursAllocationsFamiliales',"
+      "\"tauxJoursAllocationsFamiliales\"='$tauxJoursAllocationsFamiliales',"
+      "\"totalAPayerAllocationsFamiliales\"='$totalAPayerAllocationsFamiliales',"
+      "\"netAPayer\"='$netAPayer',"
+      "\"montantPrisConsiderationCalculCotisationsINSS\"='$montantPrisConsiderationCalculCotisationsINSS',"
       "\"totalDuBrut\"='$totalDuBrut' WHERE id=$id;");
     });
   }
@@ -174,12 +193,47 @@ class PaiementSalaireRepository {
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return PaiementSalaireModel(
       id: data[0][0],
-      agent: data[0][1],
-      observation: data[0][2],
-      modePaiement: data[0][3],
-      salaire: data[0][4],
-      createdAt: data[0][5],
-      approbation: data[0][6]
+      nom: data[0][1],
+      postNom: data[0][2],
+      prenom: data[0][3],
+      telephone: data[0][4],
+      adresse: data[0][5],
+      departement: data[0][6],
+      numeroSecuriteSociale: data[0][7],
+      matricule: data[0][8],
+      servicesAffectation: data[0][9],
+      salaire: data[0][10],
+      observation: data[0][11],
+      modePaiement: data[0][12],
+      createdAt: data[0][13],
+      approbation: data[0][14],
+      tauxJourHeureMoisSalaire: data[0][15],
+      joursHeuresPayeA100PourecentSalaire: data[0][16],
+      totalDuSalaire: data[0][17],
+      nombreHeureSupplementaires: data[0][18],
+      tauxHeureSupplementaires: data[0][19],
+      totalDuHeureSupplementaires: data[0][20],
+      supplementTravailSamediDimancheJoursFerie: data[0][21],
+      prime: data[0][22],
+      divers: data[0][23],
+      joursCongesPaye: data[0][24],
+      tauxCongesPaye: data[0][25],
+      totalDuCongePaye: data[0][26],
+      jourPayeMaladieAccident: data[0][27],
+      tauxJournalierMaladieAccident: data[0][28],
+      totalDuMaladieAccident: data[0][29],
+      pensionDeduction: data[0][30],
+      indemniteCompensatricesDeduction: data[0][31],
+      avancesDeduction: data[0][32],
+      diversDeduction: data[0][33],
+      retenuesFiscalesDeduction: data[0][34],
+      nombreEnfantBeneficaireAllocationsFamiliales: data[0][35],
+      nombreDeJoursAllocationsFamiliales: data[0][36],
+      tauxJoursAllocationsFamiliales: data[0][37],
+      totalAPayerAllocationsFamiliales: data[0][38],
+      netAPayer: data[0][39],
+      montantPrisConsiderationCalculCotisationsINSS: data[0][40],
+      totalDuBrut: data[0][41]
     );
   }
 }
