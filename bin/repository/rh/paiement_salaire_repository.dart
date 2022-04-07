@@ -21,35 +21,140 @@ class PaiementSalaireRepository {
 
 
   Future<void> insertData(PaiementSalaireModel paiementSalaireModel) async {
-    var agent = paiementSalaireModel.agent;
+    var nom = paiementSalaireModel.nom;
+    var postNom = paiementSalaireModel.postNom;
+    var prenom = paiementSalaireModel.prenom;
+    var telephone = paiementSalaireModel.telephone;
+    var adresse = paiementSalaireModel.adresse;
+    var departement = paiementSalaireModel.departement;
+    var numeroSecuriteSociale = paiementSalaireModel.numeroSecuriteSociale;
+    var matricule = paiementSalaireModel.matricule;
+    var servicesAffectation = paiementSalaireModel.servicesAffectation;
+    var salaire = paiementSalaireModel.salaire;
     var observation = paiementSalaireModel.observation;
     var modePaiement = paiementSalaireModel.modePaiement;
     var createdAt = paiementSalaireModel.createdAt;
     var approbation = paiementSalaireModel.approbation;
+    var tauxJourHeureMoisSalaire = paiementSalaireModel.tauxJourHeureMoisSalaire;
+    var joursHeuresPayeA100PourecentSalaire = paiementSalaireModel.joursHeuresPayeA100PourecentSalaire;
+    var totalDuSalaire = paiementSalaireModel.totalDuSalaire;
+    var nombreHeureSupplementaires = paiementSalaireModel.nombreHeureSupplementaires;
+    var tauxHeureSupplementaires = paiementSalaireModel.tauxHeureSupplementaires;
+    var totalDuHeureSupplementaires = paiementSalaireModel.totalDuHeureSupplementaires;
+    var supplementTravailSamediDimancheJoursFerie = paiementSalaireModel.supplementTravailSamediDimancheJoursFerie;
+    var prime = paiementSalaireModel.prime;
+    var divers = paiementSalaireModel.divers;
+    var joursCongesPaye = paiementSalaireModel.joursCongesPaye;
+    var tauxCongesPaye = paiementSalaireModel.tauxCongesPaye;
+    var totalDuCongePaye = paiementSalaireModel.totalDuCongePaye;
+    var jourPayeMaladieAccident = paiementSalaireModel.jourPayeMaladieAccident;
+    var tauxJournalierMaladieAccident = paiementSalaireModel.tauxJournalierMaladieAccident;
+    var totalDuMaladieAccident = paiementSalaireModel.totalDuMaladieAccident;
+    var pensionDeduction = paiementSalaireModel.pensionDeduction;
+    var indemniteCompensatricesDeduction = paiementSalaireModel.indemniteCompensatricesDeduction;
+    var avancesDeduction = paiementSalaireModel.avancesDeduction;
+    var diversDeduction = paiementSalaireModel.diversDeduction;
+    var retenuesFiscalesDeduction = paiementSalaireModel.retenuesFiscalesDeduction;
+    var nombreEnfantBeneficaireAllocationsFamiliales = paiementSalaireModel.nombreEnfantBeneficaireAllocationsFamiliales;
+    var nombreDeJoursAllocationsFamiliales = paiementSalaireModel.nombreDeJoursAllocationsFamiliales;
+    var tauxJoursAllocationsFamiliales = paiementSalaireModel.tauxJoursAllocationsFamiliales;
+    var totalAPayerAllocationsFamiliales = paiementSalaireModel.totalAPayerAllocationsFamiliales;
+    var netAPayer = paiementSalaireModel.netAPayer;
+    var montantPrisConsiderationCalculCotisationsINSS = paiementSalaireModel.montantPrisConsiderationCalculCotisationsINSS;
+    var totalDuBrut = paiementSalaireModel.totalDuBrut;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('paiement_salaires_id_seq'), '$agent',"
-        "'$observation','$modePaiement', '$createdAt', '$approbation');");
+        "INSERT INTO $tableName VALUES (nextval('paiement_salaires_id_seq'),"
+        "'$nom', '$postNom', '$prenom','$telephone','$adresse','$departement',"
+        "'$numeroSecuriteSociale','$matricule','$servicesAffectation','$salaire',"
+        "'$observation','$modePaiement', '$createdAt', '$approbation',"
+        "'$tauxJourHeureMoisSalaire','$joursHeuresPayeA100PourecentSalaire',"
+        "'$totalDuSalaire', '$nombreHeureSupplementaires',"
+        "'$tauxHeureSupplementaires','$totalDuHeureSupplementaires',"
+        "'$supplementTravailSamediDimancheJoursFerie', '$prime', '$divers',"
+        "'$joursCongesPaye','$tauxCongesPaye', '$totalDuCongePaye',"
+        "'$jourPayeMaladieAccident','$tauxJournalierMaladieAccident',"
+        "'$totalDuMaladieAccident', '$pensionDeduction',"
+        "'$indemniteCompensatricesDeduction', '$avancesDeduction',"
+        "'$diversDeduction', '$diversDeduction',"
+        "'$retenuesFiscalesDeduction','$nombreEnfantBeneficaireAllocationsFamiliales',"
+        "'$nombreDeJoursAllocationsFamiliales', '$tauxJoursAllocationsFamiliales',"
+        "'$totalAPayerAllocationsFamiliales','$netAPayer',"
+        "'$montantPrisConsiderationCalculCotisationsINSS','$totalDuBrut');");
     });
   }
 
   Future<void> update(PaiementSalaireModel paiementSalaireModel) async {
     var id = paiementSalaireModel.id;
-    var agent = paiementSalaireModel.agent;
+    var nom = paiementSalaireModel.nom;
+    var postNom = paiementSalaireModel.postNom;
+    var prenom = paiementSalaireModel.prenom;
+    var telephone = paiementSalaireModel.telephone;
+    var adresse = paiementSalaireModel.adresse;
+    var departement = paiementSalaireModel.departement;
+    var numeroSecuriteSociale = paiementSalaireModel.numeroSecuriteSociale;
+    var matricule = paiementSalaireModel.matricule;
+    var servicesAffectation = paiementSalaireModel.servicesAffectation;
+    var salaire = paiementSalaireModel.salaire;
     var observation = paiementSalaireModel.observation;
     var modePaiement = paiementSalaireModel.modePaiement;
-    var salaire = paiementSalaireModel.salaire;
     var createdAt = paiementSalaireModel.createdAt;
     var approbation = paiementSalaireModel.approbation;
+    var tauxJourHeureMoisSalaire =
+        paiementSalaireModel.tauxJourHeureMoisSalaire;
+    var joursHeuresPayeA100PourecentSalaire =
+        paiementSalaireModel.joursHeuresPayeA100PourecentSalaire;
+    var totalDuSalaire = paiementSalaireModel.totalDuSalaire;
+    var nombreHeureSupplementaires =
+        paiementSalaireModel.nombreHeureSupplementaires;
+    var tauxHeureSupplementaires =
+        paiementSalaireModel.tauxHeureSupplementaires;
+    var totalDuHeureSupplementaires =
+        paiementSalaireModel.totalDuHeureSupplementaires;
+    var supplementTravailSamediDimancheJoursFerie =
+        paiementSalaireModel.supplementTravailSamediDimancheJoursFerie;
+    var prime = paiementSalaireModel.prime;
+    var divers = paiementSalaireModel.divers;
+    var joursCongesPaye = paiementSalaireModel.joursCongesPaye;
+    var tauxCongesPaye = paiementSalaireModel.tauxCongesPaye;
+    var totalDuCongePaye = paiementSalaireModel.totalDuCongePaye;
+    var jourPayeMaladieAccident = paiementSalaireModel.jourPayeMaladieAccident;
+    var tauxJournalierMaladieAccident =
+        paiementSalaireModel.tauxJournalierMaladieAccident;
+    var totalDuMaladieAccident = paiementSalaireModel.totalDuMaladieAccident;
+    var pensionDeduction = paiementSalaireModel.pensionDeduction;
+    var indemniteCompensatricesDeduction =
+        paiementSalaireModel.indemniteCompensatricesDeduction;
+    var avancesDeduction = paiementSalaireModel.avancesDeduction;
+    var diversDeduction = paiementSalaireModel.diversDeduction;
+    var retenuesFiscalesDeduction =
+        paiementSalaireModel.retenuesFiscalesDeduction;
+    var nombreEnfantBeneficaireAllocationsFamiliales =
+        paiementSalaireModel.nombreEnfantBeneficaireAllocationsFamiliales;
+    var nombreDeJoursAllocationsFamiliales =
+        paiementSalaireModel.nombreDeJoursAllocationsFamiliales;
+    var tauxJoursAllocationsFamiliales =
+        paiementSalaireModel.tauxJoursAllocationsFamiliales;
+    var totalAPayerAllocationsFamiliales =
+        paiementSalaireModel.totalAPayerAllocationsFamiliales;
+    var netAPayer = paiementSalaireModel.netAPayer;
+    var montantPrisConsiderationCalculCotisationsINSS =
+        paiementSalaireModel.montantPrisConsiderationCalculCotisationsINSS;
+    var totalDuBrut = paiementSalaireModel.totalDuBrut;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-      "UPDATE $tableName SET \"agent\"='$agent', \"observation\"='$observation',"
+      "UPDATE $tableName SET \"nom\"='$nom', \"postNom\"='$postNom', \"prenom\"='$prenom',"
+      "\"telephone\"='$telephone', \"adresse\"='$adresse', \"departement\"='$departement',"
       "\"modePaiement\"='$modePaiement', \"salaire\"='$salaire',"
-      "\"createdAt\"='$createdAt', \"approbation\"='$approbation' WHERE id=$id;");
+      "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
+      "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
+      "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
+      "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
+      "\"totalDuBrut\"='$totalDuBrut' WHERE id=$id;");
     });
   }
 

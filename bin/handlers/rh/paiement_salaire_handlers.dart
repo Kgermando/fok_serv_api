@@ -34,10 +34,18 @@ class PaiementSalaireHandlers {
       var input = jsonDecode(await request.readAsString());
 
       PaiementSalaireModel data = PaiementSalaireModel(
-         agent: input['agent'],
+         nom: input['nom'],
+         postNom: input['postNom'],
+         prenom: input['prenom'],
+         telephone: input['telephone'],
+         adresse: input['adresse'],
+         departement: input['departement'],
+         numeroSecuriteSociale: input['numeroSecuriteSociale'],
+         matricule: input['matricule'],
+         servicesAffectation: input['servicesAffectation'],
+         salaire: input['salaire'],
           observation: bool.hasEnvironment(input['observation']),
           modePaiement: input['modePaiement'],
-          salaire: input['salaire'],
           createdAt: DateTime.parse(input['createdAt']),
           approbation: input['approbation'] as bool,
           tauxJourHeureMoisSalaire: input['tauxJourHeureMoisSalaire'],
@@ -83,8 +91,35 @@ class PaiementSalaireHandlers {
       PaiementSalaireModel data =
           await repos.salaires.getFromId(int.parse(id!));
 
-      if (input['agent'] != null) {
-        data.agent = input['agent'];
+      if (input['nom'] != null) {
+        data.nom = input['nom'];
+      }
+      if (input['postNom'] != null) {
+        data.postNom = input['postNom'];
+      }
+      if (input['prenom'] != null) {
+        data.prenom = input['prenom'];
+      }
+      if (input['telephone'] != null) {
+        data.telephone = input['telephone'];
+      }
+      if (input['adresse'] != null) {
+        data.adresse = input['adresse'];
+      }
+      if (input['departement'] != null) {
+        data.departement = input['departement'];
+      }
+      if (input['numeroSecuriteSociale'] != null) {
+        data.numeroSecuriteSociale = input['numeroSecuriteSociale'];
+      }
+      if (input['matricule'] != null) {
+        data.matricule = input['matricule'];
+      }
+      if (input['servicesAffectation'] != null) {
+        data.servicesAffectation = input['servicesAffectation'];
+      }
+      if (input['salaire'] != null) {
+        data.salaire = input['salaire'];
       }
       if (input['observation'] != null) {
         data.observation = bool.hasEnvironment(input['observation']);
@@ -92,14 +127,92 @@ class PaiementSalaireHandlers {
       if (input['modePaiement'] != null) {
         data.modePaiement = input['modePaiement'];
       }
-      if (input['salaire'] != null) {
-        data.salaire = input['salaire'];
-      }
       if (input['createdAt'] != null) {
         data.createdAt = DateTime.parse(input['createdAt']);
       }
       if (input['approbation'] != null) {
         data.approbation = input['approbation'] as bool;
+      }
+      if (input['tauxJourHeureMoisSalaire'] != null) {
+        data.tauxJourHeureMoisSalaire = input['tauxJourHeureMoisSalaire'];
+      }
+      if (input['joursHeuresPayeA100PourecentSalaire'] != null) {
+        data.joursHeuresPayeA100PourecentSalaire = input['joursHeuresPayeA100PourecentSalaire'];
+      }
+      if (input['totalDuSalaire'] != null) {
+        data.totalDuSalaire = input['totalDuSalaire'];
+      }
+      if (input['nombreHeureSupplementaires'] != null) {
+        data.nombreHeureSupplementaires = input['nombreHeureSupplementaires'];
+      }
+      if (input['tauxHeureSupplementaires'] != null) {
+        data.tauxHeureSupplementaires = input['tauxHeureSupplementaires'];
+      }
+      if (input['totalDuHeureSupplementaires'] != null) {
+        data.totalDuHeureSupplementaires = input['totalDuHeureSupplementaires'];
+      }
+      if (input['supplementTravailSamediDimancheJoursFerie'] != null) {
+        data.supplementTravailSamediDimancheJoursFerie = input['supplementTravailSamediDimancheJoursFerie'];
+      }
+      if (input['prime'] != null) {
+        data.prime = input['prime'];
+      }
+      if (input['divers'] != null) {
+        data.divers = input['divers'];
+      }
+      if (input['joursCongesPaye'] != null) {
+        data.joursCongesPaye = input['joursCongesPaye'];
+      }
+      if (input['tauxCongesPaye'] != null) {
+        data.tauxCongesPaye = input['tauxCongesPaye'];
+      }
+      if (input['totalDuCongePaye'] != null) {
+        data.totalDuCongePaye = input['totalDuCongePaye'];
+      }
+      if (input['jourPayeMaladieAccident'] != null) {
+        data.jourPayeMaladieAccident = input['jourPayeMaladieAccident'];
+      }
+      if (input['tauxJournalierMaladieAccident'] != null) {
+        data.tauxJournalierMaladieAccident = input['tauxJournalierMaladieAccident'];
+      }
+      if (input['totalDuMaladieAccident'] != null) {
+        data.totalDuMaladieAccident = input['totalDuMaladieAccident'];
+      }
+      if (input['pensionDeduction'] != null) {
+        data.pensionDeduction = input['pensionDeduction'];
+      }
+      if (input['indemniteCompensatricesDeduction'] != null) {
+        data.indemniteCompensatricesDeduction = input['indemniteCompensatricesDeduction'];
+      }
+      if (input['avancesDeduction'] != null) {
+        data.avancesDeduction = input['avancesDeduction'];
+      }
+      if (input['diversDeduction'] != null) {
+        data.diversDeduction = input['diversDeduction'];
+      }
+      if (input['retenuesFiscalesDeduction'] != null) {
+        data.retenuesFiscalesDeduction = input['retenuesFiscalesDeduction'];
+      }
+      if (input['nombreEnfantBeneficaireAllocationsFamiliales'] != null) {
+        data.nombreEnfantBeneficaireAllocationsFamiliales = input['nombreEnfantBeneficaireAllocationsFamiliales'];
+      }
+      if (input['nombreDeJoursAllocationsFamiliales'] != null) {
+        data.nombreDeJoursAllocationsFamiliales = input['nombreDeJoursAllocationsFamiliales'];
+      }
+      if (input['tauxJoursAllocationsFamiliales'] != null) {
+        data.tauxJoursAllocationsFamiliales = input['tauxJoursAllocationsFamiliales'];
+      }
+      if (input['totalAPayerAllocationsFamiliales'] != null) {
+        data.totalAPayerAllocationsFamiliales = input['totalAPayerAllocationsFamiliales'];
+      }
+      if (input['netAPayer'] != null) {
+        data.netAPayer = input['netAPayer'];
+      }
+      if (input['montantPrisConsiderationCalculCotisationsINSS'] != null) {
+        data.montantPrisConsiderationCalculCotisationsINSS = input['montantPrisConsiderationCalculCotisationsINSS'];
+      }
+      if (input['totalDuBrut'] != null) {
+        data.totalDuBrut = input['totalDuBrut'];
       }
       repos.salaires.update(data);
       return Response.ok(jsonEncode(data.toJson()));
