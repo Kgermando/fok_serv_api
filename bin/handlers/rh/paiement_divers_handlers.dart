@@ -24,10 +24,13 @@ class PaiementDiversHandlers {
 
       PaiementDiversModel data = PaiementDiversModel(
           agent: input['agent'],
-          observation: bool.hasEnvironment(input['observation']),
+          observation: input['observation'] as bool,
           modePaiement: input['modePaiement'],
+          titleDivers: input['titleDivers'],
           divers: input['divers'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+          approbation: input['approbation'] as bool
+      );
       try {
         await repos.paiementDivers.insertData(data);
       } catch (e) {
@@ -46,16 +49,22 @@ class PaiementDiversHandlers {
         data.agent = input['agent'];
       }
       if (input['observation'] != null) {
-        data.observation = bool.hasEnvironment(input['observation']);
+        data.observation = input['observation'] as bool;
       }
       if (input['modePaiement'] != null) {
         data.modePaiement = input['modePaiement'];
+      }
+      if (input['titleDivers'] != null) {
+        data.titleDivers = input['titleDivers'];
       }
       if (input['divers'] != null) {
         data.divers = input['divers'];
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['approbation'] != null) {
+        data.approbation = input['approbation'] as bool;
       }
       repos.paiementDivers.update(data);
       return Response.ok(jsonEncode(data.toJson()));

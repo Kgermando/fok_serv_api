@@ -70,6 +70,7 @@ class TableName {
           "sexe" $vachar,
           "role" $vachar,
           "matricule" $vachar,
+          "numeroSecuriteSociale" $vachar,
           "dateNaissance" $timestamp,
           "lieuNaissance" $vachar,
           "nationalite" $vachar,
@@ -83,19 +84,57 @@ class TableName {
           "experience" $vachar,
           "statutAgent" $boolean,
           "createdAt" $timestamp,
-          "photo" $vachar
+          "photo" $vachar,
+          "salaire" $vachar
       );
       ''');
-
       
       // Paiement Salaire
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tableSalaire(
           "id" $key,
-          "agent" $vachar,
+          "nom" $vachar,
+          "postNom" $vachar,
+          "prenom" $vachar,
+          "telephone" $vachar,
+          "adresse" $vachar,
+          "departement" $vachar,
+          "numeroSecuriteSociale" $vachar,
+          "matricule" $vachar,
+          "servicesAffectation" $vachar,
+          "salaire" $vachar,
           "observation" $boolean,
           "modePaiement" $vachar,
-          "createdAt" $timestamp
+          "salaire" $vachar,
+          "createdAt" $timestamp,
+          "approbation" $boolean,
+          "tauxJourHeureMoisSalaire" $vachar,
+          "joursHeuresPayeA100PourecentSalaire" $vachar,
+          "totalDuSalaire" $vachar,
+          "nombreHeureSupplementaires" $vachar,
+          "tauxHeureSupplementaires" $vachar,
+          "totalDuHeureSupplementaires" $vachar,
+          "supplementTravailSamediDimancheJoursFerie" $vachar,
+          "prime" $vachar,
+          "divers" $vachar,
+          "joursCongesPaye" $vachar,
+          "tauxCongesPaye" $vachar,
+          "totalDuCongePaye" $vachar,
+          "jourPayeMaladieAccident" $vachar,
+          "tauxJournalierMaladieAccident" $vachar,
+          "totalDuMaladieAccident" $vachar,
+          "pensionDeduction" $vachar,
+          "indemniteCompensatricesDeduction" $vachar,
+          "avancesDeduction" $vachar,
+          "diversDeduction" $vachar,
+          "retenuesFiscalesDeduction" $vachar,
+          "nombreEnfantBeneficaireAllocationsFamiliales" $vachar,
+          "nombreDeJoursAllocationsFamiliales" $vachar,
+          "tauxJoursAllocationsFamiliales" $vachar,
+          "totalAPayerAllocationsFamiliales" $vachar,
+          "netAPayer" $vachar,
+          "montantPrisConsiderationCalculCotisationsINSS" $vachar,
+          "salaire" $vachar
       );
       ''');
 
@@ -106,8 +145,10 @@ class TableName {
           "agent" $vachar,
           "observation" $boolean,
           "modePaiement" $vachar,
+          "titleDivers" $vachar,
           "divers" $vachar,
-          "createdAt" $timestamp
+          "createdAt" $timestamp,
+          "approbation" $boolean
       );
       ''');
 

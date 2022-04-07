@@ -11,7 +11,7 @@ class PaiementSalaireRepository {
   Future<List<PaiementSalaireModel>> getAllData() async {
     var data = <PaiementSalaireModel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
+    var querySQL = "SELECT * FROM $tableName ORDER BY \"createdAt\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(PaiementSalaireModel.fromSQL(row));
@@ -24,13 +24,14 @@ class PaiementSalaireRepository {
     var agent = paiementSalaireModel.agent;
     var observation = paiementSalaireModel.observation;
     var modePaiement = paiementSalaireModel.modePaiement;
-    var created = paiementSalaireModel.created;
+    var createdAt = paiementSalaireModel.createdAt;
+    var approbation = paiementSalaireModel.approbation;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('paiement_salaires_id_seq'), '$agent',"
-        "'$observation','$modePaiement', '$created');");
+        "'$observation','$modePaiement', '$createdAt', '$approbation');");
     });
   }
 
@@ -39,14 +40,16 @@ class PaiementSalaireRepository {
     var agent = paiementSalaireModel.agent;
     var observation = paiementSalaireModel.observation;
     var modePaiement = paiementSalaireModel.modePaiement;
-    var created = paiementSalaireModel.created;
+    var salaire = paiementSalaireModel.salaire;
+    var createdAt = paiementSalaireModel.createdAt;
+    var approbation = paiementSalaireModel.approbation;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
       "UPDATE $tableName SET \"agent\"='$agent', \"observation\"='$observation',"
-      "\"modePaiement\"='$modePaiement',"
-      "\"created\"='$created' WHERE id=$id;");
+      "\"modePaiement\"='$modePaiement', \"salaire\"='$salaire',"
+      "\"createdAt\"='$createdAt', \"approbation\"='$approbation' WHERE id=$id;");
     });
   }
 
@@ -69,7 +72,9 @@ class PaiementSalaireRepository {
       agent: data[0][1],
       observation: data[0][2],
       modePaiement: data[0][3],
-      created: data[0][4]
+      salaire: data[0][4],
+      createdAt: data[0][5],
+      approbation: data[0][6]
     );
   }
 }

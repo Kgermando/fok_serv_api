@@ -7,8 +7,9 @@ class AgentModel {
   late String telephone;
   late String adresse;
   late String sexe;
-  late String role;  // droit d'acces au logiciel de 0 à 5
+  late String role; // droit d'acces au logiciel de 0 à 5
   late String matricule;
+  late String numeroSecuriteSociale;
   late DateTime dateNaissance;
   late String lieuNaissance;
   late String nationalite;
@@ -17,38 +18,41 @@ class AgentModel {
   late String servicesAffectation;
   late DateTime dateDebutContrat;
   late DateTime dateFinContrat;
-  late String fonctionOccupe;  // Fonction occupé
+  late String fonctionOccupe; // Fonction occupé
   late String? competance;
   late String? experience;
   late bool statutAgent;
   late DateTime createdAt;
   late String? photo;
+  late String salaire;
 
-  AgentModel({
-    this.id,
-    required this.nom,
-    required this.postNom,
-    required this.prenom,
-    required this.email,
-    required this.telephone,
-    required this.adresse,
-    required this.sexe,
-    required this.role,
-    required this.matricule,
-    required this.dateNaissance,
-    required this.lieuNaissance,
-    required this.nationalite,
-    required this.typeContrat,
-    required this.departement,
-    required this.servicesAffectation,
-    required this.dateDebutContrat,
-    required this.dateFinContrat,
-    required this.fonctionOccupe,
-    this.competance,
-    this.experience,
-    required this.statutAgent,
-    required this.createdAt,
-    this.photo,
+  AgentModel(
+      {this.id,
+      required this.nom,
+      required this.postNom,
+      required this.prenom,
+      required this.email,
+      required this.telephone,
+      required this.adresse,
+      required this.sexe,
+      required this.role,
+      required this.matricule,
+      required this.numeroSecuriteSociale,
+      required this.dateNaissance,
+      required this.lieuNaissance,
+      required this.nationalite,
+      required this.typeContrat,
+      required this.departement,
+      required this.servicesAffectation,
+      required this.dateDebutContrat,
+      required this.dateFinContrat,
+      required this.fonctionOccupe,
+      this.competance,
+      this.experience,
+      required this.statutAgent,
+      required this.createdAt,
+      this.photo,
+      required this.salaire,
   });
 
   factory AgentModel.fromSQL(List<dynamic> row) {
@@ -63,23 +67,24 @@ class AgentModel {
       sexe: row[7],
       role: row[8],
       matricule: row[9],
-      dateNaissance: row[10],
-      lieuNaissance: row[11],
-      nationalite: row[12],
-      typeContrat: row[13],
-      departement: row[14],
-      servicesAffectation: row[15],
-      dateDebutContrat: row[16],
-      dateFinContrat: row[17],
-      fonctionOccupe: row[18],
-      competance: row[19],
-      experience: row[20],
-      statutAgent: row[21],
-      createdAt: row[22],
-      photo: row[23]
+      numeroSecuriteSociale: row[8],
+      dateNaissance: row[9],
+      lieuNaissance: row[10],
+      nationalite: row[11],
+      typeContrat: row[12],
+      departement: row[13],
+      servicesAffectation: row[14],
+      dateDebutContrat: row[15],
+      dateFinContrat: row[16],
+      fonctionOccupe: row[17],
+      competance: row[20],
+      experience: row[21],
+      statutAgent: row[22],
+      createdAt: row[23],
+      photo: row[24],
+      salaire: row[25],
     );
   }
-
 
   factory AgentModel.fromJson(Map<String, dynamic> json) {
     return AgentModel(
@@ -93,6 +98,7 @@ class AgentModel {
       sexe: json["sexe"],
       role: json["role"],
       matricule: json["matricule"],
+      numeroSecuriteSociale: json["numeroSecuriteSociale"],
       dateNaissance: DateTime.parse(json['dateNaissance']),
       lieuNaissance: json["lieuNaissance"],
       nationalite: json["nationalite"],
@@ -106,10 +112,10 @@ class AgentModel {
       experience: json["experience"],
       statutAgent: json["statutAgent"],
       createdAt: DateTime.parse(json["createdAt"]),
-      photo: json["photo"]
+      photo: json["photo"],
+      salaire: json["salaire"]
     );
   }
-
 
   Map<String, dynamic> toJson() {
     return {
@@ -123,6 +129,7 @@ class AgentModel {
       'sexe': sexe,
       'role': role,
       'matricule': matricule,
+      'numeroSecuriteSociale': numeroSecuriteSociale,
       'dateNaissance': dateNaissance.toIso8601String(),
       'lieuNaissance': lieuNaissance,
       'nationalite': nationalite,
@@ -136,7 +143,8 @@ class AgentModel {
       'experience': experience,
       'statutAgent': statutAgent,
       'createdAt': createdAt.toIso8601String(),
-      'phot': photo
+      'phot': photo,
+      'salaire': salaire
     };
   }
 }

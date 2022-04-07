@@ -24,14 +24,16 @@ class PaiementDiversRepository {
     var matricule = paiementDiversModel.agent;
     var observation = paiementDiversModel.observation;
     var modePaiement = paiementDiversModel.modePaiement;
-    var divers = paiementDiversModel.divers ;
+    var titleDivers = paiementDiversModel.titleDivers;
+    var divers = paiementDiversModel.divers;
     var created = paiementDiversModel.created;
+    var approbation = paiementDiversModel.approbation;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval(paiement_divers_id_seq'), '$matricule',"
-        "'$observation','$modePaiement','$divers', '$created');");
+        "'$observation','$modePaiement','$titleDivers', '$divers', '$created', '$approbation');");
     });
   }
 
@@ -40,15 +42,17 @@ class PaiementDiversRepository {
     var agent = paiementDiversModel.agent;
     var observation = paiementDiversModel.observation;
     var modePaiement = paiementDiversModel.modePaiement;
+    var titleDivers = paiementDiversModel.titleDivers;
     var divers = paiementDiversModel.divers;
     var created = paiementDiversModel.created;
+    var approbation = paiementDiversModel.approbation;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
         "UPDATE $tableName SET \"matricule\"='$agent', \"observation\"='$observation',"
-        "\"modePaiement\"='$modePaiement',\"prime\"='$divers',"
-        "\"created\"='$created' WHERE id=$id;");
+        "\"modePaiement\"='$modePaiement', \"titleDivers\"='$titleDivers', \"divers\"='$divers',"
+        "\"created\"='$created', \"approbation\"='$approbation' WHERE id=$id;");
     });
   }
 
@@ -71,8 +75,10 @@ class PaiementDiversRepository {
       agent: data[0][1],
       observation: data[0][2],
       modePaiement: data[0][3],
-      divers: data[0][4],
-      created: data[0][5]
+      titleDivers: data[0][4],
+      divers: data[0][5],
+      created: data[0][6],
+      approbation: data[0][7]
     );
   }
 }

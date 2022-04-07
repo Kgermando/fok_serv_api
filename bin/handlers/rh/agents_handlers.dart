@@ -48,6 +48,7 @@ class AgentsHandlers {
           sexe: input['sexe'],
           role: input['role'],
           matricule: input['matricule'],
+          numeroSecuriteSociale: input['numeroSecuriteSociale'],
           dateNaissance: DateTime.parse(input['dateNaissance']),
           lieuNaissance: input['lieuNaissance'],
           nationalite: input['nationalite'],
@@ -61,7 +62,8 @@ class AgentsHandlers {
           experience: input['experience'],
           statutAgent: input['statutAgent'] as bool,
           createdAt: DateTime.parse(input['createdAt']),
-          photo: input['photo']);
+          photo: input['photo'], 
+          salaire: input['salaire']);
 
       try {
         await repos.agents.insertData(agent);
@@ -104,6 +106,9 @@ class AgentsHandlers {
       if (input['matricule'] != null) {
         selectUser.matricule = input['matricule'];
       }
+      if (input['numeroSecuriteSociale'] != null) {
+        selectUser.numeroSecuriteSociale = input['numeroSecuriteSociale'];
+      }
       if (input['dateNaissance'] != null) {
         selectUser.dateNaissance = DateTime.parse(input['dateNaissance']);
       }
@@ -145,6 +150,9 @@ class AgentsHandlers {
       }
       if (input['photo'] != null) {
         selectUser.photo = input['photo'];
+      }
+      if (input['salaire'] != null) {
+        selectUser.salaire = input['salaire'];
       }
       
       repos.agents.update(selectUser);

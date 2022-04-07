@@ -3,18 +3,22 @@ import 'agent_model.dart';
 class PaiementDiversModel {
   late int? id;
   late AgentModel agent;
-  late bool observation; // Payé ou non Payé
+  late bool observation; // Payé ou non Payé  // pour Finance
   late String modePaiement; // mode depayement
-  late String divers; // divers pour agent selon l'ordre
+  late String titleDivers; // divers pour agent selon l'ordre
+  late String divers; // Prime, restauration, frais de mission, ....
   late DateTime created;
+  late bool approbation; // pour DG
 
   PaiementDiversModel(
       {this.id,
       required this.agent,
       required this.observation,
       required this.modePaiement,
+      required this.titleDivers,
       required this.divers,
-      required this.created});
+      required this.created,
+      required this.approbation});
 
   factory PaiementDiversModel.fromSQL(List<dynamic> row) {
     return PaiementDiversModel(
@@ -22,18 +26,22 @@ class PaiementDiversModel {
         agent: row[1],
         observation: row[2],
         modePaiement: row[3],
-        divers: row[4],
-        created: row[5]);
+        titleDivers: row[4],
+        divers: row[5],
+        created: row[6],
+        approbation: row[7]);
   }
 
   factory PaiementDiversModel.fromJson(Map<String, dynamic> json) {
     return PaiementDiversModel(
-        id: json['id'],
-        agent: json['agent'],
-        observation: json['observation'],
-        modePaiement: json['modePaiement'],
-        divers: json['divers'],
-        created: DateTime.parse(json['created']),
+      id: json['id'],
+      agent: json['agent'],
+      observation: json['observation'],
+      modePaiement: json['modePaiement'],
+      titleDivers: json['titleDivers'],
+      divers: json['divers'],
+      created: DateTime.parse(json['created']),
+      approbation: json['approbation'],
     );
   }
 
@@ -43,8 +51,10 @@ class PaiementDiversModel {
       'agent': agent,
       'observation': observation,
       'modePaiement': modePaiement,
+      'titleDivers': titleDivers,
       'divers': divers,
-      'created': created
+      'created': created,
+      'approbation': approbation
     };
   }
 }

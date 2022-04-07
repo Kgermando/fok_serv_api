@@ -32,6 +32,7 @@ class AgentsRepository {
     var sexe = agentModel.sexe;
     var role = agentModel.role;
     var matricule = agentModel.matricule;
+    var numeroSecuriteSociale = agentModel.numeroSecuriteSociale; 
     var dateNaissance = agentModel.dateNaissance;
     var lieuNaissance = agentModel.lieuNaissance;
     var nationalite = agentModel.nationalite;
@@ -46,17 +47,18 @@ class AgentsRepository {
     var statutAgent = agentModel.statutAgent;
     var createdAt = agentModel.createdAt;
     var photo = agentModel.photo;
+    var salaire = agentModel.salaire;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('agents_id_seq'), '$nom',"
         "'$postNom', '$prenom', '$email', '$telephone', '$adresse', '$sexe',"
-        "'$role', '$matricule', '$dateNaissance', '$lieuNaissance',"
+        "'$role', '$matricule', '$numeroSecuriteSociale', '$dateNaissance', '$lieuNaissance',"
         "'$nationalite', '$typeContrat', '$departement','$servicesAffectation',"
         "'$dateDebutContrat', '$dateFinContrat','$fonctionOccupe',"
         "'$competance', '$experience', '$statutAgent',"
-        "'$createdAt', '$photo');");
+        "'$createdAt', '$photo', '$salaire');");
     });
   }
 
@@ -72,6 +74,7 @@ class AgentsRepository {
     var sexe = agentModel.sexe;
     var role = agentModel.role;
     var matricule = agentModel.matricule;
+    var numeroSecuriteSociale = agentModel.numeroSecuriteSociale; 
     var dateNaissance = agentModel.dateNaissance;
     var lieuNaissance = agentModel.lieuNaissance;
     var nationalite = agentModel.nationalite;
@@ -86,22 +89,23 @@ class AgentsRepository {
     var statutAgent = agentModel.statutAgent;
     var createdAt = agentModel.createdAt;
     var photo = agentModel.photo;
+    var salaire = agentModel.salaire;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-          "UPDATE $tableName SET \"nom\"='$nom', \"postNom\"='$postNom',"
-          "\"prenom\"='$prenom', \"email\"='$email', \"telephone\"='$telephone',"
-          "\"adresse\"='$adresse', \"sexe\"='$sexe', \"role\"='$role',"
-          "\"matricule\"='$matricule', \"dateNaissance\"='$dateNaissance',"
-          "\"lieuNaissance\"='$lieuNaissance', \"nationalite\"='$nationalite',"
-          "\"typeContrat\"='$typeContrat', \"departement\"='$departement',"
-          "\"servicesAffectation\"='$servicesAffectation',"
-          "\"dateDebutContrat\"='$dateDebutContrat',"
-          "\"dateFinContrat\"='$dateFinContrat', \"fonctionOccupe\"='$fonctionOccupe',"
-          "\"competance\"='$competance', \"experience\"='$experience',"
-          "\"statutAgent\"='$statutAgent',"
-          "\"createdAt\"='$createdAt', \"photo\"='$photo' WHERE id=$id;");
+        "UPDATE $tableName SET \"nom\"='$nom', \"postNom\"='$postNom',"
+        "\"prenom\"='$prenom', \"email\"='$email', \"telephone\"='$telephone',"
+        "\"adresse\"='$adresse', \"sexe\"='$sexe', \"role\"='$role',"
+        "\"matricule\"='$matricule', \"numeroSecuriteSociale\"='$numeroSecuriteSociale', \"dateNaissance\"='$dateNaissance',"
+        "\"lieuNaissance\"='$lieuNaissance', \"nationalite\"='$nationalite',"
+        "\"typeContrat\"='$typeContrat', \"departement\"='$departement',"
+        "\"servicesAffectation\"='$servicesAffectation',"
+        "\"dateDebutContrat\"='$dateDebutContrat',"
+        "\"dateFinContrat\"='$dateFinContrat', \"fonctionOccupe\"='$fonctionOccupe',"
+        "\"competance\"='$competance', \"experience\"='$experience',"
+        "\"statutAgent\"='$statutAgent', \"createdAt\"='$createdAt',"
+        "\"photo\"='$photo', \"salaire\"='$salaire' WHERE id=$id;");
     });
   }
 
@@ -130,20 +134,22 @@ class AgentsRepository {
       sexe: data[0][7],
       role: data[0][8],
       matricule: data[0][9],
-      dateNaissance: data[0][10],
-      lieuNaissance: data[0][11],
-      nationalite: data[0][12],
-      typeContrat: data[0][13],
-      departement: data[0][14],
-      servicesAffectation: data[0][15],
-      dateDebutContrat: data[0][16],
-      dateFinContrat: data[0][17],
-      fonctionOccupe: data[0][18],
-      competance: data[0][19],
-      experience: data[0][20],
-      statutAgent: data[0][21],
-      createdAt: data[0][22],
-      photo: data[0][23],
+      numeroSecuriteSociale: data[0][10],
+      dateNaissance: data[0][11],
+      lieuNaissance: data[0][12],
+      nationalite: data[0][13],
+      typeContrat: data[0][14],
+      departement: data[0][15],
+      servicesAffectation: data[0][16],
+      dateDebutContrat: data[0][17],
+      dateFinContrat: data[0][18],
+      fonctionOccupe: data[0][19],
+      competance: data[0][20],
+      experience: data[0][21],
+      statutAgent: data[0][22],
+      createdAt: data[0][23],
+      photo: data[0][24], 
+      salaire: data[0][25]
     );
   }
 
