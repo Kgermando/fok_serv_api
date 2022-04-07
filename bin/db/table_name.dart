@@ -105,7 +105,6 @@ class TableName {
           "salaire" $vachar,
           "observation" $boolean,
           "modePaiement" $vachar,
-          "salaire" $vachar,
           "createdAt" $timestamp,
           "approbation" $boolean,
           "tauxJourHeureMoisSalaire" $vachar,
@@ -134,7 +133,7 @@ class TableName {
           "totalAPayerAllocationsFamiliales" $vachar,
           "netAPayer" $vachar,
           "montantPrisConsiderationCalculCotisationsINSS" $vachar,
-          "salaire" $vachar
+          "totalDuBrut" $vachar
       );
       ''');
 
