@@ -69,7 +69,7 @@ class PaiementSalaireRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('paiement_salaires_id_seq'),"
+        "INSERT INTO $tableName VALUES (nextval('salaires_id_seq'),"
         "'$nom', '$postNom', '$prenom','$telephone','$adresse','$departement',"
         "'$numeroSecuriteSociale','$matricule','$servicesAffectation','$salaire',"
         "'$observation','$modePaiement', '$createdAt', '$approbation',"
@@ -81,7 +81,7 @@ class PaiementSalaireRepository {
         "'$jourPayeMaladieAccident','$tauxJournalierMaladieAccident',"
         "'$totalDuMaladieAccident', '$pensionDeduction',"
         "'$indemniteCompensatricesDeduction', '$avancesDeduction',"
-        "'$diversDeduction', '$diversDeduction',"
+        "'$diversDeduction',"
         "'$retenuesFiscalesDeduction','$nombreEnfantBeneficaireAllocationsFamiliales',"
         "'$nombreDeJoursAllocationsFamiliales', '$tauxJoursAllocationsFamiliales',"
         "'$totalAPayerAllocationsFamiliales','$netAPayer',"
