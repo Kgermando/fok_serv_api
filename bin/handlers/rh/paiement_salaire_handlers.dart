@@ -75,6 +75,9 @@ class PaiementSalaireHandlers {
           netAPayer: input['netAPayer'],
           montantPrisConsiderationCalculCotisationsINSS: input['montantPrisConsiderationCalculCotisationsINSS'],
           totalDuBrut: input['totalDuBrut'],
+          signatureDG: input['signatureDG'],
+          signatureFinance: input['signatureFinance'],
+          signatureRH: input['signatureRH']
       );
       try {
         await repos.salaires.insertData(data);
@@ -213,6 +216,15 @@ class PaiementSalaireHandlers {
       }
       if (input['totalDuBrut'] != null) {
         data.totalDuBrut = input['totalDuBrut'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['signatureFinance'] != null) {
+        data.signatureFinance = input['signatureFinance'];
+      }
+      if (input['signatureRH'] != null) {
+        data.signatureRH = input['signatureRH'];
       }
       repos.salaires.update(data);
       return Response.ok(jsonEncode(data.toJson()));

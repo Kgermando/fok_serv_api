@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:postgres/postgres.dart';
 
 import '../../models/users/user_model.dart';
@@ -10,19 +8,19 @@ class UserRepository {
 
   UserRepository(this.executor, this.tableName);
   
-  Future<int> _generateId() async {
-    int id = Random().nextInt(2147483647);
-    while (!await _isUniqueId(id)) {
-      id = Random().nextInt(2147483647);
-    }
-    return id;
-  }
+  // Future<int> _generateId() async {
+  //   int id = Random().nextInt(2147483647);
+  //   while (!await _isUniqueId(id)) {
+  //     id = Random().nextInt(2147483647);
+  //   }
+  //   return id;
+  // }
  
-  Future<bool> _isUniqueId(int id) async {
-    var data = await executor.query(
-      "SELECT * FROM  $tableName WHERE \"id\" = '$id'");
-    return data.isEmpty ? true : data[0].isEmpty;
-  }
+  // Future<bool> _isUniqueId(int id) async {
+  //   var data = await executor.query(
+  //     "SELECT * FROM  $tableName WHERE \"id\" = '$id'");
+  //   return data.isEmpty ? true : data[0].isEmpty;
+  // }
 
 
   Future<bool> isUniqueLogin(String matricule) async {

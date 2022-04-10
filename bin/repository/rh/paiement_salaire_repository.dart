@@ -62,6 +62,9 @@ class PaiementSalaireRepository {
     var netAPayer = paiementSalaireModel.netAPayer;
     var montantPrisConsiderationCalculCotisationsINSS = paiementSalaireModel.montantPrisConsiderationCalculCotisationsINSS;
     var totalDuBrut = paiementSalaireModel.totalDuBrut;
+    var signatureDG = paiementSalaireModel.signatureDG;
+    var signatureFinance = paiementSalaireModel.signatureFinance;
+    var signatureRH = paiementSalaireModel.signatureRH;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
@@ -82,7 +85,8 @@ class PaiementSalaireRepository {
         "'$retenuesFiscalesDeduction','$nombreEnfantBeneficaireAllocationsFamiliales',"
         "'$nombreDeJoursAllocationsFamiliales', '$tauxJoursAllocationsFamiliales',"
         "'$totalAPayerAllocationsFamiliales','$netAPayer',"
-        "'$montantPrisConsiderationCalculCotisationsINSS','$totalDuBrut');");
+        "'$montantPrisConsiderationCalculCotisationsINSS','$totalDuBrut',"
+        "'$signatureDG','$signatureFinance','$signatureRH');");
     });
   }
 
@@ -143,6 +147,9 @@ class PaiementSalaireRepository {
     var montantPrisConsiderationCalculCotisationsINSS =
         paiementSalaireModel.montantPrisConsiderationCalculCotisationsINSS;
     var totalDuBrut = paiementSalaireModel.totalDuBrut;
+    var signatureDG = paiementSalaireModel.signatureDG;
+    var signatureFinance = paiementSalaireModel.signatureFinance;
+    var signatureRH = paiementSalaireModel.signatureRH;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -173,7 +180,8 @@ class PaiementSalaireRepository {
       "\"totalAPayerAllocationsFamiliales\"='$totalAPayerAllocationsFamiliales',"
       "\"netAPayer\"='$netAPayer',"
       "\"montantPrisConsiderationCalculCotisationsINSS\"='$montantPrisConsiderationCalculCotisationsINSS',"
-      "\"totalDuBrut\"='$totalDuBrut' WHERE id=$id;");
+      "\"totalDuBrut\"='$totalDuBrut', \"signatureDG\"='$signatureDG',"
+      "\"signatureFinance\"='$signatureFinance', \"signatureRH\"='$signatureRH' WHERE id=$id;");
     });
   }
 
@@ -233,7 +241,10 @@ class PaiementSalaireRepository {
       totalAPayerAllocationsFamiliales: data[0][38],
       netAPayer: data[0][39],
       montantPrisConsiderationCalculCotisationsINSS: data[0][40],
-      totalDuBrut: data[0][41]
+      totalDuBrut: data[0][41],
+      signatureDG: data[0][42],
+      signatureRH: data[0][43],
+      signatureFinance: data[0][44]
     );
   }
 }

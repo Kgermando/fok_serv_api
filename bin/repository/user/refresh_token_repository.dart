@@ -30,6 +30,7 @@ class RefreshTokensRepository {
     var token = refreshTokenModel.token;
 
     await _executor.transaction((ctx) async {
+      // ignore: unused_local_variable
       var result = await ctx.execute(
           "INSERT INTO $_tableName VALUES (nextval('refresh_tokens_id_seq'), '$owner', '$token');");
     });

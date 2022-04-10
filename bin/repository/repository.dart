@@ -1,6 +1,5 @@
 import 'package:postgres/postgres.dart';
 
-import '../models/rh/paiement_salaire_model.dart';
 import 'comptabilites/amrtissement_repository.dart';
 import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/journal_repository.dart';
@@ -12,7 +11,7 @@ import 'finances/depenses_repository.dart';
 import 'finances/dettes_repository.dart';
 import 'finances/fin_exterieur_repository.dart';
 import 'rh/agents_repository.dart';
-import 'rh/paiement_divers_repository copy.dart';
+import 'rh/paiement_divers_repository.dart';
 import 'rh/paiement_salaire_repository.dart';
 import 'rh/performence_repository.dart';
 import 'rh/presence_repository.dart';

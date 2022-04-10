@@ -133,7 +133,10 @@ class TableName {
           "totalAPayerAllocationsFamiliales" $vachar,
           "netAPayer" $vachar,
           "montantPrisConsiderationCalculCotisationsINSS" $vachar,
-          "totalDuBrut" $vachar
+          "totalDuBrut" $vachar,
+          "signatureDG" $vachar,
+          "signatureFinance" $vachar,
+          "signatureRH" $vachar
       );
       ''');
 

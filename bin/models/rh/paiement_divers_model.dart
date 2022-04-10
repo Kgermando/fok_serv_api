@@ -53,7 +53,7 @@ class PaiementDiversModel {
       'modePaiement': modePaiement,
       'titleDivers': titleDivers,
       'divers': divers,
-      'created': created,
+      'created': created.toIso8601String(),
       'approbation': approbation
     };
   }
