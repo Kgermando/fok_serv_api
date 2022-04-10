@@ -160,7 +160,7 @@ class PaiementSalaireModel {
         createdAt: DateTime.parse(json['createdAt']),
         approbation: json['approbation'],
         tauxJourHeureMoisSalaire: json['tauxJourHeureMoisSalaire'],
-        joursHeuresPayeA100PourecentSalaire: json['tauxJourHeureMoisSalaire'],
+        joursHeuresPayeA100PourecentSalaire: json['joursHeuresPayeA100PourecentSalaire'],
         totalDuSalaire: json['totalDuSalaire'],
         nombreHeureSupplementaires: json['nombreHeureSupplementaires'],
         tauxHeureSupplementaires: json['tauxHeureSupplementaires'],
