@@ -19,6 +19,17 @@ class CaissesHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late CaisseModel agent;
+      try {
+        agent = await repos.caisses.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
     router.post('/insert-new-transaction-caisse', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -32,7 +43,9 @@ class CaissesHandlers {
           departement: input['departement'],
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+          signature: input['signature']
+          );
       try {
         await repos.caisses.insertData(data);
       } catch (e) {
@@ -42,10 +55,10 @@ class CaissesHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-caisse/<id>', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-transaction-caisse/<id>', (Request request, String id) async {
       var id = request.params['id'];
       CaisseModel data = await repos.caisses.getFromId(int.parse(id!));
+      dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];
@@ -77,11 +90,14 @@ class CaissesHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['signature'] != null) {
+        data.signature = input['numeroOperation'];
+      }
       repos.caisses.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-caisse/<id>', (Request request) async {
+    router.delete('/delete-transaction-caisse/<id>', (String id, Request request) async {
       var id = request.params['id'];
       repos.caisses.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

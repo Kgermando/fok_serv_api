@@ -27,13 +27,14 @@ class DettesRepository {
     var montant = detteModel.montant;
     var numeroOperation = detteModel.numeroOperation;
     var created = detteModel.created;
+    var signature = detteModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
           "INSERT INTO $tableName VALUES (nextval('dettes_id_seq'), '$nomComplet',"
           "'$pieceJustificative','$libelle','$montant',"
-          "'$numeroOperation', '$created');");
+          "'$numeroOperation', '$created', '$signature');");
     });
   }
 
@@ -45,6 +46,7 @@ class DettesRepository {
     var montant = detteModel.montant;
     var numeroOperation = detteModel.numeroOperation;
     var created = detteModel.created;
+    var signature = detteModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -52,7 +54,7 @@ class DettesRepository {
           "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
           "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
           "\"montant\"='$montant', \"numeroOperation\"='$numeroOperation',"
-          "\"created\"='$created' WHERE id=$id;");
+          "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -77,7 +79,8 @@ class DettesRepository {
         libelle: data[0][3],
         montant: data[0][4],
         numeroOperation: data[0][5],
-        created: data[0][6]);
+        created: data[0][6],
+        signature: data[0][7]);
   }
 
 }

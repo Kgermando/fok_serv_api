@@ -19,6 +19,17 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late JournalModel agent;
+      try {
+        agent = await repos.journals.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
     router.post('/insert-new-comptabilite-journal',
         (Request request) async {
       var input = jsonDecode(await request.readAsString());
@@ -29,7 +40,9 @@ class JournalHandlers {
           intitule: input['intitule'],
           montant: input['montant'],
           typeJournal: input['typeJournal'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        signature: input['signature'],
+      );
       try {
         await repos.journals.insertData(data);
       } catch (e) {
@@ -40,7 +53,7 @@ class JournalHandlers {
     });
 
     router.put('/update-comptabilite-journal/<id>',
-        (Request request) async {
+        (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       JournalModel data =
@@ -64,12 +77,15 @@ class JournalHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
       repos.journals.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-comptabilite-journal/<id>',
-        (Request request) async {
+        (String id, Request request) async {
       var id = request.params['id'];
       repos.journals.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

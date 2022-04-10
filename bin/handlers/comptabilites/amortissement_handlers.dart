@@ -19,6 +19,17 @@ class AmortissementHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late AmortissementModel agent;
+      try {
+        agent = await repos.amortissements.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
     router.post('/insert-new-comptabilite-amortissement', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -28,7 +39,9 @@ class AmortissementHandlers {
           intitule: input['intitule'],
           montant: input['montant'],
           typeJournal: input['typeJournal'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']), 
+          signature: input['signature'],
+      );
       try {
         await repos.amortissements.insertData(data);
       } catch (e) {
@@ -38,7 +51,7 @@ class AmortissementHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-comptabilite-amortissement/<id>', (Request request) async {
+    router.put('/update-comptabilite-amortissement/<id>', (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       AmortissementModel data = await repos.amortissements.getFromId(int.parse(id!));
@@ -61,11 +74,14 @@ class AmortissementHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
       repos.amortissements.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-comptabilite-amortissement/<id>', (Request request) async {
+    router.delete('/delete-comptabilite-amortissement/<id>', (String id, Request request) async {
       var id = request.params['id'];
       repos.amortissements.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

@@ -19,6 +19,17 @@ class CreanceHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late CreanceModel agent;
+      try {
+        agent = await repos.creances.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
     router.post('/insert-new-transaction-creance', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -28,7 +39,9 @@ class CreanceHandlers {
           libelle: input['libelle'],
           montant: input['montant'],
           numeroOperation: input['numeroOperation'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+          signature: input['signature']
+        );
       try {
         await repos.creances.insertData(data);
       } catch (e) {
@@ -38,7 +51,7 @@ class CreanceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-creance/<id>', (Request request) async {
+    router.put('/update-transaction-creance/<id>', (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       CreanceModel data = await repos.creances.getFromId(int.parse(id!));
@@ -61,11 +74,14 @@ class CreanceHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
       repos.creances.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-creance/<id>', (Request request) async {
+    router.delete('/delete-transaction-creance/<id>', (String id,Request request ) async {
       var id = request.params['id'];
       repos.creances.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

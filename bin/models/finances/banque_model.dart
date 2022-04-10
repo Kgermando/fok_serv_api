@@ -10,6 +10,7 @@ class BanqueModel {
   late String typeOperation;
   late String numeroOperation;
   late DateTime created; 
+  late String signature;
 
   BanqueModel({
     this.id,
@@ -23,6 +24,7 @@ class BanqueModel {
     required this.typeOperation,
     required this.numeroOperation,
     required this.created,
+    required this.signature,
   });
 
   factory BanqueModel.fromSQL(List<dynamic> row) {
@@ -37,7 +39,8 @@ class BanqueModel {
       departement: row[7],
       typeOperation: row[8],
       numeroOperation: row[9],
-      created: row[10]
+      created: row[10],
+      signature: row[11]
     );
   }
 
@@ -54,6 +57,7 @@ class BanqueModel {
       typeOperation: json['typeOperation'],
       numeroOperation: json['numeroOperation'],
       created: DateTime.parse(json['created']),
+      signature: json['signature']
     );
   }
 
@@ -70,6 +74,7 @@ class BanqueModel {
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
       'created': created.toIso8601String(),
+      'signature': signature,
     };
   }
 }

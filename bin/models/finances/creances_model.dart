@@ -6,6 +6,7 @@ class CreanceModel {
   late String montant;
   late String numeroOperation;
   late DateTime created;
+  late String signature;
 
  CreanceModel( 
     {
@@ -16,6 +17,7 @@ class CreanceModel {
     required this.montant,
     required this.numeroOperation,
     required this.created,
+    required this.signature,
   });
 
   factory CreanceModel.fromSQL(List<dynamic> row) {
@@ -26,7 +28,8 @@ class CreanceModel {
         libelle: row[3],
         montant: row[4],
         numeroOperation: row[5],
-        created: row[6]
+        created: row[6],
+        signature: row[7]
     );
   }
 
@@ -39,6 +42,7 @@ class CreanceModel {
       montant: json['montant'],
       numeroOperation: json['numeroOperation'],
       created: DateTime.parse(json['created']),
+      signature: json['signature']
     );
   }
 
@@ -51,6 +55,7 @@ class CreanceModel {
       'montant': montant,
       'numeroOperation': numeroOperation,
       'created': created.toIso8601String(),
+      'signature': signature,
     };
   }
 }

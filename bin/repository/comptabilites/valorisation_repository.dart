@@ -27,12 +27,13 @@ class ValorisationRepository {
     var prixTotal = valorisationModel.prixTotal;
     var source = valorisationModel.source;
     var created = valorisationModel.created;
+    var signature = valorisationModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('valorisations_id_seq'), '$numeroOrdre',"
-        "'$intitule','$quantite','$prixUnitaire','$prixTotal','$source','$created');");
+        "'$intitule','$quantite','$prixUnitaire','$prixTotal','$source','$created','$signature');");
     });
   }
 
@@ -45,6 +46,7 @@ class ValorisationRepository {
     var prixTotal = valorisationModel.prixTotal;
     var source = valorisationModel.source;
     var created = valorisationModel.created;
+    var signature = valorisationModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -52,7 +54,7 @@ class ValorisationRepository {
         "UPDATE $tableName SET \"numeroOrdre\"='$numeroOrdre', "
         "\"intitule\"='$intitule',\"quantite\"='$quantite',"
         "\"prixUnitaire\"='$prixUnitaire',\"prixTotal\"='$prixTotal',"
-        "\"source\"='$source', \"created\"='$created' WHERE id=$id;");
+        "\"source\"='$source', \"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -78,7 +80,8 @@ class ValorisationRepository {
         prixUnitaire: data[0][4],
         prixTotal: data[0][5],
         source: data[0][6],
-        created: data[0][7]);
+        created: data[0][7],
+        signature: data[0][8]);
   } 
   
 }

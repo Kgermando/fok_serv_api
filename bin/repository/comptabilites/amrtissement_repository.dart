@@ -26,12 +26,13 @@ class AmortissementRepository {
     var montant = amortissementModel.montant;
     var typeJournal = amortissementModel.typeJournal;
     var created = amortissementModel.created;
+    var signature = amortissementModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('amortissements_id_seq'), '$titleArmotissement',"
-        "'$comptes','$intitule','$montant','$typeJournal','$created');");
+        "'$comptes','$intitule','$montant','$typeJournal','$created','$signature');");
     });
   }
 
@@ -43,15 +44,16 @@ class AmortissementRepository {
     var montant = amortissementModel.montant;
     var typeJournal = amortissementModel.typeJournal;
     var created = amortissementModel.created;
+    var signature = amortissementModel.signature;
 
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
           "UPDATE $tableName SET \"titleArmotissement\"='$titleArmotissement', "
-          "\"comptes\"='$comptes',\"intitule\"='$intitule',"
-          "\"montant\"='$montant',\"typeJournal\"='$typeJournal',"
-          "\"created\"='$created' WHERE id=$id;");
+          "\"comptes\"='$comptes', \"intitule\"='$intitule',"
+          "\"montant\"='$montant', \"typeJournal\"='$typeJournal',"
+          "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -76,7 +78,8 @@ class AmortissementRepository {
         intitule: data[0][3],
         montant: data[0][4],
         typeJournal: data[0][5],
-        created: data[0][6]);
+        created: data[0][6],
+        signature: data[0][7]);
   } 
   
 }

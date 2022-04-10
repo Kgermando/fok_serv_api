@@ -20,7 +20,7 @@ class TableName {
   final bilansTable = 'bilans';
   final journalsTable = 'journals';
   final valorisationTable = 'valorisations';
-  
+
   // Type database
   final key = 'serial primary key NOT NULL';
   final vachar = 'VARCHAR NOT NULL';
@@ -56,7 +56,6 @@ class TableName {
       );
       ''');
 
-
       // Agent
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tableAgents(
@@ -88,7 +87,7 @@ class TableName {
           "salaire" $vachar
       );
       ''');
-      
+
       // Paiement Salaire
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tableSalaire(
@@ -179,7 +178,7 @@ class TableName {
       );
       ''');
 
-      
+      // Finance banque
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $banquesTable(
           "id" $key,
@@ -192,10 +191,12 @@ class TableName {
           "departement" $vachar,
           "typeOperation" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
       );
       ''');
 
+      // Finance CAissse
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $caissesTable(
           "id" $key,
@@ -208,11 +209,13 @@ class TableName {
           "departement" $vachar,
           "typeOperation" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
           
       );
       ''');
 
+      // Finance Creance
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $creancesTable(
           "id" $key,
@@ -221,10 +224,12 @@ class TableName {
           "libelle" $vachar,
           "montant" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
       );
       ''');
 
+      // Finance depenses
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $depensesTable(
           "id" $key,
@@ -236,10 +241,12 @@ class TableName {
           "ligneBudgtaire" $vachar,
           "modePayement" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
         );
       ''');
 
+      // Finance dettes
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $dettesTable(
           "id" $key,
@@ -248,10 +255,12 @@ class TableName {
           "libelle" $vachar,
           "montant" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
         );
       ''');
 
+      // Finance fin ext
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $finExterieursTable(
           "id" $key,
@@ -263,10 +272,12 @@ class TableName {
           "ligneBudgtaire" $vachar,
           "typeOperation" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
         );
       ''');
 
+      // comptabilite amortissement
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $amortissementsTable(
           "id" $key,
@@ -275,10 +286,12 @@ class TableName {
           "intitule" $vachar,
           "montant" $vachar,
           "typeJournal" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
         );
       ''');
 
+      // comptabilite ilans
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $bilansTable(
           "id" $key,
@@ -287,10 +300,12 @@ class TableName {
           "intitule" $vachar,
           "montant" $vachar,
           "typeBilan" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
         );
       ''');
 
+      // comptabilite journals
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $journalsTable(
           "id" $key,
@@ -299,10 +314,12 @@ class TableName {
           "intitule" $vachar,
           "montant" $vachar,
           "typeJournal" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
         );
       ''');
 
+      // comptabilite valorisation
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $valorisationTable(
           "id" $key,
@@ -312,7 +329,8 @@ class TableName {
           "prixUnitaire" $vachar,
           "prixTotal" $vachar,
           "source" $vachar,
-          "created" $timestamp
+          "created" $timestamp,
+          "signature" $vachar
         );
       ''');
 

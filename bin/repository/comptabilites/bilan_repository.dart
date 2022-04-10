@@ -26,12 +26,13 @@ class BilanRepository {
     var montant = bilanModel.montant;
     var typeBilan = bilanModel.typeBilan;
     var created = bilanModel.created;
+    var signature = bilanModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('bilans_id_seq'), '$titleBilan',"
-          "'$comptes','$intitule','$montant','$typeBilan','$created');");
+          "'$comptes','$intitule','$montant','$typeBilan','$created','$signature');");
     });
   }
 
@@ -43,6 +44,7 @@ class BilanRepository {
     var montant = bilanModel.montant;
     var typeBilan = bilanModel.typeBilan;
     var created = bilanModel.created;
+    var signature = bilanModel.signature;
 
 
     await executor.transaction((conn) async {
@@ -51,7 +53,7 @@ class BilanRepository {
           "UPDATE $tableName SET \"titleBilan\"='$titleBilan', "
           "\"comptes\"='$comptes',\"intitule\"='$intitule',"
           "\"montant\"='$montant',\"typeBilan\"='$typeBilan',"
-          "\"created\"='$created' WHERE id=$id;");
+          "\"created\"='$created',\"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -76,7 +78,8 @@ class BilanRepository {
         intitule: data[0][3],
         montant: data[0][4],
         typeBilan: data[0][5],
-        created: data[0][6]);
+        created: data[0][6],
+        signature: data[0][7]);
   } 
   
 }

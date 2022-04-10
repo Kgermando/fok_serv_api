@@ -88,11 +88,12 @@ class PaiementSalaireHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-paiement/<id>', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-paiement/<id>', (Request request, String id) async {
       var id = request.params['id'];
       PaiementSalaireModel data =
           await repos.salaires.getFromId(int.parse(id!));
+      dynamic input = jsonDecode(await request.readAsString());
+
 
       if (input['nom'] != null) {
         data.nom = input['nom'];
@@ -125,7 +126,7 @@ class PaiementSalaireHandlers {
         data.salaire = input['salaire'];
       }
       if (input['observation'] != null) {
-        data.observation = bool.hasEnvironment(input['observation']);
+        data.observation = input['observation'] as bool;
       }
       if (input['modePaiement'] != null) {
         data.modePaiement = input['modePaiement'];

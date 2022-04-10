@@ -20,6 +20,18 @@ class DetteHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late DetteModel agent;
+      try {
+        agent = await repos.dettes.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
+
     router.post('/insert-new-transaction-dette', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -29,7 +41,9 @@ class DetteHandlers {
           libelle: input['libelle'],
           montant: input['montant'],
           numeroOperation: input['numeroOperation'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        signature: input['signature'],
+      );
       try {
         await repos.dettes.insertData(data);
       } catch (e) {
@@ -39,7 +53,7 @@ class DetteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-dette/<id>', (Request request) async {
+    router.put('/update-transaction-dette/<id>', (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       DetteModel data = await repos.dettes.getFromId(int.parse(id!));
@@ -62,11 +76,14 @@ class DetteHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
       repos.dettes.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-dette/<id>', (Request request) async {
+    router.delete('/delete-transaction-dette/<id>', (String id, Request request) async {
       var id = request.params['id'];
       repos.dettes.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

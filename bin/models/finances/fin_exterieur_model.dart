@@ -9,6 +9,7 @@ class FinanceExterieurModel {
   late String typeOperation;
   late String numeroOperation;
   late DateTime created;
+  late String signature;
  
   FinanceExterieurModel( 
     {
@@ -21,7 +22,8 @@ class FinanceExterieurModel {
     required this.ligneBudgtaire,
     required this.typeOperation,
     required this.numeroOperation,
-    required this.created
+    required this.created,
+    required this.signature,
   });
 
   factory FinanceExterieurModel.fromSQL(List<dynamic> row) {
@@ -35,7 +37,8 @@ class FinanceExterieurModel {
         ligneBudgtaire: row[6],
         typeOperation: row[7],
         numeroOperation: row[8],
-        created: row[9]
+        created: row[9],
+        signature: row[10]
     );
   }
 
@@ -50,7 +53,8 @@ class FinanceExterieurModel {
       ligneBudgtaire: json['ligneBudgtaire'],
       typeOperation: json['typeOperation'],
       numeroOperation: json['numeroOperation'],
-      created: DateTime.parse(json['created'])
+      created: DateTime.parse(json['created']),
+      signature: json['signature']
     );
   }
 
@@ -65,7 +69,8 @@ class FinanceExterieurModel {
       'ligneBudgtaire': ligneBudgtaire,
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'signature': signature,
     };
   }
 }

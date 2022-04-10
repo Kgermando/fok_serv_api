@@ -19,6 +19,17 @@ class ValorisationHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late ValorisationModel agent;
+      try {
+        agent = await repos.valorisations.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
     router.post('/insert-new-comptabilite-valorisation',
         (Request request) async {
       var input = jsonDecode(await request.readAsString());
@@ -30,7 +41,9 @@ class ValorisationHandlers {
           prixUnitaire: input['prixUnitaire'],
           prixTotal: input['prixTotal'],
           source: input['source'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        signature: input['signature'],
+      );
       try {
         await repos.valorisations.insertData(data);
       } catch (e) {
@@ -41,7 +54,7 @@ class ValorisationHandlers {
     });
 
     router.put('/update-comptabilite-valorisation/<id>',
-        (Request request) async {
+        (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       ValorisationModel data =
@@ -68,12 +81,15 @@ class ValorisationHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
       repos.valorisations.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-comptabilite-valorisation/<id>',
-        (Request request) async {
+        (String id, Request request) async {
       var id = request.params['id'];
       repos.valorisations.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

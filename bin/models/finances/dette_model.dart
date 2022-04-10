@@ -6,6 +6,7 @@ class DetteModel {
   late String montant;
   late String numeroOperation;
   late DateTime created;
+  late String signature;
 
   DetteModel( 
     {
@@ -15,7 +16,8 @@ class DetteModel {
     required this.libelle,
     required this.montant,
     required this.numeroOperation,
-    required this.created
+    required this.created,
+    required this.signature,
   });
 
   factory DetteModel.fromSQL(List<dynamic> row) {
@@ -26,7 +28,8 @@ class DetteModel {
         libelle: row[3],
         montant: row[4],
         numeroOperation: row[5],
-        created: row[6]
+        created: row[6],
+        signature: row[7]
     ); 
   }
 
@@ -38,7 +41,8 @@ class DetteModel {
       libelle: json['libelle'],
       montant: json['montant'],
       numeroOperation: json['numeroOperation'],
-      created: DateTime.parse(json['created'])
+      created: DateTime.parse(json['created']),
+      signature: json['signature']
     );
   }
 
@@ -50,7 +54,8 @@ class DetteModel {
       'libelle': libelle,
       'montant': montant,
       'numeroOperation': numeroOperation,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'signature': signature,
     };
   }
 }

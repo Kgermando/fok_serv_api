@@ -26,13 +26,14 @@ class CreancesRepository {
     var montant = creanceModel.montant;
     var numeroOperation = creanceModel.numeroOperation;
     var created = creanceModel.created;
+    var signature = creanceModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
           "INSERT INTO $tableName VALUES (nextval('creances_id_seq'), '$nomComplet',"
           "'$pieceJustificative','$libelle','$montant',"
-          "'$numeroOperation', '$created');");
+          "'$numeroOperation', '$created', '$signature');");
     });
   }
 
@@ -45,6 +46,7 @@ class CreancesRepository {
     var montant = creanceModel.montant;
     var numeroOperation = creanceModel.numeroOperation;
     var created = creanceModel.created;
+    var signature = creanceModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -52,7 +54,7 @@ class CreancesRepository {
         "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
         "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
         "\"montant\"='$montant', \"numeroOperation\"='$numeroOperation',"
-        "\"created\"='$created' WHERE id=$id;");
+        "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -77,7 +79,8 @@ class CreancesRepository {
         libelle: data[0][3],
         montant: data[0][4],
         numeroOperation: data[0][5],
-        created: data[0][6]);
+        created: data[0][6],
+        signature: data[0][7]);
   }
 
 }

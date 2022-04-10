@@ -30,13 +30,14 @@ class BanqueRepository {
     var typeOperation = banqueModel.typeOperation;
     var numeroOperation = banqueModel.numeroOperation;
     var created = banqueModel.created;
+    var signature = banqueModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('banques_id_seq'), '$nomComplet',"
         "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
-        "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation', '$created');");
+        "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation', '$created', '$signature');");
     });
   }
 
@@ -53,6 +54,7 @@ class BanqueRepository {
     var typeOperation = banqueModel.typeOperation;
     var numeroOperation = banqueModel.numeroOperation;
     var created = banqueModel.created;
+    var signature = banqueModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -62,7 +64,7 @@ class BanqueRepository {
         "\"montant\"='$montant',\"coupureBillet\"='$coupureBillet',"
         "\"ligneBudgtaire\"='$ligneBudgtaire', \"departement\"='$departement',"
         "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
-        "\"created\"='$created' WHERE id=$id;");
+        "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -91,7 +93,9 @@ class BanqueRepository {
         departement: data[0][7],
         typeOperation: data[0][8],
         numeroOperation: data[0][9],
-        created: data[0][10]);
+        created: data[0][10],
+        signature: data[0][11]
+        );
   } 
   
 }

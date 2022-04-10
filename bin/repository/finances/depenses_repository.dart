@@ -29,6 +29,7 @@ class DepensesRepository {
     var modePayement = depensesModel.modePayement;
     var numeroOperation = depensesModel.numeroOperation;
     var created = depensesModel.created;
+    var signature = depensesModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
@@ -36,7 +37,7 @@ class DepensesRepository {
           "INSERT INTO $tableName VALUES (nextval('depenses_id_seq'), '$nomComplet',"
           "'$pieceJustificative','$naturePayement','$montant','$coupureBillet',"
           "'$ligneBudgtaire','$modePayement',"
-          "'$numeroOperation', '$created');");
+          "'$numeroOperation', '$created', '$signature');");
     });
   }
 
@@ -51,6 +52,7 @@ class DepensesRepository {
     var modePayement = depensesModel.modePayement;
     var numeroOperation = depensesModel.numeroOperation;
     var created = depensesModel.created;
+    var signature = depensesModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -59,7 +61,7 @@ class DepensesRepository {
         "\"pieceJustificative\"='$pieceJustificative',\"naturePayement\"='$naturePayement',"
         "\"montant\"='$montant', \"coupureBillet\"='$coupureBillet',"
         "\"ligneBudgtaire\"='$ligneBudgtaire', \"modePayement\"='$modePayement',"
-        "\"numeroOperation\"='$numeroOperation',\"created\"='$created' WHERE id=$id;");
+        "\"numeroOperation\"='$numeroOperation',\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -87,6 +89,7 @@ class DepensesRepository {
         ligneBudgtaire: data[0][6],
         modePayement: data[0][7],
         numeroOperation: data[0][8],
-        created: data[0][9]);
+        created: data[0][9],
+        signature: data[0][10]);
   }
 }

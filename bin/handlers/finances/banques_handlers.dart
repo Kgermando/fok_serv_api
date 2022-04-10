@@ -20,6 +20,17 @@ class BanqueHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late BanqueModel agent;
+      try {
+        agent = await repos.banques.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
     router.post('/insert-new-transaction-banque', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -33,7 +44,9 @@ class BanqueHandlers {
           departement: input['departement'],
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+          signature: input['signature']
+        );
       try {
         await repos.banques.insertData(data);
       } catch (e) {
@@ -43,10 +56,10 @@ class BanqueHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-banque/<id>', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-transaction-banque/<id>', (Request request, String id) async {
       var id = request.params['id'];
       BanqueModel data = await repos.banques.getFromId(int.parse(id!));
+      dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];
@@ -78,11 +91,14 @@ class BanqueHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
       repos.banques.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-banque/<id>', (Request request) async {
+    router.delete('/delete-transaction-banque/<id>', (String id, Request request) async {
       var id = request.params['id'];
       repos.banques.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

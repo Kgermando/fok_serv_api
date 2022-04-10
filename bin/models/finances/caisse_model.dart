@@ -10,6 +10,7 @@ class CaisseModel {
   late String typeOperation;
   late String numeroOperation;
   late DateTime created;
+  late String signature;
 
   CaisseModel( 
     {
@@ -24,6 +25,7 @@ class CaisseModel {
     required this.typeOperation,
     required this.numeroOperation,
     required this.created,
+    required this.signature,
   });
 
   factory CaisseModel.fromSQL(List<dynamic> row) {
@@ -38,7 +40,8 @@ class CaisseModel {
       departement: row[7],
       typeOperation: row[8],
       numeroOperation: row[9],
-      created: row[10]
+      created: row[10],
+      signature: row[11]
     );
   }
 
@@ -55,6 +58,7 @@ class CaisseModel {
       typeOperation: json['typeOperation'],
       numeroOperation: json['numeroOperation'],
       created: DateTime.parse(json['created']),
+      signature: json['signature']
     );
   }
 
@@ -71,6 +75,7 @@ class CaisseModel {
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
       'created': created.toIso8601String(),
+      'signature': signature,
     };
   }
 }

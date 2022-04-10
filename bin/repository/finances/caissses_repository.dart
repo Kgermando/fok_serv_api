@@ -30,13 +30,14 @@ class CaissesRepository {
     var typeOperation = caisseModel.typeOperation;
     var numeroOperation = caisseModel.numeroOperation;
     var created = caisseModel.created;
+    var signature = caisseModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
           "INSERT INTO $tableName VALUES (nextval('caisses_id_seq'), '$nomComplet',"
           "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
-          "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation', '$created');");
+          "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation', '$created, '$signature');");
     });
   }
 
@@ -52,6 +53,7 @@ class CaissesRepository {
     var typeOperation = caisseModel.typeOperation;
     var numeroOperation = caisseModel.numeroOperation;
     var created = caisseModel.created;
+    var signature = caisseModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -61,7 +63,7 @@ class CaissesRepository {
           "\"montant\"='$montant',\"coupureBillet\"='$coupureBillet',"
           "\"ligneBudgtaire\"='$ligneBudgtaire', \"departement\"='$departement',"
           "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
-          "\"created\"='$created' WHERE id=$id;");
+          "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -90,7 +92,8 @@ class CaissesRepository {
         departement: data[0][7],
         typeOperation: data[0][8],
         numeroOperation: data[0][9],
-        created: data[0][10]);
+        created: data[0][10],
+        signature: data[0][11]);
   }
 
 

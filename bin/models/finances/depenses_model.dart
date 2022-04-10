@@ -9,8 +9,7 @@ class DepensesModel {
   late String modePayement;
   late String numeroOperation;
   late DateTime created;
-  
-  
+  late String signature;
 
   DepensesModel( 
     {
@@ -23,7 +22,8 @@ class DepensesModel {
     required this.ligneBudgtaire,
     required this.modePayement,
     required this.numeroOperation,
-    required this.created
+    required this.created,
+    required this.signature,
   });
 
   factory DepensesModel.fromSQL(List<dynamic> row) {
@@ -37,7 +37,8 @@ class DepensesModel {
         ligneBudgtaire: row[6],
         modePayement: row[7],
         numeroOperation: row[8],
-        created: row[9]
+        created: row[9],
+        signature: row[10]
     );
   }
 
@@ -52,7 +53,8 @@ class DepensesModel {
       ligneBudgtaire: json['ligneBudgtaire'],
       modePayement: json['modePayement'],
       numeroOperation: json['numeroOperation'],
-      created: DateTime.parse(json['created'])
+      created: DateTime.parse(json['created']),
+      signature: json['signature']
     );
   }
 
@@ -67,7 +69,8 @@ class DepensesModel {
       'ligneBudgtaire': ligneBudgtaire,
       'modePayement': modePayement,
       'numeroOperation': numeroOperation,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'signature': signature,
     };
   }
 }

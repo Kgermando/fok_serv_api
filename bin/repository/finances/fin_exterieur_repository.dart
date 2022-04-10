@@ -29,13 +29,14 @@ class FinExteRepository {
     var typeOperation = financeExterieurModel.typeOperation;
     var numeroOperation = financeExterieurModel.numeroOperation;
     var created = financeExterieurModel.created;
+    var signature = financeExterieurModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('fin_exterieurs_id_seq'), '$nomComplet',"
         "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
-        "'$ligneBudgtaire', '$typeOperation','$numeroOperation', '$created');");
+        "'$ligneBudgtaire', '$typeOperation','$numeroOperation', '$created', '$signature');");
     });
   }
 
@@ -50,6 +51,7 @@ class FinExteRepository {
     var typeOperation = financeExterieurModel.typeOperation;
     var numeroOperation = financeExterieurModel.numeroOperation;
     var created = financeExterieurModel.created;
+    var signature = financeExterieurModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -59,7 +61,7 @@ class FinExteRepository {
           "\"montant\"='$montant',\"coupureBillet\"='$coupureBillet',"
           "\"ligneBudgtaire\"='$ligneBudgtaire',"
           "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
-          "\"created\"='$created' WHERE id=$id;");
+          "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -87,7 +89,8 @@ class FinExteRepository {
         ligneBudgtaire: data[0][6],
         typeOperation: data[0][7],
         numeroOperation: data[0][8],
-        created: data[0][9]);
+        created: data[0][9],
+        signature: data[0][10]);
   } 
   
 }

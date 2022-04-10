@@ -26,12 +26,13 @@ class JournalRepository {
     var montant = journalModel.montant;
     var typeJournal = journalModel.typeJournal;
     var created = journalModel.created;
+    var signature = journalModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
           "INSERT INTO $tableName VALUES (nextval('journals_id_seq'), '$titleBilan',"
-          "'$comptes','$intitule','$montant','$typeJournal','$created');");
+          "'$comptes','$intitule','$montant','$typeJournal','$created','$signature');");
     });
   }
 
@@ -43,6 +44,7 @@ class JournalRepository {
     var montant = journalModel.montant;
     var typeJournal = journalModel.typeJournal;
     var created = journalModel.created;
+    var signature = journalModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -50,7 +52,7 @@ class JournalRepository {
           "UPDATE $tableName SET \"titleBilan\"='$titleBilan', "
           "\"comptes\"='$comptes',\"intitule\"='$intitule',"
           "\"montant\"='$montant',\"typeJournal\"='$typeJournal',"
-          "\"created\"='$created' WHERE id=$id;");
+          "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
     });
   }
 
@@ -75,6 +77,7 @@ class JournalRepository {
         intitule: data[0][3],
         montant: data[0][4],
         typeJournal: data[0][5],
-        created: data[0][6]);
+        created: data[0][6],
+        signature: data[0][7]);
   } 
 }

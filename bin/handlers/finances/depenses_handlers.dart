@@ -19,6 +19,17 @@ class DepensesHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late DepensesModel agent;
+      try {
+        agent = await repos.depenses.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
     router.post('/insert-new-transaction-depense', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -31,7 +42,9 @@ class DepensesHandlers {
           ligneBudgtaire: input['ligneBudgtaire'],
           modePayement: input['modePayement'],
           numeroOperation: input['numeroOperation'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        signature: input['signature']
+      );
       try {
         await repos.depenses.insertData(data);
       } catch (e) {
@@ -41,7 +54,7 @@ class DepensesHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-depense/<id>', (Request request) async {
+    router.put('/update-transaction-depense/<id>', (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       DepensesModel data = await repos.depenses.getFromId(int.parse(id!));
@@ -73,11 +86,14 @@ class DepensesHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
       repos.depenses.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-depense/<id>', (Request request) async {
+    router.delete('/delete-transaction-depense/<id>', (String id, Request request) async {
       var id = request.params['id'];
       repos.depenses.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
