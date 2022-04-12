@@ -12,6 +12,7 @@ import 'handlers/comptabilites/amortissement_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
 import 'handlers/comptabilites/valorisation_handlers.dart';
+import 'handlers/devis/devis_handlers.dart';
 import 'handlers/finances/banques_handlers.dart';
 import 'handlers/finances/caisses_handlers.dart';
 import 'handlers/finances/creance_handlers.dart';
@@ -163,7 +164,13 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ValorisationHandlers(repos).router));
 
-
+    router.mount(
+        '/api/devis/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(DevisHandlers(repos).router));
 
     router.all(
       '/<ignored|.*>',

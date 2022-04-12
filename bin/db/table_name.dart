@@ -20,6 +20,7 @@ class TableName {
   final bilansTable = 'bilans';
   final journalsTable = 'journals';
   final valorisationTable = 'valorisations';
+  final devisTable = 'devis';
 
   // Type database
   final key = 'serial primary key NOT NULL';
@@ -49,6 +50,9 @@ class TableName {
           "nom" $vachar,
           "prenom" $vachar,
           "matricule" $vachar,
+          "departement" $vachar,
+          "servicesAffectation" $vachar,
+          "fonctionOccupe" $vachar,
           "role" $vachar,
           "isOnline" $boolean,
           "createdAt" $timestamp,
@@ -331,6 +335,23 @@ class TableName {
           "source" $vachar,
           "created" $timestamp,
           "signature" $vachar
+        );
+      ''');
+
+      // comptabilite valorisation
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $devisTable(
+          "id" $key,
+          "title" $vachar,
+          "priority" $vachar,
+          "departement" $vachar,
+          "list" $list,
+          "approbation" $boolean,
+          "observation" $boolean,
+          "signatureDG" $vachar,
+          "signatureReception" $vachar,
+          "signatureEmission" $vachar,
+          "created" $timestamp
         );
       ''');
 

@@ -4,6 +4,7 @@ import 'comptabilites/amrtissement_repository.dart';
 import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/journal_repository.dart';
 import 'comptabilites/valorisation_repository.dart';
+import 'devis/devis_repository.dart';
 import 'finances/banque_repository.dart';
 import 'finances/caissses_repository.dart';
 import 'finances/creances_repository.dart';
@@ -36,7 +37,8 @@ class Repository {
   late AmortissementRepository amortissements;
   late BilanRepository bilans;
   late JournalRepository journals;
-  late ValorisationRepository valorisations; 
+  late ValorisationRepository valorisations;
+  late DevisRepository devis;
 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
@@ -56,5 +58,6 @@ class Repository {
     bilans = BilanRepository(executor, 'bilans');
     journals = JournalRepository(executor, 'journals');
     valorisations = ValorisationRepository(executor, 'valorisations');
+    devis = DevisRepository(executor, 'devis');
   }
 }

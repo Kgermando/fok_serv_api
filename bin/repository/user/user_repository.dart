@@ -54,6 +54,9 @@ class UserRepository {
     var prenom = user.prenom;
     var role = user.role;
     var matricule = user.matricule;
+    var departement = user.departement;
+    var servicesAffectation = user.servicesAffectation;
+    var fonctionOccupe = user.fonctionOccupe;
     var isOnline = user.isOnline;
     var createdAt = user.createdAt;
     var passwordHash = user.passwordHash;
@@ -62,7 +65,8 @@ class UserRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('users_id_seq'), '$photo', '$nom', '$prenom',"
-        "'$matricule', '$role', '$isOnline', '$createdAt', '$passwordHash');");
+        "'$matricule', '$departement', '$servicesAffectation', '$fonctionOccupe', '$role', '$isOnline',"
+        "'$createdAt', '$passwordHash');");
     });
 
   }
@@ -77,13 +81,15 @@ class UserRepository {
       nom: data[0][2],
       prenom: data[0][3],
       matricule: data[0][4],
-      role: data[0][5],
-      isOnline: data[0][6],
-      createdAt: data[0][7],
-      passwordHash: data[0][8]
+      departement: data[0][5],
+      servicesAffectation: data[0][6],
+      fonctionOccupe: data[0][7],
+      role: data[0][8],
+      isOnline: data[0][9],
+      createdAt: data[0][10],
+      passwordHash: data[0][11]
     );
   }
-
 
   Future<void> update(UserModel user) async {
     var id = user.id;
@@ -91,6 +97,9 @@ class UserRepository {
     var nom = user.nom;
     var prenom = user.prenom;
     var matricule = user.matricule;
+    var departement = user.departement;
+    var servicesAffectation = user.servicesAffectation;
+    var fonctionOccupe = user.fonctionOccupe;
     var role = user.role;
     var isOnline = user.isOnline;
     var createdAt = user.createdAt;
@@ -100,7 +109,8 @@ class UserRepository {
       // ignore: unused_local_variable
       var result = await conn.execute(
         "UPDATE $tableName SET \"photo\"='$photo', \"nom\"='$nom',"
-        "\"prenom\"='$prenom', \"matricule\"='$matricule', \"role\"='$role',"
+        "\"prenom\"='$prenom', \"matricule\"='$matricule', \"departement\"='$departement',"
+        "\"servicesAffectation\"='$servicesAffectation', \"fonctionOccupe\"='$fonctionOccupe', \"role\"='$role',"
         "\"isOnline\"='$isOnline', \"createdAt\"='$createdAt', \"passwordHash\"='$passwordHash' WHERE id=$id;");
     });
   }

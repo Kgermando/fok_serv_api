@@ -52,6 +52,15 @@ class UserHandlers {
       if (input['matricule'] != null) {
         selectUser.matricule = input['matricule'];
       }
+      if (input['departement'] != null) {
+        selectUser.departement = input['departement'];
+      }
+      if (input['servicesAffectation'] != null) {
+        selectUser.servicesAffectation = input['servicesAffectation'];
+      }
+      if (input['fonctionOccupe'] != null) {
+        selectUser.fonctionOccupe = input['fonctionOccupe'];
+      }
       if (input['role'] != null) {
         selectUser.role = input['role'];
       }
@@ -78,6 +87,9 @@ class UserHandlers {
         nom: input['nom'],
         prenom: input['prenom'],
         matricule: input['matricule'],
+        departement: input['departement'],
+        servicesAffectation: input['servicesAffectation'],
+        fonctionOccupe: input['fonctionOccupe'],
         role: input['role'],
         isOnline: input['isOnline'] as bool,
         createdAt: DateTime.parse(input['createdAt'] ?? ''),
