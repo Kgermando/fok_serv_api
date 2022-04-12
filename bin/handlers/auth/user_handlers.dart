@@ -92,9 +92,9 @@ class UserHandlers {
         fonctionOccupe: input['fonctionOccupe'],
         role: input['role'],
         isOnline: input['isOnline'] as bool,
-        createdAt: DateTime.parse(input['createdAt'] ?? ''),
+        createdAt: DateTime.parse(input['createdAt']),
         passwordHash:
-            md5.convert(utf8.encode(input['passwordHash'] ?? '')).toString(),
+            md5.convert(utf8.encode(input['passwordHash'])).toString(),
       );
 
       try {
