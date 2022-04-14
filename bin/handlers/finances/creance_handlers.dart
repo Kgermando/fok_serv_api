@@ -40,7 +40,9 @@ class CreanceHandlers {
           montant: input['montant'],
           numeroOperation: input['numeroOperation'],
           created: DateTime.parse(input['created']),
-          signature: input['signature']
+          signature: input['signature'],
+          approbation: input['approbation'],
+          statutPaie: input['statutPaie']
         );
       try {
         await repos.creances.insertData(data);
@@ -76,6 +78,12 @@ class CreanceHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['approbation'] != null) {
+        data.approbation = input['approbation'];
+      }
+      if (input['statutPaie'] != null) {
+        data.statutPaie = input['statutPaie'];
       }
       repos.creances.update(data);
       return Response.ok(jsonEncode(data.toJson()));

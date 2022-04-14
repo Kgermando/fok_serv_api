@@ -25,7 +25,7 @@ class CaisseModel {
     required this.typeOperation,
     required this.numeroOperation,
     required this.created,
-    required this.signature,
+    required this.signature
   });
 
   factory CaisseModel.fromSQL(List<dynamic> row) {
@@ -75,7 +75,7 @@ class CaisseModel {
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
       'created': created.toIso8601String(),
-      'signature': signature,
+      'signature': signature
     };
   }
 }

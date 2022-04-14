@@ -36,13 +36,15 @@ class DetteHandlers {
       var input = jsonDecode(await request.readAsString());
 
       DetteModel data = DetteModel(
-          nomComplet: input['nomComplet'],
-          pieceJustificative: input['pieceJustificative'],
-          libelle: input['libelle'],
-          montant: input['montant'],
-          numeroOperation: input['numeroOperation'],
-          created: DateTime.parse(input['created']),
+        nomComplet: input['nomComplet'],
+        pieceJustificative: input['pieceJustificative'],
+        libelle: input['libelle'],
+        montant: input['montant'],
+        numeroOperation: input['numeroOperation'],
+        created: DateTime.parse(input['created']),
         signature: input['signature'],
+        approbation: input['approbation'],
+        statutPaie: input['statutPaie']
       );
       try {
         await repos.dettes.insertData(data);
@@ -78,6 +80,12 @@ class DetteHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['approbation'] != null) {
+        data.approbation = input['approbation'];
+      }
+      if (input['statutPaie'] != null) {
+        data.statutPaie = input['statutPaie'];
       }
       repos.dettes.update(data);
       return Response.ok(jsonEncode(data.toJson()));

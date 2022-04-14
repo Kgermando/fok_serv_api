@@ -28,13 +28,15 @@ class DettesRepository {
     var numeroOperation = detteModel.numeroOperation;
     var created = detteModel.created;
     var signature = detteModel.signature;
+    var approbation = detteModel.approbation;
+    var statutPaie = detteModel.statutPaie;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
           "INSERT INTO $tableName VALUES (nextval('dettes_id_seq'), '$nomComplet',"
           "'$pieceJustificative','$libelle','$montant',"
-          "'$numeroOperation', '$created', '$signature');");
+          "'$numeroOperation', '$created', '$signature', '$approbation', '$statutPaie');");
     });
   }
 
@@ -47,14 +49,17 @@ class DettesRepository {
     var numeroOperation = detteModel.numeroOperation;
     var created = detteModel.created;
     var signature = detteModel.signature;
+    var approbation = detteModel.approbation;
+    var statutPaie = detteModel.statutPaie;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-          "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
-          "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
-          "\"montant\"='$montant', \"numeroOperation\"='$numeroOperation',"
-          "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
+        "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
+        "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
+        "\"montant\"='$montant', \"numeroOperation\"='$numeroOperation',"
+        "\"created\"='$created', \"signature\"='$signature', \"approbation\"='$approbation',"
+        "\"statutPaie\"='$statutPaie' WHERE id=$id;");
     });
   }
 
@@ -73,14 +78,17 @@ class DettesRepository {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return DetteModel(
-        id: data[0][0],
-        nomComplet: data[0][1],
-        pieceJustificative: data[0][2],
-        libelle: data[0][3],
-        montant: data[0][4],
-        numeroOperation: data[0][5],
-        created: data[0][6],
-        signature: data[0][7]);
+      id: data[0][0],
+      nomComplet: data[0][1],
+      pieceJustificative: data[0][2],
+      libelle: data[0][3],
+      montant: data[0][4],
+      numeroOperation: data[0][5],
+      created: data[0][6],
+      signature: data[0][7],
+      approbation: data[0][8],
+      statutPaie: data[0][9]
+    );
   }
 
 }

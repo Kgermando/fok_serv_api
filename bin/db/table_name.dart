@@ -229,7 +229,9 @@ class TableName {
           "montant" $vachar,
           "numeroOperation" $vachar,
           "created" $timestamp,
-          "signature" $vachar
+          "signature" $vachar,
+          "approbation" $boolean,
+          "statutPaie" $boolean
       );
       ''');
 
@@ -260,7 +262,9 @@ class TableName {
           "montant" $vachar,
           "numeroOperation" $vachar,
           "created" $timestamp,
-          "signature" $vachar
+          "signature" $vachar,
+          "approbation" $boolean,
+          "statutPaie" $boolean
         );
       ''');
 

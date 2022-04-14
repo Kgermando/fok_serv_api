@@ -18,7 +18,7 @@ class CaissesRepository {
     }
     return data.toList();
   }
-
+ 
   Future<void> insertData(CaisseModel caisseModel) async {
     var nomComplet = caisseModel.nomComplet;
     var pieceJustificative = caisseModel.pieceJustificative;
@@ -37,7 +37,7 @@ class CaissesRepository {
       var result = await ctx.execute(
           "INSERT INTO $tableName VALUES (nextval('caisses_id_seq'), '$nomComplet',"
           "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
-          "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation', '$created, '$signature');");
+          "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation', '$created', '$signature');");
     });
   }
 
