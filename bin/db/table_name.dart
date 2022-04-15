@@ -3,6 +3,7 @@ import 'package:shelf/shelf.dart';
 
 class TableName {
   // Tables
+  // RH
   final tableToken = 'refresh_tokens';
   final tableUser = 'users';
   final tableAgents = 'agents';
@@ -10,6 +11,8 @@ class TableName {
   final tablePaiementDivers = 'paiement_divers';
   final tablePresence = 'presences';
   final tablePerformence = 'performences';
+
+  // FINANCES
   final banquesTable = 'banques';
   final caissesTable = 'caisses';
   final creancesTable = 'creances';
@@ -21,6 +24,15 @@ class TableName {
   final journalsTable = 'journals';
   final valorisationTable = 'valorisations';
   final devisTable = 'devis';
+
+  // LOGISTIQUE
+  final anguinTable = 'anguins';
+  final carburantTable = 'carburants';
+  final entretienTable = 'entretiens';
+  final etatMaterielTable = 'etat_materiels';
+  final immobilierTable = 'immobiliers';
+  final mobilierTable = 'mobiliers';
+  final trajetTable = 'trajets';
 
   // Type database
   final key = 'serial primary key NOT NULL';
@@ -358,6 +370,111 @@ class TableName {
           "created" $timestamp
         );
       ''');
+
+      // Anguin
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $anguinTable(
+          "id" $key,
+          "nom" $vachar,
+          "modele" $vachar,
+          "marque" $vachar,
+          "numeroChassie" $vachar,
+          "couleur" $vachar,
+          "genre" $vachar,
+          "qtyMaxReservoir" $vachar,
+          "dateFabrication" $timestamp,
+          "nomeroPLaque" $vachar,
+          "nomeroEntreprise" $vachar,
+          "kilometrageInitiale" $vachar,
+          "provenance" $vachar,
+          "created" $timestamp,
+          "signature" $vachar
+        );
+      '''); 
+      // Carburant
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $anguinTable(
+          "id" $key,
+          "qtyEntreSortie" $vachar,
+          "typeCaburant" $vachar,
+          "fournisseur" $vachar,
+          "nomeroFactureAchat" $vachar,
+          "prixAchatParLitre" $vachar,
+          "nomReceptioniste" $vachar,
+          "numeroPlaque" $vachar,
+          "dateHeureSortieAnguin" $timestamp,
+          "nomeroPLaque" $vachar,
+          "created" $timestamp,
+          "signature" $vachar
+        );
+      ''');
+      // Entretien
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $anguinTable(
+          "id" $key,
+          "nom" $vachar,
+          "modele" $vachar,
+          "marque" $vachar,
+          "etatObjet" $vachar,
+          "objetRemplace" $list,
+          "dureeTravaux" $vachar,
+          "created" $timestamp,
+          "signature" $vachar
+        );
+      '''); 
+      // EtatMateriel
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $anguinTable(
+          "id" $key,
+          "nom" $vachar,
+          "modele" $vachar,
+          "marque" $vachar,
+          "typeObjet" $vachar,
+          "statut" $list,
+          "created" $timestamp,
+          "signature" $vachar
+        );
+      '''); 
+      // Immobilier
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $anguinTable(
+          "id" $key,
+          "typeAllocation" $vachar,
+          "adresse" $vachar,
+          "numeroCertificat" $vachar,
+          "superficie" $vachar,
+          "dateAcquisition" $timestamp,
+          "created" $timestamp,
+          "signature" $vachar
+        );
+      '''); 
+      // Mobilier
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $anguinTable(
+          "id" $key,
+          "nom" $vachar,
+          "modele" $vachar,
+          "marque" $vachar,
+          "descriptionMobilier" $vachar,
+          "nombre" $vachar,
+          "created" $timestamp,
+          "signature" $vachar
+        );
+      '''); 
+       await connection.query('''
+        CREATE TABLE IF NOT EXISTS $anguinTable(
+          "id" $key,
+          "nomeroEntreprise" $vachar,
+          "nomUtilisateur" $vachar,
+          "trajetDe" $vachar,
+          "trajetA" $vachar,
+          "mission" $vachar,
+          "kilometrageSorite" $vachar,
+          "kilometrageRetour" $vachar,
+          "created" $timestamp,
+          "signature" $vachar
+        );
+      '''); 
 
       print("Tables created succes!");
       return connection;

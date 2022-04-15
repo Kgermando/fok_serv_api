@@ -34,7 +34,8 @@ class CreanceModel {
         created: row[6],
         signature: row[7],
         approbation: row[8],
-        statutPaie: row[9]);
+        statutPaie: row[9] 
+    );
   }
 
   factory CreanceModel.fromJson(Map<String, dynamic> json) {
