@@ -52,6 +52,7 @@ class TableName {
   final succursaleTable = 'succursales';
   final bonLivraisonTable = 'bon_livraisons';
   final achatTable = 'achats';
+  final cartTable = 'carts';
 
 
 
@@ -602,7 +603,7 @@ class TableName {
         "accuseReceptionLastName" $vachar
     );
     ''');
-
+    // Achats
     await connection.query('''
       CREATE TABLE IF NOT EXISTS $achatTable(
         "id" $key,
@@ -622,6 +623,24 @@ class TableName {
         "qtyLivre" $vachar
     );
     ''');
+    // Cart
+    await connection.query('''
+        CREATE TABLE IF NOT EXISTS $cartTable(
+          "id" $key,
+          "idProductCart" $vachar,
+          "quantityCart" $vachar,
+          "priceCart" $vachar,
+          "priceAchatUnit" $vachar,
+          "unite" $vachar,
+          "created" $timestamp,
+          "telephone" $vachar,
+          "succursale" $vachar,
+          "nameBusiness" $vachar,
+          "tva" $vachar,
+          "remise" $vachar,
+          "qtyRemise" $vachar
+      );
+      ''');
 
       
 

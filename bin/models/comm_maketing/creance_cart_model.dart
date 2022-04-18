@@ -1,13 +1,13 @@
 class CreanceCartModel {
-  final int? id;
-  final List cart;
-  final String client;
-  final DateTime created;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
+  late int? id;
+  late List cart;
+  late String client;
+  late DateTime created;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
 
-  const CreanceCartModel(
+  CreanceCartModel(
       {this.id,
       required this.cart,
       required this.client,

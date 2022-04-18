@@ -1,19 +1,19 @@
 class CartModel {
-  final int? id;
-  final String idProductCart;
-  final String quantityCart;
-  final String priceCart;
-  final String priceAchatUnit;
-  final String unite;
-  final DateTime created;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
-  final String tva;
-  final String remise;
-  final String qtyRemise;
+  late int? id;
+  late String idProductCart;
+  late String quantityCart;
+  late String priceCart;
+  late String priceAchatUnit;
+  late String unite;
+  late DateTime created;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
+  late String tva;
+  late String remise;
+  late String qtyRemise;
 
-  const CartModel({
+  CartModel({
     this.id,
     required this.idProductCart,
     required this.quantityCart,

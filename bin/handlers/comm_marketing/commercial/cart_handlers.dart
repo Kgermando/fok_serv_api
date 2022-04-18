@@ -3,27 +3,27 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../../models/comm_maketing/achat_model.dart';
+import '../../../models/comm_maketing/cart_model.dart';
 import '../../../repository/repository.dart';
 
-class AchatsHandlers {
+class CartHandlers {
   final Repository repos;
 
-  AchatsHandlers(this.repos);
+  CartHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
 
     router.get('/', (Request request) async {
-      List<AchatModel> data = await repos.achats.getAllData();
+      List<CartModel> data = await repos.carts.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late AchatModel data;
+      late CartModel data;
       try {
-        data = await repos.achats.getFromId(int.parse(id));
+        data = await repos.carts.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
@@ -31,15 +31,14 @@ class AchatsHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-achat', (Request request) async {
+    router.post('/insert-new-cart', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-      AchatModel data = AchatModel(
-          idProduct: input['idProduct'],
-          quantity: input['quantity'],
-          quantityAchat: input['quantityAchat'],
+      CartModel data = CartModel(
+          idProductCart: input['idProductCart'],
+          quantityCart: input['quantityCart'],
+          priceCart: input['priceCart'],
           priceAchatUnit: input['priceAchatUnit'],
-          prixVenteUnit: input['prixVenteUnit'],
           unite: input['unite'],
           created: DateTime.parse(input['created']),
           telephone: input['telephone'],
@@ -47,11 +46,10 @@ class AchatsHandlers {
           nameBusiness: input['nameBusiness'],
           tva: input['tva'],
           remise: input['remise'],
-          qtyRemise: input['qtyRemise'],
-          qtyLivre: input['qtyLivre']
+          qtyRemise: input['qtyRemise']
         );
       try {
-        await repos.achats.insertData(data);
+        await repos.carts.insertData(data);
       } catch (e) {
         print(e);
         return Response(422);
@@ -59,25 +57,22 @@ class AchatsHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-achat/<id>', (Request request, String id) async {
+    router.put('/update-cart/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      AchatModel data = await repos.achats.getFromId(int.parse(id!));
+      CartModel data = await repos.carts.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
-      if (input['idProduct'] != null) {
-        data.idProduct = input['idProduct'];
+      if (input['idProductCart'] != null) {
+        data.idProductCart = input['idProductCart'];
       }
-      if (input['quantity'] != null) {
-        data.quantity = input['quantity'];
+      if (input['quantityCart'] != null) {
+        data.quantityCart = input['quantityCart'];
       }
-      if (input['quantityAchat'] != null) {
-        data.quantityAchat = input['quantityAchat'];
+      if (input['priceCart'] != null) {
+        data.priceCart = input['priceCart'];
       }
       if (input['priceAchatUnit'] != null) {
         data.priceAchatUnit = input['priceAchatUnit'];
-      }
-      if (input['prixVenteUnit'] != null) {
-        data.prixVenteUnit = input['prixVenteUnit'];
       }
       if (input['unite'] != null) {
         data.unite = input['unite'];
@@ -103,23 +98,20 @@ class AchatsHandlers {
       if (input['qtyRemise'] != null) {
         data.qtyRemise = input['qtyRemise'];
       }
-      if (input['qtyLivre'] != null) {
-        data.qtyLivre = input['qtyLivre'];
-      }
-      repos.achats.update(data);
+      repos.carts.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-achat/<id>', (String id, Request request) async {
+    router.delete('/delete-cart/<id>', (String id, Request request) async {
       var id = request.params['id'];
-      repos.achats.deleteData(int.parse(id!));
+      repos.carts.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page achats n\'est pas trouvé'),
+          Response.notFound('La Page carts n\'est pas trouvé'),
     );
 
     return router;

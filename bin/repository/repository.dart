@@ -2,6 +2,7 @@ import 'package:postgres/postgres.dart';
 
 import 'comm_marketing/commercial/achats_repository.dart';
 import 'comm_marketing/commercial/bon_livraison_repository.dart';
+import 'comm_marketing/commercial/cart_repository.dart';
 import 'comm_marketing/commercial/produit_model_repository.dart';
 import 'comm_marketing/commercial/stocks_global_repository.dart';
 import 'comm_marketing/commercial/succursale_repository.dart';
@@ -77,6 +78,7 @@ class Repository {
   late SuccursaleRepository succursales;
   late BonLivraisonRepository bonLivraison;
   late AchatsRepository achats;
+  late CartRepository carts;
 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
@@ -119,5 +121,6 @@ class Repository {
     succursales = SuccursaleRepository(executor, 'succursales');
     bonLivraison = BonLivraisonRepository(executor, 'bon_livraisons');
     achats = AchatsRepository(executor, 'achats');
+    carts = CartRepository(executor, 'carts');
   }
 }
