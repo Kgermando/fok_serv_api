@@ -5,6 +5,7 @@ import 'comm_marketing/commercial/bon_livraison_repository.dart';
 import 'comm_marketing/commercial/cart_repository.dart';
 import 'comm_marketing/commercial/creance_repository.dart';
 import 'comm_marketing/commercial/facture_cart_repository.dart';
+import 'comm_marketing/commercial/number_facture_repository.dart';
 import 'comm_marketing/commercial/produit_model_repository.dart';
 import 'comm_marketing/commercial/stocks_global_repository.dart';
 import 'comm_marketing/commercial/succursale_repository.dart';
@@ -83,6 +84,7 @@ class Repository {
   late CartRepository carts;
   late FactureRepository factures;
   late CreanceFactureRepository creancesFacture;
+  late NumberFactureRepository numberFacture;
 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
@@ -128,5 +130,6 @@ class Repository {
     carts = CartRepository(executor, 'carts');
     factures = FactureRepository(executor, 'factures');
     creancesFacture = CreanceFactureRepository(executor, 'creance_factures');
+    numberFacture = NumberFactureRepository(executor, 'number_factures');
   }
 }

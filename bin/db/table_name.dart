@@ -55,6 +55,7 @@ class TableName {
   final cartTable = 'carts';
   final factureTable = 'factures';
   final creanceFactureTable = 'creance_factures';
+  final numberFactureTable = 'number_factures';
 
 
 
@@ -667,6 +668,15 @@ class TableName {
             "nameBusiness" $vachar
           );
         ''');
+      // Number facture
+      await connection.query('''
+      CREATE TABLE IF NOT EXISTS $numberFactureTable(
+        "id" $key,
+        "number" $vachar,
+        "succursale" $vachar,
+        "nameBusiness" $vachar
+    );
+    ''');
 
       
 

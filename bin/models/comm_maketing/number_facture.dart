@@ -1,8 +1,8 @@
 class NumberFactureModel {
-  final int? id;
-  final String number;
-  final String succursale;
-  final String nameBusiness;
+  late int? id;
+  late String number;
+  late String succursale;
+  late String nameBusiness;
 
   NumberFactureModel(
     {this.id,
