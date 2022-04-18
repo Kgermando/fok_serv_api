@@ -1,21 +1,21 @@
 class AchatModel {
-  final int? id;
-  final String idProduct;
-  final String quantity;
-  final String quantityAchat;
-  final String priceAchatUnit;
-  final String prixVenteUnit;
-  final String unite;
-  final DateTime created;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
-  final String tva;
-  final String remise;
-  final String qtyRemise;
-  final String qtyLivre;
+  late int? id;
+  late String idProduct;
+  late String quantity;
+  late String quantityAchat;
+  late String priceAchatUnit;
+  late String prixVenteUnit;
+  late String unite;
+  late DateTime created;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
+  late String tva;
+  late String remise;
+  late String qtyRemise;
+  late String qtyLivre;
 
-  const AchatModel({
+  AchatModel({
     this.id,
     required this.idProduct,
     required this.quantity,

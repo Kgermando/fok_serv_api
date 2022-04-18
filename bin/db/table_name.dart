@@ -51,6 +51,7 @@ class TableName {
   final stocksGlobalTable = 'stocks_global';
   final succursaleTable = 'succursales';
   final bonLivraisonTable = 'bon_livraisons';
+  final achatTable = 'achats';
 
 
 
@@ -599,6 +600,26 @@ class TableName {
         "accuseReception" $boolean,
         "accuseReceptionFirstName" $vachar,
         "accuseReceptionLastName" $vachar
+    );
+    ''');
+
+    await connection.query('''
+      CREATE TABLE IF NOT EXISTS $achatTable(
+        "id" $key,
+        "idProduct" $vachar,
+        "quantity" $vachar,
+        "quantityAchat" $vachar,
+        "priceAchatUnit" $vachar,
+        "prixVenteUnit" $vachar,
+        "unite" $vachar,
+        "created" $timestamp,
+        "telephone" $vachar,
+        "succursale" $vachar,
+        "nameBusiness" $vachar,
+        "tva" $vachar,
+        "remise" $vachar,
+        "qtyRemise" $vachar,
+        "qtyLivre" $vachar
     );
     ''');
 
