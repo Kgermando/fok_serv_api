@@ -3,7 +3,7 @@ class RestitutionModel {
   final String idProduct;
   final String quantity;
   final String unite;
-  final DateTime date;
+  final DateTime created;
   final String firstName;
   final String lastName;
   final String telephone;
@@ -19,7 +19,7 @@ class RestitutionModel {
     required this.idProduct,
     required this.quantity,
     required this.unite,
-    required this.date,
+    required this.created,
     required this.firstName,
     required this.lastName,
     required this.telephone,
@@ -37,7 +37,7 @@ class RestitutionModel {
       idProduct: row[1],
       quantity: row[2],
       unite: row[3],
-      date: row[4],
+      created: row[4],
       firstName: row[5],
       lastName: row[6],
       telephone: row[7],
@@ -56,7 +56,7 @@ class RestitutionModel {
       idProduct: json['idProduct'],
       quantity: json['quantity'],
       unite: json['unite'],
-      date: DateTime.parse(json['date']),
+      created: DateTime.parse(json['created']),
       firstName: json["firstName"],
       lastName: json["lastName"],
       telephone: json["telephone"],
@@ -74,7 +74,7 @@ class RestitutionModel {
       'id': id,
       'idProduct': idProduct,
       'quantity': quantity,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
       "firstName": firstName,
       "lastName": lastName,
       "telephone": telephone,

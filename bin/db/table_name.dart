@@ -2,6 +2,13 @@ import 'package:postgres/postgres.dart';
 import 'package:shelf/shelf.dart';
 
 class TableName {
+  // variable Type database
+  final key = 'serial primary key NOT NULL';
+  final vachar = 'VARCHAR NOT NULL';
+  final timestamp = 'TIMESTAMP NOT NULL';
+  final list = 'JSON NULL';
+  final boolean = 'BOOLEAN NOT NULL';
+
   // Tables
   // RH
   final tableToken = 'refresh_tokens';
@@ -38,12 +45,10 @@ class TableName {
   final mobilierTable = 'mobiliers';
   final trajetTable = 'trajets';
 
-  // Type database
-  final key = 'serial primary key NOT NULL';
-  final vachar = 'VARCHAR NOT NULL';
-  final timestamp = 'TIMESTAMP NOT NULL';
-  final list = 'JSON NULL';
-  final boolean = 'BOOLEAN NOT NULL';
+  // COMMEERCIAL & MARKETING
+  final modelTable = 'models_produits';
+
+
 
   Future openConnection(PostgreSQLConnection connection) async {
     try {
@@ -520,6 +525,22 @@ class TableName {
           "soumettre" $boolean
         );
       '''); 
+
+      await connection.query('''
+      CREATE TABLE IF NOT EXISTS $modelTable(
+        "id" $key,
+        "categorie"$vachar,
+        "sousCategorie1" $vachar,
+        "sousCategorie2" $vachar,
+        "sousCategorie3" $vachar,
+        "sousCategorie4" $vachar,
+        "idProduct" $vachar,
+        "telephone" $vachar,
+        "succursale" $vachar,
+        "nameBusiness" $vachar,
+        "date" $timestamp
+    );
+    ''');
 
       
 

@@ -5,7 +5,7 @@ class BonLivraisonModel {
   final String priceAchatUnit; 
   final String prixVenteUnit;
   final String unite;
-  final DateTime date;
+  final DateTime created;
   final String firstName;
   final String lastName;
   final String telephone;
@@ -25,7 +25,7 @@ class BonLivraisonModel {
     required this.priceAchatUnit,
     required this.prixVenteUnit,
     required this.unite,
-    required this.date,
+    required this.created,
     required this.firstName,
     required this.lastName,
     required this.telephone,
@@ -47,7 +47,7 @@ class BonLivraisonModel {
       priceAchatUnit: row[3],
       prixVenteUnit: row[4],
       unite: row[5],
-      date: row[6],
+      created: row[6],
       firstName: row[7],
       lastName: row[8],
       telephone: row[9],
@@ -70,7 +70,7 @@ class BonLivraisonModel {
         priceAchatUnit: json['priceAchatUnit'],
         prixVenteUnit: json['prixVenteUnit'],
         unite: json['unite'],
-        date: DateTime.parse(json['date']),
+        created: DateTime.parse(json['created']),
         firstName: json["firstName"],
         lastName: json["lastName"],
         telephone: json["telephone"],
@@ -93,7 +93,7 @@ class BonLivraisonModel {
       'priceAchatUnit': priceAchatUnit,
       'prixVenteUnit': prixVenteUnit,
       'unite': unite,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
       "firstName": firstName,
       "lastName": lastName,
       "telephone": telephone,

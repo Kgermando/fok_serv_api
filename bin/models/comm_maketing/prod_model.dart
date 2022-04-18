@@ -1,17 +1,17 @@
 class ProductModel {
-  final int? id;
-  final String categorie;
-  final String sousCategorie1;
-  final String sousCategorie2;
-  final String sousCategorie3;
-  final String sousCategorie4;
-  final String idProduct;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
-  final DateTime date;
+  late int? id;
+  late String categorie;
+  late String sousCategorie1;
+  late String sousCategorie2;
+  late String sousCategorie3;
+  late String sousCategorie4;
+  late String idProduct;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
+  late DateTime created;
 
-  const ProductModel({
+  ProductModel({
     this.id,
     required this.categorie,
     required this.sousCategorie1,
@@ -22,7 +22,7 @@ class ProductModel {
     required this.telephone,
     required this.succursale,
     required this.nameBusiness,
-    required this.date,
+    required this.created
   });
 
 
@@ -38,7 +38,7 @@ class ProductModel {
       telephone: row[7],
       succursale: row[8],
       nameBusiness: row[9],
-      date: row[10]
+      created: row[10]
     );
   }
 
@@ -55,7 +55,7 @@ class ProductModel {
       telephone: json["telephone"],
       succursale: json["succursale"],
       nameBusiness: json["nameBusiness"],
-      date: DateTime.parse(json['date']),
+      created: DateTime.parse(json['created']),
     );
   }
 
@@ -71,7 +71,7 @@ class ProductModel {
       'telephone': telephone,
       "succursale": succursale,
       'nameBusiness': nameBusiness,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
     };
   }
 }

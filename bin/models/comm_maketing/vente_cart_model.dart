@@ -4,7 +4,7 @@ class VenteCartModel {
   final String quantityCart;
   final String priceTotalCart;
   final String unite;
-  final DateTime date;
+  final DateTime created;
   final String telephone;
   final String succursale;
   final String nameBusiness;
@@ -18,7 +18,7 @@ class VenteCartModel {
     required this.quantityCart,
     required this.priceTotalCart,
     required this.unite,
-    required this.date,
+    required this.created,
     required this.telephone,
     required this.succursale,
     required this.nameBusiness,
@@ -34,7 +34,7 @@ class VenteCartModel {
       quantityCart: row[2],
       priceTotalCart: row[3],
       unite: row[4],
-      date: row[5],
+      created: row[5],
       telephone: row[6],
       succursale: row[7],
       nameBusiness: row[8],
@@ -51,7 +51,7 @@ class VenteCartModel {
       quantityCart: json['quantityCart'],
       priceTotalCart: json['priceTotalCart'],
       unite: json['unite'],
-      date: DateTime.parse(json['date']),
+      created: DateTime.parse(json['created']),
       telephone: json["telephone"],
       succursale: json["succursale"],
       nameBusiness: json["nameBusiness"],
@@ -68,7 +68,7 @@ class VenteCartModel {
       'quantityCart': quantityCart,
       'priceTotalCart': priceTotalCart,
       'unite': unite,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
       'telephone': telephone,
       "succursale": succursale,
       'nameBusiness': nameBusiness,

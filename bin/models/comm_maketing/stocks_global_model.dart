@@ -7,7 +7,7 @@ class StocksGlobalMOdel {
   final String prixVenteUnit;
   final String unite;
   final bool modeAchat;
-  final DateTime date;
+  final DateTime created;
   final String telephone;
   final String succursale;
   final String nameBusiness;
@@ -23,7 +23,7 @@ class StocksGlobalMOdel {
     required this.prixVenteUnit,
     required this.unite,
     required this.modeAchat,
-    required this.date,
+    required this.created,
     required this.telephone,
     required this.succursale,
     required this.nameBusiness,
@@ -41,7 +41,7 @@ class StocksGlobalMOdel {
       prixVenteUnit: row[5],
       unite: row[6],
       modeAchat: row[7],
-      date: row[8],
+      created: row[8],
       telephone: row[9],
       succursale: row[10],
       nameBusiness: row[11],
@@ -60,7 +60,7 @@ class StocksGlobalMOdel {
       prixVenteUnit: json['prixVenteUnit'],
       unite: json['unite'],
       modeAchat: json['modeAchat'],
-      date: DateTime.parse(json['date']),
+      created: DateTime.parse(json['created']),
       telephone: json["telephone"],
       succursale: json["succursale"],
       nameBusiness: json["nameBusiness"],
@@ -79,7 +79,7 @@ class StocksGlobalMOdel {
       'prixVenteUnit': prixVenteUnit,
       'unite': unite,
       'modeAchat': modeAchat,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
       "telephone": telephone,
       "succursale": succursale,
       "nameBusiness": nameBusiness,

@@ -6,7 +6,7 @@ class AchatModel {
   final String priceAchatUnit;
   final String prixVenteUnit;
   final String unite;
-  final DateTime date;
+  final DateTime created;
   final String telephone;
   final String succursale;
   final String nameBusiness;
@@ -23,7 +23,7 @@ class AchatModel {
     required this.priceAchatUnit,
     required this.prixVenteUnit,
     required this.unite,
-    required this.date,
+    required this.created,
     required this.telephone,
     required this.succursale,
     required this.nameBusiness,
@@ -42,7 +42,7 @@ class AchatModel {
       priceAchatUnit: row[4],
       prixVenteUnit: row[5],
       unite: row[6],
-      date: row[7],
+      created: row[7],
       telephone: row[8],
       succursale: row[9],
       nameBusiness: row[10],
@@ -62,7 +62,7 @@ class AchatModel {
       priceAchatUnit: json['priceAchatUnit'],
       prixVenteUnit: json['prixVenteUnit'],
       unite: json['unite'],
-      date: DateTime.parse(json['date']),
+      created: DateTime.parse(json['created']),
       telephone: json["telephone"],
       succursale: json["succursale"],
       nameBusiness: json["nameBusiness"],
@@ -82,7 +82,7 @@ class AchatModel {
       'priceAchatUnit': priceAchatUnit,
       'prixVenteUnit': prixVenteUnit,
       'unite': unite,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
       "telephone": telephone,
       "succursale": succursale,
       "nameBusiness": nameBusiness,

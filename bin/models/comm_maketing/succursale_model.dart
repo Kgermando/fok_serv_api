@@ -4,7 +4,7 @@ class SuccursaleModel {
   final String adresse;
   final String pays;
   final String nameBusiness;
-  final DateTime date;
+  final DateTime created;
 
   SuccursaleModel({
     this.id, 
@@ -12,7 +12,7 @@ class SuccursaleModel {
     required this.adresse, 
     required this.pays,
     required this.nameBusiness,
-    required this.date,
+    required this.created,
   });
 
   factory SuccursaleModel.fromSQL(List<dynamic> row) {
@@ -22,7 +22,7 @@ class SuccursaleModel {
       adresse: row[2],
       pays: row[3],
       nameBusiness: row[4],
-      date: row[5]
+      created: row[5]
     );
   }
 
@@ -33,7 +33,7 @@ class SuccursaleModel {
       adresse: json['adresse'],
       pays: json['pays'],
       nameBusiness: json["nameBusiness"],
-      date: DateTime.parse(json['date']),
+      created: DateTime.parse(json['created']),
     );
   }
 
@@ -44,7 +44,7 @@ class SuccursaleModel {
       'adresse': adresse,
       'pays': pays,
       "nameBusiness": nameBusiness,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
     };
   }
 }

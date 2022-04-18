@@ -2,7 +2,7 @@ class CreanceCartModel {
   final int? id;
   final List cart;
   final String client;
-  final DateTime date;
+  final DateTime created;
   final String telephone;
   final String succursale;
   final String nameBusiness;
@@ -11,7 +11,7 @@ class CreanceCartModel {
       {this.id,
       required this.cart,
       required this.client,
-      required this.date,
+      required this.created,
       required this.telephone,
       required this.succursale,
       required this.nameBusiness});
@@ -21,7 +21,7 @@ class CreanceCartModel {
       id: row[0],
       cart: row[1],
       client: row[2],
-      date: row[3],
+      created: row[3],
       telephone: row[4],
       succursale: row[5],
       nameBusiness: row[6],
@@ -33,7 +33,7 @@ class CreanceCartModel {
       id: json['id'],
       cart: json['cart'],
       client: json['client'],
-      date: DateTime.parse(json['date']),
+      created: DateTime.parse(json['created']),
       telephone: json["telephone"],
       succursale: json["succursale"],
       nameBusiness: json["nameBusiness"],
@@ -54,7 +54,7 @@ class CreanceCartModel {
       'id': id,
       'cart': cart,
       'client': client,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
       'telephone': telephone,
       "succursale": succursale,
       'nameBusiness': nameBusiness,

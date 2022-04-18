@@ -1,7 +1,7 @@
 class GainModel {
   final int? id;
   final double sum;
-  final DateTime date;
+  final DateTime created;
   final String telephone;
   final String succursale;
   final String nameBusiness;
@@ -9,7 +9,7 @@ class GainModel {
   GainModel({
     this.id,
     required this.sum, 
-    required this.date,
+    required this.created,
     required this.telephone,
     required this.succursale,
     required this.nameBusiness
@@ -19,7 +19,7 @@ class GainModel {
     return GainModel(
       id: row[0],
       sum: row[1],
-      date: row[2],
+      created: row[2],
       telephone: row[3],
       succursale: row[4],
       nameBusiness: row[5]
@@ -30,7 +30,7 @@ class GainModel {
     return GainModel(
       id: json['id'],
       sum: double.parse(json['sum'].toString()),
-      date: DateTime.parse(json['date']),
+      created: DateTime.parse(json['created']),
       telephone: json["telephone"],
       succursale: json["succursale"],
       nameBusiness: json["nameBusiness"]
@@ -41,7 +41,7 @@ class GainModel {
     return {
       'id': id,
       'sum': sum,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
       "telephone": telephone,
       "succursale": succursale,
       "nameBusiness": nameBusiness,

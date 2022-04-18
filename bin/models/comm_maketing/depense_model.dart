@@ -3,7 +3,7 @@ class DepenseModel {
   final String motant;
   final String libele;
   final String motif;
-  final DateTime date;
+  final DateTime created;
   final String telephone;
   final String succursale;
   final String nameBusiness;
@@ -13,7 +13,7 @@ class DepenseModel {
       required this.motant,
       required this.libele,
       required this.motif,
-      required this.date,
+      required this.created,
       required this.telephone,
       required this.succursale,
       required this.nameBusiness});
@@ -24,7 +24,7 @@ class DepenseModel {
         motant: row[1],
         libele: row[2],
         motif: row[3],
-        date: row[4],
+        created: row[4],
         telephone: row[5],
         succursale: row[6],
         nameBusiness: row[7]);
@@ -36,7 +36,7 @@ class DepenseModel {
         motant: json['motant'],
         libele: json['libele'],
         motif: json['motif'],
-        date: DateTime.parse(json['date']),
+        created: DateTime.parse(json['created']),
         telephone: json["telephone"],
         succursale: json["succursale"],
         nameBusiness: json["nameBusiness"]);
@@ -48,7 +48,7 @@ class DepenseModel {
       'motant': motant,
       'libele': libele,
       'motif': motif,
-      'date': date.toIso8601String(),
+      'created': created.toIso8601String(),
       "telephone": telephone,
       "succursale": succursale,
       "nameBusiness": nameBusiness

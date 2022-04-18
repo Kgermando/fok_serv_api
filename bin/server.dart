@@ -8,6 +8,7 @@ import 'db/config_db.dart';
 import 'db/table_name.dart';
 import 'handlers/auth/auth_handlers.dart';
 import 'handlers/auth/user_handlers.dart';
+import 'handlers/comm_marketing/produit_model_handler.dart';
 import 'handlers/comptabilites/amortissement_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
@@ -243,6 +244,15 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(TrajetHandlers(repos).router));
+
+
+    router.mount(
+        '/api/comm_marketing/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ProduitModelHandlers(repos).router));
 
     router.all(
       '/<ignored|.*>',

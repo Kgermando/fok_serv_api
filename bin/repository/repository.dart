@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import 'comm_marketing/produit_model.dart';
 import 'comptabilites/amrtissement_repository.dart';
 import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/journal_repository.dart';
@@ -66,6 +67,9 @@ class Repository {
   late MobilierRepository mobiliers;
   late TrajetRepository trajets;
 
+  // COMMERCIAL & MARKETING
+  late ProduitModelRepository produitModel;
+
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
     users = UserRepository(executor, 'users');
@@ -91,7 +95,7 @@ class Repository {
     // EXPLOITAIONS
     projets = ProjetRepository(executor, 'projets');
     taches = TacheRepository(executor, 'taches');
-    
+
     // LOGISTIQUE
     anguins = AnguinRepository(executor, 'anguins');
     carburants = CarburantRepository(executor, 'carburants');
@@ -100,5 +104,8 @@ class Repository {
     immobiliers = ImmobilierRepository(executor, 'immobiliers');
     mobiliers = MobilierRepository(executor, 'mobiliers');
     trajets = TrajetRepository(executor, 'trajets');
+
+    // COMMERCIAL & MARKETING
+    produitModel = ProduitModelRepository(executor, 'models_produits');
   }
 }
