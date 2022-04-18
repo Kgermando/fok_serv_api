@@ -5,6 +5,7 @@ class TableName {
   // variable Type database
   final key = 'serial primary key NOT NULL';
   final vachar = 'VARCHAR NOT NULL';
+  final vacharNull = 'VARCHAR NULL';
   final timestamp = 'TIMESTAMP NOT NULL';
   final list = 'JSON NULL';
   final boolean = 'BOOLEAN NOT NULL';
@@ -49,6 +50,7 @@ class TableName {
   final modelTable = 'models_produits';
   final stocksGlobalTable = 'stocks_global';
   final succursaleTable = 'succursales';
+  final bonLivraisonTable = 'bon_livraisons';
 
 
 
@@ -556,7 +558,7 @@ class TableName {
         "priceAchatUnit" $vachar,
         "prixVenteUnit" $vachar,
         "unite" $vachar,
-        "modeAchat" $vachar,
+        "modeAchat" $boolean,
         "created" $timestamp,
         "telephone" $vachar,
         "succursale" $vachar,
@@ -568,16 +570,37 @@ class TableName {
     // Succursale
     await connection.query('''
         CREATE TABLE IF NOT EXISTS $succursaleTable(
-          "id" serial primary key NOT NULL,
-          "name" VARCHAR NOT NULL,
-          "adresse" VARCHAR,
-          "pays" VARCHAR NOT NULL,
-          "nameBusiness" VARCHAR NOT NULL,
-          "created" TIMESTAMP NOT NULL
+          "id" $key,
+          "name" $vachar,
+          "adresse" $vacharNull,
+          "pays" $vachar,
+          "nameBusiness" $vachar,
+          "created" $timestamp
       );
       ''');
-
-    
+    // Bon de livraison
+    await connection.query('''
+      CREATE TABLE IF NOT EXISTS $bonLivraisonTable(
+        "id" $key,
+        "idProduct" $vachar,
+        "quantityAchat" $vachar,
+        "priceAchatUnit" $vachar,
+        "prixVenteUnit" $vachar,
+        "unite" $vachar,
+        "created" $timestamp,
+        "firstName" $vachar,
+        "lastName" $vachar,
+        "telephone" $vachar,
+        "succursale" $vachar,
+        "nameBusiness" $vachar,
+        "tva" $vachar,
+        "remise" $vachar,
+        "qtyRemise" $vachar,
+        "accuseReception" $boolean,
+        "accuseReceptionFirstName" $vachar,
+        "accuseReceptionLastName" $vachar
+    );
+    ''');
 
       
 

@@ -1,24 +1,24 @@
 class BonLivraisonModel {
-  final int? id;
-  final String idProduct;
-  final String quantityAchat;
-  final String priceAchatUnit; 
-  final String prixVenteUnit;
-  final String unite;
-  final DateTime created;
-  final String firstName;
-  final String lastName;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
-  final String tva;
-  final String remise;
-  final String qtyRemise;
-  final bool accuseReception;
-  final String accuseReceptionFirstName;
-  final String accuseReceptionLastName;
+  late int? id;
+  late String idProduct;
+  late String quantityAchat;
+  late String priceAchatUnit; 
+  late String prixVenteUnit;
+  late String unite;
+  late DateTime created;
+  late String firstName;
+  late String lastName;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
+  late String tva;
+  late String remise;
+  late String qtyRemise;
+  late bool accuseReception;
+  late String accuseReceptionFirstName;
+  late String accuseReceptionLastName;
 
-  const BonLivraisonModel({
+  BonLivraisonModel({
     this.id,
     required this.idProduct,
     required this.quantityAchat,
