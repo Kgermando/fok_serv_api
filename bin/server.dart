@@ -13,12 +13,21 @@ import 'handlers/comptabilites/bilans_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
 import 'handlers/comptabilites/valorisation_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
+import 'handlers/exploitations/projet_handlers.dart';
+import 'handlers/exploitations/tache_handlers.dart';
 import 'handlers/finances/banques_handlers.dart';
 import 'handlers/finances/caisses_handlers.dart';
 import 'handlers/finances/creance_handlers.dart';
 import 'handlers/finances/depenses_handlers.dart';
 import 'handlers/finances/dette_handlers.dart';
 import 'handlers/finances/fin_exterieur_handlers.dart';
+import 'handlers/logistiques/anguin_handlers.dart';
+import 'handlers/logistiques/carburant_handlers.dart';
+import 'handlers/logistiques/entretien_handlers.dart';
+import 'handlers/logistiques/etat_materiel_handlers.dart';
+import 'handlers/logistiques/immobiler_repository.dart';
+import 'handlers/logistiques/mobilier_handlers.dart';
+import 'handlers/logistiques/trajet_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
 import 'handlers/rh/paiement_divers_handlers.dart';
 import 'handlers/rh/paiement_salaire_handlers.dart';
@@ -146,8 +155,7 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(BilansHandlers(repos).router));
-      
+            .addHandler(BilansHandlers(repos).router)); 
     router.mount(
         '/api/comptabilite/journals/',
         Pipeline()
@@ -155,7 +163,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(JournalHandlers(repos).router));
-
     router.mount(
         '/api/comptabilite/valorisations/',
         Pipeline()
@@ -163,7 +170,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ValorisationHandlers(repos).router));
-
     router.mount(
         '/api/devis/',
         Pipeline()
@@ -171,6 +177,72 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(DevisHandlers(repos).router));
+
+    router.mount(
+        '/api/projets/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ProjetHandlers(repos).router));
+    router.mount(
+        '/api/taches/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(TacheHanlers(repos).router));
+  
+
+    router.mount(
+        '/api/anguins/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(AnguinHandlers(repos).router));
+    router.mount(
+        '/api/carburants/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CarburantHandlers(repos).router));
+    router.mount(
+        '/api/entretiens/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(EntretienHandlers(repos).router));
+    router.mount(
+        '/api/etat_materiels/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(EtatMaterielHandlers(repos).router));
+    router.mount(
+        '/api/immobiliers/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ImmobilierHandlers(repos).router));
+    router.mount(
+        '/api/mobiliers/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(MobilierHandlers(repos).router));
+    router.mount(
+        '/api/trajets/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(TrajetHandlers(repos).router));
 
     router.all(
       '/<ignored|.*>',

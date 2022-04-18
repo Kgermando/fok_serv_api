@@ -5,6 +5,8 @@ import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/journal_repository.dart';
 import 'comptabilites/valorisation_repository.dart';
 import 'devis/devis_repository.dart';
+import 'exploitations/projet_repository.dart';
+import 'exploitations/tache_repository.dart';
 import 'finances/banque_repository.dart';
 import 'finances/caissses_repository.dart';
 import 'finances/creances_repository.dart';
@@ -30,11 +32,15 @@ class Repository {
   final PostgreSQLConnection executor;
   late RefreshTokensRepository refreshTokens;
   late UserRepository users;
+
+  // RH
   late AgentsRepository agents;
   late PaiementSalaireRepository salaires;
   late PaiementDiversRepository paiementDivers;
   late PresenceRepository presences;
   late PerformenceRepository performences;
+
+  // FINANCES
   late BanqueRepository banques;
   late CaissesRepository caisses;
   late CreancesRepository creances;
@@ -47,6 +53,11 @@ class Repository {
   late ValorisationRepository valorisations;
   late DevisRepository devis;
 
+  // EXPLOITAIONS
+  late ProjetRepository projets;
+  late TacheRepository taches;
+
+  // LOGISTIQUE
   late AnguinRepository anguins;
   late CarburantRepository carburants;
   late EntretienRepository entretiens;
@@ -58,11 +69,13 @@ class Repository {
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
     users = UserRepository(executor, 'users');
+    // RH
     agents = AgentsRepository(executor, 'agents');
     salaires = PaiementSalaireRepository(executor, 'salaires');
     paiementDivers = PaiementDiversRepository(executor, 'paiement_divers');
     presences = PresenceRepository(executor, 'presences');
     performences = PerformenceRepository(executor, 'performences');
+    // FINANCES
     banques = BanqueRepository(executor, 'banques');
     caisses = CaissesRepository(executor, 'caisses');
     creances = CreancesRepository(executor, 'creances');
@@ -74,6 +87,12 @@ class Repository {
     journals = JournalRepository(executor, 'journals');
     valorisations = ValorisationRepository(executor, 'valorisations');
     devis = DevisRepository(executor, 'devis');
+
+    // EXPLOITAIONS
+    projets = ProjetRepository(executor, 'projets');
+    taches = TacheRepository(executor, 'taches');
+    
+    // LOGISTIQUE
     anguins = AnguinRepository(executor, 'anguins');
     carburants = CarburantRepository(executor, 'carburants');
     entretiens = EntretienRepository(executor, 'entretiens');

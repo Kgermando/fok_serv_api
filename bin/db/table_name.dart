@@ -25,6 +25,10 @@ class TableName {
   final valorisationTable = 'valorisations';
   final devisTable = 'devis';
 
+  // EXPLOITATION
+  final projetTable = 'projets';
+  final tacheTable = 'taches';
+
   // LOGISTIQUE
   final anguinTable = 'anguins';
   final carburantTable = 'carburants';
@@ -475,6 +479,49 @@ class TableName {
           "signature" $vachar
         );
       '''); 
+
+      // Projets
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $projetTable(
+          "id" $key,
+          "nomProjet" $vachar,
+          "responsable" $vachar,
+          "objectifs" $vachar,
+          "description" $vachar,
+          "resources" $vachar,
+          "responsabilite" $vachar,
+          "communication" $vachar,
+          "processusVerification" $vachar,
+          "problemePotientEtRisque" $vachar,
+          "dateDebutEtFin" $vachar,
+          "budgetDetail" $vachar,
+          "recetteAttendus" $vachar,
+          "listAgentEtRole" $list,
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      '''); 
+
+      // Taches
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $tacheTable(
+          "id" $key,
+          "nomProjet" $vachar,
+          "numeroTache" $vachar,
+          "agent" $vachar,
+          "jalon" $vachar,
+          "tache" $vachar,
+          "realisations" $vachar,
+          "signatureResp" $vachar,
+          "signatureAgent" $vachar,
+          "created" $timestamp,
+          "reponduDate" $timestamp,
+          "reponseDate" $vachar,
+          "soumettre" $boolean
+        );
+      '''); 
+
+      
 
       print("Tables created succes!");
       return connection;
