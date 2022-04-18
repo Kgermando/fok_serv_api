@@ -53,6 +53,8 @@ class TableName {
   final bonLivraisonTable = 'bon_livraisons';
   final achatTable = 'achats';
   final cartTable = 'carts';
+  final factureTable = 'factures';
+  final creanceFactureTable = 'creance_factures';
 
 
 
@@ -641,6 +643,30 @@ class TableName {
           "qtyRemise" $vachar
       );
       ''');
+      // Facture
+      await connection.query('''
+          CREATE TABLE IF NOT EXISTS $factureTable(
+            "id" $key,
+            "cart" $list,
+            "client" $vachar,
+            "date" $timestamp,
+            "telephone" $vachar,
+            "succursale" $vachar,
+            "nameBusiness" $vachar
+          );
+        '''); 
+        // Creance
+      await connection.query('''
+          CREATE TABLE IF NOT EXISTS $creanceFactureTable(
+            "id" $key,
+            "cart" $list,
+            "client" $vachar,
+            "date" $timestamp,
+            "telephone" $vachar,
+            "succursale" $vachar,
+            "nameBusiness" $vachar
+          );
+        ''');
 
       
 

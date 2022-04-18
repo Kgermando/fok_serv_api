@@ -1,13 +1,13 @@
 class FactureCartModel {
-  final int? id;
-  final List cart;
-  final String client;
-  final DateTime created;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
+  late int? id;
+  late List cart;
+  late String client;
+  late DateTime created;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
 
-  const FactureCartModel(
+  FactureCartModel(
       {this.id,
       required this.cart,
       required this.client,
@@ -15,7 +15,7 @@ class FactureCartModel {
       required this.telephone,
       required this.succursale,
       required this.nameBusiness});
-
+ 
   factory FactureCartModel.fromSQL(List<dynamic> row) {
     return FactureCartModel(
       id: row[0],

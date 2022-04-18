@@ -293,6 +293,20 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CartHandlers(repos).router));
+    router.mount(
+        '/api/comm_marketing/factures',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CartHandlers(repos).router));
+    router.mount(
+        '/api/comm_marketing/facture-creances',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CartHandlers(repos).router));
 
 
         
