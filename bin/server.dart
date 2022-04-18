@@ -8,8 +8,9 @@ import 'db/config_db.dart';
 import 'db/table_name.dart';
 import 'handlers/auth/auth_handlers.dart';
 import 'handlers/auth/user_handlers.dart';
-import 'handlers/comm_marketing/commercial/produit_model_handler.dart';
+import 'handlers/comm_marketing/commercial/produit_model_handlers.dart';
 import 'handlers/comm_marketing/commercial/stocks_global_handlers.dart';
+import 'handlers/comm_marketing/commercial/succursale_handlers.dart';
 import 'handlers/comptabilites/amortissement_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
@@ -261,6 +262,13 @@ class Service {
         .addMiddleware(handleErrors())
         // .addMiddleware(handleAuth(serverSecretKey))
         .addHandler(StockGlobalHandlers(repos).router));
+    router.mount(
+        '/api/comm_marketing/succursales',
+        Pipeline()
+          .addMiddleware(setJsonHeader())
+          .addMiddleware(handleErrors())
+          // .addMiddleware(handleAuth(serverSecretKey))
+          .addHandler(SuccursaleHandlers(repos).router));
 
 
         

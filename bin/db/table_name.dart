@@ -48,6 +48,8 @@ class TableName {
   // COMMEERCIAL & MARKETING
   final modelTable = 'models_produits';
   final stocksGlobalTable = 'stocks_global';
+  final succursaleTable = 'succursales';
+
 
 
 
@@ -528,7 +530,7 @@ class TableName {
       '''); 
 
 
-      // Prodit model
+      // Produit model
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $modelTable(
           "id" $key,
@@ -541,10 +543,9 @@ class TableName {
           "telephone" $vachar,
           "succursale" $vachar,
           "nameBusiness" $vachar,
-          "date" $timestamp
+          "created" $timestamp
       );
       ''');
-
     // Stock global
     await connection.query('''
       CREATE TABLE IF NOT EXISTS $stocksGlobalTable(
@@ -556,7 +557,7 @@ class TableName {
         "prixVenteUnit" $vachar,
         "unite" $vachar,
         "modeAchat" $vachar,
-        "date" $timestamp,
+        "created" $timestamp,
         "telephone" $vachar,
         "succursale" $vachar,
         "nameBusiness" $vachar,
@@ -564,6 +565,19 @@ class TableName {
         "qtyRavitailler" $vachar
     );
     ''');
+    // Succursale
+    await connection.query('''
+        CREATE TABLE IF NOT EXISTS $succursaleTable(
+          "id" serial primary key NOT NULL,
+          "name" VARCHAR NOT NULL,
+          "adresse" VARCHAR,
+          "pays" VARCHAR NOT NULL,
+          "nameBusiness" VARCHAR NOT NULL,
+          "created" TIMESTAMP NOT NULL
+      );
+      ''');
+
+    
 
       
 

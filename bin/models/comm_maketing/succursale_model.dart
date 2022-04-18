@@ -1,10 +1,10 @@
 class SuccursaleModel {
-  final int? id;
-  final String name;
-  final String adresse;
-  final String pays;
-  final String nameBusiness;
-  final DateTime created;
+  late int? id;
+  late String name;
+  late String adresse;
+  late String pays;
+  late String nameBusiness;
+  late DateTime created;
 
   SuccursaleModel({
     this.id, 
