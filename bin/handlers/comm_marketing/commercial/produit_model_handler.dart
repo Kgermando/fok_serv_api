@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/prod_model.dart';
-import '../../repository/repository.dart';
+import '../../../models/comm_maketing/prod_model.dart';
+import '../../../repository/repository.dart';
 
 class ProduitModelHandlers {
   final Repository repos;

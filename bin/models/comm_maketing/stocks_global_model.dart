@@ -1,20 +1,20 @@
 class StocksGlobalMOdel {
-  final int? id;
-  final String idProduct;
-  final String quantity;
-  final String quantityAchat;
-  final String priceAchatUnit;
-  final String prixVenteUnit;
-  final String unite;
-  final bool modeAchat;
-  final DateTime created;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
-  final String tva;
-  final String qtyRavitailler;
+  late int? id;
+  late String idProduct;
+  late String quantity;
+  late String quantityAchat;
+  late String priceAchatUnit;
+  late String prixVenteUnit;
+  late String unite;
+  late bool modeAchat;
+  late DateTime created;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
+  late String tva;
+  late String qtyRavitailler;
 
-  const StocksGlobalMOdel({
+  StocksGlobalMOdel({
     this.id,
     required this.idProduct,
     required this.quantity,

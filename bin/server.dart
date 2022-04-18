@@ -8,7 +8,8 @@ import 'db/config_db.dart';
 import 'db/table_name.dart';
 import 'handlers/auth/auth_handlers.dart';
 import 'handlers/auth/user_handlers.dart';
-import 'handlers/comm_marketing/produit_model_handler.dart';
+import 'handlers/comm_marketing/commercial/produit_model_handler.dart';
+import 'handlers/comm_marketing/commercial/stocks_global_handlers.dart';
 import 'handlers/comptabilites/amortissement_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
@@ -231,28 +232,38 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ImmobilierHandlers(repos).router));
     router.mount(
-        '/api/mobiliers/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(MobilierHandlers(repos).router));
+      '/api/mobiliers/',
+      Pipeline()
+          .addMiddleware(setJsonHeader())
+          .addMiddleware(handleErrors())
+          // .addMiddleware(handleAuth(serverSecretKey))
+          .addHandler(MobilierHandlers(repos).router));
     router.mount(
-        '/api/trajets/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(TrajetHandlers(repos).router));
+      '/api/trajets/',
+      Pipeline()
+        .addMiddleware(setJsonHeader())
+        .addMiddleware(handleErrors())
+        // .addMiddleware(handleAuth(serverSecretKey))
+        .addHandler(TrajetHandlers(repos).router));
 
 
     router.mount(
-        '/api/comm_marketing/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(ProduitModelHandlers(repos).router));
+      '/api/comm_marketing/prod-models',
+      Pipeline()
+        .addMiddleware(setJsonHeader())
+        .addMiddleware(handleErrors())
+        // .addMiddleware(handleAuth(serverSecretKey))
+        .addHandler(ProduitModelHandlers(repos).router));
+    router.mount(
+      '/api/comm_marketing/stocks-global',
+      Pipeline()
+        .addMiddleware(setJsonHeader())
+        .addMiddleware(handleErrors())
+        // .addMiddleware(handleAuth(serverSecretKey))
+        .addHandler(StockGlobalHandlers(repos).router));
+
+
+        
 
     router.all(
       '/<ignored|.*>',

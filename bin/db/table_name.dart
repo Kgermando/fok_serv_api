@@ -47,6 +47,7 @@ class TableName {
 
   // COMMEERCIAL & MARKETING
   final modelTable = 'models_produits';
+  final stocksGlobalTable = 'stocks_global';
 
 
 
@@ -526,19 +527,41 @@ class TableName {
         );
       '''); 
 
+
+      // Prodit model
       await connection.query('''
-      CREATE TABLE IF NOT EXISTS $modelTable(
+        CREATE TABLE IF NOT EXISTS $modelTable(
+          "id" $key,
+          "categorie" $vachar,
+          "sousCategorie1" $vachar,
+          "sousCategorie2" $vachar,
+          "sousCategorie3" $vachar,
+          "sousCategorie4" $vachar,
+          "idProduct" $vachar,
+          "telephone" $vachar,
+          "succursale" $vachar,
+          "nameBusiness" $vachar,
+          "date" $timestamp
+      );
+      ''');
+
+    // Stock global
+    await connection.query('''
+      CREATE TABLE IF NOT EXISTS $stocksGlobalTable(
         "id" $key,
-        "categorie"$vachar,
-        "sousCategorie1" $vachar,
-        "sousCategorie2" $vachar,
-        "sousCategorie3" $vachar,
-        "sousCategorie4" $vachar,
         "idProduct" $vachar,
+        "quantity" $vachar,
+        "quantityAchat" $vachar,
+        "priceAchatUnit" $vachar,
+        "prixVenteUnit" $vachar,
+        "unite" $vachar,
+        "modeAchat" $vachar,
+        "date" $timestamp,
         "telephone" $vachar,
         "succursale" $vachar,
         "nameBusiness" $vachar,
-        "date" $timestamp
+        "tva" $vachar,
+        "qtyRavitailler" $vachar
     );
     ''');
 
