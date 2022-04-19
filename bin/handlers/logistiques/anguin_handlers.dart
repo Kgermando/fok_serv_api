@@ -33,20 +33,23 @@ class AnguinHandlers {
     router.post('/insert-new-anguin', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       AnguinModel anguinModel = AnguinModel(
-          nom: input['nom'],
-          modele: input['modele'],
-          marque: input['marque'],
-          numeroChassie: input['numeroChassie'],
-          couleur: input['couleur'],
-          genre: input['genre'],
-          qtyMaxReservoir: input['qtyMaxReservoir'],
-          dateFabrication: DateTime.parse(input['dateFabrication']),
-          nomeroPLaque: input['nomeroPLaque'],
-          nomeroEntreprise: input['nomeroEntreprise'],
-          kilometrageInitiale: input['kilometrageInitiale'],
-          provenance: input['provenance'],
-          created: DateTime.parse(input['created']),
-          signature: input['signature']);
+        nom: input['nom'],
+        modele: input['modele'],
+        marque: input['marque'],
+        numeroChassie: input['numeroChassie'],
+        couleur: input['couleur'],
+        genre: input['genre'],
+        qtyMaxReservoir: input['qtyMaxReservoir'],
+        dateFabrication: DateTime.parse(input['dateFabrication']),
+        nomeroPLaque: input['nomeroPLaque'],
+        nomeroEntreprise: input['nomeroEntreprise'],
+        kilometrageInitiale: input['kilometrageInitiale'],
+        provenance: input['provenance'],
+        created: DateTime.parse(input['created']),
+        signature: input['signature'],
+        typeCaburant: input['typeCaburant'],
+        typeMoteur: input['typeMoteur'],
+      );
 
       try {
         await repos.anguins.insertData(anguinModel);
@@ -100,6 +103,12 @@ class AnguinHandlers {
       }
       if (input['signature'] != null) {
         anguinModel.signature = input['signature'];
+      }
+      if (input['typeCaburant'] != null) {
+        anguinModel.typeCaburant = input['typeCaburant'];
+      }
+      if (input['typeMoteur'] != null) {
+        anguinModel.typeMoteur = input['typeMoteur'];
       }
       repos.anguins.update(anguinModel);
       return Response.ok(jsonEncode(anguinModel.toJson()));

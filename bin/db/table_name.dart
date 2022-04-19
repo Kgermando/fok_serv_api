@@ -413,7 +413,7 @@ class TableName {
       '''); 
       // Carburant
       await connection.query('''
-        CREATE TABLE IF NOT EXISTS $anguinTable(
+        CREATE TABLE IF NOT EXISTS $carburantTable(
           "id" $key,
           "qtyEntreSortie" $vachar,
           "typeCaburant" $vachar,
@@ -423,14 +423,13 @@ class TableName {
           "nomReceptioniste" $vachar,
           "numeroPlaque" $vachar,
           "dateHeureSortieAnguin" $timestamp,
-          "nomeroPLaque" $vachar,
           "created" $timestamp,
           "signature" $vachar
         );
       ''');
       // Entretien
       await connection.query('''
-        CREATE TABLE IF NOT EXISTS $anguinTable(
+        CREATE TABLE IF NOT EXISTS $entretienTable(
           "id" $key,
           "nom" $vachar,
           "modele" $vachar,
@@ -444,7 +443,7 @@ class TableName {
       '''); 
       // EtatMateriel
       await connection.query('''
-        CREATE TABLE IF NOT EXISTS $anguinTable(
+        CREATE TABLE IF NOT EXISTS $etatMaterielTable(
           "id" $key,
           "nom" $vachar,
           "modele" $vachar,
@@ -457,7 +456,7 @@ class TableName {
       '''); 
       // Immobilier
       await connection.query('''
-        CREATE TABLE IF NOT EXISTS $anguinTable(
+        CREATE TABLE IF NOT EXISTS $immobilierTable(
           "id" $key,
           "typeAllocation" $vachar,
           "adresse" $vachar,
@@ -470,7 +469,7 @@ class TableName {
       '''); 
       // Mobilier
       await connection.query('''
-        CREATE TABLE IF NOT EXISTS $anguinTable(
+        CREATE TABLE IF NOT EXISTS $mobilierTable(
           "id" $key,
           "nom" $vachar,
           "modele" $vachar,
@@ -481,8 +480,9 @@ class TableName {
           "signature" $vachar
         );
       '''); 
+      // Trajet
        await connection.query('''
-        CREATE TABLE IF NOT EXISTS $anguinTable(
+        CREATE TABLE IF NOT EXISTS $trajetTable(
           "id" $key,
           "nomeroEntreprise" $vachar,
           "nomUtilisateur" $vachar,

@@ -34,14 +34,16 @@ class AnguinRepository {
     var provenance = anguinModel.provenance;
     var created = anguinModel.created;
     var signature = anguinModel.signature;
+    var typeCaburant = anguinModel.typeCaburant;
+    var typeMoteur = anguinModel.typeMoteur;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('anguins_id_seq'), '$nom',"
-          "'$modele', '$marque', '$numeroChassie', '$couleur', '$genre', '$qtyMaxReservoir',"
-          "'$dateFabrication', '$nomeroPLaque', '$nomeroEntreprise', '$kilometrageInitiale', '$provenance',"
-          "'$created', '$signature');");
+        "INSERT INTO $tableName VALUES (nextval('anguins_id_seq'), '$nom',"
+        "'$modele', '$marque', '$numeroChassie', '$couleur', '$genre', '$qtyMaxReservoir',"
+        "'$dateFabrication', '$nomeroPLaque', '$nomeroEntreprise', '$kilometrageInitiale', '$provenance',"
+        "'$created', '$signature', '$typeCaburant', '$typeMoteur');");
     });
   }
 
@@ -63,6 +65,8 @@ class AnguinRepository {
     var provenance = anguinModel.provenance;
     var created = anguinModel.created;
     var signature = anguinModel.signature;
+    var typeCaburant = anguinModel.typeCaburant;
+    var typeMoteur = anguinModel.typeMoteur;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -71,8 +75,8 @@ class AnguinRepository {
           "\"marque\"='$marque', \"numeroChassie\"='$numeroChassie', \"couleur\"='$couleur',"
           "\"genre\"='$genre', \"qtyMaxReservoir\"='$qtyMaxReservoir', \"rodateFabricationle\"='$dateFabrication',"
           "\"nomeroPLaque\"='$nomeroPLaque', \"nomeroEntreprise\"='$nomeroEntreprise', \"kilometrageInitiale\"='$kilometrageInitiale',"
-          "\"provenance\"='$provenance', \"created\"='$created',"
-          "\"signature\"='$signature' WHERE id=$id;");
+          "\"provenance\"='$provenance', \"created\"='$created', \"signature\"='$signature',"
+          "\"typeCaburant\"='$typeCaburant', \"typeMoteur\"='$typeMoteur' WHERE id=$id;");
     });
   }
 
@@ -105,7 +109,9 @@ class AnguinRepository {
       kilometrageInitiale: data[0][11],
       provenance: data[0][12],
       created: data[0][13],
-      signature: data[0][14]
+      signature: data[0][14],
+      typeCaburant: data[0][15],
+      typeMoteur: data[0][16]
     );
   }
 }
