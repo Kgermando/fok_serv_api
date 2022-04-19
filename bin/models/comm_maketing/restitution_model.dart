@@ -1,20 +1,20 @@
 class RestitutionModel {
-  final int? id;
-  final String idProduct;
-  final String quantity;
-  final String unite;
-  final DateTime created;
-  final String firstName;
-  final String lastName;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
-  final bool accuseReception;
-  final String accuseReceptionFirstName;
-  final String accuseReceptionLastName;
-  final String role;
-
-  const RestitutionModel({
+  late int? id;
+  late String idProduct;
+  late String quantity;
+  late String unite;
+  late DateTime created;
+  late String firstName;
+  late String lastName;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
+  late bool accuseReception;
+  late String accuseReceptionFirstName;
+  late String accuseReceptionLastName;
+  late String role;
+ 
+  RestitutionModel({
     this.id,
     required this.idProduct,
     required this.quantity,

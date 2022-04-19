@@ -11,7 +11,9 @@ import 'handlers/auth/user_handlers.dart';
 import 'handlers/comm_marketing/commercial/achats_handlers.dart';
 import 'handlers/comm_marketing/commercial/bon_livraison_handlers.dart';
 import 'handlers/comm_marketing/commercial/cart_handlers.dart';
+import 'handlers/comm_marketing/commercial/gains_handlers.dart';
 import 'handlers/comm_marketing/commercial/produit_model_handlers.dart';
+import 'handlers/comm_marketing/commercial/restitution_handlers.dart';
 import 'handlers/comm_marketing/commercial/stocks_global_handlers.dart';
 import 'handlers/comm_marketing/commercial/succursale_handlers.dart';
 import 'handlers/comptabilites/amortissement_handlers.dart';
@@ -307,6 +309,27 @@ class Service {
           .addMiddleware(handleErrors())
           // .addMiddleware(handleAuth(serverSecretKey))
           .addHandler(CartHandlers(repos).router));
+    router.mount(
+        '/api/comm_marketing/ventes',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CartHandlers(repos).router));
+    router.mount(
+        '/api/comm_marketing/gains',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(GainsHandlers(repos).router));
+    router.mount(
+        '/api/comm_marketing/restitutions',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(RestitutionHandlers(repos).router));
 
 
         

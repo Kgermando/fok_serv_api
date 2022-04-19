@@ -56,8 +56,9 @@ class TableName {
   final factureTable = 'factures';
   final creanceFactureTable = 'creance_factures';
   final numberFactureTable = 'number_factures';
-
-
+  final venteTable = 'ventes';
+  final gainTable = 'gains';
+  final restitutionTable = 'restitutions';
 
 
   Future openConnection(PostgreSQLConnection connection) async {
@@ -650,7 +651,7 @@ class TableName {
             "id" $key,
             "cart" $list,
             "client" $vachar,
-            "date" $timestamp,
+            "created" $timestamp,
             "telephone" $vachar,
             "succursale" $vachar,
             "nameBusiness" $vachar
@@ -662,7 +663,7 @@ class TableName {
             "id" $key,
             "cart" $list,
             "client" $vachar,
-            "date" $timestamp,
+            "created" $timestamp,
             "telephone" $vachar,
             "succursale" $vachar,
             "nameBusiness" $vachar
@@ -677,6 +678,56 @@ class TableName {
         "nameBusiness" $vachar
     );
     ''');
+    // Ventes
+    await connection.query('''
+      CREATE TABLE IF NOT EXISTS $venteTable(
+        "id" $key,
+        "idProductCart" $vachar,
+        "quantityCart" $vachar,
+        "priceTotalCart" $vachar,
+        "unite" $vachar,
+        "created" $timestamp,
+        "telephone" $vachar,
+        "succursale" $vachar,
+        "nameBusiness" $vachar,
+        "tva" $vachar,
+        "remise" $vachar,
+        "qtyRemise" $vachar
+      );
+      ''');
+      // Gain
+      await connection.query('''
+      CREATE TABLE IF NOT EXISTS $gainTable(
+        "id" $key,
+        "sum" FLOAT4 NOT NULL,
+        "created" $timestamp,
+        "telephone" $vachar,
+        "succursale" $vachar,
+        "nameBusiness" $vachar
+    );
+    ''');
+    // Restitution
+    await connection.query('''
+      CREATE TABLE IF NOT EXISTS $restitutionTable(
+        "id" $key,
+        "idProduct" $vachar,
+        "quantity" $vachar,
+        "unite" $vachar,
+        "created" $timestamp,
+        "firstName" $vachar,
+        "lastName" $vachar,
+        "telephone" $vachar,
+        "succursale" $vachar,
+        "nameBusiness" $vachar,
+        "accuseReception" $boolean,
+        "accuseReceptionFirstName" $vachar,
+        "accuseReceptionLastName" $vachar,
+        "role" $vachar
+    );
+    ''');
+
+
+
 
       
 

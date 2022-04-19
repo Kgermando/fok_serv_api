@@ -1,10 +1,10 @@
 class GainModel {
-  final int? id;
-  final double sum;
-  final DateTime created;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
+  late int? id;
+  late double sum;
+  late DateTime created;
+  late String telephone;
+  late String succursale;
+  late String nameBusiness;
 
   GainModel({
     this.id,
@@ -14,7 +14,7 @@ class GainModel {
     required this.succursale,
     required this.nameBusiness
   });
-
+ 
   factory GainModel.fromSQL(List<dynamic> row) {
     return GainModel(
       id: row[0],
