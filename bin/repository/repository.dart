@@ -1,5 +1,7 @@
 import 'package:postgres/postgres.dart';
 
+import 'budgets/departement_budget_repository.dart';
+import 'budgets/ligne_budgetaire_repository.dart';
 import 'comm_marketing/commercial/achats_repository.dart';
 import 'comm_marketing/commercial/bon_livraison_repository.dart';
 import 'comm_marketing/commercial/cart_repository.dart';
@@ -64,6 +66,8 @@ class Repository {
   late JournalRepository journals;
   late ValorisationRepository valorisations;
   late DevisRepository devis;
+  late DepartementBudgetRepository departementBudgets;
+  late LigneBudgtaireRepository ligneBudgetaires;
 
   // EXPLOITAIONS
   late ProjetRepository projets;
@@ -101,6 +105,7 @@ class Repository {
     paiementDivers = PaiementDiversRepository(executor, 'paiement_divers');
     presences = PresenceRepository(executor, 'presences');
     performences = PerformenceRepository(executor, 'performences');
+
     // FINANCES
     banques = BanqueRepository(executor, 'banques');
     caisses = CaissesRepository(executor, 'caisses');
@@ -113,6 +118,8 @@ class Repository {
     journals = JournalRepository(executor, 'journals');
     valorisations = ValorisationRepository(executor, 'valorisations');
     devis = DevisRepository(executor, 'devis');
+    departementBudgets = DepartementBudgetRepository(executor, 'departement_budgets');
+    ligneBudgetaires = LigneBudgtaireRepository(executor, 'ligne_budgetaires');
 
     // EXPLOITAIONS
     projets = ProjetRepository(executor, 'projets');

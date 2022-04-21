@@ -33,16 +33,18 @@ class CarburantHandlers {
     router.post('/insert-new-carburant', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       CarburantModel carburantModel = CarburantModel(
-          qtyEntreSortie: input['qtyEntreSortie'],
-          typeCaburant: input['typeCaburant'],
-          fournisseur: input['fournisseur'],
-          nomeroFactureAchat: input['nomeroFactureAchat'],
-          prixAchatParLitre: input['prixAchatParLitre'],
-          nomReceptioniste: input['nomReceptioniste'],
-          numeroPlaque: input['numeroPlaque'],
-          dateHeureSortieAnguin: DateTime.parse(input['dateHeureSortieAnguin']),
-          created: DateTime.parse(input['created']),
-          signature: input['signature']);
+        operationEntreSortie: input['operationEntreSortie'],
+        typeCaburant: input['typeCaburant'],
+        fournisseur: input['fournisseur'],
+        nomeroFactureAchat: input['nomeroFactureAchat'],
+        prixAchatParLitre: input['prixAchatParLitre'],
+        nomReceptioniste: input['nomReceptioniste'],
+        numeroPlaque: input['numeroPlaque'],
+        dateHeureSortieAnguin: DateTime.parse(input['dateHeureSortieAnguin']),
+        created: DateTime.parse(input['created']),
+        signature: input['signature'],
+        qtyAchat: input['qtyAchat']
+      );
       try {
         await repos.carburants.insertData(carburantModel);
       } catch (e) {
@@ -57,8 +59,8 @@ class CarburantHandlers {
       CarburantModel carburantModel = await repos.carburants.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
-      if (input['qtyEntreSortie'] != null) {
-        carburantModel.qtyEntreSortie = input['qtyEntreSortie'];
+      if (input['operationEntreSortie'] != null) {
+        carburantModel.operationEntreSortie = input['operationEntreSortie'];
       }
       if (input['typeCaburant'] != null) {
         carburantModel.typeCaburant = input['typeCaburant'];
@@ -86,6 +88,9 @@ class CarburantHandlers {
       }
       if (input['signature'] != null) {
         carburantModel.signature = input['signature'];
+      }
+      if (input['qtyAchat'] != null) {
+        carburantModel.qtyAchat = input['qtyAchat'];
       }
       repos.carburants.update(carburantModel);
       return Response.ok(jsonEncode(carburantModel.toJson()));

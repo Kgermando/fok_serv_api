@@ -62,9 +62,27 @@ class PaiementSalaireRepository {
     var netAPayer = paiementSalaireModel.netAPayer;
     var montantPrisConsiderationCalculCotisationsINSS = paiementSalaireModel.montantPrisConsiderationCalculCotisationsINSS;
     var totalDuBrut = paiementSalaireModel.totalDuBrut;
+    var approbationDG = paiementSalaireModel.approbationDG;
     var signatureDG = paiementSalaireModel.signatureDG;
-    var signatureFinance = paiementSalaireModel.signatureFinance;
-    var signatureRH = paiementSalaireModel.signatureRH;
+    var signatureJustificationDG =
+        paiementSalaireModel.signatureJustificationDG;
+
+    var approbationFin = paiementSalaireModel.approbationFin;
+    var signatureFin = paiementSalaireModel.signatureFin;
+    var signatureJustificationFin =
+        paiementSalaireModel.signatureJustificationFin;
+
+    var approbationBudget = paiementSalaireModel.approbationBudget;
+    var signatureBudget = paiementSalaireModel.signatureBudget;
+    var signatureJustificationBudget =
+        paiementSalaireModel.signatureJustificationBudget;
+
+    var approbationDD = paiementSalaireModel.approbationDD;
+    var signatureDD = paiementSalaireModel.signatureDD;
+    var signatureJustificationDD =
+        paiementSalaireModel.signatureJustificationDD;
+
+    var signature = paiementSalaireModel.signature;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
@@ -86,7 +104,10 @@ class PaiementSalaireRepository {
         "'$nombreDeJoursAllocationsFamiliales', '$tauxJoursAllocationsFamiliales',"
         "'$totalAPayerAllocationsFamiliales','$netAPayer',"
         "'$montantPrisConsiderationCalculCotisationsINSS','$totalDuBrut',"
-        "'$signatureDG','$signatureFinance','$signatureRH');");
+        "'$approbationDG','$signatureDG','$signatureJustificationDG',"
+        "'$approbationFin', '$signatureFin', '$signatureJustificationFin',"
+        "'$approbationBudget', '$signatureBudget', '$signatureJustificationBudget',"
+        "'$approbationDD', '$signatureDD', '$signatureJustificationDD', '$signature');");
     });
   }
 
@@ -147,9 +168,27 @@ class PaiementSalaireRepository {
     var montantPrisConsiderationCalculCotisationsINSS =
         paiementSalaireModel.montantPrisConsiderationCalculCotisationsINSS;
     var totalDuBrut = paiementSalaireModel.totalDuBrut;
+    var approbationDG = paiementSalaireModel.approbationDG;
     var signatureDG = paiementSalaireModel.signatureDG;
-    var signatureFinance = paiementSalaireModel.signatureFinance;
-    var signatureRH = paiementSalaireModel.signatureRH;
+    var signatureJustificationDG =
+        paiementSalaireModel.signatureJustificationDG;
+
+    var approbationFin = paiementSalaireModel.approbationFin;
+    var signatureFin = paiementSalaireModel.signatureFin;
+    var signatureJustificationFin =
+        paiementSalaireModel.signatureJustificationFin;
+
+    var approbationBudget = paiementSalaireModel.approbationBudget;
+    var signatureBudget = paiementSalaireModel.signatureBudget;
+    var signatureJustificationBudget =
+        paiementSalaireModel.signatureJustificationBudget;
+
+    var approbationDD = paiementSalaireModel.approbationDD;
+    var signatureDD = paiementSalaireModel.signatureDD;
+    var signatureJustificationDD =
+        paiementSalaireModel.signatureJustificationDD;
+
+    var signature = paiementSalaireModel.signature;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -180,8 +219,12 @@ class PaiementSalaireRepository {
       "\"totalAPayerAllocationsFamiliales\"='$totalAPayerAllocationsFamiliales',"
       "\"netAPayer\"='$netAPayer',"
       "\"montantPrisConsiderationCalculCotisationsINSS\"='$montantPrisConsiderationCalculCotisationsINSS',"
-      "\"totalDuBrut\"='$totalDuBrut', \"signatureDG\"='$signatureDG',"
-      "\"signatureFinance\"='$signatureFinance', \"signatureRH\"='$signatureRH' WHERE id=$id;");
+      "\"totalDuBrut\"='$totalDuBrut', \"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+      "\"signatureJustificationDG\"='$signatureJustificationDG', \"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+      "\"signatureJustificationFin\"='$signatureJustificationFin', \"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+      "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+      "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+      "\"signatureJustificationDD\"='$signatureJustificationDD', \"signature\"='$signature'  WHERE id=$id;");
     });
   }
 
@@ -242,9 +285,19 @@ class PaiementSalaireRepository {
       netAPayer: data[0][39],
       montantPrisConsiderationCalculCotisationsINSS: data[0][40],
       totalDuBrut: data[0][41],
-      signatureDG: data[0][42],
-      signatureRH: data[0][43],
-      signatureFinance: data[0][44]
+      approbationDG: data[0][42],
+      signatureDG: data[0][43],
+      signatureJustificationDG: data[0][44],
+      approbationFin: data[0][45],
+      signatureFin: data[0][46],
+      signatureJustificationFin: data[0][47],
+      approbationBudget: data[0][48],
+      signatureBudget: data[0][49],
+      signatureJustificationBudget: data[0][50],
+      approbationDD: data[0][51],
+      signatureDD: data[0][52],
+      signatureJustificationDD: data[0][53],
+      signature: data[0][54]
     );
   }
 }

@@ -25,6 +25,8 @@ class AgentModel {
   late DateTime createdAt;
   late String? photo;
   late String salaire;
+  late String signature; // celui qui fait le document
+  late DateTime created;
 
   AgentModel(
       {this.id,
@@ -53,6 +55,8 @@ class AgentModel {
       required this.createdAt,
       this.photo,
       required this.salaire,
+      required this.signature,
+      required this.created
   });
 
   factory AgentModel.fromSQL(List<dynamic> row) {
@@ -82,7 +86,9 @@ class AgentModel {
       statutAgent: row[22],
       createdAt: row[23],
       photo: row[24],
-      salaire: row[25]
+      salaire: row[25],
+      signature: row[26],
+      created: row[27]
     );
   }
 
@@ -113,7 +119,9 @@ class AgentModel {
       statutAgent: json["statutAgent"],
       createdAt: DateTime.parse(json["createdAt"]),
       photo: json["photo"],
-      salaire: json["salaire"]
+      salaire: json["salaire"],
+      signature: json['signature'],
+      created: DateTime.parse(json['created'])
     );
   }
 
@@ -144,7 +152,9 @@ class AgentModel {
       'statutAgent': statutAgent,
       'createdAt': createdAt.toIso8601String(),
       'phot': photo,
-      'salaire': salaire
+      'salaire': salaire,
+      'signature': signature,
+      'created': created.toIso8601String()
     };
   }
 }

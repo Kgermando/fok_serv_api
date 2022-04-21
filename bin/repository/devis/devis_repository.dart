@@ -25,19 +25,40 @@ class DevisRepository {
     var priority = devisModel.priority;
     var departement = devisModel.departement;
     var list = devisModel.list;
-    var approbation = devisModel.approbation;
-    var observation = devisModel.observation;
+    var approbationDG = devisModel.approbationDG;
     var signatureDG = devisModel.signatureDG;
-    var signatureReception = devisModel.signatureReception;
-    var signatureEmission = devisModel.signatureEmission;
+    var signatureJustificationDG =
+        devisModel.signatureJustificationDG;
+
+    var approbationFin = devisModel.approbationFin;
+    var signatureFin = devisModel.signatureFin;
+    var signatureJustificationFin =
+        devisModel.signatureJustificationFin;
+
+    var approbationBudget = devisModel.approbationBudget;
+    var signatureBudget = devisModel.signatureBudget;
+    var signatureJustificationBudget =
+        devisModel.signatureJustificationBudget;
+
+    var approbationDD = devisModel.approbationDD;
+    var signatureDD = devisModel.signatureDD;
+    var signatureJustificationDD =
+        devisModel.signatureJustificationDD;
+
+    var signature = devisModel.signature;
     var created = devisModel.created;
+
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('devis_id_seq'), '$title',"
-        "'$priority','$departement','$list','$approbation',"
-        "'$observation','$signatureDG','$signatureReception','$signatureEmission', '$created');");
+        "'$priority','$departement','$list',"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
+        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+        "'$signatureDD', '$signatureJustificationDD',"
+        "'$signature','$created');");
     });
   }
 
@@ -47,22 +68,41 @@ class DevisRepository {
     var priority = devisModel.priority;
     var departement = devisModel.departement;
     var list = devisModel.list;
-    var approbation = devisModel.approbation;
-    var observation = devisModel.observation;
+    var approbationDG = devisModel.approbationDG;
     var signatureDG = devisModel.signatureDG;
-    var signatureReception = devisModel.signatureReception;
-    var signatureEmission = devisModel.signatureEmission;
+    var signatureJustificationDG = devisModel.signatureJustificationDG;
+
+    var approbationFin = devisModel.approbationFin;
+    var signatureFin = devisModel.signatureFin;
+    var signatureJustificationFin = devisModel.signatureJustificationFin;
+
+    var approbationBudget = devisModel.approbationBudget;
+    var signatureBudget = devisModel.signatureBudget;
+    var signatureJustificationBudget = devisModel.signatureJustificationBudget;
+
+    var approbationDD = devisModel.approbationDD;
+    var signatureDD = devisModel.signatureDD;
+    var signatureJustificationDD = devisModel.signatureJustificationDD;
+
+    var signature = devisModel.signature;
     var created = devisModel.created;
+
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
           "UPDATE $tableName SET \"title\"='$title', "
           "\"priority\"='$priority',\"departement\"='$departement',"
-          "\"list\"='$list',\"approbation\"='$approbation',"
-          "\"observation\"='$observation', \"signatureDG\"='$signatureDG',"
-          "\"signatureReception\"='$signatureReception', \"signatureEmission\"='$signatureEmission',"
-          "\"created\"='$created' WHERE id=$id;");
+          "\"list\"='$list',"
+          "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+          "\"signatureJustificationDG\"='$signatureJustificationDG',"
+          "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+          "\"signatureJustificationFin\"='$signatureJustificationFin',"
+          "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+          "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+          "\"signatureJustificationDD\"='$signatureJustificationDD',"
+          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -86,12 +126,20 @@ class DevisRepository {
       priority: data[0][2],
       departement: data[0][3],
       list: data[0][4],
-      approbation: data[0][5],
-      observation: data[0][6],
-      signatureDG: data[0][7],
-      signatureReception: data[0][8],
-      signatureEmission: data[0][9],
-      created: data[0][10]
+      approbationDG: data[0][5],
+      signatureDG: data[0][6],
+      signatureJustificationDG: data[0][7],
+      approbationFin: data[0][8],
+      signatureFin: data[0][9],
+      signatureJustificationFin: data[0][10],
+      approbationBudget: data[0][11],
+      signatureBudget: data[0][12],
+      signatureJustificationBudget: data[0][13],
+      approbationDD: data[0][14],
+      signatureDD: data[0][15],
+      signatureJustificationDD: data[0][16],
+      signature: data[0][17],
+      created: data[0][18]
     );
   } 
 }

@@ -29,15 +29,36 @@ class CaissesRepository {
     var departement = caisseModel.departement;
     var typeOperation = caisseModel.typeOperation;
     var numeroOperation = caisseModel.numeroOperation;
-    var created = caisseModel.created;
+    var approbationDG = caisseModel.approbationDG;
+    var signatureDG = caisseModel.signatureDG;
+    var signatureJustificationDG = caisseModel.signatureJustificationDG;
+
+    var approbationFin = caisseModel.approbationFin;
+    var signatureFin = caisseModel.signatureFin;
+    var signatureJustificationFin = caisseModel.signatureJustificationFin;
+
+    var approbationBudget = caisseModel.approbationBudget;
+    var signatureBudget = caisseModel.signatureBudget;
+    var signatureJustificationBudget = caisseModel.signatureJustificationBudget;
+
+    var approbationDD = caisseModel.approbationDD;
+    var signatureDD = caisseModel.signatureDD;
+    var signatureJustificationDD = caisseModel.signatureJustificationDD;
+
     var signature = caisseModel.signature;
+    var created = caisseModel.created;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
           "INSERT INTO $tableName VALUES (nextval('caisses_id_seq'), '$nomComplet',"
           "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
-          "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation', '$created', '$signature');");
+          "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation',"
+          "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
+          "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+          "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+          "'$signatureDD', '$signatureJustificationDD',"
+          "'$signature', '$created');");
     });
   }
 
@@ -52,18 +73,43 @@ class CaissesRepository {
     var departement = caisseModel.departement;
     var typeOperation = caisseModel.typeOperation;
     var numeroOperation = caisseModel.numeroOperation;
-    var created = caisseModel.created;
+    var approbationDG = caisseModel.approbationDG;
+    var signatureDG = caisseModel.signatureDG;
+    var signatureJustificationDG = caisseModel.signatureJustificationDG;
+
+    var approbationFin = caisseModel.approbationFin;
+    var signatureFin = caisseModel.signatureFin;
+    var signatureJustificationFin = caisseModel.signatureJustificationFin;
+
+    var approbationBudget = caisseModel.approbationBudget;
+    var signatureBudget = caisseModel.signatureBudget;
+    var signatureJustificationBudget = caisseModel.signatureJustificationBudget;
+
+    var approbationDD = caisseModel.approbationDD;
+    var signatureDD = caisseModel.signatureDD;
+    var signatureJustificationDD = caisseModel.signatureJustificationDD;
+
     var signature = caisseModel.signature;
+    var created = caisseModel.created;
+
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-          "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
-          "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
-          "\"montant\"='$montant',\"coupureBillet\"='$coupureBillet',"
-          "\"ligneBudgtaire\"='$ligneBudgtaire', \"departement\"='$departement',"
-          "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
-          "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
+        "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
+        "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
+        "\"montant\"='$montant',\"coupureBillet\"='$coupureBillet',"
+        "\"ligneBudgtaire\"='$ligneBudgtaire', \"departement\"='$departement',"
+        "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
+        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+        "\"signatureJustificationDG\"='$signatureJustificationDG',"
+        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+        "\"signatureJustificationFin\"='$signatureJustificationFin',"
+        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+        "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -92,8 +138,22 @@ class CaissesRepository {
         departement: data[0][7],
         typeOperation: data[0][8],
         numeroOperation: data[0][9],
-        created: data[0][10],
-        signature: data[0][11]);
+        approbationDG: data[0][10],
+        signatureDG: data[0][11],
+        signatureJustificationDG: data[0][12],
+        approbationFin: data[0][13],
+        signatureFin: data[0][14],
+        signatureJustificationFin: data[0][15],
+        approbationBudget: data[0][16],
+        signatureBudget: data[0][17],
+        signatureJustificationBudget: data[0][18],
+        approbationDD: data[0][19],
+        signatureDD: data[0][20],
+        signatureJustificationDD: data[0][21],
+        signature: data[0][22],
+        created: data[0][23]
+        
+      );
   }
 
 

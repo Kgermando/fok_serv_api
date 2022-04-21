@@ -32,10 +32,31 @@ class AnguinRepository {
     var nomeroEntreprise = anguinModel.nomeroEntreprise;
     var kilometrageInitiale = anguinModel.kilometrageInitiale;
     var provenance = anguinModel.provenance;
-    var created = anguinModel.created;
-    var signature = anguinModel.signature;
     var typeCaburant = anguinModel.typeCaburant;
     var typeMoteur = anguinModel.typeMoteur;
+    var approbationDG = anguinModel.approbationDG;
+    var signatureDG = anguinModel.signatureDG;
+    var signatureJustificationDG =
+        anguinModel.signatureJustificationDG;
+
+    var approbationFin = anguinModel.approbationFin;
+    var signatureFin = anguinModel.signatureFin;
+    var signatureJustificationFin =
+        anguinModel.signatureJustificationFin;
+
+    var approbationBudget = anguinModel.approbationBudget;
+    var signatureBudget = anguinModel.signatureBudget;
+    var signatureJustificationBudget =
+        anguinModel.signatureJustificationBudget;
+
+    var approbationDD = anguinModel.approbationDD;
+    var signatureDD = anguinModel.signatureDD;
+    var signatureJustificationDD =
+        anguinModel.signatureJustificationDD;
+
+    var signature = anguinModel.signature;
+    var created = anguinModel.created;
+
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
@@ -43,7 +64,12 @@ class AnguinRepository {
         "INSERT INTO $tableName VALUES (nextval('anguins_id_seq'), '$nom',"
         "'$modele', '$marque', '$numeroChassie', '$couleur', '$genre', '$qtyMaxReservoir',"
         "'$dateFabrication', '$nomeroPLaque', '$nomeroEntreprise', '$kilometrageInitiale', '$provenance',"
-        "'$created', '$signature', '$typeCaburant', '$typeMoteur');");
+        "'$typeCaburant', '$typeMoteur',"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
+        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+        "'$signatureDD', '$signatureJustificationDD',"
+        "'$signature', '$created');");
     });
   }
 
@@ -63,20 +89,45 @@ class AnguinRepository {
     var nomeroEntreprise = anguinModel.nomeroEntreprise;
     var kilometrageInitiale = anguinModel.kilometrageInitiale;
     var provenance = anguinModel.provenance;
-    var created = anguinModel.created;
-    var signature = anguinModel.signature;
     var typeCaburant = anguinModel.typeCaburant;
     var typeMoteur = anguinModel.typeMoteur;
+     var approbationDG = anguinModel.approbationDG;
+    var signatureDG = anguinModel.signatureDG;
+    var signatureJustificationDG = anguinModel.signatureJustificationDG;
+
+    var approbationFin = anguinModel.approbationFin;
+    var signatureFin = anguinModel.signatureFin;
+    var signatureJustificationFin = anguinModel.signatureJustificationFin;
+
+    var approbationBudget = anguinModel.approbationBudget;
+    var signatureBudget = anguinModel.signatureBudget;
+    var signatureJustificationBudget = anguinModel.signatureJustificationBudget;
+
+    var approbationDD = anguinModel.approbationDD;
+    var signatureDD = anguinModel.signatureDD;
+    var signatureJustificationDD = anguinModel.signatureJustificationDD;
+
+    var signature = anguinModel.signature;
+    var created = anguinModel.created;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-          "UPDATE $tableName SET \"nom\"='$nom', \"modele\"='$modele',"
-          "\"marque\"='$marque', \"numeroChassie\"='$numeroChassie', \"couleur\"='$couleur',"
-          "\"genre\"='$genre', \"qtyMaxReservoir\"='$qtyMaxReservoir', \"rodateFabricationle\"='$dateFabrication',"
-          "\"nomeroPLaque\"='$nomeroPLaque', \"nomeroEntreprise\"='$nomeroEntreprise', \"kilometrageInitiale\"='$kilometrageInitiale',"
-          "\"provenance\"='$provenance', \"created\"='$created', \"signature\"='$signature',"
-          "\"typeCaburant\"='$typeCaburant', \"typeMoteur\"='$typeMoteur' WHERE id=$id;");
+        "UPDATE $tableName SET \"nom\"='$nom', \"modele\"='$modele',"
+        "\"marque\"='$marque', \"numeroChassie\"='$numeroChassie', \"couleur\"='$couleur',"
+        "\"genre\"='$genre', \"qtyMaxReservoir\"='$qtyMaxReservoir', \"rodateFabricationle\"='$dateFabrication',"
+        "\"nomeroPLaque\"='$nomeroPLaque', \"nomeroEntreprise\"='$nomeroEntreprise', \"kilometrageInitiale\"='$kilometrageInitiale',"
+        "\"provenance\"='$provenance'"
+        "\"typeCaburant\"='$typeCaburant', \"typeMoteur\"='$typeMoteur',"
+        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+        "\"signatureJustificationDG\"='$signatureJustificationDG',"
+        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+        "\"signatureJustificationFin\"='$signatureJustificationFin',"
+        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+        "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -108,10 +159,22 @@ class AnguinRepository {
       nomeroEntreprise: data[0][10],
       kilometrageInitiale: data[0][11],
       provenance: data[0][12],
-      created: data[0][13],
-      signature: data[0][14],
-      typeCaburant: data[0][15],
-      typeMoteur: data[0][16]
+      typeCaburant: data[0][13],
+      typeMoteur: data[0][14],
+      approbationDG: data[0][15],
+      signatureDG: data[0][16],
+      signatureJustificationDG: data[0][17],
+      approbationFin: data[0][18],
+      signatureFin: data[0][19],
+      signatureJustificationFin: data[0][20],
+      approbationBudget: data[0][21],
+      signatureBudget: data[0][22],
+      signatureJustificationBudget: data[0][23],
+      approbationDD: data[0][24],
+      signatureDD: data[0][25],
+      signatureJustificationDD: data[0][26],
+      signature: data[0][27],
+      created: data[0][28]
     );
   }
 }

@@ -187,7 +187,7 @@ class Service {
             .addHandler(DevisHandlers(repos).router));
 
     router.mount(
-        '/api/projets/',
+        '/api/projets/', 
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())

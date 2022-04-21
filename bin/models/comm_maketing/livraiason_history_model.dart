@@ -7,15 +7,26 @@ class LivraisonHistoryModel {
   final String prixVenteUnit;
   final String unite;
   final String margeBen;
-  final DateTime created;
-  final String telephone;
-  final String succursale;
-  final String nameBusiness;
   final String tva;
   final String remise;
   final String qtyRemise;
   final String margeBenRemise;
   final String qtyLivre;
+  late String approbationDG; // button radio OUi et NON if non text field
+  late String signatureDG;
+  late String signatureJustificationDG;
+  late String approbationFin;
+  late String signatureFin;
+  late String signatureJustificationFin;
+  late String approbationBudget;
+  late String signatureBudget;
+  late String signatureJustificationBudget;
+  late String approbationDD;
+  late String signatureDD; // directeur de departement
+  late String signatureJustificationDD;
+  late String succursale;
+  late String signature; // celui qui fait le document
+  late DateTime created;
 
   LivraisonHistoryModel(
       {this.id,
@@ -26,15 +37,26 @@ class LivraisonHistoryModel {
       required this.prixVenteUnit,
       required this.unite,
       required this.margeBen,
-      required this.created,
-      required this.telephone,
-      required this.succursale,
-      required this.nameBusiness,
       required this.tva,
       required this.remise,
       required this.qtyRemise,
       required this.margeBenRemise,
-      required this.qtyLivre
+      required this.qtyLivre,
+      required this.approbationDG,
+      required this.signatureDG,
+      required this.signatureJustificationDG,
+      required this.approbationFin,
+      required this.signatureFin,
+      required this.signatureJustificationFin,
+      required this.approbationBudget,
+      required this.signatureBudget,
+      required this.signatureJustificationBudget,
+      required this.approbationDD,
+      required this.signatureDD,
+      required this.signatureJustificationDD,
+      required this.succursale,
+      required this.signature,
+      required this.created,
   });
 
   factory LivraisonHistoryModel.fromSQL(List<dynamic> row) {
@@ -47,15 +69,26 @@ class LivraisonHistoryModel {
         prixVenteUnit: row[5],
         unite: row[6],
         margeBen: row[7],
-        created: row[8],
-        telephone: row[9],
-        succursale: row[10],
-        nameBusiness: row[11],
-        tva: row[12],
-        remise: row[13],
-        qtyRemise: row[14],
-        margeBenRemise: row[15],
-        qtyLivre: row[16]
+        tva: row[8],
+        remise: row[9],
+        qtyRemise: row[10],
+        margeBenRemise: row[11],
+        qtyLivre: row[12],
+        approbationDG: row[13],
+        signatureDG: row[14],
+        signatureJustificationDG: row[15],
+        approbationFin: row[16],
+        signatureFin: row[17],
+        signatureJustificationFin: row[18],
+        approbationBudget: row[19],
+        signatureBudget: row[20],
+        signatureJustificationBudget: row[21],
+        approbationDD: row[22],
+        signatureDD: row[23],
+        signatureJustificationDD: row[24],
+        succursale: row[25],
+        signature: row[26],
+        created: row[27]
       );
   }
 
@@ -69,15 +102,26 @@ class LivraisonHistoryModel {
       prixVenteUnit: json['prixVenteUnit'],
       unite: json['unite'],
       margeBen: json['margeBen'],
-      created: DateTime.parse(json['created']),
-      telephone: json["telephone"],
-      succursale: json["succursale"],
-      nameBusiness: json["nameBusiness"],
       tva: json["tva"],
       remise: json["remise"],
       qtyRemise: json["qtyRemise"],
       margeBenRemise: json["qtyRemise"],
-      qtyLivre: json["qtyLivre"]
+      qtyLivre: json["qtyLivre"],
+      approbationDG: json['approbationDG'],
+      signatureDG: json['signatureDG'],
+      signatureJustificationDG: json['signatureJustificationDG'],
+      approbationFin: json['approbationFin'],
+      signatureFin: json['signatureFin'],
+      signatureJustificationFin: json['signatureJustificationFin'],
+      approbationBudget: json['approbationBudget'],
+      signatureBudget: json['signatureBudget'],
+      signatureJustificationBudget: json['signatureJustificationBudget'],
+      approbationDD: json['approbationDD'],
+      signatureDD: json['signatureDD'],
+      signatureJustificationDD: json['signatureJustificationDD'],
+      succursale: json['succursale'],
+      signature: json['signature'],
+      created: DateTime.parse(json['created'])
     );
   }
 
@@ -91,15 +135,26 @@ class LivraisonHistoryModel {
       'prixVenteUnit': prixVenteUnit,
       'unite': unite,
       'margeBen': margeBen,
-      'created': created.toIso8601String(),
-      "telephone": telephone,
-      "succursale": succursale,
-      "nameBusiness": nameBusiness,
       "tva": tva,
       "remise": remise,
       "qtyRemise": qtyRemise,
       "margeBenRemise": qtyRemise,
-      "qtyLivre": qtyLivre
+      "qtyLivre": qtyLivre,
+      'approbationDG': approbationDG,
+      'signatureDG': signatureDG,
+      'signatureJustificationDG': signatureJustificationDG,
+      'approbationFin': approbationFin,
+      'signatureFin': signatureFin,
+      'signatureJustificationFin': signatureJustificationFin,
+      'approbationBudget': approbationBudget,
+      'signatureBudget': signatureBudget,
+      'signatureJustificationBudget': signatureJustificationBudget,
+      'approbationDD': approbationDD,
+      'signatureDD': signatureDD,
+      'signatureJustificationDD': signatureJustificationDD,
+      'succursale': succursale,
+      'signature': signature,
+      'created': created.toIso8601String()
     };
   }
 }

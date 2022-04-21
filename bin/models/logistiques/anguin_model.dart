@@ -9,14 +9,31 @@ class AnguinModel {
   late String qtyMaxReservoir;
   late DateTime dateFabrication;
   late String nomeroPLaque;
-  late String
-      nomeroEntreprise; // numero que l'entreprise donne donne a ses anguins
+  // numero que l'entreprise donne donne a ses anguins
+  late String nomeroEntreprise; 
   late String kilometrageInitiale;
   late String provenance;
-  late DateTime created;
-  late String signature;
   late String typeCaburant;
   late String typeMoteur;
+  late String approbationDG; // button radio OUi et NON if non text field
+  late String signatureDG;
+  late String signatureJustificationDG;
+
+  late String approbationFin;
+  late String signatureFin;
+  late String signatureJustificationFin;
+
+  late String approbationBudget;
+  late String signatureBudget;
+  late String signatureJustificationBudget;
+
+  late String approbationDD;
+  late String signatureDD; // directeur de departement
+  late String signatureJustificationDD;
+
+  late String signature; // celui qui fait le document
+  late DateTime created;
+
 
   AnguinModel(
       {this.id,
@@ -32,10 +49,23 @@ class AnguinModel {
       required this.nomeroEntreprise,
       required this.kilometrageInitiale,
       required this.provenance,
-      required this.created,
-      required this.signature,
       required this.typeCaburant,
-      required this.typeMoteur});
+      required this.typeMoteur,
+      required this.approbationDG,
+      required this.signatureDG,
+      required this.signatureJustificationDG,
+      required this.approbationFin,
+      required this.signatureFin,
+      required this.signatureJustificationFin,
+      required this.approbationBudget,
+      required this.signatureBudget,
+      required this.signatureJustificationBudget,
+      required this.approbationDD,
+      required this.signatureDD,
+      required this.signatureJustificationDD,
+      required this.signature,
+      required this.created
+    });
 
   factory AnguinModel.fromSQL(List<dynamic> row) {
     return AnguinModel(
@@ -52,10 +82,23 @@ class AnguinModel {
         nomeroEntreprise: row[10],
         kilometrageInitiale: row[11],
         provenance: row[12],
-        created: row[13],
-        signature: row[14],
-        typeCaburant: row[15],
-        typeMoteur: row[16]);
+        typeCaburant: row[13],
+        typeMoteur: row[14],
+        approbationDG: row[6],
+        signatureDG: row[7],
+        signatureJustificationDG: row[8],
+        approbationFin: row[9],
+        signatureFin: row[10],
+        signatureJustificationFin: row[11],
+        approbationBudget: row[12],
+        signatureBudget: row[13],
+        signatureJustificationBudget: row[14],
+        approbationDD: row[15],
+        signatureDD: row[16],
+        signatureJustificationDD: row[17],
+        signature: row[18],
+        created: row[19]
+    );
   }
 
   factory AnguinModel.fromJson(Map<String, dynamic> json) {
@@ -73,10 +116,23 @@ class AnguinModel {
         nomeroEntreprise: json['nomeroEntreprise'],
         kilometrageInitiale: json['kilometrageInitiale'],
         provenance: json['provenance'],
-        created: DateTime.parse(json['created']),
-        signature: json['signature'],
         typeCaburant: json['typeCaburant'],
-        typeMoteur: json['typeMoteur']);
+        typeMoteur: json['typeMoteur'],
+        approbationDG: json['approbationDG'],
+        signatureDG: json['signatureDG'],
+        signatureJustificationDG: json['signatureJustificationDG'],
+        approbationFin: json['approbationFin'],
+        signatureFin: json['signatureFin'],
+        signatureJustificationFin: json['signatureJustificationFin'],
+        approbationBudget: json['approbationBudget'],
+        signatureBudget: json['signatureBudget'],
+        signatureJustificationBudget: json['signatureJustificationBudget'],
+        approbationDD: json['approbationDD'],
+        signatureDD: json['signatureDD'],
+        signatureJustificationDD: json['signatureJustificationDD'],
+        signature: json['signature'],
+        created: DateTime.parse(json['created'])
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -94,10 +150,22 @@ class AnguinModel {
       'nomeroEntreprise': nomeroEntreprise,
       'kilometrageInitiale': kilometrageInitiale,
       'provenance': provenance,
-      'created': created.toIso8601String(),
-      'signature': signature,
       'typeCaburant': typeCaburant,
-      'typeMoteur': typeMoteur
+      'typeMoteur': typeMoteur,
+      'approbationDG': approbationDG,
+      'signatureDG': signatureDG,
+      'signatureJustificationDG': signatureJustificationDG,
+      'approbationFin': approbationFin,
+      'signatureFin': signatureFin,
+      'signatureJustificationFin': signatureJustificationFin,
+      'approbationBudget': approbationBudget,
+      'signatureBudget': signatureBudget,
+      'signatureJustificationBudget': signatureJustificationBudget,
+      'approbationDD': approbationDD,
+      'signatureDD': signatureDD,
+      'signatureJustificationDD': signatureJustificationDD,
+      'signature': signature,
+      'created': created.toIso8601String()
     };
   }
 }

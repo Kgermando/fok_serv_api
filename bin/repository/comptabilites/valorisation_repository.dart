@@ -26,14 +26,39 @@ class ValorisationRepository {
     var prixUnitaire = valorisationModel.prixUnitaire;
     var prixTotal = valorisationModel.prixTotal;
     var source = valorisationModel.source;
-    var created = valorisationModel.created;
+    var approbationDG = valorisationModel.approbationDG;
+    var signatureDG = valorisationModel.signatureDG;
+    var signatureJustificationDG =
+        valorisationModel.signatureJustificationDG;
+
+    var approbationFin = valorisationModel.approbationFin;
+    var signatureFin = valorisationModel.signatureFin;
+    var signatureJustificationFin =
+        valorisationModel.signatureJustificationFin;
+
+    var approbationBudget = valorisationModel.approbationBudget;
+    var signatureBudget = valorisationModel.signatureBudget;
+    var signatureJustificationBudget =
+        valorisationModel.signatureJustificationBudget;
+
+    var approbationDD = valorisationModel.approbationDD;
+    var signatureDD = valorisationModel.signatureDD;
+    var signatureJustificationDD =
+        valorisationModel.signatureJustificationDD;
+
     var signature = valorisationModel.signature;
+    var created = valorisationModel.created;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('valorisations_id_seq'), '$numeroOrdre',"
-        "'$intitule','$quantite','$prixUnitaire','$prixTotal','$source','$created','$signature');");
+        "'$intitule','$quantite','$prixUnitaire','$prixTotal','$source',"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
+          "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+          "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+          "'$signatureDD', '$signatureJustificationDD',"
+        "'$signature','$created');");
     });
   }
 
@@ -45,8 +70,25 @@ class ValorisationRepository {
     var prixUnitaire = valorisationModel.prixUnitaire;
     var prixTotal = valorisationModel.prixTotal;
     var source = valorisationModel.source;
-    var created = valorisationModel.created;
+    var approbationDG = valorisationModel.approbationDG;
+    var signatureDG = valorisationModel.signatureDG;
+    var signatureJustificationDG = valorisationModel.signatureJustificationDG;
+
+    var approbationFin = valorisationModel.approbationFin;
+    var signatureFin = valorisationModel.signatureFin;
+    var signatureJustificationFin = valorisationModel.signatureJustificationFin;
+
+    var approbationBudget = valorisationModel.approbationBudget;
+    var signatureBudget = valorisationModel.signatureBudget;
+    var signatureJustificationBudget =
+        valorisationModel.signatureJustificationBudget;
+
+    var approbationDD = valorisationModel.approbationDD;
+    var signatureDD = valorisationModel.signatureDD;
+    var signatureJustificationDD = valorisationModel.signatureJustificationDD;
+
     var signature = valorisationModel.signature;
+    var created = valorisationModel.created;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -54,7 +96,16 @@ class ValorisationRepository {
         "UPDATE $tableName SET \"numeroOrdre\"='$numeroOrdre', "
         "\"intitule\"='$intitule',\"quantite\"='$quantite',"
         "\"prixUnitaire\"='$prixUnitaire',\"prixTotal\"='$prixTotal',"
-        "\"source\"='$source', \"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
+        "\"source\"='$source',"
+        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+          "\"signatureJustificationDG\"='$signatureJustificationDG',"
+          "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+          "\"signatureJustificationFin\"='$signatureJustificationFin',"
+          "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+          "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+          "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -80,8 +131,21 @@ class ValorisationRepository {
         prixUnitaire: data[0][4],
         prixTotal: data[0][5],
         source: data[0][6],
-        created: data[0][7],
-        signature: data[0][8]);
+        approbationDG: data[0][7],
+        signatureDG: data[0][8],
+        signatureJustificationDG: data[0][9],
+        approbationFin: data[0][10],
+        signatureFin: data[0][11],
+        signatureJustificationFin: data[0][12],
+        approbationBudget: data[0][13],
+        signatureBudget: data[0][14],
+        signatureJustificationBudget: data[0][15],
+        approbationDD: data[0][16],
+        signatureDD: data[0][17],
+        signatureJustificationDD: data[0][18],
+        signature: data[0][19],
+        created: data[0][20]
+    );
   } 
   
 }

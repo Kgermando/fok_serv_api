@@ -5,13 +5,24 @@ class CartModel {
   late String priceCart;
   late String priceAchatUnit;
   late String unite;
-  late DateTime created;
-  late String telephone;
-  late String succursale;
-  late String nameBusiness;
   late String tva;
   late String remise;
   late String qtyRemise;
+  late String approbationDG; // button radio OUi et NON if non text field
+  late String signatureDG;
+  late String signatureJustificationDG;
+  late String approbationFin;
+  late String signatureFin;
+  late String signatureJustificationFin;
+  late String approbationBudget;
+  late String signatureBudget;
+  late String signatureJustificationBudget;
+  late String approbationDD;
+  late String signatureDD; // directeur de departement
+  late String signatureJustificationDD;
+  late String succursale;
+  late String signature; // celui qui fait le document
+  late DateTime created;
 
   CartModel({
     this.id,
@@ -20,13 +31,24 @@ class CartModel {
     required this.priceCart,
     required this.priceAchatUnit,
     required this.unite,
-    required this.created,
-    required this.telephone,
-    required this.succursale,
-    required this.nameBusiness,
     required this.tva,
     required this.remise,
-    required this.qtyRemise
+    required this.qtyRemise,
+    required this.approbationDG,
+    required this.signatureDG,
+    required this.signatureJustificationDG,
+    required this.approbationFin,
+    required this.signatureFin,
+    required this.signatureJustificationFin,
+    required this.approbationBudget,
+    required this.signatureBudget,
+    required this.signatureJustificationBudget,
+    required this.approbationDD,
+    required this.signatureDD,
+    required this.signatureJustificationDD,
+    required this.succursale,
+    required this.signature,
+    required this.created
   });
 
   factory CartModel.fromSQL(List<dynamic> row) {
@@ -37,13 +59,24 @@ class CartModel {
       priceCart: row[3],
       priceAchatUnit: row[4],
       unite: row[5],
-      created: row[6],
-      telephone: row[7],
-      succursale: row[8],
-      nameBusiness: row[9],
-      tva: row[10],
-      remise: row[11],
-      qtyRemise: row[12]
+      tva: row[6],
+      remise: row[7],
+      qtyRemise: row[8],
+      approbationDG: row[9],
+      signatureDG: row[10],
+      signatureJustificationDG: row[11],
+      approbationFin: row[12],
+      signatureFin: row[13],
+      signatureJustificationFin: row[14],
+      approbationBudget: row[15],
+      signatureBudget: row[16],
+      signatureJustificationBudget: row[17],
+      approbationDD: row[18],
+      signatureDD: row[19],
+      signatureJustificationDD: row[20],
+      succursale: row[21],
+      signature: row[22],
+      created: row[23]
     );
   } 
  
@@ -55,13 +88,24 @@ class CartModel {
       priceCart: json['priceCart'],
       priceAchatUnit: json['priceAchatUnit'],
       unite: json['unite'],
-      created: DateTime.parse(json['created']),
-      telephone: json["telephone"],
-      succursale: json["succursale"],
-      nameBusiness: json["nameBusiness"],
       tva: json["tva"],
       remise: json["remise"],
-      qtyRemise: json["qtyRemise"]
+      qtyRemise: json["qtyRemise"],
+      approbationDG: json['approbationDG'],
+      signatureDG: json['signatureDG'],
+      signatureJustificationDG: json['signatureJustificationDG'],
+      approbationFin: json['approbationFin'],
+      signatureFin: json['signatureFin'],
+      signatureJustificationFin: json['signatureJustificationFin'],
+      approbationBudget: json['approbationBudget'],
+      signatureBudget: json['signatureBudget'],
+      signatureJustificationBudget: json['signatureJustificationBudget'],
+      approbationDD: json['approbationDD'],
+      signatureDD: json['signatureDD'],
+      signatureJustificationDD: json['signatureJustificationDD'],
+      succursale: json['succursale'],
+      signature: json['signature'],
+      created: DateTime.parse(json['created'])
     );
   }
 
@@ -73,13 +117,24 @@ class CartModel {
       'priceCart': priceCart,
       'priceAchatUnit': priceAchatUnit,
       'unite': unite,
-      'created': created.toIso8601String(),
-      'telephone': telephone,
-      "succursale": succursale,
-      'nameBusiness': nameBusiness,
       "tva": tva,
       "remise": remise,
-      "qtyRemise": qtyRemise
+      "qtyRemise": qtyRemise,
+      'approbationDG': approbationDG,
+      'signatureDG': signatureDG,
+      'signatureJustificationDG': signatureJustificationDG,
+      'approbationFin': approbationFin,
+      'signatureFin': signatureFin,
+      'signatureJustificationFin': signatureJustificationFin,
+      'approbationBudget': approbationBudget,
+      'signatureBudget': signatureBudget,
+      'signatureJustificationBudget': signatureJustificationBudget,
+      'approbationDD': approbationDD,
+      'signatureDD': signatureDD,
+      'signatureJustificationDD': signatureJustificationDD,
+      'succursale': succursale,
+      'signature': signature,
+      'created': created.toIso8601String()
     };
   }
 }

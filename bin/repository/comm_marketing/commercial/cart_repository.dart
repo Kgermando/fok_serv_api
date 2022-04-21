@@ -26,21 +26,44 @@ class CartRepository {
     var priceCart = cartModel.priceCart;
     var priceAchatUnit = cartModel.priceAchatUnit;
     var unite = cartModel.unite;
-    var created = cartModel.created;
-    var telephone = cartModel.telephone;
-    var succursale = cartModel.succursale;
-    var nameBusiness = cartModel.nameBusiness;
     var tva = cartModel.tva;
     var remise = cartModel.remise;
     var qtyRemise = cartModel.qtyRemise;
+    var approbationDG = cartModel.approbationDG;
+    var signatureDG = cartModel.signatureDG;
+    var signatureJustificationDG =
+        cartModel.signatureJustificationDG;
+
+    var approbationFin = cartModel.approbationFin;
+    var signatureFin = cartModel.signatureFin;
+    var signatureJustificationFin =
+        cartModel.signatureJustificationFin;
+
+    var approbationBudget = cartModel.approbationBudget;
+    var signatureBudget = cartModel.signatureBudget;
+    var signatureJustificationBudget =
+        cartModel.signatureJustificationBudget;
+
+    var approbationDD = cartModel.approbationDD;
+    var signatureDD = cartModel.signatureDD;
+    var signatureJustificationDD =
+        cartModel.signatureJustificationDD;
+    var succursale = cartModel.succursale;
+    var signature = cartModel.signature;
+    var created = cartModel.created;
+
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('carts_id_seq'), '$idProductCart',"
         "'$quantityCart', '$priceCart','$priceAchatUnit', '$unite',"
-        "'$created','$telephone','$succursale', '$nameBusiness', '$tva',"
-        "'$remise', '$qtyRemise');");
+        "'$tva', '$remise', '$qtyRemise'"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
+        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+        "'$signatureDD', '$signatureJustificationDD',"
+        "'$signature','$created');");
     });
   }
 
@@ -51,13 +74,27 @@ class CartRepository {
     var priceCart = cartModel.priceCart;
     var priceAchatUnit = cartModel.priceAchatUnit;
     var unite = cartModel.unite;
-    var created = cartModel.created;
-    var telephone = cartModel.telephone;
-    var succursale = cartModel.succursale;
-    var nameBusiness = cartModel.nameBusiness;
     var tva = cartModel.tva;
     var remise = cartModel.remise;
     var qtyRemise = cartModel.qtyRemise;
+    var approbationDG = cartModel.approbationDG;
+    var signatureDG = cartModel.signatureDG;
+    var signatureJustificationDG = cartModel.signatureJustificationDG;
+
+    var approbationFin = cartModel.approbationFin;
+    var signatureFin = cartModel.signatureFin;
+    var signatureJustificationFin = cartModel.signatureJustificationFin;
+
+    var approbationBudget = cartModel.approbationBudget;
+    var signatureBudget = cartModel.signatureBudget;
+    var signatureJustificationBudget = cartModel.signatureJustificationBudget;
+
+    var approbationDD = cartModel.approbationDD;
+    var signatureDD = cartModel.signatureDD;
+    var signatureJustificationDD = cartModel.signatureJustificationDD;
+    var succursale = cartModel.succursale;
+    var signature = cartModel.signature;
+    var created = cartModel.created;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -65,9 +102,16 @@ class CartRepository {
         "UPDATE $tableName SET \"idProductCart\"='$idProductCart', \"quantityCart\"='$quantityCart',"
         "\"priceCart\"='$priceCart',\"priceAchatUnit\"='$priceAchatUnit',"
         "\"unite\"='$unite',"
-        "\"created\"='$created', \"telephone\"='$telephone', \"succursale\"='$succursale',"
-        "\"nameBusiness\"='$nameBusiness', \"tva\"='$tva', \"remise\"='$remise',"
-        "\"qtyRemise\"='$qtyRemise' WHERE id=$id;");
+        "\"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise'"
+        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+        "\"signatureJustificationDG\"='$signatureJustificationDG',"
+        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+        "\"signatureJustificationFin\"='$signatureJustificationFin',"
+        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+        "\"signatureJustificationDD\"='$signatureJustificationDD', \"succursale\"='$succursale',"
+        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -92,13 +136,24 @@ class CartRepository {
       priceCart: data[0][3],
       priceAchatUnit: data[0][4],
       unite: data[0][5],
-      created: data[0][6],
-      telephone: data[0][7],
-      succursale: data[0][8],
-      nameBusiness: data[0][9],
-      tva: data[0][10],
-      remise: data[0][11],
-      qtyRemise: data[0][12]
+      tva: data[0][6],
+      remise: data[0][7],
+      qtyRemise: data[0][8],
+      approbationDG: data[0][9],
+      signatureDG: data[0][10],
+      signatureJustificationDG: data[0][11],
+      approbationFin: data[0][12],
+      signatureFin: data[0][13],
+      signatureJustificationFin: data[0][14],
+      approbationBudget: data[0][15],
+      signatureBudget: data[0][16],
+      signatureJustificationBudget: data[0][17],
+      approbationDD: data[0][18],
+      signatureDD: data[0][19],
+      signatureJustificationDD: data[0][20],
+      succursale: data[0][21],
+      signature: data[0][22],
+      created: data[0][23]
     );
   } 
   

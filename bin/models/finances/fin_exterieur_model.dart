@@ -8,8 +8,24 @@ class FinanceExterieurModel {
   late String ligneBudgtaire; // somme d'affectation pour le budget
   late String typeOperation;
   late String numeroOperation;
+  late String ressourceFin; // financement Propre ou financement exterieur
+  late String approbationDG; // button radio OUi et NON if non text field
+  late String signatureDG;
+  late String signatureJustificationDG;
+  late String approbationFin;
+  late String signatureFin;
+  late String signatureJustificationFin;
+
+  late String approbationBudget;
+  late String signatureBudget;
+  late String signatureJustificationBudget;
+
+  late String approbationDD;
+  late String signatureDD; // directeur de departement
+  late String signatureJustificationDD;
+
+  late String signature; // celui qui fait le document
   late DateTime created;
-  late String signature;
  
   FinanceExterieurModel( 
     {
@@ -22,8 +38,21 @@ class FinanceExterieurModel {
     required this.ligneBudgtaire,
     required this.typeOperation,
     required this.numeroOperation,
-    required this.created,
+    required this.ressourceFin,
+    required this.approbationDG,
+    required this.signatureDG,
+    required this.signatureJustificationDG,
+    required this.approbationFin,
+    required this.signatureFin,
+    required this.signatureJustificationFin,
+    required this.approbationBudget,
+    required this.signatureBudget,
+    required this.signatureJustificationBudget,
+    required this.approbationDD,
+    required this.signatureDD,
+    required this.signatureJustificationDD,
     required this.signature,
+    required this.created
   });
 
   factory FinanceExterieurModel.fromSQL(List<dynamic> row) {
@@ -37,8 +66,21 @@ class FinanceExterieurModel {
         ligneBudgtaire: row[6],
         typeOperation: row[7],
         numeroOperation: row[8],
-        created: row[9],
-        signature: row[10]
+        ressourceFin: row[9],
+        approbationDG: row[10],
+        signatureDG: row[11],
+        signatureJustificationDG: row[12],
+        approbationFin: row[13],
+        signatureFin: row[14],
+        signatureJustificationFin: row[15],
+        approbationBudget: row[16],
+        signatureBudget: row[17],
+        signatureJustificationBudget: row[18],
+        approbationDD: row[19],
+        signatureDD: row[20],
+        signatureJustificationDD: row[21],
+        signature: row[22],
+        created: row[23]
     );
   }
 
@@ -53,8 +95,21 @@ class FinanceExterieurModel {
       ligneBudgtaire: json['ligneBudgtaire'],
       typeOperation: json['typeOperation'],
       numeroOperation: json['numeroOperation'],
-      created: DateTime.parse(json['created']),
-      signature: json['signature']
+      ressourceFin: json['ressourceFin'],
+        approbationDG: json['approbationDG'],
+        signatureDG: json['signatureDG'],
+        signatureJustificationDG: json['signatureJustificationDG'],
+        approbationFin: json['approbationFin'],
+        signatureFin: json['signatureFin'],
+        signatureJustificationFin: json['signatureJustificationFin'],
+        approbationBudget: json['approbationBudget'],
+        signatureBudget: json['signatureBudget'],
+        signatureJustificationBudget: json['signatureJustificationBudget'],
+        approbationDD: json['approbationDD'],
+        signatureDD: json['signatureDD'],
+        signatureJustificationDD: json['signatureJustificationDD'],
+        signature: json['signature'],
+        created: DateTime.parse(json['created'])
     );
   }
 
@@ -69,8 +124,21 @@ class FinanceExterieurModel {
       'ligneBudgtaire': ligneBudgtaire,
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
-      'created': created.toIso8601String(),
+      'ressourceFin': ressourceFin,
+      'approbationDG': approbationDG,
+      'signatureDG': signatureDG,
+      'signatureJustificationDG': signatureJustificationDG,
+      'approbationFin': approbationFin,
+      'signatureFin': signatureFin,
+      'signatureJustificationFin': signatureJustificationFin,
+      'approbationBudget': approbationBudget,
+      'signatureBudget': signatureBudget,
+      'signatureJustificationBudget': signatureJustificationBudget,
+      'approbationDD': approbationDD,
+      'signatureDD': signatureDD,
+      'signatureJustificationDD': signatureJustificationDD,
       'signature': signature,
+      'created': created.toIso8601String()
     };
   }
 }

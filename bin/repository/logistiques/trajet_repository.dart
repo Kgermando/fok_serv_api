@@ -84,7 +84,20 @@ class TrajetRepository {
         mission: data[0][5],
         kilometrageSorite: data[0][6],
         kilometrageRetour: data[0][7],
-        created: data[0][8],
-        signature: data[0][9]);
+        approbationDG: data[0][8],
+        signatureDG: data[0][9],
+        signatureJustificationDG: data[0][10],
+        approbationFin: data[0][11],
+        signatureFin: data[0][12],
+        signatureJustificationFin: data[0][13],
+        approbationBudget: data[0][14],
+        signatureBudget: data[0][15],
+        signatureJustificationBudget: data[0][16],
+        approbationDD: data[0][17],
+        signatureDD: data[0][18],
+        signatureJustificationDD: data[0][19],
+        signature: data[0][20],
+        created: data[0][21]
+    );
   }
 }

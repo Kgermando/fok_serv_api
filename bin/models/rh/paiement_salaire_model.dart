@@ -41,9 +41,24 @@ class PaiementSalaireModel {
   late String netAPayer;
   late String montantPrisConsiderationCalculCotisationsINSS;
   late String totalDuBrut;
+  late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
-  late String signatureFinance;
-  late String signatureRH;
+  late String signatureJustificationDG;
+
+  late String approbationFin;
+  late String signatureFin;
+  late String signatureJustificationFin;
+
+  late String approbationBudget;
+  late String signatureBudget;
+  late String signatureJustificationBudget;
+
+  late String approbationDD;
+  late String signatureDD; // directeur de departement
+  late String signatureJustificationDD;
+
+  late String signature; // celui qui fait le document
+
 
   PaiementSalaireModel({
     this.id,
@@ -88,9 +103,20 @@ class PaiementSalaireModel {
     required this.netAPayer,
     required this.montantPrisConsiderationCalculCotisationsINSS,
     required this.totalDuBrut,
+    required this.approbationDG,
     required this.signatureDG,
-    required this.signatureFinance,
-    required this.signatureRH,
+    required this.signatureJustificationDG,
+    required this.approbationFin,
+    required this.signatureFin,
+    required this.signatureJustificationFin,
+    required this.approbationBudget,
+    required this.signatureBudget,
+    required this.signatureJustificationBudget,
+    required this.approbationDD,
+    required this.signatureDD,
+    required this.signatureJustificationDD,
+    required this.signature,
+
   });
 
   factory PaiementSalaireModel.fromSQL(List<dynamic> row) {
@@ -137,9 +163,21 @@ class PaiementSalaireModel {
         netAPayer: row[39],
         montantPrisConsiderationCalculCotisationsINSS: row[40],
         totalDuBrut: row[41],
-        signatureDG: row[42],
-        signatureFinance: row[43],
-        signatureRH: row[44]);
+        approbationDG: row[42],
+        signatureDG: row[43],
+        signatureJustificationDG: row[44],
+        approbationFin: row[45],
+        signatureFin: row[46],
+        signatureJustificationFin: row[47],
+        approbationBudget: row[48],
+        signatureBudget: row[49],
+        signatureJustificationBudget: row[50],
+        approbationDD: row[21],
+        signatureDD: row[52],
+        signatureJustificationDD: row[53],
+        signature: row[54]
+      
+    );
   }
 
   factory PaiementSalaireModel.fromJson(Map<String, dynamic> json) {
@@ -192,9 +230,20 @@ class PaiementSalaireModel {
         montantPrisConsiderationCalculCotisationsINSS:
             json['montantPrisConsiderationCalculCotisationsINSS'],
         totalDuBrut: json['totalDuBrut'],
+        approbationDG: json['approbationDG'],
         signatureDG: json['signatureDG'],
-        signatureFinance: json['signatureFinance'],
-        signatureRH: json['signatureRH']);
+        signatureJustificationDG: json['signatureJustificationDG'],
+        approbationFin: json['approbationFin'],
+        signatureFin: json['signatureFin'],
+        signatureJustificationFin: json['signatureJustificationFin'],
+        approbationBudget: json['approbationBudget'],
+        signatureBudget: json['signatureBudget'],
+        signatureJustificationBudget: json['signatureJustificationBudget'],
+        approbationDD: json['approbationDD'],
+        signatureDD: json['signatureDD'],
+        signatureJustificationDD: json['signatureJustificationDD'],
+        signature: json['signature'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -245,9 +294,19 @@ class PaiementSalaireModel {
       'montantPrisConsiderationCalculCotisationsINSS':
           montantPrisConsiderationCalculCotisationsINSS,
       'totalDuBrut': totalDuBrut,
+      'approbationDG': approbationDG,
       'signatureDG': signatureDG,
-      'signatureFinance': signatureFinance,
-      'signatureRH': signatureRH
+      'signatureJustificationDG': signatureJustificationDG,
+      'approbationFin': approbationFin,
+      'signatureFin': signatureFin,
+      'signatureJustificationFin': signatureJustificationFin,
+      'approbationBudget': approbationBudget,
+      'signatureBudget': signatureBudget,
+      'signatureJustificationBudget': signatureJustificationBudget,
+      'approbationDD': approbationDD,
+      'signatureDD': signatureDD,
+      'signatureJustificationDD': signatureJustificationDD,
+      'signature': signature,
     };
   }
 }

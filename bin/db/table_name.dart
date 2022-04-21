@@ -32,6 +32,8 @@ class TableName {
   final journalsTable = 'journals';
   final valorisationTable = 'valorisations';
   final devisTable = 'devis';
+  final departementBudgetTable = 'departement_budgets';
+  final ligneBudgetaireTable = 'ligne_budgetaires';
 
   // EXPLOITATION
   final projetTable = 'projets';
@@ -391,6 +393,69 @@ class TableName {
         );
       ''');
 
+      // Departement Budget
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $ligneBudgetaireTable(
+          "id" $key,
+          "departement" $vachar,
+          "periodeBudget" $vachar,
+          "totalGlobalDispo" $vachar,
+          "totalGlobalFinExt" $vachar,
+          "totalGlobalPrevisionel" $vachar,
+
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+
+      // Ligne Budgetaire
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $ligneBudgetaireTable(
+          "id" $key,
+          "nomLigneBudgetaire" $vachar,
+          "departement" $vachar,
+          "periodeBudget" $vachar,
+          "uniteChoisie" $vachar,
+          "nombreUnite" $vachar,
+          "coutUnitaire" $vachar,
+          "coutTotal" $vachar,
+          "caisse" $vachar,
+          "banque" $vachar,
+          "finPropre" $vachar,
+          "finExterieur" $vachar,
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+
       // Anguin
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $anguinTable(
@@ -408,14 +473,16 @@ class TableName {
           "kilometrageInitiale" $vachar,
           "provenance" $vachar,
           "created" $timestamp,
-          "signature" $vachar
+          "signature" $vachar,
+          "typeCaburant" $vachar,
+          "typeMoteur" $vachar
         );
       '''); 
       // Carburant
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $carburantTable(
           "id" $key,
-          "qtyEntreSortie" $vachar,
+          "operationEntreSortie" $vachar,
           "typeCaburant" $vachar,
           "fournisseur" $vachar,
           "nomeroFactureAchat" $vachar,
@@ -424,7 +491,8 @@ class TableName {
           "numeroPlaque" $vachar,
           "dateHeureSortieAnguin" $timestamp,
           "created" $timestamp,
-          "signature" $vachar
+          "signature" $vachar,
+          "qtyAchat" $vachar
         );
       ''');
       // Entretien
@@ -449,7 +517,7 @@ class TableName {
           "modele" $vachar,
           "marque" $vachar,
           "typeObjet" $vachar,
-          "statut" $list,
+          "statut" $vachar,
           "created" $timestamp,
           "signature" $vachar
         );

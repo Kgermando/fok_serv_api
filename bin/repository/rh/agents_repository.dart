@@ -48,6 +48,8 @@ class AgentsRepository {
     var createdAt = agentModel.createdAt;
     var photo = agentModel.photo;
     var salaire = agentModel.salaire;
+    var signature = agentModel.signature;
+    var created = agentModel.created;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
@@ -58,7 +60,7 @@ class AgentsRepository {
         "'$nationalite', '$typeContrat', '$departement','$servicesAffectation',"
         "'$dateDebutContrat', '$dateFinContrat','$fonctionOccupe',"
         "'$competance', '$experience', '$statutAgent',"
-        "'$createdAt', '$photo', '$salaire');");
+        "'$createdAt', '$photo', '$salaire', '$signature', '$created');");
     });
   }
 
@@ -90,6 +92,8 @@ class AgentsRepository {
     var createdAt = agentModel.createdAt;
     var photo = agentModel.photo;
     var salaire = agentModel.salaire;
+    var signature = agentModel.signature;
+    var created = agentModel.created;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -105,7 +109,7 @@ class AgentsRepository {
         "\"dateFinContrat\"='$dateFinContrat', \"fonctionOccupe\"='$fonctionOccupe',"
         "\"competance\"='$competance', \"experience\"='$experience',"
         "\"statutAgent\"='$statutAgent', \"createdAt\"='$createdAt',"
-        "\"photo\"='$photo', \"salaire\"='$salaire' WHERE id=$id;");
+        "\"photo\"='$photo', \"salaire\"='$salaire' , \"signature\"='$signature' , \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -149,7 +153,9 @@ class AgentsRepository {
       statutAgent: data[0][22],
       createdAt: data[0][23],
       photo: data[0][24], 
-      salaire: data[0][25]
+      salaire: data[0][25],
+      signature: data[0][26],
+      created: data[0][27]
     );
   }
 

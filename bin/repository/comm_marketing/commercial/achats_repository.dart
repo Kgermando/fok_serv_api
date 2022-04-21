@@ -8,7 +8,7 @@ class AchatsRepository {
 
   AchatsRepository(this.executor, this.tableName);
 
-
+ 
   Future<List<AchatModel>> getAllData() async {
     var data = <AchatModel>{};
 
@@ -27,22 +27,41 @@ class AchatsRepository {
     var priceAchatUnit = achatModel.priceAchatUnit;
     var prixVenteUnit = achatModel.prixVenteUnit;
     var unite = achatModel.unite;
-    var created = achatModel.created;
-    var telephone = achatModel.telephone;
-    var succursale = achatModel.succursale;
-    var nameBusiness = achatModel.nameBusiness;
     var tva = achatModel.tva;
     var remise = achatModel.remise;
     var qtyRemise = achatModel.qtyRemise;
     var qtyLivre = achatModel.qtyLivre;
+    var approbationDG = achatModel.approbationDG;
+    var signatureDG = achatModel.signatureDG;
+    var signatureJustificationDG = achatModel.signatureJustificationDG;
+
+    var approbationFin = achatModel.approbationFin;
+    var signatureFin = achatModel.signatureFin;
+    var signatureJustificationFin = achatModel.signatureJustificationFin;
+
+    var approbationBudget = achatModel.approbationBudget;
+    var signatureBudget = achatModel.signatureBudget;
+    var signatureJustificationBudget = achatModel.signatureJustificationBudget;
+
+    var approbationDD = achatModel.approbationDD;
+    var signatureDD = achatModel.signatureDD;
+    var signatureJustificationDD = achatModel.signatureJustificationDD;
+
+    var succursale = achatModel.succursale;
+    var signature = achatModel.signature;
+    var created = achatModel.created;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('achats_id_seq'), '$idProduct',"
         "'$quantity','$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
-        "'$created','$telephone','$succursale', '$nameBusiness', '$tva',"
-        "'$remise', '$qtyRemise', '$qtyLivre');");
+        "'$tva', '$remise', '$qtyRemise', '$qtyLivre'"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
+        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+        "'$signatureDD', '$signatureJustificationDD', '$succursale',"
+        "'$signature','$created');");
     });
   }
 
@@ -54,14 +73,32 @@ class AchatsRepository {
     var priceAchatUnit = achatModel.priceAchatUnit;
     var prixVenteUnit = achatModel.prixVenteUnit;
     var unite = achatModel.unite;
-    var created = achatModel.created;
-    var telephone = achatModel.telephone;
-    var succursale = achatModel.succursale;
-    var nameBusiness = achatModel.nameBusiness;
     var tva = achatModel.tva;
     var remise = achatModel.remise;
     var qtyRemise = achatModel.qtyRemise;
     var qtyLivre = achatModel.qtyLivre;
+    var approbationDG = achatModel.approbationDG;
+    var signatureDG = achatModel.signatureDG;
+    var signatureJustificationDG =
+        achatModel.signatureJustificationDG;
+
+    var approbationFin = achatModel.approbationFin;
+    var signatureFin = achatModel.signatureFin;
+    var signatureJustificationFin =
+        achatModel.signatureJustificationFin;
+
+    var approbationBudget = achatModel.approbationBudget;
+    var signatureBudget = achatModel.signatureBudget;
+    var signatureJustificationBudget =
+        achatModel.signatureJustificationBudget;
+
+    var approbationDD = achatModel.approbationDD;
+    var signatureDD = achatModel.signatureDD;
+    var signatureJustificationDD =
+        achatModel.signatureJustificationDD;
+    var succursale = achatModel.succursale;
+    var signature = achatModel.signature; 
+    var created = achatModel.created;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -69,9 +106,17 @@ class AchatsRepository {
         "UPDATE $tableName SET \"idProduct\"='$idProduct', \"quantity\"='$quantity',"
         "\"quantityAchat\"='$quantityAchat',\"priceAchatUnit\"='$priceAchatUnit',"
         "\"prixVenteUnit\"='$prixVenteUnit',\"unite\"='$unite',"
-        "\"created\"='$created', \"telephone\"='$telephone', \"succursale\"='$succursale',"
-        "\"nameBusiness\"='$nameBusiness', \"tva\"='$tva', \"remise\"='$remise',"
-        "\"qtyRemise\"='$qtyRemise', \"qtyLivre\"='$qtyLivre' WHERE id=$id;");
+        "\"tva\"='$tva', \"remise\"='$remise',"
+        "\"qtyRemise\"='$qtyRemise', \"qtyLivre\"='$qtyLivre'"
+        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+        "\"signatureJustificationDG\"='$signatureJustificationDG',"
+        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+        "\"signatureJustificationFin\"='$signatureJustificationFin',"
+        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+        "\"signatureJustificationDD\"='$signatureJustificationDD', \"succursale\"='$succursale',"
+        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -97,14 +142,25 @@ class AchatsRepository {
       priceAchatUnit: data[0][4],
       prixVenteUnit: data[0][5],
       unite: data[0][6],
-      created: data[0][7],
-      telephone: data[0][8],
-      succursale: data[0][9],
-      nameBusiness: data[0][10],
-      tva: data[0][11],
-      remise: data[0][12],
-      qtyRemise: data[0][13],
-      qtyLivre: data[0][14]
+      tva: data[0][7],
+      remise: data[0][8],
+      qtyRemise: data[0][9],
+      qtyLivre: data[0][10],
+      approbationDG: data[0][11],
+      signatureDG: data[0][12],
+      signatureJustificationDG: data[0][13],
+      approbationFin: data[0][14],
+      signatureFin: data[0][15],
+      signatureJustificationFin: data[0][16],
+      approbationBudget: data[0][17],
+      signatureBudget: data[0][18],
+      signatureJustificationBudget: data[0][19],
+      approbationDD: data[0][20],
+      signatureDD: data[0][21],
+      signatureJustificationDD: data[0][22],
+      succursale: data[0][23],
+      signature: data[0][24],
+      created: data[0][25]
     );
   } 
 }

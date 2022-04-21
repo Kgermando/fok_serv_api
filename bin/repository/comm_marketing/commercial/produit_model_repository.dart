@@ -26,9 +26,27 @@ class ProduitModelRepository {
     var sousCategorie3 = productModel.sousCategorie3;
     var sousCategorie4 = productModel.sousCategorie4;
     var idProduct = productModel.idProduct;
-    var telephone = productModel.telephone;
+    var approbationDG = productModel.approbationDG;
+    var signatureDG = productModel.signatureDG;
+    var signatureJustificationDG =
+        productModel.signatureJustificationDG;
+
+    var approbationFin = productModel.approbationFin;
+    var signatureFin = productModel.signatureFin;
+    var signatureJustificationFin =
+        productModel.signatureJustificationFin;
+
+    var approbationBudget = productModel.approbationBudget;
+    var signatureBudget = productModel.signatureBudget;
+    var signatureJustificationBudget =
+        productModel.signatureJustificationBudget;
+
+    var approbationDD = productModel.approbationDD;
+    var signatureDD = productModel.signatureDD;
+    var signatureJustificationDD =
+        productModel.signatureJustificationDD;
     var succursale = productModel.succursale;
-    var nameBusiness = productModel.nameBusiness;
+    var signature = productModel.signature;
     var created = productModel.created;
 
 
@@ -36,8 +54,12 @@ class ProduitModelRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('models_produits_id_seq'), '$categorie',"
-        "'$sousCategorie1','$sousCategorie2','$sousCategorie3','$sousCategorie4',"
-        "'$idProduct', '$telephone', '$succursale', '$nameBusiness','$created');");
+        "'$sousCategorie1','$sousCategorie2','$sousCategorie3','$sousCategorie4', '$idProduct',"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
+          "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+          "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+          "'$signatureDD', '$signatureJustificationDD', '$succursale'"
+        "'$signature','$created');");
     });
   }
 
@@ -49,9 +71,24 @@ class ProduitModelRepository {
     var sousCategorie3 = productModel.sousCategorie3;
     var sousCategorie4 = productModel.sousCategorie4;
     var idProduct = productModel.idProduct;
-    var telephone = productModel.telephone;
+    var approbationDG = productModel.approbationDG;
+    var signatureDG = productModel.signatureDG;
+    var signatureJustificationDG = productModel.signatureJustificationDG;
+
+    var approbationFin = productModel.approbationFin;
+    var signatureFin = productModel.signatureFin;
+    var signatureJustificationFin = productModel.signatureJustificationFin;
+
+    var approbationBudget = productModel.approbationBudget;
+    var signatureBudget = productModel.signatureBudget;
+    var signatureJustificationBudget =
+        productModel.signatureJustificationBudget;
+
+    var approbationDD = productModel.approbationDD;
+    var signatureDD = productModel.signatureDD;
+    var signatureJustificationDD = productModel.signatureJustificationDD;
     var succursale = productModel.succursale;
-    var nameBusiness = productModel.nameBusiness;
+    var signature = productModel.signature;
     var created = productModel.created;
 
 
@@ -61,8 +98,16 @@ class ProduitModelRepository {
         "UPDATE $tableName SET \"categorie\"='$categorie', "
         "\"sousCategorie1\"='$sousCategorie1', \"sousCategorie2\"='$sousCategorie2',"
         "\"sousCategorie3\"='$sousCategorie3', \"sousCategorie4\"='$sousCategorie4',"
-        "\"idProduct\"='$idProduct', \"telephone\"='$telephone', \"succursale\"='$succursale',"
-        "\"nameBusiness\"='$nameBusiness', \"created\"='$created' WHERE id=$id;");
+        "\"idProduct\"='$idProduct',"
+        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+          "\"signatureJustificationDG\"='$signatureJustificationDG',"
+          "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+          "\"signatureJustificationFin\"='$signatureJustificationFin',"
+          "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+          "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+          "\"signatureJustificationDD\"='$signatureJustificationDD', \"succursale\"='$succursale',"
+        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -88,10 +133,22 @@ class ProduitModelRepository {
       sousCategorie3: data[0][4],
       sousCategorie4: data[0][5],
       idProduct: data[0][6],
-      telephone: data[0][7],
-      succursale: data[0][8],
-      nameBusiness: data[0][9],
-      created: data[0][10]);
+      approbationDG: data[0][7],
+      signatureDG: data[0][8],
+      signatureJustificationDG: data[0][9],
+      approbationFin: data[0][10],
+      signatureFin: data[0][11],
+      signatureJustificationFin: data[0][12],
+      approbationBudget: data[0][13],
+      signatureBudget: data[0][14],
+      signatureJustificationBudget: data[0][15],
+      approbationDD: data[0][16],
+      signatureDD: data[0][17],
+      signatureJustificationDD: data[0][18],
+      succursale: data[0][19],
+      signature: data[0][20],
+      created: data[0][21]
+    );
   } 
   
 }
