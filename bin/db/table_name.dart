@@ -38,6 +38,7 @@ class TableName {
   // EXPLOITATION
   final projetTable = 'projets';
   final tacheTable = 'taches';
+  final virementTable = 'virements';
 
   // LOGISTIQUE
   final anguinTable = 'anguins';
@@ -67,7 +68,7 @@ class TableName {
   final annuaireTable = 'annuaires';
 
 
-  // COMMERCIAL & MARKETING
+  // ARCHIVE
   final archivesTable = 'archives';
 
 
@@ -130,7 +131,9 @@ class TableName {
           "statutAgent" $boolean,
           "createdAt" $timestamp,
           "photo" $vachar,
-          "salaire" $vachar
+          "salaire" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
       );
       ''');
 
@@ -179,23 +182,20 @@ class TableName {
           "netAPayer" $vachar,
           "montantPrisConsiderationCalculCotisationsINSS" $vachar,
           "totalDuBrut" $vachar,
-          "signatureDG" $vachar,
-          "signatureFinance" $vachar,
-          "signatureRH" $vachar
-      );
-      ''');
 
-      // Paiement Divers
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $tablePaiementDivers(
-          "id" $key,
-          "agent" $vachar,
-          "observation" $boolean,
-          "modePaiement" $vachar,
-          "titleDivers" $vachar,
-          "divers" $vachar,
-          "createdAt" $timestamp,
-          "approbation" $boolean
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar
       );
       ''');
 
@@ -208,6 +208,20 @@ class TableName {
           "sortie" $timestamp,
           "presence" $vachar,
           "motif" $vachar,
+
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar
           "created" $timestamp
       );
       ''');
@@ -220,6 +234,19 @@ class TableName {
           "hospitalite" $vachar,
           "ponctualite" $vachar,
           "travaille" $vachar,
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
           "created" $timestamp
       );
       ''');
@@ -234,11 +261,25 @@ class TableName {
           "montant" $vachar,
           "coupureBillet" $list,
           "ligneBudgtaire" $vachar,
+          "resources" $vachar,
           "departement" $vachar,
           "typeOperation" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
       );
       ''');
 
@@ -252,12 +293,25 @@ class TableName {
           "montant" $vachar,
           "coupureBillet" $list,
           "ligneBudgtaire" $vachar,
+          "resources" $vachar,
           "departement" $vachar,
           "typeOperation" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
           
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
       );
       ''');
 
@@ -270,28 +324,24 @@ class TableName {
           "libelle" $vachar,
           "montant" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp,
-          "signature" $vachar,
-          "approbation" $boolean,
           "statutPaie" $boolean
-      );
-      ''');
 
-      // Finance depenses
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $depensesTable(
-          "id" $key,
-          "nomComplet" $vachar,
-          "pieceJustificative" $vachar,
-          "naturePayement" $vachar,
-          "montant" $vachar,
-          "coupureBillet" $list,
-          "ligneBudgtaire" $vachar,
-          "modePayement" $vachar,
-          "numeroOperation" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
-        );
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+          
+      );
       ''');
 
       // Finance dettes
@@ -303,10 +353,22 @@ class TableName {
           "libelle" $vachar,
           "montant" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp,
+          "statutPaie" $boolean,
+
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
           "signature" $vachar,
-          "approbation" $boolean,
-          "statutPaie" $boolean
+          "created" $timestamp
         );
       ''');
 
@@ -322,8 +384,21 @@ class TableName {
           "ligneBudgtaire" $vachar,
           "typeOperation" $vachar,
           "numeroOperation" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       ''');
 
@@ -336,8 +411,21 @@ class TableName {
           "intitule" $vachar,
           "montant" $vachar,
           "typeJournal" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+          
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       ''');
 
@@ -350,8 +438,21 @@ class TableName {
           "intitule" $vachar,
           "montant" $vachar,
           "typeBilan" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+          
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       ''');
 
@@ -364,8 +465,21 @@ class TableName {
           "intitule" $vachar,
           "montant" $vachar,
           "typeJournal" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       ''');
 
@@ -379,12 +493,25 @@ class TableName {
           "prixUnitaire" $vachar,
           "prixTotal" $vachar,
           "source" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+          
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       ''');
 
-      // comptabilite valorisation
+      // Devis
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $devisTable(
           "id" $key,
@@ -392,11 +519,22 @@ class TableName {
           "priority" $vachar,
           "departement" $vachar,
           "list" $list,
-          "approbation" $boolean,
-          "observation" $boolean,
+          "ligneBudgtaire" $vachar,
+          "resources" $vachar,
+          
+          "approbationDG" $vachar,
           "signatureDG" $vachar,
-          "signatureReception" $vachar,
-          "signatureEmission" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
           "created" $timestamp
         );
       ''');
@@ -447,6 +585,7 @@ class TableName {
           "banque" $vachar,
           "finPropre" $vachar,
           "finExterieur" $vachar,
+
           "approbationDG" $vachar,
           "signatureDG" $vachar,
           "signatureJustificationDG" $vachar,
@@ -480,10 +619,23 @@ class TableName {
           "nomeroEntreprise" $vachar,
           "kilometrageInitiale" $vachar,
           "provenance" $vachar,
-          "created" $timestamp,
-          "signature" $vachar,
           "typeCaburant" $vachar,
-          "typeMoteur" $vachar
+          "typeMoteur" $vachar,
+
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       '''); 
       // Carburant
@@ -498,9 +650,23 @@ class TableName {
           "nomReceptioniste" $vachar,
           "numeroPlaque" $vachar,
           "dateHeureSortieAnguin" $timestamp,
-          "created" $timestamp,
+          "qtyAchat" $vachar,
+
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
           "signature" $vachar,
-          "qtyAchat" $vachar
+          "created" $timestamp
+
         );
       ''');
       // Entretien
@@ -513,8 +679,21 @@ class TableName {
           "etatObjet" $vachar,
           "objetRemplace" $list,
           "dureeTravaux" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+          
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       '''); 
       // EtatMateriel
@@ -526,8 +705,21 @@ class TableName {
           "marque" $vachar,
           "typeObjet" $vachar,
           "statut" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+          
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       '''); 
       // Immobilier
@@ -539,8 +731,21 @@ class TableName {
           "numeroCertificat" $vachar,
           "superficie" $vachar,
           "dateAcquisition" $timestamp,
-          "created" $timestamp,
-          "signature" $vachar
+          
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       '''); 
       // Mobilier
@@ -552,8 +757,21 @@ class TableName {
           "marque" $vachar,
           "descriptionMobilier" $vachar,
           "nombre" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+          
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       '''); 
       // Trajet
@@ -567,8 +785,21 @@ class TableName {
           "mission" $vachar,
           "kilometrageSorite" $vachar,
           "kilometrageRetour" $vachar,
-          "created" $timestamp,
-          "signature" $vachar
+          
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
         );
       '''); 
 
@@ -580,6 +811,7 @@ class TableName {
           "responsable" $vachar,
           "objectifs" $vachar,
           "description" $vachar,
+          "ligneBudgtaire" $vachar,
           "resources" $vachar,
           "responsabilite" $vachar,
           "communication" $vachar,
@@ -589,6 +821,19 @@ class TableName {
           "budgetDetail" $vachar,
           "recetteAttendus" $vachar,
           "listAgentEtRole" $list,
+          
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
           "signature" $vachar,
           "created" $timestamp
         );
@@ -613,6 +858,20 @@ class TableName {
         );
       '''); 
 
+      // Taches
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $virementTable(
+          "id" $key,
+          "nomProjet" $vachar,
+          "pieceJustificative" $vachar,
+          "montantVerser" $vachar,
+          "montantEnLettre" $vachar,
+          "typeVersement" $vachar,
+          "signature" $vachar,
+          "created" $vachar
+        );
+      '''); 
+
 
       // Produit model
       await connection.query('''
@@ -624,11 +883,22 @@ class TableName {
           "sousCategorie3" $vachar,
           "sousCategorie4" $vachar,
           "idProduct" $vachar,
-          "telephone" $vachar,
-          "succursale" $vachar,
-          "nameBusiness" $vachar,
+
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
           "created" $timestamp
-      );
+        );
       ''');
     // Stock global
     await connection.query('''
@@ -641,23 +911,48 @@ class TableName {
         "prixVenteUnit" $vachar,
         "unite" $vachar,
         "modeAchat" $boolean,
-        "created" $timestamp,
-        "telephone" $vachar,
-        "succursale" $vachar,
-        "nameBusiness" $vachar,
         "tva" $vachar,
-        "qtyRavitailler" $vachar
+        "qtyRavitailler" $vachar,
+
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
+
     );
     ''');
     // Succursale
     await connection.query('''
-        CREATE TABLE IF NOT EXISTS $succursaleTable(
-          "id" $key,
-          "name" $vachar,
-          "adresse" $vacharNull,
-          "pays" $vachar,
-          "nameBusiness" $vachar,
-          "created" $timestamp
+      CREATE TABLE IF NOT EXISTS $succursaleTable(
+        "id" $key,
+        "name" $vachar,
+        "adresse" $vacharNull,
+        "province" $vachar,
+          
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
       );
       ''');
     // Bon de livraison
@@ -669,18 +964,29 @@ class TableName {
         "priceAchatUnit" $vachar,
         "prixVenteUnit" $vachar,
         "unite" $vachar,
-        "created" $timestamp,
         "firstName" $vachar,
         "lastName" $vachar,
-        "telephone" $vachar,
-        "succursale" $vachar,
-        "nameBusiness" $vachar,
         "tva" $vachar,
         "remise" $vachar,
         "qtyRemise" $vachar,
         "accuseReception" $boolean,
         "accuseReceptionFirstName" $vachar,
-        "accuseReceptionLastName" $vachar
+        "accuseReceptionLastName" $vachar,
+
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
     );
     ''');
     // Achats
@@ -693,14 +999,25 @@ class TableName {
         "priceAchatUnit" $vachar,
         "prixVenteUnit" $vachar,
         "unite" $vachar,
-        "created" $timestamp,
-        "telephone" $vachar,
-        "succursale" $vachar,
-        "nameBusiness" $vachar,
         "tva" $vachar,
         "remise" $vachar,
         "qtyRemise" $vachar,
-        "qtyLivre" $vachar
+        "qtyLivre" $vachar,
+
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
     );
     ''');
     // Cart
@@ -712,13 +1029,24 @@ class TableName {
           "priceCart" $vachar,
           "priceAchatUnit" $vachar,
           "unite" $vachar,
-          "created" $timestamp,
-          "telephone" $vachar,
-          "succursale" $vachar,
-          "nameBusiness" $vachar,
           "tva" $vachar,
           "remise" $vachar,
-          "qtyRemise" $vachar
+          "qtyRemise" $vachar,
+
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
       );
       ''');
       // Facture
@@ -727,10 +1055,21 @@ class TableName {
             "id" $key,
             "cart" $list,
             "client" $vachar,
-            "created" $timestamp,
-            "telephone" $vachar,
-            "succursale" $vachar,
-            "nameBusiness" $vachar
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+
           );
         '''); 
         // Creance
@@ -739,10 +1078,21 @@ class TableName {
             "id" $key,
             "cart" $list,
             "client" $vachar,
-            "created" $timestamp,
-            "telephone" $vachar,
-            "succursale" $vachar,
-            "nameBusiness" $vachar
+
+            "approbationDG" $vachar, 
+            "signatureDG" $vachar,
+            "signatureJustificationDG" $vachar,
+            "approbationFin" $vachar,
+            "signatureFin" $vachar,
+            "signatureJustificationFin" $vachar,
+            "approbationBudget" $vachar,
+            "signatureBudget" $vachar,
+            "signatureJustificationBudget" $vachar,
+            "approbationDD" $vachar,
+            "signatureDD" $vachar,
+            "signatureJustificationDD" $vachar,
+            "signature" $vachar,
+            "created" $timestamp
           );
         ''');
       // Number facture
@@ -750,8 +1100,21 @@ class TableName {
       CREATE TABLE IF NOT EXISTS $numberFactureTable(
         "id" $key,
         "number" $vachar,
-        "succursale" $vachar,
-        "nameBusiness" $vachar
+
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
     );
     ''');
     // Ventes
@@ -762,13 +1125,25 @@ class TableName {
         "quantityCart" $vachar,
         "priceTotalCart" $vachar,
         "unite" $vachar,
-        "created" $timestamp,
-        "telephone" $vachar,
-        "succursale" $vachar,
-        "nameBusiness" $vachar,
         "tva" $vachar,
         "remise" $vachar,
-        "qtyRemise" $vachar
+        "qtyRemise" $vachar,
+
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
+        
       );
       ''');
       // Gain
@@ -776,10 +1151,21 @@ class TableName {
       CREATE TABLE IF NOT EXISTS $gainTable(
         "id" $key,
         "sum" FLOAT4 NOT NULL,
-        "created" $timestamp,
-        "telephone" $vachar,
-        "succursale" $vachar,
-        "nameBusiness" $vachar
+        
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
     );
     ''');
     // Restitution
@@ -789,7 +1175,6 @@ class TableName {
         "idProduct" $vachar,
         "quantity" $vachar,
         "unite" $vachar,
-        "created" $timestamp,
         "firstName" $vachar,
         "lastName" $vachar,
         "telephone" $vachar,
@@ -798,7 +1183,22 @@ class TableName {
         "accuseReception" $boolean,
         "accuseReceptionFirstName" $vachar,
         "accuseReceptionLastName" $vachar,
-        "role" $vachar
+        "role" $vachar,
+
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
     );
     ''');
 

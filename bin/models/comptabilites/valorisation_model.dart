@@ -6,7 +6,8 @@ class ValorisationModel {
   late String prixUnitaire;
   late String prixTotal;
   late String source;
-   late String approbationDG; // button radio OUi et NON if non text field
+  
+  late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;
 

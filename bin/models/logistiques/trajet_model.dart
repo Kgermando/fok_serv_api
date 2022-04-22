@@ -7,6 +7,7 @@ class TrajetModel {
   late String mission;
   late String kilometrageSorite;
   late String kilometrageRetour;
+  
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;

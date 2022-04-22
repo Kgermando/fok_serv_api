@@ -40,7 +40,6 @@ import 'handlers/logistiques/immobiler_repository.dart';
 import 'handlers/logistiques/mobilier_handlers.dart';
 import 'handlers/logistiques/trajet_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
-import 'handlers/rh/paiement_divers_handlers.dart';
 import 'handlers/rh/paiement_salaire_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
 import 'middleware/middleware.dart';
@@ -95,14 +94,6 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PaiementSalaireHandlers(repos).router));
 
-    router.mount(
-        '/api/rh/paiement-divers/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(PaiementDiversHandlers(repos).router));
-    
     router.mount(
         '/api/finances/transactions/banques/',
         Pipeline()

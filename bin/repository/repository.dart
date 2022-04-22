@@ -25,6 +25,7 @@ import 'comptabilites/valorisation_repository.dart';
 import 'devis/devis_repository.dart';
 import 'exploitations/projet_repository.dart';
 import 'exploitations/tache_repository.dart';
+import 'exploitations/virement_repository.dart';
 import 'finances/banque_repository.dart';
 import 'finances/caissses_repository.dart';
 import 'finances/creances_repository.dart';
@@ -38,7 +39,6 @@ import 'logistiques/immobilier_repository.dart';
 import 'logistiques/mobilier_repository.dart';
 import 'logistiques/trajet_repository.dart';
 import 'rh/agents_repository.dart';
-import 'rh/paiement_divers_repository.dart';
 import 'rh/paiement_salaire_repository.dart';
 import 'rh/performence_repository.dart';
 import 'rh/presence_repository.dart';
@@ -53,7 +53,6 @@ class Repository {
   // RH
   late AgentsRepository agents;
   late PaiementSalaireRepository salaires;
-  late PaiementDiversRepository paiementDivers;
   late PresenceRepository presences;
   late PerformenceRepository performences;
 
@@ -74,6 +73,7 @@ class Repository {
   // EXPLOITAIONS
   late ProjetRepository projets;
   late TacheRepository taches;
+  late VirementRepository virements;
 
   // LOGISTIQUE
   late AnguinRepository anguins;
@@ -108,7 +108,6 @@ class Repository {
     // RH
     agents = AgentsRepository(executor, 'agents');
     salaires = PaiementSalaireRepository(executor, 'salaires');
-    paiementDivers = PaiementDiversRepository(executor, 'paiement_divers');
     presences = PresenceRepository(executor, 'presences');
     performences = PerformenceRepository(executor, 'performences');
 
@@ -130,6 +129,7 @@ class Repository {
     // EXPLOITAIONS
     projets = ProjetRepository(executor, 'projets');
     taches = TacheRepository(executor, 'taches');
+    virements = VirementRepository(executor, 'virements');
 
     // LOGISTIQUE
     anguins = AnguinRepository(executor, 'anguins');

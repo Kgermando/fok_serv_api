@@ -5,6 +5,7 @@ class BilanModel {
   late String intitule;
   late String montant;
   late String typeBilan; // Actif ou Passif
+  
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;
