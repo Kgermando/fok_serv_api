@@ -6,6 +6,7 @@ import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'db/config_db.dart';
 import 'db/table_name.dart';
+import 'handlers/archives/archive_handlers.dart';
 import 'handlers/auth/auth_handlers.dart';
 import 'handlers/auth/user_handlers.dart';
 import 'handlers/comm_marketing/commercial/achats_handlers.dart';
@@ -346,6 +347,15 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CampaignHandlers(repos).router));
+
+            
+    router.mount(
+        '/api/archves/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ArchiveHandlers(repos).router));
     
 
     router.all(

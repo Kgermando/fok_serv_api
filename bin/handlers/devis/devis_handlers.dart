@@ -146,7 +146,7 @@ class DevisHandlers {
     router.delete('/delete-devis/<id>',
         (String id, Request request) async {
       var id = request.params['id'];
-      repos.banques.deleteData(int.parse(id!));
+      repos.devis.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 

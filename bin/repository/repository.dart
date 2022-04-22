@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import 'archives/archive_repository.dart';
 import 'budgets/departement_budget_repository.dart';
 import 'budgets/ligne_budgetaire_repository.dart';
 import 'comm_marketing/commercial/achats_repository.dart';
@@ -99,6 +100,7 @@ class Repository {
   late AgendaRepository agendas;
   late AnnuaireReposiotry annuaires;
   late CampaignRepository campaigns;
+  late ArchiveRepository archives;
 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
@@ -154,5 +156,6 @@ class Repository {
     agendas = AgendaRepository(executor, 'agendas');
     annuaires = AnnuaireReposiotry(executor, 'annuaires');
     campaigns = CampaignRepository(executor, 'campaigns');
+    archives = ArchiveRepository(executor, 'archives');
   }
 }
