@@ -1,35 +1,33 @@
 import 'package:postgres/postgres.dart';
 
-import '../../../models/comm_maketing/annuaire_model.dart';
+import '../../../models/comm_maketing/campaign_model.dart';
 
-class AnnuaireReposiotry {
+class CampaignRepository {
   final PostgreSQLConnection executor;
   final String tableName;
 
-  AnnuaireReposiotry(this.executor, this.tableName);
+  CampaignRepository(this.executor, this.tableName);
 
 
-  Future<List<AnnuaireModel>> getAllData() async {
-    var data = <AnnuaireModel>{};
+  Future<List<CampaignModel>> getAllData() async {
+    var data = <CampaignModel>{};
 
     var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
-      data.add(AnnuaireModel.fromSQL(row));
+      data.add(CampaignModel.fromSQL(row));
     }
     return data.toList();
   }
 
-  Future<void> insertData(AnnuaireModel data) async {
-    var categorie = data.categorie;
-    var nomPostnomPrenom = data.nomPostnomPrenom;
-    var email = data.email;
-    var mobile1 = data.mobile1;
-    var mobile2 = data.mobile2;
-    var secteurActivite = data.secteurActivite;
-    var nomEntreprise = data.nomEntreprise;
-    var grade = data.grade;
-    var adresseEntreprise = data.adresseEntreprise;
+  Future<void> insertData(CampaignModel data) async {
+    var typeProduit = data.typeProduit;
+    var dateDebutEtFin = data.dateDebutEtFin;
+    var agentAffectes = data.agentAffectes;
+    var coutCampaign = data.coutCampaign;
+    var lieuCible = data.lieuCible;
+    var promotion = data.promotion;
+    var objetctifs = data.objetctifs;
 
     var approbationDG = data.approbationDG;
     var signatureDG = data.signatureDG;
@@ -56,9 +54,9 @@ class AnnuaireReposiotry {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('annuaires_id_seq'), '$categorie',"
-        "'$nomPostnomPrenom','$email','$mobile1', '$mobile2', '$secteurActivite',"
-        "'$nomEntreprise','$grade','$adresseEntreprise',"
+        "INSERT INTO $tableName VALUES (nextval('campaigns_id_seq'), '$typeProduit',"
+        "'$dateDebutEtFin','$agentAffectes','$coutCampaign', '$lieuCible', '$promotion',"
+        "'$objetctifs',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
         "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
         "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
@@ -67,17 +65,15 @@ class AnnuaireReposiotry {
     });
   }
 
-  Future<void> update(AnnuaireModel data) async {
+  Future<void> update(CampaignModel data) async {
     var id = data.id;
-    var categorie = data.categorie;
-    var nomPostnomPrenom = data.nomPostnomPrenom;
-    var email = data.email;
-    var mobile1 = data.mobile1;
-    var mobile2 = data.mobile2;
-    var secteurActivite = data.secteurActivite;
-    var nomEntreprise = data.nomEntreprise;
-    var grade = data.grade;
-    var adresseEntreprise = data.adresseEntreprise;
+    var typeProduit = data.typeProduit;
+    var dateDebutEtFin = data.dateDebutEtFin;
+    var agentAffectes = data.agentAffectes;
+    var coutCampaign = data.coutCampaign;
+    var lieuCible = data.lieuCible;
+    var promotion = data.promotion;
+    var objetctifs = data.objetctifs;
 
     var approbationDG = data.approbationDG;
     var signatureDG = data.signatureDG;
@@ -104,10 +100,10 @@ class AnnuaireReposiotry {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-          "UPDATE $tableName SET \"categorie\"='$categorie', "
-          "\"nomPostnomPrenom\"='$nomPostnomPrenom',\"email\"='$email',"
-          "\"mobile1\"='$mobile1', \"mobile2\"='$mobile2', \"secteurActivite\"='$secteurActivite',"
-          "\"nomEntreprise\"='$nomEntreprise', \"grade\"='$grade', \"adresseEntreprise\"='$adresseEntreprise',"
+          "UPDATE $tableName SET \"typeProduit\"='$typeProduit', "
+          "\"dateDebutEtFin\"='$dateDebutEtFin',\"agentAffectes\"='$agentAffectes',"
+          "\"coutCampaign\"='$coutCampaign', \"lieuCible\"='$lieuCible', \"promotion\"='$promotion',"
+          "\"objetctifs\"='$objetctifs',"
           "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
           "\"signatureJustificationDG\"='$signatureJustificationDG',"
           "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
@@ -131,34 +127,32 @@ class AnnuaireReposiotry {
     }
   }
 
-  Future<AnnuaireModel> getFromId(int id) async {
+  Future<CampaignModel> getFromId(int id) async {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
-    return AnnuaireModel(
+    return CampaignModel(
       id: data[0][0],
-      categorie: data[0][1],
-      nomPostnomPrenom: data[0][2],
-      email: data[0][3],
-      mobile1: data[0][4],
-      mobile2: data[0][5],
-      secteurActivite: data[0][6],
-      nomEntreprise: data[0][7],
-      grade: data[0][8],
-      adresseEntreprise: data[0][9],
-      approbationDG: data[0][10],
-      signatureDG: data[0][11],
-      signatureJustificationDG: data[0][12],
-      approbationFin: data[0][13],
-      signatureFin: data[0][14],
-      signatureJustificationFin: data[0][15],
-      approbationBudget: data[0][16],
-      signatureBudget: data[0][17],
-      signatureJustificationBudget: data[0][18],
-      approbationDD: data[0][19],
-      signatureDD: data[0][20],
-      signatureJustificationDD: data[0][21],
-      signature: data[0][22],
-      created: data[0][23]
+      typeProduit: data[0][1],
+      dateDebutEtFin: data[0][2],
+      agentAffectes: data[0][3],
+      coutCampaign: data[0][4],
+      lieuCible: data[0][5],
+      promotion: data[0][6],
+      objetctifs: data[0][7],
+      approbationDG: data[0][8],
+      signatureDG: data[0][9],
+      signatureJustificationDG: data[0][10],
+      approbationFin: data[0][11],
+      signatureFin: data[0][12],
+      signatureJustificationFin: data[0][13],
+      approbationBudget: data[0][14],
+      signatureBudget: data[0][15],
+      signatureJustificationBudget: data[0][16],
+      approbationDD: data[0][17],
+      signatureDD: data[0][18],
+      signatureJustificationDD: data[0][19],
+      signature: data[0][20],
+      created: data[0][21]
     );
   } 
 }

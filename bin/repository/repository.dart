@@ -14,6 +14,9 @@ import 'comm_marketing/commercial/restitution_repository.dart';
 import 'comm_marketing/commercial/stocks_global_repository.dart';
 import 'comm_marketing/commercial/succursale_repository.dart';
 import 'comm_marketing/commercial/vente_repository.dart';
+import 'comm_marketing/marketing/agenda_repository.dart';
+import 'comm_marketing/marketing/annuaire_repository.dart';
+import 'comm_marketing/marketing/campaign_repository.dart';
 import 'comptabilites/amrtissement_repository.dart';
 import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/journal_repository.dart';
@@ -93,6 +96,9 @@ class Repository {
   late VenteRepository ventes;
   late GainRepository gains;
   late RestitutionRepository restitutions;
+  late AgendaRepository agendas;
+  late AnnuaireReposiotry annuaires;
+  late CampaignRepository campaigns;
 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
@@ -115,7 +121,8 @@ class Repository {
     journals = JournalRepository(executor, 'journals');
     valorisations = ValorisationRepository(executor, 'valorisations');
     devis = DevisRepository(executor, 'devis');
-    departementBudgets = DepartementBudgetRepository(executor, 'departement_budgets');
+    departementBudgets =
+        DepartementBudgetRepository(executor, 'departement_budgets');
     ligneBudgetaires = LigneBudgtaireRepository(executor, 'ligne_budgetaires');
 
     // EXPLOITAIONS
@@ -144,5 +151,8 @@ class Repository {
     ventes = VenteRepository(executor, 'ventes');
     gains = GainRepository(executor, 'gains');
     restitutions = RestitutionRepository(executor, 'restitutions');
+    agendas = AgendaRepository(executor, 'agendas');
+    annuaires = AnnuaireReposiotry(executor, 'annuaires');
+    campaigns = CampaignRepository(executor, 'campaigns');
   }
 }

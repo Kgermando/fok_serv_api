@@ -16,6 +16,9 @@ import 'handlers/comm_marketing/commercial/produit_model_handlers.dart';
 import 'handlers/comm_marketing/commercial/restitution_handlers.dart';
 import 'handlers/comm_marketing/commercial/stocks_global_handlers.dart';
 import 'handlers/comm_marketing/commercial/succursale_handlers.dart';
+import 'handlers/comm_marketing/marketing/agenda_handlers.dart';
+import 'handlers/comm_marketing/marketing/annuaire_handlers.dart';
+import 'handlers/comm_marketing/marketing/campaign_handlers.dart';
 import 'handlers/comptabilites/amortissement_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
@@ -322,8 +325,28 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(RestitutionHandlers(repos).router));
 
-
-        
+    router.mount(
+        '/api/comm_marketing/agendas',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(AgendaHandlers(repos).router));
+    router.mount(
+        '/api/comm_marketing/annuaires',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(AnnuaireHandlers(repos).router));
+    router.mount(
+        '/api/comm_marketing/campaigns',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CampaignHandlers(repos).router));
+    
 
     router.all(
       '/<ignored|.*>',
