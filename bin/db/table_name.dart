@@ -48,7 +48,9 @@ class TableName {
   final mobilierTable = 'mobiliers';
   final trajetTable = 'trajets';
 
-  // COMMEERCIAL & MARKETING
+
+
+  // COMMERCIAL & MARKETING
   final modelTable = 'models_produits';
   final stocksGlobalTable = 'stocks_global';
   final succursaleTable = 'succursales';
@@ -61,6 +63,12 @@ class TableName {
   final venteTable = 'ventes';
   final gainTable = 'gains';
   final restitutionTable = 'restitutions';
+  final agendaTable = 'agendas';
+  final annuaireTable = 'annuaires';
+
+
+  // COMMERCIAL & MARKETING
+  final archivesTable = 'archives';
 
 
   Future openConnection(PostgreSQLConnection connection) async {
