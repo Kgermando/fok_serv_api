@@ -4,6 +4,7 @@ class AmortissementModel {
   late String comptes;
   late String intitule;
   late String montant;
+  
   late String typeJournal; // Debit ou Credit
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;

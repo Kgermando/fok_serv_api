@@ -38,8 +38,20 @@ class MobilierHandlers {
         marque: input['marque'],
         descriptionMobilier: input['descriptionMobilier'],
         nombre: input['nombre'],
-        created: DateTime.parse(input['created']),
-        signature: input['signature']);
+        approbationDG: input['approbationDG'],
+          signatureDG: input['signatureDG'],
+          signatureJustificationDG: input['signatureJustificationDG'],
+          approbationFin: input['approbationFin'],
+          signatureFin: input['signatureFin'],
+          signatureJustificationFin: input['signatureJustificationFin'],
+          approbationBudget: input['approbationBudget'],
+          signatureBudget: input['signatureBudget'],
+          signatureJustificationBudget: input['signatureJustificationBudget'],
+          approbationDD: input['approbationDD'],
+          signatureDD: input['signatureDD'],
+          signatureJustificationDD: input['signatureJustificationDD'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
 
       try {
         await repos.mobiliers.insertData(mobilierModel);
@@ -52,32 +64,73 @@ class MobilierHandlers {
 
     router.put('/update-mobilier/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      MobilierModel mobilierModel = await repos.mobiliers.getFromId(int.parse(id!));
+      MobilierModel data = await repos.mobiliers.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nom'] != null) {
-        mobilierModel.nom = input['nom'];
+        data.nom = input['nom'];
       }
       if (input['modele'] != null) {
-        mobilierModel.modele = input['modele'];
+        data.modele = input['modele'];
       }
       if (input['marque'] != null) {
-        mobilierModel.marque = input['marque'];
+        data.marque = input['marque'];
       }
       if (input['descriptionMobilier'] != null) {
-        mobilierModel.descriptionMobilier = input['descriptionMobilier'];
+        data.descriptionMobilier = input['descriptionMobilier'];
       }
       if (input['nombre'] != null) {
-        mobilierModel.nombre = input['nombre'];
+        data.nombre = input['nombre'];
+      }
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['signatureJustificationDG'] != null) {
+        data.signatureJustificationDG = input['signatureJustificationDG'];
+      }
+
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
+      }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['signatureJustificationFin'] != null) {
+        data.signatureJustificationFin = input['signatureJustificationFin'];
+      }
+
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['signatureJustificationBudget'] != null) {
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
+      }
+
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['signatureJustificationDD'] != null) {
+        data.signatureJustificationDD = input['signatureJustificationDD'];
+      }
+
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
       }
       if (input['created'] != null) {
-        mobilierModel.created = DateTime.parse(input['created']);
+        data.created = DateTime.parse(input['created']);
       }
-      if (input['signature'] != null) {
-        mobilierModel.signature = input['signature'];
-      }
-      repos.mobiliers.update(mobilierModel);
-      return Response.ok(jsonEncode(mobilierModel.toJson()));
+      repos.mobiliers.update(data);
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-mobilier/<id>', (

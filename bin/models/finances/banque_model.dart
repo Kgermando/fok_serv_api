@@ -6,9 +6,11 @@ class BanqueModel {
   late String montant;
   late List<dynamic> coupureBillet;
   late String ligneBudgtaire; // somme d'affectation pour le budget
+  late String resources; // resource mis a disposition pour ce projet
   late String departement;
   late String typeOperation;
   late String numeroOperation;
+  
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;
@@ -37,6 +39,7 @@ class BanqueModel {
     required this.montant,
     required this.coupureBillet,
     required this.ligneBudgtaire,
+    required this.resources,
     required this.departement,
     required this.typeOperation,
     required this.numeroOperation,
@@ -54,8 +57,6 @@ class BanqueModel {
     required this.signatureJustificationDD,
     required this.signature,
     required this.created
-
-
   });
 
   factory BanqueModel.fromSQL(List<dynamic> row) {
@@ -67,23 +68,24 @@ class BanqueModel {
       montant: row[4],
       coupureBillet: row[5],
       ligneBudgtaire: row[6],
-      departement: row[7],
-      typeOperation: row[8],
-      numeroOperation: row[9],
-      approbationDG: row[10],
-      signatureDG: row[11],
-      signatureJustificationDG: row[12],
-      approbationFin: row[13],
-      signatureFin: row[14],
-      signatureJustificationFin: row[15],
-      approbationBudget: row[16],
-      signatureBudget: row[17],
-      signatureJustificationBudget: row[18],
-      approbationDD: row[19],
-      signatureDD: row[20],
-      signatureJustificationDD: row[21],
-      signature: row[22],
-      created: row[23]
+      resources: row[7],
+      departement: row[8],
+      typeOperation: row[9],
+      numeroOperation: row[10],
+      approbationDG: row[11],
+      signatureDG: row[12],
+      signatureJustificationDG: row[13],
+      approbationFin: row[14],
+      signatureFin: row[15],
+      signatureJustificationFin: row[16],
+      approbationBudget: row[17],
+      signatureBudget: row[18],
+      signatureJustificationBudget: row[19],
+      approbationDD: row[20],
+      signatureDD: row[21],
+      signatureJustificationDD: row[22],
+      signature: row[23],
+      created: row[24]
     );
   }
 
@@ -96,6 +98,7 @@ class BanqueModel {
       montant: json['montant'],
       coupureBillet: json['coupureBillet'],
       ligneBudgtaire: json['ligneBudgtaire'],
+      resources: json['resources'],
       departement: json['departement'],
       typeOperation: json['typeOperation'],
       numeroOperation: json['numeroOperation'],
@@ -125,6 +128,7 @@ class BanqueModel {
       'montant': montant,
       'coupureBillet': coupureBillet,
       'ligneBudgtaire': ligneBudgtaire,
+      'resources': resources,
       'departement': departement,
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
@@ -142,7 +146,6 @@ class BanqueModel {
       'signatureJustificationDD': signatureJustificationDD,
       'signature': signature,
       'created': created.toIso8601String()
-
     };
   }
 }

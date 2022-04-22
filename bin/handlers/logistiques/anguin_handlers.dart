@@ -45,10 +45,27 @@ class AnguinHandlers {
         nomeroEntreprise: input['nomeroEntreprise'],
         kilometrageInitiale: input['kilometrageInitiale'],
         provenance: input['provenance'],
-        created: DateTime.parse(input['created']),
-        signature: input['signature'],
         typeCaburant: input['typeCaburant'],
         typeMoteur: input['typeMoteur'],
+        approbationDG: input['approbationDG'],
+        signatureDG: input['signatureDG'],
+        signatureJustificationDG: input['signatureJustificationDG'],
+
+        approbationFin: input['approbationFin'],
+        signatureFin: input['signatureFin'],
+        signatureJustificationFin: input['signatureJustificationFin'],
+
+        approbationBudget: input['approbationBudget'],
+        signatureBudget: input['signatureBudget'],
+        signatureJustificationBudget: input['signatureJustificationBudget'],
+        
+
+        approbationDD: input['approbationDD'],
+        signatureDD: input['signatureDD'],
+        signatureJustificationDD: input['signatureJustificationDD'],
+
+        signature: input['signature'],
+        created: DateTime.parse(input['created'])
       );
 
       try {
@@ -62,56 +79,99 @@ class AnguinHandlers {
 
     router.put('/update-anguin/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      AnguinModel anguinModel = await repos.anguins.getFromId(int.parse(id!));
+      AnguinModel data = await repos.anguins.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nom'] != null) {
-        anguinModel.nom = input['nom'];
+        data.nom = input['nom'];
       }
       if (input['modele'] != null) {
-        anguinModel.modele = input['modele'];
+        data.modele = input['modele'];
       }
       if (input['marque'] != null) {
-        anguinModel.marque = input['marque'];
+        data.marque = input['marque'];
       }
       if (input['numeroChassie'] != null) {
-        anguinModel.numeroChassie = input['numeroChassie'];
+        data.numeroChassie = input['numeroChassie'];
       }
       if (input['couleur'] != null) {
-        anguinModel.couleur = input['couleur'];
+        data.couleur = input['couleur'];
       }
       if (input['qtyMaxReservoir'] != null) {
-        anguinModel.qtyMaxReservoir = input['qtyMaxReservoir'];
+        data.qtyMaxReservoir = input['qtyMaxReservoir'];
       }
       if (input['dateFabrication'] != null) {
-        anguinModel.dateFabrication = DateTime.parse(input['dateFabrication']);
+        data.dateFabrication = DateTime.parse(input['dateFabrication']);
       }
       if (input['nomeroPLaque'] != null) {
-        anguinModel.nomeroPLaque = input['nomeroPLaque'];
+        data.nomeroPLaque = input['nomeroPLaque'];
       }
       if (input['nomeroEntreprise'] != null) {
-        anguinModel.nomeroEntreprise = input['nomeroEntreprise'];
+        data.nomeroEntreprise = input['nomeroEntreprise'];
       }
       if (input['kilometrageInitiale'] != null) {
-        anguinModel.kilometrageInitiale = input['kilometrageInitiale'];
+        data.kilometrageInitiale = input['kilometrageInitiale'];
       }
       if (input['provenance'] != null) {
-        anguinModel.provenance = input['provenance'];
-      }
-      if (input['created'] != null) {
-        anguinModel.created = DateTime.parse(input['created']);
-      }
-      if (input['signature'] != null) {
-        anguinModel.signature = input['signature'];
+        data.provenance = input['provenance'];
       }
       if (input['typeCaburant'] != null) {
-        anguinModel.typeCaburant = input['typeCaburant'];
+        data.typeCaburant = input['typeCaburant'];
       }
       if (input['typeMoteur'] != null) {
-        anguinModel.typeMoteur = input['typeMoteur'];
+        data.typeMoteur = input['typeMoteur'];
       }
-      repos.anguins.update(anguinModel);
-      return Response.ok(jsonEncode(anguinModel.toJson()));
+
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['signatureJustificationDG'] != null) {
+        data.signatureJustificationDG = input['signatureJustificationDG'];
+      }
+
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
+      }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['signatureJustificationFin'] != null) {
+        data.signatureJustificationFin = input['signatureJustificationFin'];
+      }
+
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['signatureJustificationBudget'] != null) {
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
+      }
+
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['signatureJustificationDD'] != null) {
+        data.signatureJustificationDD = input['signatureJustificationDD'];
+      }
+
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
+      if (input['created'] != null) {
+        data.created = DateTime.parse(input['created']);
+      }
+
+      repos.anguins.update(data);
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-anguin/<id>', (

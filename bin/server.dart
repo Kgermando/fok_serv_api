@@ -26,7 +26,6 @@ import 'handlers/exploitations/tache_handlers.dart';
 import 'handlers/finances/banques_handlers.dart';
 import 'handlers/finances/caisses_handlers.dart';
 import 'handlers/finances/creance_handlers.dart';
-import 'handlers/finances/depenses_handlers.dart';
 import 'handlers/finances/dette_handlers.dart';
 import 'handlers/finances/fin_exterieur_handlers.dart';
 import 'handlers/logistiques/anguin_handlers.dart';
@@ -123,14 +122,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CreanceHandlers(repos).router));
-
-    router.mount(
-        '/api/finances/transactions/depenses/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(DepensesHandlers(repos).router));
 
     router.mount(
         '/api/finances/transactions/dettes/',

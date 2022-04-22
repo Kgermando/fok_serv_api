@@ -75,9 +75,25 @@ class PaiementSalaireHandlers {
         netAPayer: input['netAPayer'],
         montantPrisConsiderationCalculCotisationsINSS: input['montantPrisConsiderationCalculCotisationsINSS'],
         totalDuBrut: input['totalDuBrut'],
+
+        approbationDG: input['approbationDG'],
         signatureDG: input['signatureDG'],
-        signatureFinance: input['signatureFinance'],
-        signatureRH: input['signatureRH']
+        signatureJustificationDG: input['signatureJustificationDG'],
+
+        approbationFin: input['approbationFin'],
+        signatureFin: input['signatureFin'],
+        signatureJustificationFin: input['signatureJustificationFin'],
+
+        approbationBudget: input['approbationBudget'],
+        signatureBudget: input['signatureBudget'],
+        signatureJustificationBudget: input['signatureJustificationBudget'],
+        
+
+        approbationDD: input['approbationDD'],
+        signatureDD: input['signatureDD'],
+        signatureJustificationDD: input['signatureJustificationDD'],
+
+        signature: input['signature']
       );
       try {
         await repos.salaires.insertData(data);
@@ -93,7 +109,6 @@ class PaiementSalaireHandlers {
       PaiementSalaireModel data =
           await repos.salaires.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
-
 
       if (input['nom'] != null) {
         data.nom = input['nom'];
@@ -218,15 +233,51 @@ class PaiementSalaireHandlers {
       if (input['totalDuBrut'] != null) {
         data.totalDuBrut = input['totalDuBrut'];
       }
+       if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
       if (input['signatureDG'] != null) {
         data.signatureDG = input['signatureDG'];
       }
-      if (input['signatureFinance'] != null) {
-        data.signatureFinance = input['signatureFinance'];
+      if (input['signatureJustificationDG'] != null) {
+        data.signatureJustificationDG = input['signatureJustificationDG'];
       }
-      if (input['signatureRH'] != null) {
-        data.signatureRH = input['signatureRH'];
+
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
       }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['signatureJustificationFin'] != null) {
+        data.signatureJustificationFin = input['signatureJustificationFin'];
+      }
+
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['signatureJustificationBudget'] != null) {
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
+      }
+
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['signatureJustificationDD'] != null) {
+        data.signatureJustificationDD = input['signatureJustificationDD'];
+      }
+
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
+      
       repos.salaires.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });

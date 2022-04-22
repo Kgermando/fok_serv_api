@@ -25,6 +25,8 @@ class DevisRepository {
     var priority = devisModel.priority;
     var departement = devisModel.departement;
     var list = devisModel.list;
+     var ligneBudgtaire = devisModel.ligneBudgtaire;
+    var resources = devisModel.resources;
     var approbationDG = devisModel.approbationDG;
     var signatureDG = devisModel.signatureDG;
     var signatureJustificationDG =
@@ -53,7 +55,7 @@ class DevisRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('devis_id_seq'), '$title',"
-        "'$priority','$departement','$list',"
+        "'$priority','$departement','$list', '$ligneBudgtaire', '$resources',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
         "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
         "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
@@ -68,6 +70,8 @@ class DevisRepository {
     var priority = devisModel.priority;
     var departement = devisModel.departement;
     var list = devisModel.list;
+    var ligneBudgtaire = devisModel.ligneBudgtaire;
+    var resources = devisModel.resources;
     var approbationDG = devisModel.approbationDG;
     var signatureDG = devisModel.signatureDG;
     var signatureJustificationDG = devisModel.signatureJustificationDG;
@@ -93,7 +97,7 @@ class DevisRepository {
       var result = await conn.execute(
           "UPDATE $tableName SET \"title\"='$title', "
           "\"priority\"='$priority',\"departement\"='$departement',"
-          "\"list\"='$list',"
+          "\"list\"='$list', \"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
           "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
           "\"signatureJustificationDG\"='$signatureJustificationDG',"
           "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
@@ -126,20 +130,22 @@ class DevisRepository {
       priority: data[0][2],
       departement: data[0][3],
       list: data[0][4],
-      approbationDG: data[0][5],
-      signatureDG: data[0][6],
-      signatureJustificationDG: data[0][7],
-      approbationFin: data[0][8],
-      signatureFin: data[0][9],
-      signatureJustificationFin: data[0][10],
-      approbationBudget: data[0][11],
-      signatureBudget: data[0][12],
-      signatureJustificationBudget: data[0][13],
-      approbationDD: data[0][14],
-      signatureDD: data[0][15],
-      signatureJustificationDD: data[0][16],
-      signature: data[0][17],
-      created: data[0][18]
+      ligneBudgtaire: data[0][5],
+      resources: data[0][6],
+      approbationDG: data[0][7],
+      signatureDG: data[0][8],
+      signatureJustificationDG: data[0][9],
+      approbationFin: data[0][10],
+      signatureFin: data[0][11],
+      signatureJustificationFin: data[0][12],
+      approbationBudget: data[0][13],
+      signatureBudget: data[0][14],
+      signatureJustificationBudget: data[0][15],
+      approbationDD: data[0][16],
+      signatureDD: data[0][17],
+      signatureJustificationDD: data[0][18],
+      signature: data[0][19],
+      created: data[0][20]
     );
   } 
 }

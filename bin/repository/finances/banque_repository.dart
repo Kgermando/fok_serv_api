@@ -26,6 +26,7 @@ class BanqueRepository {
     var montant = banqueModel.montant;
     var coupureBillet = banqueModel.coupureBillet;
     var ligneBudgtaire = banqueModel.ligneBudgtaire;
+    var resources = banqueModel.resources;
     var departement = banqueModel.departement;
     var typeOperation = banqueModel.typeOperation;
     var numeroOperation = banqueModel.numeroOperation;
@@ -53,7 +54,7 @@ class BanqueRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('banques_id_seq'), '$nomComplet',"
         "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
-        "'$ligneBudgtaire','$departement','$typeOperation','$numeroOperation',"
+        "'$ligneBudgtaire', '$resources', '$departement','$typeOperation','$numeroOperation',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
         "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
         "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
@@ -71,6 +72,7 @@ class BanqueRepository {
     var montant = banqueModel.montant;
     var coupureBillet = banqueModel.coupureBillet;
     var ligneBudgtaire = banqueModel.ligneBudgtaire;
+    var resources = banqueModel.resources;
     var departement = banqueModel.departement;
     var typeOperation = banqueModel.typeOperation;
     var numeroOperation = banqueModel.numeroOperation;
@@ -103,7 +105,7 @@ class BanqueRepository {
         "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
         "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
         "\"montant\"='$montant',\"coupureBillet\"='$coupureBillet',"
-        "\"ligneBudgtaire\"='$ligneBudgtaire', \"departement\"='$departement',"
+        "\"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources', \"departement\"='$departement',"
         "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
         "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
         "\"signatureJustificationDG\"='$signatureJustificationDG',"
@@ -139,23 +141,24 @@ class BanqueRepository {
         montant: data[0][4],
         coupureBillet: data[0][5],
         ligneBudgtaire: data[0][6],
-        departement: data[0][7],
-        typeOperation: data[0][8],
-        numeroOperation: data[0][9],
-        approbationDG: data[0][10],
-        signatureDG: data[0][11],
-        signatureJustificationDG: data[0][12],
-        approbationFin: data[0][13],
-        signatureFin: data[0][14],
-        signatureJustificationFin: data[0][15],
-        approbationBudget: data[0][16],
-        signatureBudget: data[0][17],
-        signatureJustificationBudget: data[0][18],
-        approbationDD: data[0][19],
-        signatureDD: data[0][20],
-        signatureJustificationDD: data[0][21],
-        signature: data[0][22],
-        created: data[0][23]
+        resources: data[0][7],
+        departement: data[0][8],
+        typeOperation: data[0][9],
+        numeroOperation: data[0][10],
+        approbationDG: data[0][11],
+        signatureDG: data[0][12],
+        signatureJustificationDG: data[0][13],
+        approbationFin: data[0][14],
+        signatureFin: data[0][15],
+        signatureJustificationFin: data[0][16],
+        approbationBudget: data[0][17],
+        signatureBudget: data[0][18],
+        signatureJustificationBudget: data[0][19],
+        approbationDD: data[0][20],
+        signatureDD: data[0][21],
+        signatureJustificationDD: data[0][22],
+        signature: data[0][23],
+        created: data[0][24]
     );
   } 
   

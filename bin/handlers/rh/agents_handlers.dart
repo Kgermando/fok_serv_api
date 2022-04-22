@@ -63,7 +63,10 @@ class AgentsHandlers {
           statutAgent: input['statutAgent'] as bool,
           createdAt: DateTime.parse(input['createdAt']),
           photo: input['photo'], 
-          salaire: input['salaire']);
+          salaire: input['salaire'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created'])
+      );
 
       try {
         await repos.agents.insertData(agent);
@@ -153,6 +156,12 @@ class AgentsHandlers {
       }
       if (input['salaire'] != null) {
         selectUser.salaire = input['salaire'];
+      }
+      if (input['signature'] != null) {
+        selectUser.signature = input['signature'];
+      }
+      if (input['created'] != null) {
+        selectUser.created = DateTime.parse(input['created']);
       }
       
       repos.agents.update(selectUser);

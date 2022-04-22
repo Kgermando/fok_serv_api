@@ -39,8 +39,21 @@ class EntretienHandlers {
           etatObjet: input['etatObjet'],
           objetRemplace: input['objetRemplace'],
           dureeTravaux: input['dureeTravaux'],
-          created: DateTime.parse(input['created']),
-          signature: input['signature']);
+          approbationDG: input['approbationDG'],
+          signatureDG: input['signatureDG'],
+          signatureJustificationDG: input['signatureJustificationDG'],
+          approbationFin: input['approbationFin'],
+          signatureFin: input['signatureFin'],
+          signatureJustificationFin: input['signatureJustificationFin'],
+          approbationBudget: input['approbationBudget'],
+          signatureBudget: input['signatureBudget'],
+          signatureJustificationBudget: input['signatureJustificationBudget'],
+          approbationDD: input['approbationDD'],
+          signatureDD: input['signatureDD'],
+          signatureJustificationDD: input['signatureJustificationDD'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created'])
+      );
 
       try {
         await repos.entretiens.insertData(entretienModel);
@@ -53,35 +66,77 @@ class EntretienHandlers {
 
     router.put('/update-entretien/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      EntretienModel entretienModel = await repos.entretiens.getFromId(int.parse(id!));
+      EntretienModel data = await repos.entretiens.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nom'] != null) {
-        entretienModel.nom = input['nom'];
+        data.nom = input['nom'];
       }
       if (input['modele'] != null) {
-        entretienModel.modele = input['modele'];
+        data.modele = input['modele'];
       }
       if (input['marque'] != null) {
-        entretienModel.marque = input['marque'];
+        data.marque = input['marque'];
       }
       if (input['etatObjet'] != null) {
-        entretienModel.etatObjet = input['etatObjet'];
+        data.etatObjet = input['etatObjet'];
       }
       if (input['objetRemplace'] != null) {
-        entretienModel.objetRemplace = input['objetRemplace'];
+        data.objetRemplace = input['objetRemplace'];
       }
       if (input['dureeTravaux'] != null) {
-        entretienModel.dureeTravaux = input['dureeTravaux'];
+        data.dureeTravaux = input['dureeTravaux'];
+      }
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['signatureJustificationDG'] != null) {
+        data.signatureJustificationDG = input['signatureJustificationDG'];
+      }
+
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
+      }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['signatureJustificationFin'] != null) {
+        data.signatureJustificationFin = input['signatureJustificationFin'];
+      }
+
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['signatureJustificationBudget'] != null) {
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
+      }
+
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['signatureJustificationDD'] != null) {
+        data.signatureJustificationDD = input['signatureJustificationDD'];
+      }
+
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
       }
       if (input['created'] != null) {
-        entretienModel.created = DateTime.parse(input['created']);
+        data.created = DateTime.parse(input['created']);
       }
-      if (input['signature'] != null) {
-        entretienModel.signature = input['signature'];
-      }
-      repos.entretiens.update(entretienModel);
-      return Response.ok(jsonEncode(entretienModel.toJson()));
+      
+      repos.entretiens.update(data);
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-entretien/<id>', (

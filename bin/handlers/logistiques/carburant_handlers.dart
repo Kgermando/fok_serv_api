@@ -41,9 +41,26 @@ class CarburantHandlers {
         nomReceptioniste: input['nomReceptioniste'],
         numeroPlaque: input['numeroPlaque'],
         dateHeureSortieAnguin: DateTime.parse(input['dateHeureSortieAnguin']),
-        created: DateTime.parse(input['created']),
-        signature: input['signature'],
-        qtyAchat: input['qtyAchat']
+        qtyAchat: input['qtyAchat'],
+        approbationDG: input['approbationDG'],
+          signatureDG: input['signatureDG'],
+          signatureJustificationDG: input['signatureJustificationDG'],
+
+          approbationFin: input['approbationFin'],
+          signatureFin: input['signatureFin'],
+          signatureJustificationFin: input['signatureJustificationFin'],
+
+          approbationBudget: input['approbationBudget'],
+          signatureBudget: input['signatureBudget'],
+          signatureJustificationBudget: input['signatureJustificationBudget'],
+          
+
+          approbationDD: input['approbationDD'],
+          signatureDD: input['signatureDD'],
+          signatureJustificationDD: input['signatureJustificationDD'],
+
+          signature: input['signature'],
+          created: DateTime.parse(input['created'])
       );
       try {
         await repos.carburants.insertData(carburantModel);
@@ -56,44 +73,88 @@ class CarburantHandlers {
 
     router.put('/update-carburant/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      CarburantModel carburantModel = await repos.carburants.getFromId(int.parse(id!));
+      CarburantModel data = await repos.carburants.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['operationEntreSortie'] != null) {
-        carburantModel.operationEntreSortie = input['operationEntreSortie'];
+        data.operationEntreSortie = input['operationEntreSortie'];
       }
       if (input['typeCaburant'] != null) {
-        carburantModel.typeCaburant = input['typeCaburant'];
+        data.typeCaburant = input['typeCaburant'];
       }
       if (input['fournisseur'] != null) {
-        carburantModel.fournisseur = input['fournisseur'];
+        data.fournisseur = input['fournisseur'];
       }
       if (input['nomeroFactureAchat'] != null) {
-        carburantModel.nomeroFactureAchat = input['nomeroFactureAchat'];
+        data.nomeroFactureAchat = input['nomeroFactureAchat'];
       }
       if (input['prixAchatParLitre'] != null) {
-        carburantModel.prixAchatParLitre = input['prixAchatParLitre'];
+        data.prixAchatParLitre = input['prixAchatParLitre'];
       }
       if (input['nomReceptioniste'] != null) {
-        carburantModel.nomReceptioniste = input['nomReceptioniste'];
+        data.nomReceptioniste = input['nomReceptioniste'];
       }
       if (input['numeroPlaque'] != null) {
-        carburantModel.numeroPlaque = input['numeroPlaque'];
+        data.numeroPlaque = input['numeroPlaque'];
       }
       if (input['dateFabrication'] != null) {
-        carburantModel.dateHeureSortieAnguin = DateTime.parse(input['dateHeureSortieAnguin']);
-      }
-      if (input['created'] != null) {
-        carburantModel.created = DateTime.parse(input['created']);
-      }
-      if (input['signature'] != null) {
-        carburantModel.signature = input['signature'];
+        data.dateHeureSortieAnguin = DateTime.parse(input['dateHeureSortieAnguin']);
       }
       if (input['qtyAchat'] != null) {
-        carburantModel.qtyAchat = input['qtyAchat'];
+        data.qtyAchat = input['qtyAchat'];
       }
-      repos.carburants.update(carburantModel);
-      return Response.ok(jsonEncode(carburantModel.toJson()));
+
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['signatureJustificationDG'] != null) {
+        data.signatureJustificationDG = input['signatureJustificationDG'];
+      }
+
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
+      }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['signatureJustificationFin'] != null) {
+        data.signatureJustificationFin = input['signatureJustificationFin'];
+      }
+
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['signatureJustificationBudget'] != null) {
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
+      }
+
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['signatureJustificationDD'] != null) {
+        data.signatureJustificationDD = input['signatureJustificationDD'];
+      }
+
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
+      if (input['created'] != null) {
+        data.created = DateTime.parse(input['created']);
+      }
+
+
+      repos.carburants.update(data);
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-carburant/<id>', (

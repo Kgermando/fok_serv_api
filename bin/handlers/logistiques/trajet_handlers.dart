@@ -40,8 +40,20 @@ class TrajetHandlers {
           mission: input['mission'],
           kilometrageSorite: input['kilometrageSorite'],
           kilometrageRetour: input['kilometrageRetour'],
-          created: DateTime.parse(input['created']),
-          signature: input['signature']);
+          approbationDG: input['approbationDG'],
+          signatureDG: input['signatureDG'],
+          signatureJustificationDG: input['signatureJustificationDG'],
+          approbationFin: input['approbationFin'],
+          signatureFin: input['signatureFin'],
+          signatureJustificationFin: input['signatureJustificationFin'],
+          approbationBudget: input['approbationBudget'],
+          signatureBudget: input['signatureBudget'],
+          signatureJustificationBudget: input['signatureJustificationBudget'],
+          approbationDD: input['approbationDD'],
+          signatureDD: input['signatureDD'],
+          signatureJustificationDD: input['signatureJustificationDD'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
 
       try {
         await repos.trajets.insertData(trajetModel);
@@ -54,38 +66,79 @@ class TrajetHandlers {
 
     router.put('/update-trajet/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      TrajetModel trajetModel = await repos.trajets.getFromId(int.parse(id!));
+      TrajetModel data = await repos.trajets.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nomeroEntreprise'] != null) {
-        trajetModel.nomeroEntreprise = input['nomeroEntreprise'];
+        data.nomeroEntreprise = input['nomeroEntreprise'];
       }
       if (input['nomUtilisateur'] != null) {
-        trajetModel.nomUtilisateur = input['nomUtilisateur'];
+        data.nomUtilisateur = input['nomUtilisateur'];
       }
       if (input['trajetDe'] != null) {
-        trajetModel.trajetDe = input['trajetDe'];
+        data.trajetDe = input['trajetDe'];
       }
       if (input['trajetA'] != null) {
-        trajetModel.trajetA = input['trajetA'];
+        data.trajetA = input['trajetA'];
       }
       if (input['mission'] != null) {
-        trajetModel.mission = input['mission'];
+        data.mission = input['mission'];
       }
       if (input['kilometrageSorite'] != null) {
-        trajetModel.kilometrageSorite = input['kilometrageSorite'];
+        data.kilometrageSorite = input['kilometrageSorite'];
       }
       if (input['kilometrageRetour'] != null) {
-        trajetModel.kilometrageRetour = input['kilometrageRetour'];
+        data.kilometrageRetour = input['kilometrageRetour'];
+      }
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['signatureJustificationDG'] != null) {
+        data.signatureJustificationDG = input['signatureJustificationDG'];
+      }
+
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
+      }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['signatureJustificationFin'] != null) {
+        data.signatureJustificationFin = input['signatureJustificationFin'];
+      }
+
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['signatureJustificationBudget'] != null) {
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
+      }
+
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['signatureJustificationDD'] != null) {
+        data.signatureJustificationDD = input['signatureJustificationDD'];
+      }
+
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
       }
       if (input['created'] != null) {
-        trajetModel.created = DateTime.parse(input['created']);
+        data.created = DateTime.parse(input['created']);
       }
-      if (input['signature'] != null) {
-        trajetModel.signature = input['signature'];
-      }
-      repos.trajets.update(trajetModel);
-      return Response.ok(jsonEncode(trajetModel.toJson()));
+      repos.trajets.update(data);
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-trajet/<id>', (

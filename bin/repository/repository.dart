@@ -24,7 +24,6 @@ import 'exploitations/tache_repository.dart';
 import 'finances/banque_repository.dart';
 import 'finances/caissses_repository.dart';
 import 'finances/creances_repository.dart';
-import 'finances/depenses_repository.dart';
 import 'finances/dettes_repository.dart';
 import 'finances/fin_exterieur_repository.dart';
 import 'logistiques/anguin_repository.dart';
@@ -58,7 +57,6 @@ class Repository {
   late BanqueRepository banques;
   late CaissesRepository caisses;
   late CreancesRepository creances;
-  late DepensesRepository depenses;
   late DettesRepository dettes;
   late FinExteRepository finExterieurs;
   late AmortissementRepository amortissements;
@@ -110,7 +108,6 @@ class Repository {
     banques = BanqueRepository(executor, 'banques');
     caisses = CaissesRepository(executor, 'caisses');
     creances = CreancesRepository(executor, 'creances');
-    depenses = DepensesRepository(executor, 'depenses');
     dettes = DettesRepository(executor, 'dettes');
     finExterieurs = FinExteRepository(executor, 'fin_exterieurs');
     amortissements = AmortissementRepository(executor, 'amortissements');

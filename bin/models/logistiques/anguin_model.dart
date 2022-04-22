@@ -15,6 +15,7 @@ class AnguinModel {
   late String provenance;
   late String typeCaburant;
   late String typeMoteur;
+  
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;

@@ -33,13 +33,25 @@ class ImmobilierHandlers {
     router.post('/insert-new-immobilier', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       ImmobilierModel immobilierModel = ImmobilierModel(
-          typeAllocation: input['typeAllocation'],
-          adresse: input['adresse'],
-          numeroCertificat: input['numeroCertificat'],
-          superficie: input['superficie'],
-          dateAcquisition: DateTime.parse(input['dateAcquisition']),
-          created: DateTime.parse(input['created']),
-          signature: input['signature']);
+        typeAllocation: input['typeAllocation'],
+        adresse: input['adresse'],
+        numeroCertificat: input['numeroCertificat'],
+        superficie: input['superficie'],
+        dateAcquisition: DateTime.parse(input['dateAcquisition']),
+        approbationDG: input['approbationDG'],
+        signatureDG: input['signatureDG'],
+        signatureJustificationDG: input['signatureJustificationDG'],
+        approbationFin: input['approbationFin'],
+        signatureFin: input['signatureFin'],
+        signatureJustificationFin: input['signatureJustificationFin'],
+        approbationBudget: input['approbationBudget'],
+        signatureBudget: input['signatureBudget'],
+        signatureJustificationBudget: input['signatureJustificationBudget'],
+        approbationDD: input['approbationDD'],
+        signatureDD: input['signatureDD'],
+        signatureJustificationDD: input['signatureJustificationDD'],
+        signature: input['signature'],
+        created: DateTime.parse(input['created']));
 
       try {
         await repos.immobiliers.insertData(immobilierModel);
@@ -69,12 +81,6 @@ class ImmobilierHandlers {
       }
       if (input['dateAcquisition'] != null) {
         immobilierModel.dateAcquisition = DateTime.parse(input['dateAcquisition']);
-      }
-      if (input['created'] != null) {
-        immobilierModel.created = DateTime.parse(input['created']);
-      }
-      if (input['signature'] != null) {
-        immobilierModel.signature = input['signature'];
       }
       repos.immobiliers.update(immobilierModel);
       return Response.ok(jsonEncode(immobilierModel.toJson()));

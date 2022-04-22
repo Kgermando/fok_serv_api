@@ -6,6 +6,7 @@ class EntretienModel {
   late String etatObjet;
   late List objetRemplace;
   late String dureeTravaux;
+  
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;

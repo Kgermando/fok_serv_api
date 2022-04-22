@@ -41,10 +41,21 @@ class DetteHandlers {
         libelle: input['libelle'],
         montant: input['montant'],
         numeroOperation: input['numeroOperation'],
-        created: DateTime.parse(input['created']),
-        signature: input['signature'],
-        approbation: input['approbation'],
-        statutPaie: input['statutPaie']
+        statutPaie: input['statutPaie'],
+        approbationDG: input['approbationDG'],
+          signatureDG: input['signatureDG'],
+          signatureJustificationDG: input['signatureJustificationDG'],
+          approbationFin: input['approbationFin'],
+          signatureFin: input['signatureFin'],
+          signatureJustificationFin: input['signatureJustificationFin'],
+          approbationBudget: input['approbationBudget'],
+          signatureBudget: input['signatureBudget'],
+          signatureJustificationBudget: input['signatureJustificationBudget'],
+          approbationDD: input['approbationDD'],
+          signatureDD: input['signatureDD'],
+          signatureJustificationDD: input['signatureJustificationDD'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created'])
       );
       try {
         await repos.dettes.insertData(data);
@@ -75,17 +86,55 @@ class DetteHandlers {
       if (input['numeroOperation'] != null) {
         data.numeroOperation = input['numeroOperation'];
       }
-      if (input['created'] != null) {
-        data.created = DateTime.parse(input['created']);
+      if (input['statutPaie'] != null) {
+        data.statutPaie = input['statutPaie'];
       }
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['signatureJustificationDG'] != null) {
+        data.signatureJustificationDG = input['signatureJustificationDG'];
+      }
+
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
+      }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['signatureJustificationFin'] != null) {
+        data.signatureJustificationFin = input['signatureJustificationFin'];
+      }
+
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['signatureJustificationBudget'] != null) {
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
+      }
+
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['signatureJustificationDD'] != null) {
+        data.signatureJustificationDD = input['signatureJustificationDD'];
+      }
+
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
-      if (input['approbation'] != null) {
-        data.approbation = input['approbation'];
-      }
-      if (input['statutPaie'] != null) {
-        data.statutPaie = input['statutPaie'];
+      if (input['created'] != null) {
+        data.created = DateTime.parse(input['created']);
       }
       repos.dettes.update(data);
       return Response.ok(jsonEncode(data.toJson()));

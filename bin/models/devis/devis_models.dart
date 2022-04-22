@@ -4,10 +4,13 @@ class DevisModel {
   late String priority;
   late String departement;
   late List list; // Choses a énumerer
+  late String ligneBudgtaire;
+  late String resources;
+  
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;
-
+ 
   late String approbationFin;
   late String signatureFin;
   late String signatureJustificationFin;
@@ -30,6 +33,8 @@ class DevisModel {
       required this.priority,
       required this.departement,
       required this.list,
+      required this.ligneBudgtaire,  
+      required this.resources,
       required this.approbationDG,
       required this.signatureDG,
       required this.signatureJustificationDG,
@@ -53,20 +58,22 @@ class DevisModel {
         priority: row[2],
         departement: row[3],
         list: row[4],
-        approbationDG: row[5],
-        signatureDG: row[6],
-        signatureJustificationDG: row[7],
-        approbationFin: row[8],
-        signatureFin: row[9],
-        signatureJustificationFin: row[10],
-        approbationBudget: row[11],
-        signatureBudget: row[12],
-        signatureJustificationBudget: row[13],
-        approbationDD: row[14],
-        signatureDD: row[15],
-        signatureJustificationDD: row[16],
-        signature: row[17],
-        created: row[18]
+        ligneBudgtaire: row[5],
+        resources: row[6],
+        approbationDG: row[7],
+        signatureDG: row[8],
+        signatureJustificationDG: row[9],
+        approbationFin: row[10],
+        signatureFin: row[11],
+        signatureJustificationFin: row[12],
+        approbationBudget: row[13],
+        signatureBudget: row[14],
+        signatureJustificationBudget: row[15],
+        approbationDD: row[16],
+        signatureDD: row[17],
+        signatureJustificationDD: row[18],
+        signature: row[19],
+        created: row[20]
     );
   }
 
@@ -77,6 +84,8 @@ class DevisModel {
         priority: json['priority'],
         departement: json['departement'],
         list: json['list'],
+        ligneBudgtaire: json['ligneBudgtaire'],
+        resources: json['resources'],
         approbationDG: json['approbationDG'],
         signatureDG: json['signatureDG'],
         signatureJustificationDG: json['signatureJustificationDG'],
@@ -102,6 +111,8 @@ class DevisModel {
       'priority': priority,
       'departement': departement,
       'list': list,
+      'ligneBudgtaire': ligneBudgtaire,
+      'resources': resources,
       'approbationDG': approbationDG,
       'signatureDG': signatureDG,
       'signatureJustificationDG': signatureJustificationDG,

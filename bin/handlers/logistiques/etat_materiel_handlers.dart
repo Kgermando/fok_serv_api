@@ -33,13 +33,25 @@ class EtatMaterielHandlers {
     router.post('/insert-new-etat-materiel', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       EtatMaterielModel etatMaterielModel = EtatMaterielModel(
-          nom: input['nom'],
-          modele: input['modele'],
-          marque: input['marque'],
-          typeObjet: input['typeObjet'],
-          statut: input['statut'],
-          created: DateTime.parse(input['created']),
-          signature: input['signature']);
+        nom: input['nom'],
+        modele: input['modele'],
+        marque: input['marque'],
+        typeObjet: input['typeObjet'],
+        statut: input['statut'],
+        approbationDG: input['approbationDG'],
+        signatureDG: input['signatureDG'],
+        signatureJustificationDG: input['signatureJustificationDG'],
+        approbationFin: input['approbationFin'],
+        signatureFin: input['signatureFin'],
+        signatureJustificationFin: input['signatureJustificationFin'],
+        approbationBudget: input['approbationBudget'],
+        signatureBudget: input['signatureBudget'],
+        signatureJustificationBudget: input['signatureJustificationBudget'],
+        approbationDD: input['approbationDD'],
+        signatureDD: input['signatureDD'],
+        signatureJustificationDD: input['signatureJustificationDD'],
+        signature: input['signature'],
+        created: DateTime.parse(input['created']));
 
       try {
         await repos.etatMateriels.insertData(etatMaterielModel);
@@ -52,32 +64,73 @@ class EtatMaterielHandlers {
 
     router.put('/update-etat-materiel/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      EtatMaterielModel etatMaterielModel = await repos.etatMateriels.getFromId(int.parse(id!));
+      EtatMaterielModel data = await repos.etatMateriels.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nom'] != null) {
-        etatMaterielModel.nom = input['nom'];
+        data.nom = input['nom'];
       }
       if (input['modele'] != null) {
-        etatMaterielModel.modele = input['modele'];
+        data.modele = input['modele'];
       }
       if (input['marque'] != null) {
-        etatMaterielModel.marque = input['marque'];
+        data.marque = input['marque'];
       }
       if (input['typeObjet'] != null) {
-        etatMaterielModel.typeObjet = input['typeObjet'];
+        data.typeObjet = input['typeObjet'];
       }
       if (input['statut'] != null) {
-        etatMaterielModel.statut = input['statut'];
+        data.statut = input['statut'];
+      }
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['signatureJustificationDG'] != null) {
+        data.signatureJustificationDG = input['signatureJustificationDG'];
+      }
+
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
+      }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['signatureJustificationFin'] != null) {
+        data.signatureJustificationFin = input['signatureJustificationFin'];
+      }
+
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['signatureJustificationBudget'] != null) {
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
+      }
+
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['signatureJustificationDD'] != null) {
+        data.signatureJustificationDD = input['signatureJustificationDD'];
+      }
+
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
       }
       if (input['created'] != null) {
-        etatMaterielModel.created = DateTime.parse(input['created']);
+        data.created = DateTime.parse(input['created']);
       }
-      if (input['signature'] != null) {
-        etatMaterielModel.signature = input['signature'];
-      }
-      repos.etatMateriels.update(etatMaterielModel);
-      return Response.ok(jsonEncode(etatMaterielModel.toJson()));
+      repos.etatMateriels.update(data);
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-etatMateriel/<id>', (
