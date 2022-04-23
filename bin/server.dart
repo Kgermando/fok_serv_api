@@ -12,11 +12,14 @@ import 'handlers/auth/user_handlers.dart';
 import 'handlers/comm_marketing/commercial/achats_handlers.dart';
 import 'handlers/comm_marketing/commercial/bon_livraison_handlers.dart';
 import 'handlers/comm_marketing/commercial/cart_handlers.dart';
+import 'handlers/comm_marketing/commercial/creance_facture_handlers.dart';
+import 'handlers/comm_marketing/commercial/facture_handlers.dart';
 import 'handlers/comm_marketing/commercial/gains_handlers.dart';
 import 'handlers/comm_marketing/commercial/produit_model_handlers.dart';
 import 'handlers/comm_marketing/commercial/restitution_handlers.dart';
 import 'handlers/comm_marketing/commercial/stocks_global_handlers.dart';
 import 'handlers/comm_marketing/commercial/succursale_handlers.dart';
+import 'handlers/comm_marketing/commercial/ventes_handlers.dart';
 import 'handlers/comm_marketing/marketing/agenda_handlers.dart';
 import 'handlers/comm_marketing/marketing/annuaire_handlers.dart';
 import 'handlers/comm_marketing/marketing/campaign_handlers.dart';
@@ -27,6 +30,7 @@ import 'handlers/comptabilites/valorisation_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
 import 'handlers/exploitations/projet_handlers.dart';
 import 'handlers/exploitations/tache_handlers.dart';
+import 'handlers/exploitations/versement_projet_handlers.dart';
 import 'handlers/finances/banques_handlers.dart';
 import 'handlers/finances/caisses_handlers.dart';
 import 'handlers/finances/creance_handlers.dart';
@@ -41,6 +45,7 @@ import 'handlers/logistiques/mobilier_handlers.dart';
 import 'handlers/logistiques/trajet_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
 import 'handlers/rh/paiement_salaire_handlers.dart';
+import 'handlers/rh/performence_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
 import 'middleware/middleware.dart';
 import 'repository/repository.dart';
@@ -71,13 +76,13 @@ class Service {
             .addHandler(UserHandlers(repos).router));
 
     router.mount(
-      '/api/rh/agents/',
-      Pipeline()
-          .addMiddleware(setJsonHeader())
-          .addMiddleware(handleErrors())
-          // .addMiddleware(handleAuth(serverSecretKey))
-          .addHandler(AgentsHandlers(repos).router));
-    
+        '/api/rh/agents/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(AgentsHandlers(repos).router));
+
     router.mount(
         '/api/rh/presences/',
         Pipeline()
@@ -93,6 +98,15 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PaiementSalaireHandlers(repos).router));
+
+    router.mount(
+        '/api/rh/performences/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(PerformenceHandlers(repos).router));
+
 
     router.mount(
         '/api/finances/transactions/banques/',
@@ -133,7 +147,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(FinExterieurHandlers(repos).router));
-    
 
     router.mount(
         '/api/comptabilite/amortissements/',
@@ -142,14 +155,14 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(AmortissementHandlers(repos).router));
-    
+
     router.mount(
         '/api/comptabilite/bilans/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(BilansHandlers(repos).router)); 
+            .addHandler(BilansHandlers(repos).router));
     router.mount(
         '/api/comptabilite/journals/',
         Pipeline()
@@ -164,6 +177,9 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ValorisationHandlers(repos).router));
+    
+    
+    
     router.mount(
         '/api/devis/',
         Pipeline()
@@ -172,8 +188,11 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(DevisHandlers(repos).router));
 
+
+
+
     router.mount(
-        '/api/projets/', 
+        '/api/projets/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
@@ -186,7 +205,16 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(TacheHanlers(repos).router));
-  
+    router.mount(
+        '/api/versements-projets/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(VersementProjetHandlers(repos).router));
+
+
+
 
     router.mount(
         '/api/anguins/',
@@ -224,93 +252,95 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ImmobilierHandlers(repos).router));
     router.mount(
-      '/api/mobiliers/',
-      Pipeline()
-          .addMiddleware(setJsonHeader())
-          .addMiddleware(handleErrors())
-          // .addMiddleware(handleAuth(serverSecretKey))
-          .addHandler(MobilierHandlers(repos).router));
-    router.mount(
-      '/api/trajets/',
-      Pipeline()
-        .addMiddleware(setJsonHeader())
-        .addMiddleware(handleErrors())
-        // .addMiddleware(handleAuth(serverSecretKey))
-        .addHandler(TrajetHandlers(repos).router));
-
-
-    router.mount(
-      '/api/comm_marketing/prod-models',
-      Pipeline()
-        .addMiddleware(setJsonHeader())
-        .addMiddleware(handleErrors())
-        // .addMiddleware(handleAuth(serverSecretKey))
-        .addHandler(ProduitModelHandlers(repos).router));
-    router.mount(
-      '/api/comm_marketing/stocks-global',
-      Pipeline()
-        .addMiddleware(setJsonHeader())
-        .addMiddleware(handleErrors())
-        // .addMiddleware(handleAuth(serverSecretKey))
-        .addHandler(StockGlobalHandlers(repos).router));
-    router.mount(
-        '/api/comm_marketing/succursales',
+        '/api/mobiliers/',
         Pipeline()
-          .addMiddleware(setJsonHeader())
-          .addMiddleware(handleErrors())
-          // .addMiddleware(handleAuth(serverSecretKey))
-          .addHandler(SuccursaleHandlers(repos).router));
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(MobilierHandlers(repos).router));
     router.mount(
-        '/api/comm_marketing/bon-livraisons',
+        '/api/trajets/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(TrajetHandlers(repos).router));
+
+
+
+
+    router.mount(
+        '/api/produit-models/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ProduitModelHandlers(repos).router));
+    router.mount(
+        '/api/stocks-global/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(StockGlobalHandlers(repos).router));
+    router.mount(
+        '/api/succursales/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(SuccursaleHandlers(repos).router));
+    router.mount(
+        '/api/bon-livraisons/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BonLivraisonHandlers(repos).router));
     router.mount(
-        '/api/comm_marketing/achats',
+        '/api/achats/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(AchatsHandlers(repos).router));
     router.mount(
-        '/api/comm_marketing/carts',
+        '/api/carts/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CartHandlers(repos).router));
     router.mount(
-        '/api/comm_marketing/factures',
+        '/api/factures/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(CartHandlers(repos).router));
+            .addHandler(FactureHandlers(repos).router));
     router.mount(
-      '/api/comm_marketing/facture-creances',
-      Pipeline()
-          .addMiddleware(setJsonHeader())
-          .addMiddleware(handleErrors())
-          // .addMiddleware(handleAuth(serverSecretKey))
-          .addHandler(CartHandlers(repos).router));
-    router.mount(
-        '/api/comm_marketing/ventes',
+        '/api/facture-creances/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(CartHandlers(repos).router));
+            .addHandler(CreanceFactureHandlers(repos).router));
     router.mount(
-        '/api/comm_marketing/gains',
+        '/api/ventes/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(VenteHandlers(repos).router));
+    router.mount(
+        '/api/gains/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(GainsHandlers(repos).router));
     router.mount(
-        '/api/comm_marketing/restitutions',
+        '/api/restitutions/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
@@ -318,28 +348,27 @@ class Service {
             .addHandler(RestitutionHandlers(repos).router));
 
     router.mount(
-        '/api/comm_marketing/agendas',
+        '/api/agendas/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(AgendaHandlers(repos).router));
     router.mount(
-        '/api/comm_marketing/annuaires',
+        '/api/annuaires/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(AnnuaireHandlers(repos).router));
     router.mount(
-        '/api/comm_marketing/campaigns',
+        '/api/campaigns/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CampaignHandlers(repos).router));
 
-            
     router.mount(
         '/api/archves/',
         Pipeline()
@@ -347,7 +376,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ArchiveHandlers(repos).router));
-    
 
     router.all(
       '/<ignored|.*>',
@@ -360,14 +388,16 @@ class Service {
 void main(List<String> args) async {
   // Use any available host or container IP (usually `0.0.0.0`).
   final ip = InternetAddress.anyIPv4;
+  final port = 80;
 
   PostgreSQLConnection connection = await ConnexionDatabase().connection();
-  PostgreSQLConnection creatTable = await TableName().openConnection(connection);
+  PostgreSQLConnection creatTable =
+      await TableName().openConnection(connection);
 
   Repository repos = Repository(creatTable);
-  Service service = Service(repos, "testKey");
+  Service service = Service(repos, "fokadKey");
 
-  final server = await shelf_io.serve(service.handlers,ip,80,);
-  
+  final server = await shelf_io.serve(service.handlers, ip, port);
+
   print('Server listening on port ${server.port}');
 }

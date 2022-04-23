@@ -25,7 +25,7 @@ import 'comptabilites/valorisation_repository.dart';
 import 'devis/devis_repository.dart';
 import 'exploitations/projet_repository.dart';
 import 'exploitations/tache_repository.dart';
-import 'exploitations/virement_repository.dart';
+import 'exploitations/versement_projet_repository.dart';
 import 'finances/banque_repository.dart';
 import 'finances/caissses_repository.dart';
 import 'finances/creances_repository.dart';
@@ -73,7 +73,7 @@ class Repository {
   // EXPLOITAIONS
   late ProjetRepository projets;
   late TacheRepository taches;
-  late VirementRepository virements;
+  late VersementProjetRepository versementProjets;
 
   // LOGISTIQUE
   late AnguinRepository anguins;
@@ -129,7 +129,7 @@ class Repository {
     // EXPLOITAIONS
     projets = ProjetRepository(executor, 'projets');
     taches = TacheRepository(executor, 'taches');
-    virements = VirementRepository(executor, 'virements');
+    versementProjets = VersementProjetRepository(executor, 'versement_projets');
 
     // LOGISTIQUE
     anguins = AnguinRepository(executor, 'anguins');

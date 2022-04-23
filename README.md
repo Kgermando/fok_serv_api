@@ -34,6 +34,7 @@ $ docker run -it -p 8080:8080 myserver
 Server listening on port 8080
 ```
 
+
 And then from a second terminal:
 ```
 $ curl http://0.0.0.0:8080

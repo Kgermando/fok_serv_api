@@ -34,7 +34,8 @@ class PaiementSalaireRepository {
     var observation = paiementSalaireModel.observation;
     var modePaiement = paiementSalaireModel.modePaiement;
     var createdAt = paiementSalaireModel.createdAt;
-    var approbation = paiementSalaireModel.approbation;
+    var ligneBudgtaire = paiementSalaireModel.ligneBudgtaire;
+    var resources = paiementSalaireModel.resources;
     var tauxJourHeureMoisSalaire = paiementSalaireModel.tauxJourHeureMoisSalaire;
     var joursHeuresPayeA100PourecentSalaire = paiementSalaireModel.joursHeuresPayeA100PourecentSalaire;
     var totalDuSalaire = paiementSalaireModel.totalDuSalaire;
@@ -90,7 +91,7 @@ class PaiementSalaireRepository {
         "INSERT INTO $tableName VALUES (nextval('salaires_id_seq'),"
         "'$nom', '$postNom', '$prenom','$telephone','$adresse','$departement',"
         "'$numeroSecuriteSociale','$matricule','$servicesAffectation','$salaire',"
-        "'$observation','$modePaiement', '$createdAt', '$approbation',"
+        "'$observation','$modePaiement', '$createdAt', '$ligneBudgtaire', '$resources',"
         "'$tauxJourHeureMoisSalaire','$joursHeuresPayeA100PourecentSalaire',"
         "'$totalDuSalaire', '$nombreHeureSupplementaires',"
         "'$tauxHeureSupplementaires','$totalDuHeureSupplementaires',"
@@ -126,7 +127,8 @@ class PaiementSalaireRepository {
     var observation = paiementSalaireModel.observation;
     var modePaiement = paiementSalaireModel.modePaiement;
     var createdAt = paiementSalaireModel.createdAt;
-    var approbation = paiementSalaireModel.approbation;
+    var ligneBudgtaire = paiementSalaireModel.ligneBudgtaire;
+    var resources = paiementSalaireModel.resources;
     var tauxJourHeureMoisSalaire =
         paiementSalaireModel.tauxJourHeureMoisSalaire;
     var joursHeuresPayeA100PourecentSalaire =
@@ -198,7 +200,7 @@ class PaiementSalaireRepository {
       "\"numeroSecuriteSociale\"='$numeroSecuriteSociale', \"matricule\"='$matricule',"
       "\"servicesAffectation\"='$servicesAffectation', \"salaire\"='$salaire',"
       "\"observation\"='$observation', \"modePaiement\"='$modePaiement',"
-      "\"createdAt\"='$createdAt', \"approbation\"='$approbation',"
+      "\"createdAt\"='$createdAt', \"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
       "\"tauxJourHeureMoisSalaire\"='$tauxJourHeureMoisSalaire',"
       "\"joursHeuresPayeA100PourecentSalaire\"='$joursHeuresPayeA100PourecentSalaire',"
       "\"totalDuSalaire\"='$totalDuSalaire', \"nombreHeureSupplementaires\"='$nombreHeureSupplementaires',"
@@ -257,47 +259,48 @@ class PaiementSalaireRepository {
       observation: data[0][11],
       modePaiement: data[0][12],
       createdAt: data[0][13],
-      approbation: data[0][14],
-      tauxJourHeureMoisSalaire: data[0][15],
-      joursHeuresPayeA100PourecentSalaire: data[0][16],
-      totalDuSalaire: data[0][17],
-      nombreHeureSupplementaires: data[0][18],
-      tauxHeureSupplementaires: data[0][19],
-      totalDuHeureSupplementaires: data[0][20],
-      supplementTravailSamediDimancheJoursFerie: data[0][21],
-      prime: data[0][22],
-      divers: data[0][23],
-      joursCongesPaye: data[0][24],
-      tauxCongesPaye: data[0][25],
-      totalDuCongePaye: data[0][26],
-      jourPayeMaladieAccident: data[0][27],
-      tauxJournalierMaladieAccident: data[0][28],
-      totalDuMaladieAccident: data[0][29],
-      pensionDeduction: data[0][30],
-      indemniteCompensatricesDeduction: data[0][31],
-      avancesDeduction: data[0][32],
-      diversDeduction: data[0][33],
-      retenuesFiscalesDeduction: data[0][34],
-      nombreEnfantBeneficaireAllocationsFamiliales: data[0][35],
-      nombreDeJoursAllocationsFamiliales: data[0][36],
-      tauxJoursAllocationsFamiliales: data[0][37],
-      totalAPayerAllocationsFamiliales: data[0][38],
-      netAPayer: data[0][39],
-      montantPrisConsiderationCalculCotisationsINSS: data[0][40],
-      totalDuBrut: data[0][41],
-      approbationDG: data[0][42],
-      signatureDG: data[0][43],
-      signatureJustificationDG: data[0][44],
-      approbationFin: data[0][45],
-      signatureFin: data[0][46],
-      signatureJustificationFin: data[0][47],
-      approbationBudget: data[0][48],
-      signatureBudget: data[0][49],
-      signatureJustificationBudget: data[0][50],
-      approbationDD: data[0][51],
-      signatureDD: data[0][52],
-      signatureJustificationDD: data[0][53],
-      signature: data[0][54]
+      ligneBudgtaire: data[0][14],
+      resources: data[0][15],
+      tauxJourHeureMoisSalaire: data[0][16],
+      joursHeuresPayeA100PourecentSalaire: data[0][17],
+      totalDuSalaire: data[0][18],
+      nombreHeureSupplementaires: data[0][19],
+      tauxHeureSupplementaires: data[0][20],
+      totalDuHeureSupplementaires: data[0][21],
+      supplementTravailSamediDimancheJoursFerie: data[0][22],
+      prime: data[0][23],
+      divers: data[0][24],
+      joursCongesPaye: data[0][25],
+      tauxCongesPaye: data[0][26],
+      totalDuCongePaye: data[0][27],
+      jourPayeMaladieAccident: data[0][28],
+      tauxJournalierMaladieAccident: data[0][29],
+      totalDuMaladieAccident: data[0][30],
+      pensionDeduction: data[0][31],
+      indemniteCompensatricesDeduction: data[0][32],
+      avancesDeduction: data[0][33],
+      diversDeduction: data[0][34],
+      retenuesFiscalesDeduction: data[0][35],
+      nombreEnfantBeneficaireAllocationsFamiliales: data[0][36],
+      nombreDeJoursAllocationsFamiliales: data[0][37],
+      tauxJoursAllocationsFamiliales: data[0][38],
+      totalAPayerAllocationsFamiliales: data[0][39],
+      netAPayer: data[0][40],
+      montantPrisConsiderationCalculCotisationsINSS: data[0][41],
+      totalDuBrut: data[0][42],
+      approbationDG: data[0][43],
+      signatureDG: data[0][44],
+      signatureJustificationDG: data[0][45],
+      approbationFin: data[0][46],
+      signatureFin: data[0][47],
+      signatureJustificationFin: data[0][48],
+      approbationBudget: data[0][49],
+      signatureBudget: data[0][50],
+      signatureJustificationBudget: data[0][51],
+      approbationDD: data[0][52],
+      signatureDD: data[0][53],
+      signatureJustificationDD: data[0][54],
+      signature: data[0][55]
     );
   }
 }

@@ -30,7 +30,7 @@ class CreanceFactureHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-creance', (Request request) async {
+    router.post('/insert-new-facture-creance', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       CreanceCartModel data = CreanceCartModel(
@@ -61,7 +61,7 @@ class CreanceFactureHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-creance/<id>', (Request request, String id) async {
+    router.put('/update-facture-creance/<id>', (Request request, String id) async {
       var id = request.params['id'];
       CreanceCartModel data = await repos.creancesFacture.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
@@ -126,7 +126,7 @@ class CreanceFactureHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-creance/<id>', (String id, Request request) async {
+    router.delete('/delete-facture-creance/<id>', (String id, Request request) async {
       var id = request.params['id'];
       repos.creancesFacture.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

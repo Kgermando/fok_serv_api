@@ -47,7 +47,8 @@ class PaiementSalaireHandlers {
         observation: input['observation'] as bool,
         modePaiement: input['modePaiement'],
         createdAt: DateTime.parse(input['createdAt']),
-        approbation: input['approbation'] as bool,
+        ligneBudgtaire: input['ligneBudgtaire'],
+        resources: input['resources'],
         tauxJourHeureMoisSalaire: input['tauxJourHeureMoisSalaire'],
         joursHeuresPayeA100PourecentSalaire: input['joursHeuresPayeA100PourecentSalaire'],
         totalDuSalaire: input['totalDuSalaire'],
@@ -149,8 +150,11 @@ class PaiementSalaireHandlers {
       if (input['createdAt'] != null) {
         data.createdAt = DateTime.parse(input['createdAt']);
       }
-      if (input['approbation'] != null) {
-        data.approbation = input['approbation'] as bool;
+      if (input['ligneBudgtaire'] != null) {
+        data.ligneBudgtaire = input['ligneBudgtaire'] ;
+      }
+      if (input['resources'] != null) {
+        data.resources = input['resources'];
       }
       if (input['tauxJourHeureMoisSalaire'] != null) {
         data.tauxJourHeureMoisSalaire = input['tauxJourHeureMoisSalaire'];
@@ -291,7 +295,7 @@ class PaiementSalaireHandlers {
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page paiements salaire n\'est pas trouvé'),
+          Response.notFound('La Page paiement salaires n\'est pas trouvé'),
     );
     return router;
   }

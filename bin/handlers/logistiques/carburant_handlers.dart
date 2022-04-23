@@ -43,24 +43,24 @@ class CarburantHandlers {
         dateHeureSortieAnguin: DateTime.parse(input['dateHeureSortieAnguin']),
         qtyAchat: input['qtyAchat'],
         approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
+        signatureDG: input['signatureDG'],
+        signatureJustificationDG: input['signatureJustificationDG'],
 
-          approbationFin: input['approbationFin'],
-          signatureFin: input['signatureFin'],
-          signatureJustificationFin: input['signatureJustificationFin'],
+        approbationFin: input['approbationFin'],
+        signatureFin: input['signatureFin'],
+        signatureJustificationFin: input['signatureJustificationFin'],
 
-          approbationBudget: input['approbationBudget'],
-          signatureBudget: input['signatureBudget'],
-          signatureJustificationBudget: input['signatureJustificationBudget'],
-          
+        approbationBudget: input['approbationBudget'],
+        signatureBudget: input['signatureBudget'],
+        signatureJustificationBudget: input['signatureJustificationBudget'],
+        
 
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
+        approbationDD: input['approbationDD'],
+        signatureDD: input['signatureDD'],
+        signatureJustificationDD: input['signatureJustificationDD'],
 
-          signature: input['signature'],
-          created: DateTime.parse(input['created'])
+        signature: input['signature'],
+        created: DateTime.parse(input['created'])
       );
       try {
         await repos.carburants.insertData(carburantModel);

@@ -38,7 +38,7 @@ class TableName {
   // EXPLOITATION
   final projetTable = 'projets';
   final tacheTable = 'taches';
-  final virementTable = 'virements';
+  final virementTable = 'versement_projets';
 
   // LOGISTIQUE
   final anguinTable = 'anguins';
@@ -221,7 +221,7 @@ class TableName {
           "approbationDD" $vachar,
           "signatureDD" $vachar,
           "signatureJustificationDD" $vachar,
-          "signature" $vachar
+          "signature" $vachar,
           "created" $timestamp
       );
       ''');
@@ -324,7 +324,7 @@ class TableName {
           "libelle" $vachar,
           "montant" $vachar,
           "numeroOperation" $vachar,
-          "statutPaie" $boolean
+          "statutPaie" $boolean,
 
           "approbationDG" $vachar,
           "signatureDG" $vachar,
