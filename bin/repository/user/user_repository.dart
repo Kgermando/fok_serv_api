@@ -60,13 +60,14 @@ class UserRepository {
     var isOnline = user.isOnline;
     var createdAt = user.createdAt;
     var passwordHash = user.passwordHash;
+    var succursale = user.succursale;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('users_id_seq'), '$photo', '$nom', '$prenom',"
         "'$matricule', '$departement', '$servicesAffectation', '$fonctionOccupe', '$role', '$isOnline',"
-        "'$createdAt', '$passwordHash');");
+        "'$createdAt', '$passwordHash', '$succursale');");
     });
 
   }
@@ -87,7 +88,8 @@ class UserRepository {
       role: data[0][8],
       isOnline: data[0][9],
       createdAt: data[0][10],
-      passwordHash: data[0][11]
+      passwordHash: data[0][11],
+      succursale: data[0][12]
     );
   }
 
@@ -104,6 +106,7 @@ class UserRepository {
     var isOnline = user.isOnline;
     var createdAt = user.createdAt;
     var passwordHash = user.passwordHash;
+    var succursale = user.succursale;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -111,7 +114,7 @@ class UserRepository {
         "UPDATE $tableName SET \"photo\"='$photo', \"nom\"='$nom',"
         "\"prenom\"='$prenom', \"matricule\"='$matricule', \"departement\"='$departement',"
         "\"servicesAffectation\"='$servicesAffectation', \"fonctionOccupe\"='$fonctionOccupe', \"role\"='$role',"
-        "\"isOnline\"='$isOnline', \"createdAt\"='$createdAt', \"passwordHash\"='$passwordHash' WHERE id=$id;");
+        "\"isOnline\"='$isOnline', \"createdAt\"='$createdAt', \"passwordHash\"='$passwordHash' ', \"succursale\"='$succursale' WHERE id=$id;");
     });
   }
 

@@ -20,6 +20,29 @@ class AnnuaireReposiotry {
     return data.toList();
   }
 
+  Future<List<AnnuaireModel>> getAllDataSearch(String query) async {
+    var data = <AnnuaireModel>{};
+
+    var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(AnnuaireModel.fromSQL(row));
+    }
+    return data.toList().where((value) {
+      final categorieLower = value.categorie.toLowerCase();
+      final nomPostnomPrenomLower = value.nomPostnomPrenom.toLowerCase();
+      final mobile1Lower = value.mobile1.toLowerCase();
+      final mobile2Lower = value.mobile2.toLowerCase();
+      final secteurActiviteLower = value.secteurActivite.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return categorieLower.contains(searchLower) ||
+          nomPostnomPrenomLower.contains(searchLower) ||
+          mobile1Lower.contains(searchLower) ||
+          mobile2Lower.contains(searchLower) ||
+          secteurActiviteLower.contains(searchLower);
+    }).toList();
+  }
+
   Future<void> insertData(AnnuaireModel data) async {
     var categorie = data.categorie;
     var nomPostnomPrenom = data.nomPostnomPrenom;

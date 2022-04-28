@@ -1,14 +1,14 @@
 class HistoryRavitaillementModel {
-  final int? id;
-  final String idProduct;
-  final String quantity;
-  final String quantityAchat;
-  final String priceAchatUnit;
-  final String prixVenteUnit;
-  final String unite;
-  final String margeBen;
-  final String tva;
-  final String qtyRavitailler;
+  late int? id;
+  late String idProduct;
+  late String quantity;
+  late String quantityAchat;
+  late String priceAchatUnit;
+  late String prixVenteUnit;
+  late String unite;
+  late String margeBen;
+  late String tva;
+  late String qtyRavitailler;
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;

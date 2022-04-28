@@ -38,7 +38,8 @@ class TableName {
   // EXPLOITATION
   final projetTable = 'projets';
   final tacheTable = 'taches';
-  final virementTable = 'versement_projets';
+  final versementTable = 'versement_projets';
+  final rapportTable = 'rapports';
 
   // LOGISTIQUE
   final anguinTable = 'anguins';
@@ -66,6 +67,8 @@ class TableName {
   final restitutionTable = 'restitutions';
   final agendaTable = 'agendas';
   final annuaireTable = 'annuaires';
+  final historyRavitaillementTable = 'history_ravitaillements';
+  final historyLivraisonTable = 'history_livraisons';
 
 
   // ARCHIVE
@@ -99,7 +102,8 @@ class TableName {
           "role" $vachar,
           "isOnline" $boolean,
           "createdAt" $timestamp,
-          "passwordHash" $vachar
+          "passwordHash" $vachar,
+          "succursale" $vachar
       );
       ''');
 
@@ -848,25 +852,32 @@ class TableName {
           "agent" $vachar,
           "jalon" $vachar,
           "tache" $vachar,
-          "realisations" $vachar,
           "signatureResp" $vachar,
-          "signatureAgent" $vachar,
-          "created" $timestamp,
-          "reponduDate" $timestamp,
-          "reponseDate" $vachar,
-          "soumettre" $boolean
+          "created" $timestamp
         );
       '''); 
 
-      // Taches
+      // Versement
       await connection.query('''
-        CREATE TABLE IF NOT EXISTS $virementTable(
+        CREATE TABLE IF NOT EXISTS $versementTable(
           "id" $key,
           "nomProjet" $vachar,
           "pieceJustificative" $vachar,
           "montantVerser" $vachar,
           "montantEnLettre" $vachar,
           "typeVersement" $vachar,
+          "signature" $vachar,
+          "created" $vachar
+        );
+      '''); 
+
+      // Rapport
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $rapportTable(
+          "id" $key,
+          "nomProjet" $vachar,
+          "numeroTache" $vachar,
+          "rapport" $vachar,
           "signature" $vachar,
           "created" $vachar
         );
@@ -1051,10 +1062,10 @@ class TableName {
       ''');
       // Facture
       await connection.query('''
-          CREATE TABLE IF NOT EXISTS $factureTable(
-            "id" $key,
-            "cart" $list,
-            "client" $vachar,
+        CREATE TABLE IF NOT EXISTS $factureTable(
+          "id" $key,
+          "cart" $list,
+          "client" $vachar,
           "approbationDG" $vachar, 
           "signatureDG" $vachar,
           "signatureJustificationDG" $vachar,
@@ -1072,13 +1083,12 @@ class TableName {
 
           );
         '''); 
-        // Creance
+        // Creance facture
       await connection.query('''
           CREATE TABLE IF NOT EXISTS $creanceFactureTable(
             "id" $key,
             "cart" $list,
             "client" $vachar,
-
             "approbationDG" $vachar, 
             "signatureDG" $vachar,
             "signatureJustificationDG" $vachar,
@@ -1100,19 +1110,7 @@ class TableName {
       CREATE TABLE IF NOT EXISTS $numberFactureTable(
         "id" $key,
         "number" $vachar,
-
-        "approbationDG" $vachar, 
-        "signatureDG" $vachar,
-        "signatureJustificationDG" $vachar,
-        "approbationFin" $vachar,
-        "signatureFin" $vachar,
-        "signatureJustificationFin" $vachar,
-        "approbationBudget" $vachar,
-        "signatureBudget" $vachar,
-        "signatureJustificationBudget" $vachar,
-        "approbationDD" $vachar,
-        "signatureDD" $vachar,
-        "signatureJustificationDD" $vachar,
+        "succursale" $vachar,
         "signature" $vachar,
         "created" $timestamp
     );
@@ -1128,7 +1126,6 @@ class TableName {
         "tva" $vachar,
         "remise" $vachar,
         "qtyRemise" $vachar,
-
         "approbationDG" $vachar, 
         "signatureDG" $vachar,
         "signatureJustificationDG" $vachar,
@@ -1143,7 +1140,6 @@ class TableName {
         "signatureJustificationDD" $vachar,
         "signature" $vachar,
         "created" $timestamp
-        
       );
       ''');
       // Gain
@@ -1184,7 +1180,6 @@ class TableName {
         "accuseReceptionFirstName" $vachar,
         "accuseReceptionLastName" $vachar,
         "role" $vachar,
-
         "approbationDG" $vachar, 
         "signatureDG" $vachar,
         "signatureJustificationDG" $vachar,
@@ -1202,7 +1197,72 @@ class TableName {
     );
     ''');
 
+     // Histiry ravitaillement
+      await connection.query('''
+      CREATE TABLE IF NOT EXISTS $historyRavitaillementTable(
+        "id" $key,
+        "idProduct" $vachar,
+        "quantity" $vachar,
+        "quantityAchat" $vachar,
+        "priceAchatUnit" $vachar,
+        "prixVenteUnit" $vachar,
+        "unite" $vachar,
+        "margeBen" $vachar,
+        "tva" $vachar,
+        "qtyRavitailler" $vachar,
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "succursale" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
 
+    );
+    ''');
+
+    // Histiry livraison
+      await connection.query('''
+      CREATE TABLE IF NOT EXISTS $historyLivraisonTable(
+        "id" $key,
+        "idProduct" $vachar,
+        "quantity" $vachar,
+        "quantityAchat" $vachar,
+        "priceAchatUnit" $vachar,
+        "prixVenteUnit" $vachar,
+        "unite" $vachar,
+        "margeBen" $vachar,
+        "tva" $vachar,
+        "remise" $vachar,
+        "qtyRemise" $vachar,
+        "margeBenRemise" $vachar,
+        "qtyLivre" $vachar,
+        "approbationDG" $vachar, 
+        "signatureDG" $vachar,
+        "signatureJustificationDG" $vachar,
+        "approbationFin" $vachar,
+        "signatureFin" $vachar,
+        "signatureJustificationFin" $vachar,
+        "approbationBudget" $vachar,
+        "signatureBudget" $vachar,
+        "signatureJustificationBudget" $vachar,
+        "approbationDD" $vachar,
+        "signatureDD" $vachar,
+        "signatureJustificationDD" $vachar,
+        "succursale" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
+
+    );
+    ''');
 
 
       

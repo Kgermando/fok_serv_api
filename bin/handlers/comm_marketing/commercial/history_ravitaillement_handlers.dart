@@ -3,27 +3,27 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../../models/comm_maketing/cart_model.dart';
+import '../../../models/comm_maketing/history_ravitaillement_model.dart';
 import '../../../repository/repository.dart';
 
-class CartHandlers {
+class HistoryRavitaillementHandlers {
   final Repository repos;
 
-  CartHandlers(this.repos);
+  HistoryRavitaillementHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
 
     router.get('/', (Request request) async {
-      List<CartModel> data = await repos.carts.getAllData();
+      List<HistoryRavitaillementModel> data = await repos.historyRavitaillements.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late CartModel data;
+      late HistoryRavitaillementModel data;
       try {
-        data = await repos.carts.getFromId(int.parse(id));
+        data = await repos.historyRavitaillements.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
@@ -31,18 +31,19 @@ class CartHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-cart', (Request request) async {
+    router.post('/insert-new-history-ravitaillement', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-      CartModel data = CartModel(
-          idProductCart: input['idProductCart'],
-          quantityCart: input['quantityCart'],
-          priceCart: input['priceCart'],
+      HistoryRavitaillementModel data = HistoryRavitaillementModel(
+          idProduct: input['idProduct'],
+          quantity: input['quantity'],
+          quantityAchat: input['quantityAchat'],
           priceAchatUnit: input['priceAchatUnit'],
+          prixVenteUnit: input['prixVenteUnit'],
           unite: input['unite'],
+          margeBen: input['margeBen'],
           tva: input['tva'],
-          remise: input['remise'],
-          qtyRemise: input['qtyRemise'],
+          qtyRavitailler: input['qtyRavitailler'],
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
@@ -60,7 +61,7 @@ class CartHandlers {
           created: DateTime.parse(input['created'])
         );
       try {
-        await repos.carts.insertData(data);
+        await repos.historyRavitaillements.insertData(data);
       } catch (e) {
         print(e);
         return Response(422);
@@ -68,36 +69,39 @@ class CartHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-cart/<id>', (Request request, String id) async {
+    router.put('/update-history-ravitaillement/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      CartModel data = await repos.carts.getFromId(int.parse(id!));
+      HistoryRavitaillementModel data = await repos.historyRavitaillements.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
-      if (input['idProductCart'] != null) {
-        data.idProductCart = input['idProductCart'];
+      if (input['idProduct'] != null) {
+        data.idProduct = input['idProduct'];
       }
-      if (input['quantityCart'] != null) {
-        data.quantityCart = input['quantityCart'];
+      if (input['quantity'] != null) {
+        data.quantity = input['quantity'];
       }
-      if (input['priceCart'] != null) {
-        data.priceCart = input['priceCart'];
+      if (input['quantityAchat'] != null) {
+        data.quantityAchat = input['quantityAchat'];
       }
       if (input['priceAchatUnit'] != null) {
         data.priceAchatUnit = input['priceAchatUnit'];
       }
+      if (input['prixVenteUnit'] != null) {
+        data.prixVenteUnit = input['prixVenteUnit'];
+      }
       if (input['unite'] != null) {
         data.unite = input['unite'];
+      }
+      if (input['margeBen'] != null) {
+        data.margeBen = input['margeBen'];
       }
       if (input['tva'] != null) {
         data.tva = input['tva'];
       }
-      if (input['remise'] != null) {
-        data.remise = input['remise'];
+      if (input['qtyRavitailler'] != null) {
+        data.qtyRavitailler = input['qtyRavitailler'];
       }
-      if (input['qtyRemise'] != null) {
-        data.qtyRemise = input['qtyRemise'];
-      }
-       if (input['approbationDG'] != null) {
+      if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }
       if (input['signatureDG'] != null) {
@@ -106,6 +110,7 @@ class CartHandlers {
       if (input['signatureJustificationDG'] != null) {
         data.signatureJustificationDG = input['signatureJustificationDG'];
       }
+
       if (input['approbationFin'] != null) {
         data.approbationFin = input['approbationFin'];
       }
@@ -145,25 +150,20 @@ class CartHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
-      repos.carts.update(data);
+      repos.historyRavitaillements.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-cart/<id>', (String id, Request request) async {
+    router.delete('/delete-history-ravitaillement/<id>', (String id, Request request) async {
       var id = request.params['id'];
-      repos.carts.deleteData(int.parse(id!));
-      return Response.ok('Supprimée');
-    });
-
-    router.delete('/delete-all-cart', (Request request) async {
-      repos.carts.deleteAllData();
+      repos.historyRavitaillements.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page carts n\'est pas trouvé'),
+          Response.notFound('La Page history-ravitaillement n\'est pas trouvé'),
     );
 
     return router;

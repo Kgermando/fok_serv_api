@@ -6,10 +6,10 @@ import 'package:shelf_router/shelf_router.dart';
 import '../../models/budgets/ligne_budgetaire_model.dart';
 import '../../repository/repository.dart';
 
-class LignBudgetaireHanlers {
+class LigneBudgetaireHanlers {
   final Repository repos;
 
-  LignBudgetaireHanlers(this.repos);
+  LigneBudgetaireHanlers(this.repos);
 
   Router get router {
     final router = Router();

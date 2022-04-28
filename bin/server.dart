@@ -9,12 +9,17 @@ import 'db/table_name.dart';
 import 'handlers/archives/archive_handlers.dart';
 import 'handlers/auth/auth_handlers.dart';
 import 'handlers/auth/user_handlers.dart';
+import 'handlers/budgets/departement_budget_handlers.dart';
+import 'handlers/budgets/ligne_budgetaire_handlers.dart';
 import 'handlers/comm_marketing/commercial/achats_handlers.dart';
 import 'handlers/comm_marketing/commercial/bon_livraison_handlers.dart';
 import 'handlers/comm_marketing/commercial/cart_handlers.dart';
 import 'handlers/comm_marketing/commercial/creance_facture_handlers.dart';
 import 'handlers/comm_marketing/commercial/facture_handlers.dart';
 import 'handlers/comm_marketing/commercial/gains_handlers.dart';
+import 'handlers/comm_marketing/commercial/history_livraison_handlers.dart';
+import 'handlers/comm_marketing/commercial/history_ravitaillement_handlers.dart';
+import 'handlers/comm_marketing/commercial/number_fact_handlers.dart';
 import 'handlers/comm_marketing/commercial/produit_model_handlers.dart';
 import 'handlers/comm_marketing/commercial/restitution_handlers.dart';
 import 'handlers/comm_marketing/commercial/stocks_global_handlers.dart';
@@ -29,6 +34,7 @@ import 'handlers/comptabilites/journal_handlers.dart';
 import 'handlers/comptabilites/valorisation_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
 import 'handlers/exploitations/projet_handlers.dart';
+import 'handlers/exploitations/rapport_hanlders.dart';
 import 'handlers/exploitations/tache_handlers.dart';
 import 'handlers/exploitations/versement_projet_handlers.dart';
 import 'handlers/finances/banques_handlers.dart';
@@ -178,7 +184,25 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ValorisationHandlers(repos).router));
     
+
+    // Budgets
+    router.mount(
+        '/api/budgets/departements/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(DepartementBudgetHandlers(repos).router));
+    router.mount(
+        '/api/budgets/ligne-budgetaires/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(LigneBudgetaireHanlers(repos).router));
     
+
+
     
     router.mount(
         '/api/devis/',
@@ -212,7 +236,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(VersementProjetHandlers(repos).router));
-
+    router.mount(
+        '/api/rapports/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(RapportHandlers(repos).router));
 
 
 
@@ -346,6 +376,29 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(RestitutionHandlers(repos).router));
+    router.mount(
+        '/api/history-ravitaillements/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(HistoryRavitaillementHandlers(repos).router));
+    router.mount(
+        '/api/history-livraisons/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(HistoryLivraisonHandlers(repos).router));
+    router.mount(
+        '/api/number-facts/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(NumberFactHandlers(repos).router));
+
+
 
     router.mount(
         '/api/agendas/',

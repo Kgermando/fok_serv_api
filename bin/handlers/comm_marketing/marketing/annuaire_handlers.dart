@@ -20,6 +20,11 @@ class AnnuaireHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/search/<query>', (Request request, String query) async {
+      List<AnnuaireModel> data = await repos.annuaires.getAllDataSearch(query);
+      return Response.ok(jsonEncode(data));
+    });
+
     router.get('/<id>', (Request request, String id) async {
       late AnnuaireModel data;
       try {

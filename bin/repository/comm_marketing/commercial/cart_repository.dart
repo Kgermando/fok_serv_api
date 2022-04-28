@@ -126,6 +126,17 @@ class CartRepository {
     }
   }
 
+  deleteAllData() async {
+    try {
+      await executor.transaction((conn) async {
+        // ignore: unused_local_variable
+        var result = await conn.execute('DELETE * FROM $tableName;');
+      });
+    } catch (e) {
+      'erreur $e';
+    }
+  }
+
   Future<CartModel> getFromId(int id) async {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");

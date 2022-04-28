@@ -65,7 +65,7 @@ class UserHandlers {
         selectUser.role = input['role'];
       }
       if (input['isOnline'] != null) {
-        selectUser.isOnline = input['isOnline'];
+        selectUser.isOnline = input['isOnline'] as bool;
       }
       if (input['createdAt'] != null) {
         selectUser.createdAt = input['createdAt'];
@@ -74,6 +74,9 @@ class UserHandlers {
         selectUser.passwordHash =
             md5.convert(utf8.encode(input['passwordHash'])).toString();
         repos.refreshTokens.logoutAll(selectUser.id!);
+      }
+      if (input['succursale'] != null) {
+        selectUser.succursale = input['succursale'];
       }
       repos.users.update(selectUser);
       return Response.ok(jsonEncode(selectUser.toJson()));
@@ -95,6 +98,7 @@ class UserHandlers {
         createdAt: DateTime.parse(input['createdAt']),
         passwordHash:
             md5.convert(utf8.encode(input['passwordHash'])).toString(),
+        succursale: input['succursale']
       );
 
       try {

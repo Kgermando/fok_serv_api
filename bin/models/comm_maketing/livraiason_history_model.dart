@@ -1,17 +1,17 @@
 class LivraisonHistoryModel {
-  final int? id;
-  final String idProduct;
-  final String quantity;
-  final String quantityAchat;
-  final String priceAchatUnit;
-  final String prixVenteUnit;
-  final String unite;
-  final String margeBen;
-  final String tva;
-  final String remise;
-  final String qtyRemise;
-  final String margeBenRemise;
-  final String qtyLivre;
+  late int? id;
+  late String idProduct;
+  late String quantity;
+  late String quantityAchat;
+  late String priceAchatUnit;
+  late String prixVenteUnit;
+  late String unite;
+  late String margeBen;
+  late String tva;
+  late String remise;
+  late String qtyRemise;
+  late String margeBenRemise;
+  late String qtyLivre;
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;

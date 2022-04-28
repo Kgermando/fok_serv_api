@@ -9,6 +9,8 @@ import 'comm_marketing/commercial/cart_repository.dart';
 import 'comm_marketing/commercial/creance_repository.dart';
 import 'comm_marketing/commercial/facture_cart_repository.dart';
 import 'comm_marketing/commercial/gain_repository.dart';
+import 'comm_marketing/commercial/history_livraison_repository.dart';
+import 'comm_marketing/commercial/history_ravitraillemenr_repository.dart';
 import 'comm_marketing/commercial/number_facture_repository.dart';
 import 'comm_marketing/commercial/produit_model_repository.dart';
 import 'comm_marketing/commercial/restitution_repository.dart';
@@ -24,6 +26,7 @@ import 'comptabilites/journal_repository.dart';
 import 'comptabilites/valorisation_repository.dart';
 import 'devis/devis_repository.dart';
 import 'exploitations/projet_repository.dart';
+import 'exploitations/rapport_repository.dart';
 import 'exploitations/tache_repository.dart';
 import 'exploitations/versement_projet_repository.dart';
 import 'finances/banque_repository.dart';
@@ -74,6 +77,7 @@ class Repository {
   late ProjetRepository projets;
   late TacheRepository taches;
   late VersementProjetRepository versementProjets;
+  late RapportRepository rapports;
 
   // LOGISTIQUE
   late AnguinRepository anguins;
@@ -100,6 +104,10 @@ class Repository {
   late AgendaRepository agendas;
   late AnnuaireReposiotry annuaires;
   late CampaignRepository campaigns;
+  late HistoryRavitaillementRepository historyRavitaillements;
+  late HistoryLivraisonRepository historyLivraisons;
+
+  // Archive
   late ArchiveRepository archives;
 
   Repository(this.executor) {
@@ -130,6 +138,7 @@ class Repository {
     projets = ProjetRepository(executor, 'projets');
     taches = TacheRepository(executor, 'taches');
     versementProjets = VersementProjetRepository(executor, 'versement_projets');
+    rapports = RapportRepository(executor, 'rapports');
 
     // LOGISTIQUE
     anguins = AnguinRepository(executor, 'anguins');
@@ -156,6 +165,11 @@ class Repository {
     agendas = AgendaRepository(executor, 'agendas');
     annuaires = AnnuaireReposiotry(executor, 'annuaires');
     campaigns = CampaignRepository(executor, 'campaigns');
+    historyRavitaillements =
+        HistoryRavitaillementRepository(executor, 'history_ravitaillements');
+    historyLivraisons = HistoryLivraisonRepository(executor, 'history_livraisons');
+
+    // ARCHIVE
     archives = ArchiveRepository(executor, 'archives');
   }
 }

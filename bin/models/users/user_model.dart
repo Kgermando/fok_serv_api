@@ -11,6 +11,7 @@ class UserModel {
   late bool isOnline; // Agent connecté
   late DateTime createdAt;
   late String passwordHash;
+  late String succursale;
 
   UserModel({
     this.id,
@@ -25,6 +26,7 @@ class UserModel {
     required this.isOnline,
     required this.createdAt,
     required this.passwordHash,
+    required this.succursale,
   });
 
   factory UserModel.fromSQL(List<dynamic> row) {
@@ -40,7 +42,8 @@ class UserModel {
         role: row[8],
         isOnline: row[9],
         createdAt: row[10],
-        passwordHash: row[11]);
+        passwordHash: row[11],
+        succursale: row[12]);
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -56,7 +59,8 @@ class UserModel {
         role: json["role"],
         isOnline: json["isOnline"],
         createdAt: DateTime.parse(json["createdAt"]),
-        passwordHash: json["passwordHash"]);
+        passwordHash: json["passwordHash"],
+        succursale: json["succursale"]);
   }
 
   Map<String, dynamic> toJson() {
@@ -72,7 +76,8 @@ class UserModel {
       'role': role,
       'isOnline': isOnline,
       'createdAt': createdAt.toIso8601String(),
-      'passwordHash': passwordHash
+      'passwordHash': passwordHash,
+      'succursale': succursale,
     };
   }
 }
