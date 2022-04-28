@@ -9,6 +9,7 @@ class TableName {
   final timestamp = 'TIMESTAMP NOT NULL';
   final list = 'JSON NULL';
   final boolean = 'BOOLEAN NOT NULL';
+  final float = 'FLOAT8 NOT NULL';
 
   // Tables
   // RH
@@ -27,11 +28,15 @@ class TableName {
   final depensesTable = 'depenses';
   final dettesTable = 'dettes';
   final finExterieursTable = 'fin_exterieurs';
+
+  // COMPTABILITE
   final amortissementsTable = 'amortissements';
   final bilansTable = 'bilans';
   final journalsTable = 'journals';
   final valorisationTable = 'valorisations';
   final devisTable = 'devis';
+
+  // BUDGET
   final departementBudgetTable = 'departement_budgets';
   final ligneBudgetaireTable = 'ligne_budgetaires';
 
@@ -65,10 +70,12 @@ class TableName {
   final venteTable = 'ventes';
   final gainTable = 'gains';
   final restitutionTable = 'restitutions';
-  final agendaTable = 'agendas';
-  final annuaireTable = 'annuaires';
   final historyRavitaillementTable = 'history_ravitaillements';
   final historyLivraisonTable = 'history_livraisons';
+
+  final agendaTable = 'agendas';
+  final annuaireTable = 'annuaires';
+  final campaignTable = 'campaigns';
 
 
   // ARCHIVE
@@ -545,7 +552,7 @@ class TableName {
 
       // Departement Budget
       await connection.query('''
-        CREATE TABLE IF NOT EXISTS $ligneBudgetaireTable(
+        CREATE TABLE IF NOT EXISTS $departementBudgetTable(
           "id" $key,
           "departement" $vachar,
           "periodeBudget" $vachar,
@@ -882,6 +889,89 @@ class TableName {
           "created" $vachar
         );
       '''); 
+
+      // Agenda
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $agendaTable(
+          "id" $key,
+          "title" $vachar,
+          "description" $vachar,
+          "number" $float,
+
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+       // Annuaire
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $annuaireTable(
+          "id" $key,
+          "categorie" $vachar,
+          "nomPostnomPrenom" $vachar,
+          "email" $vachar,
+          "mobile1" $vachar,
+          "mobile2" $vachar,
+          "secteurActivite" $vachar,
+          "nomEntreprise" $vachar,
+          "grade" $vachar,
+          "adresseEntreprise" $vachar,
+
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+       // Campaign
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $campaignTable(
+          "id" $key,
+          "typeProduit" $vachar,
+          "dateDebutEtFin" $vachar,
+          "agentAffectes" $list,
+          "coutCampaign" $vachar,
+          "lieuCible" $vachar,
+          "promotion" $vachar,
+          "objetctifs" $vachar,
+
+          "approbationDG" $vachar, 
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+          "approbationFin" $vachar,
+          "signatureFin" $vachar,
+          "signatureJustificationFin" $vachar,
+          "approbationBudget" $vachar,
+          "signatureBudget" $vachar,
+          "signatureJustificationBudget" $vachar,
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
 
 
       // Produit model

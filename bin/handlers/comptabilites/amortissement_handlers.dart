@@ -30,7 +30,7 @@ class AmortissementHandlers {
       return Response.ok(jsonEncode(agent.toJson()));
     });
 
-    router.post('/insert-new-comptabilite-amortissement', (Request request) async {
+    router.post('/insert-new-amortissement', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       AmortissementModel data = AmortissementModel(
@@ -63,7 +63,7 @@ class AmortissementHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-comptabilite-amortissement/<id>', (Request request, String id) async {
+    router.put('/update-amortissement/<id>', (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       AmortissementModel data = await repos.amortissements.getFromId(int.parse(id!));

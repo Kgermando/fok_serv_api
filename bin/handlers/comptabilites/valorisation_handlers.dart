@@ -30,7 +30,7 @@ class ValorisationHandlers {
       return Response.ok(jsonEncode(agent.toJson()));
     });
 
-    router.post('/insert-new-comptabilite-valorisation',
+    router.post('/insert-new-valorisation',
         (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -65,7 +65,7 @@ class ValorisationHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-comptabilite-valorisation/<id>',
+    router.put('/update-valorisation/<id>',
         (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
@@ -131,7 +131,7 @@ class ValorisationHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-comptabilite-valorisation/<id>',
+    router.delete('/delete-valorisation/<id>',
         (String id, Request request) async {
       var id = request.params['id'];
       repos.valorisations.deleteData(int.parse(id!));

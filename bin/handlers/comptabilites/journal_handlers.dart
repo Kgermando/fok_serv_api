@@ -30,7 +30,7 @@ class JournalHandlers {
       return Response.ok(jsonEncode(agent.toJson()));
     });
 
-    router.post('/insert-new-comptabilite-journal',
+    router.post('/insert-new-journal',
         (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -64,7 +64,7 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-comptabilite-journal/<id>',
+    router.put('/update-journal/<id>',
         (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
@@ -137,7 +137,7 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-comptabilite-journal/<id>',
+    router.delete('/delete-journal/<id>',
         (String id, Request request) async {
       var id = request.params['id'];
       repos.journals.deleteData(int.parse(id!));

@@ -30,7 +30,7 @@ class BilansHandlers {
       return Response.ok(jsonEncode(agent.toJson()));
     });
 
-    router.post('/insert-new-comptabilite-bilan',
+    router.post('/insert-new-bilan',
         (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
@@ -64,7 +64,7 @@ class BilansHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-comptabilite-bilan/<id>',
+    router.put('/update-bilan/<id>',
         (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
@@ -137,7 +137,7 @@ class BilansHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-comptabilite-bilan/<id>',
+    router.delete('/delete-bilan/<id>',
         (String id, Request request) async {
       var id = request.params['id'];
       repos.bilans.deleteData(int.parse(id!));

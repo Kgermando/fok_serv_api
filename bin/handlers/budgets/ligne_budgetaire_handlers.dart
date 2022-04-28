@@ -65,7 +65,7 @@ class LigneBudgetaireHanlers {
 
         signature: input['signature'],
         created: DateTime.parse(input['created']),
-        );
+      );
       try {
         await repos.ligneBudgetaires.insertData(data);
       } catch (e) {
