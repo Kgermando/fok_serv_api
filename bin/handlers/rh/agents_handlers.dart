@@ -78,10 +78,10 @@ class AgentsHandlers {
     });
 
     router.put('/update-agent/<id>', (Request request, String id) async {
+      dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       AgentModel selectUser = await repos.agents.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
-
+      
       if (input['nom'] != null) {
         selectUser.nom = input['nom'];
       }
@@ -176,6 +176,14 @@ class AgentsHandlers {
       repos.agents.deleteData(int.parse(id!));
       return Response.ok('Agent supprimée');
     });
+
+
+
+    router.get('/chart-pie-sexe/', (Request request) async {
+      List<AgentPieChartModel> data = await repos.agents.getAgentChartPie();
+      return Response.ok(jsonEncode(data));
+    });
+
 
     router.all(
       '/<ignored|.*>',

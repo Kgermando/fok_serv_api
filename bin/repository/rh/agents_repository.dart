@@ -109,7 +109,7 @@ class AgentsRepository {
         "\"dateFinContrat\"='$dateFinContrat', \"fonctionOccupe\"='$fonctionOccupe',"
         "\"competance\"='$competance', \"experience\"='$experience',"
         "\"statutAgent\"='$statutAgent', \"createdAt\"='$createdAt',"
-        "\"photo\"='$photo', \"salaire\"='$salaire' , \"signature\"='$signature' , \"created\"='$created' WHERE id=$id;");
+        "\"photo\"='$photo', \"salaire\"='$salaire', \"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 
@@ -173,4 +173,22 @@ class AgentsRepository {
       throw AgentCountModel;
     }
   }
+
+
+  Future<List<AgentPieChartModel>>getAgentChartPie() async {
+    try {
+      var data = <AgentPieChartModel>{};
+      
+      var querySQL =  "SELECT sexe, COUNT(sexe) FROM $tableName GROUP BY \"sexe\";";
+      List<List<dynamic>> results = await executor.query(querySQL);
+      for (var row in results) {
+        data.add(AgentPieChartModel.fromSQL(row));
+      }
+      return data.toList();
+    } catch (e) {
+      throw AgentPieChartModel;
+    }
+  }
+
+
 }

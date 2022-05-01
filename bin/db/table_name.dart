@@ -214,24 +214,12 @@ class TableName {
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $tablePresence(
           "id" $key,
-          "agent" $vachar,
           "arrive" $timestamp,
+          "arriveAgent" $list,
           "sortie" $timestamp,
-          "presence" $vachar,
-          "motif" $vachar,
-
-          "approbationDG" $vachar,
-          "signatureDG" $vachar,
-          "signatureJustificationDG" $vachar,
-          "approbationFin" $vachar,
-          "signatureFin" $vachar,
-          "signatureJustificationFin" $vachar,
-          "approbationBudget" $vachar,
-          "signatureBudget" $vachar,
-          "signatureJustificationBudget" $vachar,
-          "approbationDD" $vachar,
-          "signatureDD" $vachar,
-          "signatureJustificationDD" $vachar,
+          "sortieAgent" $list,
+          "remarque" $vachar,
+          "finJournee" $boolean,
           "signature" $vachar,
           "created" $timestamp
       );
@@ -239,7 +227,7 @@ class TableName {
 
       // Performence model
       await connection.query('''
-        CREATE TABLE IF NOT EXISTS $tablePresence(
+        CREATE TABLE IF NOT EXISTS $tablePerformence(
           "id" $key,
           "agent" $vachar,
           "hospitalite" $vachar,

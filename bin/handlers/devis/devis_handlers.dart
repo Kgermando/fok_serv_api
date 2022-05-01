@@ -153,7 +153,7 @@ class DevisHandlers {
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page banque n\'est pas trouvé'),
+          Response.notFound('La Page devis n\'est pas trouvé'),
     );
 
     return router;
