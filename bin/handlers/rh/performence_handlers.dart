@@ -24,6 +24,7 @@ class PerformenceHandlers {
 
       PerformenceModel data = PerformenceModel(
           agent: input['agent'],
+          departement: input['departement'],
           hospitalite: input['hospitalite'],
           ponctualite: input['ponctualite'],
           travaille: input['travaille'],
@@ -58,6 +59,9 @@ class PerformenceHandlers {
 
       if (input['agent'] != null) {
         data.agent = input['agent'];
+      }
+      if (input['departement'] != null) {
+        data.departement = input['departement'];
       }
       if (input['hospitalite'] != null) {
         data.hospitalite = input['hospitalite'];
@@ -121,7 +125,7 @@ class PerformenceHandlers {
 
     router.delete('/delete-performence/<id>', (Request request) async {
       var id = request.params['id'];
-      repos.salaires.deleteData(int.parse(id!));
+      repos.performences.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 

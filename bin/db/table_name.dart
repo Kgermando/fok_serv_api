@@ -20,6 +20,7 @@ class TableName {
   final tablePaiementDivers = 'paiement_divers';
   final tablePresence = 'presences';
   final tablePerformence = 'performences';
+  final tablePerformenceNote = 'performences_note';
 
   // FINANCES
   final banquesTable = 'banques';
@@ -55,8 +56,6 @@ class TableName {
   final mobilierTable = 'mobiliers';
   final trajetTable = 'trajets';
 
-
-
   // COMMERCIAL & MARKETING
   final modelTable = 'models_produits';
   final stocksGlobalTable = 'stocks_global';
@@ -77,10 +76,8 @@ class TableName {
   final annuaireTable = 'annuaires';
   final campaignTable = 'campaigns';
 
-
   // ARCHIVE
   final archivesTable = 'archives';
-
 
   Future openConnection(PostgreSQLConnection connection) async {
     try {
@@ -230,6 +227,7 @@ class TableName {
         CREATE TABLE IF NOT EXISTS $tablePerformence(
           "id" $key,
           "agent" $vachar,
+          "departement" $vachar,
           "hospitalite" $vachar,
           "ponctualite" $vachar,
           "travaille" $vachar,
@@ -245,6 +243,20 @@ class TableName {
           "approbationDD" $vachar,
           "signatureDD" $vachar,
           "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+      );
+      ''');
+      // Performence model
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $tablePerformenceNote(
+          "id" $key,
+          "agent" $vachar,
+          "departement" $vachar,
+          "hospitalite" $vachar,
+          "ponctualite" $vachar,
+          "travaille" $vachar,
+          "note" $vachar,
           "signature" $vachar,
           "created" $timestamp
       );
@@ -620,7 +632,6 @@ class TableName {
           "provenance" $vachar,
           "typeCaburant" $vachar,
           "typeMoteur" $vachar,
-
           "approbationDG" $vachar,
           "signatureDG" $vachar,
           "signatureJustificationDG" $vachar,
@@ -636,7 +647,7 @@ class TableName {
           "signature" $vachar,
           "created" $timestamp
         );
-      '''); 
+      ''');
       // Carburant
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $carburantTable(
@@ -694,7 +705,7 @@ class TableName {
           "signature" $vachar,
           "created" $timestamp
         );
-      '''); 
+      ''');
       // EtatMateriel
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $etatMaterielTable(
@@ -720,7 +731,7 @@ class TableName {
           "signature" $vachar,
           "created" $timestamp
         );
-      '''); 
+      ''');
       // Immobilier
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $immobilierTable(
@@ -746,7 +757,7 @@ class TableName {
           "signature" $vachar,
           "created" $timestamp
         );
-      '''); 
+      ''');
       // Mobilier
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $mobilierTable(
@@ -772,9 +783,9 @@ class TableName {
           "signature" $vachar,
           "created" $timestamp
         );
-      '''); 
+      ''');
       // Trajet
-       await connection.query('''
+      await connection.query('''
         CREATE TABLE IF NOT EXISTS $trajetTable(
           "id" $key,
           "nomeroEntreprise" $vachar,
@@ -800,7 +811,7 @@ class TableName {
           "signature" $vachar,
           "created" $timestamp
         );
-      '''); 
+      ''');
 
       // Projets
       await connection.query('''
@@ -820,72 +831,7 @@ class TableName {
           "budgetDetail" $vachar,
           "recetteAttendus" $vachar,
           "listAgentEtRole" $list,
-          
-          "approbationDG" $vachar, 
-          "signatureDG" $vachar,
-          "signatureJustificationDG" $vachar,
-          "approbationFin" $vachar,
-          "signatureFin" $vachar,
-          "signatureJustificationFin" $vachar,
-          "approbationBudget" $vachar,
-          "signatureBudget" $vachar,
-          "signatureJustificationBudget" $vachar,
-          "approbationDD" $vachar,
-          "signatureDD" $vachar,
-          "signatureJustificationDD" $vachar,
-          "signature" $vachar,
-          "created" $timestamp
-        );
-      '''); 
-
-      // Taches
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $tacheTable(
-          "id" $key,
-          "nomProjet" $vachar,
-          "numeroTache" $vachar,
-          "agent" $vachar,
-          "jalon" $vachar,
-          "tache" $vachar,
-          "signatureResp" $vachar,
-          "created" $timestamp
-        );
-      '''); 
-
-      // Versement
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $versementTable(
-          "id" $key,
-          "nomProjet" $vachar,
-          "pieceJustificative" $vachar,
-          "montantVerser" $vachar,
-          "montantEnLettre" $vachar,
-          "typeVersement" $vachar,
-          "signature" $vachar,
-          "created" $vachar
-        );
-      '''); 
-
-      // Rapport
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $rapportTable(
-          "id" $key,
-          "nomProjet" $vachar,
-          "numeroTache" $vachar,
-          "rapport" $vachar,
-          "signature" $vachar,
-          "created" $vachar
-        );
-      '''); 
-
-      // Agenda
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $agendaTable(
-          "id" $key,
-          "title" $vachar,
-          "description" $vachar,
-          "number" $float,
-
+          "typeFinancement" $vachar,
           "approbationDG" $vachar, 
           "signatureDG" $vachar,
           "signatureJustificationDG" $vachar,
@@ -902,7 +848,60 @@ class TableName {
           "created" $timestamp
         );
       ''');
-       // Annuaire
+
+      // Taches
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $tacheTable(
+          "id" $key,
+          "nomProjet" $vachar,
+          "numeroTache" $vachar,
+          "agent" $vachar,
+          "jalon" $vachar,
+          "tache" $vachar,
+          "signatureResp" $vachar,
+          "created" $timestamp,
+          "read" $boolean
+        );
+      ''');
+
+      // Versement
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $versementTable(
+          "id" $key,
+          "nomProjet" $vachar,
+          "pieceJustificative" $vachar,
+          "montantVerser" $vachar,
+          "montantEnLettre" $vachar,
+          "typeVersement" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+
+      // Rapport
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $rapportTable(
+          "id" $key,
+          "nomProjet" $vachar,
+          "numeroTache" $vachar,
+          "rapport" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+
+      // Agenda
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $agendaTable(
+          "id" $key,
+          "title" $vachar,
+          "description" $vachar,
+          "dateRappel" $timestamp, 
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+      // Annuaire
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $annuaireTable(
           "id" $key,
@@ -915,24 +914,12 @@ class TableName {
           "nomEntreprise" $vachar,
           "grade" $vachar,
           "adresseEntreprise" $vachar,
-
-          "approbationDG" $vachar, 
-          "signatureDG" $vachar,
-          "signatureJustificationDG" $vachar,
-          "approbationFin" $vachar,
-          "signatureFin" $vachar,
-          "signatureJustificationFin" $vachar,
-          "approbationBudget" $vachar,
-          "signatureBudget" $vachar,
-          "signatureJustificationBudget" $vachar,
-          "approbationDD" $vachar,
-          "signatureDD" $vachar,
-          "signatureJustificationDD" $vachar,
+          "succursale" $vachar,
           "signature" $vachar,
           "created" $timestamp
         );
       ''');
-       // Campaign
+      // Campaign
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $campaignTable(
           "id" $key,
@@ -961,7 +948,6 @@ class TableName {
         );
       ''');
 
-
       // Produit model
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $modelTable(
@@ -989,8 +975,8 @@ class TableName {
           "created" $timestamp
         );
       ''');
-    // Stock global
-    await connection.query('''
+      // Stock global
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $stocksGlobalTable(
         "id" $key,
         "idProduct" $vachar,
@@ -1020,8 +1006,8 @@ class TableName {
 
     );
     ''');
-    // Succursale
-    await connection.query('''
+      // Succursale
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $succursaleTable(
         "id" $key,
         "name" $vachar,
@@ -1044,8 +1030,8 @@ class TableName {
         "created" $timestamp
       );
       ''');
-    // Bon de livraison
-    await connection.query('''
+      // Bon de livraison
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $bonLivraisonTable(
         "id" $key,
         "idProduct" $vachar,
@@ -1078,8 +1064,8 @@ class TableName {
         "created" $timestamp
     );
     ''');
-    // Achats
-    await connection.query('''
+      // Achats
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $achatTable(
         "id" $key,
         "idProduct" $vachar,
@@ -1109,8 +1095,8 @@ class TableName {
         "created" $timestamp
     );
     ''');
-    // Cart
-    await connection.query('''
+      // Cart
+      await connection.query('''
         CREATE TABLE IF NOT EXISTS $cartTable(
           "id" $key,
           "idProductCart" $vachar,
@@ -1160,8 +1146,8 @@ class TableName {
           "created" $timestamp
 
           );
-        '''); 
-        // Creance facture
+        ''');
+      // Creance facture
       await connection.query('''
           CREATE TABLE IF NOT EXISTS $creanceFactureTable(
             "id" $key,
@@ -1193,8 +1179,8 @@ class TableName {
         "created" $timestamp
     );
     ''');
-    // Ventes
-    await connection.query('''
+      // Ventes
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $venteTable(
         "id" $key,
         "idProductCart" $vachar,
@@ -1242,8 +1228,8 @@ class TableName {
         "created" $timestamp
     );
     ''');
-    // Restitution
-    await connection.query('''
+      // Restitution
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $restitutionTable(
         "id" $key,
         "idProduct" $vachar,
@@ -1275,7 +1261,7 @@ class TableName {
     );
     ''');
 
-     // Histiry ravitaillement
+      // Histiry ravitaillement
       await connection.query('''
       CREATE TABLE IF NOT EXISTS $historyRavitaillementTable(
         "id" $key,
@@ -1307,7 +1293,7 @@ class TableName {
     );
     ''');
 
-    // Histiry livraison
+      // Histiry livraison
       await connection.query('''
       CREATE TABLE IF NOT EXISTS $historyLivraisonTable(
         "id" $key,
@@ -1341,9 +1327,6 @@ class TableName {
 
     );
     ''');
-
-
-      
 
       print("Tables created succes!");
       return connection;

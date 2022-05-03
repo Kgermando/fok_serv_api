@@ -44,6 +44,7 @@ import 'logistiques/trajet_repository.dart';
 import 'rh/agents_repository.dart';
 import 'rh/paiement_salaire_repository.dart';
 import 'rh/performence_repository.dart';
+import 'rh/performence_note_repository.dart';
 import 'rh/presence_repository.dart';
 import 'user/refresh_token_repository.dart';
 import 'user/user_repository.dart';
@@ -58,6 +59,7 @@ class Repository {
   late PaiementSalaireRepository salaires;
   late PresenceRepository presences;
   late PerformenceRepository performences;
+  late PerformenceNoteRepository performencesNote;
 
   // FINANCES
   late BanqueRepository banques;
@@ -118,6 +120,7 @@ class Repository {
     salaires = PaiementSalaireRepository(executor, 'salaires');
     presences = PresenceRepository(executor, 'presences');
     performences = PerformenceRepository(executor, 'performences');
+    performencesNote = PerformenceNoteRepository(executor, 'performences_note');
 
     // FINANCES
     banques = BanqueRepository(executor, 'banques');

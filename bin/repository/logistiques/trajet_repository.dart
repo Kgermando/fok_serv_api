@@ -27,15 +27,36 @@ class TrajetRepository {
     var mission = trajetModel.mission;
     var genkilometrageSoritere = trajetModel.kilometrageSorite;
     var kilometrageRetour = trajetModel.kilometrageRetour;
-    var created = trajetModel.created;
+
+    var approbationDG = trajetModel.approbationDG;
+    var signatureDG = trajetModel.signatureDG;
+    var signatureJustificationDG = trajetModel.signatureJustificationDG;
+
+    var approbationFin = trajetModel.approbationFin;
+    var signatureFin = trajetModel.signatureFin;
+    var signatureJustificationFin = trajetModel.signatureJustificationFin;
+
+    var approbationBudget = trajetModel.approbationBudget;
+    var signatureBudget = trajetModel.signatureBudget;
+    var signatureJustificationBudget = trajetModel.signatureJustificationBudget;
+
+    var approbationDD = trajetModel.approbationDD;
+    var signatureDD = trajetModel.signatureDD;
+    var signatureJustificationDD = trajetModel.signatureJustificationDD;
+
     var signature = trajetModel.signature;
+    var created = trajetModel.created;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('trajets_id_seq'), '$nomeroEntreprise',"
-          "'$nomUtilisateur', '$trajetDe', '$trajetA', '$mission', '$genkilometrageSoritere', '$kilometrageRetour',"
-          "'$created', '$signature');");
+        "INSERT INTO $tableName VALUES (nextval('trajets_id_seq'), '$nomeroEntreprise',"
+        "'$nomUtilisateur', '$trajetDe', '$trajetA', '$mission', '$genkilometrageSoritere', '$kilometrageRetour',"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
+        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+        "'$signatureDD', '$signatureJustificationDD',"
+        "'$signature', '$created');");
     });
   }
 
@@ -48,8 +69,25 @@ class TrajetRepository {
     var mission = trajetModel.mission;
     var genkilometrageSoritere = trajetModel.kilometrageSorite;
     var kilometrageRetour = trajetModel.kilometrageRetour;
-    var created = trajetModel.created;
+
+    var approbationDG = trajetModel.approbationDG;
+    var signatureDG = trajetModel.signatureDG;
+    var signatureJustificationDG = trajetModel.signatureJustificationDG;
+
+    var approbationFin = trajetModel.approbationFin;
+    var signatureFin = trajetModel.signatureFin;
+    var signatureJustificationFin = trajetModel.signatureJustificationFin;
+
+    var approbationBudget = trajetModel.approbationBudget;
+    var signatureBudget = trajetModel.signatureBudget;
+    var signatureJustificationBudget = trajetModel.signatureJustificationBudget;
+
+    var approbationDD = trajetModel.approbationDD;
+    var signatureDD = trajetModel.signatureDD;
+    var signatureJustificationDD = trajetModel.signatureJustificationDD;
+
     var signature = trajetModel.signature;
+    var created = trajetModel.created;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -57,7 +95,15 @@ class TrajetRepository {
         "UPDATE $tableName SET \"nomeroEntreprise\"='$nomeroEntreprise', \"nomUtilisateur\"='$nomUtilisateur',"
         "\"trajetDe\"='$trajetDe', \"trajetA\"='$trajetA', \"mission\"='$mission',"
         "\"genkilometrageSoritere\"='$genkilometrageSoritere', \"kilometrageRetour\"='$kilometrageRetour',"
-        "\"created\"='$created', \"signature\"='$signature' WHERE id=$id;");
+        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+        "\"signatureJustificationDG\"='$signatureJustificationDG',"
+        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+        "\"signatureJustificationFin\"='$signatureJustificationFin',"
+        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+        "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 

@@ -52,6 +52,7 @@ import 'handlers/logistiques/trajet_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
 import 'handlers/rh/paiement_salaire_handlers.dart';
 import 'handlers/rh/performence_handlers.dart';
+import 'handlers/rh/performence_note_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
 import 'middleware/middleware.dart';
 import 'repository/repository.dart';
@@ -112,6 +113,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PerformenceHandlers(repos).router));
+    router.mount(
+        '/api/rh/performences-note/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(PerformenceNoteHandlers(repos).router));
 
 
     router.mount(
@@ -200,8 +208,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(LigneBudgetaireHanlers(repos).router));
-    
-
 
     
     router.mount(
@@ -211,7 +217,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(DevisHandlers(repos).router));
-
 
 
 
@@ -243,7 +248,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(RapportHandlers(repos).router));
-
 
 
     router.mount(
@@ -295,8 +299,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(TrajetHandlers(repos).router));
-
-
 
 
     router.mount(

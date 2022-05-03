@@ -34,6 +34,7 @@ class AnguinRepository {
     var provenance = anguinModel.provenance;
     var typeCaburant = anguinModel.typeCaburant;
     var typeMoteur = anguinModel.typeMoteur;
+    
     var approbationDG = anguinModel.approbationDG;
     var signatureDG = anguinModel.signatureDG;
     var signatureJustificationDG =
@@ -116,8 +117,8 @@ class AnguinRepository {
         "UPDATE $tableName SET \"nom\"='$nom', \"modele\"='$modele',"
         "\"marque\"='$marque', \"numeroChassie\"='$numeroChassie', \"couleur\"='$couleur',"
         "\"genre\"='$genre', \"qtyMaxReservoir\"='$qtyMaxReservoir', \"rodateFabricationle\"='$dateFabrication',"
-        "\"nomeroPLaque\"='$nomeroPLaque', \"nomeroEntreprise\"='$nomeroEntreprise', \"kilometrageInitiale\"='$kilometrageInitiale',"
-        "\"provenance\"='$provenance'"
+        "\"nomeroPLaque\"='$nomeroPLaque', \"nomeroEntreprise\"='$nomeroEntreprise',"
+        "\"kilometrageInitiale\"='$kilometrageInitiale', \"provenance\"='$provenance',"
         "\"typeCaburant\"='$typeCaburant', \"typeMoteur\"='$typeMoteur',"
         "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
         "\"signatureJustificationDG\"='$signatureJustificationDG',"
