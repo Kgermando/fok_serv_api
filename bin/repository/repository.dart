@@ -20,10 +20,10 @@ import 'comm_marketing/commercial/vente_repository.dart';
 import 'comm_marketing/marketing/agenda_repository.dart';
 import 'comm_marketing/marketing/annuaire_repository.dart';
 import 'comm_marketing/marketing/campaign_repository.dart';
-import 'comptabilites/amrtissement_repository.dart';
+import 'comptabilites/balance_compte_repository.dart';
 import 'comptabilites/bilan_repository.dart';
+import 'comptabilites/compte_resultat_repository.dart';
 import 'comptabilites/journal_repository.dart';
-import 'comptabilites/valorisation_repository.dart';
 import 'devis/devis_repository.dart';
 import 'exploitations/projet_repository.dart';
 import 'exploitations/rapport_repository.dart';
@@ -61,17 +61,22 @@ class Repository {
   late PerformenceRepository performences;
   late PerformenceNoteRepository performencesNote;
 
+  late DevisRepository devis;
+
   // FINANCES
   late BanqueRepository banques;
   late CaissesRepository caisses;
   late CreancesRepository creances;
   late DettesRepository dettes;
   late FinExteRepository finExterieurs;
-  late AmortissementRepository amortissements;
+
+  // COMPTABILITES
   late BilanRepository bilans;
   late JournalRepository journals;
-  late ValorisationRepository valorisations;
-  late DevisRepository devis;
+  late CompteResultatRepository comptesResultat;
+  late BalanceCompteRepository balanceComptes;
+
+  // BUDGETS
   late DepartementBudgetRepository departementBudgets;
   late LigneBudgtaireRepository ligneBudgetaires;
 
@@ -122,17 +127,22 @@ class Repository {
     performences = PerformenceRepository(executor, 'performences');
     performencesNote = PerformenceNoteRepository(executor, 'performences_note');
 
+    devis = DevisRepository(executor, 'devis');
+
     // FINANCES
     banques = BanqueRepository(executor, 'banques');
     caisses = CaissesRepository(executor, 'caisses');
     creances = CreancesRepository(executor, 'creances');
     dettes = DettesRepository(executor, 'dettes');
     finExterieurs = FinExteRepository(executor, 'fin_exterieurs');
-    amortissements = AmortissementRepository(executor, 'amortissements');
+
+    // COMPTABILITE
     bilans = BilanRepository(executor, 'bilans');
     journals = JournalRepository(executor, 'journals');
-    valorisations = ValorisationRepository(executor, 'valorisations');
-    devis = DevisRepository(executor, 'devis');
+    comptesResultat = CompteResultatRepository(executor, 'comptes_resultat');
+    balanceComptes = BalanceCompteRepository(executor, 'balance_comptes');
+
+    // BUDGETS
     departementBudgets =
         DepartementBudgetRepository(executor, 'departement_budgets');
     ligneBudgetaires = LigneBudgtaireRepository(executor, 'ligne_budgetaires');
@@ -170,7 +180,8 @@ class Repository {
     campaigns = CampaignRepository(executor, 'campaigns');
     historyRavitaillements =
         HistoryRavitaillementRepository(executor, 'history_ravitaillements');
-    historyLivraisons = HistoryLivraisonRepository(executor, 'history_livraisons');
+    historyLivraisons =
+        HistoryLivraisonRepository(executor, 'history_livraisons');
 
     // ARCHIVE
     archives = ArchiveRepository(executor, 'archives');

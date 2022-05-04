@@ -3,26 +3,26 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comptabilites/journal_model.dart';
+import '../../models/comptabilites/compte_resultat_model.dart';
 import '../../repository/repository.dart';
 
-class JournalHandlers {
-  final Repository repos;
+class CompteResultatHandlers {
+   final Repository repos;
 
-  JournalHandlers(this.repos);
+  CompteResultatHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<JournalModel> data = await repos.journals.getAllData();
+      List<CompteResulatsModel> data = await repos.comptesResultat.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late JournalModel data;
+      late CompteResulatsModel data;
       try {
-        data = await repos.journals.getFromId(int.parse(id));
+        data = await repos.comptesResultat.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
@@ -30,17 +30,14 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-journal',
+    router.post('/insert-new-compte-resultat',
         (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-      JournalModel data = JournalModel(
-          libele: input['libele'],
-          compteDebit: input['compteDebit'],
-          montantDebit: input['montantDebit'],
-          compteCredit: input['compteCredit'],
-          montantCredit: input['montantCredit'],
-          remarque: input['remarque'],
+      CompteResulatsModel data = CompteResulatsModel(
+          intitule: input['intitule'],
+          compteListDebit: input['compteListDebit'],
+          compteListCredit: input['compteListCredit'],
           statut: input['statut'] as bool,
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
@@ -52,7 +49,7 @@ class JournalHandlers {
           created: DateTime.parse(input['created'])
       );
       try {
-        await repos.journals.insertData(data);
+        await repos.comptesResultat.insertData(data);
       } catch (e) {
         print(e);
         return Response(422);
@@ -60,35 +57,26 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-journal/<id>',
+    router.put('/update-compte-resultat/<id>',
         (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
-      JournalModel data =
-          await repos.journals.getFromId(int.parse(id!));
+      CompteResulatsModel data =
+          await repos.comptesResultat.getFromId(int.parse(id!));
 
-      if (input['libele'] != null) {
-        data.libele = input['libele'];
+      if (input['intitule'] != null) {
+        data.intitule = input['intitule'];
       }
-      if (input['compteDebit'] != null) {
-        data.compteDebit = input['compteDebit'];
+      if (input['compteListDebit'] != null) {
+        data.compteListDebit = input['compteListDebit'];
       }
-      if (input['montantDebit'] != null) {
-        data.montantDebit = input['montantDebit'];
-      }
-      if (input['compteCredit'] != null) {
-        data.compteCredit = input['compteCredit'];
-      }
-      if (input['montantCredit'] != null) {
-        data.montantCredit = input['montantCredit'];
-      }
-      if (input['remarque'] != null) {
-        data.remarque = input['remarque'];
+      if (input['compteListCredit'] != null) {
+        data.compteListCredit = input['compteListCredit'];
       }
       if (input['statut'] != null) {
         data.statut = input['statut'] as bool;
       }
-      if (input['approbationDG'] != null) {
+       if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }
       if (input['signatureDG'] != null) {
@@ -97,6 +85,7 @@ class JournalHandlers {
       if (input['signatureJustificationDG'] != null) {
         data.signatureJustificationDG = input['signatureJustificationDG'];
       }
+
       if (input['approbationDD'] != null) {
         data.approbationDD = input['approbationDD'];
       }
@@ -113,21 +102,21 @@ class JournalHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
-      repos.journals.update(data);
+      repos.comptesResultat.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-journal/<id>',
+    router.delete('/delete-compte-resultat/<id>',
         (String id, Request request) async {
       var id = request.params['id'];
-      repos.journals.deleteData(int.parse(id!));
+      repos.comptesResultat.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page journal n\'est pas trouvé'),
+          Response.notFound('La Page compte-resultat n\'est pas trouvé'),
     );
 
     return router;

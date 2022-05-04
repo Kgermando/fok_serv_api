@@ -20,14 +20,14 @@ class BilansHandlers {
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late BilanModel agent;
+      late BilanModel data;
       try {
-        agent = await repos.bilans.getFromId(int.parse(id));
+        data = await repos.bilans.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
       }
-      return Response.ok(jsonEncode(agent.toJson()));
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.post('/insert-new-bilan',
@@ -36,19 +36,12 @@ class BilansHandlers {
 
       BilanModel data = BilanModel(
           titleBilan: input['titleBilan'],
-          comptes: input['comptes'],
-          intitule: input['intitule'],
-          montant: input['montant'],
-          typeBilan: input['typeBilan'],
+          comptesActif: input['comptesActif'],
+          comptesPactif: input['comptesPactif'],
+          statut: input['statut'] as bool,
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
-          approbationFin: input['approbationFin'],
-          signatureFin: input['signatureFin'],
-          signatureJustificationFin: input['signatureJustificationFin'],
-          approbationBudget: input['approbationBudget'],
-          signatureBudget: input['signatureBudget'],
-          signatureJustificationBudget: input['signatureJustificationBudget'],
           approbationDD: input['approbationDD'],
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
@@ -74,17 +67,14 @@ class BilansHandlers {
       if (input['titleBilan'] != null) {
         data.titleBilan = input['titleBilan'];
       }
-      if (input['comptes'] != null) {
-        data.comptes = input['comptes'];
+      if (input['comptesActif'] != null) {
+        data.comptesActif = input['comptesActif'];
       }
-      if (input['intitule'] != null) {
-        data.intitule = input['intitule'];
+      if (input['comptesPactif'] != null) {
+        data.comptesPactif = input['comptesPactif'];
       }
-      if (input['montant'] != null) {
-        data.montant = input['montant'];
-      }
-      if (input['typeBilan'] != null) {
-        data.typeBilan = input['typeBilan'];
+      if (input['statut'] != null) {
+        data.statut = input['statut'] as bool;
       }
        if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
@@ -94,27 +84,6 @@ class BilansHandlers {
       }
       if (input['signatureJustificationDG'] != null) {
         data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-
-      if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
       }
 
       if (input['approbationDD'] != null) {

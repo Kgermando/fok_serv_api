@@ -29,12 +29,14 @@ class TableName {
   final depensesTable = 'depenses';
   final dettesTable = 'dettes';
   final finExterieursTable = 'fin_exterieurs';
-
+ 
   // COMPTABILITE
-  final amortissementsTable = 'amortissements';
   final bilansTable = 'bilans';
   final journalsTable = 'journals';
-  final valorisationTable = 'valorisations';
+  final comptesResultatTable = 'comptes_resultat';
+  final balanceComptesTable = 'balance_comptes';
+
+  // DEVIS
   final devisTable = 'devis';
 
   // BUDGET
@@ -414,114 +416,96 @@ class TableName {
         );
       ''');
 
-      // comptabilite amortissement
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $amortissementsTable(
-          "id" $key,
-          "titleArmotissement" $vachar,
-          "comptes" $vachar,
-          "intitule" $vachar,
-          "montant" $vachar,
-          "typeJournal" $vachar,
-          
-          "approbationDG" $vachar,
-          "signatureDG" $vachar,
-          "signatureJustificationDG" $vachar,
-          "approbationFin" $vachar,
-          "signatureFin" $vachar,
-          "signatureJustificationFin" $vachar,
-          "approbationBudget" $vachar,
-          "signatureBudget" $vachar,
-          "signatureJustificationBudget" $vachar,
-          "approbationDD" $vachar,
-          "signatureDD" $vachar,
-          "signatureJustificationDD" $vachar,
-          "signature" $vachar,
-          "created" $timestamp
-        );
-      ''');
-
-      // comptabilite ilans
+      // comptabilite bilans
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $bilansTable(
           "id" $key,
           "titleBilan" $vachar,
-          "comptes" $vachar,
-          "intitule" $vachar,
-          "montant" $vachar,
-          "typeBilan" $vachar,
+          "comptesActif" $list,
+          "comptesPactif" $list,
+          "statut" $boolean,
           
           "approbationDG" $vachar,
           "signatureDG" $vachar,
           "signatureJustificationDG" $vachar,
-          "approbationFin" $vachar,
-          "signatureFin" $vachar,
-          "signatureJustificationFin" $vachar,
-          "approbationBudget" $vachar,
-          "signatureBudget" $vachar,
-          "signatureJustificationBudget" $vachar,
+      
           "approbationDD" $vachar,
           "signatureDD" $vachar,
           "signatureJustificationDD" $vachar,
+
           "signature" $vachar,
           "created" $timestamp
         );
       ''');
 
       // comptabilite journals
-      await connection.query('''
+       await connection.query('''
         CREATE TABLE IF NOT EXISTS $journalsTable(
           "id" $key,
-          "titleBilan" $vachar,
-          "comptes" $vachar,
-          "intitule" $vachar,
-          "montant" $vachar,
-          "typeJournal" $vachar,
-
-          "approbationDG" $vachar,
-          "signatureDG" $vachar,
-          "signatureJustificationDG" $vachar,
-          "approbationFin" $vachar,
-          "signatureFin" $vachar,
-          "signatureJustificationFin" $vachar,
-          "approbationBudget" $vachar,
-          "signatureBudget" $vachar,
-          "signatureJustificationBudget" $vachar,
-          "approbationDD" $vachar,
-          "signatureDD" $vachar,
-          "signatureJustificationDD" $vachar,
-          "signature" $vachar,
-          "created" $timestamp
-        );
-      ''');
-
-      // comptabilite valorisation
-      await connection.query('''
-        CREATE TABLE IF NOT EXISTS $valorisationTable(
-          "id" $key,
-          "numeroOrdre" $vachar,
-          "intitule" $vachar,
-          "quantite" $vachar,
-          "prixUnitaire" $vachar,
-          "prixTotal" $vachar,
-          "source" $vachar,
+          "libele" $vachar,
+          "compteDebit" $vachar,
+          "montantDebit" $vachar,
+          "compteCredit" $vachar,
+          "montantCredit" $vachar,
+          "remarque" $vachar,
+          "statut" $boolean,
           
           "approbationDG" $vachar,
           "signatureDG" $vachar,
           "signatureJustificationDG" $vachar,
-          "approbationFin" $vachar,
-          "signatureFin" $vachar,
-          "signatureJustificationFin" $vachar,
-          "approbationBudget" $vachar,
-          "signatureBudget" $vachar,
-          "signatureJustificationBudget" $vachar,
+      
           "approbationDD" $vachar,
           "signatureDD" $vachar,
           "signatureJustificationDD" $vachar,
+          
           "signature" $vachar,
           "created" $timestamp
         );
       ''');
+    
+
+      // comptabilite Compte resultat
+       await connection.query('''
+        CREATE TABLE IF NOT EXISTS $comptesResultatTable(
+          "id" $key,
+          "intitule" $vachar,
+          "compteListDebit" $list,
+          "compteListCredit" $list,
+          "statut" $boolean,
+          
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+      
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+
+      // comptabilite balance comptes
+       await connection.query('''
+        CREATE TABLE IF NOT EXISTS $balanceComptesTable(
+          "id" $key,
+          "comptes" $list,
+          "statut" $boolean,
+          
+          "approbationDG" $vachar,
+          "signatureDG" $vachar,
+          "signatureJustificationDG" $vachar,
+      
+          "approbationDD" $vachar,
+          "signatureDD" $vachar,
+          "signatureJustificationDD" $vachar,
+
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+     
 
       // Devis
       await connection.query('''

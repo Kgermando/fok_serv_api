@@ -1,11 +1,8 @@
-class JournalModel {
+class CompteResulatsModel {
   late int? id;
-  late String libele;
-  late String compteDebit; 
-  late String montantDebit;
-  late String compteCredit;
-  late String montantCredit;
-  late String remarque;
+  late String intitule;
+  late List compteListDebit;
+  late List compteListCredit;
   late bool statut;
 
   late String approbationDG; // button radio OUi et NON if non text field
@@ -15,18 +12,14 @@ class JournalModel {
   late String approbationDD;
   late String signatureDD; // directeur de departement
   late String signatureJustificationDD;
-  
   late String signature;
   late DateTime created;
 
-  JournalModel(
+  CompteResulatsModel(
       {this.id,
-      required this.libele,
-      required this.compteDebit,
-      required this.montantDebit,
-      required this.compteCredit,
-      required this.montantCredit,
-      required this.remarque,
+      required this.intitule,
+      required this.compteListDebit,
+      required this.compteListCredit,
       required this.statut,
       required this.approbationDG,
       required this.signatureDG,
@@ -37,35 +30,29 @@ class JournalModel {
       required this.signature,
       required this.created});
 
-  factory JournalModel.fromSQL(List<dynamic> row) {
-    return JournalModel(
+  factory CompteResulatsModel.fromSQL(List<dynamic> row) {
+    return CompteResulatsModel(
         id: row[0],
-        libele: row[1],
-        compteDebit: row[2],
-        montantDebit: row[3],
-        compteCredit: row[4],
-        montantCredit: row[5],
-        remarque: row[6],
-        statut: row[7],
-        approbationDG: row[8],
-        signatureDG: row[9],
-        signatureJustificationDG: row[10],
-        approbationDD: row[11],
-        signatureDD: row[12],
-        signatureJustificationDD: row[13],
-        signature: row[14],
-        created: row[15]);
+        intitule: row[1],
+        compteListDebit: row[2],
+        compteListCredit: row[3],
+        statut: row[4],
+        approbationDG: row[5],
+        signatureDG: row[6],
+        signatureJustificationDG: row[7],
+        approbationDD: row[8],
+        signatureDD: row[9],
+        signatureJustificationDD: row[10],
+        signature: row[11],
+        created: row[12]);
   }
 
-  factory JournalModel.fromJson(Map<String, dynamic> json) {
-    return JournalModel(
+  factory CompteResulatsModel.fromJson(Map<String, dynamic> json) {
+    return CompteResulatsModel(
         id: json['id'],
-        libele: json['libele'],
-        compteDebit: json['compteDebit'],
-        montantDebit: json['montantDebit'],
-        compteCredit: json['compteCredit'],
-        montantCredit: json['montantCredit'],
-        remarque: json['remarque'],
+        intitule: json['intitule'],
+        compteListDebit: json['compteListDebit'],
+        compteListCredit: json['compteListCredit'],
         statut: json['statut'],
         approbationDG: json['approbationDG'],
         signatureDG: json['signatureDG'],
@@ -80,12 +67,9 @@ class JournalModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'libele': libele,
-      'compteDebit': compteDebit,
-      'montantDebit': montantDebit,
-      'compteCredit': compteCredit,
-      'montantCredit': montantCredit,
-      'remarque': remarque,
+      'intitule': intitule,
+      'compteListDebit': compteListDebit,
+      'compteListCredit': compteListCredit,
       'statut': statut,
       'approbationDG': approbationDG,
       'signatureDG': signatureDG,
@@ -98,3 +82,4 @@ class JournalModel {
     };
   }
 }
+

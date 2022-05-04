@@ -28,10 +28,10 @@ import 'handlers/comm_marketing/commercial/ventes_handlers.dart';
 import 'handlers/comm_marketing/marketing/agenda_handlers.dart';
 import 'handlers/comm_marketing/marketing/annuaire_handlers.dart';
 import 'handlers/comm_marketing/marketing/campaign_handlers.dart';
-import 'handlers/comptabilites/amortissement_handlers.dart';
+import 'handlers/comptabilites/balance_comptes_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
+import 'handlers/comptabilites/compte_resultat_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
-import 'handlers/comptabilites/valorisation_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
 import 'handlers/exploitations/projet_handlers.dart';
 import 'handlers/exploitations/rapport_hanlders.dart';
@@ -162,14 +162,9 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(FinExterieurHandlers(repos).router));
 
-    router.mount(
-        '/api/comptabilite/amortissements/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(AmortissementHandlers(repos).router));
 
+
+// COMPTABILITE
     router.mount(
         '/api/comptabilite/bilans/',
         Pipeline()
@@ -185,13 +180,22 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(JournalHandlers(repos).router));
     router.mount(
-        '/api/comptabilite/valorisations/',
+        '/api/comptabilite/comptes_resultat/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(ValorisationHandlers(repos).router));
+            .addHandler(CompteResultatHandlers(repos).router));
+    router.mount(
+        '/api/comptabilite/balance_comptes/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(BalanceComptesHandlers(repos).router));
     
+
+
 
     // Budgets
     router.mount(
