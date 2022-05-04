@@ -52,7 +52,6 @@ class ProduitModelHandlers {
         approbationDD: input['approbationDD'],
         signatureDD: input['signatureDD'],
         signatureJustificationDD: input['signatureJustificationDD'],
-        succursale: input['succursale'],
         signature: input['signature'],
         created: DateTime.parse(input['created'])  
           
@@ -128,9 +127,6 @@ class ProduitModelHandlers {
       }
       if (input['signatureJustificationDD'] != null) {
         data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
-      if (input['succursale'] != null) {
-        data.succursale = input['succursale'];
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];

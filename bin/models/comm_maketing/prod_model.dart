@@ -6,6 +6,7 @@ class ProductModel {
   late String sousCategorie3;
   late String sousCategorie4;
   late String idProduct;
+
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;
@@ -21,7 +22,6 @@ class ProductModel {
   late String approbationDD;
   late String signatureDD; // directeur de departement
   late String signatureJustificationDD;
-  late String succursale;
   late String signature; // celui qui fait le document
   late DateTime created;
 
@@ -45,7 +45,6 @@ class ProductModel {
     required this.approbationDD,
     required this.signatureDD,
     required this.signatureJustificationDD,
-    required this.succursale,
     required this.signature,
     required this.created
   });
@@ -72,9 +71,8 @@ class ProductModel {
       approbationDD: row[16],
       signatureDD: row[17],
       signatureJustificationDD: row[18],
-      succursale: row[26],
-      signature: row[27],
-      created: row[28]
+      signature: row[19],
+      created: row[20]
     );
   }
 
@@ -100,7 +98,6 @@ class ProductModel {
       approbationDD: json['approbationDD'],
       signatureDD: json['signatureDD'],
       signatureJustificationDD: json['signatureJustificationDD'],
-      succursale: json['succursale'],
       signature: json['signature'],
       created: DateTime.parse(json['created'])
     );
@@ -127,7 +124,6 @@ class ProductModel {
       'approbationDD': approbationDD,
       'signatureDD': signatureDD,
       'signatureJustificationDD': signatureJustificationDD,
-      'succursale': succursale,
       'signature': signature,
       'created': created.toIso8601String()
     };

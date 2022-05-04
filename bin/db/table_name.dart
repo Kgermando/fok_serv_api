@@ -57,7 +57,7 @@ class TableName {
   final trajetTable = 'trajets';
 
   // COMMERCIAL & MARKETING
-  final modelTable = 'models_produits';
+  final modelTable = 'produits_model';
   final stocksGlobalTable = 'stocks_global';
   final succursaleTable = 'succursales';
   final bonLivraisonTable = 'bon_livraisons';

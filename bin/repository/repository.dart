@@ -153,7 +153,7 @@ class Repository {
     trajets = TrajetRepository(executor, 'trajets');
 
     // COMMERCIAL & MARKETING
-    produitModel = ProduitModelRepository(executor, 'models_produits');
+    produitModel = ProduitModelRepository(executor, 'produits_model');
     stocksGlobal = StockGlobalRepository(executor, 'stocks_global');
     succursales = SuccursaleRepository(executor, 'succursales');
     bonLivraison = BonLivraisonRepository(executor, 'bon_livraisons');

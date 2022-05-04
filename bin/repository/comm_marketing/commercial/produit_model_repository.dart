@@ -45,7 +45,6 @@ class ProduitModelRepository {
     var signatureDD = productModel.signatureDD;
     var signatureJustificationDD =
         productModel.signatureJustificationDD;
-    var succursale = productModel.succursale;
     var signature = productModel.signature;
     var created = productModel.created;
 
@@ -53,12 +52,12 @@ class ProduitModelRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('models_produits_id_seq'), '$categorie',"
+        "INSERT INTO $tableName VALUES (nextval('produits_model_id_seq'), '$categorie',"
         "'$sousCategorie1','$sousCategorie2','$sousCategorie3','$sousCategorie4', '$idProduct',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-          "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-          "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-          "'$signatureDD', '$signatureJustificationDD', '$succursale'"
+        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
+        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
+        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -87,7 +86,6 @@ class ProduitModelRepository {
     var approbationDD = productModel.approbationDD;
     var signatureDD = productModel.signatureDD;
     var signatureJustificationDD = productModel.signatureJustificationDD;
-    var succursale = productModel.succursale;
     var signature = productModel.signature;
     var created = productModel.created;
 
@@ -106,7 +104,7 @@ class ProduitModelRepository {
           "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
           "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
           "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-          "\"signatureJustificationDD\"='$signatureJustificationDD', \"succursale\"='$succursale',"
+          "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -145,9 +143,8 @@ class ProduitModelRepository {
       approbationDD: data[0][16],
       signatureDD: data[0][17],
       signatureJustificationDD: data[0][18],
-      succursale: data[0][19],
-      signature: data[0][20],
-      created: data[0][21]
+      signature: data[0][19],
+      created: data[0][20]
     );
   } 
   
