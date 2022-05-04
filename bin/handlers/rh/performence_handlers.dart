@@ -19,6 +19,18 @@ class PerformenceHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/<id>', (Request request, String id) async {
+      late PerformenceModel data;
+      try {
+        data = await repos.performences.getFromId(int.parse(id));
+      } catch (e) {
+        print(e);
+        return Response(404);
+      }
+      return Response.ok(jsonEncode(data.toJson()));
+    });
+
+
     router.post('/insert-new-performence', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 

@@ -42,6 +42,7 @@ class PaiementSalaireModel {
   late String netAPayer;
   late String montantPrisConsiderationCalculCotisationsINSS;
   late String totalDuBrut;
+  
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;

@@ -28,6 +28,8 @@ class CampaignRepository {
     var lieuCible = data.lieuCible;
     var promotion = data.promotion;
     var objetctifs = data.objetctifs;
+    var ligneBudgtaire = data.ligneBudgtaire;
+    var resources = data.resources;
 
     var approbationDG = data.approbationDG;
     var signatureDG = data.signatureDG;
@@ -56,7 +58,7 @@ class CampaignRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('campaigns_id_seq'), '$typeProduit',"
         "'$dateDebutEtFin','$agentAffectes','$coutCampaign', '$lieuCible', '$promotion',"
-        "'$objetctifs',"
+        "'$objetctifs', '$ligneBudgtaire', '$resources',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
         "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
         "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
@@ -74,6 +76,8 @@ class CampaignRepository {
     var lieuCible = data.lieuCible;
     var promotion = data.promotion;
     var objetctifs = data.objetctifs;
+    var ligneBudgtaire = data.ligneBudgtaire;
+    var resources = data.resources;
 
     var approbationDG = data.approbationDG;
     var signatureDG = data.signatureDG;
@@ -103,7 +107,7 @@ class CampaignRepository {
           "UPDATE $tableName SET \"typeProduit\"='$typeProduit', "
           "\"dateDebutEtFin\"='$dateDebutEtFin',\"agentAffectes\"='$agentAffectes',"
           "\"coutCampaign\"='$coutCampaign', \"lieuCible\"='$lieuCible', \"promotion\"='$promotion',"
-          "\"objetctifs\"='$objetctifs',"
+          "\"objetctifs\"='$objetctifs', \"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
           "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
           "\"signatureJustificationDG\"='$signatureJustificationDG',"
           "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
@@ -139,20 +143,22 @@ class CampaignRepository {
       lieuCible: data[0][5],
       promotion: data[0][6],
       objetctifs: data[0][7],
-      approbationDG: data[0][8],
-      signatureDG: data[0][9],
-      signatureJustificationDG: data[0][10],
-      approbationFin: data[0][11],
-      signatureFin: data[0][12],
-      signatureJustificationFin: data[0][13],
-      approbationBudget: data[0][14],
-      signatureBudget: data[0][15],
-      signatureJustificationBudget: data[0][16],
-      approbationDD: data[0][17],
-      signatureDD: data[0][18],
-      signatureJustificationDD: data[0][19],
-      signature: data[0][20],
-      created: data[0][21]
+      ligneBudgtaire: data[0][8],
+      resources: data[0][9],
+      approbationDG: data[0][10],
+      signatureDG: data[0][11],
+      signatureJustificationDG: data[0][12],
+      approbationFin: data[0][13],
+      signatureFin: data[0][14],
+      signatureJustificationFin: data[0][15],
+      approbationBudget: data[0][16],
+      signatureBudget: data[0][17],
+      signatureJustificationBudget: data[0][18],
+      approbationDD: data[0][19],
+      signatureDD: data[0][20],
+      signatureJustificationDD: data[0][21],
+      signature: data[0][22],
+      created: data[0][23]
     );
   } 
 }

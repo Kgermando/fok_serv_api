@@ -41,6 +41,8 @@ class CampaignHandlers {
         lieuCible: input['lieuCible'],
         promotion: input['promotion'],
         objetctifs: input['objetctifs'],
+        ligneBudgtaire: input['ligneBudgtaire'],
+        resources: input['resources'],
         approbationDG: input['approbationDG'],
         signatureDG: input['signatureDG'],
         signatureJustificationDG: input['signatureJustificationDG'],
@@ -90,6 +92,12 @@ class CampaignHandlers {
       }
       if (input['objetctifs'] != null) {
         data.objetctifs = input['objetctifs'];
+      }
+      if (input['ligneBudgtaire'] != null) {
+        data.ligneBudgtaire = input['ligneBudgtaire'];
+      }
+      if (input['resources'] != null) {
+        data.resources = input['resources'];
       }
       if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
