@@ -1031,6 +1031,7 @@ class TableName {
         "tva" $vachar,
         "remise" $vachar,
         "qtyRemise" $vachar,
+
         "accuseReception" $boolean,
         "accuseReceptionFirstName" $vachar,
         "accuseReceptionLastName" $vachar,
@@ -1047,6 +1048,7 @@ class TableName {
         "approbationDD" $vachar,
         "signatureDD" $vachar,
         "signatureJustificationDD" $vachar,
+        "succursale" $vachar,
         "signature" $vachar,
         "created" $timestamp
     );
@@ -1078,6 +1080,7 @@ class TableName {
         "approbationDD" $vachar,
         "signatureDD" $vachar,
         "signatureJustificationDD" $vachar,
+        "succursale" $vachar,
         "signature" $vachar,
         "created" $timestamp
     );
@@ -1107,6 +1110,7 @@ class TableName {
           "approbationDD" $vachar,
           "signatureDD" $vachar,
           "signatureJustificationDD" $vachar,
+          "succursale" $vachar,
           "signature" $vachar,
           "created" $timestamp
       );
@@ -1129,6 +1133,7 @@ class TableName {
           "approbationDD" $vachar,
           "signatureDD" $vachar,
           "signatureJustificationDD" $vachar,
+          "succursale" $vachar,
           "signature" $vachar,
           "created" $timestamp
 
@@ -1152,10 +1157,12 @@ class TableName {
             "approbationDD" $vachar,
             "signatureDD" $vachar,
             "signatureJustificationDD" $vachar,
+            "succursale" $vachar,
             "signature" $vachar,
             "created" $timestamp
           );
         ''');
+
       // Number facture
       await connection.query('''
       CREATE TABLE IF NOT EXISTS $numberFactureTable(
@@ -1189,10 +1196,12 @@ class TableName {
         "approbationDD" $vachar,
         "signatureDD" $vachar,
         "signatureJustificationDD" $vachar,
+        "succursale" $vachar,
         "signature" $vachar,
         "created" $timestamp
       );
       ''');
+
       // Gain
       await connection.query('''
       CREATE TABLE IF NOT EXISTS $gainTable(
@@ -1211,6 +1220,7 @@ class TableName {
         "approbationDD" $vachar,
         "signatureDD" $vachar,
         "signatureJustificationDD" $vachar,
+        "succursale" $vachar,
         "signature" $vachar,
         "created" $timestamp
     );
@@ -1243,6 +1253,7 @@ class TableName {
         "approbationDD" $vachar,
         "signatureDD" $vachar,
         "signatureJustificationDD" $vachar,
+        "succursale" $vachar,
         "signature" $vachar,
         "created" $timestamp
     );

@@ -10,9 +10,11 @@ class BonLivraisonModel {
   late String tva;
   late String remise;
   late String qtyRemise;
+  
   late bool accuseReception;
   late String accuseReceptionFirstName;
   late String accuseReceptionLastName;
+
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
   late String signatureJustificationDG;
