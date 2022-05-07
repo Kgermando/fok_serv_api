@@ -193,8 +193,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BalanceComptesHandlers(repos).router));
-    
-
 
 
     // Budgets

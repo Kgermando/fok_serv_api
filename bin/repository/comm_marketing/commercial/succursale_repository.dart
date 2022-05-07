@@ -51,12 +51,12 @@ class SuccursaleRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('succursales_id_seq'), '$name', $adresse', '$province',"
+        "INSERT INTO $tableName VALUES (nextval('succursales_id_seq'), '$name', '$adresse', '$province',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
         "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
         "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
         "'$signatureDD', '$signatureJustificationDD',"
-        "'$signature','$created');");
+        "'$signature', '$created');");
     });
   }
 

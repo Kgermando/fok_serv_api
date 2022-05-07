@@ -74,7 +74,7 @@ class BilanModel {
       'id': id,
       'titleBilan': titleBilan,
       'comptesActif': comptesActif,
-      'moncomptesPactiftant': comptesPactif,
+      'comptesPactif': comptesPactif,
       'statut': statut,
       'approbationDG': approbationDG,
       'signatureDG': signatureDG,
