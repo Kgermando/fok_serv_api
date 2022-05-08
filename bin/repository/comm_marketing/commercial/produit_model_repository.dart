@@ -25,26 +25,16 @@ class ProduitModelRepository {
     var sousCategorie2 = productModel.sousCategorie2;
     var sousCategorie3 = productModel.sousCategorie3;
     var sousCategorie4 = productModel.sousCategorie4;
-    var idProduct = productModel.idProduct;
+
     var approbationDG = productModel.approbationDG;
     var signatureDG = productModel.signatureDG;
-    var signatureJustificationDG =
-        productModel.signatureJustificationDG;
-
-    var approbationFin = productModel.approbationFin;
-    var signatureFin = productModel.signatureFin;
-    var signatureJustificationFin =
-        productModel.signatureJustificationFin;
-
-    var approbationBudget = productModel.approbationBudget;
-    var signatureBudget = productModel.signatureBudget;
-    var signatureJustificationBudget =
-        productModel.signatureJustificationBudget;
+    var signatureJustificationDG = productModel.signatureJustificationDG;
 
     var approbationDD = productModel.approbationDD;
     var signatureDD = productModel.signatureDD;
-    var signatureJustificationDD =
-        productModel.signatureJustificationDD;
+    var signatureJustificationDD = productModel.signatureJustificationDD;
+
+    var idProduct = productModel.idProduct;
     var signature = productModel.signature;
     var created = productModel.created;
 
@@ -54,10 +44,8 @@ class ProduitModelRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('produits_model_id_seq'), '$categorie',"
         "'$sousCategorie1','$sousCategorie2','$sousCategorie3','$sousCategorie4', '$idProduct',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
+        "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -69,23 +57,16 @@ class ProduitModelRepository {
     var sousCategorie2 = productModel.sousCategorie2;
     var sousCategorie3 = productModel.sousCategorie3;
     var sousCategorie4 = productModel.sousCategorie4;
-    var idProduct = productModel.idProduct;
-    var approbationDG = productModel.approbationDG;
+
+      var approbationDG = productModel.approbationDG;
     var signatureDG = productModel.signatureDG;
     var signatureJustificationDG = productModel.signatureJustificationDG;
-
-    var approbationFin = productModel.approbationFin;
-    var signatureFin = productModel.signatureFin;
-    var signatureJustificationFin = productModel.signatureJustificationFin;
-
-    var approbationBudget = productModel.approbationBudget;
-    var signatureBudget = productModel.signatureBudget;
-    var signatureJustificationBudget =
-        productModel.signatureJustificationBudget;
 
     var approbationDD = productModel.approbationDD;
     var signatureDD = productModel.signatureDD;
     var signatureJustificationDD = productModel.signatureJustificationDD;
+
+    var idProduct = productModel.idProduct;
     var signature = productModel.signature;
     var created = productModel.created;
 
@@ -98,13 +79,9 @@ class ProduitModelRepository {
         "\"sousCategorie3\"='$sousCategorie3', \"sousCategorie4\"='$sousCategorie4',"
         "\"idProduct\"='$idProduct',"
         "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-          "\"signatureJustificationDG\"='$signatureJustificationDG',"
-          "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-          "\"signatureJustificationFin\"='$signatureJustificationFin',"
-          "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-          "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-          "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"signatureJustificationDG\"='$signatureJustificationDG',"
+        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -130,21 +107,15 @@ class ProduitModelRepository {
       sousCategorie2: data[0][3],
       sousCategorie3: data[0][4],
       sousCategorie4: data[0][5],
-      idProduct: data[0][6],
-      approbationDG: data[0][7],
-      signatureDG: data[0][8],
-      signatureJustificationDG: data[0][9],
-      approbationFin: data[0][10],
-      signatureFin: data[0][11],
-      signatureJustificationFin: data[0][12],
-      approbationBudget: data[0][13],
-      signatureBudget: data[0][14],
-      signatureJustificationBudget: data[0][15],
-      approbationDD: data[0][16],
-      signatureDD: data[0][17],
-      signatureJustificationDD: data[0][18],
-      signature: data[0][19],
-      created: data[0][20]
+      approbationDG: data[0][6],
+      signatureDG: data[0][7],
+      signatureJustificationDG: data[0][8],
+      approbationDD: data[0][9],
+      signatureDD: data[0][10],
+      signatureJustificationDD: data[0][11],
+      idProduct: data[0][12],
+      signature: data[0][13],
+      created: data[0][14]
     );
   } 
   

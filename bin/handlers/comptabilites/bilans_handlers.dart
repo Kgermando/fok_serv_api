@@ -30,8 +30,7 @@ class BilansHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-bilan',
-        (Request request) async {
+    router.post('/insert-new-bilan', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       BilanModel data = BilanModel(
@@ -46,8 +45,7 @@ class BilansHandlers {
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-      );
+          created: DateTime.parse(input['created']));
       try {
         await repos.bilans.insertData(data);
       } catch (e) {
@@ -57,12 +55,10 @@ class BilansHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-bilan/<id>',
-        (Request request, String id) async {
+    router.put('/update-bilan/<id>', (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
-      BilanModel data =
-          await repos.bilans.getFromId(int.parse(id!));
+      BilanModel data = await repos.bilans.getFromId(int.parse(id!));
 
       if (input['titleBilan'] != null) {
         data.titleBilan = input['titleBilan'];
@@ -76,7 +72,7 @@ class BilansHandlers {
       if (input['statut'] != null) {
         data.statut = input['statut'] as bool;
       }
-       if (input['approbationDG'] != null) {
+      if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }
       if (input['signatureDG'] != null) {
@@ -106,8 +102,7 @@ class BilansHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-bilan/<id>',
-        (String id, Request request) async {
+    router.delete('/delete-bilan/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.bilans.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -115,8 +110,7 @@ class BilansHandlers {
 
     router.all(
       '/<ignored|.*>',
-      (Request request) =>
-          Response.notFound('La Page bilan n\'est pas trouvé'),
+      (Request request) => Response.notFound('La Page bilan n\'est pas trouvé'),
     );
 
     return router;

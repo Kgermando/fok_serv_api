@@ -14,7 +14,6 @@ class VenteHandlers {
   Router get router {
     final router = Router();
 
-
     router.get('/', (Request request) async {
       List<VenteCartModel> data = await repos.ventes.getAllData();
       return Response.ok(jsonEncode(data));
@@ -42,22 +41,9 @@ class VenteHandlers {
           tva: input['tva'],
           remise: input['remise'],
           qtyRemise: input['qtyRemise'],
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationFin: input['approbationFin'],
-          signatureFin: input['signatureFin'],
-          signatureJustificationFin: input['signatureJustificationFin'],
-          approbationBudget: input['approbationBudget'],
-          signatureBudget: input['signatureBudget'],
-          signatureJustificationBudget: input['signatureJustificationBudget'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-        );
+          created: DateTime.parse(input['created']));
       try {
         await repos.ventes.insertData(data);
       } catch (e) {
@@ -93,46 +79,6 @@ class VenteHandlers {
       if (input['qtyRemise'] != null) {
         data.qtyRemise = input['qtyRemise'];
       }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-
-      if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
-      }
-
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
       if (input['succursale'] != null) {
         data.succursale = input['succursale'];
       }
@@ -146,7 +92,7 @@ class VenteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-vente/<id>', (String id, Request request) async {
+    router.delete('/delete-vente/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.ventes.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

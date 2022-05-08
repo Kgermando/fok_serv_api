@@ -57,8 +57,7 @@ class CaissesHandlers {
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-      );
+          created: DateTime.parse(input['created']));
       try {
         await repos.caisses.insertData(data);
       } catch (e) {
@@ -68,7 +67,8 @@ class CaissesHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-caisse/<id>', (Request request, String id) async {
+    router.put('/update-transaction-caisse/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       CaisseModel data = await repos.caisses.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
@@ -103,7 +103,7 @@ class CaissesHandlers {
       if (input['numeroOperation'] != null) {
         data.numeroOperation = input['numeroOperation'];
       }
-       if (input['approbationDG'] != null) {
+      if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }
       if (input['signatureDG'] != null) {
@@ -154,7 +154,8 @@ class CaissesHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-caisse/<id>', (String id, Request request) async {
+    router.delete('/delete-transaction-caisse/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.caisses.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

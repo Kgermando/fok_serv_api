@@ -22,25 +22,6 @@ class GainRepository {
 
   Future<void> insertData(GainModel gainModel) async {
     var sum = gainModel.sum;
-    var approbationDG = gainModel.approbationDG;
-    var signatureDG = gainModel.signatureDG;
-    var signatureJustificationDG =
-        gainModel.signatureJustificationDG;
-
-    var approbationFin = gainModel.approbationFin;
-    var signatureFin = gainModel.signatureFin;
-    var signatureJustificationFin =
-        gainModel.signatureJustificationFin;
-
-    var approbationBudget = gainModel.approbationBudget;
-    var signatureBudget = gainModel.signatureBudget;
-    var signatureJustificationBudget =
-        gainModel.signatureJustificationBudget;
-
-    var approbationDD = gainModel.approbationDD;
-    var signatureDD = gainModel.signatureDD;
-    var signatureJustificationDD =
-        gainModel.signatureJustificationDD;
     var succursale = gainModel.succursale;
     var signature = gainModel.signature;
     var created = gainModel.created;
@@ -49,32 +30,13 @@ class GainRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('gains_id_seq'), '$sum',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-          "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-          "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-          "'$signatureDD', '$signatureJustificationDD', '$succursale',"
-        "'$signature','$created');");
+        "'$succursale', '$signature','$created');");
     });
   }
 
   Future<void> update(GainModel gainModel) async {
     var id = gainModel.id;
     var sum = gainModel.sum;
-    var approbationDG = gainModel.approbationDG;
-    var signatureDG = gainModel.signatureDG;
-    var signatureJustificationDG = gainModel.signatureJustificationDG;
-
-    var approbationFin = gainModel.approbationFin;
-    var signatureFin = gainModel.signatureFin;
-    var signatureJustificationFin = gainModel.signatureJustificationFin;
-
-    var approbationBudget = gainModel.approbationBudget;
-    var signatureBudget = gainModel.signatureBudget;
-    var signatureJustificationBudget = gainModel.signatureJustificationBudget;
-
-    var approbationDD = gainModel.approbationDD;
-    var signatureDD = gainModel.signatureDD;
-    var signatureJustificationDD = gainModel.signatureJustificationDD;
     var succursale = gainModel.succursale;
     var signature = gainModel.signature;
     var created = gainModel.created;
@@ -83,14 +45,7 @@ class GainRepository {
       // ignore: unused_local_variable
       var result = await conn.execute(
         "UPDATE $tableName SET \"sum\"='$sum',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD', \"succursale\"='$succursale',"
+        "\"succursale\"='$succursale',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -112,21 +67,9 @@ class GainRepository {
     return GainModel(
       id: data[0][0],
       sum: data[0][1],
-       approbationDG: data[0][2],
-        signatureDG: data[0][3],
-        signatureJustificationDG: data[0][4],
-        approbationFin: data[0][5],
-        signatureFin: data[0][6],
-        signatureJustificationFin: data[0][7],
-        approbationBudget: data[0][8],
-        signatureBudget: data[0][9],
-        signatureJustificationBudget: data[0][10],
-        approbationDD: data[0][11],
-        signatureDD: data[0][12],
-        signatureJustificationDD: data[0][13],
-        signature: data[0][14],
-        succursale: data[0][15],
-        created: data[0][16]
+        signature: data[0][2],
+        succursale: data[0][3],
+        created: data[0][4]
     );
   } 
 }

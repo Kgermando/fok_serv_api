@@ -14,7 +14,6 @@ class StockGlobalHandlers {
   Router get router {
     final router = Router();
 
-
     router.get('/', (Request request) async {
       List<StocksGlobalMOdel> data = await repos.stocksGlobal.getAllData();
       return Response.ok(jsonEncode(data));
@@ -44,21 +43,8 @@ class StockGlobalHandlers {
           modeAchat: input['modeAchat'] as bool,
           tva: input['tva'],
           qtyRavitailler: input['qtyRavitailler'],
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationFin: input['approbationFin'],
-          signatureFin: input['signatureFin'],
-          signatureJustificationFin: input['signatureJustificationFin'],
-          approbationBudget: input['approbationBudget'],
-          signatureBudget: input['signatureBudget'],
-          signatureJustificationBudget: input['signatureJustificationBudget'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-        );
+          created: DateTime.parse(input['created']));
       try {
         await repos.stocksGlobal.insertData(data);
       } catch (e) {
@@ -68,9 +54,11 @@ class StockGlobalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-stocks-global/<id>', (Request request, String id) async {
+    router.put('/update-stocks-global/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
-      StocksGlobalMOdel data = await repos.stocksGlobal.getFromId(int.parse(id!));
+      StocksGlobalMOdel data =
+          await repos.stocksGlobal.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['idProduct'] != null) {
@@ -100,46 +88,6 @@ class StockGlobalHandlers {
       if (input['qtyRavitailler'] != null) {
         data.qtyRavitailler = input['qtyRavitailler'];
       }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-
-      if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
-      }
-
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
@@ -150,7 +98,8 @@ class StockGlobalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-stocks-global/<id>', (String id, Request request) async {
+    router.delete('/delete-stocks-global/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.stocksGlobal.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

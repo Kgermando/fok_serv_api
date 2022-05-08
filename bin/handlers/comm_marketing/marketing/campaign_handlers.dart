@@ -34,30 +34,29 @@ class CampaignHandlers {
       var input = jsonDecode(await request.readAsString());
 
       CampaignModel data = CampaignModel(
-        typeProduit: input['typeProduit'],
-        dateDebutEtFin: input['dateDebutEtFin'],
-        agentAffectes: input['agentAffectes'],
-        coutCampaign: input['coutCampaign'],
-        lieuCible: input['lieuCible'],
-        promotion: input['promotion'],
-        objetctifs: input['objetctifs'],
-        ligneBudgtaire: input['ligneBudgtaire'],
-        resources: input['resources'],
-        approbationDG: input['approbationDG'],
-        signatureDG: input['signatureDG'],
-        signatureJustificationDG: input['signatureJustificationDG'],
-        approbationFin: input['approbationFin'],
-        signatureFin: input['signatureFin'],
-        signatureJustificationFin: input['signatureJustificationFin'],
-        approbationBudget: input['approbationBudget'],
-        signatureBudget: input['signatureBudget'],
-        signatureJustificationBudget: input['signatureJustificationBudget'],
-        approbationDD: input['approbationDD'],
-        signatureDD: input['signatureDD'],
-        signatureJustificationDD: input['signatureJustificationDD'],
-        signature: input['signature'],
-        created: DateTime.parse(input['created'])
-      );
+          typeProduit: input['typeProduit'],
+          dateDebutEtFin: input['dateDebutEtFin'],
+          agentAffectes: input['agentAffectes'],
+          coutCampaign: input['coutCampaign'],
+          lieuCible: input['lieuCible'],
+          promotion: input['promotion'],
+          objetctifs: input['objetctifs'],
+          ligneBudgtaire: input['ligneBudgtaire'],
+          resources: input['resources'],
+          approbationDG: input['approbationDG'],
+          signatureDG: input['signatureDG'],
+          signatureJustificationDG: input['signatureJustificationDG'],
+          approbationFin: input['approbationFin'],
+          signatureFin: input['signatureFin'],
+          signatureJustificationFin: input['signatureJustificationFin'],
+          approbationBudget: input['approbationBudget'],
+          signatureBudget: input['signatureBudget'],
+          signatureJustificationBudget: input['signatureJustificationBudget'],
+          approbationDD: input['approbationDD'],
+          signatureDD: input['signatureDD'],
+          signatureJustificationDD: input['signatureJustificationDD'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
       try {
         await repos.campaigns.insertData(data);
       } catch (e) {
@@ -149,7 +148,7 @@ class CampaignHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-campaign/<id>', (String id, Request request) async {
+    router.delete('/delete-campaign/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.campaigns.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

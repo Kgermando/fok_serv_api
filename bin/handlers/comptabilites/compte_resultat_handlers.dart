@@ -7,7 +7,7 @@ import '../../models/comptabilites/compte_resultat_model.dart';
 import '../../repository/repository.dart';
 
 class CompteResultatHandlers {
-   final Repository repos;
+  final Repository repos;
 
   CompteResultatHandlers(this.repos);
 
@@ -30,8 +30,7 @@ class CompteResultatHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-compte-resultat',
-        (Request request) async {
+    router.post('/insert-new-compte-resultat', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       CompteResulatsModel data = CompteResulatsModel(
@@ -46,8 +45,7 @@ class CompteResultatHandlers {
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-      );
+          created: DateTime.parse(input['created']));
       try {
         await repos.comptesResultat.insertData(data);
       } catch (e) {
@@ -76,7 +74,7 @@ class CompteResultatHandlers {
       if (input['statut'] != null) {
         data.statut = input['statut'] as bool;
       }
-       if (input['approbationDG'] != null) {
+      if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }
       if (input['signatureDG'] != null) {
@@ -107,7 +105,7 @@ class CompteResultatHandlers {
     });
 
     router.delete('/delete-compte-resultat/<id>',
-        (String id, Request request) async {
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.comptesResultat.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

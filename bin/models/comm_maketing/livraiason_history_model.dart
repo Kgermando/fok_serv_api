@@ -12,18 +12,6 @@ class LivraisonHistoryModel {
   late String qtyRemise;
   late String margeBenRemise;
   late String qtyLivre;
-  late String approbationDG; // button radio OUi et NON if non text field
-  late String signatureDG;
-  late String signatureJustificationDG;
-  late String approbationFin;
-  late String signatureFin;
-  late String signatureJustificationFin;
-  late String approbationBudget;
-  late String signatureBudget;
-  late String signatureJustificationBudget;
-  late String approbationDD;
-  late String signatureDD; // directeur de departement
-  late String signatureJustificationDD;
   late String succursale;
   late String signature; // celui qui fait le document
   late DateTime created;
@@ -42,18 +30,6 @@ class LivraisonHistoryModel {
       required this.qtyRemise,
       required this.margeBenRemise,
       required this.qtyLivre,
-      required this.approbationDG,
-      required this.signatureDG,
-      required this.signatureJustificationDG,
-      required this.approbationFin,
-      required this.signatureFin,
-      required this.signatureJustificationFin,
-      required this.approbationBudget,
-      required this.signatureBudget,
-      required this.signatureJustificationBudget,
-      required this.approbationDD,
-      required this.signatureDD,
-      required this.signatureJustificationDD,
       required this.succursale,
       required this.signature,
       required this.created,
@@ -74,21 +50,9 @@ class LivraisonHistoryModel {
         qtyRemise: row[10],
         margeBenRemise: row[11],
         qtyLivre: row[12],
-        approbationDG: row[13],
-        signatureDG: row[14],
-        signatureJustificationDG: row[15],
-        approbationFin: row[16],
-        signatureFin: row[17],
-        signatureJustificationFin: row[18],
-        approbationBudget: row[19],
-        signatureBudget: row[20],
-        signatureJustificationBudget: row[21],
-        approbationDD: row[22],
-        signatureDD: row[23],
-        signatureJustificationDD: row[24],
-        succursale: row[25],
-        signature: row[26],
-        created: row[27]
+        succursale: row[13],
+        signature: row[14],
+        created: row[15]
       );
   }
 
@@ -107,18 +71,6 @@ class LivraisonHistoryModel {
       qtyRemise: json["qtyRemise"],
       margeBenRemise: json["qtyRemise"],
       qtyLivre: json["qtyLivre"],
-      approbationDG: json['approbationDG'],
-      signatureDG: json['signatureDG'],
-      signatureJustificationDG: json['signatureJustificationDG'],
-      approbationFin: json['approbationFin'],
-      signatureFin: json['signatureFin'],
-      signatureJustificationFin: json['signatureJustificationFin'],
-      approbationBudget: json['approbationBudget'],
-      signatureBudget: json['signatureBudget'],
-      signatureJustificationBudget: json['signatureJustificationBudget'],
-      approbationDD: json['approbationDD'],
-      signatureDD: json['signatureDD'],
-      signatureJustificationDD: json['signatureJustificationDD'],
       succursale: json['succursale'],
       signature: json['signature'],
       created: DateTime.parse(json['created'])
@@ -140,18 +92,6 @@ class LivraisonHistoryModel {
       "qtyRemise": qtyRemise,
       "margeBenRemise": qtyRemise,
       "qtyLivre": qtyLivre,
-      'approbationDG': approbationDG,
-      'signatureDG': signatureDG,
-      'signatureJustificationDG': signatureJustificationDG,
-      'approbationFin': approbationFin,
-      'signatureFin': signatureFin,
-      'signatureJustificationFin': signatureJustificationFin,
-      'approbationBudget': approbationBudget,
-      'signatureBudget': signatureBudget,
-      'signatureJustificationBudget': signatureJustificationBudget,
-      'approbationDD': approbationDD,
-      'signatureDD': signatureDD,
-      'signatureJustificationDD': signatureJustificationDD,
       'succursale': succursale,
       'signature': signature,
       'created': created.toIso8601String()

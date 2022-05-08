@@ -30,26 +30,6 @@ class HistoryRavitaillementRepository {
     var margeBen = historyRavitaillementModel.margeBen;
     var tva = historyRavitaillementModel.tva;
     var qtyRavitailler = historyRavitaillementModel.qtyRavitailler;
-    
-    var approbationDG = historyRavitaillementModel.approbationDG;
-    var signatureDG = historyRavitaillementModel.signatureDG;
-    var signatureJustificationDG =
-        historyRavitaillementModel.signatureJustificationDG;
-
-    var approbationFin = historyRavitaillementModel.approbationFin;
-    var signatureFin = historyRavitaillementModel.signatureFin;
-    var signatureJustificationFin =
-        historyRavitaillementModel.signatureJustificationFin;
-
-    var approbationBudget = historyRavitaillementModel.approbationBudget;
-    var signatureBudget = historyRavitaillementModel.signatureBudget;
-    var signatureJustificationBudget =
-        historyRavitaillementModel.signatureJustificationBudget;
-
-    var approbationDD = historyRavitaillementModel.approbationDD;
-    var signatureDD = historyRavitaillementModel.signatureDD;
-    var signatureJustificationDD =
-        historyRavitaillementModel.signatureJustificationDD;
 
     var succursale = historyRavitaillementModel.succursale;
     var signature = historyRavitaillementModel.signature;
@@ -61,10 +41,6 @@ class HistoryRavitaillementRepository {
         "INSERT INTO $tableName VALUES (nextval('history_ravitaillements_id_seq'), '$idProduct',"
         "'$quantity','$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
         "'$margeBen', '$tva', '$qtyRavitailler',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$succursale', '$signature', '$created');");
     });
   }
@@ -81,26 +57,6 @@ class HistoryRavitaillementRepository {
     var tva = historyRavitaillementModel.tva;
     var qtyRavitailler = historyRavitaillementModel.qtyRavitailler;
 
-    var approbationDG = historyRavitaillementModel.approbationDG;
-    var signatureDG = historyRavitaillementModel.signatureDG;
-    var signatureJustificationDG =
-        historyRavitaillementModel.signatureJustificationDG;
-
-    var approbationFin = historyRavitaillementModel.approbationFin;
-    var signatureFin = historyRavitaillementModel.signatureFin;
-    var signatureJustificationFin =
-        historyRavitaillementModel.signatureJustificationFin;
-
-    var approbationBudget = historyRavitaillementModel.approbationBudget;
-    var signatureBudget = historyRavitaillementModel.signatureBudget;
-    var signatureJustificationBudget =
-        historyRavitaillementModel.signatureJustificationBudget;
-
-    var approbationDD = historyRavitaillementModel.approbationDD;
-    var signatureDD = historyRavitaillementModel.signatureDD;
-    var signatureJustificationDD =
-        historyRavitaillementModel.signatureJustificationDD;
-
     var succursale = historyRavitaillementModel.succursale;
     var signature = historyRavitaillementModel.signature;
     var created = historyRavitaillementModel.created;
@@ -112,14 +68,6 @@ class HistoryRavitaillementRepository {
         "\"quantityAchat\"='$quantityAchat',\"priceAchatUnit\"='$priceAchatUnit',"
         "\"prixVenteUnit\"='$prixVenteUnit',\"unite\"='$unite', \"margeBen\"='$margeBen',"
         "\"tva\"='$tva', \"qtyRavitailler\"='$qtyRavitailler',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"succursale\"='$succursale', \"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -149,21 +97,9 @@ class HistoryRavitaillementRepository {
       margeBen: data[0][7],
       tva: data[0][8],
       qtyRavitailler: data[0][9],
-      approbationDG: data[0][10],
-      signatureDG: data[0][11],
-      signatureJustificationDG: data[0][12],
-      approbationFin: data[0][13],
-      signatureFin: data[0][14],
-      signatureJustificationFin: data[0][15],
-      approbationBudget: data[0][16],
-      signatureBudget: data[0][17],
-      signatureJustificationBudget: data[0][18],
-      approbationDD: data[0][19],
-      signatureDD: data[0][20],
-      signatureJustificationDD: data[0][21],
-      succursale: data[0][22],
-      signature: data[0][23],
-      created: data[0][24]
+      succursale: data[0][10],
+      signature: data[0][11],
+      created: data[0][12]
     );
   } 
 }

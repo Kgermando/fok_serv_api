@@ -14,9 +14,9 @@ class DepartementBudgetHandlers {
   Router get router {
     final router = Router();
 
-
-   router.get('/', (Request request) async {
-      List<DepartementBudgetModel> data = await repos.departementBudgets.getAllData();
+    router.get('/', (Request request) async {
+      List<DepartementBudgetModel> data =
+          await repos.departementBudgets.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
@@ -40,26 +40,21 @@ class DepartementBudgetHandlers {
         totalGlobalDispo: input['totalGlobalDispo'],
         totalGlobalFinExt: input['totalGlobalFinExt'],
         totalGlobalPrevisionel: input['totalGlobalPrevisionel'],
-
         approbationDG: input['approbationDG'],
         signatureDG: input['signatureDG'],
         signatureJustificationDG: input['signatureJustificationDG'],
-
         approbationFin: input['approbationFin'],
         signatureFin: input['signatureFin'],
         signatureJustificationFin: input['signatureJustificationFin'],
-
         approbationBudget: input['approbationBudget'],
         signatureBudget: input['signatureBudget'],
         signatureJustificationBudget: input['signatureJustificationBudget'],
-
         approbationDD: input['approbationDD'],
         signatureDD: input['signatureDD'],
         signatureJustificationDD: input['signatureJustificationDD'],
-
         signature: input['signature'],
         created: DateTime.parse(input['created']),
-        );
+      );
       try {
         await repos.departementBudgets.insertData(data);
       } catch (e) {
@@ -69,9 +64,11 @@ class DepartementBudgetHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-departement-budget/<id>', (Request request, String id) async {
+    router.put('/update-departement-budget/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
-      DepartementBudgetModel data = await repos.departementBudgets.getFromId(int.parse(id!));
+      DepartementBudgetModel data =
+          await repos.departementBudgets.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['departement'] != null) {
@@ -117,7 +114,8 @@ class DepartementBudgetHandlers {
         data.signatureBudget = input['signatureBudget'];
       }
       if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget = input['signatureJustificationBudget'];
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
       }
 
       if (input['approbationDD'] != null) {
@@ -130,7 +128,6 @@ class DepartementBudgetHandlers {
         data.signatureJustificationDD = input['signatureJustificationDD'];
       }
 
-
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
@@ -141,7 +138,8 @@ class DepartementBudgetHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-departement-budget/<id>', (String id, Request request) async {
+    router.delete('/delete-departement-budget/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.departementBudgets.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-
 import '../../models/finances/dette_model.dart';
 import '../../repository/repository.dart';
 
@@ -31,18 +30,17 @@ class DetteHandlers {
       return Response.ok(jsonEncode(agent.toJson()));
     });
 
-
     router.post('/insert-new-transaction-dette', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       DetteModel data = DetteModel(
-        nomComplet: input['nomComplet'],
-        pieceJustificative: input['pieceJustificative'],
-        libelle: input['libelle'],
-        montant: input['montant'],
-        numeroOperation: input['numeroOperation'],
-        statutPaie: input['statutPaie'],
-        approbationDG: input['approbationDG'],
+          nomComplet: input['nomComplet'],
+          pieceJustificative: input['pieceJustificative'],
+          libelle: input['libelle'],
+          montant: input['montant'],
+          numeroOperation: input['numeroOperation'],
+          statutPaie: input['statutPaie'],
+          approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
           approbationFin: input['approbationFin'],
@@ -55,8 +53,7 @@ class DetteHandlers {
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-      );
+          created: DateTime.parse(input['created']));
       try {
         await repos.dettes.insertData(data);
       } catch (e) {
@@ -66,7 +63,8 @@ class DetteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-dette/<id>', (Request request, String id) async {
+    router.put('/update-transaction-dette/<id>',
+        (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       DetteModel data = await repos.dettes.getFromId(int.parse(id!));
@@ -140,7 +138,8 @@ class DetteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-dette/<id>', (String id, Request request) async {
+    router.delete('/delete-transaction-dette/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.dettes.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -148,8 +147,7 @@ class DetteHandlers {
 
     router.all(
       '/<ignored|.*>',
-      (Request request) =>
-          Response.notFound('La Page dette n\'est pas trouvé'),
+      (Request request) => Response.notFound('La Page dette n\'est pas trouvé'),
     );
 
     return router;

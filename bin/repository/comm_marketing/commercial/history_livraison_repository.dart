@@ -33,26 +33,6 @@ class HistoryLivraisonRepository {
     var qtyRemise = livraisonHistoryModel.qtyRemise;
     var margeBenRemise = livraisonHistoryModel.margeBenRemise;
     var qtyLivre = livraisonHistoryModel.qtyLivre;
-    
-    var approbationDG = livraisonHistoryModel.approbationDG;
-    var signatureDG = livraisonHistoryModel.signatureDG;
-    var signatureJustificationDG =
-        livraisonHistoryModel.signatureJustificationDG;
-
-    var approbationFin = livraisonHistoryModel.approbationFin;
-    var signatureFin = livraisonHistoryModel.signatureFin;
-    var signatureJustificationFin =
-        livraisonHistoryModel.signatureJustificationFin;
-
-    var approbationBudget = livraisonHistoryModel.approbationBudget;
-    var signatureBudget = livraisonHistoryModel.signatureBudget;
-    var signatureJustificationBudget =
-        livraisonHistoryModel.signatureJustificationBudget;
-
-    var approbationDD = livraisonHistoryModel.approbationDD;
-    var signatureDD = livraisonHistoryModel.signatureDD;
-    var signatureJustificationDD =
-        livraisonHistoryModel.signatureJustificationDD;
 
     var succursale = livraisonHistoryModel.succursale;
     var signature = livraisonHistoryModel.signature;
@@ -64,10 +44,6 @@ class HistoryLivraisonRepository {
         "INSERT INTO $tableName VALUES (nextval('history_livraisons_id_seq'), '$idProduct',"
         "'$quantity','$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
         "'$margeBen', '$tva', '$remise', '$qtyRemise', '$margeBenRemise', '$qtyLivre',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$succursale', '$signature', '$created');");
     });
   }
@@ -87,26 +63,6 @@ class HistoryLivraisonRepository {
     var margeBenRemise = livraisonHistoryModel.margeBenRemise;
     var qtyLivre = livraisonHistoryModel.qtyLivre;
 
-    var approbationDG = livraisonHistoryModel.approbationDG;
-    var signatureDG = livraisonHistoryModel.signatureDG;
-    var signatureJustificationDG =
-        livraisonHistoryModel.signatureJustificationDG;
-
-    var approbationFin = livraisonHistoryModel.approbationFin;
-    var signatureFin = livraisonHistoryModel.signatureFin;
-    var signatureJustificationFin =
-        livraisonHistoryModel.signatureJustificationFin;
-
-    var approbationBudget = livraisonHistoryModel.approbationBudget;
-    var signatureBudget = livraisonHistoryModel.signatureBudget;
-    var signatureJustificationBudget =
-        livraisonHistoryModel.signatureJustificationBudget;
-
-    var approbationDD = livraisonHistoryModel.approbationDD;
-    var signatureDD = livraisonHistoryModel.signatureDD;
-    var signatureJustificationDD =
-        livraisonHistoryModel.signatureJustificationDD;
-
     var succursale = livraisonHistoryModel.succursale;
     var signature = livraisonHistoryModel.signature;
     var created = livraisonHistoryModel.created;
@@ -120,14 +76,6 @@ class HistoryLivraisonRepository {
         "\"prixVenteUnit\"='$prixVenteUnit',\"unite\"='$unite', \"margeBen\"='$margeBen',"
         "\"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise',"
         "\"margeBenRemise\"='$margeBenRemise', \"qtyLivre\"='$qtyLivre',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"succursale\"='$succursale', \"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -160,21 +108,9 @@ class HistoryLivraisonRepository {
       qtyRemise: data[0][10],
       margeBenRemise: data[0][11],
       qtyLivre: data[0][12],
-      approbationDG: data[0][13],
-      signatureDG: data[0][14],
-      signatureJustificationDG: data[0][15],
-      approbationFin: data[0][16],
-      signatureFin: data[0][17],
-      signatureJustificationFin: data[0][18],
-      approbationBudget: data[0][19],
-      signatureBudget: data[0][20],
-      signatureJustificationBudget: data[0][21],
-      approbationDD: data[0][22],
-      signatureDD: data[0][23],
-      signatureJustificationDD: data[0][24],
-      succursale: data[0][25],
-      signature: data[0][26],
-      created: data[0][27]
+      succursale: data[0][13],
+      signature: data[0][14],
+      created: data[0][15]
     );
   } 
 }

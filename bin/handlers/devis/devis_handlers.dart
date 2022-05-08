@@ -11,7 +11,6 @@ class DevisHandlers {
 
   DevisHandlers(this.repos);
 
-  
   Router get router {
     final router = Router();
 
@@ -37,28 +36,22 @@ class DevisHandlers {
       DevisModel data = DevisModel(
           title: input['title'],
           priority: input['priority'],
-          departement : input['departement'],
+          departement: input['departement'],
           list: input['list'],
           ligneBudgtaire: input['ligneBudgtaire'],
           resources: input['resources'],
-
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
-
           approbationFin: input['approbationFin'],
           signatureFin: input['signatureFin'],
           signatureJustificationFin: input['signatureJustificationFin'],
-
           approbationBudget: input['approbationBudget'],
           signatureBudget: input['signatureBudget'],
           signatureJustificationBudget: input['signatureJustificationBudget'],
-          
-
           approbationDD: input['approbationDD'],
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
-
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -70,8 +63,7 @@ class DevisHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-devis/<id>',
-        (Request request, String id) async {
+    router.put('/update-devis/<id>', (Request request, String id) async {
       var id = request.params['id'];
       DevisModel data = await repos.devis.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
@@ -119,7 +111,8 @@ class DevisHandlers {
         data.signatureBudget = input['signatureBudget'];
       }
       if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget = input['signatureJustificationBudget'];
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
       }
 
       if (input['approbationDD'] != null) {
@@ -138,13 +131,12 @@ class DevisHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
-      
+
       repos.devis.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-devis/<id>',
-        (String id, Request request) async {
+    router.delete('/delete-devis/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.devis.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -152,8 +144,7 @@ class DevisHandlers {
 
     router.all(
       '/<ignored|.*>',
-      (Request request) =>
-          Response.notFound('La Page devis n\'est pas trouvé'),
+      (Request request) => Response.notFound('La Page devis n\'est pas trouvé'),
     );
 
     return router;

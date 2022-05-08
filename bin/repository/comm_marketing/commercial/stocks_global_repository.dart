@@ -30,26 +30,6 @@ class StockGlobalRepository {
     var modeAchat = stocksGlobalMOdel.modeAchat;
     var tva = stocksGlobalMOdel.tva;
     var qtyRavitailler = stocksGlobalMOdel.qtyRavitailler;
-    
-    var approbationDG = stocksGlobalMOdel.approbationDG;
-    var signatureDG = stocksGlobalMOdel.signatureDG;
-    var signatureJustificationDG =
-        stocksGlobalMOdel.signatureJustificationDG;
-
-    var approbationFin = stocksGlobalMOdel.approbationFin;
-    var signatureFin = stocksGlobalMOdel.signatureFin;
-    var signatureJustificationFin =
-        stocksGlobalMOdel.signatureJustificationFin;
-
-    var approbationBudget = stocksGlobalMOdel.approbationBudget;
-    var signatureBudget = stocksGlobalMOdel.signatureBudget;
-    var signatureJustificationBudget =
-        stocksGlobalMOdel.signatureJustificationBudget;
-
-    var approbationDD = stocksGlobalMOdel.approbationDD;
-    var signatureDD = stocksGlobalMOdel.signatureDD;
-    var signatureJustificationDD =
-        stocksGlobalMOdel.signatureJustificationDD;
 
     var signature = stocksGlobalMOdel.signature;
     var created = stocksGlobalMOdel.created;
@@ -60,10 +40,6 @@ class StockGlobalRepository {
         "INSERT INTO $tableName VALUES (nextval('stocks_global_id_seq'), '$idProduct',"
         "'$quantity','$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
         "'$modeAchat', '$tva', '$qtyRavitailler',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -79,22 +55,6 @@ class StockGlobalRepository {
     var modeAchat = stocksGlobalMOdel.modeAchat;
     var tva = stocksGlobalMOdel.tva;
     var qtyRavitailler = stocksGlobalMOdel.qtyRavitailler;
-    var approbationDG = stocksGlobalMOdel.approbationDG;
-    var signatureDG = stocksGlobalMOdel.signatureDG;
-    var signatureJustificationDG = stocksGlobalMOdel.signatureJustificationDG;
-
-    var approbationFin = stocksGlobalMOdel.approbationFin;
-    var signatureFin = stocksGlobalMOdel.signatureFin;
-    var signatureJustificationFin = stocksGlobalMOdel.signatureJustificationFin;
-
-    var approbationBudget = stocksGlobalMOdel.approbationBudget;
-    var signatureBudget = stocksGlobalMOdel.signatureBudget;
-    var signatureJustificationBudget =
-        stocksGlobalMOdel.signatureJustificationBudget;
-
-    var approbationDD = stocksGlobalMOdel.approbationDD;
-    var signatureDD = stocksGlobalMOdel.signatureDD;
-    var signatureJustificationDD = stocksGlobalMOdel.signatureJustificationDD;
 
     var signature = stocksGlobalMOdel.signature;
     var created = stocksGlobalMOdel.created;
@@ -106,14 +66,6 @@ class StockGlobalRepository {
         "\"quantityAchat\"='$quantityAchat',\"priceAchatUnit\"='$priceAchatUnit',"
         "\"prixVenteUnit\"='$prixVenteUnit',\"unite\"='$unite', \"modeAchat\"='$modeAchat',"
         "\"tva\"='$tva', \"qtyRavitailler\"='$qtyRavitailler',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -143,20 +95,8 @@ class StockGlobalRepository {
       modeAchat: data[0][7],
       tva: data[0][8],
       qtyRavitailler: data[0][9],
-      approbationDG: data[0][10],
-      signatureDG: data[0][11],
-      signatureJustificationDG: data[0][12],
-      approbationFin: data[0][13],
-      signatureFin: data[0][14],
-      signatureJustificationFin: data[0][15],
-      approbationBudget: data[0][16],
-      signatureBudget: data[0][17],
-      signatureJustificationBudget: data[0][18],
-      approbationDD: data[0][19],
-      signatureDD: data[0][20],
-      signatureJustificationDD: data[0][21],
-      signature: data[0][22],
-      created: data[0][23]
+      signature: data[0][10],
+      created: data[0][11]
     );
   } 
 }

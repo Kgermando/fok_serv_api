@@ -7,7 +7,7 @@ import '../../models/archive/archive_model.dart';
 import '../../repository/repository.dart';
 
 class ArchiveHandlers {
-   final Repository repos;
+  final Repository repos;
 
   ArchiveHandlers(this.repos);
 
@@ -35,7 +35,7 @@ class ArchiveHandlers {
 
       ArchiveModel data = ArchiveModel(
           nomDocument: input['nomDocument'],
-          departement : input['departement'],
+          departement: input['departement'],
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -47,8 +47,7 @@ class ArchiveHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-archive/<id>',
-        (Request request, String id) async {
+    router.put('/update-archive/<id>', (Request request, String id) async {
       var id = request.params['id'];
       ArchiveModel data = await repos.archives.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
@@ -65,13 +64,12 @@ class ArchiveHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
-      
+
       repos.archives.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-archive/<id>',
-        (String id, Request request) async {
+    router.delete('/delete-archive/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.archives.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

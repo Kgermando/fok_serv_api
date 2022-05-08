@@ -14,7 +14,6 @@ class AgendaHandlers {
   Router get router {
     final router = Router();
 
-
     router.get('/', (Request request) async {
       List<AgendaModel> data = await repos.agendas.getAllData();
       return Response.ok(jsonEncode(data));
@@ -35,12 +34,11 @@ class AgendaHandlers {
       var input = jsonDecode(await request.readAsString());
 
       AgendaModel data = AgendaModel(
-        title: input['title'],
-        description: input['description'],
-        dateRappel: DateTime.parse(input['dateRappel']),
-        signature: input['signature'],
-        created: DateTime.parse(input['created'])
-      );
+          title: input['title'],
+          description: input['description'],
+          dateRappel: DateTime.parse(input['dateRappel']),
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
       try {
         await repos.agendas.insertData(data);
       } catch (e) {
@@ -74,7 +72,7 @@ class AgendaHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-agenda/<id>', (String id, Request request) async {
+    router.delete('/delete-agenda/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.annuaires.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

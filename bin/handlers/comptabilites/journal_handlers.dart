@@ -30,8 +30,7 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-journal',
-        (Request request) async {
+    router.post('/insert-new-journal', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       JournalModel data = JournalModel(
@@ -49,8 +48,7 @@ class JournalHandlers {
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-      );
+          created: DateTime.parse(input['created']));
       try {
         await repos.journals.insertData(data);
       } catch (e) {
@@ -60,12 +58,10 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-journal/<id>',
-        (Request request, String id) async {
+    router.put('/update-journal/<id>', (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
-      JournalModel data =
-          await repos.journals.getFromId(int.parse(id!));
+      JournalModel data = await repos.journals.getFromId(int.parse(id!));
 
       if (input['libele'] != null) {
         data.libele = input['libele'];
@@ -117,8 +113,7 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-journal/<id>',
-        (String id, Request request) async {
+    router.delete('/delete-journal/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.journals.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

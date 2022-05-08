@@ -14,12 +14,11 @@ class AnnuaireHandlers {
   Router get router {
     final router = Router();
 
-
     router.get('/', (Request request) async {
       List<AnnuaireModel> data = await repos.annuaires.getAllData();
       return Response.ok(jsonEncode(data));
     });
-    
+
     router.get('/<id>', (Request request, String id) async {
       late AnnuaireModel data;
       try {
@@ -35,19 +34,18 @@ class AnnuaireHandlers {
       var input = jsonDecode(await request.readAsString());
 
       AnnuaireModel data = AnnuaireModel(
-        categorie: input['categorie'],
-        nomPostnomPrenom: input['nomPostnomPrenom'],
-        email: input['email'],
-        mobile1: input['mobile1'],
-        mobile2: input['mobile2'],
-        secteurActivite: input['secteurActivite'],
-        nomEntreprise: input['nomEntreprise'],
-        grade: input['grade'],
-        adresseEntreprise: input['adresseEntreprise'],
-        succursale: input['succursale'],
-        signature: input['signature'],
-        created: DateTime.parse(input['created'])
-      );
+          categorie: input['categorie'],
+          nomPostnomPrenom: input['nomPostnomPrenom'],
+          email: input['email'],
+          mobile1: input['mobile1'],
+          mobile2: input['mobile2'],
+          secteurActivite: input['secteurActivite'],
+          nomEntreprise: input['nomEntreprise'],
+          grade: input['grade'],
+          adresseEntreprise: input['adresseEntreprise'],
+          succursale: input['succursale'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
       try {
         await repos.annuaires.insertData(data);
       } catch (e) {
@@ -102,7 +100,7 @@ class AnnuaireHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-annuaire/<id>', (String id, Request request) async {
+    router.delete('/delete-annuaire/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.annuaires.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

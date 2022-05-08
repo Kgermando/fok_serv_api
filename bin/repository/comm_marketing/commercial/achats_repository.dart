@@ -31,21 +31,6 @@ class AchatsRepository {
     var remise = achatModel.remise;
     var qtyRemise = achatModel.qtyRemise;
     var qtyLivre = achatModel.qtyLivre;
-    var approbationDG = achatModel.approbationDG;
-    var signatureDG = achatModel.signatureDG;
-    var signatureJustificationDG = achatModel.signatureJustificationDG;
-
-    var approbationFin = achatModel.approbationFin;
-    var signatureFin = achatModel.signatureFin;
-    var signatureJustificationFin = achatModel.signatureJustificationFin;
-
-    var approbationBudget = achatModel.approbationBudget;
-    var signatureBudget = achatModel.signatureBudget;
-    var signatureJustificationBudget = achatModel.signatureJustificationBudget;
-
-    var approbationDD = achatModel.approbationDD;
-    var signatureDD = achatModel.signatureDD;
-    var signatureJustificationDD = achatModel.signatureJustificationDD;
 
     var succursale = achatModel.succursale;
     var signature = achatModel.signature;
@@ -56,12 +41,8 @@ class AchatsRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('achats_id_seq'), '$idProduct',"
         "'$quantity','$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
-        "'$tva', '$remise', '$qtyRemise', '$qtyLivre'"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD', '$succursale',"
-        "'$signature','$created');");
+        "'$tva', '$remise', '$qtyRemise', '$qtyLivre',"
+        "'$succursale', '$signature','$created');");
     });
   }
 
@@ -77,25 +58,6 @@ class AchatsRepository {
     var remise = achatModel.remise;
     var qtyRemise = achatModel.qtyRemise;
     var qtyLivre = achatModel.qtyLivre;
-    var approbationDG = achatModel.approbationDG;
-    var signatureDG = achatModel.signatureDG;
-    var signatureJustificationDG =
-        achatModel.signatureJustificationDG;
-
-    var approbationFin = achatModel.approbationFin;
-    var signatureFin = achatModel.signatureFin;
-    var signatureJustificationFin =
-        achatModel.signatureJustificationFin;
-
-    var approbationBudget = achatModel.approbationBudget;
-    var signatureBudget = achatModel.signatureBudget;
-    var signatureJustificationBudget =
-        achatModel.signatureJustificationBudget;
-
-    var approbationDD = achatModel.approbationDD;
-    var signatureDD = achatModel.signatureDD;
-    var signatureJustificationDD =
-        achatModel.signatureJustificationDD;
     var succursale = achatModel.succursale;
     var signature = achatModel.signature; 
     var created = achatModel.created;
@@ -107,15 +69,8 @@ class AchatsRepository {
         "\"quantityAchat\"='$quantityAchat',\"priceAchatUnit\"='$priceAchatUnit',"
         "\"prixVenteUnit\"='$prixVenteUnit',\"unite\"='$unite',"
         "\"tva\"='$tva', \"remise\"='$remise',"
-        "\"qtyRemise\"='$qtyRemise', \"qtyLivre\"='$qtyLivre'"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD', \"succursale\"='$succursale',"
+        "\"qtyRemise\"='$qtyRemise', \"qtyLivre\"='$qtyLivre',"
+        "\"succursale\"='$succursale',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -146,21 +101,9 @@ class AchatsRepository {
       remise: data[0][8],
       qtyRemise: data[0][9],
       qtyLivre: data[0][10],
-      approbationDG: data[0][11],
-      signatureDG: data[0][12],
-      signatureJustificationDG: data[0][13],
-      approbationFin: data[0][14],
-      signatureFin: data[0][15],
-      signatureJustificationFin: data[0][16],
-      approbationBudget: data[0][17],
-      signatureBudget: data[0][18],
-      signatureJustificationBudget: data[0][19],
-      approbationDD: data[0][20],
-      signatureDD: data[0][21],
-      signatureJustificationDD: data[0][22],
-      succursale: data[0][23],
-      signature: data[0][24],
-      created: data[0][25]
+      succursale: data[0][11],
+      signature: data[0][12],
+      created: data[0][13]
     );
   } 
 }

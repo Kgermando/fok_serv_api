@@ -23,20 +23,11 @@ class SuccursaleRepository {
     var name = succursaleModel.name;
     var adresse = succursaleModel.adresse;
     var province = succursaleModel.province;
+   
     var approbationDG = succursaleModel.approbationDG;
     var signatureDG = succursaleModel.signatureDG;
     var signatureJustificationDG =
         succursaleModel.signatureJustificationDG;
-
-    var approbationFin = succursaleModel.approbationFin;
-    var signatureFin = succursaleModel.signatureFin;
-    var signatureJustificationFin =
-        succursaleModel.signatureJustificationFin;
-
-    var approbationBudget = succursaleModel.approbationBudget;
-    var signatureBudget = succursaleModel.signatureBudget;
-    var signatureJustificationBudget =
-        succursaleModel.signatureJustificationBudget;
 
     var approbationDD = succursaleModel.approbationDD;
     var signatureDD = succursaleModel.signatureDD;
@@ -52,10 +43,8 @@ class SuccursaleRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('succursales_id_seq'), '$name', '$adresse', '$province',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
+        "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
+        "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
         "'$signature', '$created');");
     });
   }
@@ -68,15 +57,6 @@ class SuccursaleRepository {
     var approbationDG = succursaleModel.approbationDG;
     var signatureDG = succursaleModel.signatureDG;
     var signatureJustificationDG = succursaleModel.signatureJustificationDG;
-
-    var approbationFin = succursaleModel.approbationFin;
-    var signatureFin = succursaleModel.signatureFin;
-    var signatureJustificationFin = succursaleModel.signatureJustificationFin;
-
-    var approbationBudget = succursaleModel.approbationBudget;
-    var signatureBudget = succursaleModel.signatureBudget;
-    var signatureJustificationBudget =
-        succursaleModel.signatureJustificationBudget;
 
     var approbationDD = succursaleModel.approbationDD;
     var signatureDD = succursaleModel.signatureDD;
@@ -92,10 +72,6 @@ class SuccursaleRepository {
         "\"adresse\"='$adresse', \"province\"='$province',"
         "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
         "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
         "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
         "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
@@ -124,17 +100,11 @@ class SuccursaleRepository {
       approbationDG: data[0][4],
       signatureDG: data[0][5],
       signatureJustificationDG: data[0][6],
-      approbationFin: data[0][7],
-      signatureFin: data[0][8],
-      signatureJustificationFin: data[0][9],
-      approbationBudget: data[0][10],
-      signatureBudget: data[0][11],
-      signatureJustificationBudget: data[0][12],
-      approbationDD: data[0][13],
-      signatureDD: data[0][14],
-      signatureJustificationDD: data[0][15],
-      signature: data[0][16],
-      created: data[0][17]
+      approbationDD: data[0][7],
+      signatureDD: data[0][8],
+      signatureJustificationDD: data[0][9],
+      signature: data[0][10],
+      created: data[0][11]
     );
   } 
 }

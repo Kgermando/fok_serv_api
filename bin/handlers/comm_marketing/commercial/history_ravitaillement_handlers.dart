@@ -14,9 +14,9 @@ class HistoryRavitaillementHandlers {
   Router get router {
     final router = Router();
 
-
     router.get('/', (Request request) async {
-      List<HistoryRavitaillementModel> data = await repos.historyRavitaillements.getAllData();
+      List<HistoryRavitaillementModel> data =
+          await repos.historyRavitaillements.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
@@ -44,22 +44,9 @@ class HistoryRavitaillementHandlers {
           margeBen: input['margeBen'],
           tva: input['tva'],
           qtyRavitailler: input['qtyRavitailler'],
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationFin: input['approbationFin'],
-          signatureFin: input['signatureFin'],
-          signatureJustificationFin: input['signatureJustificationFin'],
-          approbationBudget: input['approbationBudget'],
-          signatureBudget: input['signatureBudget'],
-          signatureJustificationBudget: input['signatureJustificationBudget'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-        );
+          created: DateTime.parse(input['created']));
       try {
         await repos.historyRavitaillements.insertData(data);
       } catch (e) {
@@ -69,9 +56,11 @@ class HistoryRavitaillementHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-history-ravitaillement/<id>', (Request request, String id) async {
+    router.put('/update-history-ravitaillement/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
-      HistoryRavitaillementModel data = await repos.historyRavitaillements.getFromId(int.parse(id!));
+      HistoryRavitaillementModel data =
+          await repos.historyRavitaillements.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['idProduct'] != null) {
@@ -101,46 +90,6 @@ class HistoryRavitaillementHandlers {
       if (input['qtyRavitailler'] != null) {
         data.qtyRavitailler = input['qtyRavitailler'];
       }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-
-      if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
-      }
-
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
       if (input['succursale'] != null) {
         data.succursale = input['succursale'];
       }
@@ -154,7 +103,8 @@ class HistoryRavitaillementHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-history-ravitaillement/<id>', (String id, Request request) async {
+    router.delete('/delete-history-ravitaillement/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.historyRavitaillements.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

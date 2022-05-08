@@ -44,28 +44,20 @@ class BanqueHandlers {
           departement: input['departement'],
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'],
-
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
-
           approbationFin: input['approbationFin'],
           signatureFin: input['signatureFin'],
           signatureJustificationFin: input['signatureJustificationFin'],
-
           approbationBudget: input['approbationBudget'],
           signatureBudget: input['signatureBudget'],
           signatureJustificationBudget: input['signatureJustificationBudget'],
-          
-
           approbationDD: input['approbationDD'],
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
-
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-          
-        );
+          created: DateTime.parse(input['created']));
       try {
         await repos.banques.insertData(data);
       } catch (e) {
@@ -75,7 +67,8 @@ class BanqueHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-banque/<id>', (Request request, String id) async {
+    router.put('/update-transaction-banque/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       BanqueModel data = await repos.banques.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
@@ -110,7 +103,7 @@ class BanqueHandlers {
       if (input['numeroOperation'] != null) {
         data.numeroOperation = input['numeroOperation'];
       }
-      
+
       if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }
@@ -162,7 +155,8 @@ class BanqueHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-banque/<id>', (String id, Request request) async {
+    router.delete('/delete-transaction-banque/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.banques.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

@@ -7,7 +7,7 @@ import '../../models/comptabilites/balance_comptes_model.dart';
 import '../../repository/repository.dart';
 
 class BalanceComptesHandlers {
-   final Repository repos;
+  final Repository repos;
 
   BalanceComptesHandlers(this.repos);
 
@@ -30,8 +30,7 @@ class BalanceComptesHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-balance-compte',
-        (Request request) async {
+    router.post('/insert-new-balance-compte', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       BalanceCompteModel data = BalanceCompteModel(
@@ -44,8 +43,7 @@ class BalanceComptesHandlers {
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-      );
+          created: DateTime.parse(input['created']));
       try {
         await repos.balanceComptes.insertData(data);
       } catch (e) {
@@ -68,7 +66,7 @@ class BalanceComptesHandlers {
       if (input['statut'] != null) {
         data.statut = input['statut'] as bool;
       }
-       if (input['approbationDG'] != null) {
+      if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }
       if (input['signatureDG'] != null) {
@@ -99,7 +97,7 @@ class BalanceComptesHandlers {
     });
 
     router.delete('/delete-balance-compte/<id>',
-        (String id, Request request) async {
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.balanceComptes.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -107,8 +105,7 @@ class BalanceComptesHandlers {
 
     router.all(
       '/<ignored|.*>',
-      (Request request) =>
-          Response.notFound('La Page bilan n\'est pas trouvé'),
+      (Request request) => Response.notFound('La Page bilan n\'est pas trouvé'),
     );
 
     return router;

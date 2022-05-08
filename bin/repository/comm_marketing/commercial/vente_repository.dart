@@ -28,25 +28,6 @@ class VenteRepository {
     var tva = achatModel.tva;
     var remise = achatModel.remise;
     var qtyRemise = achatModel.qtyRemise;
-    var approbationDG = achatModel.approbationDG;
-    var signatureDG = achatModel.signatureDG;
-    var signatureJustificationDG =
-        achatModel.signatureJustificationDG;
-
-    var approbationFin = achatModel.approbationFin;
-    var signatureFin = achatModel.signatureFin;
-    var signatureJustificationFin =
-        achatModel.signatureJustificationFin;
-
-    var approbationBudget = achatModel.approbationBudget;
-    var signatureBudget = achatModel.signatureBudget;
-    var signatureJustificationBudget =
-        achatModel.signatureJustificationBudget;
-
-    var approbationDD = achatModel.approbationDD;
-    var signatureDD = achatModel.signatureDD;
-    var signatureJustificationDD =
-        achatModel.signatureJustificationDD;
     var succursale = achatModel.succursale;
     var signature = achatModel.signature;
     var created = achatModel.created;
@@ -55,12 +36,8 @@ class VenteRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('ventes_id_seq'), '$idProductCart',"
-        "'$quantityCart','$priceTotalCart', '$unite', '$tva', '$remise', '$qtyRemise'"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD', '$succursale',"
-        "'$signature','$created');");
+        "'$quantityCart','$priceTotalCart', '$unite', '$tva', '$remise', '$qtyRemise',"
+        "'$succursale', '$signature','$created');");
     });
   }
 
@@ -73,21 +50,6 @@ class VenteRepository {
     var tva = achatModel.tva;
     var remise = achatModel.remise;
     var qtyRemise = achatModel.qtyRemise;
-    var approbationDG = achatModel.approbationDG;
-    var signatureDG = achatModel.signatureDG;
-    var signatureJustificationDG = achatModel.signatureJustificationDG;
-
-    var approbationFin = achatModel.approbationFin;
-    var signatureFin = achatModel.signatureFin;
-    var signatureJustificationFin = achatModel.signatureJustificationFin;
-
-    var approbationBudget = achatModel.approbationBudget;
-    var signatureBudget = achatModel.signatureBudget;
-    var signatureJustificationBudget = achatModel.signatureJustificationBudget;
-
-    var approbationDD = achatModel.approbationDD;
-    var signatureDD = achatModel.signatureDD;
-    var signatureJustificationDD = achatModel.signatureJustificationDD;
     var succursale = achatModel.succursale;
     var signature = achatModel.signature;
     var created = achatModel.created;
@@ -97,15 +59,8 @@ class VenteRepository {
       var result = await conn.execute(
         "UPDATE $tableName SET \"idProductCart\"='$idProductCart', \"quantityCart\"='$quantityCart',"
         "\"priceTotalCart\"='$priceTotalCart', \"unite\"='$unite',"
-        "\"succursale\"='$succursale', \"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise'"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD', \"succursale\"='$succursale',"
+        "\"succursale\"='$succursale', \"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise',"
+        "\"succursale\"='$succursale',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -133,21 +88,9 @@ class VenteRepository {
       tva: data[0][5],
       remise: data[0][6],
       qtyRemise: data[0][7],
-      approbationDG: data[0][8],
-      signatureDG: data[0][9],
-      signatureJustificationDG: data[0][10],
-      approbationFin: data[0][11],
-      signatureFin: data[0][12],
-      signatureJustificationFin: data[0][13],
-      approbationBudget: data[0][14],
-      signatureBudget: data[0][15],
-      signatureJustificationBudget: data[0][16],
-      approbationDD: data[0][17],
-      signatureDD: data[0][18],
-      signatureJustificationDD: data[0][19],
-      succursale: data[0][20],
-      signature: data[0][21],
-      created: data[0][22]
+      succursale: data[0][8],
+      signature: data[0][9],
+      created: data[0][10]
     );
   } 
 }

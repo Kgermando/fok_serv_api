@@ -34,28 +34,20 @@ class ProduitModelHandlers {
       var input = jsonDecode(await request.readAsString());
 
       ProductModel data = ProductModel(
-        categorie: input['categorie'],
-        sousCategorie1: input['sousCategorie1'],
-        sousCategorie2: input['sousCategorie2'],
-        sousCategorie3: input['sousCategorie3'],
-        sousCategorie4: input['sousCategorie4'],
-        idProduct: input['idProduct'],
-        approbationDG: input['approbationDG'],
-        signatureDG: input['signatureDG'],
-        signatureJustificationDG: input['signatureJustificationDG'],
-        approbationFin: input['approbationFin'],
-        signatureFin: input['signatureFin'],
-        signatureJustificationFin: input['signatureJustificationFin'],
-        approbationBudget: input['approbationBudget'],
-        signatureBudget: input['signatureBudget'],
-        signatureJustificationBudget: input['signatureJustificationBudget'],
-        approbationDD: input['approbationDD'],
-        signatureDD: input['signatureDD'],
-        signatureJustificationDD: input['signatureJustificationDD'],
-        signature: input['signature'],
-        created: DateTime.parse(input['created'])  
-          
-      );
+          categorie: input['categorie'],
+          sousCategorie1: input['sousCategorie1'],
+          sousCategorie2: input['sousCategorie2'],
+          sousCategorie3: input['sousCategorie3'],
+          sousCategorie4: input['sousCategorie4'],
+          approbationDG: input['approbationDG'],
+          signatureDG: input['signatureDG'],
+          signatureJustificationDG: input['signatureJustificationDG'],
+          approbationDD: input['approbationDD'],
+          signatureDD: input['signatureDD'],
+          signatureJustificationDD: input['signatureJustificationDD'],
+          idProduct: input['idProduct'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
       try {
         await repos.produitModel.insertData(data);
       } catch (e) {
@@ -89,7 +81,7 @@ class ProduitModelHandlers {
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];
       }
-       if (input['approbationDG'] != null) {
+      if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }
       if (input['signatureDG'] != null) {
@@ -98,27 +90,6 @@ class ProduitModelHandlers {
       if (input['signatureJustificationDG'] != null) {
         data.signatureJustificationDG = input['signatureJustificationDG'];
       }
-       if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
-      }
-
       if (input['approbationDD'] != null) {
         data.approbationDD = input['approbationDD'];
       }
@@ -139,7 +110,7 @@ class ProduitModelHandlers {
     });
 
     router.delete('/delete-produit-model/<id>',
-        (String id, Request request) async {
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.produitModel.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

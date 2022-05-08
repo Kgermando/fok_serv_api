@@ -34,25 +34,6 @@ class BonLivraisonRepository {
     var accuseReception = bonLivraisonModel.accuseReception;
     var accuseReceptionFirstName = bonLivraisonModel.accuseReceptionFirstName;
     var accuseReceptionLastName = bonLivraisonModel.accuseReceptionLastName;
-    var approbationDG = bonLivraisonModel.approbationDG;
-    var signatureDG = bonLivraisonModel.signatureDG;
-    var signatureJustificationDG =
-        bonLivraisonModel.signatureJustificationDG;
-
-    var approbationFin = bonLivraisonModel.approbationFin;
-    var signatureFin = bonLivraisonModel.signatureFin;
-    var signatureJustificationFin =
-        bonLivraisonModel.signatureJustificationFin;
-
-    var approbationBudget = bonLivraisonModel.approbationBudget;
-    var signatureBudget = bonLivraisonModel.signatureBudget;
-    var signatureJustificationBudget =
-        bonLivraisonModel.signatureJustificationBudget;
-
-    var approbationDD = bonLivraisonModel.approbationDD;
-    var signatureDD = bonLivraisonModel.signatureDD;
-    var signatureJustificationDD =
-        bonLivraisonModel.signatureJustificationDD;
     var succursale = bonLivraisonModel.succursale;
     var signature = bonLivraisonModel.signature;
     var created = bonLivraisonModel.created;
@@ -61,14 +42,10 @@ class BonLivraisonRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('bon_livraisons_id_seq'), '$idProduct',"
-        "'$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite', '$created',"
+        "'$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
         "'$firstName','$lastName', '$tva','$remise', '$qtyRemise',"
-        "'$accuseReception', '$accuseReceptionFirstName', '$accuseReceptionLastName'"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD', '$succursale',"
-        "'$signature','$created');");
+        "'$accuseReception', '$accuseReceptionFirstName', '$accuseReceptionLastName',"
+        "'$succursale', '$signature', '$created');");
     });
   }
 
@@ -87,22 +64,6 @@ class BonLivraisonRepository {
     var accuseReception = bonLivraisonModel.accuseReception;
     var accuseReceptionFirstName = bonLivraisonModel.accuseReceptionFirstName;
     var accuseReceptionLastName = bonLivraisonModel.accuseReceptionLastName;
-    var approbationDG = bonLivraisonModel.approbationDG;
-    var signatureDG = bonLivraisonModel.signatureDG;
-    var signatureJustificationDG = bonLivraisonModel.signatureJustificationDG;
-
-    var approbationFin = bonLivraisonModel.approbationFin;
-    var signatureFin = bonLivraisonModel.signatureFin;
-    var signatureJustificationFin = bonLivraisonModel.signatureJustificationFin;
-
-    var approbationBudget = bonLivraisonModel.approbationBudget;
-    var signatureBudget = bonLivraisonModel.signatureBudget;
-    var signatureJustificationBudget =
-        bonLivraisonModel.signatureJustificationBudget;
-
-    var approbationDD = bonLivraisonModel.approbationDD;
-    var signatureDD = bonLivraisonModel.signatureDD;
-    var signatureJustificationDD = bonLivraisonModel.signatureJustificationDD;
     var succursale = bonLivraisonModel.succursale;
     var signature = bonLivraisonModel.signature;
     var created = bonLivraisonModel.created;
@@ -114,15 +75,8 @@ class BonLivraisonRepository {
         "\"priceAchatUnit\"='$priceAchatUnit',\"prixVenteUnit\"='$prixVenteUnit',"
         "\"unite\"='$unite',\"firstName\"='$firstName', \"lastName\"='$lastName',"
         "\"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise',\"accuseReception\"='$accuseReception',"
-        "\"accuseReceptionFirstName\"='$accuseReceptionFirstName', \"accuseReceptionLastName\"='$accuseReceptionLastName'"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD', \"succursale\"='$succursale',"
+        "\"accuseReceptionFirstName\"='$accuseReceptionFirstName', \"accuseReceptionLastName\"='$accuseReceptionLastName',"
+        "\"succursale\"='$succursale',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -156,21 +110,9 @@ class BonLivraisonRepository {
       accuseReception: data[0][11],
       accuseReceptionFirstName: data[0][12],
       accuseReceptionLastName: data[0][13],
-      approbationDG: data[0][14],
-      signatureDG: data[0][15],
-      signatureJustificationDG: data[0][16],
-      approbationFin: data[0][17],
-      signatureFin: data[0][18],
-      signatureJustificationFin: data[0][19],
-      approbationBudget: data[0][20],
-      signatureBudget: data[0][21],
-      signatureJustificationBudget: data[0][22],
-      approbationDD: data[0][23],
-      signatureDD: data[0][24],
-      signatureJustificationDD: data[0][25],
-      succursale: data[0][26],
-      signature: data[0][27],
-      created: data[0][28]
+      succursale: data[0][14],
+      signature: data[0][15],
+      created: data[0][16]
     );
   } 
 }

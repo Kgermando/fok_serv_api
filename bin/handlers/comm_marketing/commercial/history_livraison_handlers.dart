@@ -7,16 +7,16 @@ import '../../../models/comm_maketing/livraiason_history_model.dart';
 import '../../../repository/repository.dart';
 
 class HistoryLivraisonHandlers {
-   final Repository repos;
+  final Repository repos;
 
   HistoryLivraisonHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
-
     router.get('/', (Request request) async {
-      List<LivraisonHistoryModel> data = await repos.historyLivraisons.getAllData();
+      List<LivraisonHistoryModel> data =
+          await repos.historyLivraisons.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
@@ -35,34 +35,21 @@ class HistoryLivraisonHandlers {
       var input = jsonDecode(await request.readAsString());
 
       LivraisonHistoryModel data = LivraisonHistoryModel(
-        idProduct: input['idProduct'],
-        quantity: input['quantity'],
-        quantityAchat: input['quantityAchat'],
-        priceAchatUnit: input['priceAchatUnit'],
-        prixVenteUnit: input['prixVenteUnit'],
-        unite: input['unite'],
-        margeBen: input['margeBen'],
-        tva: input['tva'],
-        remise: input['remise'],
-        qtyRemise: input['qtyRemise'],
-        margeBenRemise: input['margeBenRemise'],
-        qtyLivre: input['qtyLivre'],
-        approbationDG: input['approbationDG'],
-        signatureDG: input['signatureDG'],
-        signatureJustificationDG: input['signatureJustificationDG'],
-        approbationFin: input['approbationFin'],
-        signatureFin: input['signatureFin'],
-        signatureJustificationFin: input['signatureJustificationFin'],
-        approbationBudget: input['approbationBudget'],
-        signatureBudget: input['signatureBudget'],
-        signatureJustificationBudget: input['signatureJustificationBudget'],
-        approbationDD: input['approbationDD'],
-        signatureDD: input['signatureDD'],
-        signatureJustificationDD: input['signatureJustificationDD'],
-        succursale: input['succursale'],
-        signature: input['signature'],
-        created: DateTime.parse(input['created'])
-      );
+          idProduct: input['idProduct'],
+          quantity: input['quantity'],
+          quantityAchat: input['quantityAchat'],
+          priceAchatUnit: input['priceAchatUnit'],
+          prixVenteUnit: input['prixVenteUnit'],
+          unite: input['unite'],
+          margeBen: input['margeBen'],
+          tva: input['tva'],
+          remise: input['remise'],
+          qtyRemise: input['qtyRemise'],
+          margeBenRemise: input['margeBenRemise'],
+          qtyLivre: input['qtyLivre'],
+          succursale: input['succursale'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
       try {
         await repos.historyLivraisons.insertData(data);
       } catch (e) {
@@ -72,9 +59,11 @@ class HistoryLivraisonHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-history_livraison/<id>', (Request request, String id) async {
+    router.put('/update-history_livraison/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
-      LivraisonHistoryModel data = await repos.historyLivraisons.getFromId(int.parse(id!));
+      LivraisonHistoryModel data =
+          await repos.historyLivraisons.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['idProduct'] != null) {
@@ -113,47 +102,6 @@ class HistoryLivraisonHandlers {
       if (input['qtyLivre'] != null) {
         data.qtyLivre = input['qtyLivre'];
       }
-
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-
-      if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
-      }
-
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
       if (input['succursale'] != null) {
         data.succursale = input['succursale'];
       }
@@ -167,7 +115,8 @@ class HistoryLivraisonHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-history_livraison/<id>', (String id, Request request) async {
+    router.delete('/delete-history_livraison/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.historyLivraisons.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

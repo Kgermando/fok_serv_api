@@ -11,7 +11,7 @@ class FinExterieurHandlers {
 
   FinExterieurHandlers(this.repos);
 
-   Router get router {
+  Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
@@ -30,20 +30,21 @@ class FinExterieurHandlers {
       return Response.ok(jsonEncode(agent.toJson()));
     });
 
-    router.post('/insert-new-transaction-finExterieur', (Request request) async {
+    router.post('/insert-new-transaction-finExterieur',
+        (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       FinanceExterieurModel data = FinanceExterieurModel(
-        nomComplet: input['nomComplet'],
-        pieceJustificative: input['pieceJustificative'],
-        libelle: input['libelle'],
-        montant: input['montant'],
-        coupureBillet: input['coupureBillet'],
-        ligneBudgtaire: input['ligneBudgtaire'],
-        typeOperation: input['typeOperation'],
-        numeroOperation: input['numeroOperation'],
-        ressourceFin: input['ressourceFin'],
-        approbationDG: input['approbationDG'],
+          nomComplet: input['nomComplet'],
+          pieceJustificative: input['pieceJustificative'],
+          libelle: input['libelle'],
+          montant: input['montant'],
+          coupureBillet: input['coupureBillet'],
+          ligneBudgtaire: input['ligneBudgtaire'],
+          typeOperation: input['typeOperation'],
+          numeroOperation: input['numeroOperation'],
+          ressourceFin: input['ressourceFin'],
+          approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
           approbationFin: input['approbationFin'],
@@ -56,8 +57,7 @@ class FinExterieurHandlers {
           signatureDD: input['signatureDD'],
           signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-      );
+          created: DateTime.parse(input['created']));
       try {
         await repos.finExterieurs.insertData(data);
       } catch (e) {
@@ -67,10 +67,12 @@ class FinExterieurHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-finExterieur/<id>', (Request request) async {
+    router.put('/update-transaction-finExterieur/<id>',
+        (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
-      FinanceExterieurModel data = await repos.finExterieurs.getFromId(int.parse(id!));
+      FinanceExterieurModel data =
+          await repos.finExterieurs.getFromId(int.parse(id!));
 
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];
@@ -150,7 +152,8 @@ class FinExterieurHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-finExterieur/<id>', (String id, Request request) async {
+    router.delete('/delete-transaction-finExterieur/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.finExterieurs.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -164,4 +167,4 @@ class FinExterieurHandlers {
 
     return router;
   }
-} 
+}

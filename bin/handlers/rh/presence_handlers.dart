@@ -10,7 +10,6 @@ class PresenceHandlers {
   final Repository repos;
   PresenceHandlers(this.repos);
 
-   
   Router get router {
     final router = Router();
 
@@ -33,16 +32,15 @@ class PresenceHandlers {
     router.post('/insert-new-presence', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-       PresenceModel data = PresenceModel(
-        arrive: DateTime.parse(input['arrive']),
-        arriveAgent: input['arriveAgent'],
-        sortie: DateTime.parse(input['sortie']),
-        sortieAgent: input['sortieAgent'],
-        remarque: input['remarque'],
-        finJournee: input['finJournee'] as bool,
-        signature: input['signature'],
-        created: DateTime.parse(input['created'])
-      );
+      PresenceModel data = PresenceModel(
+          arrive: DateTime.parse(input['arrive']),
+          arriveAgent: input['arriveAgent'],
+          sortie: DateTime.parse(input['sortie']),
+          sortieAgent: input['sortieAgent'],
+          remarque: input['remarque'],
+          finJournee: input['finJournee'] as bool,
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
       try {
         await repos.presences.insertData(data);
       } catch (e) {
@@ -57,7 +55,7 @@ class PresenceHandlers {
       PresenceModel data = await repos.presences.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
-     if (input['arrive'] != null) {
+      if (input['arrive'] != null) {
         data.arrive = DateTime.parse(input['arrive']);
       }
       if (input['arriveAgent'] != null) {
@@ -85,7 +83,7 @@ class PresenceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-devis/<id>', (String id, Request request) async {
+    router.delete('/delete-devis/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.presences.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

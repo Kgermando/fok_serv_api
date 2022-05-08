@@ -43,18 +43,6 @@ class CartHandlers {
           tva: input['tva'],
           remise: input['remise'],
           qtyRemise: input['qtyRemise'],
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationFin: input['approbationFin'],
-          signatureFin: input['signatureFin'],
-          signatureJustificationFin: input['signatureJustificationFin'],
-          approbationBudget: input['approbationBudget'],
-          signatureBudget: input['signatureBudget'],
-          signatureJustificationBudget: input['signatureJustificationBudget'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
           succursale: input['succursale'],
           signature: input['signature'],
           created: DateTime.parse(input['created'])
@@ -97,45 +85,6 @@ class CartHandlers {
       if (input['qtyRemise'] != null) {
         data.qtyRemise = input['qtyRemise'];
       }
-       if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-      if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
-      }
-
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
       if (input['succursale'] != null) {
         data.succursale = input['succursale'];
       }
@@ -149,21 +98,22 @@ class CartHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-cart/<id>', (String id, Request request) async {
+    router.delete('/delete-cart/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.carts.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 
-    router.delete('/delete-all-cart', (Request request) async {
-      repos.carts.deleteAllData();
+    router.delete('/delete-all-cart/<succursale>', (Request request, String succursale) async {
+      var succursale = request.params['succursale'];
+      repos.carts.deleteAllData(succursale!);
       return Response.ok('Supprimée');
     });
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page carts n\'est pas trouvé'),
+          Response.notFound('La Page cart n\'est pas trouvé'),
     );
 
     return router;

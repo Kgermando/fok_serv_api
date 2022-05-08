@@ -14,7 +14,6 @@ class GainsHandlers {
   Router get router {
     final router = Router();
 
-
     router.get('/', (Request request) async {
       List<GainModel> data = await repos.gains.getAllData();
       return Response.ok(jsonEncode(data));
@@ -36,22 +35,9 @@ class GainsHandlers {
 
       GainModel data = GainModel(
           sum: input['sum'],
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationFin: input['approbationFin'],
-          signatureFin: input['signatureFin'],
-          signatureJustificationFin: input['signatureJustificationFin'],
-          approbationBudget: input['approbationBudget'],
-          signatureBudget: input['signatureBudget'],
-          signatureJustificationBudget: input['signatureJustificationBudget'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-        );
+          created: DateTime.parse(input['created']));
       try {
         await repos.gains.insertData(data);
       } catch (e) {
@@ -69,45 +55,6 @@ class GainsHandlers {
       if (input['sum'] != null) {
         data.sum = input['sum'];
       }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-      if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
-      }
-
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
       if (input['succursale'] != null) {
         data.succursale = input['succursale'];
       }
@@ -121,7 +68,7 @@ class GainsHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-gain/<id>', (String id, Request request) async {
+    router.delete('/delete-gain/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.gains.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -129,8 +76,7 @@ class GainsHandlers {
 
     router.all(
       '/<ignored|.*>',
-      (Request request) =>
-          Response.notFound('La Page gains n\'est pas trouvé'),
+      (Request request) => Response.notFound('La Page gains n\'est pas trouvé'),
     );
 
     return router;

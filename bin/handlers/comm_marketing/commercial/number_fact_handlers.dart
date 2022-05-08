@@ -7,13 +7,12 @@ import '../../../models/comm_maketing/number_facture.dart';
 import '../../../repository/repository.dart';
 
 class NumberFactHandlers {
-   final Repository repos;
+  final Repository repos;
 
   NumberFactHandlers(this.repos);
 
   Router get router {
     final router = Router();
-
 
     router.get('/', (Request request) async {
       List<NumberFactureModel> data = await repos.numberFacture.getAllData();
@@ -35,11 +34,10 @@ class NumberFactHandlers {
       var input = jsonDecode(await request.readAsString());
 
       NumberFactureModel data = NumberFactureModel(
-        number: input['number'],
-        succursale: input['succursale'],
-        signature: input['signature'],
-        created: DateTime.parse(input['created'])
-      );
+          number: input['number'],
+          succursale: input['succursale'],
+          signature: input['signature'],
+          created: DateTime.parse(input['created']));
       try {
         await repos.numberFacture.insertData(data);
       } catch (e) {
@@ -51,7 +49,8 @@ class NumberFactHandlers {
 
     router.put('/update-number-fact/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      NumberFactureModel data = await repos.numberFacture.getFromId(int.parse(id!));
+      NumberFactureModel data =
+          await repos.numberFacture.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['number'] != null) {
@@ -70,7 +69,8 @@ class NumberFactHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-number-fact/<id>', (String id, Request request) async {
+    router.delete('/delete-number-fact/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.numberFacture.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

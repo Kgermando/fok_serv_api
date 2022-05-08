@@ -14,9 +14,9 @@ class LigneBudgetaireHanlers {
   Router get router {
     final router = Router();
 
-
-   router.get('/', (Request request) async {
-      List<LigneBudgetaireModel> data = await repos.ligneBudgetaires.getAllData();
+    router.get('/', (Request request) async {
+      List<LigneBudgetaireModel> data =
+          await repos.ligneBudgetaires.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
@@ -46,23 +46,18 @@ class LigneBudgetaireHanlers {
         banque: input['banque'],
         finPropre: input['finPropre'],
         finExterieur: input['finExterieur'],
-
         approbationDG: input['approbationDG'],
         signatureDG: input['signatureDG'],
         signatureJustificationDG: input['signatureJustificationDG'],
-
         approbationFin: input['approbationFin'],
         signatureFin: input['signatureFin'],
         signatureJustificationFin: input['signatureJustificationFin'],
-
         approbationBudget: input['approbationBudget'],
         signatureBudget: input['signatureBudget'],
         signatureJustificationBudget: input['signatureJustificationBudget'],
-
         approbationDD: input['approbationDD'],
         signatureDD: input['signatureDD'],
         signatureJustificationDD: input['signatureJustificationDD'],
-
         signature: input['signature'],
         created: DateTime.parse(input['created']),
       );
@@ -75,9 +70,11 @@ class LigneBudgetaireHanlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-ligne-budgetaire/<id>', (Request request, String id) async {
+    router.put('/update-ligne-budgetaire/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
-      LigneBudgetaireModel data = await repos.ligneBudgetaires.getFromId(int.parse(id!));
+      LigneBudgetaireModel data =
+          await repos.ligneBudgetaires.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['nomLigneBudgetaire'] != null) {
@@ -141,7 +138,8 @@ class LigneBudgetaireHanlers {
         data.signatureBudget = input['signatureBudget'];
       }
       if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget = input['signatureJustificationBudget'];
+        data.signatureJustificationBudget =
+            input['signatureJustificationBudget'];
       }
 
       if (input['approbationDD'] != null) {
@@ -154,7 +152,6 @@ class LigneBudgetaireHanlers {
         data.signatureJustificationDD = input['signatureJustificationDD'];
       }
 
-
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
@@ -165,7 +162,8 @@ class LigneBudgetaireHanlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-ligne-budgetaire/<id>', (String id, Request request) async {
+    router.delete('/delete-ligne-budgetaire/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.ligneBudgetaires.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
