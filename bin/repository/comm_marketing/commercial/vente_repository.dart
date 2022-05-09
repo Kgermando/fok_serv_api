@@ -1,6 +1,8 @@
 import 'package:postgres/postgres.dart';
 
+import '../../../models/comm_maketing/courbe_vente_gain_model.dart';
 import '../../../models/comm_maketing/vente_cart_model.dart';
+import '../../../models/comm_maketing/vente_chart_model.dart';
 
 class VenteRepository {
   final PostgreSQLConnection executor;
@@ -16,6 +18,42 @@ class VenteRepository {
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(VenteCartModel.fromSQL(row));
+    }
+    return data.toList();
+  }
+
+  Future<List<VenteChartModel>> getAllDataChart() async {
+    var data = <VenteChartModel>{};
+    var querySQL =
+        "SELECT 'idProductCart', COUNT(*) AS count, SUM(\"priceTotalCart\"::FLOAT * 1) FROM $tableName GROUP BY \"idProductCart\" ORDER BY count DESC LIMIT 10;";
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(VenteChartModel.fromSQL(row));
+    }
+    return data.toList();
+  }
+
+  Future<List<CourbeVenteModel>> getAllDataChartMounth() async {
+    var data = <CourbeVenteModel>{};
+
+    var querySQL =
+        "SELECT EXTRACT(MONTH FROM \"created\" ::TIMESTAMP), SUM(\"priceTotalCart\"::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 mons' :: INTERVAL  GROUP BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ASC ;";
+
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(CourbeVenteModel.fromSQL(row));
+    }
+    return data.toList();
+  }
+
+  Future<List<CourbeVenteModel>> getAllDataChartYear() async {
+    var data = <CourbeVenteModel>{};
+    var querySQL =
+        "SELECT EXTRACT(YEAR FROM \"created\" ::TIMESTAMP), SUM(\"priceTotalCart\"::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 years' :: INTERVAL  GROUP BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ASC ;";
+
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(CourbeVenteModel.fromSQL(row));
     }
     return data.toList();
   }
@@ -57,7 +95,7 @@ class VenteRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"idProductCart\"='$idProductCart', \"quantityCart\"='$quantityCart',"
+        "UPcreated $tableName SET \"idProductCart\"='$idProductCart', \"quantityCart\"='$quantityCart',"
         "\"priceTotalCart\"='$priceTotalCart', \"unite\"='$unite',"
         "\"succursale\"='$succursale', \"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise',"
         "\"succursale\"='$succursale',"

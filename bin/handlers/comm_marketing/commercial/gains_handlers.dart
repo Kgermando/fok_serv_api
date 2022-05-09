@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../../models/comm_maketing/courbe_vente_gain_model.dart';
 import '../../../models/comm_maketing/gain_model.dart';
 import '../../../repository/repository.dart';
 
@@ -16,6 +17,16 @@ class GainsHandlers {
 
     router.get('/', (Request request) async {
       List<GainModel> data = await repos.gains.getAllData();
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/gain-chart-month/', (Request request) async {
+      List<CourbeGainModel> data = await repos.gains.getAllDataChartMounth();
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/gain-chart-year/', (Request request) async {
+      List<CourbeGainModel> data = await repos.gains.getAllDataChartYear();
       return Response.ok(jsonEncode(data));
     });
 

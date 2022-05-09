@@ -32,12 +32,12 @@ class VenteCartModel {
       quantityCart: row[2],
       priceTotalCart: row[3],
       unite: row[4],
-      tva: row[9],
-      remise: row[10],
-      qtyRemise: row[11],
-      succursale: row[12],
-      signature: row[13],
-      created: row[14]
+      tva: row[5],
+      remise: row[6],
+      qtyRemise: row[7],
+      succursale: row[8],
+      signature: row[9],
+      created: row[10]
     );
   } 
  
@@ -51,9 +51,9 @@ class VenteCartModel {
       tva: json["tva"],
       remise: json["remise"],
       qtyRemise: json["qtyRemise"],
-        succursale: json['succursale'],
-        signature: json['signature'],
-        created: DateTime.parse(json['created'])
+      succursale: json['succursale'],
+      signature: json['signature'],
+      created: DateTime.parse(json['created'])
     );
   }
 

@@ -173,10 +173,10 @@ class AgentsRepository {
       throw AgentCountModel;
     }
   }
-
+ 
 
   Future<List<AgentPieChartModel>>getAgentChartPie() async {
-    try {
+    try { 
       var data = <AgentPieChartModel>{};
       
       var querySQL =  "SELECT sexe, COUNT(sexe) FROM $tableName GROUP BY \"sexe\";";

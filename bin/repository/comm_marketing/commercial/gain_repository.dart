@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../../../models/comm_maketing/courbe_vente_gain_model.dart';
 import '../../../models/comm_maketing/gain_model.dart';
 
 class GainRepository {
@@ -16,6 +17,31 @@ class GainRepository {
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(GainModel.fromSQL(row));
+    }
+    return data.toList();
+  }
+
+  Future<List<CourbeGainModel>> getAllDataChartMounth() async {
+    var data = <CourbeGainModel>{};
+
+    var querySQL =
+        "SELECT EXTRACT(MONTH FROM \"created\" ::TIMESTAMP), SUM(sum::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 mons' :: INTERVAL  GROUP BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ASC ;";
+
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(CourbeGainModel.fromSQL(row));
+    }
+    return data.toList();
+  }
+
+  Future<List<CourbeGainModel>> getAllDataChartYear() async {
+    var data = <CourbeGainModel>{};
+
+    var querySQL =
+        "SELECT EXTRACT(YEAR FROM \"created\" ::TIMESTAMP), SUM(sum::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 years' :: INTERVAL  GROUP BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ASC ;";
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(CourbeGainModel.fromSQL(row));
     }
     return data.toList();
   }
@@ -44,7 +70,7 @@ class GainRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"sum\"='$sum',"
+        "UPcreated $tableName SET \"sum\"='$sum',"
         "\"succursale\"='$succursale',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });

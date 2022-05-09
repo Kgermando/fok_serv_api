@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../../models/comm_maketing/courbe_vente_gain_model.dart';
 import '../../../models/comm_maketing/vente_cart_model.dart';
+import '../../../models/comm_maketing/vente_chart_model.dart';
 import '../../../repository/repository.dart';
 
 class VenteHandlers {
@@ -30,9 +32,23 @@ class VenteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
+    router.get('/vente-chart/', (Request request) async {
+      List<VenteChartModel> data = await repos.ventes.getAllDataChart();
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/vente-chart-month/', (Request request) async {
+      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartMounth();
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/vente-chart-year/', (Request request) async {
+      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartYear();
+      return Response.ok(jsonEncode(data));
+    });
+
     router.post('/insert-new-vente', (Request request) async {
       var input = jsonDecode(await request.readAsString());
-
       VenteCartModel data = VenteCartModel(
           idProductCart: input['idProductCart'],
           quantityCart: input['quantityCart'],
