@@ -81,11 +81,11 @@ class CartRepository {
     }
   }
 
-  deleteAllData(String succursale) async {
+  deleteAllData(String signature) async {
     try {
       await executor.transaction((conn) async {
         // ignore: unused_local_variable
-        var result = await conn.execute('DELETE FROM $tableName WHERE succursale=$succursale;');
+        var result = await conn.execute("DELETE FROM $tableName WHERE \"signature\"='$signature';");
       });
     } catch (e) {
       'erreur $e';

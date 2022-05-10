@@ -21,9 +21,34 @@ class CompteResultatRepository {
 
   Future<void> insertData(CompteResulatsModel compteResulatsModel) async {
     var intitule = compteResulatsModel.intitule;
-    var compteListDebit = compteResulatsModel.compteListDebit;
-    var compteListCredit = compteResulatsModel.compteListCredit;
-    var statut = compteResulatsModel.statut;
+
+
+    var achatMarchandises = compteResulatsModel.achatMarchandises;
+    var variationStockMarchandises = compteResulatsModel.variationStockMarchandises;
+    var achatApprovionnements = compteResulatsModel.achatApprovionnements;
+    var variationApprovionnements = compteResulatsModel.variationApprovionnements;
+    var autresChargesExterne = compteResulatsModel.autresChargesExterne;
+    var impotsTaxesVersementsAssimiles = compteResulatsModel.impotsTaxesVersementsAssimiles;
+    var renumerationPersonnel = compteResulatsModel.renumerationPersonnel;
+    var chargesSocialas = compteResulatsModel.chargesSocialas;
+    var dotatiopnsProvisions = compteResulatsModel.dotatiopnsProvisions;
+    var autresCharges = compteResulatsModel.autresCharges;
+    var chargesfinancieres = compteResulatsModel.chargesfinancieres;
+    var chargesExptionnelles = compteResulatsModel.chargesExptionnelles;
+    var impotSurbenefices = compteResulatsModel.impotSurbenefices;
+    var soldeCrediteur = compteResulatsModel.soldeCrediteur;
+    var ventesMarchandises = compteResulatsModel.ventesMarchandises;
+    var productionVendueBienEtSerices = compteResulatsModel.productionVendueBienEtSerices;
+    var productionStockee = compteResulatsModel.productionStockee;
+    var productionImmobilisee = compteResulatsModel.productionImmobilisee;
+    var subventionExploitation = compteResulatsModel.subventionExploitation;
+    var autreProduits = compteResulatsModel.autreProduits;
+    var montantExportation = compteResulatsModel.montantExportation;
+    var produitfinancieres = compteResulatsModel.produitfinancieres;
+    var produitExceptionnels = compteResulatsModel.produitExceptionnels;
+    var soldeDebiteur = compteResulatsModel.soldeDebiteur;
+
+
     var approbationDG = compteResulatsModel.approbationDG;
     var signatureDG = compteResulatsModel.signatureDG;
     var signatureJustificationDG =
@@ -41,7 +66,18 @@ class CompteResultatRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('comptes_resultat_id_seq'), '$intitule',"
-        "'$compteListDebit','$compteListCredit','$statut',"
+        "'$achatMarchandises','$variationStockMarchandises',"
+        "'$achatApprovionnements','$variationApprovionnements',"
+        "'$autresChargesExterne','$impotsTaxesVersementsAssimiles',"
+        "'$renumerationPersonnel','$chargesSocialas',"
+        "'$dotatiopnsProvisions', '$autresCharges',  '$chargesfinancieres',"
+        "'$chargesExptionnelles','$impotSurbenefices',"
+        "'$soldeCrediteur','$ventesMarchandises',"
+        "'$productionVendueBienEtSerices','$productionStockee',"
+        "'$productionImmobilisee','$subventionExploitation',"
+        "'$autreProduits','$montantExportation', '$produitfinancieres',"
+        "'$produitExceptionnels','$soldeDebiteur',"
+
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
         "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
@@ -51,9 +87,40 @@ class CompteResultatRepository {
   Future<void> update(CompteResulatsModel compteResulatsModel) async {
     var id = compteResulatsModel.id;
     var intitule = compteResulatsModel.intitule;
-    var compteListDebit = compteResulatsModel.compteListDebit;
-    var compteListCredit = compteResulatsModel.compteListCredit;
-    var statut = compteResulatsModel.statut;
+
+    var achatMarchandises = compteResulatsModel.achatMarchandises;
+    var variationStockMarchandises =
+        compteResulatsModel.variationStockMarchandises;
+    var achatApprovionnements = compteResulatsModel.achatApprovionnements;
+    var variationApprovionnements =
+        compteResulatsModel.variationApprovionnements;
+    var autresChargesExterne = compteResulatsModel.autresChargesExterne;
+    var impotsTaxesVersementsAssimiles =
+        compteResulatsModel.impotsTaxesVersementsAssimiles;
+    var renumerationPersonnel = compteResulatsModel.renumerationPersonnel;
+    var chargesSocialas = compteResulatsModel.chargesSocialas;
+    var dotatiopnsProvisions = compteResulatsModel.dotatiopnsProvisions;
+    var autresCharges = compteResulatsModel.autresCharges;
+    var chargesfinancieres = compteResulatsModel.chargesfinancieres;
+    var chargesExptionnelles = compteResulatsModel.chargesExptionnelles;
+    var impotSurbenefices = compteResulatsModel.impotSurbenefices;
+    var soldeCrediteur = compteResulatsModel.soldeCrediteur;
+
+    var ventesMarchandises = compteResulatsModel.ventesMarchandises;
+    var productionVendueBienEtSerices =
+        compteResulatsModel.productionVendueBienEtSerices;
+    var productionStockee = compteResulatsModel.productionStockee;
+    var productionImmobilisee = compteResulatsModel.productionImmobilisee;
+    var subventionExploitation = compteResulatsModel.subventionExploitation;
+    var autreProduits = compteResulatsModel.autreProduits;
+    var montantExportation = compteResulatsModel.montantExportation;
+    var produitfinancieres = compteResulatsModel.produitfinancieres;
+
+    var produitExceptionnels = compteResulatsModel.produitExceptionnels;
+    var soldeDebiteur = compteResulatsModel.soldeDebiteur;
+
+
+
     var approbationDG = compteResulatsModel.approbationDG;
     var signatureDG = compteResulatsModel.signatureDG;
     var signatureJustificationDG = compteResulatsModel.signatureJustificationDG;
@@ -70,8 +137,20 @@ class CompteResultatRepository {
       // ignore: unused_local_variable
       var result = await conn.execute(
         "UPDATE $tableName SET \"intitule\"='$intitule', "
-        "\"compteListDebit\"='$compteListDebit', \"compteListCredit\"='$compteListCredit',"
-        "\"statut\"='$statut',"
+        "\"achatMarchandises\"='$achatMarchandises', \"variationStockMarchandises\"='$variationStockMarchandises',"
+        "\"achatApprovionnements\"='$achatApprovionnements', \"variationApprovionnements\"='$variationApprovionnements',"
+        "\"autresChargesExterne\"='$autresChargesExterne', \"impotsTaxesVersementsAssimiles\"='$impotsTaxesVersementsAssimiles',"
+        "\"renumerationPersonnel\"='$renumerationPersonnel', \"chargesSocialas\"='$chargesSocialas',"
+        "\"dotatiopnsProvisions\"='$dotatiopnsProvisions', \"autresCharges\"='$autresCharges',"
+        "\"chargesfinancieres\"='$chargesfinancieres',"
+        "\"chargesExptionnelles\"='$chargesExptionnelles', \"impotSurbenefices\"='$impotSurbenefices',"
+        "\"soldeCrediteur\"='$soldeCrediteur', \"ventesMarchandises\"='$ventesMarchandises',"
+        "\"productionVendueBienEtSerices\"='$productionVendueBienEtSerices', \"productionStockee\"='$productionStockee',"
+        "\"productionImmobilisee\"='$productionImmobilisee', \"subventionExploitation\"='$subventionExploitation',"
+        "\"autreProduits\"='$autreProduits', \"montantExportation\"='$montantExportation',"
+        "\"produitfinancieres\"='$produitfinancieres',"
+        "\"produitExceptionnels\"='$produitExceptionnels', \"soldeDebiteur\"='$soldeDebiteur',"
+
         "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
         "\"signatureJustificationDG\"='$signatureJustificationDG',"
         "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
@@ -95,19 +174,40 @@ class CompteResultatRepository {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return CompteResulatsModel(
-     id: data[0][0],
+      id: data[0][0],
       intitule: data[0][1],
-      compteListDebit: data[0][2],
-      compteListCredit: data[0][3],
-      statut: data[0][4],
-      approbationDG: data[0][5],
-      signatureDG: data[0][6],
-      signatureJustificationDG: data[0][7],
-      approbationDD: data[0][8],
-      signatureDD: data[0][9],
-      signatureJustificationDD: data[0][10],
-      signature: data[0][11],
-      created: data[0][12]   
+      achatMarchandises: data[0][2],
+      variationStockMarchandises: data[0][3],
+      achatApprovionnements: data[0][4],
+      variationApprovionnements: data[0][5],
+      autresChargesExterne: data[0][6],
+      impotsTaxesVersementsAssimiles: data[0][7],
+      renumerationPersonnel: data[0][8],
+      chargesSocialas: data[0][9],
+      dotatiopnsProvisions: data[0][10],
+      autresCharges: data[0][11],
+      chargesfinancieres: data[0][12],
+      chargesExptionnelles: data[0][13],
+      impotSurbenefices: data[0][14],
+      soldeCrediteur: data[0][15],
+      ventesMarchandises: data[0][16],
+      productionVendueBienEtSerices: data[0][17],
+      productionStockee: data[0][18],
+      productionImmobilisee: data[0][19],
+      subventionExploitation: data[0][20],
+      autreProduits: data[0][21],
+      montantExportation: data[0][22],
+      produitfinancieres: data[0][23],
+      produitExceptionnels: data[0][24],
+      soldeDebiteur: data[0][25],
+      approbationDG: data[0][26],
+      signatureDG: data[0][27],
+      signatureJustificationDG: data[0][28],
+      approbationDD: data[0][29],
+      signatureDD: data[0][30],
+      signatureJustificationDD: data[0][31],
+      signature: data[0][32],
+      created: data[0][33]
     );
   } 
 }

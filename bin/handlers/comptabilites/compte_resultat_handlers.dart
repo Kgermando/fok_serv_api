@@ -35,9 +35,32 @@ class CompteResultatHandlers {
 
       CompteResulatsModel data = CompteResulatsModel(
           intitule: input['intitule'],
-          compteListDebit: input['compteListDebit'],
-          compteListCredit: input['compteListCredit'],
-          statut: input['statut'] as bool,
+
+          achatMarchandises: input['achatMarchandises'],
+          variationStockMarchandises: input['variationStockMarchandises'],
+          achatApprovionnements: input['achatApprovionnements'],
+          variationApprovionnements: input['variationApprovionnements'],
+          autresChargesExterne: input['autresChargesExterne'],
+          impotsTaxesVersementsAssimiles: input['impotsTaxesVersementsAssimiles'],
+          renumerationPersonnel: input['renumerationPersonnel'],
+          chargesSocialas: input['chargesSocialas'],
+          dotatiopnsProvisions: input['dotatiopnsProvisions'],
+          autresCharges: input['autresCharges'],
+          chargesfinancieres: input['chargesfinancieres'],
+          chargesExptionnelles: input['chargesExptionnelles'],
+          impotSurbenefices: input['impotSurbenefices'],
+          soldeCrediteur: input['soldeCrediteur'],
+          ventesMarchandises: input['ventesMarchandises'],
+          productionVendueBienEtSerices: input['productionVendueBienEtSerices'],
+          productionStockee: input['productionStockee'],
+          productionImmobilisee: input['productionImmobilisee'],
+          subventionExploitation: input['subventionExploitation'],
+          autreProduits: input['autreProduits'],
+          montantExportation: input['montantExportation'],
+          produitfinancieres: input['produitfinancieres'],
+          produitExceptionnels: input['produitExceptionnels'],
+          soldeDebiteur: input['soldeDebiteur'],
+          
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
@@ -65,15 +88,80 @@ class CompteResultatHandlers {
       if (input['intitule'] != null) {
         data.intitule = input['intitule'];
       }
-      if (input['compteListDebit'] != null) {
-        data.compteListDebit = input['compteListDebit'];
+
+      if (input['achatMarchandises'] != null) {
+        data.achatMarchandises = input['achatMarchandises'];
       }
-      if (input['compteListCredit'] != null) {
-        data.compteListCredit = input['compteListCredit'];
+      if (input['variationStockMarchandises'] != null) {
+        data.variationStockMarchandises = input['variationStockMarchandises'];
       }
-      if (input['statut'] != null) {
-        data.statut = input['statut'] as bool;
+      if (input['achatApprovionnements'] != null) {
+        data.achatApprovionnements = input['achatApprovionnements'];
       }
+      if (input['variationApprovionnements'] != null) {
+        data.variationApprovionnements = input['variationApprovionnements'];
+      }
+      if (input['autresChargesExterne'] != null) {
+        data.autresChargesExterne = input['autresChargesExterne'];
+      }
+      if (input['chargesfinancieres'] != null) {
+        data.chargesfinancieres = input['chargesfinancieres'];
+      }
+      if (input['impotsTaxesVersementsAssimiles'] != null) {
+        data.impotsTaxesVersementsAssimiles = input['impotsTaxesVersementsAssimiles'];
+      }
+      if (input['renumerationPersonnel'] != null) {
+        data.renumerationPersonnel = input['renumerationPersonnel'];
+      }
+      if (input['chargesSocialas'] != null) {
+        data.chargesSocialas = input['chargesSocialas'];
+      }
+      if (input['dotatiopnsProvisions'] != null) {
+        data.dotatiopnsProvisions = input['dotatiopnsProvisions'];
+      }
+      if (input['autresCharges'] != null) {
+        data.autresCharges = input['autresCharges'];
+      }
+      if (input['chargesExptionnelles'] != null) {
+        data.chargesExptionnelles = input['chargesExptionnelles'];
+      }
+      if (input['impotSurbenefices'] != null) {
+        data.impotSurbenefices = input['impotSurbenefices'];
+      }
+      if (input['soldeCrediteur'] != null) {
+        data.soldeCrediteur = input['soldeCrediteur'];
+      }
+      if (input['ventesMarchandises'] != null) {
+        data.ventesMarchandises = input['ventesMarchandises'];
+      }
+      if (input['productionVendueBienEtSerices'] != null) {
+        data.productionVendueBienEtSerices = input['productionVendueBienEtSerices'];
+      }
+      if (input['productionStockee'] != null) {
+        data.productionStockee = input['productionStockee'];
+      }
+      if (input['productionImmobilisee'] != null) {
+        data.productionImmobilisee = input['productionImmobilisee'];
+      }
+      if (input['subventionExploitation'] != null) {
+        data.subventionExploitation = input['subventionExploitation'];
+      }
+      if (input['autreProduits'] != null) {
+        data.autreProduits = input['autreProduits'];
+      }
+      if (input['montantExportation'] != null) {
+        data.montantExportation = input['montantExportation'];
+      }
+      if (input['produitfinancieres'] != null) {
+        data.produitfinancieres = input['produitfinancieres'];
+      }
+      if (input['produitExceptionnels'] != null) {
+        data.produitExceptionnels = input['produitExceptionnels'];
+      }
+      if (input['soldeDebiteur'] != null) {
+        data.soldeDebiteur = input['soldeDebiteur'];
+      }
+
       if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }

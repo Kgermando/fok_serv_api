@@ -469,9 +469,34 @@ class TableName {
         CREATE TABLE IF NOT EXISTS $comptesResultatTable(
           "id" $key,
           "intitule" $vachar,
-          "compteListDebit" $list,
-          "compteListCredit" $list,
-          "statut" $boolean,
+
+          "achatMarchandises" $vachar,
+          "variationStockMarchandises" $vachar,
+          "achatApprovionnements" $vachar,
+          "variationApprovionnements" $vachar,
+          "autresChargesExterne" $vachar,
+          "impotsTaxesVersementsAssimiles" $vachar,
+          "renumerationPersonnel" $vachar,
+          "chargesSocialas" $vachar,
+          "dotatiopnsProvisions" $vachar,
+          "autresCharges" $vachar,
+          "chargesfinancieres" $vachar,
+
+          "chargesExptionnelles" $vachar,
+          "importSurbenefices" $vachar,
+          "soldeCrediteur" $vachar,
+
+          "ventesMarchandises" $vachar,
+          "productionVendueBienEtSerices" $vachar,
+          "productionStockee" $vachar,
+          "productionImmobilisee" $vachar,
+          "subventionExploitation" $vachar,
+          "autreProduits" $vachar,
+          "montantExportation" $vachar,
+          "produitfinancieres" $vachar,
+
+          "produitExceptionnels" $vachar,
+          "soldeDebiteur" $vachar,
           
           "approbationDG" $vachar,
           "signatureDG" $vachar,

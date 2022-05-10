@@ -104,16 +104,16 @@ class CartHandlers {
       return Response.ok('Supprimée');
     });
 
-    router.delete('/delete-all-cart/<succursale>', (Request request, String succursale) async {
-      var succursale = request.params['succursale'];
-      repos.carts.deleteAllData(succursale!);
-      return Response.ok('Supprimée');
+    router.delete('/delete-all-cart/<signature>', (Request request, String signature) async {
+      var signature = request.params['signature'];
+      repos.carts.deleteAllData(signature!);
+      return Response.ok('Panier vide');
     });
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page cart n\'est pas trouvé'),
+          Response.notFound('La Page panier n\'est pas trouvé'),
     );
 
     return router;
