@@ -1,11 +1,10 @@
 class BalanceCompteModel {
   late int? id;
-  // Debit, credit,
+  late String title;
   late List comptes;
   late bool statut; // A defaut de modifier il vont déclaser le fichier
 
-
-  late String approbationDG; // button radio OUi et NON if non text field
+  late String approbationDG;
   late String signatureDG;
   late String signatureJustificationDG;
 
@@ -18,6 +17,7 @@ class BalanceCompteModel {
 
   BalanceCompteModel(
       {this.id,
+      required this.title,
       required this.comptes,
       required this.statut,
       required this.approbationDG,
@@ -31,22 +31,25 @@ class BalanceCompteModel {
 
   factory BalanceCompteModel.fromSQL(List<dynamic> row) {
     return BalanceCompteModel(
-        id: row[0],
-        comptes: row[1],
-        statut: row[2],
-        approbationDG: row[3],
-        signatureDG: row[4],
-        signatureJustificationDG: row[5],
-        approbationDD: row[6],
-        signatureDD: row[7],
-        signatureJustificationDD: row[7],
-        signature: row[9],
-        created: row[10]);
+      id: row[0],
+      title: row[1],
+      comptes: row[2],
+      statut: row[3],
+      approbationDG: row[4],
+      signatureDG: row[5],
+      signatureJustificationDG: row[6],
+      approbationDD: row[7],
+      signatureDD: row[8],
+      signatureJustificationDD: row[9],
+      signature: row[10],
+      created: row[11]
+    );
   }
 
   factory BalanceCompteModel.fromJson(Map<String, dynamic> json) {
     return BalanceCompteModel(
         id: json['id'],
+        title: json['title'],
         comptes: json['comptes'],
         statut: json['statut'],
         approbationDG: json['approbationDG'],
@@ -62,6 +65,7 @@ class BalanceCompteModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'title': title,
       'comptes': comptes,
       'statut': statut,
       'approbationDG': approbationDG,

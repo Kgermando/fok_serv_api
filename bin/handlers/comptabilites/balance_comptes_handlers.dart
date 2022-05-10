@@ -34,6 +34,7 @@ class BalanceComptesHandlers {
       var input = jsonDecode(await request.readAsString());
 
       BalanceCompteModel data = BalanceCompteModel(
+          title: input['title'],
           comptes: input['comptes'],
           statut: input['statut'] as bool,
           approbationDG: input['approbationDG'],
@@ -60,6 +61,9 @@ class BalanceComptesHandlers {
       BalanceCompteModel data =
           await repos.balanceComptes.getFromId(int.parse(id!));
 
+      if (input['title'] != null) {
+        data.title = input['title'];
+      }
       if (input['comptes'] != null) {
         data.comptes = input['comptes'];
       }

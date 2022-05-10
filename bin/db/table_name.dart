@@ -442,13 +442,14 @@ class TableName {
        await connection.query('''
         CREATE TABLE IF NOT EXISTS $journalsTable(
           "id" $key,
+          "numeroOperation" $vachar,
           "libele" $vachar,
           "compteDebit" $vachar,
           "montantDebit" $vachar,
           "compteCredit" $vachar,
           "montantCredit" $vachar,
+          "tva" $vachar,
           "remarque" $vachar,
-          "statut" $boolean,
           
           "approbationDG" $vachar,
           "signatureDG" $vachar,
@@ -515,6 +516,7 @@ class TableName {
        await connection.query('''
         CREATE TABLE IF NOT EXISTS $balanceComptesTable(
           "id" $key,
+          "title" $vachar,
           "comptes" $list,
           "statut" $boolean,
           

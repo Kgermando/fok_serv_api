@@ -20,6 +20,7 @@ class BalanceCompteRepository {
   }
 
   Future<void> insertData(BalanceCompteModel balanceCompteModel) async {
+    var title = balanceCompteModel.title;
     var comptes = balanceCompteModel.comptes;
     var statut = balanceCompteModel.statut;
     var approbationDG = balanceCompteModel.approbationDG;
@@ -38,8 +39,8 @@ class BalanceCompteRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('balance_comptes_id_seq'), '$comptes',"
-        "'$statut',"
+        "INSERT INTO $tableName VALUES (nextval('balance_comptes_id_seq'), '$title',"
+        "'$comptes', '$statut',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
         "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
@@ -48,6 +49,7 @@ class BalanceCompteRepository {
 
   Future<void> update(BalanceCompteModel balanceCompteModel) async {
     var id = balanceCompteModel.id;
+    var title = balanceCompteModel.title;
     var comptes = balanceCompteModel.comptes;
     var statut = balanceCompteModel.statut;
     var approbationDG = balanceCompteModel.approbationDG;
@@ -65,7 +67,7 @@ class BalanceCompteRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"comptes\"='$comptes',"
+        "UPDATE $tableName SET \"title\"='$title', \"comptes\"='$comptes',"
         "\"statut\"='$statut',"
         "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
         "\"signatureJustificationDG\"='$signatureJustificationDG',"
@@ -91,16 +93,17 @@ class BalanceCompteRepository {
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return BalanceCompteModel(
       id: data[0][0],
-      comptes: data[0][1],
-      statut: data[0][2],
-      approbationDG: data[0][3],
-      signatureDG: data[0][4],
-      signatureJustificationDG: data[0][5],
-      approbationDD: data[0][6],
-      signatureDD: data[0][7],
-      signatureJustificationDD: data[0][8],
-      signature: data[0][9],
-      created: data[0][10]
+      title: data[0][1],
+      comptes: data[0][2],
+      statut: data[0][3],
+      approbationDG: data[0][4],
+      signatureDG: data[0][5],
+      signatureJustificationDG: data[0][6],
+      approbationDD: data[0][7],
+      signatureDD: data[0][8],
+      signatureJustificationDD: data[0][9],
+      signature: data[0][10],
+      created: data[0][11]
     );
   } 
 }

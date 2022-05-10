@@ -34,13 +34,14 @@ class JournalHandlers {
       var input = jsonDecode(await request.readAsString());
 
       JournalModel data = JournalModel(
+          numeroOperation: input['numeroOperation'],
           libele: input['libele'],
           compteDebit: input['compteDebit'],
           montantDebit: input['montantDebit'],
           compteCredit: input['compteCredit'],
           montantCredit: input['montantCredit'],
+          tva: input['tva'],
           remarque: input['remarque'],
-          statut: input['statut'] as bool,
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
@@ -63,6 +64,9 @@ class JournalHandlers {
       var id = request.params['id'];
       JournalModel data = await repos.journals.getFromId(int.parse(id!));
 
+      if (input['numeroOperation'] != null) {
+        data.numeroOperation = input['numeroOperation'];
+      }
       if (input['libele'] != null) {
         data.libele = input['libele'];
       }
@@ -78,11 +82,11 @@ class JournalHandlers {
       if (input['montantCredit'] != null) {
         data.montantCredit = input['montantCredit'];
       }
+      if (input['tva'] != null) {
+        data.tva = input['tva'];
+      }
       if (input['remarque'] != null) {
         data.remarque = input['remarque'];
-      }
-      if (input['statut'] != null) {
-        data.statut = input['statut'] as bool;
       }
       if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
