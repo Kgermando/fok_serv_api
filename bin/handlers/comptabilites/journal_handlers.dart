@@ -3,19 +3,30 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../models/comptabilites/courbe_journal_model.dart';
 import '../../models/comptabilites/journal_model.dart';
 import '../../repository/repository.dart';
 
 class JournalHandlers {
   final Repository repos;
 
-  JournalHandlers(this.repos);
+  JournalHandlers(this.repos); 
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
       List<JournalModel> data = await repos.journals.getAllData();
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/journal-chart-month/', (Request request) async {
+      List<CourbeJournalModel> data = await repos.journals.getAllDataChartMounth();
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/journal-chart-year/', (Request request) async {
+      List<CourbeJournalModel> data = await repos.journals.getAllDataChartYear();
       return Response.ok(jsonEncode(data));
     });
 

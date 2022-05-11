@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../../models/comptabilites/courbe_journal_model.dart';
 import '../../models/comptabilites/journal_model.dart';
 
 class JournalRepository {
@@ -19,6 +20,31 @@ class JournalRepository {
     return data.toList();
   }
 
+  Future<List<CourbeJournalModel>> getAllDataChartMounth() async {
+    var data = <CourbeJournalModel>{};
+
+    var querySQL =
+      "SELECT EXTRACT(MONTH FROM \"created\" ::TIMESTAMP), SUM(\"montantDebit\" ::FLOAT), SUM(\"montantCredit\" ::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 mons' :: INTERVAL GROUP BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ASC;";
+
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(CourbeJournalModel.fromSQL(row));
+    }
+    return data.toList();
+  }
+
+  Future<List<CourbeJournalModel>> getAllDataChartYear() async {
+    var data = <CourbeJournalModel>{};
+    var querySQL =
+      "SELECT EXTRACT(YEAR FROM \"created\" ::TIMESTAMP), SUM(\"montantDebit\" ::FLOAT), SUM(\"montantCredit\" ::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 years' :: INTERVAL GROUP BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ASC;";
+
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(CourbeJournalModel.fromSQL(row));
+    }
+    return data.toList();
+  }
+
   Future<void> insertData(JournalModel journalModel) async {
     var numeroOperation = journalModel.numeroOperation;
     var libele = journalModel.libele;
@@ -31,13 +57,11 @@ class JournalRepository {
 
     var approbationDG = journalModel.approbationDG;
     var signatureDG = journalModel.signatureDG;
-    var signatureJustificationDG =
-        journalModel.signatureJustificationDG;
+    var signatureJustificationDG = journalModel.signatureJustificationDG;
 
     var approbationDD = journalModel.approbationDD;
     var signatureDD = journalModel.signatureDD;
-    var signatureJustificationDD =
-        journalModel.signatureJustificationDD;
+    var signatureJustificationDD = journalModel.signatureJustificationDD;
 
     var signature = journalModel.signature;
     var created = journalModel.created;
@@ -45,12 +69,12 @@ class JournalRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('journals_id_seq'), '$numeroOperation',"
-        "'$libele', '$compteDebit','$montantDebit','$compteCredit','$montantCredit',"
-        "'$tva', '$remarque',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
-        "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
-        "'$signature','$created');");
+          "INSERT INTO $tableName VALUES (nextval('journals_id_seq'), '$numeroOperation',"
+          "'$libele', '$compteDebit','$montantDebit','$compteCredit','$montantCredit',"
+          "'$tva', '$remarque',"
+          "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
+          "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
+          "'$signature','$created');");
     });
   }
 
@@ -75,7 +99,6 @@ class JournalRepository {
 
     var signature = journalModel.signature;
     var created = journalModel.created;
-
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
@@ -107,23 +130,22 @@ class JournalRepository {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return JournalModel(
-      id: data[0][0],
-      numeroOperation:  data[0][1],
-      libele:  data[0][2],
-      compteDebit:  data[0][3],
-      montantDebit:  data[0][4],
-      compteCredit:  data[0][5],
-      montantCredit:  data[0][6],
-      tva:  data[0][7],
-      remarque:  data[0][8],
-      approbationDG:  data[0][9],
-      signatureDG:  data[0][10],
-      signatureJustificationDG:  data[0][11],
-      approbationDD:  data[0][12],
-      signatureDD:  data[0][13],
-      signatureJustificationDD:  data[0][14],
-      signature:  data[0][15],
-      created:  data[0][16]
-    );
-  } 
+        id: data[0][0],
+        numeroOperation: data[0][1],
+        libele: data[0][2],
+        compteDebit: data[0][3],
+        montantDebit: data[0][4],
+        compteCredit: data[0][5],
+        montantCredit: data[0][6],
+        tva: data[0][7],
+        remarque: data[0][8],
+        approbationDG: data[0][9],
+        signatureDG: data[0][10],
+        signatureJustificationDG: data[0][11],
+        approbationDD: data[0][12],
+        signatureDD: data[0][13],
+        signatureJustificationDD: data[0][14],
+        signature: data[0][15],
+        created: data[0][16]);
+  }
 }
