@@ -544,6 +544,7 @@ class TableName {
           "list" $list,
           "ligneBudgtaire" $vachar,
           "resources" $vachar,
+          "observation" $boolean,
           
           "approbationDG" $vachar,
           "signatureDG" $vachar,
@@ -844,6 +845,7 @@ class TableName {
           "recetteAttendus" $vachar,
           "listAgentEtRole" $list,
           "typeFinancement" $vachar,
+          "observation" $boolean,
           "approbationDG" $vachar, 
           "signatureDG" $vachar,
           "signatureJustificationDG" $vachar,
@@ -944,6 +946,7 @@ class TableName {
           "objetctifs" $vachar,
           "ligneBudgtaire" $vachar,
           "resources" $vachar,
+          "observation" $boolean,
           "approbationDG" $vachar, 
           "signatureDG" $vachar,
           "signatureJustificationDG" $vachar,

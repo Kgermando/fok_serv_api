@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../models/charts/pie_chart_model.dart';
 import '../../models/logistiques/anguin_model.dart';
 import '../../repository/repository.dart';
 
@@ -18,6 +19,13 @@ class AnguinHandlers {
       List<AnguinModel> data = await repos.anguins.getAllData();
       return Response.ok(jsonEncode(data));
     });
+
+    router.get('/chart-pie-genre/', (Request request) async {
+      List<PieChartEnguinModel> data =
+          await repos.anguins.getChartPie();
+      return Response.ok(jsonEncode(data));
+    });
+
 
     router.get('/<id>', (Request request, String id) async {
       late AnguinModel anguinModel;

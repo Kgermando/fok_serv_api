@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../../models/charts/pie_chart_model.dart';
 import '../../models/devis/devis_models.dart';
 
 class DevisRepository {
@@ -20,13 +21,49 @@ class DevisRepository {
     return data.toList();
   }
 
+  Future<List<PieChartModel>> getDepartementChartPieMounth() async {
+    try {
+      var data = <PieChartModel>{};
+    var querySQL =
+          "SELECT departement, COUNT(departement) FROM $tableName WHERE \"created\" >= NOW() - '1 mons' :: INTERVAL  GROUP BY \"departement\";";
+      // var querySQL =
+      //     "SELECT departement, COUNT(departement) FROM $tableName GROUP BY \"departement\";";
+      List<List<dynamic>> results = await executor.query(querySQL);
+      for (var row in results) {
+        data.add(PieChartModel.fromSQL(row));
+      }
+      return data.toList();
+    } catch (e) {
+      throw PieChartModel;
+    }
+  }
+
+  Future<List<PieChartModel>> getDepartementChartPieYear() async {
+    try {
+      var data = <PieChartModel>{};
+      var querySQL =
+          "SELECT departement, COUNT(departement) FROM $tableName WHERE \"created\" >= NOW() - '1 years' :: INTERVAL  GROUP BY \"departement\";";
+      // var querySQL =
+      //     "SELECT departement, COUNT(departement) FROM $tableName GROUP BY \"departement\";";
+      List<List<dynamic>> results = await executor.query(querySQL);
+      for (var row in results) {
+        data.add(PieChartModel.fromSQL(row));
+      }
+      return data.toList();
+    } catch (e) {
+      throw PieChartModel;
+    }
+  }
+
   Future<void> insertData(DevisModel devisModel) async {
     var title = devisModel.title;
     var priority = devisModel.priority;
     var departement = devisModel.departement;
     var list = devisModel.list;
-     var ligneBudgtaire = devisModel.ligneBudgtaire;
+    var ligneBudgtaire = devisModel.ligneBudgtaire;
     var resources = devisModel.resources;
+    var observation = devisModel.observation;
+
     var approbationDG = devisModel.approbationDG;
     var signatureDG = devisModel.signatureDG;
     var signatureJustificationDG =
@@ -55,7 +92,7 @@ class DevisRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('devis_id_seq'), '$title',"
-        "'$priority','$departement','$list', '$ligneBudgtaire', '$resources',"
+        "'$priority','$departement','$list', '$ligneBudgtaire', '$resources', '$observation',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
         "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
         "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
@@ -72,6 +109,8 @@ class DevisRepository {
     var list = devisModel.list;
     var ligneBudgtaire = devisModel.ligneBudgtaire;
     var resources = devisModel.resources;
+    var observation = devisModel.observation;
+
     var approbationDG = devisModel.approbationDG;
     var signatureDG = devisModel.signatureDG;
     var signatureJustificationDG = devisModel.signatureJustificationDG;
@@ -98,6 +137,7 @@ class DevisRepository {
           "UPDATE $tableName SET \"title\"='$title', "
           "\"priority\"='$priority',\"departement\"='$departement',"
           "\"list\"='$list', \"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
+          "\"observation\"='$observation',"
           "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
           "\"signatureJustificationDG\"='$signatureJustificationDG',"
           "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
@@ -132,20 +172,21 @@ class DevisRepository {
       list: data[0][4],
       ligneBudgtaire: data[0][5],
       resources: data[0][6],
-      approbationDG: data[0][7],
-      signatureDG: data[0][8],
-      signatureJustificationDG: data[0][9],
-      approbationFin: data[0][10],
-      signatureFin: data[0][11],
-      signatureJustificationFin: data[0][12],
-      approbationBudget: data[0][13],
-      signatureBudget: data[0][14],
-      signatureJustificationBudget: data[0][15],
-      approbationDD: data[0][16],
-      signatureDD: data[0][17],
-      signatureJustificationDD: data[0][18],
-      signature: data[0][19],
-      created: data[0][20]
+      observation: data[0][7],
+      approbationDG: data[0][8],
+      signatureDG: data[0][9],
+      signatureJustificationDG: data[0][10],
+      approbationFin: data[0][11],
+      signatureFin: data[0][12],
+      signatureJustificationFin: data[0][13],
+      approbationBudget: data[0][14],
+      signatureBudget: data[0][15],
+      signatureJustificationBudget: data[0][16],
+      approbationDD: data[0][17],
+      signatureDD: data[0][18],
+      signatureJustificationDD: data[0][19],
+      signature: data[0][20],
+      created: data[0][21]
     );
   } 
 }

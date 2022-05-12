@@ -179,7 +179,7 @@ class AgentsRepository {
     try { 
       var data = <AgentPieChartModel>{};
       
-      var querySQL =  "SELECT sexe, COUNT(sexe) FROM $tableName GROUP BY \"sexe\";";
+      var querySQL =  "SELECT sexe, COUNT(sexe) FROM $tableName WHERE \"approbationDG\"='Approved' GROUP BY \"sexe\";";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(AgentPieChartModel.fromSQL(row));

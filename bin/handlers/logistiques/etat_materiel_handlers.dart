@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../models/charts/pie_chart_model.dart';
 import '../../models/logistiques/etat_materiel_model.dart';
 import '../../repository/repository.dart';
 
@@ -18,6 +19,12 @@ class EtatMaterielHandlers {
       List<EtatMaterielModel> data = await repos.etatMateriels.getAllData();
       return Response.ok(jsonEncode(data));
     });
+
+    router.get('/chart-pie-statut/', (Request request) async {
+      List<PieChartMaterielModel> data = await repos.etatMateriels.getChartPie();
+      return Response.ok(jsonEncode(data));
+    });
+
 
     router.get('/<id>', (Request request, String id) async {
       late EtatMaterielModel etatMaterielModel;

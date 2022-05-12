@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../models/charts/pie_chart_model.dart';
 import '../../models/devis/devis_models.dart';
 import '../../repository/repository.dart';
 
@@ -18,6 +19,16 @@ class DevisHandlers {
       List<DevisModel> data = await repos.devis.getAllData();
       return Response.ok(jsonEncode(data));
     });
+
+    router.get('/chart-pie-dep-mounth/', (Request request) async {
+      List<PieChartModel> data = await repos.devis.getDepartementChartPieMounth();
+      return Response.ok(jsonEncode(data));
+    });
+    router.get('/chart-pie-dep-year/', (Request request) async {
+      List<PieChartModel> data = await repos.devis.getDepartementChartPieYear();
+      return Response.ok(jsonEncode(data));
+    });
+
 
     router.get('/<id>', (Request request, String id) async {
       late DevisModel agent;
@@ -40,6 +51,7 @@ class DevisHandlers {
           list: input['list'],
           ligneBudgtaire: input['ligneBudgtaire'],
           resources: input['resources'],
+          observation: input['observation'],
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
@@ -83,7 +95,9 @@ class DevisHandlers {
       if (input['resources'] != null) {
         data.resources = input['resources'];
       }
-
+      if (input['observation'] != null) {
+        data.observation = input['observation'];
+      }
       if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }

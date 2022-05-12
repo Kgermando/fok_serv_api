@@ -9,6 +9,8 @@ class CampaignModel {
   late String objetctifs;
   late String ligneBudgtaire;
   late String resources;
+  late bool observation;
+
 
   late String approbationDG; // button radio OUi et NON if non text field
   late String signatureDG;
@@ -39,6 +41,7 @@ class CampaignModel {
       required this.objetctifs,
       required this.ligneBudgtaire,
       required this.resources,
+      required this.observation,
       required this.approbationDG,
       required this.signatureDG,
       required this.signatureJustificationDG,
@@ -66,20 +69,22 @@ class CampaignModel {
         objetctifs: row[7],
         ligneBudgtaire: row[8],
         resources: row[9],
-        approbationDG: row[10],
-        signatureDG: row[11],
-        signatureJustificationDG: row[12],
-        approbationFin: row[13],
-        signatureFin: row[14],
-        signatureJustificationFin: row[15],
-        approbationBudget: row[16],
-        signatureBudget: row[17],
-        signatureJustificationBudget: row[18],
-        approbationDD: row[19],
-        signatureDD: row[20],
-        signatureJustificationDD: row[21],
-        signature: row[22],
-        created: row[23]);
+        observation: row[10],
+        approbationDG: row[11],
+        signatureDG: row[12],
+        signatureJustificationDG: row[13],
+        approbationFin: row[14],
+        signatureFin: row[15],
+        signatureJustificationFin: row[16],
+        approbationBudget: row[17],
+        signatureBudget: row[18],
+        signatureJustificationBudget: row[19],
+        approbationDD: row[20],
+        signatureDD: row[21],
+        signatureJustificationDD: row[22],
+        signature: row[23],
+        created: row[24]
+    );
   }
 
   factory CampaignModel.fromJson(Map<String, dynamic> json) {
@@ -94,6 +99,7 @@ class CampaignModel {
         objetctifs: json['objetctifs'],
         ligneBudgtaire: json['ligneBudgtaire'],
         resources: json['resources'],
+        observation: json['resources'],
         approbationDG: json['approbationDG'],
         signatureDG: json['signatureDG'],
         signatureJustificationDG: json['signatureJustificationDG'],
@@ -122,6 +128,7 @@ class CampaignModel {
       'objetctifs': objetctifs,
       'ligneBudgtaire': ligneBudgtaire,
       'resources': resources,
+      'observation': observation,
       'approbationDG': approbationDG,
       'signatureDG': signatureDG,
       'signatureJustificationDG': signatureJustificationDG,

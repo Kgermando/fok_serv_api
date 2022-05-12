@@ -149,3 +149,36 @@ class CaisseModel {
     };
   }
 }
+
+
+class CaisseChartModel {
+  late String typeOperation;
+  late double sum;
+
+  CaisseChartModel({
+    required this.typeOperation,
+    required this.sum
+    }
+  );
+
+  factory CaisseChartModel.fromSQL(List<dynamic> row) {
+    return CaisseChartModel(
+        typeOperation: row[0],
+        sum: row[1]
+    );
+  }
+
+  factory CaisseChartModel.fromJson(Map<String, dynamic> json) {
+    return CaisseChartModel(
+        typeOperation: json['typeOperation'],
+        sum: json['sum']
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'typeOperation': typeOperation,
+      'sum': sum,
+    };
+  }
+}

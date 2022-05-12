@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../../models/charts/pie_chart_model.dart';
 import '../../models/logistiques/anguin_model.dart';
 
 class AnguinRepository {
@@ -17,6 +18,22 @@ class AnguinRepository {
       data.add(AnguinModel.fromSQL(row));
     }
     return data.toList();
+  }
+
+  Future<List<PieChartEnguinModel>> getChartPie() async {
+    try {
+      var data = <PieChartEnguinModel>{};
+
+      var querySQL =
+          "SELECT genre, COUNT(genre) FROM $tableName WHERE \"approbationDG\"='Approved' GROUP BY \"genre\";";
+      List<List<dynamic>> results = await executor.query(querySQL);
+      for (var row in results) {
+        data.add(PieChartEnguinModel.fromSQL(row));
+      }
+      return data.toList();
+    } catch (e) {
+      throw PieChartEnguinModel;
+    }
   }
 
   Future<void> insertData(AnguinModel anguinModel) async {

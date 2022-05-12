@@ -43,6 +43,7 @@ class CampaignHandlers {
           objetctifs: input['objetctifs'],
           ligneBudgtaire: input['ligneBudgtaire'],
           resources: input['resources'],
+          observation: input['observation'],
           approbationDG: input['approbationDG'],
           signatureDG: input['signatureDG'],
           signatureJustificationDG: input['signatureJustificationDG'],
@@ -97,6 +98,9 @@ class CampaignHandlers {
       }
       if (input['resources'] != null) {
         data.resources = input['resources'];
+      }
+      if (input['observation'] != null) {
+        data.observation = input['observation'];
       }
       if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];

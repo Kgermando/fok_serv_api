@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../../models/charts/pie_chart_model.dart';
 import '../../models/logistiques/etat_materiel_model.dart';
 
 class EtaMaterielRepository {
@@ -17,6 +18,23 @@ class EtaMaterielRepository {
       data.add(EtatMaterielModel.fromSQL(row));
     }
     return data.toList();
+  }
+
+  
+  Future<List<PieChartMaterielModel>> getChartPie() async {
+    try {
+      var data = <PieChartMaterielModel>{};
+
+      var querySQL =
+          "SELECT statut, COUNT(statut) FROM $tableName WHERE \"approbationDG\"='Approved' GROUP BY \"statut\";";
+      List<List<dynamic>> results = await executor.query(querySQL);
+      for (var row in results) {
+        data.add(PieChartMaterielModel.fromSQL(row));
+      }
+      return data.toList();
+    } catch (e) {
+      throw PieChartMaterielModel;
+    }
   }
 
   Future<void> insertData(EtatMaterielModel etatMaterielModel) async {
