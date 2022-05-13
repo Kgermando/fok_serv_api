@@ -35,11 +35,10 @@ class DepartementBudgetHandlers {
       var input = jsonDecode(await request.readAsString());
 
       DepartementBudgetModel data = DepartementBudgetModel(
+        title: input['title'],
         departement: input['departement'],
-        periodeBudget: input['periodeBudget'],
-        totalGlobalDispo: input['totalGlobalDispo'],
-        totalGlobalFinExt: input['totalGlobalFinExt'],
-        totalGlobalPrevisionel: input['totalGlobalPrevisionel'],
+        periodeDebut:  DateTime.parse(input['periodeDebut']),
+        periodeFin:  DateTime.parse(input['periodeFin']),
         approbationDG: input['approbationDG'],
         signatureDG: input['signatureDG'],
         signatureJustificationDG: input['signatureJustificationDG'],
@@ -71,22 +70,19 @@ class DepartementBudgetHandlers {
           await repos.departementBudgets.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
+      if (input['title'] != null) {
+        data.title = input['title'];
+      }
       if (input['departement'] != null) {
         data.departement = input['departement'];
       }
-      if (input['periodeBudget'] != null) {
-        data.periodeBudget = input['periodeBudget'];
+      if (input['periodeDebut'] != null) {
+        data.periodeDebut = DateTime.parse(input['periodeDebut']);
       }
-      if (input['totalGlobalDispo'] != null) {
-        data.totalGlobalDispo = input['totalGlobalDispo'];
+      if (input['periodeFin'] != null) {
+        data.periodeFin = DateTime.parse(input['periodeFin']);
       }
-      if (input['totalGlobalFinExt'] != null) {
-        data.totalGlobalFinExt = input['totalGlobalFinExt'];
-      }
-      if (input['totalGlobalPrevisionel'] != null) {
-        data.totalGlobalPrevisionel = input['totalGlobalPrevisionel'];
-      }
-
+      
       if (input['approbationDG'] != null) {
         data.approbationDG = input['approbationDG'];
       }

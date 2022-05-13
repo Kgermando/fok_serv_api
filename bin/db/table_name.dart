@@ -567,11 +567,10 @@ class TableName {
       await connection.query('''
         CREATE TABLE IF NOT EXISTS $departementBudgetTable(
           "id" $key,
+          "title" $vachar,
           "departement" $vachar,
-          "periodeBudget" $vachar,
-          "totalGlobalDispo" $vachar,
-          "totalGlobalFinExt" $vachar,
-          "totalGlobalPrevisionel" $vachar,
+          "periodeDebut" $timestamp,
+          "periodeFin" $timestamp,
 
           "approbationDG" $vachar,
           "signatureDG" $vachar,

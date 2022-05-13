@@ -9,10 +9,10 @@ class CartRepository {
   CartRepository(this.executor, this.tableName);
 
 
-  Future<List<CartModel>> getAllData() async {
+  Future<List<CartModel>> getAllData(String matricule) async {
     var data = <CartModel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
+    var querySQL = "SELECT * FROM $tableName WHERE \"signature\"='$matricule' ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(CartModel.fromSQL(row));

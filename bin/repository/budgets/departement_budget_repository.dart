@@ -21,11 +21,10 @@ class DepartementBudgetRepository {
   }
 
   Future<void> insertData(DepartementBudgetModel departementBudgetModel) async {
+    var title = departementBudgetModel.title;
     var departement = departementBudgetModel.departement;
-    var periodeBudget = departementBudgetModel.periodeBudget;
-    var totalGlobalDispo = departementBudgetModel.totalGlobalDispo;
-    var totalGlobalFinExt = departementBudgetModel.totalGlobalFinExt;
-    var totalGlobalPrevisionel = departementBudgetModel.totalGlobalPrevisionel;
+    var periodeDebut = departementBudgetModel.periodeDebut;
+    var periodeFin = departementBudgetModel.periodeFin;
 
     var approbationDG = departementBudgetModel.approbationDG;
     var signatureDG = departementBudgetModel.signatureDG;
@@ -51,23 +50,22 @@ class DepartementBudgetRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('departement_budgets_id_seq'), '$departement',"
-        "'$periodeBudget','$totalGlobalDispo','$totalGlobalFinExt', '$totalGlobalPrevisionel',"
+        "INSERT INTO $tableName VALUES (nextval('departement_budgets_id_seq'), '$title',"
+        "'$departement', '$periodeDebut', '$periodeFin',"
         "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
         "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
         "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
         "'$signatureDD', '$signatureJustificationDD',"
-        "'$signature','$created');");
+        "'$signature', '$created');");
     });
   }
 
   Future<void> update(DepartementBudgetModel departementBudgetModel) async {
     var id = departementBudgetModel.id;
+    var title = departementBudgetModel.title;
     var departement = departementBudgetModel.departement;
-    var periodeBudget = departementBudgetModel.periodeBudget;
-    var totalGlobalDispo = departementBudgetModel.totalGlobalDispo;
-    var totalGlobalFinExt = departementBudgetModel.totalGlobalFinExt;
-    var totalGlobalPrevisionel = departementBudgetModel.totalGlobalPrevisionel;
+    var periodeDebut = departementBudgetModel.periodeDebut;
+    var periodeFin = departementBudgetModel.periodeFin;
     
     var approbationDG = departementBudgetModel.approbationDG;
     var signatureDG = departementBudgetModel.signatureDG;
@@ -95,9 +93,8 @@ class DepartementBudgetRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"departement\"='$departement', \"periodeBudget\"='$periodeBudget',"
-        "\"totalGlobalDispo\"='$totalGlobalDispo',\"totalGlobalFinExt\"='$totalGlobalFinExt',"
-        "\"totalGlobalPrevisionel\"='$totalGlobalPrevisionel',"
+        "UPDATE $tableName SET \"title\"='$title',"
+        "\"departement\"='$departement', \"periodeDebut\"='$periodeDebut',  \"periodeFin\"='$periodeFin',"
         "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
         "\"signatureJustificationDG\"='$signatureJustificationDG',"
         "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
@@ -126,30 +123,24 @@ class DepartementBudgetRepository {
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return DepartementBudgetModel(
       id: data[0][0],
-      departement: data[0][1],
-      periodeBudget: data[0][2],
-      totalGlobalDispo: data[0][3],
-      totalGlobalFinExt: data[0][4],
-      totalGlobalPrevisionel: data[0][5],
-
-      approbationDG: data[0][6],
-      signatureDG: data[0][7],
-      signatureJustificationDG: data[0][8],
-
-      approbationFin: data[0][9],
-      signatureFin: data[0][10],
-      signatureJustificationFin: data[0][11],
-
-      approbationBudget: data[0][12],
-      signatureBudget: data[0][13],
-      signatureJustificationBudget: data[0][14],
-
-      approbationDD: data[0][15],
-      signatureDD: data[0][16],
-      signatureJustificationDD: data[0][17],
-
-      signature: data[0][18],
-      created: data[0][19]
+      title: data[0][1],
+      departement: data[0][2],
+      periodeDebut: data[0][3],
+      periodeFin: data[0][4],
+      approbationDG: data[0][5],
+      signatureDG: data[0][6],
+      signatureJustificationDG: data[0][7],
+      approbationFin: data[0][8],
+      signatureFin: data[0][9],
+      signatureJustificationFin: data[0][10],
+      approbationBudget: data[0][11],
+      signatureBudget: data[0][12],
+      signatureJustificationBudget: data[0][13],
+      approbationDD: data[0][14],
+      signatureDD: data[0][15],
+      signatureJustificationDD: data[0][16],
+      signature: data[0][17],
+      created: data[0][18]
     );
   } 
 }
