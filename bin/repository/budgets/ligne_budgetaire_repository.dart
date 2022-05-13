@@ -64,7 +64,7 @@ class LigneBudgtaireRepository {
         "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
         "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
         "'$signatureDD', '$signatureJustificationDD',"
-        "$signature', '$created');");
+        "'$signature', '$created');");
     });
   }
 
