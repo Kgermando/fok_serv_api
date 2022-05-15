@@ -52,6 +52,8 @@ class UserRepository {
     var photo = user.photo;
     var nom = user.nom;
     var prenom = user.prenom;
+    var email = user.email;
+    var telephone = user.telephone;
     var role = user.role;
     var matricule = user.matricule;
     var departement = user.departement;
@@ -66,38 +68,23 @@ class UserRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('users_id_seq'), '$photo', '$nom', '$prenom',"
-        "'$matricule', '$departement', '$servicesAffectation', '$fonctionOccupe', '$role', '$isOnline',"
+        "'$email', '$telephone', '$matricule', '$departement',"
+        "'$servicesAffectation', '$fonctionOccupe', '$role', '$isOnline',"
         "'$createdAt', '$passwordHash', '$succursale');");
     });
 
   }
 
 
-  Future<UserModel> getFromId(int id) async {
-    var data = await executor
-        .query("SELECT * FROM  $tableName WHERE \"id\"='$id'");
-    return UserModel(
-      id: data[0][0],
-      photo: data[0][1],
-      nom: data[0][2],
-      prenom: data[0][3],
-      matricule: data[0][4],
-      departement: data[0][5],
-      servicesAffectation: data[0][6],
-      fonctionOccupe: data[0][7],
-      role: data[0][8],
-      isOnline: data[0][9],
-      createdAt: data[0][10],
-      passwordHash: data[0][11],
-      succursale: data[0][12]
-    );
-  }
+
 
   Future<void> update(UserModel user) async {
     var id = user.id;
     var photo = user.photo;
     var nom = user.nom;
     var prenom = user.prenom;
+    var email = user.email;
+    var telephone = user.telephone;
     var matricule = user.matricule;
     var departement = user.departement;
     var servicesAffectation = user.servicesAffectation;
@@ -112,9 +99,11 @@ class UserRepository {
       // ignore: unused_local_variable
       var result = await conn.execute(
         "UPDATE $tableName SET \"photo\"='$photo', \"nom\"='$nom',"
-        "\"prenom\"='$prenom', \"matricule\"='$matricule', \"departement\"='$departement',"
+        "\"prenom\"='$prenom', \"email\"='$email', \"telephone\"='$telephone',"
+        "\"matricule\"='$matricule', \"departement\"='$departement',"
         "\"servicesAffectation\"='$servicesAffectation', \"fonctionOccupe\"='$fonctionOccupe', \"role\"='$role',"
-        "\"isOnline\"='$isOnline', \"createdAt\"='$createdAt', \"passwordHash\"='$passwordHash' ', \"succursale\"='$succursale' WHERE id=$id;");
+        "\"isOnline\"='$isOnline', \"createdAt\"='$createdAt',"
+        "\"passwordHash\"='$passwordHash' ', \"succursale\"='$succursale' WHERE id=$id;");
     });
   }
 
@@ -127,6 +116,28 @@ class UserRepository {
     } catch (e) {
       'erreur $e';
     }
+  }
+
+
+  Future<UserModel> getFromId(int id) async {
+    var data =
+        await executor.query("SELECT * FROM  $tableName WHERE \"id\"='$id'");
+    return UserModel(
+        id: data[0][0],
+        photo: data[0][1],
+        nom: data[0][2],
+        prenom: data[0][3],
+        email: data[0][4],
+        telephone: data[0][5],
+        matricule: data[0][6],
+        departement: data[0][7],
+        servicesAffectation: data[0][8],
+        fonctionOccupe: data[0][9],
+        role: data[0][10],
+        isOnline: data[0][11],
+        createdAt: data[0][12],
+        passwordHash: data[0][13],
+        succursale: data[0][14]);
   }
 
 }  

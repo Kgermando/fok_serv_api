@@ -49,6 +49,12 @@ class UserHandlers {
       if (input['prenom'] != null) {
         selectUser.prenom = input['prenom'];
       }
+      if (input['email'] != null) {
+        selectUser.email = input['email'];
+      }
+      if (input['telephone'] != null) {
+        selectUser.telephone = input['telephone'];
+      }
       if (input['matricule'] != null) {
         selectUser.matricule = input['matricule'];
       }
@@ -89,6 +95,8 @@ class UserHandlers {
         photo: input['photo'],
         nom: input['nom'],
         prenom: input['prenom'],
+        email: input['email'],
+        telephone: input['telephone'],
         matricule: input['matricule'],
         departement: input['departement'],
         servicesAffectation: input['servicesAffectation'],

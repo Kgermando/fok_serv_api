@@ -3,6 +3,8 @@ class UserModel {
   late String? photo;
   late String nom;
   late String prenom;
+  late String email;
+  late String telephone;
   late String matricule;
   late String departement;
   late String servicesAffectation;
@@ -18,6 +20,8 @@ class UserModel {
     this.photo,
     required this.nom,
     required this.prenom,
+    required this.email,
+    required this.telephone,
     required this.matricule,
     required this.departement,
     required this.servicesAffectation,
@@ -35,15 +39,18 @@ class UserModel {
         photo: row[1],
         nom: row[2],
         prenom: row[3],
-        matricule: row[4],
-        departement: row[5],
-        servicesAffectation: row[6],
-        fonctionOccupe: row[7],
-        role: row[8],
-        isOnline: row[9],
-        createdAt: row[10],
-        passwordHash: row[11],
-        succursale: row[12]);
+        email: row[4],
+        telephone: row[5],
+        matricule: row[6],
+        departement: row[7],
+        servicesAffectation: row[8],
+        fonctionOccupe: row[9],
+        role: row[10],
+        isOnline: row[11],
+        createdAt: row[12],
+        passwordHash: row[13],
+        succursale: row[14]
+    );
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -52,6 +59,8 @@ class UserModel {
         photo: json["photo"],
         nom: json["nom"],
         prenom: json["prenom"],
+        email: json["email"],
+        telephone: json["telephone"],
         matricule: json["matricule"],
         departement: json["departement"],
         servicesAffectation: json["servicesAffectation"],
@@ -69,6 +78,8 @@ class UserModel {
       'photo': photo,
       'nom': nom,
       'prenom': prenom,
+      'email': email,
+      'telephone': telephone,
       'matricule': matricule,
       'departement': departement,
       'servicesAffectation': servicesAffectation,

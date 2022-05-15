@@ -104,6 +104,8 @@ class TableName {
           "photo" $vachar,
           "nom" $vachar,
           "prenom" $vachar,
+          "email" $vachar,
+          "telephone" $vachar,
           "matricule" $vachar,
           "departement" $vachar,
           "servicesAffectation" $vachar,
