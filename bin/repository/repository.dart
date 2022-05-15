@@ -41,6 +41,7 @@ import 'logistiques/etat_materiel_repository.dart';
 import 'logistiques/immobilier_repository.dart';
 import 'logistiques/mobilier_repository.dart';
 import 'logistiques/trajet_repository.dart';
+import 'mails/mail_repository.dart';
 import 'rh/agents_repository.dart';
 import 'rh/paiement_salaire_repository.dart';
 import 'rh/performence_repository.dart';
@@ -116,6 +117,8 @@ class Repository {
 
   // Archive
   late ArchiveRepository archives;
+  // Mails
+  late MailRepository mails;
 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
@@ -185,5 +188,8 @@ class Repository {
 
     // ARCHIVE
     archives = ArchiveRepository(executor, 'archives');
+
+    // Mails
+    mails = MailRepository(executor, 'mails');
   }
 }

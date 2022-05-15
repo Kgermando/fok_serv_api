@@ -20,14 +20,14 @@ class ArchiveHandlers {
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late ArchiveModel agent;
+      late ArchiveModel data;
       try {
-        agent = await repos.archives.getFromId(int.parse(id));
+        data = await repos.archives.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
       }
-      return Response.ok(jsonEncode(agent.toJson()));
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.post('/insert-new-archive', (Request request) async {
@@ -36,6 +36,8 @@ class ArchiveHandlers {
       ArchiveModel data = ArchiveModel(
           nomDocument: input['nomDocument'],
           departement: input['departement'],
+          description: input['description'],
+          fichier: input['fichier'],
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -58,6 +60,12 @@ class ArchiveHandlers {
       if (input['departement'] != null) {
         data.departement = input['departement'];
       }
+      if (input['description'] != null) {
+        data.description = input['description'];
+      }
+      if (input['fichier'] != null) {
+        data.fichier = input['fichier'];
+      }
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
@@ -78,7 +86,7 @@ class ArchiveHandlers {
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page banque n\'est pas trouvé'),
+          Response.notFound('La Page archive n\'est pas trouvé'),
     );
 
     return router;

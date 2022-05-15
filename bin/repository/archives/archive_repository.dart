@@ -23,6 +23,8 @@ class ArchiveRepository {
   Future<void> insertData(ArchiveModel data) async {
     var nomDocument = data.nomDocument;
     var departement = data.departement;
+    var description = data.description;
+    var fichier = data.fichier;
     var signature = data.signature;
     var created = data.created;
 
@@ -31,7 +33,7 @@ class ArchiveRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('archives_id_seq'), '$nomDocument',"
-        "'$departement',"
+        "'$departement', '$description', '$fichier',"
         "'$signature','$created');");
     });
   }
@@ -40,6 +42,8 @@ class ArchiveRepository {
     var id = data.id;
     var nomDocument = data.nomDocument;
     var departement = data.departement;
+    var description = data.description;
+    var fichier = data.fichier;
     var signature = data.signature;
     var created = data.created;
 
@@ -48,7 +52,7 @@ class ArchiveRepository {
       // ignore: unused_local_variable
       var result = await conn.execute(
           "UPDATE $tableName SET \"nomDocument\"='$nomDocument', "
-          "\"departement\"='$departement',"
+          "\"departement\"='$departement', \"description\"='$description', \"fichier\"='$fichier',"
           "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -71,8 +75,10 @@ class ArchiveRepository {
       id: data[0][0],
       nomDocument: data[0][1],
       departement: data[0][2],
-      signature: data[0][3],
-      created: data[0][4]
+      description: data[0][3],
+      fichier: data[0][4],
+      signature: data[0][5],
+      created: data[0][6]
     );
   } 
 }

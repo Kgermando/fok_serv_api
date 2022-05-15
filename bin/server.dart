@@ -49,6 +49,7 @@ import 'handlers/logistiques/etat_materiel_handlers.dart';
 import 'handlers/logistiques/immobiler_repository.dart';
 import 'handlers/logistiques/mobilier_handlers.dart';
 import 'handlers/logistiques/trajet_handlers.dart';
+import 'handlers/mails/mails_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
 import 'handlers/rh/paiement_salaire_handlers.dart';
 import 'handlers/rh/performence_handlers.dart';
@@ -435,6 +436,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ArchiveHandlers(repos).router));
+    router.mount(
+        '/api/mails/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(MailsHandlers(repos).router));
 
     router.all(
       '/<ignored|.*>',

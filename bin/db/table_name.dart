@@ -81,6 +81,9 @@ class TableName {
   // ARCHIVE
   final archivesTable = 'archives';
 
+  // MAIL
+  final mailsTable = 'mails';
+
   Future openConnection(PostgreSQLConnection connection) async {
     try {
       await connection.open();
@@ -1179,7 +1182,7 @@ class TableName {
     ''');
 
       // History livraison
-      await connection.query('''
+    await connection.query('''
       CREATE TABLE IF NOT EXISTS $historyLivraisonTable(
         "id" $key,
         "idProduct" $vachar,
@@ -1198,6 +1201,36 @@ class TableName {
         "signature" $vachar,
         "created" $timestamp
 
+    );
+    ''');
+
+      // Archive
+    await connection.query('''
+      CREATE TABLE IF NOT EXISTS $archivesTable(
+        "id" $key,
+        "nomDocument" $vachar,
+        "departement" $vachar,
+        "description" $vachar,
+        "fichier" $vachar,
+        "signature" $vachar,
+        "created" $timestamp
+
+    );
+    ''');
+
+      // Mail
+    await connection.query('''
+      CREATE TABLE IF NOT EXISTS $mailsTable(
+        "id" $key,
+        "fullName" $vachar,
+        "email" $vachar,
+        "cc" $list,
+        "objet" $vachar,
+        "message" $vachar,
+        "pieceJointe" $vachar,
+        "read" $boolean,
+        "dateSend" $timestamp,
+        "dateRead" $timestamp
     );
     ''');
 
