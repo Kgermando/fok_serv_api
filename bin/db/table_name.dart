@@ -1231,6 +1231,8 @@ class TableName {
         "message" $vachar,
         "pieceJointe" $vachar,
         "read" $boolean,
+        "fullNameDest" $vachar,
+        "emailDest" $vachar,
         "dateSend" $timestamp,
         "dateRead" $timestamp
     );

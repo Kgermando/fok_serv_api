@@ -27,6 +27,8 @@ class MailRepository {
     var message = data.message;
     var pieceJointe = data.pieceJointe;
     var read = data.read;
+    var fullNameDest = data.fullNameDest;
+    var emailDest = data.emailDest;
     var dateSend = data.dateSend;
     var dateRead = data.dateRead;
 
@@ -36,6 +38,7 @@ class MailRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('mails_id_seq'), '$fullName',"
         "'$email', '$cc', '$objet', '$message', '$pieceJointe', '$read',"
+        "'$fullNameDest', '$emailDest',"
         "'$dateSend','$dateRead');");
     });
   }
@@ -49,6 +52,8 @@ class MailRepository {
     var message = data.message;
     var pieceJointe = data.pieceJointe;
     var read = data.read;
+    var fullNameDest = data.fullNameDest;
+    var emailDest = data.emailDest;
     var dateSend = data.dateSend;
     var dateRead = data.dateRead;
 
@@ -56,10 +61,11 @@ class MailRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-          "UPDATE $tableName SET \"fullName\"='$fullName', \"email\"='$email',"
-          "\"cc\"='$cc', \"objet\"='$objet', \"message\"='$message',"
-          "\"pieceJointe\"='$pieceJointe', \"read\"='$read',"
-          "\"dateSend\"='$dateSend', \"dateRead\"='$dateRead' WHERE id=$id;");
+        "UPDATE $tableName SET \"fullName\"='$fullName', \"email\"='$email',"
+        "\"cc\"='$cc', \"objet\"='$objet', \"message\"='$message',"
+        "\"pieceJointe\"='$pieceJointe', \"read\"='$read',"
+        "\"fullNameDest\"='$fullNameDest', \"emailDest\"='$emailDest',"
+        "\"dateSend\"='$dateSend', \"dateRead\"='$dateRead' WHERE id=$id;");
     });
   }
 
@@ -86,8 +92,10 @@ class MailRepository {
       message: data[0][5],
       pieceJointe: data[0][6],
       read: data[0][7],
-      dateSend: data[0][8],
-      dateRead: data[0][9]
+      fullNameDest: data[0][8],
+      emailDest: data[0][9],
+      dateSend: data[0][10],
+      dateRead: data[0][11]
     );
   } 
 }

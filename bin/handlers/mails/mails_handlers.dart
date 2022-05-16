@@ -42,6 +42,8 @@ class MailsHandlers {
         message: input['message'],
         pieceJointe: input['pieceJointe'],
         read: input['read'] as bool,
+        fullNameDest: input['fullNameDest'],
+        emailDest: input['emailDest'],
         dateSend: DateTime.parse(input['dateSend']),
         dateRead: DateTime.parse(input['dateRead'])
       );
@@ -79,6 +81,12 @@ class MailsHandlers {
       }
       if (input['read'] != null) {
         data.read = input['read'] as bool;
+      }
+      if (input['fullNameDest'] != null) {
+        data.fullNameDest = input['fullNameDest'];
+      }
+      if (input['emailDest'] != null) {
+        data.emailDest = input['emailDest'];
       }
       if (input['dateSend'] != null) {
         data.dateSend = DateTime.parse(input['dateSend']);
