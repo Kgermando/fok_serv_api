@@ -29,6 +29,7 @@ class TableName {
   final depensesTable = 'depenses';
   final dettesTable = 'dettes';
   final finExterieursTable = 'fin_exterieurs';
+  final creanceDetteTable = 'creance_dettes';
  
   // COMPTABILITE
   final bilansTable = 'bilans';
@@ -416,6 +417,20 @@ class TableName {
           "approbationDD" $vachar,
           "signatureDD" $vachar,
           "signatureJustificationDD" $vachar,
+          "signature" $vachar,
+          "created" $timestamp
+        );
+      ''');
+
+      // Finance Creance dette
+      await connection.query('''
+        CREATE TABLE IF NOT EXISTS $creanceDetteTable(
+          "id" $key,
+          "nomComplet" $vachar,
+          "pieceJustificative" $vachar,
+          "libelle" $vachar,
+          "montant" $vachar,
+          "creanceDette" $vachar,
           "signature" $vachar,
           "created" $timestamp
         );

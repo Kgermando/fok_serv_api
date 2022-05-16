@@ -57,11 +57,9 @@ class BilanRepository {
     var approbationDG = bilanModel.approbationDG;
     var signatureDG = bilanModel.signatureDG;
     var signatureJustificationDG = bilanModel.signatureJustificationDG;
-
     var approbationDD = bilanModel.approbationDD;
     var signatureDD = bilanModel.signatureDD;
     var signatureJustificationDD = bilanModel.signatureJustificationDD;
-
     var signature = bilanModel.signature;
     var created = bilanModel.created;
 
@@ -69,8 +67,8 @@ class BilanRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"titleBilan\"='$titleBilan', "
-        "\"comptesActif\"='$comptesActif',\"comptesPactif\"='$comptesPactif',"
+        "UPDATE $tableName SET \"titleBilan\"='$titleBilan',"
+        "\"comptesActif\"='$comptesActif', \"comptesPactif\"='$comptesPactif',"
         "\"statut\"='$statut',"
         "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
         "\"signatureJustificationDG\"='$signatureJustificationDG',"

@@ -94,14 +94,18 @@ class DettesRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
+        "UPDATE $tableName SET \"nomComplet\"='$nomComplet',"
         "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
-        "\"montant\"='$montant', \"numeroOperation\"='$numeroOperation', \"statutPaie\"='$statutPaie'"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-          "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-          "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-          "'$signatureDD', '$signatureJustificationDD',"
-        "'$signature','$created' WHERE id=$id;");
+        "\"montant\"='$montant', \"numeroOperation\"='$numeroOperation', \"statutPaie\"='$statutPaie',"
+        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+        "\"signatureJustificationDG\"='$signatureJustificationDG',"
+        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
+        "\"signatureJustificationFin\"='$signatureJustificationFin',"
+        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
+        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
+        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+        "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 

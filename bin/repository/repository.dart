@@ -31,6 +31,7 @@ import 'exploitations/tache_repository.dart';
 import 'exploitations/versement_projet_repository.dart';
 import 'finances/banque_repository.dart';
 import 'finances/caissses_repository.dart';
+import 'finances/creance_dette_repository.dart';
 import 'finances/creances_repository.dart';
 import 'finances/dettes_repository.dart';
 import 'finances/fin_exterieur_repository.dart';
@@ -70,6 +71,7 @@ class Repository {
   late CreancesRepository creances;
   late DettesRepository dettes;
   late FinExteRepository finExterieurs;
+  late CreanceDetteRepository creanceDette;
 
   // COMPTABILITES
   late BilanRepository bilans;
@@ -138,6 +140,7 @@ class Repository {
     creances = CreancesRepository(executor, 'creances');
     dettes = DettesRepository(executor, 'dettes');
     finExterieurs = FinExteRepository(executor, 'fin_exterieurs');
+    creanceDette = CreanceDetteRepository(executor, 'creance_dettes');
 
     // COMPTABILITE
     bilans = BilanRepository(executor, 'bilans');
