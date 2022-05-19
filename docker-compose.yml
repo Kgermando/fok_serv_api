@@ -24,7 +24,7 @@ services:
       - POSTGRES_PASSWORD=kataku
 
     ports:
-      - "5432:5432"
+      - 5432:5432
     expose:
       - 5432 
     networks:
@@ -35,7 +35,7 @@ services:
     container_name: adminer
     restart: always
     ports:
-      - "8080:8080"
+      - 8080:8080
     expose:
       - 8080
     networks:
