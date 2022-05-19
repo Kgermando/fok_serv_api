@@ -1,5 +1,7 @@
 
 
+import 'dart:io';
+
 import 'package:postgres/postgres.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -449,8 +451,8 @@ class Service {
 void main(List<String> args) async {
 
   // Use any available host or container IP (usually `0.0.0.0`).
-  // final ip = InternetAddress.anyIPv4;
-  final ip = "167.71.4.2";
+  final ip = InternetAddress.anyIPv4;
+  // final ip = "167.71.4.2";
   final port = 80;
 
   PostgreSQLConnection connection = await ConnexionDatabase().connection();
