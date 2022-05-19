@@ -1,41 +1,119 @@
-version: '3'
+version: '3.5'
 
 services:
   app:
-    build:
+    build: 
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:80"
-    environment:
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
+      - 80:80
     depends_on:
       - db
-    # networks:
-    #   - myNetwork
+    expose:
+      - 80
+    networks:
+      localnet:
+        ipv4_address: 172.18.55.2
+
+
   db:
-    image: postgres
     restart: always
+    image: postgres:latest
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
     environment:
-      POSTGRES_PASSWORD: kataku
+      # - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=kataku
+
     ports:
       - 5432:5432
     expose:
-      - "5432"
-    # networks:
-    #   - myNetwork
+      - 5432
+    networks:
+      localnet:
+        ipv4_address: 172.18.55.3
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8082:8080
-    environment:
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-    # networks:
-    #   - myNetwork
+      - 8080:8080
+    expose:
+      - 8080
+    networks:
+      localnet:
+        ipv4_address: 172.18.55.4
 
-# networks:
-#   myNetwork:
+volumes:
+  postgres:
+
+
+networks:
+  localnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.55.0/24
+          # gateway: 172.18.55.17
+          gateway: 167.71.4.13
+
+
+
+
+
+
+
+# version: '3'
+
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "8080:8080"
+#     environment:
+#       - DATABASE_HOST=postgres
+#       - DATABASE_PORT=5432
+#     depends_on:
+#       - db
+#     # networks:
+#     #   - myNetwork
+#   db:
+#     image: postgres
+#     restart: always
+#     environment:
+#       POSTGRES_PASSWORD: kataku
+
+#       # POSTGRES_PASSWORD: password
+#       # POSTGRES_USER: admin
+#       # POSTGRES_DB: database_chat
+
+
+
+#     ports:
+#       - 5432:5432
+#     expose:
+#       - "5432"
+#     # networks:
+#     #   - myNetwork
+
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8082
+  #   adminer:
+  #     image: adminer
+  #     restart: always
+  #     ports:
+  #       - 8082:8080
+  #     environment:
+  #       - DATABASE_HOST=postgres
+  #       - DATABASE_PORT=5432
+#     # networks:
+#     #   - myNetwork
+
+# # networks:
+# #   myNetwork:

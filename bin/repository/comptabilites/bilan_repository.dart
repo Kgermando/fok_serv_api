@@ -50,31 +50,33 @@ class BilanRepository {
 
   Future<void> update(BilanModel bilanModel) async {
     var id = bilanModel.id;
-     var titleBilan = bilanModel.titleBilan;
+    var titleBilan = bilanModel.titleBilan;
     var comptesActif = bilanModel.comptesActif;
     var comptesPactif = bilanModel.comptesPactif;
     var statut = bilanModel.statut;
     var approbationDG = bilanModel.approbationDG;
     var signatureDG = bilanModel.signatureDG;
     var signatureJustificationDG = bilanModel.signatureJustificationDG;
+
     var approbationDD = bilanModel.approbationDD;
     var signatureDD = bilanModel.signatureDD;
     var signatureJustificationDD = bilanModel.signatureJustificationDD;
+
     var signature = bilanModel.signature;
     var created = bilanModel.created;
 
 
-    await executor.transaction((conn) async {
+    await executor.transaction((ctx) async {
       // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"titleBilan\"='$titleBilan',"
-        "\"comptesActif\"='$comptesActif', \"comptesPactif\"='$comptesPactif',"
-        "\"statut\"='$statut',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      var result = await ctx.execute(
+          "UPDATE $tableName SET \"titleBilan\"='$titleBilan',"
+          "\"comptesActif\"='$comptesActif', \"comptesPactif\"='$comptesPactif',"
+          "\"statut\"='$statut',"
+          "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
+          "\"signatureJustificationDG\"='$signatureJustificationDG',"
+          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
+          "\"signatureJustificationDD\"='$signatureJustificationDD',"
+          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
 

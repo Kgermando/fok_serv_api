@@ -1,11 +1,10 @@
-import 'dart:io';
+
 
 import 'package:postgres/postgres.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'db/config_db.dart';
-import 'db/table_name.dart';
 import 'handlers/archives/archive_handlers.dart';
 import 'handlers/auth/auth_handlers.dart';
 import 'handlers/auth/user_handlers.dart';
@@ -39,6 +38,7 @@ import 'handlers/exploitations/tache_handlers.dart';
 import 'handlers/exploitations/versement_projet_handlers.dart';
 import 'handlers/finances/banques_handlers.dart';
 import 'handlers/finances/caisses_handlers.dart';
+import 'handlers/finances/creance_dette_handlers.dart';
 import 'handlers/finances/creance_handlers.dart';
 import 'handlers/finances/dette_handlers.dart';
 import 'handlers/finances/fin_exterieur_handlers.dart';
@@ -57,6 +57,7 @@ import 'handlers/rh/performence_note_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
 import 'middleware/middleware.dart';
 import 'repository/repository.dart';
+import 'package:dotenv/dotenv.dart' show DotEnv, env;
 
 // Configure routes.
 class Service {
@@ -106,7 +107,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PaiementSalaireHandlers(repos).router));
-
     router.mount(
         '/api/rh/performences/',
         Pipeline()
@@ -121,7 +121,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PerformenceNoteHandlers(repos).router));
-
 
     router.mount(
         '/api/finances/transactions/banques/',
@@ -162,8 +161,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(FinExterieurHandlers(repos).router));
-
-
+    router.mount(
+        '/api/finances/creance-dettes/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CreanceDetteHandlers(repos).router));
 
 // COMPTABILITE
     router.mount(
@@ -195,7 +199,6 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BalanceComptesHandlers(repos).router));
 
-
     // Budgets
     router.mount(
         '/api/budgets/departements/',
@@ -212,7 +215,6 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(LigneBudgetaireHanlers(repos).router));
 
-    
     router.mount(
         '/api/devis/',
         Pipeline()
@@ -220,8 +222,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(DevisHandlers(repos).router));
-
-
 
     router.mount(
         '/api/projets/',
@@ -251,7 +251,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(RapportHandlers(repos).router));
-
 
     router.mount(
         '/api/anguins/',
@@ -302,9 +301,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(TrajetHandlers(repos).router));
-
-
-
 
     router.mount(
         '/api/produit-models/',
@@ -405,8 +401,6 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(NumberFactHandlers(repos).router));
 
-
-
     router.mount(
         '/api/agendas/',
         Pipeline()
@@ -453,15 +447,20 @@ class Service {
 }
 
 void main(List<String> args) async {
+
   // Use any available host or container IP (usually `0.0.0.0`).
-  final ip = InternetAddress.anyIPv4;
+  // final ip = InternetAddress.anyIPv4;
+  final ip = "172.18.55.2";
   final port = 80;
 
   PostgreSQLConnection connection = await ConnexionDatabase().connection();
-  PostgreSQLConnection creatTable =
-      await TableName().openConnection(connection);
+    print("Database it's work...");
 
-  Repository repos = Repository(creatTable);
+  // PostgreSQLConnection creatTable = await TableName().openConnection(connection);
+  // Repository repos = Repository(creatTable);
+  
+  await connection.open();
+  Repository repos = Repository(connection);
   Service service = Service(repos, "fokadKey");
 
   final server = await shelf_io.serve(service.handlers, ip, port);

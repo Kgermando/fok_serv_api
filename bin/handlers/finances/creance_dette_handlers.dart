@@ -6,10 +6,10 @@ import 'package:shelf_router/shelf_router.dart';
 import '../../models/finances/creance_dette_model.dart';
 import '../../repository/repository.dart';
 
-class BanqueHandlers {
+class CreanceDetteHandlers {
   final Repository repos;
 
-  BanqueHandlers(this.repos);
+  CreanceDetteHandlers(this.repos);
 
   Router get router {
     final router = Router();

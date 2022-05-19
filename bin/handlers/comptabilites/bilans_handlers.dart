@@ -29,7 +29,7 @@ class BilansHandlers {
       }
       return Response.ok(jsonEncode(data.toJson()));
     });
-
+ 
     router.post('/insert-new-bilan', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 

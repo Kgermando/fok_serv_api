@@ -6,6 +6,10 @@ WORKDIR /app
 COPY pubspec.* ./
 RUN dart pub get
 
+# install psql
+RUN apt-get update
+RUN apt-get -y install postgresql-client
+
 # Copy app source code (except anything in .dockerignore) and AOT compile app.
 COPY . .
 RUN dart compile exe bin/server.dart -o bin/server
@@ -17,5 +21,5 @@ COPY --from=build /runtime/ /
 COPY --from=build /app/bin/server /app/bin/
 
 # Start server.
-EXPOSE 8080
+EXPOSE 80
 CMD ["/app/bin/server"]
