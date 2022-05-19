@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:postgres/postgres.dart';
@@ -448,17 +446,17 @@ class Service {
 }
 
 void main(List<String> args) async {
-
   // Use any available host or container IP (usually `0.0.0.0`).
-  final ip = InternetAddress.anyIPv4;
+  // final ip = InternetAddress.anyIPv4;
+  final ip = 'app-network';
   final port = 80;
 
   PostgreSQLConnection connection = await ConnexionDatabase().connection();
-    print("Database it's work...");
+  print("Database it's work...");
 
   // PostgreSQLConnection creatTable = await TableName().openConnection(connection);
   // Repository repos = Repository(creatTable);
-  
+
   await connection.open();
   Repository repos = Repository(connection);
   Service service = Service(repos, "fokadKey");
