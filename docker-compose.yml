@@ -12,7 +12,7 @@ services:
     expose:
       - 80
     networks:
-      labnet.io:
+      fokad:
         ipv4_address: 10.110.0.2
 
 
@@ -31,7 +31,7 @@ services:
     expose:
       - 5432
     networks:
-      labnet.io:
+      fokad:
         ipv4_address: 10.110.0.3
 
   adminer:
@@ -42,7 +42,7 @@ services:
     expose:
       - 8080
     networks:
-      labnet.io:
+      fokad:
         ipv4_address: 10.110.0.4
 
 volumes:
@@ -50,16 +50,14 @@ volumes:
 
 
 networks:
-  labnet.io:
-    name: labnet.io
+  localnet:
+    name: fokad
     driver: bridge
     ipam:
       config:
         - subnet: 10.110.0.0/16
           # gateway: 172.18.55.17
           # gateway: 10.110.0.1
-
-# localnet à la place de labnet.io
 
 
 
