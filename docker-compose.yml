@@ -50,13 +50,15 @@ volumes:
 
 
 networks:
-  localnet:
+  labnet.io:
     driver: bridge
     ipam:
       config:
         - subnet: 10.110.0.0/16
           # gateway: 172.18.55.17
-          # gateway: 10.110.0.1
+          gateway: 167.71.4.13
+
+
 
 
 
