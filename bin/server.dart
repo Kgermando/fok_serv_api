@@ -450,7 +450,7 @@ void main(List<String> args) async {
 
   // Use any available host or container IP (usually `0.0.0.0`).
   // final ip = InternetAddress.anyIPv4;
-  final ip = "172.18.55.2";
+  final ip = "10.110.0.2";
   final port = 80;
 
   PostgreSQLConnection connection = await ConnexionDatabase().connection();

@@ -12,8 +12,8 @@ services:
     expose:
       - 80
     networks:
-      localnet:
-        ipv4_address: 172.18.55.2
+      labnet.io:
+        ipv4_address: 10.110.0.2
 
 
   db:
@@ -31,8 +31,8 @@ services:
     expose:
       - 5432
     networks:
-      localnet:
-        ipv4_address: 172.18.55.3
+      labnet.io:
+        ipv4_address: 10.110.0.3
 
   adminer:
     image: adminer
@@ -42,23 +42,24 @@ services:
     expose:
       - 8080
     networks:
-      localnet:
-        ipv4_address: 172.18.55.4
+      labnet.io:
+        ipv4_address: 10.110.0.4
 
 volumes:
   postgres:
 
 
 networks:
-  localnet:
+  labnet.io:
+    name: labnet.io
     driver: bridge
     ipam:
       config:
-        - subnet: 172.18.55.0/24
+        - subnet: 10.110.0.0/16
           # gateway: 172.18.55.17
-          gateway: 167.71.4.13
+          # gateway: 10.110.0.1
 
-
+# localnet à la place de labnet.io
 
 
 
