@@ -12,10 +12,6 @@ services:
       - "80:80"
     networks:
       - app-network
-    # networks:
-    #   167.71.4.13:
-    #     ipv4_address: 167.71.4.2
-
 
   db:
     restart: always
@@ -25,7 +21,6 @@ services:
       - postgres:/var/lib/postgresql/data
       - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
     environment:
-      # - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=kataku
 
     ports:
@@ -34,9 +29,6 @@ services:
       - 5432 
     networks:
       - app-network
-    # networks:
-    #   167.71.4.13:
-    #     ipv4_address: 167.71.4.3
 
   adminer:
     image: adminer
@@ -48,9 +40,6 @@ services:
       - 8080
     networks:
       - app-network
-    # networks:
-    #   167.71.4.13:
-    #     ipv4_address: 167.71.4.4
 
 volumes:
   postgres:
@@ -59,73 +48,3 @@ volumes:
 networks:
   app-network:
     driver: bridge
-
-
-# networks:
-#   167.71.4.13:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 167.71.4.0/16
-#           # gateway: 172.18.55.17
-#           # gateway: 167.71.4.13
-
-
-
-
-
-
-
-# version: '3'
-
-# services:
-#   app:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile
-#     ports:
-#       - "8080:8080"
-#     environment:
-#       - DATABASE_HOST=postgres
-#       - DATABASE_PORT=5432
-#     depends_on:
-#       - db
-#     # networks:
-#     #   - myNetwork
-#   db:
-#     image: postgres
-#     restart: always
-#     environment:
-#       POSTGRES_PASSWORD: kataku
-
-#       # POSTGRES_PASSWORD: password
-#       # POSTGRES_USER: admin
-#       # POSTGRES_DB: database_chat
-
-
-
-#     ports:
-#       - 5432:5432
-#     expose:
-#       - "5432"
-#     # networks:
-#     #   - myNetwork
-
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8082
-  #   adminer:
-  #     image: adminer
-  #     restart: always
-  #     ports:
-  #       - 8082:8080
-  #     environment:
-  #       - DATABASE_HOST=postgres
-  #       - DATABASE_PORT=5432
-#     # networks:
-#     #   - myNetwork
-
-# # networks:
-# #   myNetwork:

@@ -59,7 +59,6 @@ import 'handlers/rh/performence_note_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
 import 'middleware/middleware.dart';
 import 'repository/repository.dart';
-import 'package:dotenv/dotenv.dart' show DotEnv, env;
 
 // Configure routes.
 class Service {
@@ -452,7 +451,6 @@ void main(List<String> args) async {
 
   // Use any available host or container IP (usually `0.0.0.0`).
   final ip = InternetAddress.anyIPv4;
-  // final ip = "167.71.4.2";
   final port = 80;
 
   PostgreSQLConnection connection = await ConnexionDatabase().connection();
