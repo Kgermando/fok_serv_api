@@ -12,7 +12,7 @@ services:
     expose:
       - 80
     networks:
-      fokad:
+      localnet:
         ipv4_address: 10.110.0.2
 
 
@@ -31,7 +31,7 @@ services:
     expose:
       - 5432
     networks:
-      fokad:
+      localnet:
         ipv4_address: 10.110.0.3
 
   adminer:
@@ -42,7 +42,7 @@ services:
     expose:
       - 8080
     networks:
-      fokad:
+      localnet:
         ipv4_address: 10.110.0.4
 
 volumes:
@@ -51,7 +51,6 @@ volumes:
 
 networks:
   localnet:
-    name: fokad
     driver: bridge
     ipam:
       config:
