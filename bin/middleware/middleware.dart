@@ -46,7 +46,7 @@ Middleware setJsonHeader() {
       Response response = await innerHandler(request);
       return response.change(
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
           ...corsHeaders, // add corsHeaders to response headers of each route
         }
       );
