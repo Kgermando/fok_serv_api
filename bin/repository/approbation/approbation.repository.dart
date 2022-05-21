@@ -22,31 +22,16 @@ class ApprobationRepository {
 
   Future<void> insertData(ApprobationModel data) async {
     
-    var reference = data.reference;
+   var reference = data.reference;
     var title = data.title;
     var departement = data.departement;
+    var fontctionOccupee = data.fontctionOccupee;
     var ligneBudgtaire = data.ligneBudgtaire;
     var resources = data.resources;
 
-    var approbationDG = data.approbationDG;
-    var signatureDG = data.signatureDG;
-    var signatureJustificationDG =
-        data.signatureJustificationDG;
-
-    var approbationFin = data.approbationFin;
-    var signatureFin = data.signatureFin;
-    var signatureJustificationFin =
-        data.signatureJustificationFin;
-
-    var approbationBudget = data.approbationBudget;
-    var signatureBudget = data.signatureBudget;
-    var signatureJustificationBudget =
-        data.signatureJustificationBudget;
-
-    var approbationDD = data.approbationDD;
-    var signatureDD = data.signatureDD;
-    var signatureJustificationDD =
-        data.signatureJustificationDD;
+    var approbation = data.approbation;
+    var signatureApprobation = data.signatureApprobation;
+    var justification = data.justification;
 
     var signature = data.signature;
     var created = data.created;
@@ -56,11 +41,8 @@ class ApprobationRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('approbations_id_seq'), '$reference',"
-        "'$title','$departement', '$ligneBudgtaire', '$resources',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
+        "'$title', '$departement', '$fontctionOccupee', '$ligneBudgtaire', '$resources',"
+        "'$approbation', '$signatureApprobation', '$justification',"
         "'$signature','$created');");
     });
   }
@@ -70,24 +52,13 @@ class ApprobationRepository {
     var reference = data.reference;
     var title = data.title;
     var departement = data.departement;
+    var fontctionOccupee = data.fontctionOccupee;
     var ligneBudgtaire = data.ligneBudgtaire;
     var resources = data.resources;
 
-    var approbationDG = data.approbationDG;
-    var signatureDG = data.signatureDG;
-    var signatureJustificationDG = data.signatureJustificationDG;
-
-    var approbationFin = data.approbationFin;
-    var signatureFin = data.signatureFin;
-    var signatureJustificationFin = data.signatureJustificationFin;
-
-    var approbationBudget = data.approbationBudget;
-    var signatureBudget = data.signatureBudget;
-    var signatureJustificationBudget = data.signatureJustificationBudget;
-
-    var approbationDD = data.approbationDD;
-    var signatureDD = data.signatureDD;
-    var signatureJustificationDD = data.signatureJustificationDD;
+    var approbation = data.approbation;
+    var signatureApprobation = data.signatureApprobation;
+    var justification = data.justification;
 
     var signature = data.signature;
     var created = data.created;
@@ -98,15 +69,10 @@ class ApprobationRepository {
       var result = await conn.execute(
           "UPDATE $tableName SET \"reference\"='$reference',"
           "\"title\"='$title',\"departement\"='$departement',"
+          "\"fontctionOccupee\"='$fontctionOccupee',"
           "\"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
-          "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-          "\"signatureJustificationDG\"='$signatureJustificationDG',"
-          "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-          "\"signatureJustificationFin\"='$signatureJustificationFin',"
-          "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-          "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-          "\"signatureJustificationDD\"='$signatureJustificationDD',"
+          "\"approbation\"='$approbation', \"signatureApprobation\"='$signatureApprobation',"
+          "\"justification\"='$justification',"
           "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -130,22 +96,14 @@ class ApprobationRepository {
       reference: data[0][1],
       title: data[0][2],
       departement: data[0][3],
-      ligneBudgtaire: data[0][3],
-      resources: data[0][4],
-      approbationDG: data[0][5],
-      signatureDG: data[0][6],
-      signatureJustificationDG: data[0][7],
-      approbationFin: data[0][8],
-      signatureFin: data[0][9],
-      signatureJustificationFin: data[0][10],
-      approbationBudget: data[0][11],
-      signatureBudget: data[0][12],
-      signatureJustificationBudget: data[0][13],
-      approbationDD: data[0][14],
-      signatureDD: data[0][15],
-      signatureJustificationDD: data[0][16],
-      signature: data[0][17],
-      created: data[0][18]
+      fontctionOccupee: data[0][4],
+      ligneBudgtaire: data[0][5],
+      resources: data[0][6],
+      approbation: data[0][7],
+      signatureApprobation: data[0][8],
+      justification: data[0][9],
+      signature: data[0][10],
+      created: data[0][11]
     );
   } 
 }

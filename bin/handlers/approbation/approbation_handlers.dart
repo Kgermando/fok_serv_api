@@ -37,20 +37,12 @@ class ApprobationHandlers {
         reference: input['reference'],
         title: input['title'],
         departement: input['departement'],
+        fontctionOccupee: input['fontctionOccupee'],
         ligneBudgtaire: input['ligneBudgtaire'],
         resources: input['resources'],
-        approbationDG: input['approbationDG'],
-        signatureDG: input['signatureDG'],
-        signatureJustificationDG: input['signatureJustificationDG'],
-        approbationFin: input['approbationFin'],
-        signatureFin: input['signatureFin'],
-        signatureJustificationFin: input['signatureJustificationFin'],
-        approbationBudget: input['approbationBudget'],
-        signatureBudget: input['signatureBudget'],
-        signatureJustificationBudget: input['signatureJustificationBudget'],
-        approbationDD: input['approbationDD'],
-        signatureDD: input['signatureDD'],
-        signatureJustificationDD: input['signatureJustificationDD'],
+        approbation: input['approbation'],
+        signatureApprobation: input['signatureApprobation'],
+        justification: input['justification'],
         signature: input['signature'],
         created: DateTime.parse(input['created'])
       );
@@ -78,49 +70,24 @@ class ApprobationHandlers {
       if (input['departement'] != null) {
         data.departement = input['departement'];
       }
+      if (input['fontctionOccupee'] != null) {
+        data.fontctionOccupee = input['fontctionOccupee'];
+      }
+      if (input['ligneBudgtaire'] != null) {
+        data.ligneBudgtaire = input['ligneBudgtaire'];
+      }
       if (input['resources'] != null) {
         data.resources = input['resources'];
       }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
+      if (input['approbation'] != null) {
+        data.approbation = input['approbation'];
       }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
+      if (input['signatureApprobation'] != null) {
+        data.signatureApprobation = input['signatureApprobation'];
       }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
+      if (input['justification'] != null) {
+        data.justification = input['justification'];
       }
-      if (input['approbationFin'] != null) {
-        data.approbationFin = input['approbationFin'];
-      }
-      if (input['signatureFin'] != null) {
-        data.signatureFin = input['signatureFin'];
-      }
-      if (input['signatureJustificationFin'] != null) {
-        data.signatureJustificationFin = input['signatureJustificationFin'];
-      }
-
-      if (input['approbationBudget'] != null) {
-        data.approbationBudget = input['approbationBudget'];
-      }
-      if (input['signatureBudget'] != null) {
-        data.signatureBudget = input['signatureBudget'];
-      }
-      if (input['signatureJustificationBudget'] != null) {
-        data.signatureJustificationBudget =
-            input['signatureJustificationBudget'];
-      }
-
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
-
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
