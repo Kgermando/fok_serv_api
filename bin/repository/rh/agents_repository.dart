@@ -22,7 +22,6 @@ class AgentsRepository {
   }
 
   Future<void> insertData(AgentModel agentModel) async {
-    
     var nom = agentModel.nom;
     var postNom = agentModel.postNom;
     var prenom = agentModel.prenom;
@@ -32,7 +31,7 @@ class AgentsRepository {
     var sexe = agentModel.sexe;
     var role = agentModel.role;
     var matricule = agentModel.matricule;
-    var numeroSecuriteSociale = agentModel.numeroSecuriteSociale; 
+    var numeroSecuriteSociale = agentModel.numeroSecuriteSociale;
     var dateNaissance = agentModel.dateNaissance;
     var lieuNaissance = agentModel.lieuNaissance;
     var nationalite = agentModel.nationalite;
@@ -62,7 +61,7 @@ class AgentsRepository {
           "$dateDebutContrat", "$dateFinContrat", "$fonctionOccupe",
           "$competance", "$experience", "$statutAgent",
           "$createdAt", "$photo", "$salaire", "$signature", "$created");
-        """
+        """ 
       );
     });
   }
