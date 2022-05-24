@@ -1,6 +1,6 @@
 class ApprobationModel {
   late int? id;
-  late int reference; // Id
+  late int reference; // Id du ficher à approuver
   late String title; // equivaux a un champs unique
   late String departement;
   late String fontctionOccupee;

@@ -43,7 +43,7 @@ class ApprobationRepository {
         "INSERT INTO $tableName VALUES (nextval('approbations_id_seq'), '$reference',"
         "'$title', '$departement', '$fontctionOccupee', '$ligneBudgtaire', '$resources',"
         "'$approbation', '$signatureApprobation', '$justification',"
-        "'$signature','$created');");
+        "'$signature', '$created');");
     });
   }
 
