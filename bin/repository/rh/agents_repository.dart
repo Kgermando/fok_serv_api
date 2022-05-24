@@ -54,13 +54,13 @@ class AgentsRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        """INSERT INTO $tableName VALUES (nextval('agents_id_seq'), '$nom',"
-        "'$postNom', '$prenom', '$email', '$telephone', '$adresse', '$sexe',"
-        "'$role', '$matricule', '$numeroSecuriteSociale', '$dateNaissance', '$lieuNaissance',"
-        "'$nationalite', '$typeContrat', '$departement','$servicesAffectation',"
-        "'$dateDebutContrat', '$dateFinContrat','$fonctionOccupe',"
-        "'$competance', '$experience', '$statutAgent',"
-        "'$createdAt', '$photo', '$salaire', '$signature', '$created');""");
+        """INSERT INTO $tableName VALUES (nextval('agents_id_seq'), "$nom",
+        "$postNom", "$prenom", "$email", "$telephone", "$adresse", "$sexe",
+        "$role", "$matricule", "$numeroSecuriteSociale", "$dateNaissance", "$lieuNaissance",
+        "$nationalite", '$typeContrat", "$departement",'"$servicesAffectation",
+        "$dateDebutContrat", "$dateFinContrat","$fonctionOccupe",
+        "$competance", "$experience", "$statutAgent",
+        "$createdAt", "$photo", "$salaire", "$signature", "$created");""");
     });
   }
 
@@ -98,18 +98,18 @@ class AgentsRepository {
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"nom\"='$nom', \"postNom\"='$postNom',"
-        "\"prenom\"='$prenom', \"email\"='$email', \"telephone\"='$telephone',"
-        "\"adresse\"='$adresse', \"sexe\"='$sexe', \"role\"='$role',"
-        "\"matricule\"='$matricule', \"numeroSecuriteSociale\"='$numeroSecuriteSociale', \"dateNaissance\"='$dateNaissance',"
-        "\"lieuNaissance\"='$lieuNaissance', \"nationalite\"='$nationalite',"
-        "\"typeContrat\"='$typeContrat', \"departement\"='$departement',"
-        "\"servicesAffectation\"='$servicesAffectation',"
-        "\"dateDebutContrat\"='$dateDebutContrat',"
-        "\"dateFinContrat\"='$dateFinContrat', \"fonctionOccupe\"='$fonctionOccupe',"
-        "\"competance\"='$competance', \"experience\"='$experience',"
-        "\"statutAgent\"='$statutAgent', \"createdAt\"='$createdAt',"
-        "\"photo\"='$photo', \"salaire\"='$salaire', \"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+        """UPDATE $tableName SET "nom"="$nom", "postNom"="$postNom",
+        "prenom"="$prenom", "email"="$email", "telephone"="$telephone",
+        "adresse"="$adresse", "sexe"="$sexe", "role"="$role",
+        "matricule"="$matricule", "numeroSecuriteSociale"="$numeroSecuriteSociale", "dateNaissance"="$dateNaissance",
+        "lieuNaissance"="$lieuNaissance", "nationalite"="$nationalite",
+        "typeContrat"="$typeContrat", "departement"="$departement",
+        "servicesAffectation"="$servicesAffectation",
+        "dateDebutContrat"="$dateDebutContrat",
+        "dateFinContrat"="$dateFinContrat", "fonctionOccupe"="$fonctionOccupe",
+        "competance"="$competance", "experience"="$experience",
+        "statutAgent"="$statutAgent", "createdAt"="$createdAt",
+        "photo"="$photo", "salaire"="$salaire", "signature"="$signature", "created"="$created" WHERE id=$id;""");
     });
   }
 
