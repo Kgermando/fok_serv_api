@@ -53,7 +53,7 @@ class AgentsRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval(\"agents_id_seq\"), \"$nom\", \"$postNom\","
+        "INSERT INTO $tableName VALUES (nextval('agents_id_seq'), \"$nom\", \"$postNom\","
         "\"$prenom\", \"$email\", \"$telephone\", \"$adresse\", \"$sexe\", \"$role\", \"$matricule\","
         "\"$numeroSecuriteSociale\", \"$dateNaissance\", \"$lieuNaissance\", \"$nationalite\","
         "\"$typeContrat\", \"$departement\", \"$servicesAffectation\", \"$dateDebutContrat\","
