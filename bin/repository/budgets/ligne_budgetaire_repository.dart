@@ -32,25 +32,6 @@ class LigneBudgtaireRepository {
     var banque = ligneBudgetaireModel.banque;
     var finPropre = ligneBudgetaireModel.finPropre;
     var finExterieur = ligneBudgetaireModel.finExterieur;
-    var approbationDG = ligneBudgetaireModel.approbationDG;
-    var signatureDG = ligneBudgetaireModel.signatureDG;
-    var signatureJustificationDG =
-        ligneBudgetaireModel.signatureJustificationDG;
-
-    var approbationFin = ligneBudgetaireModel.approbationFin;
-    var signatureFin = ligneBudgetaireModel.signatureFin;
-    var signatureJustificationFin =
-        ligneBudgetaireModel.signatureJustificationFin;
-
-    var approbationBudget = ligneBudgetaireModel.approbationBudget;
-    var signatureBudget = ligneBudgetaireModel.signatureBudget;
-    var signatureJustificationBudget =
-        ligneBudgetaireModel.signatureJustificationBudget;
-
-    var approbationDD = ligneBudgetaireModel.approbationDD;
-    var signatureDD = ligneBudgetaireModel.signatureDD;
-    var signatureJustificationDD =
-        ligneBudgetaireModel.signatureJustificationDD;
     var signature = ligneBudgetaireModel.signature;
     var created = ligneBudgetaireModel.created;
 
@@ -60,10 +41,6 @@ class LigneBudgtaireRepository {
         "INSERT INTO $tableName VALUES (nextval('ligne_budgetaires_id_seq'), '$nomLigneBudgetaire',"
         "'$departement','$periodeBudget','$uniteChoisie', '$nombreUnite', '$coutUnitaire',"
         "'$coutTotal','$caisse','$banque', '$finPropre', '$finExterieur',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature', '$created');");
     });
   }
@@ -81,25 +58,6 @@ class LigneBudgtaireRepository {
     var banque = ligneBudgetaireModel.banque;
     var finPropre = ligneBudgetaireModel.finPropre;
     var finExterieur = ligneBudgetaireModel.finExterieur;
-    var approbationDG = ligneBudgetaireModel.approbationDG;
-    var signatureDG = ligneBudgetaireModel.signatureDG;
-    var signatureJustificationDG =
-        ligneBudgetaireModel.signatureJustificationDG;
-
-    var approbationFin = ligneBudgetaireModel.approbationFin;
-    var signatureFin = ligneBudgetaireModel.signatureFin;
-    var signatureJustificationFin =
-        ligneBudgetaireModel.signatureJustificationFin;
-
-    var approbationBudget = ligneBudgetaireModel.approbationBudget;
-    var signatureBudget = ligneBudgetaireModel.signatureBudget;
-    var signatureJustificationBudget =
-        ligneBudgetaireModel.signatureJustificationBudget;
-
-    var approbationDD = ligneBudgetaireModel.approbationDD;
-    var signatureDD = ligneBudgetaireModel.signatureDD;
-    var signatureJustificationDD =
-        ligneBudgetaireModel.signatureJustificationDD;
     var signature = ligneBudgetaireModel.signature;
     var created = ligneBudgetaireModel.created;
 
@@ -111,14 +69,6 @@ class LigneBudgtaireRepository {
         "\"nombreUnite\"='$nombreUnite', \"coutUnitaire\"='$coutUnitaire',"
         "\"coutTotal\"='$coutTotal', \"caisse\"='$caisse', \"banque\"='$banque',"
         "\"finPropre\"='$finPropre', \"finExterieur\"='$finExterieur',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature' , \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -150,20 +100,8 @@ class LigneBudgtaireRepository {
       banque: data[0][9],
       finPropre: data[0][10],
       finExterieur: data[0][11],
-      approbationDG: data[0][12],
-      signatureDG: data[0][13],
-      signatureJustificationDG: data[0][14],
-      approbationFin: data[0][15],
-      signatureFin: data[0][16],
-      signatureJustificationFin: data[0][17],
-      approbationBudget: data[0][18],
-      signatureBudget: data[0][19],
-      signatureJustificationBudget: data[0][20],
-      approbationDD: data[0][21],
-      signatureDD: data[0][22],
-      signatureJustificationDD: data[0][23],
-      signature: data[0][24],
-      created: data[0][25]
+      signature: data[0][12],
+      created: data[0][13]
     );
   } 
 }

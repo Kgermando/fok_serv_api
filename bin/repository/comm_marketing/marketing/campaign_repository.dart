@@ -32,25 +32,6 @@ class CampaignRepository {
     var resources = data.resources;
     var observation = data.observation;
 
-    var approbationDG = data.approbationDG;
-    var signatureDG = data.signatureDG;
-    var signatureJustificationDG =
-        data.signatureJustificationDG;
-
-    var approbationFin = data.approbationFin;
-    var signatureFin = data.signatureFin;
-    var signatureJustificationFin = data.signatureJustificationFin;
-
-    var approbationBudget = data.approbationBudget;
-    var signatureBudget = data.signatureBudget;
-    var signatureJustificationBudget =
-        data.signatureJustificationBudget;
-
-    var approbationDD = data.approbationDD;
-    var signatureDD = data.signatureDD;
-    var signatureJustificationDD =
-        data.signatureJustificationDD;
-
     var signature = data.signature;
     var created = data.created;
 
@@ -60,10 +41,6 @@ class CampaignRepository {
         "INSERT INTO $tableName VALUES (nextval('campaigns_id_seq'), '$typeProduit',"
         "'$dateDebutEtFin','$agentAffectes','$coutCampaign', '$lieuCible', '$promotion',"
         "'$objetctifs', '$ligneBudgtaire', '$resources', '$observation',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -80,26 +57,6 @@ class CampaignRepository {
     var ligneBudgtaire = data.ligneBudgtaire;
     var resources = data.resources;
     var observation = data.observation;
-
-    var approbationDG = data.approbationDG;
-    var signatureDG = data.signatureDG;
-    var signatureJustificationDG =
-        data.signatureJustificationDG;
-
-    var approbationFin = data.approbationFin;
-    var signatureFin = data.signatureFin;
-    var signatureJustificationFin = data.signatureJustificationFin;
-
-    var approbationBudget = data.approbationBudget;
-    var signatureBudget = data.signatureBudget;
-    var signatureJustificationBudget =
-        data.signatureJustificationBudget;
-
-    var approbationDD = data.approbationDD;
-    var signatureDD = data.signatureDD;
-    var signatureJustificationDD =
-        data.signatureJustificationDD;
-
     var signature = data.signature;
     var created = data.created;
 
@@ -111,14 +68,6 @@ class CampaignRepository {
           "\"coutCampaign\"='$coutCampaign', \"lieuCible\"='$lieuCible', \"promotion\"='$promotion',"
           "\"objetctifs\"='$objetctifs', \"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
           "\"observation\"='$observation',"
-          "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-          "\"signatureJustificationDG\"='$signatureJustificationDG',"
-          "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-          "\"signatureJustificationFin\"='$signatureJustificationFin',"
-          "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-          "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-          "\"signatureJustificationDD\"='$signatureJustificationDD',"
           "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -149,20 +98,8 @@ class CampaignRepository {
       ligneBudgtaire: data[0][8],
       resources: data[0][9],
       observation: data[0][10],
-      approbationDG: data[0][11],
-      signatureDG: data[0][12],
-      signatureJustificationDG: data[0][13],
-      approbationFin: data[0][14],
-      signatureFin: data[0][15],
-      signatureJustificationFin: data[0][16],
-      approbationBudget: data[0][17],
-      signatureBudget: data[0][18],
-      signatureJustificationBudget: data[0][19],
-      approbationDD: data[0][20],
-      signatureDD: data[0][21],
-      signatureJustificationDD: data[0][22],
-      signature: data[0][23],
-      created: data[0][24]
+      signature: data[0][11],
+      created: data[0][12]
     );
   } 
 }

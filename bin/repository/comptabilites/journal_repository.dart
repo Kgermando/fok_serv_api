@@ -54,15 +54,6 @@ class JournalRepository {
     var montantCredit = journalModel.montantCredit;
     var tva = journalModel.tva;
     var remarque = journalModel.remarque;
-
-    var approbationDG = journalModel.approbationDG;
-    var signatureDG = journalModel.signatureDG;
-    var signatureJustificationDG = journalModel.signatureJustificationDG;
-
-    var approbationDD = journalModel.approbationDD;
-    var signatureDD = journalModel.signatureDD;
-    var signatureJustificationDD = journalModel.signatureJustificationDD;
-
     var signature = journalModel.signature;
     var created = journalModel.created;
 
@@ -72,8 +63,6 @@ class JournalRepository {
           "INSERT INTO $tableName VALUES (nextval('journals_id_seq'), '$numeroOperation',"
           "'$libele', '$compteDebit','$montantDebit','$compteCredit','$montantCredit',"
           "'$tva', '$remarque',"
-          "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
-          "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
           "'$signature','$created');");
     });
   }
@@ -89,14 +78,6 @@ class JournalRepository {
     var tva = journalModel.tva;
     var remarque = journalModel.remarque;
 
-    var approbationDG = journalModel.approbationDG;
-    var signatureDG = journalModel.signatureDG;
-    var signatureJustificationDG = journalModel.signatureJustificationDG;
-
-    var approbationDD = journalModel.approbationDD;
-    var signatureDD = journalModel.signatureDD;
-    var signatureJustificationDD = journalModel.signatureJustificationDD;
-
     var signature = journalModel.signature;
     var created = journalModel.created;
 
@@ -107,10 +88,6 @@ class JournalRepository {
           "\"compteDebit\"='$compteDebit',\"montantDebit\"='$montantDebit',"
           "\"compteCredit\"='$compteCredit',\"montantCredit\"='$montantCredit',"
           "\"tva\"='$tva', \"remarque\"='$remarque',"
-          "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-          "\"signatureJustificationDG\"='$signatureJustificationDG',"
-          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-          "\"signatureJustificationDD\"='$signatureJustificationDD',"
           "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -139,13 +116,7 @@ class JournalRepository {
         montantCredit: data[0][6],
         tva: data[0][7],
         remarque: data[0][8],
-        approbationDG: data[0][9],
-        signatureDG: data[0][10],
-        signatureJustificationDG: data[0][11],
-        approbationDD: data[0][12],
-        signatureDD: data[0][13],
-        signatureJustificationDD: data[0][14],
-        signature: data[0][15],
-        created: data[0][16]);
+        signature: data[0][9],
+        created: data[0][10]);
   }
 }

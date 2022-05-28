@@ -10,7 +10,6 @@ class AchatModel {
   late String remise;
   late String qtyRemise;
   late String qtyLivre;
-
   late String succursale;
   late String signature;
   late DateTime created;

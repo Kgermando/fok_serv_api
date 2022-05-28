@@ -37,19 +37,7 @@ class ImmobilierHandlers {
         adresse: input['adresse'],
         numeroCertificat: input['numeroCertificat'],
         superficie: input['superficie'],
-        dateAcquisition: DateTime.parse(input['dateAcquisition']),
-        approbationDG: input['approbationDG'],
-        signatureDG: input['signatureDG'],
-        signatureJustificationDG: input['signatureJustificationDG'],
-        approbationFin: input['approbationFin'],
-        signatureFin: input['signatureFin'],
-        signatureJustificationFin: input['signatureJustificationFin'],
-        approbationBudget: input['approbationBudget'],
-        signatureBudget: input['signatureBudget'],
-        signatureJustificationBudget: input['signatureJustificationBudget'],
-        approbationDD: input['approbationDD'],
-        signatureDD: input['signatureDD'],
-        signatureJustificationDD: input['signatureJustificationDD'],
+        dateAcquisition: DateTime.parse(input['dateAcquisition']), 
         signature: input['signature'],
         created: DateTime.parse(input['created']));
 
@@ -81,6 +69,12 @@ class ImmobilierHandlers {
       }
       if (input['dateAcquisition'] != null) {
         immobilierModel.dateAcquisition = DateTime.parse(input['dateAcquisition']);
+      }
+      if (input['signature'] != null) {
+        immobilierModel.signature = input['signature'];
+      }
+      if (input['created'] != null) {
+        immobilierModel.created = DateTime.parse(input['created']);
       }
       repos.immobiliers.update(immobilierModel);
       return Response.ok(jsonEncode(immobilierModel.toJson()));

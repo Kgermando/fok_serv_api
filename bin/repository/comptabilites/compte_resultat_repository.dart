@@ -48,17 +48,6 @@ class CompteResultatRepository {
     var produitExceptionnels = compteResulatsModel.produitExceptionnels;
     var soldeDebiteur = compteResulatsModel.soldeDebiteur;
 
-
-    var approbationDG = compteResulatsModel.approbationDG;
-    var signatureDG = compteResulatsModel.signatureDG;
-    var signatureJustificationDG =
-        compteResulatsModel.signatureJustificationDG;
-
-    var approbationDD = compteResulatsModel.approbationDD;
-    var signatureDD = compteResulatsModel.signatureDD;
-    var signatureJustificationDD =
-        compteResulatsModel.signatureJustificationDD;
-
     var signature = compteResulatsModel.signature;
     var created = compteResulatsModel.created;
 
@@ -77,9 +66,6 @@ class CompteResultatRepository {
         "'$productionImmobilisee','$subventionExploitation',"
         "'$autreProduits','$montantExportation', '$produitfinancieres',"
         "'$produitExceptionnels','$soldeDebiteur',"
-
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
-        "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -119,16 +105,6 @@ class CompteResultatRepository {
     var produitExceptionnels = compteResulatsModel.produitExceptionnels;
     var soldeDebiteur = compteResulatsModel.soldeDebiteur;
 
-
-
-    var approbationDG = compteResulatsModel.approbationDG;
-    var signatureDG = compteResulatsModel.signatureDG;
-    var signatureJustificationDG = compteResulatsModel.signatureJustificationDG;
-
-    var approbationDD = compteResulatsModel.approbationDD;
-    var signatureDD = compteResulatsModel.signatureDD;
-    var signatureJustificationDD = compteResulatsModel.signatureJustificationDD;
-
     var signature = compteResulatsModel.signature;
     var created = compteResulatsModel.created;
 
@@ -150,11 +126,6 @@ class CompteResultatRepository {
         "\"autreProduits\"='$autreProduits', \"montantExportation\"='$montantExportation',"
         "\"produitfinancieres\"='$produitfinancieres',"
         "\"produitExceptionnels\"='$produitExceptionnels', \"soldeDebiteur\"='$soldeDebiteur',"
-
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -200,14 +171,8 @@ class CompteResultatRepository {
       produitfinancieres: data[0][23],
       produitExceptionnels: data[0][24],
       soldeDebiteur: data[0][25],
-      approbationDG: data[0][26],
-      signatureDG: data[0][27],
-      signatureJustificationDG: data[0][28],
-      approbationDD: data[0][29],
-      signatureDD: data[0][30],
-      signatureJustificationDD: data[0][31],
-      signature: data[0][32],
-      created: data[0][33]
+      signature: data[0][26],
+      created: data[0][27]
     );
   } 
 }

@@ -42,27 +42,7 @@ class EtaMaterielRepository {
     var modele = etatMaterielModel.modele;
     var marque = etatMaterielModel.marque;
     var typeObjet = etatMaterielModel.typeObjet;
-    var statut = etatMaterielModel.statut;
-    var approbationDG = etatMaterielModel.approbationDG;
-    var signatureDG = etatMaterielModel.signatureDG;
-    var signatureJustificationDG =
-        etatMaterielModel.signatureJustificationDG;
-
-    var approbationFin = etatMaterielModel.approbationFin;
-    var signatureFin = etatMaterielModel.signatureFin;
-    var signatureJustificationFin =
-        etatMaterielModel.signatureJustificationFin;
-
-    var approbationBudget = etatMaterielModel.approbationBudget;
-    var signatureBudget = etatMaterielModel.signatureBudget;
-    var signatureJustificationBudget =
-        etatMaterielModel.signatureJustificationBudget;
-
-    var approbationDD = etatMaterielModel.approbationDD;
-    var signatureDD = etatMaterielModel.signatureDD;
-    var signatureJustificationDD =
-        etatMaterielModel.signatureJustificationDD;
-
+    var statut = etatMaterielModel.statut; 
     var signature = etatMaterielModel.signature;
     var created = etatMaterielModel.created;
 
@@ -71,11 +51,7 @@ class EtaMaterielRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('etat_materiels_id_seq'), '$nom',"
-        "'$modele', '$marque', '$typeObjet', '$statut',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
+        "'$modele', '$marque', '$typeObjet', '$statut'," 
         "'$signature','$created');");
     });
   }
@@ -86,23 +62,7 @@ class EtaMaterielRepository {
     var modele = etatMaterielModel.modele;
     var marque = etatMaterielModel.marque;
     var typeObjet = etatMaterielModel.typeObjet;
-    var statut = etatMaterielModel.statut;
-   var approbationDG = etatMaterielModel.approbationDG;
-  var signatureDG = etatMaterielModel.signatureDG;
-  var signatureJustificationDG = etatMaterielModel.signatureJustificationDG;
-
-  var approbationFin = etatMaterielModel.approbationFin;
-  var signatureFin = etatMaterielModel.signatureFin;
-  var signatureJustificationFin = etatMaterielModel.signatureJustificationFin;
-
-  var approbationBudget = etatMaterielModel.approbationBudget;
-  var signatureBudget = etatMaterielModel.signatureBudget;
-  var signatureJustificationBudget =
-      etatMaterielModel.signatureJustificationBudget;
-
-  var approbationDD = etatMaterielModel.approbationDD;
-    var signatureDD = etatMaterielModel.signatureDD;
-    var signatureJustificationDD = etatMaterielModel.signatureJustificationDD;
+    var statut = etatMaterielModel.statut; 
 
     var signature = etatMaterielModel.signature;
     var created = etatMaterielModel.created;
@@ -110,15 +70,7 @@ class EtaMaterielRepository {
       // ignore: unused_local_variable
       var result = await conn.execute(
         "UPDATE $tableName SET \"nom\"='$nom', \"modele\"='$modele',"
-        "\"marque\"='$marque', \"typeObjet\"='$typeObjet', \"statut\"='$statut',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"marque\"='$marque', \"typeObjet\"='$typeObjet', \"statut\"='$statut'," 
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -143,21 +95,9 @@ class EtaMaterielRepository {
         modele: data[0][2],
         marque: data[0][3],
         typeObjet: data[0][4],
-        statut: data[0][5],
-        approbationDG: data[0][6],
-        signatureDG: data[0][7],
-        signatureJustificationDG: data[0][8],
-        approbationFin: data[0][9],
-        signatureFin: data[0][10],
-        signatureJustificationFin: data[0][11],
-        approbationBudget: data[0][12],
-        signatureBudget: data[0][13],
-        signatureJustificationBudget: data[0][14],
-        approbationDD: data[0][15],
-        signatureDD: data[0][16],
-        signatureJustificationDD: data[0][17],
-        signature: data[0][18],
-        created: data[0][19]
+        statut: data[0][5], 
+        signature: data[0][6],
+        created: data[0][7]
     );
   }
 }

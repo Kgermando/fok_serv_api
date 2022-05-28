@@ -24,15 +24,6 @@ class BilanRepository {
     var comptesActif = bilanModel.comptesActif;
     var comptesPactif = bilanModel.comptesPactif;
     var statut = bilanModel.statut;
-    var approbationDG = bilanModel.approbationDG;
-    var signatureDG = bilanModel.signatureDG;
-    var signatureJustificationDG =
-        bilanModel.signatureJustificationDG;
-
-    var approbationDD = bilanModel.approbationDD;
-    var signatureDD = bilanModel.signatureDD;
-    var signatureJustificationDD =
-        bilanModel.signatureJustificationDD;
 
     var signature = bilanModel.signature;
     var created = bilanModel.created;
@@ -42,8 +33,6 @@ class BilanRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('bilans_id_seq'), '$titleBilan',"
         "'$comptesActif','$comptesPactif','$statut',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
-        "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -54,13 +43,6 @@ class BilanRepository {
     var comptesActif = bilanModel.comptesActif;
     var comptesPactif = bilanModel.comptesPactif;
     var statut = bilanModel.statut;
-    var approbationDG = bilanModel.approbationDG;
-    var signatureDG = bilanModel.signatureDG;
-    var signatureJustificationDG = bilanModel.signatureJustificationDG;
-
-    var approbationDD = bilanModel.approbationDD;
-    var signatureDD = bilanModel.signatureDD;
-    var signatureJustificationDD = bilanModel.signatureJustificationDD;
 
     var signature = bilanModel.signature;
     var created = bilanModel.created;
@@ -72,10 +54,6 @@ class BilanRepository {
           "UPDATE $tableName SET \"titleBilan\"='$titleBilan',"
           "\"comptesActif\"='$comptesActif', \"comptesPactif\"='$comptesPactif',"
           "\"statut\"='$statut',"
-          "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-          "\"signatureJustificationDG\"='$signatureJustificationDG',"
-          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-          "\"signatureJustificationDD\"='$signatureJustificationDD',"
           "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -100,15 +78,9 @@ class BilanRepository {
       comptesActif: data[0][2],
       comptesPactif: data[0][3],
       statut: data[0][4],
-      approbationDG: data[0][5],
-      signatureDG: data[0][6],
-      signatureJustificationDG: data[0][7],
-      approbationDD: data[0][8],
-      signatureDD: data[0][9],
-      signatureJustificationDD: data[0][10],
-      signature: data[0][11],
-      created: data[0][12]   
+      signature: data[0][5],
+      created: data[0][6]   
     );
-  } 
+  }
   
 }

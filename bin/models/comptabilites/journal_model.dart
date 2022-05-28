@@ -9,14 +9,6 @@ class JournalModel {
   late String tva;
   late String remarque;
 
-  late String approbationDG; // button radio OUi et NON if non text field
-  late String signatureDG;
-  late String signatureJustificationDG;
-
-  late String approbationDD;
-  late String signatureDD; // directeur de departement
-  late String signatureJustificationDD;
-
   late String signature;
   late DateTime created;
 
@@ -30,12 +22,6 @@ class JournalModel {
       required this.montantCredit,
       required this.tva,
       required this.remarque,
-      required this.approbationDG,
-      required this.signatureDG,
-      required this.signatureJustificationDG,
-      required this.approbationDD,
-      required this.signatureDD,
-      required this.signatureJustificationDD,
       required this.signature,
       required this.created}); 
 
@@ -50,14 +36,8 @@ class JournalModel {
         montantCredit: row[6],
         tva: row[7],
         remarque: row[8],
-        approbationDG: row[9],
-        signatureDG: row[10],
-        signatureJustificationDG: row[11],
-        approbationDD: row[12],
-        signatureDD: row[13],
-        signatureJustificationDD: row[14],
-        signature: row[15],
-        created: row[16]);
+        signature: row[9],
+        created: row[10]);
   }
 
   factory JournalModel.fromJson(Map<String, dynamic> json) {
@@ -71,12 +51,6 @@ class JournalModel {
         montantCredit: json['montantCredit'],
         tva: json['tva'],
         remarque: json['remarque'],
-        approbationDG: json['approbationDG'],
-        signatureDG: json['signatureDG'],
-        signatureJustificationDG: json['signatureJustificationDG'],
-        approbationDD: json['approbationDD'],
-        signatureDD: json['signatureDD'],
-        signatureJustificationDD: json['signatureJustificationDD'],
         signature: json['signature'],
         created: DateTime.parse(json['created']));
   }
@@ -92,12 +66,6 @@ class JournalModel {
       'montantCredit': montantCredit,
       'tva': tva,
       'remarque': remarque,
-      'approbationDG': approbationDG,
-      'signatureDG': signatureDG,
-      'signatureJustificationDG': signatureJustificationDG,
-      'approbationDD': approbationDD,
-      'signatureDD': signatureDD,
-      'signatureJustificationDD': signatureJustificationDD,
       'signature': signature,
       'created': created.toIso8601String()
     };

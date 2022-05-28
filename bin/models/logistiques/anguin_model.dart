@@ -15,22 +15,6 @@ class AnguinModel {
   late String provenance;
   late String typeCaburant;
   late String typeMoteur;
-  
-  late String approbationDG; // button radio OUi et NON if non text field
-  late String signatureDG;
-  late String signatureJustificationDG;
-
-  late String approbationFin;
-  late String signatureFin;
-  late String signatureJustificationFin;
-
-  late String approbationBudget;
-  late String signatureBudget;
-  late String signatureJustificationBudget;
-
-  late String approbationDD;
-  late String signatureDD; // directeur de departement
-  late String signatureJustificationDD;
 
   late String signature; // celui qui fait le document
   late DateTime created;
@@ -52,18 +36,6 @@ class AnguinModel {
       required this.provenance,
       required this.typeCaburant,
       required this.typeMoteur,
-      required this.approbationDG,
-      required this.signatureDG,
-      required this.signatureJustificationDG,
-      required this.approbationFin,
-      required this.signatureFin,
-      required this.signatureJustificationFin,
-      required this.approbationBudget,
-      required this.signatureBudget,
-      required this.signatureJustificationBudget,
-      required this.approbationDD,
-      required this.signatureDD,
-      required this.signatureJustificationDD,
       required this.signature,
       required this.created
     });
@@ -85,20 +57,8 @@ class AnguinModel {
         provenance: row[12],
         typeCaburant: row[13],
         typeMoteur: row[14],
-        approbationDG: row[15],
-        signatureDG: row[16],
-        signatureJustificationDG: row[17],
-        approbationFin: row[18],
-        signatureFin: row[19],
-        signatureJustificationFin: row[20],
-        approbationBudget: row[21],
-        signatureBudget: row[22],
-        signatureJustificationBudget: row[23],
-        approbationDD: row[24],
-        signatureDD: row[25],
-        signatureJustificationDD: row[26],
-        signature: row[27],
-        created: row[28]
+        signature: row[15],
+        created: row[16]
     );
   }
 
@@ -119,18 +79,6 @@ class AnguinModel {
         provenance: json['provenance'],
         typeCaburant: json['typeCaburant'],
         typeMoteur: json['typeMoteur'],
-        approbationDG: json['approbationDG'],
-        signatureDG: json['signatureDG'],
-        signatureJustificationDG: json['signatureJustificationDG'],
-        approbationFin: json['approbationFin'],
-        signatureFin: json['signatureFin'],
-        signatureJustificationFin: json['signatureJustificationFin'],
-        approbationBudget: json['approbationBudget'],
-        signatureBudget: json['signatureBudget'],
-        signatureJustificationBudget: json['signatureJustificationBudget'],
-        approbationDD: json['approbationDD'],
-        signatureDD: json['signatureDD'],
-        signatureJustificationDD: json['signatureJustificationDD'],
         signature: json['signature'],
         created: DateTime.parse(json['created'])
     );
@@ -153,18 +101,6 @@ class AnguinModel {
       'provenance': provenance,
       'typeCaburant': typeCaburant,
       'typeMoteur': typeMoteur,
-      'approbationDG': approbationDG,
-      'signatureDG': signatureDG,
-      'signatureJustificationDG': signatureJustificationDG,
-      'approbationFin': approbationFin,
-      'signatureFin': signatureFin,
-      'signatureJustificationFin': signatureJustificationFin,
-      'approbationBudget': approbationBudget,
-      'signatureBudget': signatureBudget,
-      'signatureJustificationBudget': signatureJustificationBudget,
-      'approbationDD': approbationDD,
-      'signatureDD': signatureDD,
-      'signatureJustificationDD': signatureJustificationDD,
       'signature': signature,
       'created': created.toIso8601String()
     };

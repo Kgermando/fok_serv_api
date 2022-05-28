@@ -39,12 +39,6 @@ class ProduitModelHandlers {
           sousCategorie2: input['sousCategorie2'],
           sousCategorie3: input['sousCategorie3'],
           sousCategorie4: input['sousCategorie4'],
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
           idProduct: input['idProduct'],
           signature: input['signature'],
           created: DateTime.parse(input['created']));
@@ -80,24 +74,6 @@ class ProduitModelHandlers {
       }
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];
-      }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];

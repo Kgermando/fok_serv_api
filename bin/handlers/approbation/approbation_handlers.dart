@@ -41,7 +41,6 @@ class ApprobationHandlers {
         ligneBudgtaire: input['ligneBudgtaire'],
         resources: input['resources'],
         approbation: input['approbation'],
-        signatureApprobation: input['signatureApprobation'],
         justification: input['justification'],
         signature: input['signature'], 
         created: DateTime.parse(input['created'])
@@ -81,9 +80,6 @@ class ApprobationHandlers {
       }
       if (input['approbation'] != null) {
         data.approbation = input['approbation'];
-      }
-      if (input['signatureApprobation'] != null) {
-        data.signatureApprobation = input['signatureApprobation'];
       }
       if (input['justification'] != null) {
         data.justification = input['justification'];

@@ -30,25 +30,6 @@ class CarburantRepository {
     var numeroPlaque = carburantModel.numeroPlaque;
     var dateHeureSortieAnguin = carburantModel.dateHeureSortieAnguin;
     var qtyAchat = carburantModel.qtyAchat;
-    var approbationDG = carburantModel.approbationDG;
-    var signatureDG = carburantModel.signatureDG;
-    var signatureJustificationDG =
-        carburantModel.signatureJustificationDG;
-
-    var approbationFin = carburantModel.approbationFin;
-    var signatureFin = carburantModel.signatureFin;
-    var signatureJustificationFin =
-        carburantModel.signatureJustificationFin;
-
-    var approbationBudget = carburantModel.approbationBudget;
-    var signatureBudget = carburantModel.signatureBudget;
-    var signatureJustificationBudget =
-        carburantModel.signatureJustificationBudget;
-
-    var approbationDD = carburantModel.approbationDD;
-    var signatureDD = carburantModel.signatureDD;
-    var signatureJustificationDD =
-        carburantModel.signatureJustificationDD;
 
     var signature = carburantModel.signature;
     var created = carburantModel.created;
@@ -60,10 +41,6 @@ class CarburantRepository {
         "'$typeCaburant', '$fournisseur', '$nomeroFactureAchat', '$prixAchatParLitre',"
         "'$nomReceptioniste', '$numeroPlaque','$dateHeureSortieAnguin',"
         "'$qtyAchat',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature', '$created');");
     });
   }
@@ -79,22 +56,6 @@ class CarburantRepository {
     var numeroPlaque = carburantModel.numeroPlaque;
     var dateHeureSortieAnguin = carburantModel.dateHeureSortieAnguin;
     var qtyAchat = carburantModel.qtyAchat;
-    var approbationDG = carburantModel.approbationDG;
-    var signatureDG = carburantModel.signatureDG;
-    var signatureJustificationDG = carburantModel.signatureJustificationDG;
-
-    var approbationFin = carburantModel.approbationFin;
-    var signatureFin = carburantModel.signatureFin;
-    var signatureJustificationFin = carburantModel.signatureJustificationFin;
-
-    var approbationBudget = carburantModel.approbationBudget;
-    var signatureBudget = carburantModel.signatureBudget;
-    var signatureJustificationBudget =
-        carburantModel.signatureJustificationBudget;
-
-    var approbationDD = carburantModel.approbationDD;
-    var signatureDD = carburantModel.signatureDD;
-    var signatureJustificationDD = carburantModel.signatureJustificationDD;
 
     var signature = carburantModel.signature;
     var created = carburantModel.created;
@@ -106,14 +67,6 @@ class CarburantRepository {
         "\"fournisseur\"='$fournisseur', \"nomeroFactureAchat\"='$nomeroFactureAchat', \"prixAchatParLitre\"='$prixAchatParLitre',"
         "\"nomReceptioniste\"='$nomReceptioniste', \"numeroPlaque\"='$numeroPlaque', \"dateHeureSortieAnguin\"='$dateHeureSortieAnguin',"
         " \"qtyAchat\"='$qtyAchat',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -143,20 +96,8 @@ class CarburantRepository {
       numeroPlaque: data[0][7],
       dateHeureSortieAnguin: data[0][8],
       qtyAchat: data[0][9],
-      approbationDG: data[0][10],
-      signatureDG: data[0][11],
-      signatureJustificationDG: data[0][12],
-      approbationFin: data[0][13],
-      signatureFin: data[0][14],
-      signatureJustificationFin: data[0][15],
-      approbationBudget: data[0][16],
-      signatureBudget: data[0][17],
-      signatureJustificationBudget: data[0][18],
-      approbationDD: data[0][19],
-      signatureDD: data[0][20],
-      signatureJustificationDD: data[0][21],
-      signature: data[0][22],
-      created: data[0][23]
+      signature: data[0][10],
+      created: data[0][11]
     );
   }
 

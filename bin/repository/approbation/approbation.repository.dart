@@ -30,7 +30,6 @@ class ApprobationRepository {
     var resources = data.resources;
 
     var approbation = data.approbation;
-    var signatureApprobation = data.signatureApprobation;
     var justification = data.justification;
 
     var signature = data.signature;
@@ -42,7 +41,7 @@ class ApprobationRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('approbations_id_seq'), '$reference',"
         "'$title', '$departement', '$fontctionOccupee', '$ligneBudgtaire', '$resources',"
-        "'$approbation', '$signatureApprobation', '$justification',"
+        "'$approbation', '$justification',"
         "'$signature', '$created');");
     });
   }
@@ -57,7 +56,6 @@ class ApprobationRepository {
     var resources = data.resources;
 
     var approbation = data.approbation;
-    var signatureApprobation = data.signatureApprobation;
     var justification = data.justification;
 
     var signature = data.signature;
@@ -71,7 +69,7 @@ class ApprobationRepository {
           "\"title\"='$title',\"departement\"='$departement',"
           "\"fontctionOccupee\"='$fontctionOccupee',"
           "\"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
-          "\"approbation\"='$approbation', \"signatureApprobation\"='$signatureApprobation',"
+          "\"approbation\"='$approbation',"
           "\"justification\"='$justification',"
           "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
@@ -100,10 +98,9 @@ class ApprobationRepository {
       ligneBudgtaire: data[0][5],
       resources: data[0][6],
       approbation: data[0][7],
-      signatureApprobation: data[0][8],
-      justification: data[0][9],
-      signature: data[0][10],
-      created: data[0][11]
+      justification: data[0][8],
+      signature: data[0][9],
+      created: data[0][10]
     );
   } 
 }

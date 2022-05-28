@@ -53,12 +53,6 @@ class JournalHandlers {
           montantCredit: input['montantCredit'],
           tva: input['tva'],
           remarque: input['remarque'],
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -99,25 +93,6 @@ class JournalHandlers {
       if (input['remarque'] != null) {
         data.remarque = input['remarque'];
       }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
-      }
-
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }

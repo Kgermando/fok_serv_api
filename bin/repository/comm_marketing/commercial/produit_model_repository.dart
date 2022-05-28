@@ -26,14 +26,6 @@ class ProduitModelRepository {
     var sousCategorie3 = productModel.sousCategorie3;
     var sousCategorie4 = productModel.sousCategorie4;
 
-    var approbationDG = productModel.approbationDG;
-    var signatureDG = productModel.signatureDG;
-    var signatureJustificationDG = productModel.signatureJustificationDG;
-
-    var approbationDD = productModel.approbationDD;
-    var signatureDD = productModel.signatureDD;
-    var signatureJustificationDD = productModel.signatureJustificationDD;
-
     var idProduct = productModel.idProduct;
     var signature = productModel.signature;
     var created = productModel.created;
@@ -44,8 +36,6 @@ class ProduitModelRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('produits_model_id_seq'), '$categorie',"
         "'$sousCategorie1','$sousCategorie2','$sousCategorie3','$sousCategorie4', '$idProduct',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
-        "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -57,14 +47,6 @@ class ProduitModelRepository {
     var sousCategorie2 = productModel.sousCategorie2;
     var sousCategorie3 = productModel.sousCategorie3;
     var sousCategorie4 = productModel.sousCategorie4;
-
-      var approbationDG = productModel.approbationDG;
-    var signatureDG = productModel.signatureDG;
-    var signatureJustificationDG = productModel.signatureJustificationDG;
-
-    var approbationDD = productModel.approbationDD;
-    var signatureDD = productModel.signatureDD;
-    var signatureJustificationDD = productModel.signatureJustificationDD;
 
     var idProduct = productModel.idProduct;
     var signature = productModel.signature;
@@ -78,10 +60,6 @@ class ProduitModelRepository {
         "\"sousCategorie1\"='$sousCategorie1', \"sousCategorie2\"='$sousCategorie2',"
         "\"sousCategorie3\"='$sousCategorie3', \"sousCategorie4\"='$sousCategorie4',"
         "\"idProduct\"='$idProduct',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -108,14 +86,8 @@ class ProduitModelRepository {
       sousCategorie3: data[0][4],
       sousCategorie4: data[0][5],
       idProduct: data[0][6],
-      approbationDG: data[0][7],
-      signatureDG: data[0][8],
-      signatureJustificationDG: data[0][9],
-      approbationDD: data[0][10],
-      signatureDD: data[0][11],
-      signatureJustificationDD: data[0][12],
-      signature: data[0][13],
-      created: data[0][14]
+      signature: data[0][7],
+      created: data[0][8]
     );
   } 
   

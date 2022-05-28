@@ -27,25 +27,6 @@ class DettesRepository {
     var montant = detteModel.montant;
     var numeroOperation = detteModel.numeroOperation;
     var statutPaie = detteModel.statutPaie;
-    var approbationDG = detteModel.approbationDG;
-    var signatureDG = detteModel.signatureDG;
-    var signatureJustificationDG =
-        detteModel.signatureJustificationDG;
-
-    var approbationFin = detteModel.approbationFin;
-    var signatureFin = detteModel.signatureFin;
-    var signatureJustificationFin =
-        detteModel.signatureJustificationFin;
-
-    var approbationBudget = detteModel.approbationBudget;
-    var signatureBudget = detteModel.signatureBudget;
-    var signatureJustificationBudget =
-        detteModel.signatureJustificationBudget;
-
-    var approbationDD = detteModel.approbationDD;
-    var signatureDD = detteModel.signatureDD;
-    var signatureJustificationDD =
-        detteModel.signatureJustificationDD;
 
     var signature = detteModel.signature;
     var created = detteModel.created;
@@ -53,14 +34,10 @@ class DettesRepository {
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('dettes_id_seq'), '$nomComplet',"
-          "'$pieceJustificative','$libelle','$montant',"
-          "'$numeroOperation', '$statutPaie',"
-          "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-          "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-          "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-          "'$signatureDD', '$signatureJustificationDD',"
-          "'$signature','$created');");
+        "INSERT INTO $tableName VALUES (nextval('dettes_id_seq'), '$nomComplet',"
+        "'$pieceJustificative','$libelle','$montant',"
+        "'$numeroOperation', '$statutPaie',"
+        "'$signature','$created');");
     });
   }
 
@@ -72,21 +49,6 @@ class DettesRepository {
     var montant = detteModel.montant;
     var numeroOperation = detteModel.numeroOperation;
     var statutPaie = detteModel.statutPaie;
-    var approbationDG = detteModel.approbationDG;
-    var signatureDG = detteModel.signatureDG;
-    var signatureJustificationDG = detteModel.signatureJustificationDG;
-
-    var approbationFin = detteModel.approbationFin;
-    var signatureFin = detteModel.signatureFin;
-    var signatureJustificationFin = detteModel.signatureJustificationFin;
-
-    var approbationBudget = detteModel.approbationBudget;
-    var signatureBudget = detteModel.signatureBudget;
-    var signatureJustificationBudget = detteModel.signatureJustificationBudget;
-
-    var approbationDD = detteModel.approbationDD;
-    var signatureDD = detteModel.signatureDD;
-    var signatureJustificationDD = detteModel.signatureJustificationDD;
 
     var signature = detteModel.signature;
     var created = detteModel.created;
@@ -97,14 +59,6 @@ class DettesRepository {
         "UPDATE $tableName SET \"nomComplet\"='$nomComplet',"
         "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
         "\"montant\"='$montant', \"numeroOperation\"='$numeroOperation', \"statutPaie\"='$statutPaie',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -131,20 +85,8 @@ class DettesRepository {
       montant: data[0][4],
       numeroOperation: data[0][5],
       statutPaie: data[0][6],
-      approbationDG: data[0][7],
-      signatureDG: data[0][8],
-      signatureJustificationDG: data[0][9],
-      approbationFin: data[0][10],
-      signatureFin: data[0][11],
-      signatureJustificationFin: data[0][12],
-      approbationBudget: data[0][13],
-      signatureBudget: data[0][14],
-      signatureJustificationBudget: data[0][15],
-      approbationDD: data[0][16],
-      signatureDD: data[0][17],
-      signatureJustificationDD: data[0][18],
-      signature: data[0][19],
-      created: data[0][20]
+      signature: data[0][7],
+      created: data[0][8]
     );
   }
 

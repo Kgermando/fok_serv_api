@@ -37,14 +37,6 @@ class SuccursaleHandlers {
           name: input['name'],
           adresse: input['adresse'],
           province: input['province'],
-          
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
-
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -69,25 +61,6 @@ class SuccursaleHandlers {
       }
       if (input['province'] != null) {
         data.province = input['province'];
-      }
-
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
       }
 
       if (input['signature'] != null) {

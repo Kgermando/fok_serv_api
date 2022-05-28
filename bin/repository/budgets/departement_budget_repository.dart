@@ -26,24 +26,6 @@ class DepartementBudgetRepository {
     var periodeDebut = departementBudgetModel.periodeDebut;
     var periodeFin = departementBudgetModel.periodeFin;
 
-    var approbationDG = departementBudgetModel.approbationDG;
-    var signatureDG = departementBudgetModel.signatureDG;
-    var signatureJustificationDG = departementBudgetModel.signatureJustificationDG;
-
-    var approbationFin = departementBudgetModel.approbationFin;
-    var signatureFin = departementBudgetModel.signatureFin;
-    var signatureJustificationFin = departementBudgetModel.signatureJustificationFin;
-
-    var approbationBudget = departementBudgetModel.approbationBudget;
-    var signatureBudget = departementBudgetModel.signatureBudget;
-    var signatureJustificationBudget =
-        departementBudgetModel.signatureJustificationBudget;
-
-    var approbationDD = departementBudgetModel.approbationDD;
-    var signatureDD = departementBudgetModel.signatureDD;
-    var signatureJustificationDD =
-        departementBudgetModel.signatureJustificationDD;
-
     var signature = departementBudgetModel.signature;
     var created = departementBudgetModel.created;
 
@@ -52,10 +34,6 @@ class DepartementBudgetRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('departement_budgets_id_seq'), '$title',"
         "'$departement', '$periodeDebut', '$periodeFin',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature', '$created');");
     });
   }
@@ -66,26 +44,6 @@ class DepartementBudgetRepository {
     var departement = departementBudgetModel.departement;
     var periodeDebut = departementBudgetModel.periodeDebut;
     var periodeFin = departementBudgetModel.periodeFin;
-    
-    var approbationDG = departementBudgetModel.approbationDG;
-    var signatureDG = departementBudgetModel.signatureDG;
-    var signatureJustificationDG =
-        departementBudgetModel.signatureJustificationDG;
-
-    var approbationFin = departementBudgetModel.approbationFin;
-    var signatureFin = departementBudgetModel.signatureFin;
-    var signatureJustificationFin =
-        departementBudgetModel.signatureJustificationFin;
-
-    var approbationBudget = departementBudgetModel.approbationBudget;
-    var signatureBudget = departementBudgetModel.signatureBudget;
-    var signatureJustificationBudget =
-        departementBudgetModel.signatureJustificationBudget;
-
-    var approbationDD = departementBudgetModel.approbationDD;
-    var signatureDD = departementBudgetModel.signatureDD;
-    var signatureJustificationDD =
-        departementBudgetModel.signatureJustificationDD;
 
     var signature = departementBudgetModel.signature;
     var created = departementBudgetModel.created;
@@ -94,15 +52,8 @@ class DepartementBudgetRepository {
       // ignore: unused_local_variable
       var result = await conn.execute(
         "UPDATE $tableName SET \"title\"='$title',"
-        "\"departement\"='$departement', \"periodeDebut\"='$periodeDebut',  \"periodeFin\"='$periodeFin',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"departement\"='$departement', \"periodeDebut\"='$periodeDebut',"
+        "\"periodeFin\"='$periodeFin',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -127,20 +78,8 @@ class DepartementBudgetRepository {
       departement: data[0][2],
       periodeDebut: data[0][3],
       periodeFin: data[0][4],
-      approbationDG: data[0][5],
-      signatureDG: data[0][6],
-      signatureJustificationDG: data[0][7],
-      approbationFin: data[0][8],
-      signatureFin: data[0][9],
-      signatureJustificationFin: data[0][10],
-      approbationBudget: data[0][11],
-      signatureBudget: data[0][12],
-      signatureJustificationBudget: data[0][13],
-      approbationDD: data[0][14],
-      signatureDD: data[0][15],
-      signatureJustificationDD: data[0][16],
-      signature: data[0][17],
-      created: data[0][18]
+      signature: data[0][5],
+      created: data[0][6]
     );
   } 
 }

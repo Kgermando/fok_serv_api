@@ -9,7 +9,6 @@ class ApprobationModel {
   late String resources;
 
   late String approbation; // button radio OUi et NON if non text field
-  late String signatureApprobation;
   late String justification;
 
   late String signature; // celui qui fait le document
@@ -24,7 +23,6 @@ class ApprobationModel {
       required this.ligneBudgtaire,
       required this.resources,
       required this.approbation,
-      required this.signatureApprobation,
       required this.justification,
       required this.signature,
       required this.created});
@@ -39,10 +37,9 @@ class ApprobationModel {
         ligneBudgtaire: row[5],
         resources: row[6],
         approbation: row[7],
-        signatureApprobation: row[8],
-        justification: row[9],
-        signature: row[10],
-        created: row[11]);
+        justification: row[8],
+        signature: row[9],
+        created: row[10]);
   }
 
   factory ApprobationModel.fromJson(Map<String, dynamic> json) {
@@ -55,7 +52,6 @@ class ApprobationModel {
         ligneBudgtaire: json['ligneBudgtaire'],
         resources: json['resources'],
         approbation: json['approbation'],
-        signatureApprobation: json['signatureApprobation'],
         justification: json['justification'],
         signature: json['signature'],
         created: DateTime.parse(json['created']));
@@ -71,7 +67,6 @@ class ApprobationModel {
       'ligneBudgtaire': ligneBudgtaire,
       'resources': resources,
       'approbation': approbation,
-      'signatureApprobation': signatureApprobation,
       'justification': justification,
       'signature': signature,
       'created': created.toIso8601String()

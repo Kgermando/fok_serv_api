@@ -64,26 +64,6 @@ class DevisRepository {
     var resources = devisModel.resources;
     var observation = devisModel.observation;
 
-    var approbationDG = devisModel.approbationDG;
-    var signatureDG = devisModel.signatureDG;
-    var signatureJustificationDG =
-        devisModel.signatureJustificationDG;
-
-    var approbationFin = devisModel.approbationFin;
-    var signatureFin = devisModel.signatureFin;
-    var signatureJustificationFin =
-        devisModel.signatureJustificationFin;
-
-    var approbationBudget = devisModel.approbationBudget;
-    var signatureBudget = devisModel.signatureBudget;
-    var signatureJustificationBudget =
-        devisModel.signatureJustificationBudget;
-
-    var approbationDD = devisModel.approbationDD;
-    var signatureDD = devisModel.signatureDD;
-    var signatureJustificationDD =
-        devisModel.signatureJustificationDD;
-
     var signature = devisModel.signature;
     var created = devisModel.created;
 
@@ -93,10 +73,6 @@ class DevisRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('devis_id_seq'), '$title',"
         "'$priority','$departement','$list', '$ligneBudgtaire', '$resources', '$observation',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -111,22 +87,6 @@ class DevisRepository {
     var resources = devisModel.resources;
     var observation = devisModel.observation;
 
-    var approbationDG = devisModel.approbationDG;
-    var signatureDG = devisModel.signatureDG;
-    var signatureJustificationDG = devisModel.signatureJustificationDG;
-
-    var approbationFin = devisModel.approbationFin;
-    var signatureFin = devisModel.signatureFin;
-    var signatureJustificationFin = devisModel.signatureJustificationFin;
-
-    var approbationBudget = devisModel.approbationBudget;
-    var signatureBudget = devisModel.signatureBudget;
-    var signatureJustificationBudget = devisModel.signatureJustificationBudget;
-
-    var approbationDD = devisModel.approbationDD;
-    var signatureDD = devisModel.signatureDD;
-    var signatureJustificationDD = devisModel.signatureJustificationDD;
-
     var signature = devisModel.signature;
     var created = devisModel.created;
 
@@ -138,14 +98,6 @@ class DevisRepository {
           "\"priority\"='$priority',\"departement\"='$departement',"
           "\"list\"='$list', \"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
           "\"observation\"='$observation',"
-          "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-          "\"signatureJustificationDG\"='$signatureJustificationDG',"
-          "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-          "\"signatureJustificationFin\"='$signatureJustificationFin',"
-          "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-          "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-          "\"signatureJustificationDD\"='$signatureJustificationDD',"
           "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -173,20 +125,8 @@ class DevisRepository {
       ligneBudgtaire: data[0][5],
       resources: data[0][6],
       observation: data[0][7],
-      approbationDG: data[0][8],
-      signatureDG: data[0][9],
-      signatureJustificationDG: data[0][10],
-      approbationFin: data[0][11],
-      signatureFin: data[0][12],
-      signatureJustificationFin: data[0][13],
-      approbationBudget: data[0][14],
-      signatureBudget: data[0][15],
-      signatureJustificationBudget: data[0][16],
-      approbationDD: data[0][17],
-      signatureDD: data[0][18],
-      signatureJustificationDD: data[0][19],
-      signature: data[0][20],
-      created: data[0][21]
+      signature: data[0][8],
+      created: data[0][9]
     );
   } 
 }

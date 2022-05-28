@@ -23,16 +23,6 @@ class BalanceCompteRepository {
     var title = balanceCompteModel.title;
     var comptes = balanceCompteModel.comptes;
     var statut = balanceCompteModel.statut;
-    var approbationDG = balanceCompteModel.approbationDG;
-    var signatureDG = balanceCompteModel.signatureDG;
-    var signatureJustificationDG =
-        balanceCompteModel.signatureJustificationDG;
-
-    var approbationDD = balanceCompteModel.approbationDD;
-    var signatureDD = balanceCompteModel.signatureDD;
-    var signatureJustificationDD =
-        balanceCompteModel.signatureJustificationDD;
-
     var signature = balanceCompteModel.signature;
     var created = balanceCompteModel.created;
 
@@ -41,8 +31,6 @@ class BalanceCompteRepository {
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('balance_comptes_id_seq'), '$title',"
         "'$comptes', '$statut',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG',"
-        "'$approbationDD', '$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -52,13 +40,6 @@ class BalanceCompteRepository {
     var title = balanceCompteModel.title;
     var comptes = balanceCompteModel.comptes;
     var statut = balanceCompteModel.statut;
-    var approbationDG = balanceCompteModel.approbationDG;
-    var signatureDG = balanceCompteModel.signatureDG;
-    var signatureJustificationDG = balanceCompteModel.signatureJustificationDG;
-
-    var approbationDD = balanceCompteModel.approbationDD;
-    var signatureDD = balanceCompteModel.signatureDD;
-    var signatureJustificationDD = balanceCompteModel.signatureJustificationDD;
 
     var signature = balanceCompteModel.signature;
     var created = balanceCompteModel.created;
@@ -69,10 +50,6 @@ class BalanceCompteRepository {
       var result = await conn.execute(
         "UPDATE $tableName SET \"title\"='$title', \"comptes\"='$comptes',"
         "\"statut\"='$statut',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -96,14 +73,8 @@ class BalanceCompteRepository {
       title: data[0][1],
       comptes: data[0][2],
       statut: data[0][3],
-      approbationDG: data[0][4],
-      signatureDG: data[0][5],
-      signatureJustificationDG: data[0][6],
-      approbationDD: data[0][7],
-      signatureDD: data[0][8],
-      signatureJustificationDD: data[0][9],
-      signature: data[0][10],
-      created: data[0][11]
+      signature: data[0][4],
+      created: data[0][5]
     );
   } 
 }

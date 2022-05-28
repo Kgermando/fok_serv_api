@@ -6,12 +6,6 @@ class ProductModel {
   late String sousCategorie3;
   late String sousCategorie4;
   late String idProduct;
-  late String approbationDG; // button radio OUi et NON if non text field
-  late String signatureDG;
-  late String signatureJustificationDG;
-  late String approbationDD;
-  late String signatureDD; // directeur de departement
-  late String signatureJustificationDD;
   late String signature; // celui qui fait le document
   late DateTime created;
 
@@ -23,12 +17,6 @@ class ProductModel {
     required this.sousCategorie3,
     required this.sousCategorie4,
     required this.idProduct,
-    required this.approbationDG,
-    required this.signatureDG,
-    required this.signatureJustificationDG,
-    required this.approbationDD,
-    required this.signatureDD,
-    required this.signatureJustificationDD,
     required this.signature,
     required this.created
   });
@@ -43,14 +31,8 @@ class ProductModel {
       sousCategorie3: row[4],
       sousCategorie4: row[5],
       idProduct: row[6],
-      approbationDG: row[7],
-      signatureDG: row[8],
-      signatureJustificationDG: row[9],
-      approbationDD: row[10],
-      signatureDD: row[11],
-      signatureJustificationDD: row[12],
-      signature: row[13],
-      created: row[14]
+      signature: row[7],
+      created: row[8]
     );
   }
 
@@ -63,13 +45,7 @@ class ProductModel {
       sousCategorie2: json['sousCategorie2'],
       sousCategorie3: json['sousCategorie3'],
       sousCategorie4: json['sousCategorie4'],
-      idProduct: json['idProduct'], 
-      approbationDG: json['approbationDG'],
-      signatureDG: json['signatureDG'],
-      signatureJustificationDG: json['signatureJustificationDG'],
-      approbationDD: json['approbationDD'],
-      signatureDD: json['signatureDD'],
-      signatureJustificationDD: json['signatureJustificationDD'],
+      idProduct: json['idProduct'],
       signature: json['signature'],
       created: DateTime.parse(json['created'])
     );
@@ -84,12 +60,6 @@ class ProductModel {
       'sousCategorie3': sousCategorie3,
       'sousCategorie4': sousCategorie4,
       'idProduct': idProduct,
-      'approbationDG': approbationDG,
-      'signatureDG': signatureDG,
-      'signatureJustificationDG': signatureJustificationDG,
-      'approbationDD': approbationDD,
-      'signatureDD': signatureDD,
-      'signatureJustificationDD': signatureJustificationDD,
       'signature': signature,
       'created': created.toIso8601String()
     };

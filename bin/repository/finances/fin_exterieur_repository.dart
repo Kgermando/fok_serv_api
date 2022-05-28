@@ -29,25 +29,6 @@ class FinExteRepository {
     var typeOperation = financeExterieurModel.typeOperation;
     var numeroOperation = financeExterieurModel.numeroOperation;
     var ressourceFin = financeExterieurModel.ressourceFin;
-    var approbationDG = financeExterieurModel.approbationDG;
-    var signatureDG = financeExterieurModel.signatureDG;
-    var signatureJustificationDG =
-        financeExterieurModel.signatureJustificationDG;
-
-    var approbationFin = financeExterieurModel.approbationFin;
-    var signatureFin = financeExterieurModel.signatureFin;
-    var signatureJustificationFin =
-        financeExterieurModel.signatureJustificationFin;
-
-    var approbationBudget = financeExterieurModel.approbationBudget;
-    var signatureBudget = financeExterieurModel.signatureBudget;
-    var signatureJustificationBudget =
-        financeExterieurModel.signatureJustificationBudget;
-
-    var approbationDD = financeExterieurModel.approbationDD;
-    var signatureDD = financeExterieurModel.signatureDD;
-    var signatureJustificationDD =
-        financeExterieurModel.signatureJustificationDD;
 
     var signature = financeExterieurModel.signature;
     var created = financeExterieurModel.created;
@@ -59,10 +40,6 @@ class FinExteRepository {
         "INSERT INTO $tableName VALUES (nextval('fin_exterieurs_id_seq'), '$nomComplet',"
         "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
         "'$ligneBudgtaire', '$typeOperation','$numeroOperation', '$ressourceFin',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature','$created');");
     });
   }
@@ -78,25 +55,6 @@ class FinExteRepository {
     var typeOperation = financeExterieurModel.typeOperation;
     var numeroOperation = financeExterieurModel.numeroOperation;
     var ressourceFin = financeExterieurModel.ressourceFin;
-    var approbationDG = financeExterieurModel.approbationDG;
-    var signatureDG = financeExterieurModel.signatureDG;
-    var signatureJustificationDG =
-        financeExterieurModel.signatureJustificationDG;
-
-    var approbationFin = financeExterieurModel.approbationFin;
-    var signatureFin = financeExterieurModel.signatureFin;
-    var signatureJustificationFin =
-        financeExterieurModel.signatureJustificationFin;
-
-    var approbationBudget = financeExterieurModel.approbationBudget;
-    var signatureBudget = financeExterieurModel.signatureBudget;
-    var signatureJustificationBudget =
-        financeExterieurModel.signatureJustificationBudget;
-
-    var approbationDD = financeExterieurModel.approbationDD;
-    var signatureDD = financeExterieurModel.signatureDD;
-    var signatureJustificationDD =
-        financeExterieurModel.signatureJustificationDD;
 
     var signature = financeExterieurModel.signature;
     var created = financeExterieurModel.created;
@@ -111,14 +69,6 @@ class FinExteRepository {
           "\"ligneBudgtaire\"='$ligneBudgtaire',"
           "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
           "\"ressourceFin\"='$ressourceFin',"
-          "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-          "\"signatureJustificationDG\"='$signatureJustificationDG',"
-          "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-          "\"signatureJustificationFin\"='$signatureJustificationFin',"
-          "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-          "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-          "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-          "\"signatureJustificationDD\"='$signatureJustificationDD',"
           "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -148,20 +98,8 @@ class FinExteRepository {
         typeOperation: data[0][7],
         numeroOperation: data[0][8],
         ressourceFin: data[0][9],
-        approbationDG: data[0][10],
-        signatureDG: data[0][11],
-        signatureJustificationDG: data[0][12],
-        approbationFin: data[0][13],
-        signatureFin: data[0][14],
-        signatureJustificationFin: data[0][15],
-        approbationBudget: data[0][16],
-        signatureBudget: data[0][17],
-        signatureJustificationBudget: data[0][18],
-        approbationDD: data[0][19],
-        signatureDD: data[0][20],
-        signatureJustificationDD: data[0][21],
-        signature: data[0][22],
-        created: data[0][23]
+        signature: data[0][10],
+        created: data[0][11]
     );
   } 
   

@@ -60,13 +60,6 @@ class CompteResultatHandlers {
           produitfinancieres: input['produitfinancieres'],
           produitExceptionnels: input['produitExceptionnels'],
           soldeDebiteur: input['soldeDebiteur'],
-          
-          approbationDG: input['approbationDG'],
-          signatureDG: input['signatureDG'],
-          signatureJustificationDG: input['signatureJustificationDG'],
-          approbationDD: input['approbationDD'],
-          signatureDD: input['signatureDD'],
-          signatureJustificationDD: input['signatureJustificationDD'],
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -160,26 +153,6 @@ class CompteResultatHandlers {
       }
       if (input['soldeDebiteur'] != null) {
         data.soldeDebiteur = input['soldeDebiteur'];
-      }
-
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['signatureJustificationDG'] != null) {
-        data.signatureJustificationDG = input['signatureJustificationDG'];
-      }
-
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
-      }
-      if (input['signatureJustificationDD'] != null) {
-        data.signatureJustificationDD = input['signatureJustificationDD'];
       }
 
       if (input['signature'] != null) {

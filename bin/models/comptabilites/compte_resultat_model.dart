@@ -31,13 +31,6 @@ class CompteResulatsModel {
 
   late String produitExceptionnels;
   late String soldeDebiteur; // Perte
-
-  late String approbationDG; // button radio OUi et NON if non text field
-  late String signatureDG;
-  late String signatureJustificationDG;
-  late String approbationDD;
-  late String signatureDD; // directeur de departement
-  late String signatureJustificationDD;
   late String signature;
   late DateTime created;
 
@@ -68,12 +61,6 @@ class CompteResulatsModel {
       required this.produitfinancieres,
       required this.produitExceptionnels,
       required this.soldeDebiteur,
-      required this.approbationDG,
-      required this.signatureDG,
-      required this.signatureJustificationDG,
-      required this.approbationDD,
-      required this.signatureDD,
-      required this.signatureJustificationDD,
       required this.signature,
       required this.created});
 
@@ -105,14 +92,8 @@ class CompteResulatsModel {
         produitfinancieres: row[23],
         produitExceptionnels: row[24],
         soldeDebiteur: row[25],
-        approbationDG: row[26],
-        signatureDG: row[27],
-        signatureJustificationDG: row[28],
-        approbationDD: row[29],
-        signatureDD: row[30],
-        signatureJustificationDD: row[31],
-        signature: row[32],
-        created: row[33]);
+        signature: row[26],
+        created: row[27]);
   }
 
   factory CompteResulatsModel.fromJson(Map<String, dynamic> json) {
@@ -143,12 +124,6 @@ class CompteResulatsModel {
         produitfinancieres: json['produitfinancieres'],
         produitExceptionnels: json['produitExceptionnels'],
         soldeDebiteur: json['soldeDebiteur'],
-        approbationDG: json['approbationDG'],
-        signatureDG: json['signatureDG'],
-        signatureJustificationDG: json['signatureJustificationDG'],
-        approbationDD: json['approbationDD'],
-        signatureDD: json['signatureDD'],
-        signatureJustificationDD: json['signatureJustificationDD'],
         signature: json['signature'],
         created: DateTime.parse(json['created']));
   }
@@ -181,12 +156,6 @@ class CompteResulatsModel {
       'produitExceptionnels': produitExceptionnels,
       'produitfinancieres': produitfinancieres,
       'soldeDebiteur': soldeDebiteur,
-      'approbationDG': approbationDG,
-      'signatureDG': signatureDG,
-      'signatureJustificationDG': signatureJustificationDG,
-      'approbationDD': approbationDD,
-      'signatureDD': signatureDD,
-      'signatureJustificationDD': signatureJustificationDD,
       'signature': signature,
       'created': created.toIso8601String()
     };

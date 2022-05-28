@@ -51,26 +51,6 @@ class AnguinRepository {
     var provenance = anguinModel.provenance;
     var typeCaburant = anguinModel.typeCaburant;
     var typeMoteur = anguinModel.typeMoteur;
-    
-    var approbationDG = anguinModel.approbationDG;
-    var signatureDG = anguinModel.signatureDG;
-    var signatureJustificationDG =
-        anguinModel.signatureJustificationDG;
-
-    var approbationFin = anguinModel.approbationFin;
-    var signatureFin = anguinModel.signatureFin;
-    var signatureJustificationFin =
-        anguinModel.signatureJustificationFin;
-
-    var approbationBudget = anguinModel.approbationBudget;
-    var signatureBudget = anguinModel.signatureBudget;
-    var signatureJustificationBudget =
-        anguinModel.signatureJustificationBudget;
-
-    var approbationDD = anguinModel.approbationDD;
-    var signatureDD = anguinModel.signatureDD;
-    var signatureJustificationDD =
-        anguinModel.signatureJustificationDD;
 
     var signature = anguinModel.signature;
     var created = anguinModel.created;
@@ -83,10 +63,6 @@ class AnguinRepository {
         "'$modele', '$marque', '$numeroChassie', '$couleur', '$genre', '$qtyMaxReservoir',"
         "'$dateFabrication', '$nomeroPLaque', '$nomeroEntreprise', '$kilometrageInitiale', '$provenance',"
         "'$typeCaburant', '$typeMoteur',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature', '$created');");
     });
   }
@@ -109,21 +85,6 @@ class AnguinRepository {
     var provenance = anguinModel.provenance;
     var typeCaburant = anguinModel.typeCaburant;
     var typeMoteur = anguinModel.typeMoteur;
-     var approbationDG = anguinModel.approbationDG;
-    var signatureDG = anguinModel.signatureDG;
-    var signatureJustificationDG = anguinModel.signatureJustificationDG;
-
-    var approbationFin = anguinModel.approbationFin;
-    var signatureFin = anguinModel.signatureFin;
-    var signatureJustificationFin = anguinModel.signatureJustificationFin;
-
-    var approbationBudget = anguinModel.approbationBudget;
-    var signatureBudget = anguinModel.signatureBudget;
-    var signatureJustificationBudget = anguinModel.signatureJustificationBudget;
-
-    var approbationDD = anguinModel.approbationDD;
-    var signatureDD = anguinModel.signatureDD;
-    var signatureJustificationDD = anguinModel.signatureJustificationDD;
 
     var signature = anguinModel.signature;
     var created = anguinModel.created;
@@ -137,14 +98,6 @@ class AnguinRepository {
         "\"nomeroPLaque\"='$nomeroPLaque', \"nomeroEntreprise\"='$nomeroEntreprise',"
         "\"kilometrageInitiale\"='$kilometrageInitiale', \"provenance\"='$provenance',"
         "\"typeCaburant\"='$typeCaburant', \"typeMoteur\"='$typeMoteur',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -179,20 +132,8 @@ class AnguinRepository {
       provenance: data[0][12],
       typeCaburant: data[0][13],
       typeMoteur: data[0][14],
-      approbationDG: data[0][15],
-      signatureDG: data[0][16],
-      signatureJustificationDG: data[0][17],
-      approbationFin: data[0][18],
-      signatureFin: data[0][19],
-      signatureJustificationFin: data[0][20],
-      approbationBudget: data[0][21],
-      signatureBudget: data[0][22],
-      signatureJustificationBudget: data[0][23],
-      approbationDD: data[0][24],
-      signatureDD: data[0][25],
-      signatureJustificationDD: data[0][26],
-      signature: data[0][27],
-      created: data[0][28]
+      signature: data[0][15],
+      created: data[0][16]
     );
   }
 }

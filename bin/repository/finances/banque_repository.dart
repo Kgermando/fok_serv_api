@@ -83,21 +83,6 @@ class BanqueRepository {
     var departement = banqueModel.departement;
     var typeOperation = banqueModel.typeOperation;
     var numeroOperation = banqueModel.numeroOperation;
-    var approbationDG = banqueModel.approbationDG;
-    var signatureDG = banqueModel.signatureDG;
-    var signatureJustificationDG = banqueModel.signatureJustificationDG;
-
-    var approbationFin = banqueModel.approbationFin;
-    var signatureFin = banqueModel.signatureFin;
-    var signatureJustificationFin = banqueModel.signatureJustificationFin;
-
-    var approbationBudget = banqueModel.approbationBudget;
-    var signatureBudget = banqueModel.signatureBudget;
-    var signatureJustificationBudget = banqueModel.signatureJustificationBudget;
-
-    var approbationDD = banqueModel.approbationDD;
-    var signatureDD = banqueModel.signatureDD;
-    var signatureJustificationDD = banqueModel.signatureJustificationDD;
 
     var signature = banqueModel.signature;
     var created = banqueModel.created;
@@ -108,10 +93,6 @@ class BanqueRepository {
         "INSERT INTO $tableName VALUES (nextval('banques_id_seq'), '$nomComplet',"
         "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
         "'$ligneBudgtaire', '$resources', '$departement','$typeOperation','$numeroOperation',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
         "'$signature', '$created');");
     });
   }
@@ -129,25 +110,6 @@ class BanqueRepository {
     var departement = banqueModel.departement;
     var typeOperation = banqueModel.typeOperation;
     var numeroOperation = banqueModel.numeroOperation;
-    var approbationDG = banqueModel.approbationDG;
-    var signatureDG = banqueModel.signatureDG;
-    var signatureJustificationDG =
-        banqueModel.signatureJustificationDG;
-
-    var approbationFin = banqueModel.approbationFin;
-    var signatureFin = banqueModel.signatureFin;
-    var signatureJustificationFin =
-        banqueModel.signatureJustificationFin;
-
-    var approbationBudget = banqueModel.approbationBudget;
-    var signatureBudget = banqueModel.signatureBudget;
-    var signatureJustificationBudget =
-        banqueModel.signatureJustificationBudget;
-
-    var approbationDD = banqueModel.approbationDD;
-    var signatureDD = banqueModel.signatureDD;
-    var signatureJustificationDD =
-        banqueModel.signatureJustificationDD;
 
     var signature = banqueModel.signature;
     var created = banqueModel.created;
@@ -160,14 +122,6 @@ class BanqueRepository {
         "\"montant\"='$montant',\"coupureBillet\"='$coupureBillet',"
         "\"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources', \"departement\"='$departement',"
         "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -198,20 +152,8 @@ class BanqueRepository {
         departement: data[0][8],
         typeOperation: data[0][9],
         numeroOperation: data[0][10],
-        approbationDG: data[0][11],
-        signatureDG: data[0][12],
-        signatureJustificationDG: data[0][13],
-        approbationFin: data[0][14],
-        signatureFin: data[0][15],
-        signatureJustificationFin: data[0][16],
-        approbationBudget: data[0][17],
-        signatureBudget: data[0][18],
-        signatureJustificationBudget: data[0][19],
-        approbationDD: data[0][20],
-        signatureDD: data[0][21],
-        signatureJustificationDD: data[0][22],
-        signature: data[0][23],
-        created: data[0][24]
+        signature: data[0][11],
+        created: data[0][12]
     );
   } 
   

@@ -26,23 +26,7 @@ class TrajetRepository {
     var trajetA = trajetModel.trajetA;
     var mission = trajetModel.mission;
     var genkilometrageSoritere = trajetModel.kilometrageSorite;
-    var kilometrageRetour = trajetModel.kilometrageRetour;
-
-    var approbationDG = trajetModel.approbationDG;
-    var signatureDG = trajetModel.signatureDG;
-    var signatureJustificationDG = trajetModel.signatureJustificationDG;
-
-    var approbationFin = trajetModel.approbationFin;
-    var signatureFin = trajetModel.signatureFin;
-    var signatureJustificationFin = trajetModel.signatureJustificationFin;
-
-    var approbationBudget = trajetModel.approbationBudget;
-    var signatureBudget = trajetModel.signatureBudget;
-    var signatureJustificationBudget = trajetModel.signatureJustificationBudget;
-
-    var approbationDD = trajetModel.approbationDD;
-    var signatureDD = trajetModel.signatureDD;
-    var signatureJustificationDD = trajetModel.signatureJustificationDD;
+    var kilometrageRetour = trajetModel.kilometrageRetour; 
 
     var signature = trajetModel.signature;
     var created = trajetModel.created;
@@ -51,11 +35,7 @@ class TrajetRepository {
       // ignore: unused_local_variable
       var result = await ctx.execute(
         "INSERT INTO $tableName VALUES (nextval('trajets_id_seq'), '$nomeroEntreprise',"
-        "'$nomUtilisateur', '$trajetDe', '$trajetA', '$mission', '$genkilometrageSoritere', '$kilometrageRetour',"
-        "'$approbationDG', '$signatureDG', '$signatureJustificationDG', '$approbationFin',"
-        "'$signatureFin', '$signatureJustificationFin', '$approbationBudget',"
-        "'$signatureBudget', '$signatureJustificationBudget', '$approbationDD',"
-        "'$signatureDD', '$signatureJustificationDD',"
+        "'$nomUtilisateur', '$trajetDe', '$trajetA', '$mission', '$genkilometrageSoritere', '$kilometrageRetour'," 
         "'$signature', '$created');");
     });
   }
@@ -68,23 +48,7 @@ class TrajetRepository {
     var trajetA = trajetModel.trajetA;
     var mission = trajetModel.mission;
     var genkilometrageSoritere = trajetModel.kilometrageSorite;
-    var kilometrageRetour = trajetModel.kilometrageRetour;
-
-    var approbationDG = trajetModel.approbationDG;
-    var signatureDG = trajetModel.signatureDG;
-    var signatureJustificationDG = trajetModel.signatureJustificationDG;
-
-    var approbationFin = trajetModel.approbationFin;
-    var signatureFin = trajetModel.signatureFin;
-    var signatureJustificationFin = trajetModel.signatureJustificationFin;
-
-    var approbationBudget = trajetModel.approbationBudget;
-    var signatureBudget = trajetModel.signatureBudget;
-    var signatureJustificationBudget = trajetModel.signatureJustificationBudget;
-
-    var approbationDD = trajetModel.approbationDD;
-    var signatureDD = trajetModel.signatureDD;
-    var signatureJustificationDD = trajetModel.signatureJustificationDD;
+    var kilometrageRetour = trajetModel.kilometrageRetour; 
 
     var signature = trajetModel.signature;
     var created = trajetModel.created;
@@ -94,15 +58,7 @@ class TrajetRepository {
       var result = await conn.execute(
         "UPDATE $tableName SET \"nomeroEntreprise\"='$nomeroEntreprise', \"nomUtilisateur\"='$nomUtilisateur',"
         "\"trajetDe\"='$trajetDe', \"trajetA\"='$trajetA', \"mission\"='$mission',"
-        "\"genkilometrageSoritere\"='$genkilometrageSoritere', \"kilometrageRetour\"='$kilometrageRetour',"
-        "\"approbationDG\"='$approbationDG', \"signatureDG\"='$signatureDG',"
-        "\"signatureJustificationDG\"='$signatureJustificationDG',"
-        "\"approbationFin\"='$approbationFin', \"signatureFin\"='$signatureFin',"
-        "\"signatureJustificationFin\"='$signatureJustificationFin',"
-        "\"approbationBudget\"='$approbationBudget', \"signatureBudget\"='$signatureBudget',"
-        "\"signatureJustificationBudget\"='$signatureJustificationBudget',"
-        "\"approbationDD\"='$approbationDD', \"signatureDD\"='$signatureDD',"
-        "\"signatureJustificationDD\"='$signatureJustificationDD',"
+        "\"genkilometrageSoritere\"='$genkilometrageSoritere', \"kilometrageRetour\"='$kilometrageRetour'," 
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -129,21 +85,9 @@ class TrajetRepository {
         trajetA: data[0][4],
         mission: data[0][5],
         kilometrageSorite: data[0][6],
-        kilometrageRetour: data[0][7],
-        approbationDG: data[0][8],
-        signatureDG: data[0][9],
-        signatureJustificationDG: data[0][10],
-        approbationFin: data[0][11],
-        signatureFin: data[0][12],
-        signatureJustificationFin: data[0][13],
-        approbationBudget: data[0][14],
-        signatureBudget: data[0][15],
-        signatureJustificationBudget: data[0][16],
-        approbationDD: data[0][17],
-        signatureDD: data[0][18],
-        signatureJustificationDD: data[0][19],
-        signature: data[0][20],
-        created: data[0][21]
+        kilometrageRetour: data[0][7], 
+        signature: data[0][8],
+        created: data[0][9]
     );
   }
 }
