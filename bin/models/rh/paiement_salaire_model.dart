@@ -42,22 +42,6 @@ class PaiementSalaireModel {
   late String netAPayer;
   late String montantPrisConsiderationCalculCotisationsINSS;
   late String totalDuBrut;
-  
-  late String approbationDG; // button radio OUi et NON if non text field
-  late String signatureDG;
-  late String signatureJustificationDG;
-
-  late String approbationFin;
-  late String signatureFin;
-  late String signatureJustificationFin;
-
-  late String approbationBudget;
-  late String signatureBudget;
-  late String signatureJustificationBudget;
-
-  late String approbationDD;
-  late String signatureDD; // directeur de departement
-  late String signatureJustificationDD;
 
   late String signature; // celui qui fait le document
 
@@ -106,18 +90,6 @@ class PaiementSalaireModel {
     required this.netAPayer,
     required this.montantPrisConsiderationCalculCotisationsINSS,
     required this.totalDuBrut,
-    required this.approbationDG,
-    required this.signatureDG,
-    required this.signatureJustificationDG,
-    required this.approbationFin,
-    required this.signatureFin,
-    required this.signatureJustificationFin,
-    required this.approbationBudget,
-    required this.signatureBudget,
-    required this.signatureJustificationBudget,
-    required this.approbationDD,
-    required this.signatureDD,
-    required this.signatureJustificationDD,
     required this.signature,
 
   });
@@ -167,19 +139,7 @@ class PaiementSalaireModel {
         netAPayer: row[40],
         montantPrisConsiderationCalculCotisationsINSS: row[41],
         totalDuBrut: row[42],
-        approbationDG: row[43],
-        signatureDG: row[44],
-        signatureJustificationDG: row[45],
-        approbationFin: row[46],
-        signatureFin: row[47],
-        signatureJustificationFin: row[48],
-        approbationBudget: row[49],
-        signatureBudget: row[50],
-        signatureJustificationBudget: row[51],
-        approbationDD: row[52],
-        signatureDD: row[53],
-        signatureJustificationDD: row[54],
-        signature: row[55]
+        signature: row[43]
     );
   }
 
@@ -234,18 +194,6 @@ class PaiementSalaireModel {
         montantPrisConsiderationCalculCotisationsINSS:
             json['montantPrisConsiderationCalculCotisationsINSS'],
         totalDuBrut: json['totalDuBrut'],
-        approbationDG: json['approbationDG'],
-        signatureDG: json['signatureDG'],
-        signatureJustificationDG: json['signatureJustificationDG'],
-        approbationFin: json['approbationFin'],
-        signatureFin: json['signatureFin'],
-        signatureJustificationFin: json['signatureJustificationFin'],
-        approbationBudget: json['approbationBudget'],
-        signatureBudget: json['signatureBudget'],
-        signatureJustificationBudget: json['signatureJustificationBudget'],
-        approbationDD: json['approbationDD'],
-        signatureDD: json['signatureDD'],
-        signatureJustificationDD: json['signatureJustificationDD'],
         signature: json['signature'],
     );
   }
@@ -299,18 +247,6 @@ class PaiementSalaireModel {
       'montantPrisConsiderationCalculCotisationsINSS':
           montantPrisConsiderationCalculCotisationsINSS,
       'totalDuBrut': totalDuBrut,
-      'approbationDG': approbationDG,
-      'signatureDG': signatureDG,
-      'signatureJustificationDG': signatureJustificationDG,
-      'approbationFin': approbationFin,
-      'signatureFin': signatureFin,
-      'signatureJustificationFin': signatureJustificationFin,
-      'approbationBudget': approbationBudget,
-      'signatureBudget': signatureBudget,
-      'signatureJustificationBudget': signatureJustificationBudget,
-      'approbationDD': approbationDD,
-      'signatureDD': signatureDD,
-      'signatureJustificationDD': signatureJustificationDD,
       'signature': signature,
     };
   }

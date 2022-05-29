@@ -52,12 +52,15 @@ class CompteBalance {
   late String comptes;
   late String debit;
   late String credit;
+  late double solde;
 
   CompteBalance(
-      {required this.comptes, required this.debit, required this.credit});
+      {required this.comptes, required this.debit, required this.credit,
+      required this.solde});
 
   factory CompteBalance.fromJson(Map<String, dynamic> json) {
     return CompteBalance(
-        comptes: json['comptes'], debit: json['debit'], credit: json['credit']);
+      comptes: json['comptes'], debit: json['debit'], credit: json['credit'],
+        solde: json['solde']);
   }
 }
