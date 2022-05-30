@@ -22,18 +22,19 @@ class PerformenceRepository {
   Future<void> insertData(PerformenceModel performenceModel) async {
     var agent = performenceModel.agent;
     var departement = performenceModel.departement;
-    var hospitalite = performenceModel.hospitalite;
-    var ponctualite = performenceModel.ponctualite;
-    var travaille = performenceModel.travaille; 
+    var nom = performenceModel.nom;
+    var postnom = performenceModel.postnom;
+    var prenom = performenceModel.prenom;
     var signature = performenceModel.signature;
     var created = performenceModel.created;
 
     await executor.transaction((ctx) async {
       // ignore: unused_local_variable
       var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('performences_id_seq'), '$agent',"
-          "'$departement','$hospitalite', '$ponctualite','$travaille'," 
-          "'$signature','$created');");
+        "INSERT INTO $tableName VALUES (nextval('performences_id_seq'), '$agent',"
+        "'$departement','$nom', '$postnom','$prenom'," 
+        "'$signature','$created');"
+        );
     });
   }
 
@@ -41,17 +42,18 @@ class PerformenceRepository {
     var id = performenceModel.id;
     var agent = performenceModel.agent;
     var departement = performenceModel.departement;
-    var hospitalite = performenceModel.hospitalite;
-    var ponctualite = performenceModel.ponctualite;
-    var travaille = performenceModel.travaille; 
+    var nom = performenceModel.nom;
+    var postnom = performenceModel.postnom;
+    var prenom = performenceModel.prenom; 
     var signature = performenceModel.signature;
     var created = performenceModel.created;
 
     await executor.transaction((conn) async {
       // ignore: unused_local_variable
       var result = await conn.execute(
-        "UPDATE $tableName SET \"agent\"='$agent', \"hospitalite\"='$hospitalite',"
-        "\"departement\"='$departement', \"ponctualite\"='$ponctualite', \"travaille\"='$travaille',"
+        "UPDATE $tableName SET \"agent\"='$agent', \"departement\"='$departement',"
+        "\"nom\"='$nom',"
+        " \"postnom\"='$postnom', \"prenom\"='$prenom',"
         "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
     });
   }
@@ -74,9 +76,9 @@ class PerformenceRepository {
       id: data[0][0],
       agent: data[0][1],
       departement: data[0][2],
-      hospitalite: data[0][3],
-      ponctualite: data[0][4],
-      travaille: data[0][5], 
+      nom: data[0][3],
+      postnom: data[0][4],
+      prenom: data[0][5], 
       signature: data[0][6],
       created: data[0][7]
     );

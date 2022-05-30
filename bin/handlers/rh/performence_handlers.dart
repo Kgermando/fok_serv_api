@@ -37,9 +37,9 @@ class PerformenceHandlers {
       PerformenceModel data = PerformenceModel(
           agent: input['agent'],
           departement: input['departement'],
-          hospitalite: input['hospitalite'],
-          ponctualite: input['ponctualite'],
-          travaille: input['travaille'], 
+          nom: input['nom'],
+          postnom: input['postnom'],
+          prenom: input['prenom'], 
           signature: input['signature'],
           created: DateTime.parse(input['created']));
 
@@ -63,14 +63,14 @@ class PerformenceHandlers {
       if (input['departement'] != null) {
         data.departement = input['departement'];
       }
-      if (input['hospitalite'] != null) {
-        data.hospitalite = input['hospitalite'];
+      if (input['nom'] != null) {
+        data.nom = input['nom'];
       }
-      if (input['ponctualite'] != null) {
-        data.ponctualite = input['ponctualite'];
+      if (input['postnom'] != null) {
+        data.postnom = input['postnom'];
       }
-      if (input['travaille'] != null) {
-        data.travaille = input['travaille'];
+      if (input['prenom'] != null) {
+        data.prenom = input['prenom'];
       } 
       if (input['signature'] != null) {
         data.signature = input['signature'];
