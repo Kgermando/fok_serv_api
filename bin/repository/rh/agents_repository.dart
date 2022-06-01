@@ -22,17 +22,17 @@ class AgentsRepository {
 
   Future<void> insertData(AgentModel agentModel) async {
     await executor.transaction((ctx) async {
-      var idLast = await ctx.query("SELECT id FROM $tableName");
+      // var idLast = await ctx.query("SELECT id FROM $tableName");
       await ctx.query(
           "INSERT INTO $tableName (id, nom, postnom, prenom, email, telephone,"
           "adresse, sexe, role, matricule, numero_securite_sociale, date_naissance,"
           "lieu_naissance, nationalite, type_contrat, departement, services_affectation,"
           "date_debut_contrat, date_fin_contrat, fonction_occupe, competance, experience,"
           "statut_agent, created_at, photo, salaire, signature, created)"
-          "VALUES (@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13,"
+          "VALUES (nextval(@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13,"
           "@14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28)",
           substitutionValues: {
-            '1': idLast.last[0] + 1,
+            '1': "nextval('agents_id_seq')",
             '2': agentModel.nom,
             '3': agentModel.postNom,
             '4': agentModel.prenom,
