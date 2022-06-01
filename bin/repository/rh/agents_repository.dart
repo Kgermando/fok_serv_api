@@ -22,44 +22,47 @@ class AgentsRepository {
 
   Future<void> insertData(AgentModel agentModel) async {
     await executor.transaction((ctx) async {
-      // var idLast = await ctx.query("SELECT id FROM $tableName");
+      var idLast = await ctx.query("SELECT id FROM $tableName");
       await ctx.query(
           "INSERT INTO $tableName (id, nom, postnom, prenom, email, telephone,"
           "adresse, sexe, role, matricule, numero_securite_sociale, date_naissance,"
           "lieu_naissance, nationalite, type_contrat, departement, services_affectation,"
           "date_debut_contrat, date_fin_contrat, fonction_occupe, competance, experience,"
           "statut_agent, created_at, photo, salaire, signature, created)"
-          "VALUES (@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13,"
-          "@14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28)",
+          "VALUES (nextval('agents_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12,"
+          "@13, @14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @2)",
+
+          // "VALUES (nextval(@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13,"
+          //     "@14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28)",
+          // '1': idLast.last[0] + 1,
           substitutionValues: {
-            '1': "nextval('agents_id_seq')",
-            '2': agentModel.nom,
-            '3': agentModel.postNom,
-            '4': agentModel.prenom,
-            '5': agentModel.email,
-            '6': agentModel.telephone,
-            '7': agentModel.adresse,
-            '8': agentModel.sexe,
-            '9': agentModel.role,
-            '10': agentModel.matricule,
-            '11': agentModel.numeroSecuriteSociale,
-            '12': agentModel.dateNaissance,
-            '13': agentModel.lieuNaissance,
-            '14': agentModel.nationalite,
-            '15': agentModel.typeContrat,
-            '16': agentModel.departement,
-            '17': agentModel.servicesAffectation,
-            '18': agentModel.dateDebutContrat,
-            '19': agentModel.dateFinContrat,
-            '20': agentModel.fonctionOccupe,
-            '21': agentModel.competance,
-            '22': agentModel.experience,
-            '23': agentModel.statutAgent,
-            '24': agentModel.createdAt,
-            '25': agentModel.photo,
-            '26': agentModel.salaire,
-            '27': agentModel.signature,
-            '28': agentModel.created
+            '1': agentModel.nom,
+            '2': agentModel.postNom,
+            '3': agentModel.prenom,
+            '4': agentModel.email,
+            '5': agentModel.telephone,
+            '6': agentModel.adresse,
+            '7': agentModel.sexe,
+            '8': agentModel.role,
+            '9': agentModel.matricule,
+            '10': agentModel.numeroSecuriteSociale,
+            '11': agentModel.dateNaissance,
+            '12': agentModel.lieuNaissance,
+            '13': agentModel.nationalite,
+            '14': agentModel.typeContrat,
+            '15': agentModel.departement,
+            '16': agentModel.servicesAffectation,
+            '17': agentModel.dateDebutContrat,
+            '18': agentModel.dateFinContrat,
+            '19': agentModel.fonctionOccupe,
+            '20': agentModel.competance,
+            '21': agentModel.experience,
+            '22': agentModel.statutAgent,
+            '23': agentModel.createdAt,
+            '24': agentModel.photo,
+            '25': agentModel.salaire,
+            '26': agentModel.signature,
+            '27': agentModel.created
           });
     });
   }
