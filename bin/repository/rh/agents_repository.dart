@@ -24,11 +24,11 @@ class AgentsRepository {
     await executor.transaction((ctx) async {
       var idLast = await ctx.query("SELECT id FROM $tableName");
       await ctx.query(
-          "INSERT INTO $tableName (id, nom, postNom, prenom, email, telephone,"
-          "adresse, sexe, role, matricule, numeroSecuriteSociale, dateNaissance,"
-          "lieuNaissance, nationalite, typeContrat, departement, servicesAffectation,"
-          "dateDebutContrat, dateFinContrat, fonctionOccupe, competance, experience,"
-          "statutAgent, createdAt, photo, salaire, signature, created)"
+          "INSERT INTO $tableName (id, nom, postnom, prenom, email, telephone,"
+          "adresse, sexe, role, matricule, numero_securite_sociale, date_naissance,"
+          "lieu_naissance, nationalite, type_contrat, departement, services_affectation,"
+          "date_debut_contrat, date_fin_contrat, fonction_occupe, competance, experience,"
+          "statut_agent, created_at, photo, salaire, signature, created)"
           "VALUES (@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13,"
           "@14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28)",
           substitutionValues: {
@@ -61,73 +61,20 @@ class AgentsRepository {
             '27': agentModel.signature,
             '28': agentModel.created
           });
-      // ignore: unused_local_variable
-      // var result = await ctx.execute(
-      //   "INSERT INTO $tableName VALUES (nextval('agents_id_seq'), '$nom', '$postNom',"
-      //   "'$prenom', '$email', '$telephone', '$adresse', '$sexe', '$role', '$matricule',"
-      //   "'$numeroSecuriteSociale', '$dateNaissance', '$lieuNaissance', '$nationalite',"
-      //   "'$typeContrat', '$departement', '$servicesAffectation', '$dateDebutContrat',"
-      //   "'$dateFinContrat', '$fonctionOccupe', '$competance', '$experience', '$statutAgent',"
-      //   "'$createdAt', '$photo', '$salaire', '$signature', '$created');"
-      // );
     });
   }
 
   Future<void> update(AgentModel agentModel) async {
-    // var id = agentModel.id;
-    // var nom = agentModel.nom;
-    // var postNom = agentModel.postNom;
-    // var prenom = agentModel.prenom;
-    // var email = agentModel.email;
-    // var telephone = agentModel.telephone;
-    // var adresse = agentModel.adresse;
-    // var sexe = agentModel.sexe;
-    // var role = agentModel.role;
-    // var matricule = agentModel.matricule;
-    // var numeroSecuriteSociale = agentModel.numeroSecuriteSociale;
-    // var dateNaissance = agentModel.dateNaissance;
-    // var lieuNaissance = agentModel.lieuNaissance;
-    // var nationalite = agentModel.nationalite;
-    // var typeContrat = agentModel.typeContrat;
-    // var departement = agentModel.departement;
-    // var servicesAffectation = agentModel.servicesAffectation;
-    // var dateDebutContrat = agentModel.dateDebutContrat;
-    // var dateFinContrat = agentModel.dateFinContrat;
-    // var fonctionOccupe = agentModel.fonctionOccupe;
-    // var competance = agentModel.competance;
-    // var experience = agentModel.experience;
-    // var statutAgent = agentModel.statutAgent;
-    // var createdAt = agentModel.createdAt;
-    // var photo = agentModel.photo;
-    // var salaire = agentModel.salaire;
-    // var signature = agentModel.signature;
-    // var created = agentModel.created;
-
-    // await executor.transaction((conn) async {
-    //   // ignore: unused_local_variable
-    //   var result = await conn.execute(
-    //       "UPDATE $tableName SET \"nom\"='$nom', \"postNom\"='$postNom',"
-    //       "\"prenom\"='$prenom', \"email\"='$email', \"telephone\"='$telephone',"
-    //       "\"adresse\"='$adresse', \"sexe\"='$sexe', \"role\"='$role',"
-    //       "\"matricule\"='$matricule', \"numeroSecuriteSociale\"='$numeroSecuriteSociale', \"dateNaissance\"='$dateNaissance',"
-    //       "\"lieuNaissance\"='$lieuNaissance', \"nationalite\"='$nationalite',"
-    //       "\"typeContrat\"='$typeContrat', \"departement\"='$departement',"
-    //       "\"servicesAffectation\"='$servicesAffectation',"
-    //       "\"dateDebutContrat\"='$dateDebutContrat',"
-    //       "\"dateFinContrat\"='$dateFinContrat', \"fonctionOccupe\"='$fonctionOccupe',"
-    //       "\"competance\"='$competance', \"experience\"='$experience',"
-    //       "\"statutAgent\"='$statutAgent', \"createdAt\"='$createdAt',"
-    //       "\"photo\"='$photo', \"salaire\"='$salaire', \"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
-    // });
     await executor.transaction((conn) async {
       await conn.query(
         "UPDATE $tableName"
-        "SET nom = @1, postNom = @2, prenom = @3, email = @4, telephone = @5,"
-        "adresse = @6, sexe = @7, role = @8, matricule = @9, numeroSecuriteSociale = @10,"
-        "dateNaissance = @11, lieuNaissance = @12, nationalite = @13, typeContrat = @14, departement = @15,"
-        "servicesAffectation = @16, dateDebutContrat = @17, dateFinContrat = @18, fonctionOccupe = @19,"
-        "competance = @20, experience = @21, statutAgent = @22, createdAt = @23,"
-        "photo = @24, salaire = @25, signature = @26, created = @27 WHERE id = @28",
+        "SET nom = @1, postnom = @2, prenom = @3, email = @4, telephone = @5,"
+        "adresse = @6, sexe = @7, role = @8, matricule = @9, numero_securite_sociale = @10,"
+        "date_naissance = @11, lieu_naissance = @12, nationalite = @13, type_contrat = @14,"
+        "departement = @15, services_affectation = @16, date_debut_contrat = @17,"
+        "date_fin_contrat = @18, fonction_occupe = @19, competance = @20,"
+        "experience = @21, statutAgent = @22, created_at = @23, photo = @24,"
+        "salaire = @25, signature = @26, created = @27 WHERE id = @28",
         substitutionValues: {
           '1': agentModel.nom,
           '2': agentModel.postNom,
