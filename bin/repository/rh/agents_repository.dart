@@ -30,7 +30,7 @@ class AgentsRepository {
           "date_debut_contrat, date_fin_contrat, fonction_occupe, competance, experience,"
           "statut_agent, created_at, photo, salaire, signature, created)"
           "VALUES (nextval('agents_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12,"
-          "@13, @14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @2)",
+          "@13, @14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27)",
 
           // "VALUES (nextval(@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13,"
           //     "@14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28)",
