@@ -12,7 +12,7 @@ class AgentsRepository {
   Future<List<AgentModel>> getAllData() async {
     var data = <AgentModel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"createdAt\" DESC;";
+    var querySQL = "SELECT * FROM $tableName ORDER BY \"created_at\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(AgentModel.fromSQL(row));
