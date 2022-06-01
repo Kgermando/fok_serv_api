@@ -43,7 +43,7 @@ class PaiementSalaireModel {
   late String montantPrisConsiderationCalculCotisationsINSS;
   late String totalDuBrut;
 
-  late String signature; // celui qui fait le document
+  late String signature; // celui qui fait ce document
 
 
   PaiementSalaireModel({
@@ -90,7 +90,7 @@ class PaiementSalaireModel {
     required this.netAPayer,
     required this.montantPrisConsiderationCalculCotisationsINSS,
     required this.totalDuBrut,
-    required this.signature,
+    required this.signature
 
   });
 

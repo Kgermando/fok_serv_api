@@ -75,3 +75,10 @@ class MailModel {
     };
   }
 }
+
+// class MailColor {
+//   final MailModel mail;
+//   final Color color;
+
+//   MailColor({required this.mail, required this.color});
+// }
