@@ -11,7 +11,7 @@ class MailRepository {
   Future<List<MailModel>> getAllData() async {
     var data = <MailModel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"dateSend\" DESC;";
+    var querySQL = "SELECT * FROM $tableName ORDER BY \"date_send\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(MailModel.fromSQL(row));
