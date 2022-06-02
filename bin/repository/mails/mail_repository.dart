@@ -20,52 +20,48 @@ class MailRepository {
   }
 
   Future<void> insertData(MailModel data) async {
-    var fullName = data.fullName;
-    var email = data.email;
-    var cc = data.cc;
-    var objet = data.objet;
-    var message = data.message;
-    var pieceJointe = data.pieceJointe;
-    var read = data.read;
-    var fullNameDest = data.fullNameDest;
-    var emailDest = data.emailDest;
-    var dateSend = data.dateSend;
-    var dateRead = data.dateRead;
-
-
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('mails_id_seq'), '$fullName',"
-        "'$email', '$cc', '$objet', '$message', '$pieceJointe', '$read',"
-        "'$fullNameDest', '$emailDest',"
-        "'$dateSend','$dateRead');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, full_name, email, cc, objet, message,"
+        "piece_jointe, read, full_name_dest, email_dest, date_send, date_read)"
+        "VALUES (nextval('mails_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11)",
+        substitutionValues: {
+          '1': data.fullName,
+          '2': data.email,
+          '3': data.cc,
+          '4': data.objet,
+          '5': data.message,
+          '6': data.pieceJointe,
+          '7': data.read,
+          '8': data.fullNameDest,
+          '9': data.emailDest,
+          '10': data.dateSend,
+          '11': data.dateRead
+        });
     });
   }
 
   Future<void> update(MailModel data) async {
-    var id = data.id;
-    var fullName = data.fullName;
-    var email = data.email;
-    var cc = data.cc;
-    var objet = data.objet;
-    var message = data.message;
-    var pieceJointe = data.pieceJointe;
-    var read = data.read;
-    var fullNameDest = data.fullNameDest;
-    var emailDest = data.emailDest;
-    var dateSend = data.dateSend;
-    var dateRead = data.dateRead;
-
-
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"fullName\"='$fullName', \"email\"='$email',"
-        "\"cc\"='$cc', \"objet\"='$objet', \"message\"='$message',"
-        "\"pieceJointe\"='$pieceJointe', \"read\"='$read',"
-        "\"fullNameDest\"='$fullNameDest', \"emailDest\"='$emailDest',"
-        "\"dateSend\"='$dateSend', \"dateRead\"='$dateRead' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET full_name = @1, email = @2, cc = @3, objet = @4, message = @5,"
+        "piece_jointe = @6, read = @7, full_name_dest = @8, email_dest = @9,"
+        "date_send = @10, date_read = @11 WHERE id = @12",
+        substitutionValues: {
+          '1': data.fullName,
+          '2': data.email,
+          '3': data.cc,
+          '4': data.objet,
+          '5': data.message,
+          '6': data.pieceJointe,
+          '7': data.read,
+          '8': data.fullNameDest,
+          '9': data.emailDest,
+          '10': data.dateSend,
+          '11': data.dateRead,
+          '12': data.id
+        });
     });
   }
 

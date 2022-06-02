@@ -22,53 +22,53 @@ class AnnuaireReposiotry {
 
   
   Future<void> insertData(AnnuaireModel data) async {
-    var categorie = data.categorie;
-    var nomPostnomPrenom = data.nomPostnomPrenom;
-    var email = data.email;
-    var mobile1 = data.mobile1;
-    var mobile2 = data.mobile2;
-    var secteurActivite = data.secteurActivite;
-    var nomEntreprise = data.nomEntreprise;
-    var grade = data.grade;
-    var adresseEntreprise = data.adresseEntreprise;
-    var succursale = data.succursale;
-    var signature = data.signature;
-    var created = data.created;
-
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('annuaires_id_seq'), '$categorie',"
-        "'$nomPostnomPrenom','$email','$mobile1', '$mobile2', '$secteurActivite',"
-        "'$nomEntreprise','$grade','$adresseEntreprise',"
-        "'$succursale','$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, categorie, nom_postnom_prenom,"
+          "email, mobile_1, mobile_2, secteur_activite, nom_entreprise,"
+          "grade,  adresse_entreprise,  succursale, signature, created)"
+          "VALUES (nextval('annuaires_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9, @10, @11, @12)",
+          substitutionValues: {
+            '1': data.categorie,
+            '2': data.nomPostnomPrenom,
+            '3': data.email,
+            '4': data.mobile1,
+            '5': data.mobile2,
+            '6': data.secteurActivite,
+            '7': data.nomEntreprise,
+            '8': data.grade,
+            '9': data.adresseEntreprise,
+            '10': data.succursale,
+            '11': data.signature,
+            '12': data.created
+          });
     });
   }
 
   Future<void> update(AnnuaireModel data) async {
-    var id = data.id;
-    var categorie = data.categorie;
-    var nomPostnomPrenom = data.nomPostnomPrenom;
-    var email = data.email;
-    var mobile1 = data.mobile1;
-    var mobile2 = data.mobile2;
-    var secteurActivite = data.secteurActivite;
-    var nomEntreprise = data.nomEntreprise;
-    var grade = data.grade;
-    var adresseEntreprise = data.adresseEntreprise;
-    var succursale = data.succursale;
-    var signature = data.signature;
-    var created = data.created;
-
-    await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"categorie\"='$categorie', "
-          "\"nomPostnomPrenom\"='$nomPostnomPrenom',\"email\"='$email',"
-          "\"mobile1\"='$mobile1', \"mobile2\"='$mobile2', \"secteurActivite\"='$secteurActivite',"
-          "\"nomEntreprise\"='$nomEntreprise', \"grade\"='$grade', "
-          "\"adresseEntreprise\"='$adresseEntreprise', \"succursale\"='$succursale', "
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+     await executor.transaction((conn) async {
+      await conn.query(
+          "UPDATE $tableName"
+          "SET categorie = @1, nom_postnom_prenom = @2, email = @3,"
+          "mobile_1 = @4, mobile_2 = @5, secteur_activite = @6, nom_entreprise = @7,"
+          "grade = @8, adresse_entreprise = @9, succursale = @10, signature = @11,"
+          "created = @12 WHERE id = @13",
+          substitutionValues: {
+            '1': data.categorie,
+            '2': data.nomPostnomPrenom,
+            '3': data.email,
+            '4': data.mobile1,
+            '5': data.mobile2,
+            '6': data.secteurActivite,
+            '7': data.nomEntreprise,
+            '8': data.grade,
+            '9': data.adresseEntreprise,
+            '10': data.succursale,
+            '11': data.signature,
+            '12': data.created,
+            '13': data.id
+          });
     });
   }
 

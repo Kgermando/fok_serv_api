@@ -20,56 +20,56 @@ class LigneBudgtaireRepository {
     return data.toList();
   }
 
-  Future<void> insertData(LigneBudgetaireModel ligneBudgetaireModel) async {
-    var nomLigneBudgetaire = ligneBudgetaireModel.nomLigneBudgetaire;
-    var departement = ligneBudgetaireModel.departement;
-    var periodeBudget = ligneBudgetaireModel.periodeBudget;
-    var uniteChoisie = ligneBudgetaireModel.uniteChoisie;
-    var nombreUnite = ligneBudgetaireModel.nombreUnite;
-    var coutUnitaire = ligneBudgetaireModel.coutUnitaire;
-    var coutTotal = ligneBudgetaireModel.coutTotal;
-    var caisse = ligneBudgetaireModel.caisse;
-    var banque = ligneBudgetaireModel.banque;
-    var finPropre = ligneBudgetaireModel.finPropre;
-    var finExterieur = ligneBudgetaireModel.finExterieur;
-    var signature = ligneBudgetaireModel.signature;
-    var created = ligneBudgetaireModel.created;
-
+  Future<void> insertData(LigneBudgetaireModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('ligne_budgetaires_id_seq'), '$nomLigneBudgetaire',"
-        "'$departement','$periodeBudget','$uniteChoisie', '$nombreUnite', '$coutUnitaire',"
-        "'$coutTotal','$caisse','$banque', '$finPropre', '$finExterieur',"
-        "'$signature', '$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, nom_ligne_budgetaire, departement,"
+          "periode_budget, unite_choisie, nombre_unite, cout_unitaire, cout_total,"
+          "caisse, banque, fin_propre, fin_exterieur, signature, created)"
+          "VALUES (nextval('ligne_budgetaires_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9, @10, @11, @12, @13)",
+          substitutionValues: {
+            '1': data.nomLigneBudgetaire,
+            '2': data.departement,
+            '3': data.periodeBudget,
+            '4': data.uniteChoisie,
+            '5': data.nombreUnite,
+            '6': data.coutUnitaire,
+            '7': data.coutTotal,
+            '8': data.caisse,
+            '9': data.banque,
+            '10': data.finPropre,
+            '11': data.finExterieur,
+            '12': data.signature,
+            '13': data.created
+          });
     });
   }
 
-  Future<void> update(LigneBudgetaireModel ligneBudgetaireModel) async {
-    var id = ligneBudgetaireModel.id;
-    var nomLigneBudgetaire = ligneBudgetaireModel.nomLigneBudgetaire;
-    var departement = ligneBudgetaireModel.departement;
-    var periodeBudget = ligneBudgetaireModel.periodeBudget;
-    var uniteChoisie = ligneBudgetaireModel.uniteChoisie;
-    var nombreUnite = ligneBudgetaireModel.nombreUnite;
-    var coutUnitaire = ligneBudgetaireModel.coutUnitaire;
-    var coutTotal = ligneBudgetaireModel.coutTotal;
-    var caisse = ligneBudgetaireModel.caisse;
-    var banque = ligneBudgetaireModel.banque;
-    var finPropre = ligneBudgetaireModel.finPropre;
-    var finExterieur = ligneBudgetaireModel.finExterieur;
-    var signature = ligneBudgetaireModel.signature;
-    var created = ligneBudgetaireModel.created;
-
-    await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"nomLigneBudgetaire\"='$nomLigneBudgetaire', \"departement\"='$departement',"
-        "\"periodeBudget\"='$periodeBudget',\"uniteChoisie\"='$uniteChoisie',"
-        "\"nombreUnite\"='$nombreUnite', \"coutUnitaire\"='$coutUnitaire',"
-        "\"coutTotal\"='$coutTotal', \"caisse\"='$caisse', \"banque\"='$banque',"
-        "\"finPropre\"='$finPropre', \"finExterieur\"='$finExterieur',"
-        "\"signature\"='$signature' , \"created\"='$created' WHERE id=$id;");
+  Future<void> update(LigneBudgetaireModel data) async {
+    await executor.transaction((ctx) async {
+      await ctx.query(
+          "UPDATE $tableName"
+          "SET nom_ligne_budgetaire = @1, departement = @2, periode_budget = @3,"
+          "unite_choisie = @4, nombre_unite = @5, cout_unitaire = @6, cout_total = @7,"
+          "caisse = @8, banque = @9, fin_propre = @10, fin_exterieur = @11,"
+          "signature = @12, created = @13 WHERE id = @14",
+          substitutionValues: {
+            '1': data.nomLigneBudgetaire,
+            '2': data.departement,
+            '3': data.periodeBudget,
+            '4': data.uniteChoisie,
+            '5': data.nombreUnite,
+            '6': data.coutUnitaire,
+            '7': data.coutTotal,
+            '8': data.caisse,
+            '9': data.banque,
+            '10': data.finPropre,
+            '11': data.finExterieur,
+            '12': data.signature,
+            '13': data.created,
+            '14': data.id
+          });
     });
   }
 

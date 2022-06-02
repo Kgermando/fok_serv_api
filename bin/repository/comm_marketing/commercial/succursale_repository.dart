@@ -19,40 +19,36 @@ class SuccursaleRepository {
     return data.toList();
   }
 
-  Future<void> insertData(SuccursaleModel succursaleModel) async {
-    var name = succursaleModel.name;
-    var adresse = succursaleModel.adresse;
-    var province = succursaleModel.province;
-
-    var signature = succursaleModel.signature;
-    var created = succursaleModel.created;
-
-
-
+  Future<void> insertData(SuccursaleModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('succursales_id_seq'), '$name',"
-        "'$adresse', '$province',"
-        "'$signature', '$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, name, adresse,"
+        "province, signature, created)"
+        "VALUES (nextval('succursales_id_seq'), @1, @2, @3, @4, @5)",
+        substitutionValues: {
+          '1': data.name,
+          '2': data.adresse,
+          '3': data.province,
+          '4': data.signature,
+          '5': data.created
+        });
     });
   }
 
-  Future<void> update(SuccursaleModel succursaleModel) async {
-    var id = succursaleModel.id;
-    var name = succursaleModel.name;
-    var adresse = succursaleModel.adresse;
-    var province = succursaleModel.province;
-
-    var signature = succursaleModel.signature;
-    var created = succursaleModel.created;
-
+  Future<void> update(SuccursaleModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"name\"='$name', "
-        "\"adresse\"='$adresse', \"province\"='$province',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET name = @1, adresse = @2, province = @3,"
+          "signature = @4, created = @5 WHERE id = @6",
+          substitutionValues: {
+            '1': data.name,
+            '2': data.adresse,
+            '3': data.province,
+            '4': data.signature,
+            '5': data.created,
+            '6': data.id
+          });
     });
   }
 

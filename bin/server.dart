@@ -119,6 +119,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PerformenceNoteHandlers(repos).router));
+    router.mount(
+        '/api/rh/transport-restaurations/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(PerformenceNoteHandlers(repos).router));
 
     router.mount(
         '/api/finances/transactions/banques/',

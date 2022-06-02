@@ -19,44 +19,44 @@ class EntretienRepository {
     return data.toList();
   }
 
-  Future<void> insertData(EntretienModel entretienModel) async {
-    var nom = entretienModel.nom;
-    var modele = entretienModel.modele;
-    var marque = entretienModel.marque;
-    var etatObjet = entretienModel.etatObjet;
-    var objetRemplace = entretienModel.objetRemplace;
-    var dureeTravaux = entretienModel.dureeTravaux;
-
-    var signature = entretienModel.signature;
-    var created = entretienModel.created;
-
+  Future<void> insertData(EntretienModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('entretiens_id_seq'), '$nom',"
-          "'$modele', '$marque', '$etatObjet', '$objetRemplace', '$dureeTravaux',"
-          "'$signature', '$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, nom, modele,"
+        "marque, etat_objet, objet_remplace, duree_travaux,"
+        "signature, created)"
+        "VALUES (nextval('entretiens_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
+        substitutionValues: {
+          '1': data.nom,
+          '2': data.modele,
+          '3': data.marque,
+          '4': data.etatObjet,
+          '5': data.objetRemplace,
+          '6': data.dureeTravaux,
+          '7': data.signature,
+          '8': data.created
+        });
     });
   }
 
-  Future<void> update(EntretienModel entretienModel) async {
-    var id = entretienModel.id;
-    var nom = entretienModel.nom;
-    var modele = entretienModel.modele;
-    var marque = entretienModel.marque;
-    var etatObjet = entretienModel.etatObjet;
-    var objetRemplace = entretienModel.objetRemplace;
-    var dureeTravaux = entretienModel.dureeTravaux;
-    var signature = entretienModel.signature;
-    var created = entretienModel.created;
-
+  Future<void> update(EntretienModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"nom\"='$nom', \"modele\"='$modele',"
-        "\"marque\"='$marque', \"etatObjet\"='$etatObjet', \"objetRemplace\"='$objetRemplace',"
-        "\"dureeTravaux\"='$dureeTravaux'," 
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET nom = @1, modele = @2, marque = @3,"
+          "etat_objet = @4, objet_remplace = @5, duree_travaux = @6,"
+          "signature = @7, created = @8 WHERE id = @9",
+          substitutionValues: {
+            '1': data.nom,
+            '2': data.modele,
+            '3': data.marque,
+            '4': data.etatObjet,
+            '5': data.objetRemplace,
+            '6': data.dureeTravaux,
+            '7': data.signature,
+            '8': data.created,
+            '9': data.id
+          });
     });
   }
 

@@ -55,50 +55,46 @@ class DevisRepository {
     }
   }
 
-  Future<void> insertData(DevisModel devisModel) async {
-    var title = devisModel.title;
-    var priority = devisModel.priority;
-    var departement = devisModel.departement;
-    var list = devisModel.list;
-    var ligneBudgtaire = devisModel.ligneBudgtaire;
-    var resources = devisModel.resources;
-    var observation = devisModel.observation;
-
-    var signature = devisModel.signature;
-    var created = devisModel.created;
-
-
+  Future<void> insertData(DevisModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('devis_id_seq'), '$title',"
-        "'$priority','$departement','$list', '$ligneBudgtaire', '$resources', '$observation',"
-        "'$signature','$created');");
+      await ctx.query(
+          "INSERT INTO $tableName (id, title, priority,"
+          "departement, list, ligne_budgtaire, resources, observation,"
+          "signature, created)"
+          "VALUES (nextval('devis_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8 , @9)",
+          substitutionValues: {
+            '1': data.title,
+            '2': data.priority,
+            '3': data.departement,
+            '4': data.list,
+            '5': data.ligneBudgtaire,
+            '6': data.resources,
+            '7': data.observation,
+            '8': data.signature,
+            '9': data.created
+          });
     });
   }
 
-  Future<void> update(DevisModel devisModel) async {
-    var id = devisModel.id;
-    var title = devisModel.title;
-    var priority = devisModel.priority;
-    var departement = devisModel.departement;
-    var list = devisModel.list;
-    var ligneBudgtaire = devisModel.ligneBudgtaire;
-    var resources = devisModel.resources;
-    var observation = devisModel.observation;
-
-    var signature = devisModel.signature;
-    var created = devisModel.created;
-
-
+  Future<void> update(DevisModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"title\"='$title', "
-          "\"priority\"='$priority',\"departement\"='$departement',"
-          "\"list\"='$list', \"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
-          "\"observation\"='$observation',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET title = @1, priority = @2, departement = @3,"
+          "list = @4, ligne_budgtaire = @5, resources = @6, observation = @7,"
+          "signature = @8, created = @9 WHERE id = @10",
+          substitutionValues: {
+            '1': data.title,
+            '2': data.priority,
+            '3': data.departement,
+            '4': data.list,
+            '5': data.ligneBudgtaire,
+            '6': data.resources,
+            '7': data.observation,
+            '8': data.signature,
+            '9': data.created,
+            '10': data.id
+          });
     });
   }
 

@@ -9,7 +9,7 @@ class ApprobationModel {
   late String resources;
 
   late String approbation; // button radio OUi et NON if non text field
-  late String justification;
+  late String justification; // Motif
 
   late String signature; // celui qui fait le document
   late DateTime created;

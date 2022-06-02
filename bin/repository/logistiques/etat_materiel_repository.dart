@@ -37,41 +37,38 @@ class EtaMaterielRepository {
     }
   }
 
-  Future<void> insertData(EtatMaterielModel etatMaterielModel) async {
-    var nom = etatMaterielModel.nom;
-    var modele = etatMaterielModel.modele;
-    var marque = etatMaterielModel.marque;
-    var typeObjet = etatMaterielModel.typeObjet;
-    var statut = etatMaterielModel.statut; 
-    var signature = etatMaterielModel.signature;
-    var created = etatMaterielModel.created;
-
-
+  Future<void> insertData(EtatMaterielModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('etat_materiels_id_seq'), '$nom',"
-        "'$modele', '$marque', '$typeObjet', '$statut'," 
-        "'$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, nom, modele,"
+          "marque, type_objet, signature, created)"
+          "VALUES (nextval('etat_materiels_id_seq'), @1, @2, @3, @4, @5, @6)",
+          substitutionValues: {
+            '1': data.nom,
+            '2': data.modele,
+            '3': data.marque,
+            '4': data.typeObjet,
+            '5': data.signature,
+            '6': data.created
+          });
     });
   }
 
-  Future<void> update(EtatMaterielModel etatMaterielModel) async {
-    var id = etatMaterielModel.id;
-    var nom = etatMaterielModel.nom;
-    var modele = etatMaterielModel.modele;
-    var marque = etatMaterielModel.marque;
-    var typeObjet = etatMaterielModel.typeObjet;
-    var statut = etatMaterielModel.statut; 
-
-    var signature = etatMaterielModel.signature;
-    var created = etatMaterielModel.created;
+  Future<void> update(EtatMaterielModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"nom\"='$nom', \"modele\"='$modele',"
-        "\"marque\"='$marque', \"typeObjet\"='$typeObjet', \"statut\"='$statut'," 
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET nom = @1, modele = @2, marque = @3,"
+          "type_objet = @4, signature = @5, created = @6 WHERE id = @7",
+          substitutionValues: {
+            '1': data.nom,
+            '2': data.modele,
+            '3': data.marque,
+            '4': data.typeObjet,
+            '5': data.signature,
+            '6': data.created,
+            '7': data.id
+          });
     });
   }
 

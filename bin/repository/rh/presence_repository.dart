@@ -20,43 +20,43 @@ class PresenceRepository {
     return data.toList();
   }
 
-  Future<void> insertData(PresenceModel presenceModel) async {
-    var arrive = presenceModel.arrive;
-    var arriveAgent = presenceModel.arriveAgent;
-    var sortie = presenceModel.sortie;
-    var sortieAgent = presenceModel.sortieAgent;
-    var remarque = presenceModel.remarque;
-    var finJournee = presenceModel.finJournee;
-    var signature = presenceModel.signature;
-    var created = presenceModel.created;
-
+  Future<void> insertData(PresenceModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('presences_id_seq'), '$arrive',"
-          "'$arriveAgent','$sortie','$sortieAgent', '$remarque',"
-          "'$finJournee', '$signature', '$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, arrive, arrive_agent, sortie, sortie_agent,"
+        "remarque, fin_journee, signature, created)"
+        "VALUES (nextval('presences_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
+          substitutionValues: {
+            '1': data.arrive,
+            '2': data.arriveAgent,
+            '3': data.sortie,
+            '4': data.sortieAgent,
+            '5': data.remarque,
+            '6': data.finJournee,
+            '7': data.signature,
+            '8': data.created
+          });
     });
   }
 
-  Future<void> update(PresenceModel presenceModel) async {
-    var id = presenceModel.id;
-    var arrive = presenceModel.arrive;
-    var arriveAgent = presenceModel.arriveAgent;
-    var sortie = presenceModel.sortie;
-    var sortieAgent = presenceModel.sortieAgent;
-    var remarque = presenceModel.remarque;
-    var finJournee = presenceModel.finJournee;
-    var signature = presenceModel.signature;
-    var created = presenceModel.created;
-
+  Future<void> update(PresenceModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"arrive\"='$arrive',"
-        "\"arriveAgent\"='$arriveAgent', \"sortie\"='$sortie',"
-        "\"sortieAgent\"='$sortieAgent', \"remarque\"='$remarque', \"finJournee\"='$finJournee',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET arrive = @1, arrive_agent = @2, sortie = @3, sortie_agent = @4,"
+          "remarque = @5, fin_journee = @6,"
+          "signature = @7, created = @8 WHERE id = @9",
+          substitutionValues: {
+            '1': data.arrive,
+            '2': data.arriveAgent,
+            '3': data.sortie,
+            '4': data.sortieAgent,
+            '5': data.remarque,
+            '6': data.finJournee,
+            '7': data.signature,
+            '8': data.created,
+            '9': data.id
+          });
     });
   }
 

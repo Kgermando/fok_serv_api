@@ -19,43 +19,41 @@ class ImmobilierRepository {
     return data.toList();
   }
 
-  Future<void> insertData(ImmobilierModel immobilierModel) async {
-    var typeAllocation = immobilierModel.typeAllocation;
-    var adresse = immobilierModel.adresse;
-    var numeroCertificat = immobilierModel.numeroCertificat;
-    var superficie = immobilierModel.superficie;
-    var dateAcquisition = immobilierModel.dateAcquisition; 
-
-    var signature = immobilierModel.signature;
-    var created = immobilierModel.created;
-
+  Future<void> insertData(ImmobilierModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('immobiliers_id_seq'), '$typeAllocation',"
-        "'$adresse', '$numeroCertificat', '$superficie', '$dateAcquisition'," 
-        "'$signature', '$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, type_allocation, adresse,"
+          "numero_certificat, superficie, date_acquisition, signature, created)"
+          "VALUES (nextval('immobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
+          substitutionValues: {
+            '1': data.typeAllocation,
+            '2': data.adresse,
+            '3': data.numeroCertificat,
+            '4': data.superficie,
+            '5': data.dateAcquisition,
+            '6': data.signature,
+            '7': data.created
+          });
     });
   }
 
-  Future<void> update(ImmobilierModel immobilierModel) async {
-    var id = immobilierModel.id;
-    var typeAllocation = immobilierModel.typeAllocation;
-    var adresse = immobilierModel.adresse;
-    var numeroCertificat = immobilierModel.numeroCertificat;
-    var superficie = immobilierModel.superficie;
-    var dateAcquisition = immobilierModel.dateAcquisition; 
-
-    var signature = immobilierModel.signature;
-    var created = immobilierModel.created;
-
+  Future<void> update(ImmobilierModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"typeAllocation\"='$typeAllocation', \"adresse\"='$adresse',"
-        "\"numeroCertificat\"='$numeroCertificat', \"superficie\"='$superficie',"
-        "\"dateAcquisition\"='$dateAcquisition'," 
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET type_allocation = @1, adresse = @2, numero_certificat = @3,"
+          "superficie = @4, date_acquisition = @5,"
+          "signature = @6, created = @7 WHERE id = @8",
+          substitutionValues: {
+            '1': data.typeAllocation,
+            '2': data.adresse,
+            '3': data.numeroCertificat,
+            '4': data.superficie,
+            '5': data.dateAcquisition,
+            '6': data.signature,
+            '7': data.created,
+            '8': data.id
+          });
     });
   }
 

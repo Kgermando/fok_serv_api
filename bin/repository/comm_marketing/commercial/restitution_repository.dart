@@ -19,55 +19,56 @@ class RestitutionRepository {
     return data.toList();
   }
 
-  Future<void> insertData(RestitutionModel restitutionModel) async {
-    var idProduct = restitutionModel.idProduct;
-    var quantity = restitutionModel.quantity;
-    var unite = restitutionModel.unite;
-    var firstName = restitutionModel.firstName;
-    var lastName = restitutionModel.lastName;
-    var accuseReception = restitutionModel.accuseReception;
-    var accuseReceptionFirstName = restitutionModel.accuseReceptionFirstName;
-    var accuseReceptionLastName = restitutionModel.accuseReceptionLastName;
-    var role = restitutionModel.role;
-    var succursale = restitutionModel.succursale;
-    var signature = restitutionModel.signature;
-    var created = restitutionModel.created;
-
+  Future<void> insertData(RestitutionModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('restitutions_id_seq'), '$idProduct',"
-        "'$quantity', '$unite', '$firstName', '$lastName',"
-        "'$accuseReception', '$accuseReceptionFirstName', '$accuseReceptionLastName', '$role',"
-        "'$succursale', '$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, id_product, quantity,"
+          "unite, first_name, last_name, accuse_reception,"
+          "accuse_reception_firstName, accuse_reception_lastName, role,"
+          "succursale, signature, created)"
+          "VALUES (nextval('restitutions_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9, @10, @11, @12)",
+          substitutionValues: {
+            '1': data.idProduct,
+            '2': data.quantity,
+            '3': data.unite,
+            '4': data.firstName,
+            '5': data.lastName,
+            '6': data.accuseReception,
+            '7': data.accuseReceptionFirstName,
+            '8': data.accuseReceptionLastName,
+            '9': data.role,
+            '10': data.succursale,
+            '11': data.signature,
+            '12': data.created
+          });
     });
   }
 
-  Future<void> update(RestitutionModel restitutionModel) async {
-    var id = restitutionModel.id;
-    var idProduct = restitutionModel.idProduct;
-    var quantity = restitutionModel.quantity;
-    var unite = restitutionModel.unite;
-    var firstName = restitutionModel.firstName;
-    var lastName = restitutionModel.lastName;
-    var accuseReception = restitutionModel.accuseReception;
-    var accuseReceptionFirstName = restitutionModel.accuseReceptionFirstName;
-    var accuseReceptionLastName = restitutionModel.accuseReceptionLastName;
-    var role = restitutionModel.role;
-    var succursale = restitutionModel.succursale;
-    var signature = restitutionModel.signature;
-    var created = restitutionModel.created;
-
+  Future<void> update(RestitutionModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"idProduct\"='$idProduct', \"quantity\"='$quantity',"
-          "\"unite\"='$unite',"
-          "\"firstName\"='$firstName',\"lastName\"='$lastName',"
-          "\"accuseReception\"='$accuseReception', \"accuseReceptionFirstName\"='$accuseReceptionFirstName',"
-          "\"accuseReceptionLastName\"='$accuseReceptionLastName', \"role\"='$role',"
-          "\"succursale\"='$succursale',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET id_product = @1, quantity = @2, unite = @3,"
+          "first_name = @4, last_name = @5, accuse_reception = @6,"
+          "accuse_reception_firstName = @7, accuse_reception_lastName = @8,"
+          "role = @9, succursale = @10,"
+          "signature = @11, created = @12 WHERE id = @13",
+          substitutionValues: {
+            '1': data.idProduct,
+            '2': data.quantity,
+            '3': data.unite,
+            '4': data.firstName,
+            '5': data.lastName,
+            '6': data.accuseReception,
+            '7': data.accuseReceptionFirstName,
+            '8': data.accuseReceptionLastName,
+            '9': data.role,
+            '10': data.succursale,
+            '11': data.signature,
+            '12': data.created,
+            '13': data.id
+          });
     });
   }
 

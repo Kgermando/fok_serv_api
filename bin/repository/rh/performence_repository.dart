@@ -19,42 +19,39 @@ class PerformenceRepository {
     return data.toList();
   }
 
-  Future<void> insertData(PerformenceModel performenceModel) async {
-    var agent = performenceModel.agent;
-    var departement = performenceModel.departement;
-    var nom = performenceModel.nom;
-    var postnom = performenceModel.postnom;
-    var prenom = performenceModel.prenom;
-    var signature = performenceModel.signature;
-    var created = performenceModel.created;
-
+  Future<void> insertData(PerformenceModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('performences_id_seq'), '$agent',"
-        "'$departement','$nom', '$postnom','$prenom'," 
-        "'$signature','$created');"
-        );
+      await ctx.execute(
+        "INSERT INTO $tableName (id, agent, departement, nom, postnom, prenom, signature, created)"
+              "VALUES (nextval('performences_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
+          substitutionValues: {
+            '1': data.agent,
+            '2': data.departement,
+            '3': data.nom,
+            '4': data.postnom,
+            '5': data.prenom,
+            '6': data.signature,
+            '7': data.created
+          });
     });
   }
 
-  Future<void> update(PerformenceModel performenceModel) async {
-    var id = performenceModel.id;
-    var agent = performenceModel.agent;
-    var departement = performenceModel.departement;
-    var nom = performenceModel.nom;
-    var postnom = performenceModel.postnom;
-    var prenom = performenceModel.prenom; 
-    var signature = performenceModel.signature;
-    var created = performenceModel.created;
-
+  Future<void> update(PerformenceModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"agent\"='$agent', \"departement\"='$departement',"
-        "\"nom\"='$nom',"
-        " \"postnom\"='$postnom', \"prenom\"='$prenom',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET agent = @1, departement = @2, nom = @3, postnom = @4, prenom = @5,"
+        "signature = @6, created = @7 WHERE id = @8",
+        substitutionValues: {
+          '1': data.agent,
+          '2': data.departement,
+          '3': data.prenom,
+          '4': data.nom,
+          '5': data.postnom,
+          '6': data.signature,
+          '7': data.created,
+          '8': data.id
+        });
     });
   }
 

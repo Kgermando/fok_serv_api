@@ -20,41 +20,39 @@ class DepartementBudgetRepository {
     return data.toList();
   }
 
-  Future<void> insertData(DepartementBudgetModel departementBudgetModel) async {
-    var title = departementBudgetModel.title;
-    var departement = departementBudgetModel.departement;
-    var periodeDebut = departementBudgetModel.periodeDebut;
-    var periodeFin = departementBudgetModel.periodeFin;
-
-    var signature = departementBudgetModel.signature;
-    var created = departementBudgetModel.created;
-
+  Future<void> insertData(DepartementBudgetModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('departement_budgets_id_seq'), '$title',"
-        "'$departement', '$periodeDebut', '$periodeFin',"
-        "'$signature', '$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, title, departement, periode_debut, periode_fin,"
+        "signature, created)"
+        "VALUES (nextval('departement_budgets_id_seq'), @1, @2, @3, @4, @5, @6)",
+        substitutionValues: {
+          '1': data.title,
+          '2': data.departement,
+          '3': data.periodeDebut,
+          '4': data.periodeFin,
+          '5': data.signature,
+          '6': data.created
+          }
+        );
     });
   }
 
-  Future<void> update(DepartementBudgetModel departementBudgetModel) async {
-    var id = departementBudgetModel.id;
-    var title = departementBudgetModel.title;
-    var departement = departementBudgetModel.departement;
-    var periodeDebut = departementBudgetModel.periodeDebut;
-    var periodeFin = departementBudgetModel.periodeFin;
-
-    var signature = departementBudgetModel.signature;
-    var created = departementBudgetModel.created;
-
+  Future<void> update(DepartementBudgetModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"title\"='$title',"
-        "\"departement\"='$departement', \"periodeDebut\"='$periodeDebut',"
-        "\"periodeFin\"='$periodeFin',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET title = @1, departement = @2, periode_debut = @3, periode_fin = @4,"
+        "signature = @5, created = @6 WHERE id = @7",
+        substitutionValues: {
+          '1': data.title,
+          '2': data.departement,
+          '3': data.periodeDebut,
+          '4': data.periodeFin,
+          '5': data.signature,
+          '6': data.created,
+          '7': data.id
+        }); 
     });
   }
 

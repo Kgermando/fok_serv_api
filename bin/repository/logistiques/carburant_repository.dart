@@ -19,55 +19,53 @@ class CarburantRepository {
     return data.toList();
   }
 
-  Future<void> insertData(CarburantModel carburantModel) async {
-    
-    var operationEntreSortie = carburantModel.operationEntreSortie;
-    var typeCaburant = carburantModel.typeCaburant;
-    var fournisseur = carburantModel.fournisseur;
-    var nomeroFactureAchat = carburantModel.nomeroFactureAchat;
-    var prixAchatParLitre = carburantModel.prixAchatParLitre;
-    var nomReceptioniste = carburantModel.nomReceptioniste;
-    var numeroPlaque = carburantModel.numeroPlaque;
-    var dateHeureSortieAnguin = carburantModel.dateHeureSortieAnguin;
-    var qtyAchat = carburantModel.qtyAchat;
-
-    var signature = carburantModel.signature;
-    var created = carburantModel.created;
-
+  Future<void> insertData(CarburantModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('carburants_id_seq'), '$operationEntreSortie',"
-        "'$typeCaburant', '$fournisseur', '$nomeroFactureAchat', '$prixAchatParLitre',"
-        "'$nomReceptioniste', '$numeroPlaque','$dateHeureSortieAnguin',"
-        "'$qtyAchat',"
-        "'$signature', '$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, operation_entre_sortie, type_caburant,"
+        "fournisseur, nomero_facture_achat, prix_achat_par_litre,"
+        "nom_receptioniste, numero_plaque, date_heure_sortie_anguin,"
+        "qty_achat, signature, created)"
+        "VALUES (nextval('carburants_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10, @11)",
+        substitutionValues: {
+          '1': data.operationEntreSortie,
+          '2': data.typeCaburant,
+          '3': data.fournisseur,
+          '4': data.nomeroFactureAchat,
+          '5': data.prixAchatParLitre,
+          '6': data.nomReceptioniste,
+          '7': data.numeroPlaque,
+          '8': data.dateHeureSortieAnguin,
+          '9': data.qtyAchat,
+          '10': data.signature,
+          '11': data.created
+        });
     });
   }
 
-  Future<void> update(CarburantModel carburantModel) async {
-    var id = carburantModel.id;
-    var operationEntreSortie = carburantModel.operationEntreSortie;
-    var typeCaburant = carburantModel.typeCaburant;
-    var fournisseur = carburantModel.fournisseur;
-    var nomeroFactureAchat = carburantModel.nomeroFactureAchat;
-    var prixAchatParLitre = carburantModel.prixAchatParLitre;
-    var nomReceptioniste = carburantModel.nomReceptioniste;
-    var numeroPlaque = carburantModel.numeroPlaque;
-    var dateHeureSortieAnguin = carburantModel.dateHeureSortieAnguin;
-    var qtyAchat = carburantModel.qtyAchat;
-
-    var signature = carburantModel.signature;
-    var created = carburantModel.created;
-
+  Future<void> update(CarburantModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"operationEntreSortie\"='$operationEntreSortie', \"typeCaburant\"='$typeCaburant',"
-        "\"fournisseur\"='$fournisseur', \"nomeroFactureAchat\"='$nomeroFactureAchat', \"prixAchatParLitre\"='$prixAchatParLitre',"
-        "\"nomReceptioniste\"='$nomReceptioniste', \"numeroPlaque\"='$numeroPlaque', \"dateHeureSortieAnguin\"='$dateHeureSortieAnguin',"
-        " \"qtyAchat\"='$qtyAchat',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET operation_entre_sortie = @1, type_caburant = @2, fournisseur = @3,"
+        "nomero_facture_achat = @4, prix_achat_par_litre = @5, nom_receptioniste = @6,"
+        "numero_plaque = @7, date_heure_sortie_anguin = @8, qty_achat = @9,"
+        "signature = @10, created = @11 WHERE id = @12",
+        substitutionValues: {
+          '1': data.operationEntreSortie,
+          '2': data.typeCaburant,
+          '3': data.fournisseur,
+          '4': data.nomeroFactureAchat,
+          '5': data.prixAchatParLitre,
+          '6': data.nomReceptioniste,
+          '7': data.numeroPlaque,
+          '8': data.dateHeureSortieAnguin,
+          '9': data.qtyAchat,
+          '10': data.signature,
+          '11': data.created,
+          '12': data.id
+        });
     });
   }
 

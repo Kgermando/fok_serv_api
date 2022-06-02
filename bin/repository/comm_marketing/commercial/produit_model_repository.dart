@@ -19,48 +19,45 @@ class ProduitModelRepository {
     return data.toList();
   }
 
-  Future<void> insertData(ProductModel productModel) async {
-    var categorie = productModel.categorie;
-    var sousCategorie1 = productModel.sousCategorie1;
-    var sousCategorie2 = productModel.sousCategorie2;
-    var sousCategorie3 = productModel.sousCategorie3;
-    var sousCategorie4 = productModel.sousCategorie4;
-
-    var idProduct = productModel.idProduct;
-    var signature = productModel.signature;
-    var created = productModel.created;
-
-
+  Future<void> insertData(ProductModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('produits_model_id_seq'), '$categorie',"
-        "'$sousCategorie1','$sousCategorie2','$sousCategorie3','$sousCategorie4', '$idProduct',"
-        "'$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, categorie, sous_categorie_1,"
+          "sous_categorie_2, sous_categorie_3, sous_categorie_4, id_product,"
+          "signature, created)"
+          "VALUES (nextval('produits_model_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8)",
+          substitutionValues: {
+            '1': data.categorie,
+            '2': data.sousCategorie1,
+            '3': data.sousCategorie2,
+            '4': data.sousCategorie3,
+            '5': data.sousCategorie4,
+            '6': data.idProduct,
+            '7': data.signature,
+            '8': data.created
+          });
     });
   }
 
-  Future<void> update(ProductModel productModel) async {
-    var id = productModel.id;
-    var categorie = productModel.categorie;
-    var sousCategorie1 = productModel.sousCategorie1;
-    var sousCategorie2 = productModel.sousCategorie2;
-    var sousCategorie3 = productModel.sousCategorie3;
-    var sousCategorie4 = productModel.sousCategorie4;
-
-    var idProduct = productModel.idProduct;
-    var signature = productModel.signature;
-    var created = productModel.created;
-
-
+  Future<void> update(ProductModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"categorie\"='$categorie', "
-        "\"sousCategorie1\"='$sousCategorie1', \"sousCategorie2\"='$sousCategorie2',"
-        "\"sousCategorie3\"='$sousCategorie3', \"sousCategorie4\"='$sousCategorie4',"
-        "\"idProduct\"='$idProduct',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET categorie = @1, sous_categorie_1 = @2, sous_categorie_2 = @3,"
+          "sous_categorie_3 = @4, sous_categorie_4 = @5, id_product = @6,"
+          "signature = @7, created = @8 WHERE id = @9",
+          substitutionValues: {
+            '1': data.categorie,
+            '2': data.sousCategorie1,
+            '3': data.sousCategorie2,
+            '4': data.sousCategorie3,
+            '5': data.sousCategorie4,
+            '6': data.idProduct,
+            '7': data.signature,
+            '8': data.created,
+            '9': data.id
+          });
     });
   }
 

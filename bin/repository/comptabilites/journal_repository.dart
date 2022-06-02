@@ -45,50 +45,49 @@ class JournalRepository {
     return data.toList();
   }
 
-  Future<void> insertData(JournalModel journalModel) async {
-    var numeroOperation = journalModel.numeroOperation;
-    var libele = journalModel.libele;
-    var compteDebit = journalModel.compteDebit;
-    var montantDebit = journalModel.montantDebit;
-    var compteCredit = journalModel.compteCredit;
-    var montantCredit = journalModel.montantCredit;
-    var tva = journalModel.tva;
-    var remarque = journalModel.remarque;
-    var signature = journalModel.signature;
-    var created = journalModel.created;
-
+  Future<void> insertData(JournalModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('journals_id_seq'), '$numeroOperation',"
-          "'$libele', '$compteDebit','$montantDebit','$compteCredit','$montantCredit',"
-          "'$tva', '$remarque',"
-          "'$signature','$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, numero_operation, libele,"
+        "compte_debit, montant_debit, compte_credit, montant_credit, tva,"
+        "remarque, signature, created)"
+        "VALUES (nextval('journals_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10)",
+        substitutionValues: {
+          '1': data.numeroOperation,
+          '2': data.libele,
+          '3': data.compteDebit,
+          '4': data.montantDebit,
+          '5': data.compteCredit,
+          '6': data.montantCredit,
+          '7': data.tva,
+          '8': data.remarque,
+          '9': data.signature,
+          '10': data.created
+        });
     });
   }
 
-  Future<void> update(JournalModel journalModel) async {
-    var id = journalModel.id;
-    var numeroOperation = journalModel.numeroOperation;
-    var libele = journalModel.libele;
-    var compteDebit = journalModel.compteDebit;
-    var montantDebit = journalModel.montantDebit;
-    var compteCredit = journalModel.compteCredit;
-    var montantCredit = journalModel.montantCredit;
-    var tva = journalModel.tva;
-    var remarque = journalModel.remarque;
-
-    var signature = journalModel.signature;
-    var created = journalModel.created;
-
+  Future<void> update(JournalModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"numeroOperation\"='$numeroOperation', \"libele\"='$libele', "
-          "\"compteDebit\"='$compteDebit',\"montantDebit\"='$montantDebit',"
-          "\"compteCredit\"='$compteCredit',\"montantCredit\"='$montantCredit',"
-          "\"tva\"='$tva', \"remarque\"='$remarque',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+          "SET numero_operation = @1, libele = @2, compte_debit = @3,"
+          "montant_debit = @4, compte_credit = @5, montant_credit = @6, tva = @7,"
+          "remarque = @8, signature = @9, created = @10 WHERE id = @11",
+          substitutionValues: {
+            '1': data.numeroOperation,
+            '2': data.libele,
+            '3': data.compteDebit,
+            '4': data.montantDebit,
+            '5': data.compteCredit,
+            '6': data.montantCredit,
+            '7': data.tva,
+            '8': data.remarque,
+            '9': data.signature,
+            '10': data.created,
+            '11': data.id
+          });
     });
   }
 

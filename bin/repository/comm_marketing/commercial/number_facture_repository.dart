@@ -20,33 +20,33 @@ class NumberFactureRepository {
     return data.toList();
   }
 
-  Future<void> insertData(NumberFactureModel factureCartModel) async {
-
-    var number = factureCartModel.number;
-    var succursale = factureCartModel.succursale;
-    var signature = factureCartModel.signature;
-    var created = factureCartModel.created;
-
+  Future<void> insertData(NumberFactureModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('number_factures_id_seq'), '$number',"
-        "'$succursale', '$signature','$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, number, succursale, signature, created)"
+        "VALUES (nextval('number_factures_id_seq'), @1, @2, @3, @4)",
+        substitutionValues: {
+          '1': data.number,
+          '2': data.succursale,
+          '3': data.signature,
+          '4': data.created
+        });
     });
   }
 
-  Future<void> update(NumberFactureModel factureCartModel) async {
-    var id = factureCartModel.id;
-    var number = factureCartModel.number;
-    var succursale = factureCartModel.succursale;
-    var signature = factureCartModel.signature;
-    var created = factureCartModel.created;
-
+  Future<void> update(NumberFactureModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"number\"='$number', \"succursale\"='$succursale',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET number = @1, succursale = @2,"
+          "signature = @3, created = @4 WHERE id = @5",
+          substitutionValues: {
+            '1': data.number,
+            '2': data.succursale,
+            '3': data.signature,
+            '4': data.created,
+            '5': data.id
+          });
     });
   }
 

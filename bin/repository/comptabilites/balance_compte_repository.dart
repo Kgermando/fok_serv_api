@@ -19,38 +19,36 @@ class BalanceCompteRepository {
     return data.toList();
   }
 
-  Future<void> insertData(BalanceCompteModel balanceCompteModel) async {
-    var title = balanceCompteModel.title;
-    var comptes = balanceCompteModel.comptes;
-    var statut = balanceCompteModel.statut;
-    var signature = balanceCompteModel.signature;
-    var created = balanceCompteModel.created;
-
+  Future<void> insertData(BalanceCompteModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('balance_comptes_id_seq'), '$title',"
-        "'$comptes', '$statut',"
-        "'$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, title, comptes,"
+          "statut, signature, created)"
+          "VALUES (nextval('balance_comptes_id_seq'), @1, @2, @3, @4, @5)",
+          substitutionValues: {
+            '1': data.title,
+            '2': data.comptes,
+            '3': data.statut,
+            '4': data.signature,
+            '5': data.created
+          });
     });
   }
 
-  Future<void> update(BalanceCompteModel balanceCompteModel) async {
-    var id = balanceCompteModel.id;
-    var title = balanceCompteModel.title;
-    var comptes = balanceCompteModel.comptes;
-    var statut = balanceCompteModel.statut;
-
-    var signature = balanceCompteModel.signature;
-    var created = balanceCompteModel.created;
-
-
+  Future<void> update(BalanceCompteModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"title\"='$title', \"comptes\"='$comptes',"
-        "\"statut\"='$statut',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET title = @1, comptes = @2, statut = @3, signature = @4,"
+        "created = @5 WHERE id = @6",
+        substitutionValues: {
+          '1': data.title,
+          '2': data.comptes,
+          '3': data.statut,
+          '4': data.signature,
+          '5': data.created,
+          '6': data.id
+        });
     });
   }
 

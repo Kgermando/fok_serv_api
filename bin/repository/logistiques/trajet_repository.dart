@@ -19,47 +19,47 @@ class TrajetRepository {
     return data.toList();
   }
 
-  Future<void> insertData(TrajetModel trajetModel) async {
-    var nomeroEntreprise = trajetModel.nomeroEntreprise;
-    var nomUtilisateur = trajetModel.nomUtilisateur;
-    var trajetDe = trajetModel.trajetDe;
-    var trajetA = trajetModel.trajetA;
-    var mission = trajetModel.mission;
-    var genkilometrageSoritere = trajetModel.kilometrageSorite;
-    var kilometrageRetour = trajetModel.kilometrageRetour; 
-
-    var signature = trajetModel.signature;
-    var created = trajetModel.created;
-
+  Future<void> insertData(TrajetModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('trajets_id_seq'), '$nomeroEntreprise',"
-        "'$nomUtilisateur', '$trajetDe', '$trajetA', '$mission', '$genkilometrageSoritere', '$kilometrageRetour'," 
-        "'$signature', '$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, nomero_entreprise, nom_utilisateur,"
+          "trajet_de, trajet_a, mission, kilometrage_sorite, kilometrage_retour,"
+          "signature, created)"
+          "VALUES (nextval('trajets_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9)",
+          substitutionValues: {
+            '1': data.nomeroEntreprise,
+            '2': data.nomUtilisateur,
+            '3': data.trajetDe,
+            '4': data.trajetA,
+            '5': data.mission,
+            '6': data.kilometrageSorite,
+            '7': data.kilometrageRetour,
+            '8': data.signature,
+            '9': data.created
+          });
     });
   }
 
-  Future<void> update(TrajetModel trajetModel) async {
-    var id = trajetModel.id;
-    var nomeroEntreprise = trajetModel.nomeroEntreprise;
-    var nomUtilisateur = trajetModel.nomUtilisateur;
-    var trajetDe = trajetModel.trajetDe;
-    var trajetA = trajetModel.trajetA;
-    var mission = trajetModel.mission;
-    var genkilometrageSoritere = trajetModel.kilometrageSorite;
-    var kilometrageRetour = trajetModel.kilometrageRetour; 
-
-    var signature = trajetModel.signature;
-    var created = trajetModel.created;
-
+  Future<void> update(TrajetModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"nomeroEntreprise\"='$nomeroEntreprise', \"nomUtilisateur\"='$nomUtilisateur',"
-        "\"trajetDe\"='$trajetDe', \"trajetA\"='$trajetA', \"mission\"='$mission',"
-        "\"genkilometrageSoritere\"='$genkilometrageSoritere', \"kilometrageRetour\"='$kilometrageRetour'," 
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET nomero_entreprise = @1, nom_utilisateur = @2, trajet_de = @3,"
+          "trajet_a = @4, mission = @5, kilometrage_sorite = @6, kilometrage_retour = @7,"
+          "signature = @8, created = @9 WHERE id = @10",
+          substitutionValues: {
+            '1': data.nomeroEntreprise,
+            '2': data.nomUtilisateur,
+            '3': data.trajetDe,
+            '4': data.trajetA,
+            '5': data.mission,
+            '6': data.kilometrageSorite,
+            '7': data.kilometrageRetour,
+            '8': data.signature,
+            '9': data.created,
+            '10': data.id
+          });
     });
   }
 

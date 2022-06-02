@@ -21,57 +21,46 @@ class ApprobationRepository {
   }
 
   Future<void> insertData(ApprobationModel data) async {
-    
-   var reference = data.reference;
-    var title = data.title;
-    var departement = data.departement;
-    var fontctionOccupee = data.fontctionOccupee;
-    var ligneBudgtaire = data.ligneBudgtaire;
-    var resources = data.resources;
-
-    var approbation = data.approbation;
-    var justification = data.justification;
-
-    var signature = data.signature;
-    var created = data.created;
-
-
-    await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('approbations_id_seq'), '$reference',"
-        "'$title', '$departement', '$fontctionOccupee', '$ligneBudgtaire', '$resources',"
-        "'$approbation', '$justification',"
-        "'$signature', '$created');");
+   await executor.transaction((ctx) async {
+      await ctx.execute(
+        "INSERT INTO $tableName (id, reference, title, departement, fontction_occupee,"
+          "ligne_budgtaire, resources, approbation, justification, signature, created)"
+              "VALUES (nextval('approbations_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10)",
+          substitutionValues: {
+            '1': data.reference,
+            '2': data.title,
+            '3': data.departement,
+            '4': data.fontctionOccupee,
+            '5': data.ligneBudgtaire,
+            '6': data.resources,
+            '7': data.approbation,
+            '8': data.justification,
+            '9': data.signature,
+            '10': data.created
+          }); 
     });
   }
 
   Future<void> update(ApprobationModel data) async {
-    var id = data.id;
-    var reference = data.reference;
-    var title = data.title;
-    var departement = data.departement;
-    var fontctionOccupee = data.fontctionOccupee;
-    var ligneBudgtaire = data.ligneBudgtaire;
-    var resources = data.resources;
-
-    var approbation = data.approbation;
-    var justification = data.justification;
-
-    var signature = data.signature;
-    var created = data.created;
-
-
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"reference\"='$reference',"
-          "\"title\"='$title',\"departement\"='$departement',"
-          "\"fontctionOccupee\"='$fontctionOccupee',"
-          "\"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
-          "\"approbation\"='$approbation',"
-          "\"justification\"='$justification',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+          "SET reference = @1, title = @2, departement = @3, fontction_occupee = @4,"
+          "ligne_budgtaire = @5, resources = @6, approbation = @7, justification = @8,"
+          "signature = @9, created = @10 WHERE id = @11",
+          substitutionValues: {
+            '1': data.reference,
+            '2': data.title,
+            '3': data.departement,
+            '4': data.fontctionOccupee,
+            '5': data.ligneBudgtaire,
+            '6': data.resources,
+            '7': data.approbation,
+            '8': data.justification,
+            '9': data.signature,
+            '10': data.created,
+            '11': data.id
+          });
     });
   }
 

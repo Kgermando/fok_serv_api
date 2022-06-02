@@ -20,64 +20,66 @@ class BonLivraisonRepository {
     return data.toList();
   }
 
-  Future<void> insertData(BonLivraisonModel bonLivraisonModel) async {
-    var idProduct = bonLivraisonModel.idProduct;
-    var quantityAchat = bonLivraisonModel.quantityAchat;
-    var priceAchatUnit = bonLivraisonModel.priceAchatUnit;
-    var prixVenteUnit = bonLivraisonModel.prixVenteUnit;
-    var unite = bonLivraisonModel.unite;
-    var firstName = bonLivraisonModel.firstName;
-    var lastName = bonLivraisonModel.lastName;
-    var tva = bonLivraisonModel.tva;
-    var remise = bonLivraisonModel.remise;
-    var qtyRemise = bonLivraisonModel.qtyRemise;
-    var accuseReception = bonLivraisonModel.accuseReception;
-    var accuseReceptionFirstName = bonLivraisonModel.accuseReceptionFirstName;
-    var accuseReceptionLastName = bonLivraisonModel.accuseReceptionLastName;
-    var succursale = bonLivraisonModel.succursale;
-    var signature = bonLivraisonModel.signature;
-    var created = bonLivraisonModel.created;
-
+  Future<void> insertData(BonLivraisonModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('bon_livraisons_id_seq'), '$idProduct',"
-        "'$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
-        "'$firstName','$lastName', '$tva','$remise', '$qtyRemise',"
-        "'$accuseReception', '$accuseReceptionFirstName', '$accuseReceptionLastName',"
-        "'$succursale', '$signature', '$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, id_product,"
+          "quantity_achat, price_achat_unit, prix_vente_unit, unite,"
+          "first_name, last_name, tva,"
+          "remise, qty_remise, accuse_reception, accuse_reception_first_name,"
+          "accuse_reception_last_name, succursale, signature, created)"
+          "VALUES (nextval('bon_livraisons_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9, @10, @11, @12, @13 @14, @15, @16)",
+          substitutionValues: {
+            '1': data.idProduct,
+            '2': data.quantityAchat,
+            '3': data.priceAchatUnit,
+            '4': data.prixVenteUnit,
+            '5': data.unite,
+            '6': data.firstName,
+            '7': data.lastName,
+            '8': data.tva,
+            '9': data.remise,
+            '10': data.qtyRemise,
+            '11': data.accuseReception,
+            '12': data.accuseReceptionFirstName,
+            '13': data.accuseReceptionLastName,
+            '14': data.succursale,
+            '15': data.signature,
+            '16': data.created
+          });
     });
   }
 
-  Future<void> update(BonLivraisonModel bonLivraisonModel) async {
-    var id = bonLivraisonModel.id;
-    var idProduct = bonLivraisonModel.idProduct;
-    var quantityAchat = bonLivraisonModel.quantityAchat;
-    var priceAchatUnit = bonLivraisonModel.priceAchatUnit;
-    var prixVenteUnit = bonLivraisonModel.prixVenteUnit;
-    var unite = bonLivraisonModel.unite;
-    var firstName = bonLivraisonModel.firstName;
-    var lastName = bonLivraisonModel.lastName;
-    var tva = bonLivraisonModel.tva;
-    var remise = bonLivraisonModel.remise;
-    var qtyRemise = bonLivraisonModel.qtyRemise;
-    var accuseReception = bonLivraisonModel.accuseReception;
-    var accuseReceptionFirstName = bonLivraisonModel.accuseReceptionFirstName;
-    var accuseReceptionLastName = bonLivraisonModel.accuseReceptionLastName;
-    var succursale = bonLivraisonModel.succursale;
-    var signature = bonLivraisonModel.signature;
-    var created = bonLivraisonModel.created;
-
+  Future<void> update(BonLivraisonModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"idProduct\"='$idProduct', \"quantityAchat\"='$quantityAchat',"
-        "\"priceAchatUnit\"='$priceAchatUnit',\"prixVenteUnit\"='$prixVenteUnit',"
-        "\"unite\"='$unite',\"firstName\"='$firstName', \"lastName\"='$lastName',"
-        "\"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise',\"accuseReception\"='$accuseReception',"
-        "\"accuseReceptionFirstName\"='$accuseReceptionFirstName', \"accuseReceptionLastName\"='$accuseReceptionLastName',"
-        "\"succursale\"='$succursale',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET id_product = @1, quantity_achat = @2,"
+          "price_achat_unit = @3, prix_vente_unit = @4, unite = @5,"
+          "first_name = @6, last_name = @7, tva = @8,"
+          "remise = @9, qty_remise = @10, accuse_reception = @11,"
+          "accuse_reception_first_name = @12, accuse_reception_last_name = @13,"
+          "succursale = @14, signature = @15, created = @16 WHERE id = @17",
+          substitutionValues: {
+            '1': data.idProduct,
+            '2': data.quantityAchat,
+            '3': data.priceAchatUnit,
+            '4': data.prixVenteUnit,
+            '5': data.unite,
+            '6': data.firstName,
+            '7': data.lastName,
+            '8': data.tva,
+            '9': data.remise,
+            '10': data.qtyRemise,
+            '11': data.accuseReception,
+            '12': data.accuseReceptionFirstName,
+            '13': data.accuseReceptionLastName,
+            '14': data.succursale,
+            '15': data.signature,
+            '16': data.created,
+            '17': data.id
+          });
     });
   }
 

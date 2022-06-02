@@ -19,57 +19,52 @@ class FinExteRepository {
     return data.toList();
   }
 
-  Future<void> insertData(FinanceExterieurModel financeExterieurModel) async {
-    var nomComplet = financeExterieurModel.nomComplet;
-    var pieceJustificative = financeExterieurModel.pieceJustificative;
-    var libelle = financeExterieurModel.libelle;
-    var montant = financeExterieurModel.montant;
-    var coupureBillet = financeExterieurModel.coupureBillet;
-    var ligneBudgtaire = financeExterieurModel.ligneBudgtaire;
-    var typeOperation = financeExterieurModel.typeOperation;
-    var numeroOperation = financeExterieurModel.numeroOperation;
-    var ressourceFin = financeExterieurModel.ressourceFin;
-
-    var signature = financeExterieurModel.signature;
-    var created = financeExterieurModel.created;
-
-
+  Future<void> insertData(FinanceExterieurModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('fin_exterieurs_id_seq'), '$nomComplet',"
-        "'$pieceJustificative','$libelle','$montant','$coupureBillet',"
-        "'$ligneBudgtaire', '$typeOperation','$numeroOperation', '$ressourceFin',"
-        "'$signature','$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
+        "libelle, montant, coupure_billet, ligne_budgetaire, ressource_fin,"
+        "type_operation, numero_operation, signature, created)"
+        "VALUES (nextval('fin_exterieurs_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10, @11)",
+        substitutionValues: {
+          '1': data.nomComplet,
+          '2': data.pieceJustificative,
+          '3': data.libelle,
+          '4': data.montant,
+          '5': data.coupureBillet,
+          '6': data.ligneBudgtaire,
+          '7': data.typeOperation,
+          '8': data.numeroOperation,
+          '9': data.ressourceFin,
+          '10': data.signature,
+          '11': data.created
+        });
     });
   }
 
-  Future<void> update(FinanceExterieurModel financeExterieurModel) async {
-    var id = financeExterieurModel.id;
-    var nomComplet = financeExterieurModel.nomComplet;
-    var pieceJustificative = financeExterieurModel.pieceJustificative;
-    var libelle = financeExterieurModel.libelle;
-    var montant = financeExterieurModel.montant;
-    var coupureBillet = financeExterieurModel.coupureBillet;
-    var ligneBudgtaire = financeExterieurModel.ligneBudgtaire;
-    var typeOperation = financeExterieurModel.typeOperation;
-    var numeroOperation = financeExterieurModel.numeroOperation;
-    var ressourceFin = financeExterieurModel.ressourceFin;
-
-    var signature = financeExterieurModel.signature;
-    var created = financeExterieurModel.created;
-
-
+  Future<void> update(FinanceExterieurModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
-          "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
-          "\"montant\"='$montant',\"coupureBillet\"='$coupureBillet',"
-          "\"ligneBudgtaire\"='$ligneBudgtaire',"
-          "\"typeOperation\"='$typeOperation', \"numeroOperation\"='$numeroOperation',"
-          "\"ressourceFin\"='$ressourceFin',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
+        "montant = @4, coupure_billet = @5, ligne_budgetaire = @6,"
+        "ressource_fin = @9, type_operation = @7, numero_operation = @8,"
+        "signature = @10, created = @11 WHERE id = @12",
+        substitutionValues: {
+          '1': data.nomComplet,
+          '2': data.pieceJustificative,
+          '3': data.libelle,
+          '4': data.montant,
+          '5': data.coupureBillet,
+          '6': data.ligneBudgtaire,
+          '7': data.typeOperation,
+          '8': data.numeroOperation,
+          '9': data.ressourceFin,
+          '10': data.signature,
+          '11': data.created,
+          '12': data.id
+        });
     });
   }
 

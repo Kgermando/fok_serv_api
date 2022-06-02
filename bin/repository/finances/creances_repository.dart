@@ -19,47 +19,44 @@ class CreancesRepository {
     return data.toList();
   }
 
-  Future<void> insertData(CreanceModel creanceModel) async {
-    var nomComplet = creanceModel.nomComplet;
-    var pieceJustificative = creanceModel.pieceJustificative;
-    var libelle = creanceModel.libelle;
-    var montant = creanceModel.montant;
-    var numeroOperation = creanceModel.numeroOperation;
-    var statutPaie = creanceModel.statutPaie;
-
-    var signature = creanceModel.signature;
-    var created = creanceModel.created;
-
-
+  Future<void> insertData(CreanceModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('creances_id_seq'), '$nomComplet',"
-          "'$pieceJustificative','$libelle','$montant',"
-          "'$numeroOperation','$statutPaie',"
-          "'$signature','$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
+        "libelle, montant, numero_operation, statut_paie, signature, created)"
+        "VALUES (nextval('creances_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8)",
+        substitutionValues: {
+          '1': data.nomComplet,
+          '2': data.pieceJustificative,
+          '3': data.libelle,
+          '4': data.montant,
+          '5': data.numeroOperation,
+          '6': data.statutPaie,
+          '7': data.signature,
+          '8': data.created
+        });
     });
   }
 
-  Future<void> update(CreanceModel creanceModel) async {
-    var id = creanceModel.id;
-    var nomComplet = creanceModel.nomComplet;
-    var pieceJustificative = creanceModel.pieceJustificative;
-    var libelle = creanceModel.libelle;
-    var montant = creanceModel.montant;
-    var numeroOperation = creanceModel.numeroOperation;
-    var statutPaie = creanceModel.statutPaie;
-
-    var signature = creanceModel.signature;
-    var created = creanceModel.created;
-
+  Future<void> update(CreanceModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
-        "\"pieceJustificative\"='$pieceJustificative',\"libelle\"='$libelle',"
-        "\"montant\"='$montant', \"numeroOperation\"='$numeroOperation', \"statutPaie\"='$statutPaie'"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
+        "montant = @4, numero_operation = @5, statut_paie = @6,"
+        "signature = @7, created = @8 WHERE id = @9",
+        substitutionValues: {
+          '1': data.nomComplet,
+          '2': data.pieceJustificative,
+          '3': data.libelle,
+          '4': data.montant,
+          '5': data.numeroOperation,
+          '6': data.statutPaie,
+          '7': data.signature,
+          '8': data.created,
+          '9': data.id
+        });
     });
   }
 

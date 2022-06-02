@@ -20,53 +20,52 @@ class StockGlobalRepository {
     return data.toList();
   }
 
-  Future<void> insertData(StocksGlobalMOdel stocksGlobalMOdel) async {
-    var idProduct = stocksGlobalMOdel.idProduct;
-    var quantity = stocksGlobalMOdel.quantity;
-    var quantityAchat = stocksGlobalMOdel.quantityAchat;
-    var priceAchatUnit = stocksGlobalMOdel.priceAchatUnit;
-    var prixVenteUnit = stocksGlobalMOdel.prixVenteUnit;
-    var unite = stocksGlobalMOdel.unite;
-    var modeAchat = stocksGlobalMOdel.modeAchat;
-    var tva = stocksGlobalMOdel.tva;
-    var qtyRavitailler = stocksGlobalMOdel.qtyRavitailler;
-
-    var signature = stocksGlobalMOdel.signature;
-    var created = stocksGlobalMOdel.created;
-
+  Future<void> insertData(StocksGlobalMOdel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('stocks_global_id_seq'), '$idProduct',"
-        "'$quantity','$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
-        "'$modeAchat', '$tva', '$qtyRavitailler',"
-        "'$signature','$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, id_product, quantity,"
+        "quantity_achat, price_achat_unit, prix_vente_unit, unite, mode_achat,"
+        "tva, qty_ravitailler, signature, created)"
+        "VALUES (nextval('stocks_global_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10, @11)",
+        substitutionValues: {
+          '1': data.idProduct,
+          '2': data.quantity,
+          '3': data.quantityAchat,
+          '4': data.priceAchatUnit,
+          '5': data.prixVenteUnit,
+          '6': data.unite,
+          '7': data.modeAchat,
+          '8': data.tva,
+          '9': data.qtyRavitailler,
+          '10': data.signature,
+          '11': data.created
+        });
     });
   }
 
-  Future<void> update(StocksGlobalMOdel stocksGlobalMOdel) async {
-    var id = stocksGlobalMOdel.id;
-    var idProduct = stocksGlobalMOdel.idProduct;
-    var quantity = stocksGlobalMOdel.quantity;
-    var quantityAchat = stocksGlobalMOdel.quantityAchat;
-    var priceAchatUnit = stocksGlobalMOdel.priceAchatUnit;
-    var prixVenteUnit = stocksGlobalMOdel.prixVenteUnit;
-    var unite = stocksGlobalMOdel.unite;
-    var modeAchat = stocksGlobalMOdel.modeAchat;
-    var tva = stocksGlobalMOdel.tva;
-    var qtyRavitailler = stocksGlobalMOdel.qtyRavitailler;
-
-    var signature = stocksGlobalMOdel.signature;
-    var created = stocksGlobalMOdel.created;
-
+  Future<void> update(StocksGlobalMOdel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"idProduct\"='$idProduct', \"quantity\"='$quantity',"
-        "\"quantityAchat\"='$quantityAchat',\"priceAchatUnit\"='$priceAchatUnit',"
-        "\"prixVenteUnit\"='$prixVenteUnit',\"unite\"='$unite', \"modeAchat\"='$modeAchat',"
-        "\"tva\"='$tva', \"qtyRavitailler\"='$qtyRavitailler',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET id_product = @1, quantity = @2, quantity_achat = @3,"
+          "price_achat_unit = @4, prix_vente_unit = @5, unite = @6,"
+          "mode_achat = @7, tva = @8, qty_ravitailler = @9,"
+          "signature = @10, created = @11 WHERE id = @12",
+          substitutionValues: {
+            '1': data.idProduct,
+            '2': data.quantity,
+            '3': data.quantityAchat,
+            '4': data.priceAchatUnit,
+            '5': data.prixVenteUnit,
+            '6': data.unite,
+            '7': data.modeAchat,
+            '8': data.tva,
+            '9': data.qtyRavitailler,
+            '10': data.signature,
+            '11': data.created,
+            '12': data.id
+          });
     });
   }
 

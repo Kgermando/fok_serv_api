@@ -20,63 +20,61 @@ class HistoryLivraisonRepository {
     return data.toList();
   }
 
-  Future<void> insertData(LivraisonHistoryModel livraisonHistoryModel) async {
-    var idProduct = livraisonHistoryModel.idProduct;
-    var quantity = livraisonHistoryModel.quantity;
-    var quantityAchat = livraisonHistoryModel.quantityAchat;
-    var priceAchatUnit = livraisonHistoryModel.priceAchatUnit;
-    var prixVenteUnit = livraisonHistoryModel.prixVenteUnit;
-    var unite = livraisonHistoryModel.unite;
-    var margeBen = livraisonHistoryModel.margeBen;
-    var tva = livraisonHistoryModel.tva;
-    var remise = livraisonHistoryModel.remise;
-    var qtyRemise = livraisonHistoryModel.qtyRemise;
-    var margeBenRemise = livraisonHistoryModel.margeBenRemise;
-    var qtyLivre = livraisonHistoryModel.qtyLivre;
-
-    var succursale = livraisonHistoryModel.succursale;
-    var signature = livraisonHistoryModel.signature;
-    var created = livraisonHistoryModel.created;
-
+  Future<void> insertData(LivraisonHistoryModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('history_livraisons_id_seq'), '$idProduct',"
-        "'$quantity','$quantityAchat','$priceAchatUnit', '$prixVenteUnit', '$unite',"
-        "'$margeBen', '$tva', '$remise', '$qtyRemise', '$margeBenRemise', '$qtyLivre',"
-        "'$succursale', '$signature', '$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, id_product, quantity,"
+        "quantity_achat, price_achat_unit, prix_vente_unit, unite, marge_ben,"
+        "tva, remise, qty_remise, marge_ben_remise, qty_livre, succursale, signature, created)"
+        "VALUES (nextval('history_livraisons_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10, @11, @12, @13, @14, @15)",
+        substitutionValues: {
+          '1': data.idProduct,
+          '2': data.quantity,
+          '3': data.quantityAchat,
+          '4': data.priceAchatUnit,
+          '5': data.prixVenteUnit,
+          '6': data.unite,
+          '7': data.margeBen,
+          '8': data.tva,
+          '9': data.remise,
+          '10': data.qtyRemise,
+          '11': data.margeBenRemise,
+          '12': data.qtyLivre,
+          '13': data.succursale,
+          '14': data.signature,
+          '15': data.created
+        });
     });
   }
 
-  Future<void> update(LivraisonHistoryModel livraisonHistoryModel) async {
-    var id = livraisonHistoryModel.id;
-    var idProduct = livraisonHistoryModel.idProduct;
-    var quantity = livraisonHistoryModel.quantity;
-    var quantityAchat = livraisonHistoryModel.quantityAchat;
-    var priceAchatUnit = livraisonHistoryModel.priceAchatUnit;
-    var prixVenteUnit = livraisonHistoryModel.prixVenteUnit;
-    var unite = livraisonHistoryModel.unite;
-    var margeBen = livraisonHistoryModel.margeBen;
-    var tva = livraisonHistoryModel.tva;
-    var remise = livraisonHistoryModel.remise;
-    var qtyRemise = livraisonHistoryModel.qtyRemise;
-    var margeBenRemise = livraisonHistoryModel.margeBenRemise;
-    var qtyLivre = livraisonHistoryModel.qtyLivre;
-
-    var succursale = livraisonHistoryModel.succursale;
-    var signature = livraisonHistoryModel.signature;
-    var created = livraisonHistoryModel.created;
-
-
+  Future<void> update(LivraisonHistoryModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"idProduct\"='$idProduct', \"quantity\"='$quantity',"
-        "\"quantityAchat\"='$quantityAchat',\"priceAchatUnit\"='$priceAchatUnit',"
-        "\"prixVenteUnit\"='$prixVenteUnit',\"unite\"='$unite', \"margeBen\"='$margeBen',"
-        "\"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise',"
-        "\"margeBenRemise\"='$margeBenRemise', \"qtyLivre\"='$qtyLivre',"
-        "\"succursale\"='$succursale', \"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET id_product = @1, quantity = @2, quantity_achat = @3,"
+          "price_achat_unit = @4, prix_vente_unit = @5, unite = @6,"
+          "marge_ben = @7, tva = @8, remise = @9, qty_remise = @10,"
+          "marge_ben_remise = @11, qty_livre = @12, succursale = @13,"
+          "signature = @14, created = @15 WHERE id = @16",
+          substitutionValues: {
+            '1': data.idProduct,
+            '2': data.quantity,
+            '3': data.quantityAchat,
+            '4': data.priceAchatUnit,
+            '5': data.prixVenteUnit,
+            '6': data.unite,
+            '7': data.margeBen,
+            '8': data.tva,
+            '9': data.remise,
+            '10': data.qtyRemise,
+            '11': data.margeBenRemise,
+            '12': data.qtyLivre,
+            '13': data.succursale,
+            '14': data.signature,
+            '15': data.created,
+            '16': data.id
+          });
     });
   }
 

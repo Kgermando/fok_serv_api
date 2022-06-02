@@ -20,35 +20,36 @@ class FactureRepository {
     return data.toList();
   }
 
-  Future<void> insertData(FactureCartModel factureCartModel) async {
-
-   var cart = factureCartModel.cart;
-    var client = factureCartModel.client;
-    var succursale = factureCartModel.succursale;
-    var signature = factureCartModel.signature;
-    var created = factureCartModel.created;
-
+  Future<void> insertData(FactureCartModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('factures_id_seq'), '$cart', '$client',"
-        "'$succursale', '$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, cart, client,"
+          "succursale, signature, created)"
+          "VALUES (nextval('creance_factures_id_seq'), @1, @2, @3, @4, @5)",
+          substitutionValues: {
+            '1': data.cart,
+            '2': data.client,
+            '3': data.succursale,
+            '4': data.signature,
+            '5': data.created
+          });
     });
   }
 
-  Future<void> update(FactureCartModel factureCartModel) async {
-    var id = factureCartModel.id;
-    var cart = factureCartModel.cart;
-    var client = factureCartModel.client;
-    var succursale = factureCartModel.succursale;
-    var signature = factureCartModel.signature;
-    var created = factureCartModel.created;
-
-   await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"cart\"='$cart', \"client\"='$client',"
-        "\"succursale\"='$succursale', \"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+  Future<void> update(FactureCartModel data) async {
+    await executor.transaction((conn) async {
+      await conn.query(
+          "UPDATE $tableName"
+          "SET cart = @1, client = @2, succursale = @3,"
+          "signature = @4, created = @5 WHERE id = @6",
+          substitutionValues: {
+            '1': data.cart,
+            '2': data.client,
+            '3': data.succursale,
+            '4': data.signature,
+            '5': data.created,
+            '6': data.id
+          });
     });
   }
 

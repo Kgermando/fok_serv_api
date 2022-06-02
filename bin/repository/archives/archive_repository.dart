@@ -21,39 +21,37 @@ class ArchiveRepository {
   }
 
   Future<void> insertData(ArchiveModel data) async {
-    var nomDocument = data.nomDocument;
-    var departement = data.departement;
-    var description = data.description;
-    var fichier = data.fichier;
-    var signature = data.signature;
-    var created = data.created;
-
-
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('archives_id_seq'), '$nomDocument',"
-        "'$departement', '$description', '$fichier',"
-        "'$signature','$created');");
+      await ctx.query(
+        "INSERT INTO $tableName (id, nom_document, departement,"
+        "description, fichier, signature, created)"
+        "VALUES (nextval('archives_id_seq'), @1, @2, @3, @4, @5, @6)",
+        substitutionValues: {
+          '1': data.nomDocument,
+          '2': data.departement,
+          '3': data.description,
+          '4': data.fichier,
+          '5': data.signature,
+          '6': data.created
+        });
     });
   }
 
   Future<void> update(ArchiveModel data) async {
-    var id = data.id;
-    var nomDocument = data.nomDocument;
-    var departement = data.departement;
-    var description = data.description;
-    var fichier = data.fichier;
-    var signature = data.signature;
-    var created = data.created;
-
-
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"nomDocument\"='$nomDocument', "
-          "\"departement\"='$departement', \"description\"='$description', \"fichier\"='$fichier',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET nom_document = @1, departement = @2, description = @3,"
+        "fichier = @4, signature = @5, created = @6 WHERE id = @7",
+        substitutionValues: {
+          '1': data.nomDocument,
+          '2': data.departement,
+          '3': data.description,
+          '4': data.fichier,
+          '5': data.signature,
+          '6': data.created,
+          '7': data.id
+        });
     });
   }
 

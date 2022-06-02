@@ -21,20 +21,18 @@ class PerformenceNoteRepository {
 
   Future<void> insertData(PerformenceNoteModel performenceModel) async {
     await executor.transaction((ctx) async {
-      var idLast = await ctx.query("SELECT id FROM $tableName");
       await ctx.query("INSERT INTO $tableName (id, agent, departement, hospitalite,"
       "ponctualite, travaille, note, signature, created)"
-      "VALUES (@1, @2, @3, @4, @5, @6, @7, @8, @9)", 
+      "VALUES (nextval('performences_note_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)", 
         substitutionValues: {
-          '1': idLast.last[0] + 1,
-          '2': performenceModel.agent,
-          '3': performenceModel.departement,
-          '4': performenceModel.hospitalite,
-          '5': performenceModel.ponctualite,
-          '6': performenceModel.travaille,
-          '7': performenceModel.note,
-          '8': performenceModel.signature,
-          '9': performenceModel.created
+          '1': performenceModel.agent,
+          '2': performenceModel.departement,
+          '3': performenceModel.hospitalite,
+          '4': performenceModel.ponctualite,
+          '5': performenceModel.travaille,
+          '6': performenceModel.note,
+          '7': performenceModel.signature,
+          '8': performenceModel.created
         });
     });
   }

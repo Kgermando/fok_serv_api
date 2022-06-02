@@ -21,54 +21,54 @@ class CampaignRepository {
   }
 
   Future<void> insertData(CampaignModel data) async {
-    var typeProduit = data.typeProduit;
-    var dateDebutEtFin = data.dateDebutEtFin;
-    var agentAffectes = data.agentAffectes;
-    var coutCampaign = data.coutCampaign;
-    var lieuCible = data.lieuCible;
-    var promotion = data.promotion;
-    var objetctifs = data.objetctifs;
-    var ligneBudgtaire = data.ligneBudgtaire;
-    var resources = data.resources;
-    var observation = data.observation;
-
-    var signature = data.signature;
-    var created = data.created;
-
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('campaigns_id_seq'), '$typeProduit',"
-        "'$dateDebutEtFin','$agentAffectes','$coutCampaign', '$lieuCible', '$promotion',"
-        "'$objetctifs', '$ligneBudgtaire', '$resources', '$observation',"
-        "'$signature','$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, type_produit, date_debut_et_fin,"
+        "agent_affectes, cout_campaign, lieu_cible, promotion, objetctifs,"
+        "ligne_budgtaire,  resources,  observation,  signature, created)"
+        "VALUES (nextval('campaigns_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10, @11, @12)",
+        substitutionValues: {
+          '1': data.typeProduit,
+          '2': data.dateDebutEtFin,
+          '3': data.agentAffectes,
+          '4': data.coutCampaign,
+          '5': data.lieuCible,
+          '6': data.promotion,
+          '7': data.objetctifs,
+          '8': data.ligneBudgtaire,
+          '9': data.resources,
+          '10': data.observation,
+          '11': data.signature,
+          '12': data.created
+        }
+      );
     });
   }
 
   Future<void> update(CampaignModel data) async {
-    var id = data.id;
-    var typeProduit = data.typeProduit;
-    var dateDebutEtFin = data.dateDebutEtFin;
-    var agentAffectes = data.agentAffectes;
-    var coutCampaign = data.coutCampaign;
-    var lieuCible = data.lieuCible;
-    var promotion = data.promotion;
-    var objetctifs = data.objetctifs;
-    var ligneBudgtaire = data.ligneBudgtaire;
-    var resources = data.resources;
-    var observation = data.observation;
-    var signature = data.signature;
-    var created = data.created;
-
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"typeProduit\"='$typeProduit', "
-          "\"dateDebutEtFin\"='$dateDebutEtFin',\"agentAffectes\"='$agentAffectes',"
-          "\"coutCampaign\"='$coutCampaign', \"lieuCible\"='$lieuCible', \"promotion\"='$promotion',"
-          "\"objetctifs\"='$objetctifs', \"ligneBudgtaire\"='$ligneBudgtaire', \"resources\"='$resources',"
-          "\"observation\"='$observation',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET type_produit = @1, date_debut_et_fin = @2, agent_affectes = @3,"
+          "cout_campaign = @4, lieu_cible = @5, promotion = @6, objetctifs = @7,"
+          "ligne_budgtaire = @8, resources = @9, observation = @10,"
+          "signature = @11, created = @12 WHERE id = @13",
+          substitutionValues: {
+            '1': data.typeProduit,
+            '2': data.dateDebutEtFin,
+            '3': data.agentAffectes,
+            '4': data.coutCampaign,
+            '5': data.lieuCible,
+            '6': data.promotion,
+            '7': data.objetctifs,
+            '8': data.ligneBudgtaire,
+            '9': data.resources,
+            '10': data.observation,
+            '11': data.signature,
+            '12': data.created,
+            '13': data.id
+          });
     });
   }
 

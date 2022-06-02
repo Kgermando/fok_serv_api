@@ -46,33 +46,34 @@ class GainRepository {
     return data.toList();
   }
 
-  Future<void> insertData(GainModel gainModel) async {
-    var sum = gainModel.sum;
-    var succursale = gainModel.succursale;
-    var signature = gainModel.signature;
-    var created = gainModel.created;
-
+  Future<void> insertData(GainModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('gains_id_seq'), '$sum',"
-        "'$succursale', '$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, sum,"
+          "succursale, signature, created)"
+          "VALUES (nextval('gains_id_seq'), @1, @2, @3, @4)",
+          substitutionValues: {
+            '1': data.sum,
+            '2': data.succursale,
+            '3': data.signature,
+            '4': data.created
+          });
     });
   }
 
-  Future<void> update(GainModel gainModel) async {
-    var id = gainModel.id;
-    var sum = gainModel.sum;
-    var succursale = gainModel.succursale;
-    var signature = gainModel.signature;
-    var created = gainModel.created;
-
+  Future<void> update(GainModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPcreated $tableName SET \"sum\"='$sum',"
-        "\"succursale\"='$succursale',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET sum = @1, succursale = @2,"
+          "signature = @3, created = @4 WHERE id = @5",
+          substitutionValues: {
+            '1': data.sum,
+            '2': data.succursale,
+            '3': data.signature,
+            '4': data.created,
+            '5': data.id
+          });
     });
   }
 

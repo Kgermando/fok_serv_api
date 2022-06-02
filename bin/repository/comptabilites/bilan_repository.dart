@@ -19,42 +19,36 @@ class BilanRepository {
     return data.toList();
   }
 
-  Future<void> insertData(BilanModel bilanModel) async {
-    var titleBilan = bilanModel.titleBilan;
-    var comptesActif = bilanModel.comptesActif;
-    var comptesPactif = bilanModel.comptesPactif;
-    var statut = bilanModel.statut;
-
-    var signature = bilanModel.signature;
-    var created = bilanModel.created;
-
+  Future<void> insertData(BilanModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('bilans_id_seq'), '$titleBilan',"
-        "'$comptesActif','$comptesPactif','$statut',"
-        "'$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, title_bilan, comptes_actif,"
+          "comptes_pactif, signature, created)"
+          "VALUES (nextval('bilans_id_seq'), @1, @2, @3, @4, @5)",
+          substitutionValues: {
+            '1': data.titleBilan,
+            '2': data.comptesActif,
+            '3': data.comptesPactif,
+            '4': data.signature,
+            '5': data.created
+          });
     });
   }
 
-  Future<void> update(BilanModel bilanModel) async {
-    var id = bilanModel.id;
-    var titleBilan = bilanModel.titleBilan;
-    var comptesActif = bilanModel.comptesActif;
-    var comptesPactif = bilanModel.comptesPactif;
-    var statut = bilanModel.statut;
-
-    var signature = bilanModel.signature;
-    var created = bilanModel.created;
-
-
-    await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-          "UPDATE $tableName SET \"titleBilan\"='$titleBilan',"
-          "\"comptesActif\"='$comptesActif', \"comptesPactif\"='$comptesPactif',"
-          "\"statut\"='$statut',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+  Future<void> update(BilanModel data) async {
+    await executor.transaction((conn) async {
+      await conn.query(
+          "UPDATE $tableName"
+          "SET title_bilan = @1, comptes_actif = @2, comptes_pactif = @3,"
+          "signature = @4, created = @5 WHERE id = @6",
+          substitutionValues: {
+            '1': data.titleBilan,
+            '2': data.comptesActif,
+            '3': data.comptesPactif,
+            '4': data.signature,
+            '5': data.created,
+            '6': data.id
+          });
     });
   }
 

@@ -11,7 +11,7 @@ import 'comm_marketing/commercial/creance_repository.dart';
 import 'comm_marketing/commercial/facture_cart_repository.dart';
 import 'comm_marketing/commercial/gain_repository.dart';
 import 'comm_marketing/commercial/history_livraison_repository.dart';
-import 'comm_marketing/commercial/history_ravitraillemenr_repository.dart';
+import 'comm_marketing/commercial/history_ravitraillement_repository.dart';
 import 'comm_marketing/commercial/number_facture_repository.dart';
 import 'comm_marketing/commercial/produit_model_repository.dart';
 import 'comm_marketing/commercial/restitution_repository.dart';
@@ -49,6 +49,7 @@ import 'rh/paiement_salaire_repository.dart';
 import 'rh/performence_repository.dart';
 import 'rh/performence_note_repository.dart';
 import 'rh/presence_repository.dart';
+import 'rh/transport_restauration_repository.dart';
 import 'user/refresh_token_repository.dart';
 import 'user/user_repository.dart';
 
@@ -63,6 +64,7 @@ class Repository {
   late PresenceRepository presences;
   late PerformenceRepository performences;
   late PerformenceNoteRepository performencesNote;
+  late TasnportRestaurationRepository transportRestauration;
 
   late DevisRepository devis;
 
@@ -134,6 +136,8 @@ class Repository {
     presences = PresenceRepository(executor, 'presences');
     performences = PerformenceRepository(executor, 'performences');
     performencesNote = PerformenceNoteRepository(executor, 'performences_note');
+    transportRestauration =
+        TasnportRestaurationRepository(executor, 'transport_restaurations');
 
     devis = DevisRepository(executor, 'devis');
 

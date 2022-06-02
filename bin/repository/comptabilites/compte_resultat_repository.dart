@@ -19,114 +19,99 @@ class CompteResultatRepository {
     return data.toList();
   }
 
-  Future<void> insertData(CompteResulatsModel compteResulatsModel) async {
-    var intitule = compteResulatsModel.intitule;
-
-
-    var achatMarchandises = compteResulatsModel.achatMarchandises;
-    var variationStockMarchandises = compteResulatsModel.variationStockMarchandises;
-    var achatApprovionnements = compteResulatsModel.achatApprovionnements;
-    var variationApprovionnements = compteResulatsModel.variationApprovionnements;
-    var autresChargesExterne = compteResulatsModel.autresChargesExterne;
-    var impotsTaxesVersementsAssimiles = compteResulatsModel.impotsTaxesVersementsAssimiles;
-    var renumerationPersonnel = compteResulatsModel.renumerationPersonnel;
-    var chargesSocialas = compteResulatsModel.chargesSocialas;
-    var dotatiopnsProvisions = compteResulatsModel.dotatiopnsProvisions;
-    var autresCharges = compteResulatsModel.autresCharges;
-    var chargesfinancieres = compteResulatsModel.chargesfinancieres;
-    var chargesExptionnelles = compteResulatsModel.chargesExptionnelles;
-    var impotSurbenefices = compteResulatsModel.impotSurbenefices;
-    var soldeCrediteur = compteResulatsModel.soldeCrediteur;
-    var ventesMarchandises = compteResulatsModel.ventesMarchandises;
-    var productionVendueBienEtSerices = compteResulatsModel.productionVendueBienEtSerices;
-    var productionStockee = compteResulatsModel.productionStockee;
-    var productionImmobilisee = compteResulatsModel.productionImmobilisee;
-    var subventionExploitation = compteResulatsModel.subventionExploitation;
-    var autreProduits = compteResulatsModel.autreProduits;
-    var montantExportation = compteResulatsModel.montantExportation;
-    var produitfinancieres = compteResulatsModel.produitfinancieres;
-    var produitExceptionnels = compteResulatsModel.produitExceptionnels;
-    var soldeDebiteur = compteResulatsModel.soldeDebiteur;
-
-    var signature = compteResulatsModel.signature;
-    var created = compteResulatsModel.created;
-
+  Future<void> insertData(CompteResulatsModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('comptes_resultat_id_seq'), '$intitule',"
-        "'$achatMarchandises','$variationStockMarchandises',"
-        "'$achatApprovionnements','$variationApprovionnements',"
-        "'$autresChargesExterne','$impotsTaxesVersementsAssimiles',"
-        "'$renumerationPersonnel','$chargesSocialas',"
-        "'$dotatiopnsProvisions', '$autresCharges',  '$chargesfinancieres',"
-        "'$chargesExptionnelles','$impotSurbenefices',"
-        "'$soldeCrediteur','$ventesMarchandises',"
-        "'$productionVendueBienEtSerices','$productionStockee',"
-        "'$productionImmobilisee','$subventionExploitation',"
-        "'$autreProduits','$montantExportation', '$produitfinancieres',"
-        "'$produitExceptionnels','$soldeDebiteur',"
-        "'$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, intitule, achat_marchandises,"
+          "variation_stock_marchandises, achat_approvionnements, variation_approvionnements,"
+          "autres_charges_externe, impots_taxes_versements_assimiles,"
+          "renumeration_personnel, charges_socialas, dotatiopns_provisions,"
+          "autres_charges, charges_financieres,"
+          "charges_exptionnelles, impot_surbenefices, solde_crediteur,"
+          "ventes_marchandises, production_vendue_bien_et_serices,"
+          "production_stockee, production_immobilisee, subvention_exploitation,"
+          "autre_produits, montant_exportation,"
+          "produit_financieres, produit_exceptionnels, solde_debiteur, signature, created)"
+          "VALUES (nextval('comptes_resultat_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20,"
+          "@21, @22, @23, @24, @25, @26, @27)",
+          substitutionValues: {
+            '1': data.intitule,
+            '2': data.achatMarchandises,
+            '3': data.variationStockMarchandises,
+            '4': data.achatApprovionnements,
+            '5': data.variationApprovionnements,
+            '6': data.autresChargesExterne,
+            '7': data.impotsTaxesVersementsAssimiles,
+            '8': data.renumerationPersonnel,
+            '9': data.chargesSocialas,
+            '10': data.dotatiopnsProvisions,
+            '11': data.autresCharges,
+            '12': data.chargesfinancieres,
+            '13': data.chargesExptionnelles,
+            '14': data.impotSurbenefices,
+            '15': data.soldeCrediteur,
+            '16': data.ventesMarchandises,
+            '17': data.productionVendueBienEtSerices,
+            '18': data.productionStockee,
+            '19': data.productionImmobilisee,
+            '20': data.subventionExploitation,
+            '21': data.autreProduits,
+            '22': data.montantExportation,
+            '23': data.produitfinancieres,
+            '24': data.produitExceptionnels,
+            '25': data.soldeDebiteur,
+            '26': data.signature,
+            '27': data.created
+          });
     });
   }
 
-  Future<void> update(CompteResulatsModel compteResulatsModel) async {
-    var id = compteResulatsModel.id;
-    var intitule = compteResulatsModel.intitule;
-
-    var achatMarchandises = compteResulatsModel.achatMarchandises;
-    var variationStockMarchandises =
-        compteResulatsModel.variationStockMarchandises;
-    var achatApprovionnements = compteResulatsModel.achatApprovionnements;
-    var variationApprovionnements =
-        compteResulatsModel.variationApprovionnements;
-    var autresChargesExterne = compteResulatsModel.autresChargesExterne;
-    var impotsTaxesVersementsAssimiles =
-        compteResulatsModel.impotsTaxesVersementsAssimiles;
-    var renumerationPersonnel = compteResulatsModel.renumerationPersonnel;
-    var chargesSocialas = compteResulatsModel.chargesSocialas;
-    var dotatiopnsProvisions = compteResulatsModel.dotatiopnsProvisions;
-    var autresCharges = compteResulatsModel.autresCharges;
-    var chargesfinancieres = compteResulatsModel.chargesfinancieres;
-    var chargesExptionnelles = compteResulatsModel.chargesExptionnelles;
-    var impotSurbenefices = compteResulatsModel.impotSurbenefices;
-    var soldeCrediteur = compteResulatsModel.soldeCrediteur;
-
-    var ventesMarchandises = compteResulatsModel.ventesMarchandises;
-    var productionVendueBienEtSerices =
-        compteResulatsModel.productionVendueBienEtSerices;
-    var productionStockee = compteResulatsModel.productionStockee;
-    var productionImmobilisee = compteResulatsModel.productionImmobilisee;
-    var subventionExploitation = compteResulatsModel.subventionExploitation;
-    var autreProduits = compteResulatsModel.autreProduits;
-    var montantExportation = compteResulatsModel.montantExportation;
-    var produitfinancieres = compteResulatsModel.produitfinancieres;
-
-    var produitExceptionnels = compteResulatsModel.produitExceptionnels;
-    var soldeDebiteur = compteResulatsModel.soldeDebiteur;
-
-    var signature = compteResulatsModel.signature;
-    var created = compteResulatsModel.created;
-
-
+  Future<void> update(CompteResulatsModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"intitule\"='$intitule', "
-        "\"achatMarchandises\"='$achatMarchandises', \"variationStockMarchandises\"='$variationStockMarchandises',"
-        "\"achatApprovionnements\"='$achatApprovionnements', \"variationApprovionnements\"='$variationApprovionnements',"
-        "\"autresChargesExterne\"='$autresChargesExterne', \"impotsTaxesVersementsAssimiles\"='$impotsTaxesVersementsAssimiles',"
-        "\"renumerationPersonnel\"='$renumerationPersonnel', \"chargesSocialas\"='$chargesSocialas',"
-        "\"dotatiopnsProvisions\"='$dotatiopnsProvisions', \"autresCharges\"='$autresCharges',"
-        "\"chargesfinancieres\"='$chargesfinancieres',"
-        "\"chargesExptionnelles\"='$chargesExptionnelles', \"impotSurbenefices\"='$impotSurbenefices',"
-        "\"soldeCrediteur\"='$soldeCrediteur', \"ventesMarchandises\"='$ventesMarchandises',"
-        "\"productionVendueBienEtSerices\"='$productionVendueBienEtSerices', \"productionStockee\"='$productionStockee',"
-        "\"productionImmobilisee\"='$productionImmobilisee', \"subventionExploitation\"='$subventionExploitation',"
-        "\"autreProduits\"='$autreProduits', \"montantExportation\"='$montantExportation',"
-        "\"produitfinancieres\"='$produitfinancieres',"
-        "\"produitExceptionnels\"='$produitExceptionnels', \"soldeDebiteur\"='$soldeDebiteur',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET intitule = @1, achat_marchandises = @2, variation_stock_marchandises = @3,"
+        "achat_approvionnements = @4, variation_approvionnements = @5,"
+        "autres_charges_externe = @6, impots_taxes_versements_assimiles = @7,"
+        "renumeration_personnel = @8, charges_socialas = @9, dotatiopns_provisions = @10,"
+        "autres_charges = @11, charges_financieres = @12, charges_exptionnelles = @13,"
+        "impot_surbenefices = @14, solde_crediteur = @15, ventes_marchandises = @16,"
+        "production_vendue_bien_et_serices = @17, production_stockee = @18,"
+        "production_immobilisee = @19,"
+        "subvention_exploitation = @20, autre_produits = @21, montant_exportation = @22,"
+        "produit_financieres = @23, produit_exceptionnels = @24, solde_debiteur = @25,"
+        "signature = @26, created = @27 WHERE id = @28",
+        substitutionValues: {
+          '1': data.intitule,
+          '2': data.achatMarchandises,
+          '3': data.variationStockMarchandises,
+          '4': data.achatApprovionnements,
+          '5': data.variationApprovionnements,
+          '6': data.autresChargesExterne,
+          '7': data.impotsTaxesVersementsAssimiles,
+          '8': data.renumerationPersonnel,
+          '9': data.chargesSocialas,
+          '10': data.dotatiopnsProvisions,
+          '11': data.autresCharges,
+          '12': data.chargesfinancieres,
+          '13': data.chargesExptionnelles,
+          '14': data.impotSurbenefices,
+          '15': data.soldeCrediteur,
+          '16': data.ventesMarchandises,
+          '17': data.productionVendueBienEtSerices,
+          '18': data.productionStockee,
+          '19': data.productionImmobilisee,
+          '20': data.subventionExploitation,
+          '21': data.autreProduits,
+          '22': data.montantExportation,
+          '23': data.produitfinancieres,
+          '24': data.produitExceptionnels,
+          '25': data.soldeDebiteur,
+          '26': data.signature,
+          '27': data.created,
+          '28': data.id
+        });
     });
   }
 

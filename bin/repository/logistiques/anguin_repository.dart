@@ -36,69 +36,65 @@ class AnguinRepository {
     }
   }
 
-  Future<void> insertData(AnguinModel anguinModel) async {
-    var nom = anguinModel.nom;
-    var modele = anguinModel.modele;
-    var marque = anguinModel.marque;
-    var numeroChassie = anguinModel.numeroChassie;
-    var couleur = anguinModel.couleur;
-    var genre = anguinModel.genre;
-    var qtyMaxReservoir = anguinModel.qtyMaxReservoir;
-    var dateFabrication = anguinModel.dateFabrication;
-    var nomeroPLaque = anguinModel.nomeroPLaque;
-    var nomeroEntreprise = anguinModel.nomeroEntreprise;
-    var kilometrageInitiale = anguinModel.kilometrageInitiale;
-    var provenance = anguinModel.provenance;
-    var typeCaburant = anguinModel.typeCaburant;
-    var typeMoteur = anguinModel.typeMoteur;
-
-    var signature = anguinModel.signature;
-    var created = anguinModel.created;
-
-
+  Future<void> insertData(AnguinModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('anguins_id_seq'), '$nom',"
-        "'$modele', '$marque', '$numeroChassie', '$couleur', '$genre', '$qtyMaxReservoir',"
-        "'$dateFabrication', '$nomeroPLaque', '$nomeroEntreprise', '$kilometrageInitiale', '$provenance',"
-        "'$typeCaburant', '$typeMoteur',"
-        "'$signature', '$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, nom, modele, marque, numero_chassie,"
+        "couleur, genre, qty_max_reservoir, date_fabrication, nomero_plaque,"
+        "nomero_entreprise, kilometrage_initiale, provenance, type_caburant,"
+        "type_moteur, signature, created)"
+        "VALUES (nextval('anguins_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16)",
+        substitutionValues: {
+          '1': data.nom,
+          '2': data.modele,
+          '3': data.marque,
+          '4': data.numeroChassie,
+          '5': data.couleur,
+          '6': data.genre,
+          '7': data.qtyMaxReservoir,
+          '8': data.dateFabrication,
+          '9': data.nomeroPLaque,
+          '10': data.nomeroEntreprise,
+          '11': data.kilometrageInitiale,
+          '12': data.provenance,
+          '13': data.typeCaburant,
+          '14': data.typeMoteur,
+          '15': data.signature,
+          '16': data.created
+        });
     });
   }
 
 
   
-  Future<void> update(AnguinModel anguinModel) async {
-    var id = anguinModel.id;
-    var nom = anguinModel.nom;
-    var modele = anguinModel.modele;
-    var marque = anguinModel.marque;
-    var numeroChassie = anguinModel.numeroChassie;
-    var couleur = anguinModel.couleur;
-    var genre = anguinModel.genre;
-    var qtyMaxReservoir = anguinModel.qtyMaxReservoir;
-    var dateFabrication = anguinModel.dateFabrication;
-    var nomeroPLaque = anguinModel.nomeroPLaque;
-    var nomeroEntreprise = anguinModel.nomeroEntreprise;
-    var kilometrageInitiale = anguinModel.kilometrageInitiale;
-    var provenance = anguinModel.provenance;
-    var typeCaburant = anguinModel.typeCaburant;
-    var typeMoteur = anguinModel.typeMoteur;
-
-    var signature = anguinModel.signature;
-    var created = anguinModel.created;
-
+  Future<void> update(AnguinModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"nom\"='$nom', \"modele\"='$modele',"
-        "\"marque\"='$marque', \"numeroChassie\"='$numeroChassie', \"couleur\"='$couleur',"
-        "\"genre\"='$genre', \"qtyMaxReservoir\"='$qtyMaxReservoir', \"rodateFabricationle\"='$dateFabrication',"
-        "\"nomeroPLaque\"='$nomeroPLaque', \"nomeroEntreprise\"='$nomeroEntreprise',"
-        "\"kilometrageInitiale\"='$kilometrageInitiale', \"provenance\"='$provenance',"
-        "\"typeCaburant\"='$typeCaburant', \"typeMoteur\"='$typeMoteur',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET nom = @1, modele = @2, marque = @3, numero_chassie = @4, couleur = @5,"
+        "genre = @6, qty_max_reservoir = @7, date_fabrication = @8, nomero_plaque = @9,"
+        "nomero_entreprise = @10, kilometrage_initiale = @11, provenance = @12,"
+        "type_caburant = @13, type_moteur = @14, signature = @15, created = @16 WHERE id = @17",
+        substitutionValues: {
+          '1': data.nom,
+          '2': data.modele,
+          '3': data.marque,
+          '4': data.numeroChassie,
+          '5': data.couleur,
+          '6': data.genre,
+          '7': data.qtyMaxReservoir,
+          '8': data.dateFabrication,
+          '9': data.nomeroPLaque,
+          '10': data.nomeroEntreprise,
+          '11': data.kilometrageInitiale,
+          '12': data.provenance,
+          '13': data.typeCaburant,
+          '14': data.typeMoteur,
+          '15': data.signature,
+          '16': data.created,
+          '17': data.id
+        });
     });
   }
 

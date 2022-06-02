@@ -22,7 +22,6 @@ class AgentsRepository {
 
   Future<void> insertData(AgentModel agentModel) async {
     await executor.transaction((ctx) async {
-      var idLast = await ctx.query("SELECT id FROM $tableName");
       await ctx.query(
           "INSERT INTO $tableName (id, nom, postnom, prenom, email, telephone,"
           "adresse, sexe, role, matricule, numero_securite_sociale, date_naissance,"
@@ -105,7 +104,6 @@ class AgentsRepository {
           '28': agentModel.id
         });
     });
-    
   }
 
   deleteData(int id) async {

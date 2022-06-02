@@ -20,35 +20,35 @@ class AgendaRepository {
   }
 
   Future<void> insertData(AgendaModel data) async {
-    var title = data.title;
-    var description = data.description;
-    var dateRappel = data.dateRappel;
-    var signature = data.signature;
-    var created = data.created;
-
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('agendas_id_seq'), '$title',"
-          "'$description','$dateRappel',"
-          "'$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, title, description,"
+          "date_rappel, signature, created)"
+          "VALUES (nextval('agendas_id_seq'), @1, @2, @3, @4, @5)",
+          substitutionValues: {
+            '1': data.title,
+            '2': data.description,
+            '3': data.dateRappel,
+            '4': data.signature,
+            '5': data.created
+          });
     });
   }
 
   Future<void> update(AgendaModel data) async {
-    var id = data.id;
-    var title = data.title;
-    var description = data.description;
-    var dateRappel = data.dateRappel;
-    var signature = data.signature;
-    var created = data.created;
-
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"title\"='$title', "
-          "\"description\"='$description',\"dateRappel\"='$dateRappel',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET title = @1, description = @2, date_rappel = @3,"
+          "signature = @4, created = @5 WHERE id = @6",
+          substitutionValues: {
+            '1': data.title,
+            '2': data.description,
+            '3': data.dateRappel,
+            '4': data.signature,
+            '5': data.created,
+            '6': data.id
+          });
     });
   }
 

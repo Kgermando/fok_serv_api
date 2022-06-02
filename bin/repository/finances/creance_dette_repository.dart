@@ -20,41 +20,39 @@ class CreanceDetteRepository {
   }
 
   Future<void> insertData(CreanceDetteModel data) async {
-    var nomComplet = data.nomComplet;
-    var pieceJustificative = data.pieceJustificative;
-    var libelle = data.libelle;
-    var creanceDette = data.creanceDette;
-    var montant = data.montant;
-
-    var signature = data.signature;
-    var created = data.created;
-
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('creance_dettes_id_seq'), '$nomComplet',"
-          "'$pieceJustificative','$libelle','$montant', '$creanceDette',"
-          "'$signature', '$created');");
+      await ctx.execute(
+        "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
+        "libelle, montant, creance_dette,  signature, created)"
+        "VALUES (nextval('creance_dettes_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
+        substitutionValues: {
+          '1': data.nomComplet,
+          '2': data.pieceJustificative,
+          '3': data.libelle,
+          '4': data.montant,
+          '5': data.creanceDette,
+          '6': data.signature,
+          '7': data.created
+        });
     });
   }
 
   Future<void> update(CreanceDetteModel data) async {
-    var id = data.id;
-    var nomComplet = data.nomComplet;
-    var pieceJustificative = data.pieceJustificative;
-    var libelle = data.libelle;
-    var montant = data.montant;
-    var creanceDette = data.creanceDette;
-    var signature = data.signature;
-    var created = data.created;
-
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-          "UPDATE $tableName SET \"nomComplet\"='$nomComplet', "
-          "\"pieceJustificative\"='$pieceJustificative', \"libelle\"='$libelle',"
-          "\"montant\"='$montant', \"creanceDette\"='$creanceDette',"
-          "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
+        "montant = @4, creance_dette = @5, signature = @6, created = @7 WHERE id = @8",
+        substitutionValues: {
+          '1': data.nomComplet,
+          '2': data.pieceJustificative,
+          '3': data.libelle,
+          '4': data.montant,
+          '5': data.creanceDette,
+          '6': data.signature,
+          '7': data.created,
+          '8': data.id
+        });
     });
   }
 

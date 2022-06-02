@@ -58,48 +58,49 @@ class VenteRepository {
     return data.toList();
   }
 
-  Future<void> insertData(VenteCartModel achatModel) async {
-    var idProductCart = achatModel.idProductCart;
-    var quantityCart = achatModel.quantityCart;
-    var priceTotalCart = achatModel.priceTotalCart;
-    var unite = achatModel.unite;
-    var tva = achatModel.tva;
-    var remise = achatModel.remise;
-    var qtyRemise = achatModel.qtyRemise;
-    var succursale = achatModel.succursale;
-    var signature = achatModel.signature;
-    var created = achatModel.created;
-
+  Future<void> insertData(VenteCartModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('ventes_id_seq'), '$idProductCart',"
-        "'$quantityCart','$priceTotalCart', '$unite', '$tva', '$remise', '$qtyRemise',"
-        "'$succursale', '$signature','$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, id_product_cart, quantity_cart,"
+          "price_total_cart, unite, tva, remise, qty_remise,"
+          "succursale, signature, created)"
+          "VALUES (nextval('ventes_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9, @10)",
+          substitutionValues: {
+            '1': data.idProductCart,
+            '2': data.quantityCart,
+            '3': data.priceTotalCart,
+            '4': data.unite,
+            '5': data.tva,
+            '6': data.remise,
+            '7': data.qtyRemise,
+            '8': data.succursale,
+            '9': data.signature,
+            '10': data.created
+          });
     });
   }
 
-  Future<void> update(VenteCartModel achatModel) async {
-    var id = achatModel.id;
-    var idProductCart = achatModel.idProductCart;
-    var quantityCart = achatModel.quantityCart;
-    var priceTotalCart = achatModel.priceTotalCart;
-    var unite = achatModel.unite;
-    var tva = achatModel.tva;
-    var remise = achatModel.remise;
-    var qtyRemise = achatModel.qtyRemise;
-    var succursale = achatModel.succursale;
-    var signature = achatModel.signature;
-    var created = achatModel.created;
-
+  Future<void> update(VenteCartModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPcreated $tableName SET \"idProductCart\"='$idProductCart', \"quantityCart\"='$quantityCart',"
-        "\"priceTotalCart\"='$priceTotalCart', \"unite\"='$unite',"
-        "\"succursale\"='$succursale', \"tva\"='$tva', \"remise\"='$remise', \"qtyRemise\"='$qtyRemise',"
-        "\"succursale\"='$succursale',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+          "UPDATE $tableName"
+          "SET id_product_cart = @1, quantity_cart = @2, price_total_cart = @3,"
+          "unite = @4, tva = @5, remise = @6, qty_remise = @7,"
+          "succursale = @8, signature = @9, created = @10 WHERE id = @11",
+          substitutionValues: {
+            '1': data.idProductCart,
+            '2': data.quantityCart,
+            '3': data.priceTotalCart,
+            '4': data.unite,
+            '5': data.tva,
+            '6': data.remise,
+            '7': data.qtyRemise,
+            '8': data.succursale,
+            '9': data.signature,
+            '10': data.created,
+            '11': data.id
+          });
     });
   }
 

@@ -19,43 +19,41 @@ class MobilierRepository {
     return data.toList();
   }
 
-  Future<void> insertData(MobilierModel mobilierModel) async {
-    var nom = mobilierModel.nom;
-    var modele = mobilierModel.modele;
-    var marque = mobilierModel.marque;
-    var descriptionMobilier = mobilierModel.descriptionMobilier;
-    var nombre = mobilierModel.nombre;
-
-    var signature = mobilierModel.signature;
-    var created = mobilierModel.created;
-
+  Future<void> insertData(MobilierModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-          "INSERT INTO $tableName VALUES (nextval('mobiliers_id_seq'), '$nom',"
-          "'$modele', '$marque', '$descriptionMobilier', '$nombre',"
-          "'$signature', '$created');");
+      await ctx.execute(
+          "INSERT INTO $tableName (id, nom, modele,"
+          "marque, description_mobilier, nombre, signature, created)"
+          "VALUES (nextval('mobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
+          substitutionValues: {
+            '1': data.nom,
+            '2': data.modele,
+            '3': data.marque,
+            '4': data.descriptionMobilier,
+            '5': data.nombre,
+            '6': data.signature,
+            '7': data.created
+          });
     });
   }
 
-  Future<void> update(MobilierModel mobilierModel) async {
-    var id = mobilierModel.id;
-    var nom = mobilierModel.nom;
-    var modele = mobilierModel.modele;
-    var marque = mobilierModel.marque;
-    var descriptionMobilier = mobilierModel.descriptionMobilier;
-    var nombre = mobilierModel.nombre;
-
-    var signature = mobilierModel.signature;
-    var created = mobilierModel.created;
-
-
+  Future<void> update(MobilierModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"nom\"='$nom', \"modele\"='$modele',"
-        "\"marque\"='$marque', \"descriptionMobilier\"='$descriptionMobilier', \"nombre\"='$nombre',"
-        "\"signature\"='$signature', \"created\"='$created' WHERE id=$id;");
+      await conn.query(
+        "UPDATE $tableName"
+        "SET nom = @1, modele = @2, marque = @3,"
+        "description_mobilier = @4, nombre = @5,"
+        "signature = @6, created = @7 WHERE id = @8",
+        substitutionValues: {
+          '1': data.nom,
+          '2': data.modele,
+          '3': data.marque,
+          '4': data.descriptionMobilier,
+          '5': data.nombre,
+          '6': data.signature,
+          '7': data.created,
+          '8': data.id
+        });
     });
   }
 

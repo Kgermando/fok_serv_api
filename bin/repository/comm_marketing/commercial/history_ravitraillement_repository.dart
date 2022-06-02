@@ -1,33 +1,33 @@
 import 'package:postgres/postgres.dart';
 
-import '../../../models/comm_maketing/achat_model.dart';
+import '../../../models/comm_maketing/history_ravitaillement_model.dart';
 
-class AchatsRepository {
+class HistoryRavitaillementRepository {
   final PostgreSQLConnection executor;
   final String tableName;
 
-  AchatsRepository(this.executor, this.tableName);
+  HistoryRavitaillementRepository(this.executor, this.tableName);
 
- 
-  Future<List<AchatModel>> getAllData() async {
-    var data = <AchatModel>{};
+
+  Future<List<HistoryRavitaillementModel>> getAllData() async {
+    var data = <HistoryRavitaillementModel>{};
 
     var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
-      data.add(AchatModel.fromSQL(row));
+      data.add(HistoryRavitaillementModel.fromSQL(row));
     }
     return data.toList();
   }
 
-  Future<void> insertData(AchatModel data) async {
+  Future<void> insertData(HistoryRavitaillementModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, id_product, quantity,"
-          "quantity_achat, price_achat_unit, prix_vente_unit, unite, tva,"
-          "remise, qty_remise, qty_livre, succursale, signature, created)"
-          "VALUES (nextval('achats_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8, @9, @10, @11, @12, @13)",
+          "quantity_achat, price_achat_unit, prix_vente_unit, unite, marge_ben,"
+          "tva, qty_ravitailler, succursale, signature, created)"
+          "VALUES (nextval('history_ravitaillements_id_seq'), @1, @2, @3, @4,"
+          "@5, @6, @7, @8, @9, @10, @11, @12)",
           substitutionValues: {
             '1': data.idProduct,
             '2': data.quantity,
@@ -35,26 +35,25 @@ class AchatsRepository {
             '4': data.priceAchatUnit,
             '5': data.prixVenteUnit,
             '6': data.unite,
-            '7': data.tva,
-            '8': data.remise,
-            '9': data.qtyRemise,
-            '10': data.qtyLivre,
-            '11': data.succursale,
-            '12': data.signature,
-            '13': data.created
+            '7': data.margeBen,
+            '8': data.tva,
+            '9': data.qtyRavitailler,
+            '10': data.succursale,
+            '11': data.signature,
+            '12': data.created
           });
     });
   }
 
-  Future<void> update(AchatModel data) async {
+  Future<void> update(HistoryRavitaillementModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
           "UPDATE $tableName"
           "SET id_product = @1, quantity = @2, quantity_achat = @3,"
           "price_achat_unit = @4, prix_vente_unit = @5, unite = @6,"
-          "tva = @7,"
-          "remise = @8, qty_remise = @9, qty_livre = @10, succursale = @11,"
-          "signature = @12, created = @13 WHERE id = @14",
+          "marge_ben = @7, tva = @8,"
+          "qty_ravitailler = @9, succursale = @10,"
+          "signature = @11, created = @12 WHERE id = @13",
           substitutionValues: {
             '1': data.idProduct,
             '2': data.quantity,
@@ -62,14 +61,13 @@ class AchatsRepository {
             '4': data.priceAchatUnit,
             '5': data.prixVenteUnit,
             '6': data.unite,
-            '7': data.tva,
-            '8': data.remise,
-            '9': data.qtyRemise,
-            '10': data.qtyLivre,
-            '11': data.succursale,
-            '12': data.signature,
-            '13': data.created,
-            '14': data.id
+            '7': data.margeBen,
+            '8': data.tva,
+            '9': data.qtyRavitailler,
+            '10': data.succursale,
+            '11': data.signature,
+            '12': data.created,
+            '13': data.id
           });
     });
   }
@@ -85,10 +83,10 @@ class AchatsRepository {
     }
   }
 
-  Future<AchatModel> getFromId(int id) async {
+  Future<HistoryRavitaillementModel> getFromId(int id) async {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
-    return AchatModel(
+    return HistoryRavitaillementModel(
       id: data[0][0],
       idProduct: data[0][1],
       quantity: data[0][2],
@@ -96,13 +94,12 @@ class AchatsRepository {
       priceAchatUnit: data[0][4],
       prixVenteUnit: data[0][5],
       unite: data[0][6],
-      tva: data[0][7],
-      remise: data[0][8],
-      qtyRemise: data[0][9],
-      qtyLivre: data[0][10],
-      succursale: data[0][11],
-      signature: data[0][12],
-      created: data[0][13]
+      margeBen: data[0][7],
+      tva: data[0][8],
+      qtyRavitailler: data[0][9],
+      succursale: data[0][10],
+      signature: data[0][11],
+      created: data[0][12]
     );
   } 
 }
