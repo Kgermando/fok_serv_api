@@ -7,6 +7,7 @@ class DevisModel {
   late String signature; // celui qui fait le document
   late DateTime createdRef; // Date de reference
   late DateTime created;
+  late bool isSubmit; // soumettre chez le chef
 
   DevisModel(
       {this.id,
@@ -16,7 +17,7 @@ class DevisModel {
       required this.observation,
       required this.signature,
       required this.createdRef,
-      required this.created});
+      required this.created, required this.isSubmit});
 
   factory DevisModel.fromSQL(List<dynamic> row) {
     return DevisModel(
@@ -27,7 +28,9 @@ class DevisModel {
         observation: row[4],
         signature: row[5],
         createdRef: row[6],
-        created: row[7]);
+        created: row[7],
+        isSubmit: row[8]
+    );
   }
 
   factory DevisModel.fromJson(Map<String, dynamic> json) {
@@ -39,7 +42,9 @@ class DevisModel {
         observation: json['observation'],
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created']));
+        created: DateTime.parse(json['created']),
+      isSubmit: json['isSubmit'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -51,7 +56,8 @@ class DevisModel {
       'observation': observation,
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'isSubmit': isSubmit
     };
   }
 }

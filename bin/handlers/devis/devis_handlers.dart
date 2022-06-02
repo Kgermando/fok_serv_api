@@ -51,7 +51,9 @@ class DevisHandlers {
           observation: input['observation'],
           signature: input['signature'],
           createdRef: DateTime.parse(input['createdRef']),
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        isSubmit: input['isSubmit'],
+      );
       try {
         await repos.devis.insertData(data);
       } catch (e) {
@@ -86,6 +88,9 @@ class DevisHandlers {
       // }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['isSubmit'] != null) {
+        data.isSubmit = input['isSubmit'];
       }
 
       repos.devis.update(data);
