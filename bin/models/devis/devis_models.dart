@@ -3,7 +3,7 @@ class DevisModel {
   late String title;
   late String priority;
   late String departement;
-  late List list; // Choses a énumerer
+  late List<Map<String, dynamic>> list; // Choses a énumerer
   late String ligneBudgtaire;
   late String resources;
   late bool observation;
