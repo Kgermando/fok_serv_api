@@ -25,6 +25,7 @@ import 'comptabilites/balance_compte_repository.dart';
 import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/compte_resultat_repository.dart';
 import 'comptabilites/journal_repository.dart';
+import 'devis/devis_ist_objet_repository.dart';
 import 'devis/devis_repository.dart';
 import 'exploitations/projet_repository.dart';
 import 'exploitations/rapport_repository.dart';
@@ -66,7 +67,9 @@ class Repository {
   late PerformenceNoteRepository performencesNote;
   late TasnportRestaurationRepository transportRestauration;
 
+  // Devis
   late DevisRepository devis;
+  late DevisListObjetRepository devisListObjets;
 
   // FINANCES
   late BanqueRepository banques;
@@ -139,7 +142,9 @@ class Repository {
     transportRestauration =
         TasnportRestaurationRepository(executor, 'transport_restaurations');
 
+    // DEVIS
     devis = DevisRepository(executor, 'devis');
+    devisListObjets = DevisListObjetRepository(executor, 'devis_list_objets');
 
     // FINANCES
     banques = BanqueRepository(executor, 'banques');

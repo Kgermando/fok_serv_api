@@ -31,6 +31,7 @@ import 'handlers/comptabilites/bilans_handlers.dart';
 import 'handlers/comptabilites/compte_resultat_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
+import 'handlers/devis/devis_list_objets_handlers.dart';
 import 'handlers/exploitations/projet_handlers.dart';
 import 'handlers/exploitations/rapport_hanlders.dart';
 import 'handlers/exploitations/tache_handlers.dart';
@@ -220,6 +221,7 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(LigneBudgetaireHanlers(repos).router));
 
+    // DEVIS
     router.mount(
         '/api/devis/',
         Pipeline()
@@ -227,7 +229,16 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(DevisHandlers(repos).router));
+    router.mount(
+        '/api/devis-list-objets/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(DevisListObjetsHandlers(repos).router));
 
+
+    // EXPLOITATIONS
     router.mount(
         '/api/projets/',
         Pipeline()

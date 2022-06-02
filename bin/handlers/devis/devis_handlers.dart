@@ -31,14 +31,14 @@ class DevisHandlers {
 
 
     router.get('/<id>', (Request request, String id) async {
-      late DevisModel agent;
+      late DevisModel data;
       try {
-        agent = await repos.devis.getFromId(int.parse(id));
+        data = await repos.devis.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
       }
-      return Response.ok(jsonEncode(agent.toJson()));
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.post('/insert-new-devis', (Request request) async {
@@ -48,9 +48,6 @@ class DevisHandlers {
           title: input['title'],
           priority: input['priority'],
           departement: input['departement'],
-          list: input['list'],
-          ligneBudgtaire: input['ligneBudgtaire'],
-          resources: input['resources'],
           observation: input['observation'],
           signature: input['signature'],
           created: DateTime.parse(input['created']));
@@ -76,12 +73,6 @@ class DevisHandlers {
       }
       if (input['departement'] != null) {
         data.departement = input['departement'];
-      }
-      if (input['list'] != null) {
-        data.list = input['list'];
-      }
-      if (input['resources'] != null) {
-        data.resources = input['resources'];
       }
       if (input['observation'] != null) {
         data.observation = input['observation'];

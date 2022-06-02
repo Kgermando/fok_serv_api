@@ -59,19 +59,17 @@ class DevisRepository {
     await executor.transaction((ctx) async {
       await ctx.query(
           "INSERT INTO $tableName (id, title, priority,"
-          "departement, list, ligne_budgtaire, resources, observation,"
-          "signature, created)"
+          "departement, observation,"
+          "signature, created_ref, created)"
           "VALUES (nextval('devis_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8 , @9)",
           substitutionValues: {
             '1': data.title,
             '2': data.priority,
             '3': data.departement,
-            '4': data.list,
-            '5': data.ligneBudgtaire,
-            '6': data.resources,
-            '7': data.observation,
-            '8': data.signature,
-            '9': data.created
+            '4': data.observation,
+            '5': data.signature,
+            '6': data.createdRef,
+            '7': data.created
           });
     });
   }
@@ -80,20 +78,17 @@ class DevisRepository {
     await executor.transaction((conn) async {
       await conn.query(
           "UPDATE $tableName"
-          "SET title = @1, priority = @2, departement = @3,"
-          "list = @4, ligne_budgtaire = @5, resources = @6, observation = @7,"
-          "signature = @8, created = @9 WHERE id = @10",
+          "SET title = @1, priority = @2, departement = @3, observation = @4,"
+          "signature = @5, created_ref = @6, created = @7 WHERE id = @8",
           substitutionValues: {
             '1': data.title,
             '2': data.priority,
             '3': data.departement,
-            '4': data.list,
-            '5': data.ligneBudgtaire,
-            '6': data.resources,
-            '7': data.observation,
-            '8': data.signature,
-            '9': data.created,
-            '10': data.id
+            '4': data.observation,
+            '5': data.signature,
+            '6': data.createdRef,
+            '7': data.created,
+            '8': data.id
           });
     });
   }
@@ -117,12 +112,9 @@ class DevisRepository {
       title: data[0][1],
       priority: data[0][2],
       departement: data[0][3],
-      list: data[0][4],
-      ligneBudgtaire: data[0][5],
-      resources: data[0][6],
-      observation: data[0][7],
-      signature: data[0][8],
-      created: data[0][9]
+      observation: data[0][4],
+      signature: data[0][5],
+      created: data[0][6]
     );
   } 
 }

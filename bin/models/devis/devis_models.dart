@@ -3,12 +3,9 @@ class DevisModel {
   late String title;
   late String priority;
   late String departement;
-  late List list; // Choses a énumerer
-  late String ligneBudgtaire;
-  late String resources;
   late bool observation;
-
   late String signature; // celui qui fait le document
+  late DateTime createdRef; // Date de reference
   late DateTime created;
 
   DevisModel(
@@ -16,9 +13,6 @@ class DevisModel {
       required this.title,
       required this.priority,
       required this.departement,
-      required this.list,
-      required this.ligneBudgtaire,
-      required this.resources,
       required this.observation,
       required this.signature,
       required this.created});
@@ -29,12 +23,9 @@ class DevisModel {
       title: row[1],
       priority: row[2],
       departement: row[3],
-      list: row[4],
-      ligneBudgtaire: row[5],
-      resources: row[6],
-      observation: row[7],
-      signature: row[8],
-      created: row[9]
+      observation: row[4],
+      signature: row[5],
+      created: row[6]
     );
   }
 
@@ -44,9 +35,6 @@ class DevisModel {
         title: json['title'],
         priority: json['priority'],
         departement: json['departement'],
-        list: json['list'],
-        ligneBudgtaire: json['ligneBudgtaire'],
-        resources: json['resources'],
         observation: json['observation'],
         signature: json['signature'],
         created: DateTime.parse(json['created']));
@@ -58,9 +46,6 @@ class DevisModel {
       'title': title,
       'priority': priority,
       'departement': departement,
-      'list': list,
-      'ligneBudgtaire': ligneBudgtaire,
-      'resources': resources,
       'observation': observation,
       'signature': signature,
       'created': created.toIso8601String()
