@@ -15,18 +15,19 @@ class DevisModel {
       required this.departement,
       required this.observation,
       required this.signature,
+      required this.createdRef,
       required this.created});
 
   factory DevisModel.fromSQL(List<dynamic> row) {
     return DevisModel(
-      id: row[0],
-      title: row[1],
-      priority: row[2],
-      departement: row[3],
-      observation: row[4],
-      signature: row[5],
-      created: row[6]
-    );
+        id: row[0],
+        title: row[1],
+        priority: row[2],
+        departement: row[3],
+        observation: row[4],
+        signature: row[5],
+        createdRef: row[6],
+        created: row[7]);
   }
 
   factory DevisModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +38,7 @@ class DevisModel {
         departement: json['departement'],
         observation: json['observation'],
         signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']));
   }
 
@@ -48,6 +50,7 @@ class DevisModel {
       'departement': departement,
       'observation': observation,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

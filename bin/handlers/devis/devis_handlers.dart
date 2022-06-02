@@ -50,6 +50,7 @@ class DevisHandlers {
           departement: input['departement'],
           observation: input['observation'],
           signature: input['signature'],
+          createdRef: DateTime.parse(input['createdRef']),
           created: DateTime.parse(input['created']));
       try {
         await repos.devis.insertData(data);
@@ -80,6 +81,9 @@ class DevisHandlers {
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
+      // if (input['createdRef'] != null) {
+      //   data.createdRef = DateTime.parse(input['createdRef']); Ne pas modifier ficher refence
+      // }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }

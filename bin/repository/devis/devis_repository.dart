@@ -61,7 +61,7 @@ class DevisRepository {
           "INSERT INTO $tableName (id, title, priority,"
           "departement, observation,"
           "signature, created_ref, created)"
-          "VALUES (nextval('devis_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8 , @9)",
+          "VALUES (nextval('devis_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
           substitutionValues: {
             '1': data.title,
             '2': data.priority,
@@ -114,7 +114,8 @@ class DevisRepository {
       departement: data[0][3],
       observation: data[0][4],
       signature: data[0][5],
-      created: data[0][6]
+      createdRef: data[0][6],
+      created: data[0][7]
     );
   } 
 }
