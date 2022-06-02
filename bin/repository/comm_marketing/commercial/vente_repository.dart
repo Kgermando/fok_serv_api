@@ -25,7 +25,7 @@ class VenteRepository {
   Future<List<VenteChartModel>> getAllDataChart() async {
     var data = <VenteChartModel>{};
     var querySQL =
-        "SELECT 'idProductCart', COUNT(*) AS count, SUM(\"priceTotalCart\"::FLOAT * 1) FROM $tableName GROUP BY \"idProductCart\" ORDER BY count DESC LIMIT 10;";
+        "SELECT 'id_product_cart', COUNT(*) AS count, SUM(\"price_total_cart\"::FLOAT * 1) FROM $tableName GROUP BY \"id_product_cart\" ORDER BY count DESC LIMIT 10;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(VenteChartModel.fromSQL(row));
@@ -37,7 +37,7 @@ class VenteRepository {
     var data = <CourbeVenteModel>{};
 
     var querySQL =
-        "SELECT EXTRACT(MONTH FROM \"created\" ::TIMESTAMP), SUM(\"priceTotalCart\"::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 mons' :: INTERVAL  GROUP BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ASC ;";
+        "SELECT EXTRACT(MONTH FROM \"created\" ::TIMESTAMP), SUM(\"price_total_cart\"::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 mons' :: INTERVAL  GROUP BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ASC ;";
 
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
@@ -49,7 +49,7 @@ class VenteRepository {
   Future<List<CourbeVenteModel>> getAllDataChartYear() async {
     var data = <CourbeVenteModel>{};
     var querySQL =
-        "SELECT EXTRACT(YEAR FROM \"created\" ::TIMESTAMP), SUM(\"priceTotalCart\"::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 years' :: INTERVAL  GROUP BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ASC ;";
+        "SELECT EXTRACT(YEAR FROM \"created\" ::TIMESTAMP), SUM(\"price_total_cart\"::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 years' :: INTERVAL  GROUP BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ASC ;";
 
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
