@@ -1,6 +1,6 @@
 class DevisListObjetsModel {
   late int? id;
-  late int referenceDate;
+  late DateTime referenceDate;
   late String title;
   late String quantity;
   late String designation;

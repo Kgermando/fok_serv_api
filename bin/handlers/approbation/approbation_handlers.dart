@@ -34,7 +34,7 @@ class ApprobationHandlers {
       var input = jsonDecode(await request.readAsString());
 
       ApprobationModel data = ApprobationModel(
-        reference: input['reference'],
+        reference: DateTime.parse(input['reference']),
         title: input['title'],
         departement: input['departement'],
         fontctionOccupee: input['fontctionOccupee'],
@@ -59,9 +59,8 @@ class ApprobationHandlers {
       ApprobationModel data = await repos.approbations.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
-
       if (input['reference'] != null) {
-        data.reference = input['reference'];
+        data.reference = DateTime.parse(input['reference']);
       }
       if (input['title'] != null) {
         data.title = input['title'];

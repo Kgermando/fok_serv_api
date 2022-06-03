@@ -19,7 +19,7 @@ class ApprobationRepository {
     }
     return data.toList();
   }
-
+ 
   Future<void> insertData(ApprobationModel data) async {
    await executor.transaction((ctx) async {
       await ctx.execute(
