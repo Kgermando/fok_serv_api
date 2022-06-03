@@ -45,7 +45,7 @@ class ApprobationModel {
   factory ApprobationModel.fromJson(Map<String, dynamic> json) {
     return ApprobationModel(
         id: json['id'],
-        reference: json['reference'],
+        reference: DateTime.parse(json['reference']),
         title: json['title'],
         departement: json['departement'],
         fontctionOccupee: json['fontctionOccupee'],
@@ -60,7 +60,7 @@ class ApprobationModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'reference': reference,
+      'reference': reference.toIso8601String(),
       'title': title,
       'departement': departement,
       'fontctionOccupee': fontctionOccupee,
