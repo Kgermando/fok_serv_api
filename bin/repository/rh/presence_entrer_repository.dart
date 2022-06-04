@@ -25,16 +25,15 @@ class PresenceEntrerRepository {
       await ctx.execute(
       "INSERT INTO $tableName (id, reference, nom, prenom, matricule, note,"
       "signature, created)"
-      "VALUES (nextval('presences_entrer_id_seq'), @1, @2, @3, @4, @5, @6 , @7, @8)",
+      "VALUES (nextval('presences_entrer_id_seq'), @1, @2, @3, @4, @5, @6 , @7)",
         substitutionValues: {
           '1': data.reference,
           '2': data.nom,
           '3': data.prenom,
-          '4': data.prenom,
-          '5': data.matricule,
-          '6': data.note,
-          '7': data.signature,
-          '8': data.created
+          '4': data.matricule,
+          '5': data.note,
+          '6': data.signature,
+          '7': data.created,
         });
     });
   }
@@ -44,17 +43,16 @@ class PresenceEntrerRepository {
       await conn.query(
           "UPDATE $tableName"
           "SET reference = @1, nom = @2, prenom = @3, matricule = @4,"
-          "note = @5, signature = @6, created = @7 WHERE id = @9",
+          "note = @5, signature = @6, created = @7 WHERE id = @8",
           substitutionValues: {
             '1': data.reference,
             '2': data.nom,
             '3': data.prenom,
-            '4': data.prenom,
-            '5': data.matricule,
-            '6': data.note,
-            '7': data.signature,
-            '8': data.created,
-            '9': data.id
+            '4': data.matricule,
+            '5': data.note,
+            '6': data.signature,
+            '7': data.created,
+            '8': data.id
           });
     });
   }
