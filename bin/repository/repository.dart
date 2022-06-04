@@ -49,7 +49,9 @@ import 'rh/agents_repository.dart';
 import 'rh/paiement_salaire_repository.dart';
 import 'rh/performence_repository.dart';
 import 'rh/performence_note_repository.dart';
+import 'rh/presence_entrer_repository.dart';
 import 'rh/presence_repository.dart';
+import 'rh/presence_sortie_repository.dart';
 import 'rh/transport_restauration_repository.dart';
 import 'user/refresh_token_repository.dart';
 import 'user/user_repository.dart';
@@ -63,6 +65,8 @@ class Repository {
   late AgentsRepository agents;
   late PaiementSalaireRepository salaires;
   late PresenceRepository presences;
+  late PresenceEntrerRepository presencesEntrer;
+  late PresenceSortieRepository presencesSortie;
   late PerformenceRepository performences;
   late PerformenceNoteRepository performencesNote;
   late TasnportRestaurationRepository transportRestauration;
@@ -130,6 +134,7 @@ class Repository {
   // APPROBATION
   late ApprobationRepository approbations;
 
+ 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
     users = UserRepository(executor, 'users');
@@ -137,6 +142,8 @@ class Repository {
     agents = AgentsRepository(executor, 'agents');
     salaires = PaiementSalaireRepository(executor, 'salaires');
     presences = PresenceRepository(executor, 'presences');
+    presencesEntrer = PresenceEntrerRepository(executor, 'presences_entrer');
+    presencesSortie = PresenceSortieRepository(executor, 'presences_sortie');
     performences = PerformenceRepository(executor, 'performences');
     performencesNote = PerformenceNoteRepository(executor, 'performences_note');
     transportRestauration =

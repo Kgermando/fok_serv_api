@@ -23,18 +23,13 @@ class PresenceRepository {
   Future<void> insertData(PresenceModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, arrive, arrive_agent, sortie, sortie_agent,"
-        "remarque, fin_journee, signature, created)"
-        "VALUES (nextval('presences_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
+        "INSERT INTO $tableName (id, remarque, fin_journee, signature, created)"
+        "VALUES (nextval('presences_id_seq'), @1, @2, @3, @4)",
           substitutionValues: {
-            '1': data.arrive,
-            '2': data.arriveAgent,
-            '3': data.sortie,
-            '4': data.sortieAgent,
-            '5': data.remarque,
-            '6': data.finJournee,
-            '7': data.signature,
-            '8': data.created
+            '1': data.remarque,
+            '2': data.finJournee,
+            '3': data.signature,
+            '4': data.created
           });
     });
   }
@@ -43,19 +38,14 @@ class PresenceRepository {
     await executor.transaction((conn) async {
       await conn.query(
           "UPDATE $tableName"
-          "SET arrive = @1, arrive_agent = @2, sortie = @3, sortie_agent = @4,"
-          "remarque = @5, fin_journee = @6,"
-          "signature = @7, created = @8 WHERE id = @9",
+          "SET remarque = @1, fin_journee = @2,"
+          "signature = @3, created = @4 WHERE id = @5",
           substitutionValues: {
-            '1': data.arrive,
-            '2': data.arriveAgent,
-            '3': data.sortie,
-            '4': data.sortieAgent,
-            '5': data.remarque,
-            '6': data.finJournee,
-            '7': data.signature,
-            '8': data.created,
-            '9': data.id
+            '1': data.remarque,
+            '2': data.finJournee,
+            '3': data.signature,
+            '4': data.created,
+            '5': data.id
           });
     });
   }
@@ -76,14 +66,10 @@ class PresenceRepository {
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return PresenceModel(
       id: data[0][0],
-      arrive: data[0][1],
-      arriveAgent: data[0][2],
-      sortie: data[0][3],
-      sortieAgent: data[0][4],
-      remarque: data[0][5],
-      finJournee: data[0][6],
-      signature: data[0][7],
-      created: data[0][8]
+      remarque: data[0][1],
+      finJournee: data[0][2],
+      signature: data[0][3],
+      created: data[0][4]
     );
   }
 }

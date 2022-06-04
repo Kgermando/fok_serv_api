@@ -54,7 +54,9 @@ import 'handlers/rh/agents_handlers.dart';
 import 'handlers/rh/paiement_salaire_handlers.dart';
 import 'handlers/rh/performence_handlers.dart';
 import 'handlers/rh/performence_note_handlers.dart';
+import 'handlers/rh/presence_entrer_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
+import 'handlers/rh/presence_sortie_handlers.dart';
 import 'middleware/middleware.dart';
 import 'repository/repository.dart';
 
@@ -98,6 +100,20 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PresenceHandlers(repos).router));
+    router.mount(
+        '/api/rh/presences-entrers/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(PresenceEntreHandlers(repos).router));
+    router.mount(
+        '/api/rh/presences-sorties/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(PresenceSortieHandlers(repos).router));
 
     router.mount(
         '/api/rh/paiement-salaires/',

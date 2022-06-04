@@ -3,25 +3,25 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/rh/presence_model.dart';
+import '../../models/rh/presence_sortie_model.dart';
 import '../../repository/repository.dart';
 
-class PresenceHandlers {
+class PresenceSortieHandlers {
   final Repository repos;
-  PresenceHandlers(this.repos);
+  PresenceSortieHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<PresenceModel> data = await repos.presences.getAllData();
+      List<PresenceSortieModel> data = await repos.presencesSortie.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late PresenceModel data;
+      late PresenceSortieModel data;
       try {
-        data = await repos.presences.getFromId(int.parse(id));
+        data = await repos.presencesSortie.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
@@ -29,16 +29,17 @@ class PresenceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-presence', (Request request) async {
+    router.post('/insert-new-presence-sortie', (Request request) async {
       var input = jsonDecode(await request.readAsString());
-
-      PresenceModel data = PresenceModel(
+      PresenceSortieModel data = PresenceSortieModel(
+          nom: input['nom'],
+          postnom: input['postnom'],
+          prenom: input['prenom'],
           remarque: input['remarque'],
-          finJournee: input['finJournee'] as bool,
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
-        await repos.presences.insertData(data);
+        await repos.presencesSortie.insertData(data);
       } catch (e) {
         print(e);
         return Response(422);
@@ -46,16 +47,22 @@ class PresenceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-presence/<id>', (Request request, String id) async {
+    router.put('/update-presence-sortie/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      PresenceModel data = await repos.presences.getFromId(int.parse(id!));
+      PresenceSortieModel data = await repos.presencesSortie.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
+      if (input['nom'] != null) {
+        data.nom = input['nom'];
+      }
+      if (input['postnom'] != null) {
+        data.postnom = input['postnom'];
+      }
+      if (input['prenom'] != null) {
+        data.prenom = input['prenom'];
+      }
       if (input['remarque'] != null) {
         data.remarque = input['remarque'];
-      }
-      if (input['finJournee'] != null) {
-        data.finJournee = input['finJournee'] as bool;
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
@@ -63,20 +70,20 @@ class PresenceHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
-      repos.presences.update(data);
+      repos.presencesSortie.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-presence/<id>', (Request request, String id) async {
+    router.delete('/delete-presence-sortie/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      repos.presences.deleteData(int.parse(id!));
+      repos.presencesSortie.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page presences n\'est pas trouvé'),
+          Response.notFound('La Page presences sortie n\'est pas trouvé'),
     );
 
     return router;
