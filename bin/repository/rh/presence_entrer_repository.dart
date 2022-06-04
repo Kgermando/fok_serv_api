@@ -23,16 +23,17 @@ class PresenceEntrerRepository {
   Future<void> insertData(PresenceEntrerModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, nom, postnom, prenom, remarque,"
+        "INSERT INTO $tableName (id, reference, nom, postnom, prenom, remarque,"
         "signature, created)"
         "VALUES (nextval('presences_entrer_id_seq'), @1, @2, @3, @4, @5, @6)",
           substitutionValues: {
-            '1': data.nom,
-            '2': data.postnom,
-            '3': data.prenom,
-            '4': data.remarque,
-            '5': data.signature,
-            '6': data.created
+            '1': data.reference,
+            '2': data.nom,
+            '3': data.postnom,
+            '4': data.prenom,
+            '5': data.remarque,
+            '6': data.signature,
+            '7': data.created
           });
     });
   }
@@ -41,17 +42,17 @@ class PresenceEntrerRepository {
     await executor.transaction((conn) async {
       await conn.query(
           "UPDATE $tableName"
-          "SET arrive = @1, arrive_agent = @2, sortie = @3, sortie_agent = @4,"
-          "remarque = @5, fin_journee = @6,"
-          "signature = @7, created = @8 WHERE id = @7",
+          "SET reference = @1, nom = @2, postnom = @3, prenom = @4,"
+          "remarque = @5, signature = @6, created = @7 WHERE id = @8",
           substitutionValues: {
-            '1': data.nom,
-            '2': data.postnom,
-            '3': data.prenom,
-            '4': data.remarque,
-            '5': data.signature,
-            '6': data.created,
-            '7': data.id
+            '1': data.reference,
+            '2': data.nom,
+            '3': data.postnom,
+            '4': data.prenom,
+            '5': data.remarque,
+            '6': data.signature,
+            '7': data.created,
+            '8': data.id
           });
     });
   }
@@ -72,12 +73,13 @@ class PresenceEntrerRepository {
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return PresenceEntrerModel(
       id: data[0][0],
-      nom: data[0][1],
-      postnom: data[0][2],
-      prenom: data[0][3],
-      remarque: data[0][4],
-      signature: data[0][5],
-      created: data[0][6]
+      reference: data[0][1],
+      nom: data[0][2],
+      postnom: data[0][3],
+      prenom: data[0][4],
+      remarque: data[0][5],
+      signature: data[0][6],
+      created: data[0][7]
     );
   }
 }

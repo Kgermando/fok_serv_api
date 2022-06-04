@@ -3,6 +3,7 @@ class PresenceModel {
   late String remarque;
   late bool finJournee;
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
   PresenceModel(
@@ -10,6 +11,7 @@ class PresenceModel {
       required this.remarque,
       required this.finJournee,
       required this.signature,
+      required this.createdRef,
       required this.created});
 
   factory PresenceModel.fromSQL(List<dynamic> row) {
@@ -18,7 +20,8 @@ class PresenceModel {
       remarque: row[1],
       finJournee: row[2],
       signature: row[3],
-      created: row[4]
+      createdRef: row[4],
+      created: row[5]
     );
   }
 
@@ -28,6 +31,7 @@ class PresenceModel {
         remarque: json['remarque'],
         finJournee: json['finJournee'],
         signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']));
   }
 
@@ -37,6 +41,7 @@ class PresenceModel {
       'remarque': remarque,
       'finJournee': finJournee,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

@@ -1,5 +1,6 @@
 class PresenceEntrerModel {
   late int? id;
+  late DateTime reference;
   late String nom;
   late String postnom;
   late String prenom;
@@ -9,6 +10,7 @@ class PresenceEntrerModel {
 
   PresenceEntrerModel(
       {this.id,
+      required this.reference,
       required this.nom,
       required this.postnom,
       required this.prenom,
@@ -19,18 +21,20 @@ class PresenceEntrerModel {
   factory PresenceEntrerModel.fromSQL(List<dynamic> row) {
     return PresenceEntrerModel(
       id: row[0],
-      nom: row[1],
-      postnom: row[2],
-      prenom: row[3],
-      remarque: row[4],
-      signature: row[5],
-      created: row[6]
+      reference: row[1],
+      nom: row[2],
+      postnom: row[3],
+      prenom: row[4],
+      remarque: row[5],
+      signature: row[6],
+      created: row[7]
     );
   }
 
   factory PresenceEntrerModel.fromJson(Map<String, dynamic> json) {
     return PresenceEntrerModel(
         id: json['id'],
+        reference: json['reference'],
         nom: json['nom'],
         postnom: json['postnom'],
         prenom: json['prenom'],
@@ -42,6 +46,7 @@ class PresenceEntrerModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'reference': reference,
       'nom': nom,
       'postnom': postnom,
       'prenom': prenom,

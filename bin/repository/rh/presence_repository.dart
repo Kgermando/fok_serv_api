@@ -23,13 +23,14 @@ class PresenceRepository {
   Future<void> insertData(PresenceModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, remarque, fin_journee, signature, created)"
+        "INSERT INTO $tableName (id, remarque, fin_journee, signature, created_ref, created)"
         "VALUES (nextval('presences_id_seq'), @1, @2, @3, @4)",
           substitutionValues: {
             '1': data.remarque,
             '2': data.finJournee,
             '3': data.signature,
-            '4': data.created
+            '4': data.createdRef,
+            '5': data.created
           });
     });
   }
@@ -39,13 +40,14 @@ class PresenceRepository {
       await conn.query(
           "UPDATE $tableName"
           "SET remarque = @1, fin_journee = @2,"
-          "signature = @3, created = @4 WHERE id = @5",
+          "signature = @3, created_ref = @4, created = @5 WHERE id = @6",
           substitutionValues: {
             '1': data.remarque,
             '2': data.finJournee,
             '3': data.signature,
-            '4': data.created,
-            '5': data.id
+            '4': data.createdRef,
+            '5': data.created,
+            '6': data.id
           });
     });
   }
@@ -69,7 +71,8 @@ class PresenceRepository {
       remarque: data[0][1],
       finJournee: data[0][2],
       signature: data[0][3],
-      created: data[0][4]
+      createdRef: data[0][4],
+      created: data[0][5]
     );
   }
 }

@@ -32,6 +32,7 @@ class PresenceSortieHandlers {
     router.post('/insert-new-presence-sortie', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       PresenceSortieModel data = PresenceSortieModel(
+          reference: input['reference'],
           nom: input['nom'],
           postnom: input['postnom'],
           prenom: input['prenom'],
@@ -52,6 +53,9 @@ class PresenceSortieHandlers {
       PresenceSortieModel data = await repos.presencesSortie.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
+      // if (input['reference'] != null) {
+      //   data.reference = input['reference'];
+      // }
       if (input['nom'] != null) {
         data.nom = input['nom'];
       }
