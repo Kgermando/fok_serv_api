@@ -3,6 +3,7 @@ class PresenceModel {
   late String remarque;
   late bool finJournee;
   late String signature; // celui qui fait le document
+  late String signatureFermeture; // celui qui cloture la journee
   late DateTime createdRef;
   late DateTime created;
 
@@ -11,6 +12,7 @@ class PresenceModel {
       required this.remarque,
       required this.finJournee,
       required this.signature,
+      required this.signatureFermeture,
       required this.createdRef,
       required this.created});
 
@@ -20,8 +22,9 @@ class PresenceModel {
       remarque: row[1],
       finJournee: row[2],
       signature: row[3],
-      createdRef: row[4],
-      created: row[5]
+      signatureFermeture: row[4],
+      createdRef: row[5],
+      created: row[6]
     );
   }
 
@@ -31,6 +34,7 @@ class PresenceModel {
         remarque: json['remarque'],
         finJournee: json['finJournee'],
         signature: json['signature'],
+        signatureFermeture: json['signatureFermeture'],
         createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']));
   }
@@ -41,6 +45,7 @@ class PresenceModel {
       'remarque': remarque,
       'finJournee': finJournee,
       'signature': signature,
+      'signatureFermeture': signatureFermeture,
       'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };

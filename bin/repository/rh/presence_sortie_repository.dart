@@ -20,20 +20,21 @@ class PresenceSortieRepository {
     return data.toList();
   }
 
-  Future<void> insertData(PresenceSortieModel data) async {
+    Future<void> insertData(PresenceSortieModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, reference, nom, postnom, prenom, remarque,"
+          "INSERT INTO $tableName (id, reference, nom, prenom, matricule, note,"
           "signature, created)"
-          "VALUES (nextval('presences_entrer_id_seq'), @1, @2, @3, @4, @5, @6)",
+          "VALUES (nextval('presences_entrer_id_seq'), @1, @2, @3, @4, @5, @6 , @7, @8)",
           substitutionValues: {
             '1': data.reference,
             '2': data.nom,
-            '3': data.postnom,
+            '3': data.prenom,
             '4': data.prenom,
-            '5': data.remarque,
-            '6': data.signature,
-            '7': data.created
+            '5': data.matricule,
+            '6': data.note,
+            '7': data.signature,
+            '8': data.created
           });
     });
   }
@@ -42,20 +43,22 @@ class PresenceSortieRepository {
     await executor.transaction((conn) async {
       await conn.query(
           "UPDATE $tableName"
-          "SET reference = @1, nom = @2, postnom = @3, prenom = @4,"
-          "remarque = @5, signature = @6, created = @7 WHERE id = @8",
+          "SET reference = @1, nom = @2, prenom = @3, matricule = @4,"
+          "note = @5, signature = @6, created = @7 WHERE id = @9",
           substitutionValues: {
             '1': data.reference,
             '2': data.nom,
-            '3': data.postnom,
+            '3': data.prenom,
             '4': data.prenom,
-            '5': data.remarque,
-            '6': data.signature,
-            '7': data.created,
-            '8': data.id
+            '5': data.matricule,
+            '6': data.note,
+            '7': data.signature,
+            '8': data.created,
+            '9': data.id
           });
     });
   }
+
 
 
   deleteData(int id) async {
@@ -76,9 +79,9 @@ class PresenceSortieRepository {
       id: data[0][0],
       reference: data[0][1],
       nom: data[0][2],
-      postnom: data[0][3],
-      prenom: data[0][4],
-      remarque: data[0][5],
+      prenom: data[0][3],
+      matricule: data[0][4],
+      note: data[0][5],
       signature: data[0][6],
       created: data[0][7]
     );

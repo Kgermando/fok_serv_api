@@ -2,9 +2,9 @@ class PresenceSortieModel {
   late int? id;
   late DateTime reference;
   late String nom;
-  late String postnom;
   late String prenom;
-  late String remarque;
+  late String matricule;
+  late String note;
   late String signature; // celui qui fait le document
   late DateTime created;
 
@@ -12,9 +12,9 @@ class PresenceSortieModel {
       {this.id,
       required this.reference,
       required this.nom,
-      required this.postnom,
       required this.prenom,
-      required this.remarque,
+      required this.matricule,
+      required this.note,
       required this.signature,
       required this.created});
 
@@ -23,9 +23,9 @@ class PresenceSortieModel {
         id: row[0],
         reference: row[1],
         nom: row[2],
-        postnom: row[3],
-        prenom: row[4],
-        remarque: row[5],
+        prenom: row[3],
+        matricule: row[4],
+        note: row[5],
         signature: row[6],
         created: row[7]);
   }
@@ -33,11 +33,11 @@ class PresenceSortieModel {
   factory PresenceSortieModel.fromJson(Map<String, dynamic> json) {
     return PresenceSortieModel(
         id: json['id'],
-        reference: json['reference'],
+        reference: DateTime.parse(json['reference']),
         nom: json['nom'],
-        postnom: json['postnom'],
         prenom: json['prenom'],
-        remarque: json['remarque'],
+        matricule: json['matricule'],
+        note: json['note'],
         signature: json['signature'],
         created: DateTime.parse(json['created']));
   }
@@ -45,11 +45,11 @@ class PresenceSortieModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'reference': reference,
+      'reference': reference.toIso8601String(),
       'nom': nom,
-      'postnom': postnom,
       'prenom': prenom,
-      'remarque': remarque,
+      'matricule': matricule,
+      'note': note,
       'signature': signature,
       'created': created.toIso8601String()
     };

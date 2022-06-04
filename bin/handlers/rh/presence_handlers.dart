@@ -36,6 +36,7 @@ class PresenceHandlers {
           remarque: input['remarque'],
           finJournee: input['finJournee'] as bool,
           signature: input['signature'],
+          signatureFermeture: input['signatureFermeture'],
           createdRef: DateTime.parse(input['createdRef']),
           created: DateTime.parse(input['created']));
       try {
@@ -60,6 +61,9 @@ class PresenceHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['signatureFermeture'] != null) {
+        data.signatureFermeture = input['signatureFermeture'];
       }
       if (input['createdRef'] != null) {
         data.createdRef = DateTime.parse(input['createdRef']);

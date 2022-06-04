@@ -34,9 +34,9 @@ class PresenceEntreHandlers {
       PresenceEntrerModel data = PresenceEntrerModel(
           reference: input['reference'],
           nom: input['nom'],
-          postnom: input['postnom'],
           prenom: input['prenom'],
-          remarque: input['remarque'],
+          matricule: input['matricule'],
+          note: input['note'],
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -59,14 +59,14 @@ class PresenceEntreHandlers {
       if (input['nom'] != null) {
         data.nom = input['nom'];
       }
-      if (input['postnom'] != null) {
-        data.postnom = input['postnom'];
-      }
       if (input['prenom'] != null) {
         data.prenom = input['prenom'];
       }
-      if (input['remarque'] != null) {
-        data.remarque = input['remarque'];
+      if (input['matricule'] != null) {
+        data.matricule = input['matricule'];
+      }
+      if (input['note'] != null) {
+        data.note = input['note'];
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
