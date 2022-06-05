@@ -30,7 +30,7 @@ class CompteActifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
  
-    router.post('/insert-new-comptes-actif', (Request request) async {
+    router.post('/insert-new-compte-actif', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       CompteActifModel data = CompteActifModel(
@@ -47,7 +47,7 @@ class CompteActifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-comptes-actif/<id>', (Request request, String id) async {
+    router.put('/update-compte-actif/<id>', (Request request, String id) async {
       var id = request.params['id'];
       CompteActifModel data = await repos.compteActif.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
@@ -66,7 +66,7 @@ class CompteActifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-comptes-actif/<id>', (Request request, String id) async {
+    router.delete('/delete-compte-actif/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.compteActif.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

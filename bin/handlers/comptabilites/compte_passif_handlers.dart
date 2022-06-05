@@ -30,7 +30,7 @@ class ComptePassifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
  
-    router.post('/insert-new-comptes-passif', (Request request) async {
+    router.post('/insert-new-compte-passif', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       ComptePassifModel data = ComptePassifModel(
@@ -47,7 +47,7 @@ class ComptePassifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-comptes-passif/<id>', (Request request, String id) async {
+    router.put('/update-compte-passif/<id>', (Request request, String id) async {
       var id = request.params['id'];
       ComptePassifModel data = await repos.comptePassif.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
@@ -66,7 +66,7 @@ class ComptePassifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-comptes-passif/<id>', (Request request, String id) async {
+    router.delete('/delete-compte-passif/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.comptePassif.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

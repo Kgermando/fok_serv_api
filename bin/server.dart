@@ -202,14 +202,14 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BilansHandlers(repos).router));
     router.mount(
-        '/api/comptabilite/compte-actif/',
+        '/api/comptabilite/comptes-actif/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CompteActifHandlers(repos).router));
     router.mount(
-        '/api/comptabilite/compte-passif/',
+        '/api/comptabilite/comptes-passif/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
