@@ -22,7 +22,7 @@ class BilanRepository {
   Future<void> insertData(BilanModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, title_bilan, comptes_actif,"
+          "INSERT INTO $tableName (id, title_bilan,"
           "signature, created_ref , created)"
           "VALUES (nextval('bilans_id_seq'), @1, @2, @3, @4)",
           substitutionValues: {
@@ -38,8 +38,8 @@ class BilanRepository {
     await executor.transaction((conn) async {
       await conn.query(
           "UPDATE $tableName"
-          "SET title_bilan = @1,"
-          "signature = @2, created_ref = @3, created = @4 WHERE id = @5",
+          "SET title_bilan = @1, signature = @2,"
+          "created_ref = @3, created = @4 WHERE id = @5",
           substitutionValues: {
             '1': data.titleBilan,
             '2': data.signature,
