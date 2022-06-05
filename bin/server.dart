@@ -28,6 +28,8 @@ import 'handlers/comm_marketing/marketing/annuaire_handlers.dart';
 import 'handlers/comm_marketing/marketing/campaign_handlers.dart';
 import 'handlers/comptabilites/balance_comptes_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
+import 'handlers/comptabilites/compte_actif_handlers.dart';
+import 'handlers/comptabilites/compte_passif_handlers.dart';
 import 'handlers/comptabilites/compte_resultat_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
@@ -199,6 +201,20 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BilansHandlers(repos).router));
+    router.mount(
+        '/api/comptabilite/compte-actif/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CompteActifHandlers(repos).router));
+    router.mount(
+        '/api/comptabilite/compte-passif/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ComptePassifHandlers(repos).router));
     router.mount(
         '/api/comptabilite/journals/',
         Pipeline()

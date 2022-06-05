@@ -1,20 +1,16 @@
 class BilanModel {
   late int? id;
   late String titleBilan;
-  late List comptesActif; // Liste des comptes
-  late List comptesPactif; // Liste des comptes
-  late bool statut;
   late String signature;
+  late DateTime createdRef;
   late DateTime created;
 
 
   BilanModel({
     this.id, 
     required this.titleBilan, 
-    required this.comptesActif, 
-    required this.comptesPactif,
-    required this.statut,
     required this.signature,
+    required this.createdRef,
     required this.created
   });
 
@@ -22,11 +18,9 @@ class BilanModel {
     return BilanModel(
       id: row[0],
       titleBilan: row[1],
-      comptesActif: row[2],
-      comptesPactif: row[3],
-      statut: row[4],
-      signature: row[5],
-      created: row[6]
+      signature: row[2],
+      createdRef: row[3],
+      created: row[4]
     );
   }
 
@@ -34,10 +28,8 @@ class BilanModel {
     return BilanModel(
       id: json['id'],
       titleBilan: json['titleBilan'],
-      comptesActif: json['comptesActif'],
-      comptesPactif: json['comptesPactif'],
-      statut: json['statut'],
       signature: json['signature'],
+      createdRef: DateTime.parse(json['createdRef']),
       created: DateTime.parse(json['created'])
     );
   }
@@ -46,10 +38,8 @@ class BilanModel {
     return {
       'id': id,
       'titleBilan': titleBilan,
-      'comptesActif': comptesActif,
-      'comptesPactif': comptesPactif,
-      'statut': statut,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

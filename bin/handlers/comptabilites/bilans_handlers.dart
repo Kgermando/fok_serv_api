@@ -34,12 +34,11 @@ class BilansHandlers {
       var input = jsonDecode(await request.readAsString());
 
       BilanModel data = BilanModel(
-          titleBilan: input['titleBilan'],
-          comptesActif: input['comptesActif'],
-          comptesPactif: input['comptesPactif'],
-          statut: input['statut'] as bool,
-          signature: input['signature'],
-          created: DateTime.parse(input['created']));
+        titleBilan: input['titleBilan'],
+        signature: input['signature'],
+        createdRef: DateTime.parse(input['createdRef']),
+        created: DateTime.parse(input['created'])
+      );
       try {
         await repos.bilans.insertData(data);
       } catch (e) {
@@ -57,17 +56,11 @@ class BilansHandlers {
       if (input['titleBilan'] != null) {
         data.titleBilan = input['titleBilan'];
       }
-      if (input['comptesActif'] != null) {
-        data.comptesActif = input['comptesActif'];
-      }
-      if (input['comptesPactif'] != null) {
-        data.comptesPactif = input['comptesPactif'];
-      }
-      if (input['statut'] != null) {
-        data.statut = input['statut'] as bool;
-      }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

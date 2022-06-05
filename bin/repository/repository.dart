@@ -23,6 +23,8 @@ import 'comm_marketing/marketing/annuaire_repository.dart';
 import 'comm_marketing/marketing/campaign_repository.dart';
 import 'comptabilites/balance_compte_repository.dart';
 import 'comptabilites/bilan_repository.dart';
+import 'comptabilites/compte_actif_repository.dart';
+import 'comptabilites/compte_passif_repository.dart';
 import 'comptabilites/compte_resultat_repository.dart';
 import 'comptabilites/journal_repository.dart';
 import 'devis/devis_ist_objet_repository.dart';
@@ -85,6 +87,8 @@ class Repository {
 
   // COMPTABILITES
   late BilanRepository bilans;
+  late CompteActifRepository compteActif;
+  late ComptePassifRepository comptePassif;
   late JournalRepository journals;
   late CompteResultatRepository comptesResultat;
   late BalanceCompteRepository balanceComptes;
@@ -134,7 +138,6 @@ class Repository {
   // APPROBATION
   late ApprobationRepository approbations;
 
- 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
     users = UserRepository(executor, 'users');
@@ -163,6 +166,8 @@ class Repository {
 
     // COMPTABILITE
     bilans = BilanRepository(executor, 'bilans');
+    compteActif = CompteActifRepository(executor, 'compte_actifs');
+    comptePassif = ComptePassifRepository(executor, 'compte_passifs');
     journals = JournalRepository(executor, 'journals');
     comptesResultat = CompteResultatRepository(executor, 'comptes_resultat');
     balanceComptes = BalanceCompteRepository(executor, 'balance_comptes');
