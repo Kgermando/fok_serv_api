@@ -6,23 +6,23 @@ import 'package:shelf_router/shelf_router.dart';
 import '../../models/archive/archive_model.dart';
 import '../../repository/repository.dart';
 
-class ArchiveHandlers {
+class ArchiveFolderHandlers {
   final Repository repos;
 
-  ArchiveHandlers(this.repos);
+  ArchiveFolderHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<ArchiveModel> data = await repos.archives.getAllData();
+      List<ArchiveFolderModel> data = await repos.archivesFolders.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late ArchiveModel data;
+      late ArchiveFolderModel data;
       try {
-        data = await repos.archives.getFromId(int.parse(id));
+        data = await repos.archivesFolders.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
@@ -30,20 +30,17 @@ class ArchiveHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-archive', (Request request) async {
+    router.post('/insert-new-archive-folder', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-      ArchiveModel data = ArchiveModel(
+      ArchiveFolderModel data = ArchiveFolderModel(
         departement: input['departement'],
         folderName: input['folderName'],
-        nomDocument: input['nomDocument'],
-        description: input['description'],
-        fichier: input['fichier'],
         signature: input['signature'],
         created: DateTime.parse(input['created'])
       );
       try {
-        await repos.archives.insertData(data);
+        await repos.archivesFolders.insertData(data);
       } catch (e) {
         print(e);
         return Response(422);
@@ -51,9 +48,9 @@ class ArchiveHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-archive/<id>', (Request request, String id) async {
+    router.put('/update-archive-folder/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      ArchiveModel data = await repos.archives.getFromId(int.parse(id!));
+      ArchiveFolderModel data = await repos.archivesFolders.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['departement'] != null) {
@@ -62,15 +59,6 @@ class ArchiveHandlers {
       if (input['folderName'] != null) {
         data.folderName = input['folderName'];
       }
-      if (input['nomDocument'] != null) {
-        data.nomDocument = input['nomDocument'];
-      }
-      if (input['description'] != null) {
-        data.description = input['description'];
-      }
-      if (input['fichier'] != null) {
-        data.fichier = input['fichier'];
-      }
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
@@ -78,20 +66,20 @@ class ArchiveHandlers {
         data.created = DateTime.parse(input['created']);
       }
 
-      repos.archives.update(data);
+      repos.archivesFolders.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-archive/<id>', (Request request, String id) async {
+    router.delete('/delete-archive-folder/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      repos.archives.deleteData(int.parse(id!));
+      repos.archivesFolders.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page archive n\'est pas trouvé'),
+          Response.notFound('La Page archive folder n\'est pas trouvé'),
     );
 
     return router;

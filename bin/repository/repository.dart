@@ -1,6 +1,7 @@
 import 'package:postgres/postgres.dart';
 
 import 'approbation/approbation.repository.dart';
+import 'archives/archive_folder_repository.dart';
 import 'archives/archive_repository.dart';
 import 'budgets/departement_budget_repository.dart';
 import 'budgets/ligne_budgetaire_repository.dart';
@@ -135,8 +136,11 @@ class Repository {
 
   // Archive
   late ArchiveRepository archives;
+  late ArchiveFolderRepository archivesFolders;
+
   // Mails
   late MailRepository mails;
+  
   // APPROBATION
   late ApprobationRepository approbations;
 
@@ -218,6 +222,7 @@ class Repository {
 
     // ARCHIVE
     archives = ArchiveRepository(executor, 'archives');
+    archivesFolders = ArchiveFolderRepository(executor, 'archives_folders');
 
     // Mails
     mails = MailRepository(executor, 'mails');
