@@ -59,6 +59,8 @@ import 'handlers/rh/performence_note_handlers.dart';
 import 'handlers/rh/presence_entrer_handlers.dart';
 import 'handlers/rh/presence_handlers.dart';
 import 'handlers/rh/presence_sortie_handlers.dart';
+import 'handlers/rh/trans_rest_agents_handlers.dart';
+import 'handlers/rh/transport_restauration_handlers.dart';
 import 'middleware/middleware.dart';
 import 'repository/repository.dart';
 
@@ -144,8 +146,19 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(PerformenceNoteHandlers(repos).router));
+            .addHandler(TransportRestaurantHandlers(repos).router));
+    router.mount(
+        '/api/rh/trans-rest-agents/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(TransRestAgentsHandlers(repos).router));
 
+
+
+
+  // FINANCE
     router.mount(
         '/api/finances/transactions/banques/',
         Pipeline()

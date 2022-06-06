@@ -8,48 +8,46 @@ class TasnportRestaurationRepository {
 
   TasnportRestaurationRepository(this.executor, this.tableName);
 
-  Future<List<TransportRestauration>> getAllData() async {
-    var data = <TransportRestauration>{};
+  Future<List<TransportRestaurationModel>> getAllData() async {
+    var data = <TransportRestaurationModel>{};
 
     var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
-      data.add(TransportRestauration.fromSQL(row));
+      data.add(TransportRestaurationModel.fromSQL(row));
     }
     return data.toList();
   }
 
-  Future<void> insertData(TransportRestauration data) async {
+  Future<void> insertData(TransportRestaurationModel data) async {
     await executor.transaction((ctx) async {
       await ctx.query(
-          "INSERT INTO $tableName (id, title, agents, ligne_budgetaire,"
-          "resources, signature, created)"
-          "VALUES (nextval('transport_restaurations_id_seq'), @1, @2, @3, @4, @5, @6)",
+          "INSERT INTO $tableName (id, title, observation,"
+          "signature, created_ref, created)"
+          "VALUES (nextval('transport_restaurations_id_seq'), @1, @2, @3, @4, @5)",
           substitutionValues: {
             '1': data.title,
-            '2': data.agents,
-            '3': data.ligneBudgtaire,
-            '4': data.resources,
-            '5': data.signature,
-            '6': data.created
+            '2': data.observation,
+            '3': data.signature,
+            '4': data.createdRef,
+            '5': data.created
           });
     });
   }
 
-  Future<void> update(TransportRestauration data) async {
+  Future<void> update(TransportRestaurationModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
         "UPDATE $tableName"
-        "SET title = @1, agents = @2, ligne_budgetaire = @3, resources = @4,"
-        "signature = @5, created = @6 WHERE id = @7",
+        "SET title = @1, observation = @2, signature = @3, created_ref = @4,"
+        "created = @5 WHERE id = @6",
         substitutionValues: {
           '1': data.title,
-          '2': data.agents,
-          '3': data.ligneBudgtaire,
-          '4': data.resources,
-          '5': data.signature,
-          '6': data.created,
-          '7': data.id
+          '2': data.observation,
+          '3': data.signature,
+          '4': data.createdRef,
+          '5': data.created,
+          '6': data.id
         });
     });
     
@@ -66,17 +64,16 @@ class TasnportRestaurationRepository {
     }
   }
 
-  Future<TransportRestauration> getFromId(int id) async {
+  Future<TransportRestaurationModel> getFromId(int id) async {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
-    return TransportRestauration(
+    return TransportRestaurationModel(
         id: data[0][0],
         title: data[0][1],
-        agents: data[0][2],
-        ligneBudgtaire: data[0][3],
-        resources: data[0][4],
-        signature: data[0][5],
-        created: data[0][6]
+        observation: data[0][2],
+        signature: data[0][3],
+        createdRef: data[0][4],
+        created: data[0][5]
     );
   }
 

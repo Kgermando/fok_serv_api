@@ -6,21 +6,21 @@ import 'package:shelf_router/shelf_router.dart';
 import '../../models/rh/transport_restauration_model.dart';
 import '../../repository/repository.dart';
 
-class PerformenceHandlers {
+class TransportRestaurantHandlers {
   final Repository repos;
 
-  PerformenceHandlers(this.repos);
+  TransportRestaurantHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<TransportRestauration> data = await repos.transportRestauration.getAllData();
+      List<TransportRestaurationModel> data = await repos.transportRestauration.getAllData();
       return Response.ok(jsonEncode(data));
     });
  
     router.get('/<id>', (Request request, String id) async {
-      late TransportRestauration data;
+      late TransportRestaurationModel data;
       try {
         data = await repos.transportRestauration.getFromId(int.parse(id));
       } catch (e) {
@@ -31,15 +31,14 @@ class PerformenceHandlers {
     });
 
 
-    router.post('/insert-new-transport-restauration/', (Request request) async {
+    router.post('/insert-new-transport-restauration', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-      TransportRestauration data = TransportRestauration(
+      TransportRestaurationModel data = TransportRestaurationModel(
           title: input['title'],
-          agents: input['agents'],
-          ligneBudgtaire: input['ligneBudgtaire'],
-          resources: input['resources'],
+          observation: input['observation'] as bool,
           signature: input['signature'],
+          createdRef: DateTime.parse(input['createdRef']),
           created: DateTime.parse(input['created']));
 
       try {
@@ -54,22 +53,19 @@ class PerformenceHandlers {
     router.put('/update-transport-restauration/<id>', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
-      TransportRestauration data = await repos.transportRestauration.getFromId(int.parse(id!));
+      TransportRestaurationModel data = await repos.transportRestauration.getFromId(int.parse(id!));
 
       if (input['title'] != null) {
         data.title = input['title'];
       }
-      if (input['agents'] != null) {
-        data.agents = input['agents'];
-      }
-      if (input['ligneBudgtaire'] != null) {
-        data.ligneBudgtaire = input['ligneBudgtaire'];
-      }
-      if (input['resources'] != null) {
-        data.resources = input['resources'];
+      if (input['observation'] != null) {
+        data.observation = input['observation'] as bool;
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
@@ -78,7 +74,7 @@ class PerformenceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-performence/<id>', (Request request) async {
+    router.delete('/delete-transport-restauration/<id>', (Request request) async {
       var id = request.params['id'];
       repos.transportRestauration.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

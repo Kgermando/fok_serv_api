@@ -54,6 +54,7 @@ import 'rh/performence_note_repository.dart';
 import 'rh/presence_entrer_repository.dart';
 import 'rh/presence_repository.dart';
 import 'rh/presence_sortie_repository.dart';
+import 'rh/trans_rest_agents_repository.dart';
 import 'rh/transport_restauration_repository.dart';
 import 'user/refresh_token_repository.dart';
 import 'user/user_repository.dart';
@@ -72,6 +73,7 @@ class Repository {
   late PerformenceRepository performences;
   late PerformenceNoteRepository performencesNote;
   late TasnportRestaurationRepository transportRestauration;
+  late TransRestAgentsRepository transRestAgents;
 
   // Devis
   late DevisRepository devis;
@@ -151,6 +153,7 @@ class Repository {
     performencesNote = PerformenceNoteRepository(executor, 'performences_note');
     transportRestauration =
         TasnportRestaurationRepository(executor, 'transport_restaurations');
+    transRestAgents = TransRestAgentsRepository(executor, 'trans_rest_agents');
 
     // DEVIS
     devis = DevisRepository(executor, 'devis');
