@@ -486,14 +486,14 @@ class Service {
             .addHandler(CampaignHandlers(repos).router));
 
     router.mount(
-        '/api/archves/',
+        '/api/archives/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ArchiveHandlers(repos).router));
     router.mount(
-        '/api/archves-folders/',
+        '/api/archives-folders/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
