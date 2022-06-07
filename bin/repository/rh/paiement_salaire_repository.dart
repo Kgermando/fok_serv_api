@@ -33,7 +33,7 @@ class PaiementSalaireRepository {
       "retenues_fiscalesdeduction, nombre_enfant_beneficaire_allocations_familiales,"
       "nombre_de_jours_allocations_familiales, taux_jours_allocations_familiales,"
       "total_a_payer_allocations_familiales, net_a_payer,"
-      "montant_pris_consideration_calculCotisationsinss, total_du_brut, signature)"
+      "montant_pris_consideration_calcul_cotisationsinss, total_du_brut, signature)"
       "VALUES (nextval('salaires_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15,"
       "@16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28, @29, @30,"
       "@31, @32, @33, @34, @35, @36, @37, @38, @39, @40, @41, @42, @43)",
@@ -113,7 +113,7 @@ class PaiementSalaireRepository {
           "taux_jours_allocations_familiales = @38,"
           "total_a_payer_allocations_familiales = @39,"
           "net_a_payer = @40,"
-          "montant_pris_consideration_calculCotisationsinss = @41,"
+          "montant_pris_consideration_calcul_cotisationsinss = @41,"
           "total_du_brut = @42, signature = @43' WHERE id=@44",
         substitutionValues: {
           '1': paiementSalaireModel.nom,
