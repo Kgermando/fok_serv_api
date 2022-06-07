@@ -80,7 +80,7 @@ class TransRestAgentsModel {
         nom: json['nom'],
         prenom: json['prenom'],
         matricule: json['matricule'],
-        montant: json['signature'],
+        montant: json['montant'],
     );
   }
 
