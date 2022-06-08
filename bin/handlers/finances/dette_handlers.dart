@@ -39,7 +39,7 @@ class DetteHandlers {
           libelle: input['libelle'],
           montant: input['montant'],
           numeroOperation: input['numeroOperation'],
-          statutPaie: input['statutPaie'],
+          statutPaie: input['statutPaie'] as bool,
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -73,9 +73,8 @@ class DetteHandlers {
         data.numeroOperation = input['numeroOperation'];
       }
       if (input['statutPaie'] != null) {
-        data.statutPaie = input['statutPaie'];
+        data.statutPaie = input['statutPaie'] as bool;
       }
-      
 
       if (input['signature'] != null) {
         data.signature = input['signature'];

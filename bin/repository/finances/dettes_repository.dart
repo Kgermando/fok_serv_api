@@ -26,7 +26,7 @@ class DettesRepository {
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
         "libelle, montant, numero_operation, statut_paie, signature, created)"
         "VALUES (nextval('dettes_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11, @12)",
+        "@7, @8)",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
