@@ -23,7 +23,7 @@ class CreanceDetteRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, reference, nom_complet, piece_justificative,"
-        "libelle, montant, creance_dette,  signature, created)"
+        "libelle, montant, creance_dette, signature, created)"
         "VALUES (nextval('creance_dettes_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
         substitutionValues: {
           '1': data.reference,
