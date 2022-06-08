@@ -71,7 +71,7 @@ class UserHandlers {
         selectUser.role = input['role'];
       }
       if (input['isOnline'] != null) {
-        selectUser.isOnline = input['isOnline'] as bool;
+        selectUser.isOnline = input['isOnline'];
       }
       if (input['createdAt'] != null) {
         selectUser.createdAt = input['createdAt'];
@@ -87,27 +87,26 @@ class UserHandlers {
       repos.users.update(selectUser);
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
- 
+
     // Add new user
     router.post('/insert-new-user', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       UserModel agent = UserModel(
-        photo: input['photo'],
-        nom: input['nom'],
-        prenom: input['prenom'],
-        email: input['email'],
-        telephone: input['telephone'],
-        matricule: input['matricule'],
-        departement: input['departement'],
-        servicesAffectation: input['servicesAffectation'],
-        fonctionOccupe: input['fonctionOccupe'],
-        role: input['role'],
-        isOnline: input['isOnline'] as bool,
-        createdAt: DateTime.parse(input['createdAt']),
-        passwordHash:
-            md5.convert(utf8.encode(input['passwordHash'])).toString(),
-        succursale: input['succursale']
-      );
+          photo: input['photo'],
+          nom: input['nom'],
+          prenom: input['prenom'],
+          email: input['email'],
+          telephone: input['telephone'],
+          matricule: input['matricule'],
+          departement: input['departement'],
+          servicesAffectation: input['servicesAffectation'],
+          fonctionOccupe: input['fonctionOccupe'],
+          role: input['role'],
+          isOnline: input['isOnline'],
+          createdAt: DateTime.parse(input['createdAt']),
+          passwordHash:
+              md5.convert(utf8.encode(input['passwordHash'])).toString(),
+          succursale: input['succursale']);
 
       try {
         await repos.users.insertData(agent);

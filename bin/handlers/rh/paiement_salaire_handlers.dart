@@ -34,51 +34,57 @@ class PaiementSalaireHandlers {
       var input = jsonDecode(await request.readAsString());
 
       PaiementSalaireModel data = PaiementSalaireModel(
-        nom: input['nom'],
-        postNom: input['postNom'],
-        prenom: input['prenom'],
-        telephone: input['telephone'],
-        adresse: input['adresse'],
-        departement: input['departement'],
-        numeroSecuriteSociale: input['numeroSecuriteSociale'],
-        matricule: input['matricule'],
-        servicesAffectation: input['servicesAffectation'],
-        salaire: input['salaire'],
-        observation: input['observation'] as bool,
-        modePaiement: input['modePaiement'],
-        createdAt: DateTime.parse(input['createdAt']),
-        ligneBudgtaire: input['ligneBudgtaire'],
-        resources: input['resources'],
-        tauxJourHeureMoisSalaire: input['tauxJourHeureMoisSalaire'],
-        joursHeuresPayeA100PourecentSalaire: input['joursHeuresPayeA100PourecentSalaire'],
-        totalDuSalaire: input['totalDuSalaire'],
-        nombreHeureSupplementaires: input['nombreHeureSupplementaires'],
-        tauxHeureSupplementaires: input['tauxHeureSupplementaires'],
-        totalDuHeureSupplementaires: input['totalDuHeureSupplementaires'],
-        supplementTravailSamediDimancheJoursFerie:input['supplementTravailSamediDimancheJoursFerie'],
-        prime: input['prime'],
-        divers: input['divers'],
-        joursCongesPaye: input['joursCongesPaye'],
-        tauxCongesPaye: input['tauxCongesPaye'],
-        totalDuCongePaye: input['totalDuCongePaye'],
-        jourPayeMaladieAccident: input['jourPayeMaladieAccident'],
-        tauxJournalierMaladieAccident: input['tauxJournalierMaladieAccident'],
-        totalDuMaladieAccident: input['totalDuMaladieAccident'],
-        pensionDeduction: input['pensionDeduction'],
-        indemniteCompensatricesDeduction: input['indemniteCompensatricesDeduction'],
-        avancesDeduction: input['avancesDeduction'],
-        diversDeduction: input['diversDeduction'],
-        retenuesFiscalesDeduction: input['retenuesFiscalesDeduction'],
-        nombreEnfantBeneficaireAllocationsFamiliales:input['nombreEnfantBeneficaireAllocationsFamiliales'],
-        nombreDeJoursAllocationsFamiliales:input['nombreDeJoursAllocationsFamiliales'],
-        tauxJoursAllocationsFamiliales: input['tauxJoursAllocationsFamiliales'],
-        totalAPayerAllocationsFamiliales: input['totalAPayerAllocationsFamiliales'],
-        netAPayer: input['netAPayer'],
-        montantPrisConsiderationCalculCotisationsINSS: input['montantPrisConsiderationCalculCotisationsINSS'],
-        totalDuBrut: input['totalDuBrut'], 
-
-        signature: input['signature']
-      );
+          nom: input['nom'],
+          postNom: input['postNom'],
+          prenom: input['prenom'],
+          telephone: input['telephone'],
+          adresse: input['adresse'],
+          departement: input['departement'],
+          numeroSecuriteSociale: input['numeroSecuriteSociale'],
+          matricule: input['matricule'],
+          servicesAffectation: input['servicesAffectation'],
+          salaire: input['salaire'],
+          observation: input['observation'],
+          modePaiement: input['modePaiement'],
+          createdAt: DateTime.parse(input['createdAt']),
+          ligneBudgtaire: input['ligneBudgtaire'],
+          resources: input['resources'],
+          tauxJourHeureMoisSalaire: input['tauxJourHeureMoisSalaire'],
+          joursHeuresPayeA100PourecentSalaire:
+              input['joursHeuresPayeA100PourecentSalaire'],
+          totalDuSalaire: input['totalDuSalaire'],
+          nombreHeureSupplementaires: input['nombreHeureSupplementaires'],
+          tauxHeureSupplementaires: input['tauxHeureSupplementaires'],
+          totalDuHeureSupplementaires: input['totalDuHeureSupplementaires'],
+          supplementTravailSamediDimancheJoursFerie:
+              input['supplementTravailSamediDimancheJoursFerie'],
+          prime: input['prime'],
+          divers: input['divers'],
+          joursCongesPaye: input['joursCongesPaye'],
+          tauxCongesPaye: input['tauxCongesPaye'],
+          totalDuCongePaye: input['totalDuCongePaye'],
+          jourPayeMaladieAccident: input['jourPayeMaladieAccident'],
+          tauxJournalierMaladieAccident: input['tauxJournalierMaladieAccident'],
+          totalDuMaladieAccident: input['totalDuMaladieAccident'],
+          pensionDeduction: input['pensionDeduction'],
+          indemniteCompensatricesDeduction:
+              input['indemniteCompensatricesDeduction'],
+          avancesDeduction: input['avancesDeduction'],
+          diversDeduction: input['diversDeduction'],
+          retenuesFiscalesDeduction: input['retenuesFiscalesDeduction'],
+          nombreEnfantBeneficaireAllocationsFamiliales:
+              input['nombreEnfantBeneficaireAllocationsFamiliales'],
+          nombreDeJoursAllocationsFamiliales:
+              input['nombreDeJoursAllocationsFamiliales'],
+          tauxJoursAllocationsFamiliales:
+              input['tauxJoursAllocationsFamiliales'],
+          totalAPayerAllocationsFamiliales:
+              input['totalAPayerAllocationsFamiliales'],
+          netAPayer: input['netAPayer'],
+          montantPrisConsiderationCalculCotisationsINSS:
+              input['montantPrisConsiderationCalculCotisationsINSS'],
+          totalDuBrut: input['totalDuBrut'],
+          signature: input['signature']);
       try {
         await repos.salaires.insertData(data);
       } catch (e) {
@@ -125,7 +131,7 @@ class PaiementSalaireHandlers {
         data.salaire = input['salaire'];
       }
       if (input['observation'] != null) {
-        data.observation = input['observation'] as bool;
+        data.observation = input['observation'];
       }
       if (input['modePaiement'] != null) {
         data.modePaiement = input['modePaiement'];
@@ -134,7 +140,7 @@ class PaiementSalaireHandlers {
         data.createdAt = DateTime.parse(input['createdAt']);
       }
       if (input['ligneBudgtaire'] != null) {
-        data.ligneBudgtaire = input['ligneBudgtaire'] ;
+        data.ligneBudgtaire = input['ligneBudgtaire'];
       }
       if (input['resources'] != null) {
         data.resources = input['resources'];
@@ -143,7 +149,8 @@ class PaiementSalaireHandlers {
         data.tauxJourHeureMoisSalaire = input['tauxJourHeureMoisSalaire'];
       }
       if (input['joursHeuresPayeA100PourecentSalaire'] != null) {
-        data.joursHeuresPayeA100PourecentSalaire = input['joursHeuresPayeA100PourecentSalaire'];
+        data.joursHeuresPayeA100PourecentSalaire =
+            input['joursHeuresPayeA100PourecentSalaire'];
       }
       if (input['totalDuSalaire'] != null) {
         data.totalDuSalaire = input['totalDuSalaire'];
@@ -158,7 +165,8 @@ class PaiementSalaireHandlers {
         data.totalDuHeureSupplementaires = input['totalDuHeureSupplementaires'];
       }
       if (input['supplementTravailSamediDimancheJoursFerie'] != null) {
-        data.supplementTravailSamediDimancheJoursFerie = input['supplementTravailSamediDimancheJoursFerie'];
+        data.supplementTravailSamediDimancheJoursFerie =
+            input['supplementTravailSamediDimancheJoursFerie'];
       }
       if (input['prime'] != null) {
         data.prime = input['prime'];
@@ -179,7 +187,8 @@ class PaiementSalaireHandlers {
         data.jourPayeMaladieAccident = input['jourPayeMaladieAccident'];
       }
       if (input['tauxJournalierMaladieAccident'] != null) {
-        data.tauxJournalierMaladieAccident = input['tauxJournalierMaladieAccident'];
+        data.tauxJournalierMaladieAccident =
+            input['tauxJournalierMaladieAccident'];
       }
       if (input['totalDuMaladieAccident'] != null) {
         data.totalDuMaladieAccident = input['totalDuMaladieAccident'];
@@ -188,7 +197,8 @@ class PaiementSalaireHandlers {
         data.pensionDeduction = input['pensionDeduction'];
       }
       if (input['indemniteCompensatricesDeduction'] != null) {
-        data.indemniteCompensatricesDeduction = input['indemniteCompensatricesDeduction'];
+        data.indemniteCompensatricesDeduction =
+            input['indemniteCompensatricesDeduction'];
       }
       if (input['avancesDeduction'] != null) {
         data.avancesDeduction = input['avancesDeduction'];
@@ -200,27 +210,32 @@ class PaiementSalaireHandlers {
         data.retenuesFiscalesDeduction = input['retenuesFiscalesDeduction'];
       }
       if (input['nombreEnfantBeneficaireAllocationsFamiliales'] != null) {
-        data.nombreEnfantBeneficaireAllocationsFamiliales = input['nombreEnfantBeneficaireAllocationsFamiliales'];
+        data.nombreEnfantBeneficaireAllocationsFamiliales =
+            input['nombreEnfantBeneficaireAllocationsFamiliales'];
       }
       if (input['nombreDeJoursAllocationsFamiliales'] != null) {
-        data.nombreDeJoursAllocationsFamiliales = input['nombreDeJoursAllocationsFamiliales'];
+        data.nombreDeJoursAllocationsFamiliales =
+            input['nombreDeJoursAllocationsFamiliales'];
       }
       if (input['tauxJoursAllocationsFamiliales'] != null) {
-        data.tauxJoursAllocationsFamiliales = input['tauxJoursAllocationsFamiliales'];
+        data.tauxJoursAllocationsFamiliales =
+            input['tauxJoursAllocationsFamiliales'];
       }
       if (input['totalAPayerAllocationsFamiliales'] != null) {
-        data.totalAPayerAllocationsFamiliales = input['totalAPayerAllocationsFamiliales'];
+        data.totalAPayerAllocationsFamiliales =
+            input['totalAPayerAllocationsFamiliales'];
       }
       if (input['netAPayer'] != null) {
         data.netAPayer = input['netAPayer'];
       }
       if (input['montantPrisConsiderationCalculCotisationsINSS'] != null) {
-        data.montantPrisConsiderationCalculCotisationsINSS = input['montantPrisConsiderationCalculCotisationsINSS'];
-      } 
+        data.montantPrisConsiderationCalculCotisationsINSS =
+            input['montantPrisConsiderationCalculCotisationsINSS'];
+      }
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
-      
+
       repos.salaires.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });

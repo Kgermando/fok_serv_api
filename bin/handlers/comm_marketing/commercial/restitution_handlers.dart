@@ -39,7 +39,7 @@ class RestitutionHandlers {
           unite: input['unite'],
           firstName: input['firstName'],
           lastName: input['lastName'],
-          accuseReception: input['accuseReception'] as bool,
+          accuseReception: input['accuseReception'],
           accuseReceptionFirstName: input['accuseReceptionFirstName'],
           accuseReceptionLastName: input['accuseReceptionLastName'],
           role: input['role'],
@@ -77,7 +77,7 @@ class RestitutionHandlers {
         data.lastName = input['lastName'];
       }
       if (input['accuseReception'] != null) {
-        data.accuseReception = input['accuseReception'] as bool;
+        data.accuseReception = input['accuseReception'];
       }
       if (input['accuseReceptionFirstName'] != null) {
         data.accuseReceptionFirstName = input['accuseReceptionFirstName'];

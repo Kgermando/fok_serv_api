@@ -34,7 +34,7 @@ class PresenceHandlers {
 
       PresenceModel data = PresenceModel(
           remarque: input['remarque'],
-          finJournee: input['finJournee'] as bool,
+          finJournee: input['finJournee'],
           signature: input['signature'],
           signatureFermeture: input['signatureFermeture'],
           createdRef: DateTime.parse(input['createdRef']),
@@ -57,7 +57,7 @@ class PresenceHandlers {
         data.remarque = input['remarque'];
       }
       if (input['finJournee'] != null) {
-        data.finJournee = input['finJournee'] as bool;
+        data.finJournee = input['finJournee'];
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];

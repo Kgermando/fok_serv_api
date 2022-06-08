@@ -14,7 +14,6 @@ class BonLivraisonHandlers {
   Router get router {
     final router = Router();
 
-
     router.get('/', (Request request) async {
       List<BonLivraisonModel> data = await repos.bonLivraison.getAllData();
       return Response.ok(jsonEncode(data));
@@ -45,13 +44,12 @@ class BonLivraisonHandlers {
           tva: input['tva'],
           remise: input['remise'],
           qtyRemise: input['qtyRemise'],
-          accuseReception: input['accuseReception'] as bool,
+          accuseReception: input['accuseReception'],
           accuseReceptionFirstName: input['accuseReceptionFirstName'],
           accuseReceptionLastName: input['accuseReceptionLastName'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-        );
+          created: DateTime.parse(input['created']));
       try {
         await repos.bonLivraison.insertData(data);
       } catch (e) {
@@ -61,9 +59,11 @@ class BonLivraisonHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-bon-livraison/<id>', (Request request, String id) async {
+    router.put('/update-bon-livraison/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
-      BonLivraisonModel data = await repos.bonLivraison.getFromId(int.parse(id!));
+      BonLivraisonModel data =
+          await repos.bonLivraison.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['idProduct'] != null) {
@@ -94,7 +94,7 @@ class BonLivraisonHandlers {
         data.remise = input['remise'];
       }
       if (input['accuseReception'] != null) {
-        data.accuseReception = input['accuseReception'] as bool;
+        data.accuseReception = input['accuseReception'];
       }
       if (input['accuseReceptionFirstName'] != null) {
         data.accuseReceptionFirstName = input['accuseReceptionFirstName'];
@@ -116,7 +116,8 @@ class BonLivraisonHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-bon-livraison/<id>', (Request request, String id) async {
+    router.delete('/delete-bon-livraison/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.bonLivraison.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

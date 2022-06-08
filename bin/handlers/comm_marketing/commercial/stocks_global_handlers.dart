@@ -40,7 +40,7 @@ class StockGlobalHandlers {
           priceAchatUnit: input['priceAchatUnit'],
           prixVenteUnit: input['prixVenteUnit'],
           unite: input['unite'],
-          modeAchat: input['modeAchat'] as bool,
+          modeAchat: input['modeAchat'],
           tva: input['tva'],
           qtyRavitailler: input['qtyRavitailler'],
           signature: input['signature'],
@@ -80,7 +80,7 @@ class StockGlobalHandlers {
         data.unite = input['unite'];
       }
       if (input['modeAchat'] != null) {
-        data.modeAchat = input['modeAchat'] as bool;
+        data.modeAchat = input['modeAchat'];
       }
       if (input['tva'] != null) {
         data.tva = input['tva'];

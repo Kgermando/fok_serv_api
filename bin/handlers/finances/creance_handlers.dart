@@ -34,16 +34,15 @@ class CreanceHandlers {
       var input = jsonDecode(await request.readAsString());
 
       CreanceModel data = CreanceModel(
-        nomComplet: input['nomComplet'],
-        pieceJustificative: input['pieceJustificative'],
-        libelle: input['libelle'],
-        montant: input['montant'],
-        numeroOperation: input['numeroOperation'],
-        statutPaie: input['statutPaie'] as bool,
-        signature: input['signature'],
-        createdRef: DateTime.parse(input['createdRef']),
-        created: DateTime.parse(input['created'])
-        );
+          nomComplet: input['nomComplet'],
+          pieceJustificative: input['pieceJustificative'],
+          libelle: input['libelle'],
+          montant: input['montant'],
+          numeroOperation: input['numeroOperation'],
+          statutPaie: input['statutPaie'],
+          signature: input['signature'],
+          createdRef: DateTime.parse(input['createdRef']),
+          created: DateTime.parse(input['created']));
       try {
         await repos.creances.insertData(data);
       } catch (e) {
@@ -53,7 +52,8 @@ class CreanceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-creance/<id>', (Request request, String id) async {
+    router.put('/update-transaction-creance/<id>',
+        (Request request, String id) async {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       CreanceModel data = await repos.creances.getFromId(int.parse(id!));
@@ -74,9 +74,9 @@ class CreanceHandlers {
         data.numeroOperation = input['numeroOperation'];
       }
       if (input['statutPaie'] != null) {
-        data.statutPaie = input['statutPaie'] as bool;
+        data.statutPaie = input['statutPaie'];
       }
-     
+
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
@@ -90,7 +90,8 @@ class CreanceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-transaction-creance/<id>', (String id,Request request ) async {
+    router.delete('/delete-transaction-creance/<id>',
+        (String id, Request request) async {
       var id = request.params['id'];
       repos.creances.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

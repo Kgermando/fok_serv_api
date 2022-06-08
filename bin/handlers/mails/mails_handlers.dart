@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
@@ -8,7 +7,7 @@ import '../../models/mail/mail_model.dart';
 import '../../repository/repository.dart';
 
 class MailsHandlers {
-    final Repository repos;
+  final Repository repos;
 
   MailsHandlers(this.repos);
 
@@ -35,18 +34,17 @@ class MailsHandlers {
       var input = jsonDecode(await request.readAsString());
 
       MailModel data = MailModel(
-        fullName: input['fullName'],
-        email: input['email'],
-        cc: input['cc'],
-        objet: input['objet'],
-        message: input['message'],
-        pieceJointe: input['pieceJointe'],
-        read: input['read'] as bool,
-        fullNameDest: input['fullNameDest'],
-        emailDest: input['emailDest'],
-        dateSend: DateTime.parse(input['dateSend']),
-        dateRead: DateTime.parse(input['dateRead'])
-      );
+          fullName: input['fullName'],
+          email: input['email'],
+          cc: input['cc'],
+          objet: input['objet'],
+          message: input['message'],
+          pieceJointe: input['pieceJointe'],
+          read: input['read'],
+          fullNameDest: input['fullNameDest'],
+          emailDest: input['emailDest'],
+          dateSend: DateTime.parse(input['dateSend']),
+          dateRead: DateTime.parse(input['dateRead']));
       try {
         await repos.mails.insertData(data);
       } catch (e) {
@@ -80,7 +78,7 @@ class MailsHandlers {
         data.pieceJointe = input['pieceJointe'];
       }
       if (input['read'] != null) {
-        data.read = input['read'] as bool;
+        data.read = input['read'];
       }
       if (input['fullNameDest'] != null) {
         data.fullNameDest = input['fullNameDest'];
@@ -107,8 +105,7 @@ class MailsHandlers {
 
     router.all(
       '/<ignored|.*>',
-      (Request request) =>
-          Response.notFound('La Page mail n\'est pas trouvé'),
+      (Request request) => Response.notFound('La Page mail n\'est pas trouvé'),
     );
 
     return router;

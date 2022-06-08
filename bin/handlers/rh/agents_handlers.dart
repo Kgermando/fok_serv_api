@@ -60,13 +60,12 @@ class AgentsHandlers {
           fonctionOccupe: input['fonctionOccupe'],
           competance: input['competance'],
           experience: input['experience'],
-          statutAgent: input['statutAgent'] as bool,
+          statutAgent: input['statutAgent'],
           createdAt: DateTime.parse(input['createdAt']),
-          photo: input['photo'], 
+          photo: input['photo'],
           salaire: input['salaire'],
           signature: input['signature'],
-          created: DateTime.parse(input['created'])
-      );
+          created: DateTime.parse(input['created']));
 
       try {
         await repos.agents.insertData(agent);
@@ -81,7 +80,7 @@ class AgentsHandlers {
       dynamic input = jsonDecode(await request.readAsString());
       var id = request.params['id'];
       AgentModel selectUser = await repos.agents.getFromId(int.parse(id!));
-      
+
       if (input['nom'] != null) {
         selectUser.nom = input['nom'];
       }
@@ -146,7 +145,7 @@ class AgentsHandlers {
         selectUser.experience = input['experience'];
       }
       if (input['statutAgent'] != null) {
-        selectUser.statutAgent = input['statutAgent'] as bool;
+        selectUser.statutAgent = input['statutAgent'];
       }
       if (input['createdAt'] != null) {
         selectUser.createdAt = DateTime.parse(input['createdAt']);
@@ -163,7 +162,7 @@ class AgentsHandlers {
       if (input['created'] != null) {
         selectUser.created = DateTime.parse(input['created']);
       }
-      
+
       repos.agents.update(selectUser);
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
@@ -177,13 +176,10 @@ class AgentsHandlers {
       return Response.ok('Agent supprimée');
     });
 
-
-
     router.get('/chart-pie-sexe/', (Request request) async {
       List<AgentPieChartModel> data = await repos.agents.getAgentChartPie();
       return Response.ok(jsonEncode(data));
     });
-
 
     router.all(
       '/<ignored|.*>',

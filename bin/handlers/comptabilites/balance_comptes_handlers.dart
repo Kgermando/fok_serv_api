@@ -36,7 +36,7 @@ class BalanceComptesHandlers {
       BalanceCompteModel data = BalanceCompteModel(
           title: input['title'],
           comptes: input['comptes'],
-          statut: input['statut'] as bool,
+          statut: input['statut'],
           signature: input['signature'],
           created: DateTime.parse(input['created']));
       try {
@@ -62,7 +62,7 @@ class BalanceComptesHandlers {
         data.comptes = input['comptes'];
       }
       if (input['statut'] != null) {
-        data.statut = input['statut'] as bool;
+        data.statut = input['statut'];
       }
 
       if (input['signature'] != null) {
