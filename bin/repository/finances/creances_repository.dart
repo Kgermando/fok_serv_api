@@ -23,9 +23,8 @@ class CreancesRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
-        "libelle, montant, numero_operation, statut_paie, signature, created)"
-        "VALUES (nextval('creances_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8)",
+        "libelle, montant, numero_operation, statut_paie, signature, created_ref, created)"
+        "VALUES (nextval('creances_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8 , @9)",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
@@ -34,7 +33,8 @@ class CreancesRepository {
           '5': data.numeroOperation,
           '6': data.statutPaie,
           '7': data.signature,
-          '8': data.created
+          '8': data.createdRef,
+          '9': data.created
         });
     });
   }
@@ -45,7 +45,7 @@ class CreancesRepository {
         "UPDATE $tableName"
         "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
         "montant = @4, numero_operation = @5, statut_paie = @6,"
-        "signature = @7, created = @8 WHERE id = @9",
+        "signature = @7, created_ref = @8, created = @9 WHERE id = @10",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
@@ -54,8 +54,9 @@ class CreancesRepository {
           '5': data.numeroOperation,
           '6': data.statutPaie,
           '7': data.signature,
-          '8': data.created,
-          '9': data.id
+          '8': data.createdRef,
+          '9': data.created,
+          '10': data.id
         });
     });
   }
@@ -83,7 +84,8 @@ class CreancesRepository {
       numeroOperation: data[0][5],
       statutPaie: data[0][6],
       signature: data[0][7],
-      created: data[0][8]
+      createdRef: data[0][8],
+      created: data[0][9]
     );
   }
 

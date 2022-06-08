@@ -6,21 +6,21 @@ class CreanceModel {
   late String montant;
   late String numeroOperation;
   late bool statutPaie;
-
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
-  CreanceModel({
-    this.id,
-    required this.nomComplet,
-    required this.pieceJustificative,
-    required this.libelle,
-    required this.montant,
-    required this.numeroOperation,
-    required this.statutPaie,
-    required this.signature,
-    required this.created
-  });
+  CreanceModel(
+      {this.id,
+      required this.nomComplet,
+      required this.pieceJustificative,
+      required this.libelle,
+      required this.montant,
+      required this.numeroOperation,
+      required this.statutPaie,
+      required this.signature,
+      required this.createdRef,
+      required this.created});
 
   factory CreanceModel.fromSQL(List<dynamic> row) {
     return CreanceModel(
@@ -32,8 +32,8 @@ class CreanceModel {
         numeroOperation: row[5],
         statutPaie: row[6],
         signature: row[7],
-        created: row[8]
-    );
+        createdRef: row[8],
+        created: row[9]);
   }
 
   factory CreanceModel.fromJson(Map<String, dynamic> json) {
@@ -46,9 +46,8 @@ class CreanceModel {
         numeroOperation: json['numeroOperation'],
         statutPaie: json['statutPaie'],
         signature: json['signature'],
-        created: DateTime.parse(json['created'])
-        
-    );
+        createdRef: DateTime.parse(json['createdRef']),
+        created: DateTime.parse(json['created']));
   }
 
   Map<String, dynamic> toJson() {
@@ -61,6 +60,7 @@ class CreanceModel {
       'numeroOperation': numeroOperation,
       'statutPaie': statutPaie,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

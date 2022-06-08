@@ -22,17 +22,18 @@ class CreanceDetteRepository {
   Future<void> insertData(CreanceDetteModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
+        "INSERT INTO $tableName (id, reference, nom_complet, piece_justificative,"
         "libelle, montant, creance_dette,  signature, created)"
-        "VALUES (nextval('creance_dettes_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
+        "VALUES (nextval('creance_dettes_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
         substitutionValues: {
-          '1': data.nomComplet,
-          '2': data.pieceJustificative,
-          '3': data.libelle,
-          '4': data.montant,
-          '5': data.creanceDette,
-          '6': data.signature,
-          '7': data.created
+          '1': data.reference,
+          '2': data.nomComplet,
+          '3': data.pieceJustificative,
+          '4': data.libelle,
+          '5': data.montant,
+          '6': data.creanceDette,
+          '7': data.signature,
+          '8': data.created
         });
     });
   }
@@ -41,17 +42,18 @@ class CreanceDetteRepository {
     await executor.transaction((conn) async {
       await conn.query(
         "UPDATE $tableName"
-        "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
-        "montant = @4, creance_dette = @5, signature = @6, created = @7 WHERE id = @8",
+        "SET reference = @1, nom_complet = @2, piece_justificative = @3, libelle = @4,"
+        "montant = @5, creance_dette = @6, signature = @7, created = @8 WHERE id = @9",
         substitutionValues: {
-          '1': data.nomComplet,
-          '2': data.pieceJustificative,
-          '3': data.libelle,
-          '4': data.montant,
-          '5': data.creanceDette,
-          '6': data.signature,
-          '7': data.created,
-          '8': data.id
+          '1': data.reference,
+          '2': data.nomComplet,
+          '3': data.pieceJustificative,
+          '4': data.libelle,
+          '5': data.montant,
+          '6': data.creanceDette,
+          '7': data.signature,
+          '8': data.created,
+          '9': data.id
         });
     });
   }
@@ -71,13 +73,15 @@ class CreanceDetteRepository {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return CreanceDetteModel(
-        id: data[0][0],
-        nomComplet: data[0][1],
-        pieceJustificative: data[0][2],
-        libelle: data[0][3],
-        montant: data[0][4],
-        creanceDette: data[0][5],
-        signature: data[0][6],
-        created: data[0][7]);
+      id: data[0][0],
+      reference: data[0][1],
+      nomComplet: data[0][2],
+      pieceJustificative: data[0][3],
+      libelle: data[0][4],
+      montant: data[0][5],
+      creanceDette: data[0][6],
+      signature: data[0][7],
+      created: data[0][8]
+    );
   }
 }

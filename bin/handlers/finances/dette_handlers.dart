@@ -34,14 +34,16 @@ class DetteHandlers {
       var input = jsonDecode(await request.readAsString());
 
       DetteModel data = DetteModel(
-          nomComplet: input['nomComplet'],
-          pieceJustificative: input['pieceJustificative'],
-          libelle: input['libelle'],
-          montant: input['montant'],
-          numeroOperation: input['numeroOperation'],
-          statutPaie: input['statutPaie'] as bool,
-          signature: input['signature'],
-          created: DateTime.parse(input['created']));
+        nomComplet: input['nomComplet'],
+        pieceJustificative: input['pieceJustificative'],
+        libelle: input['libelle'],
+        montant: input['montant'],
+        numeroOperation: input['numeroOperation'],
+        statutPaie: input['statutPaie'] as bool,
+        signature: input['signature'],
+        createdRef: DateTime.parse(input['createdRef']),
+        created: DateTime.parse(input['created'])
+      );
       try {
         await repos.dettes.insertData(data);
       } catch (e) {
@@ -75,9 +77,11 @@ class DetteHandlers {
       if (input['statutPaie'] != null) {
         data.statutPaie = input['statutPaie'] as bool;
       }
-
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

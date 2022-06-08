@@ -6,8 +6,8 @@ class DetteModel {
   late String montant;
   late String numeroOperation;
   late bool statutPaie;
-
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
   DetteModel(
@@ -19,6 +19,7 @@ class DetteModel {
       required this.numeroOperation,
       required this.statutPaie,
       required this.signature,
+      required this.createdRef,
       required this.created});
 
   factory DetteModel.fromSQL(List<dynamic> row) {
@@ -31,8 +32,8 @@ class DetteModel {
         numeroOperation: row[5],
         statutPaie: row[6],
         signature: row[7],
-        created: row[8]
-    );
+        createdRef: row[8],
+        created: row[9]);
   }
 
   factory DetteModel.fromJson(Map<String, dynamic> json) {
@@ -45,8 +46,8 @@ class DetteModel {
         numeroOperation: json['numeroOperation'],
         statutPaie: json['statutPaie'],
         signature: json['signature'],
-        created: DateTime.parse(json['created'])
-    );
+        createdRef: DateTime.parse(json['createdRef']),
+        created: DateTime.parse(json['created']));
   }
 
   Map<String, dynamic> toJson() {
@@ -59,6 +60,7 @@ class DetteModel {
       'numeroOperation': numeroOperation,
       'statutPaie': statutPaie,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }
