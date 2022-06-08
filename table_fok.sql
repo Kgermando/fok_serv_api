@@ -50,7 +50,7 @@ CREATE TABLE "public"."agents" (
     "adresse" character varying NOT NULL,
     "sexe" character varying NOT NULL,
     "role" character varying NOT NULL,
-    "matricule" character varying NOT NULL,
+    "matricule" character varying NOT NULL UNIQUE,
     "numero_securite_sociale" character varying NOT NULL,
     "date_naissance" timestamp NOT NULL,
     "lieu_naissance" character varying NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE "public"."agents" (
     "fonction_occupe" character varying NOT NULL,
     "competance" text NOT NULL,
     "experience" text NOT NULL,
-    "statut_agent" boolean NOT NULL,
+    "statut_agent" character varying NOT NULL,
     "created_at" timestamp NOT NULL,
     "photo" character varying,
     "salaire" character varying NOT NULL,
@@ -177,7 +177,7 @@ CREATE TABLE "public"."balance_comptes" (
     "id" integer DEFAULT nextval('balance_comptes_id_seq') NOT NULL,
     "title" character varying NOT NULL,
     "comptes" jsonb,
-    "statut" boolean NOT NULL,
+    "statut" character varying NOT NULL,
     "signature" character varying NOT NULL,
     "created" timestamp NOT NULL
 ) WITH (oids = false);
@@ -234,7 +234,7 @@ CREATE TABLE "public"."bon_livraisons" (
     "tva" character varying NOT NULL,
     "remise" character varying NOT NULL,
     "qty_remise" character varying NOT NULL,
-    "accuse_reception" boolean NOT NULL,
+    "accuse_reception" character varying NOT NULL,
     "accuse_reception_first_name" character varying NOT NULL,
     "accuse_reception_last_name" character varying NOT NULL,
     "succursale" character varying NOT NULL,
@@ -279,7 +279,7 @@ CREATE TABLE "public"."campaigns" (
     "objetctifs" character varying NOT NULL,
     "ligne_budgtaire" character varying NOT NULL,
     "resources" character varying NOT NULL,
-    "observation" boolean NOT NULL,
+    "observation" character varying NOT NULL,
     "signature" character varying NOT NULL,
     "created" timestamp NOT NULL
 ) WITH (oids = false);
@@ -393,13 +393,15 @@ CREATE SEQUENCE creance_dettes_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647
 
 CREATE TABLE "public"."creance_dettes" (
     "id" integer DEFAULT nextval('creance_dettes_id_seq') NOT NULL,
+    "reference" timestamp NOT NULL,
     "nom_complet" character varying NOT NULL,
     "piece_justificative" character varying NOT NULL,
     "libelle" character varying NOT NULL,
     "montant" character varying NOT NULL,
     "creance_dette" character varying NOT NULL,
     "signature" character varying NOT NULL,
-    "created" timestamp NOT NULL
+    "created" timestamp NOT NULL,
+    CONSTRAINT "creance_dettes_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
 
@@ -428,9 +430,11 @@ CREATE TABLE "public"."creances" (
     "libelle" character varying NOT NULL,
     "montant" character varying NOT NULL,
     "numero_operation" character varying NOT NULL,
-    "statut_paie" boolean NOT NULL,
+    "statut_paie" character varying NOT NULL,
     "signature" character varying NOT NULL,
-    "created" timestamp NOT NULL
+    "created_ref" timestamp NOT NULL,
+    "created" timestamp NOT NULL,
+    CONSTRAINT "creances_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
 
@@ -460,9 +464,11 @@ CREATE TABLE "public"."dettes" (
     "libelle" character varying NOT NULL,
     "montant" character varying NOT NULL,
     "numero_operation" character varying NOT NULL,
-    "statut_paie" boolean NOT NULL,
+    "statut_paie" character varying NOT NULL,
     "signature" character varying NOT NULL,
-    "created" timestamp NOT NULL
+    "created_ref" timestamp NOT NULL,
+    "created" timestamp NOT NULL,
+    CONSTRAINT "dettes_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
 
@@ -475,11 +481,11 @@ CREATE TABLE "public"."devis" (
     "title" character varying NOT NULL,
     "priority" character varying NOT NULL,
     "departement" character varying NOT NULL,
-    "observation" boolean NOT NULL,
+    "observation" character varying NOT NULL,
     "signature" character varying NOT NULL,
     "created_ref" timestamp NOT NULL,
     "created" timestamp NOT NULL,
-    "is_submit" boolean NOT NULL,
+    "is_submit" character varying NOT NULL,
     CONSTRAINT "devis_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
@@ -695,7 +701,7 @@ CREATE TABLE "public"."mails" (
     "objet" character varying NOT NULL,
     "message" character varying NOT NULL,
     "piece_jointe" character varying NOT NULL,
-    "read" boolean NOT NULL,
+    "read" character varying NOT NULL,
     "full_name_dest" character varying NOT NULL,
     "email_dest" character varying NOT NULL,
     "date_send" timestamp NOT NULL,
@@ -766,13 +772,13 @@ CREATE TABLE "public"."performences_note" (
 
 
 DROP TABLE IF EXISTS "presences";
-DROP SEQUENCE IF EXISTS presences_id_seq1;
-CREATE SEQUENCE presences_id_seq1 INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
+DROP SEQUENCE IF EXISTS presences_id_seq;
+CREATE SEQUENCE presences_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
 
 CREATE TABLE "public"."presences" (
-    "id" integer DEFAULT nextval('presences_id_seq1') NOT NULL,
+    "id" integer DEFAULT nextval('presences_id_seq') NOT NULL,
     "remarque" character varying NOT NULL,
-    "fin_journee" boolean NOT NULL,
+    "fin_journee" character varying NOT NULL,
     "signature" character varying NOT NULL,
     "signature_fermeture" character varying NOT NULL,
     "created_ref" timestamp NOT NULL,
@@ -853,7 +859,7 @@ CREATE TABLE "public"."projets" (
     "recette_attendus" character varying NOT NULL,
     "list_agent_et_role" json,
     "type_financement" character varying NOT NULL,
-    "observation" boolean NOT NULL,
+    "observation" character varying NOT NULL,
     "signature" character varying NOT NULL,
     "created" timestamp NOT NULL
 ) WITH (oids = false);
@@ -895,7 +901,7 @@ CREATE TABLE "public"."restitutions" (
     "unite" character varying NOT NULL,
     "first_name" character varying NOT NULL,
     "last_name" character varying NOT NULL,
-    "accuse_reception" boolean NOT NULL,
+    "accuse_reception" character varying NOT NULL,
     "accuse_reception_firstName" character varying NOT NULL,
     "accuse_reception_lastName" character varying NOT NULL,
     "role" character varying NOT NULL,
@@ -921,7 +927,7 @@ CREATE TABLE "public"."salaires" (
     "matricule" character varying NOT NULL,
     "services_affectation" character varying NOT NULL,
     "salaire" character varying NOT NULL,
-    "observation" boolean NOT NULL,
+    "observation" character varying NOT NULL,
     "mode_paiement" character varying NOT NULL,
     "created_at" timestamp NOT NULL,
     "ligne_budgtaire" character varying NOT NULL,
@@ -969,7 +975,7 @@ CREATE TABLE "public"."stocks_global" (
     "price_achat_unit" character varying NOT NULL,
     "prix_vente_unit" character varying NOT NULL,
     "unite" character varying NOT NULL,
-    "mode_achat" boolean NOT NULL,
+    "mode_achat" character varying NOT NULL,
     "tva" character varying NOT NULL,
     "qty_ravitailler" character varying NOT NULL,
     "signature" character varying NOT NULL,
@@ -1004,7 +1010,7 @@ CREATE TABLE "public"."taches" (
     "tache" character varying NOT NULL,
     "signature_resp" character varying NOT NULL,
     "created" timestamp NOT NULL,
-    "read" boolean NOT NULL
+    "read" character varying NOT NULL
 ) WITH (oids = false);
 
 
@@ -1048,7 +1054,7 @@ CREATE SEQUENCE transport_restaurations_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2
 CREATE TABLE "public"."transport_restaurations" (
     "id" integer DEFAULT nextval('transport_restaurations_id_seq') NOT NULL,
     "title" character varying NOT NULL,
-    "observation" boolean NOT NULL,
+    "observation" character varying NOT NULL,
     "signature" character varying NOT NULL,
     "created_ref" timestamp NOT NULL,
     "created" timestamp NOT NULL,
@@ -1072,7 +1078,7 @@ CREATE TABLE "public"."users" (
     "servicesAffectation" character varying NOT NULL,
     "fonctionOccupe" character varying NOT NULL,
     "role" character varying NOT NULL,
-    "isOnline" boolean NOT NULL,
+    "isOnline" character varying NOT NULL,
     "createdAt" timestamp NOT NULL,
     "passwordHash" character varying NOT NULL,
     "succursale" character varying NOT NULL
@@ -1114,4 +1120,4 @@ CREATE TABLE "public"."versement_projets" (
 ) WITH (oids = false);
 
 
--- 2022-06-08 07:14:29.281934+00
+-- 2022-06-08 15:08:15.276325+00

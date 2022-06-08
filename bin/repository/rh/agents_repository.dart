@@ -73,6 +73,7 @@ class AgentsRepository {
         "date_fin_contrat = @18, fonction_occupe = @19, competance = @20,"
         "experience = @21, statut_agent = @22, created_at = @23, photo = @24,"
         "salaire = @25, signature = @26, created = @27 WHERE id = @28",
+
         substitutionValues: {
           '1': agentModel.nom,
           '2': agentModel.postNom,
