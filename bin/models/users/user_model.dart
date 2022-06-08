@@ -10,7 +10,7 @@ class UserModel {
   late String servicesAffectation;
   late String fonctionOccupe;
   late String role; // Acces user de 1 à 5
-  late bool isOnline; // Agent connecté
+  late String isOnline; // Agent connecté
   late DateTime createdAt;
   late String passwordHash;
   late String succursale;
@@ -55,21 +55,22 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        id: json["id"],
-        photo: json["photo"],
-        nom: json["nom"],
-        prenom: json["prenom"],
-        email: json["email"],
-        telephone: json["telephone"],
-        matricule: json["matricule"],
-        departement: json["departement"],
-        servicesAffectation: json["servicesAffectation"],
-        fonctionOccupe: json["fonctionOccupe"],
-        role: json["role"],
-        isOnline: bool.fromEnvironment(json["isOnline"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        passwordHash: json["passwordHash"],
-        succursale: json["succursale"]);
+      id: json["id"],
+      photo: json["photo"],
+      nom: json["nom"],
+      prenom: json["prenom"],
+      email: json["email"],
+      telephone: json["telephone"],
+      matricule: json["matricule"],
+      departement: json["departement"],
+      servicesAffectation: json["servicesAffectation"],
+      fonctionOccupe: json["fonctionOccupe"],
+      role: json["role"],
+      isOnline: json["isOnline"],
+      createdAt: DateTime.parse(json["createdAt"]),
+      passwordHash: json["passwordHash"],
+      succursale: json["succursale"]
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -88,7 +89,7 @@ class UserModel {
       'isOnline': isOnline,
       'createdAt': createdAt.toIso8601String(),
       'passwordHash': passwordHash,
-      'succursale': succursale,
+      'succursale': succursale
     };
   }
 }
