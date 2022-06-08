@@ -10,11 +10,11 @@ class PaiementSalaireModel {
   late String matricule;
   late String servicesAffectation;
   late String salaire;
-  late bool observation; // Payé ou non Payé  // pour Finance
+  late String observation; // Payé ou non Payé  // pour Finance
   late String modePaiement; // mode depayement
   late DateTime createdAt;
   late String ligneBudgtaire;
-  late String resources; 
+  late String resources;
   late String tauxJourHeureMoisSalaire;
   late String joursHeuresPayeA100PourecentSalaire;
   late String totalDuSalaire;
@@ -45,54 +45,51 @@ class PaiementSalaireModel {
 
   late String signature; // celui qui fait ce document
 
-
-  PaiementSalaireModel({
-    this.id,
-    required this.nom,
-    required this.postNom,
-    required this.prenom,
-    required this.telephone,
-    required this.adresse,
-    required this.departement,
-    required this.numeroSecuriteSociale,
-    required this.matricule,
-    required this.servicesAffectation,
-    required this.salaire,
-    required this.observation,
-    required this.modePaiement,
-    required this.createdAt,
-    required this.ligneBudgtaire,
-    required this.resources,
-    required this.tauxJourHeureMoisSalaire,
-    required this.joursHeuresPayeA100PourecentSalaire,
-    required this.totalDuSalaire,
-    required this.nombreHeureSupplementaires,
-    required this.tauxHeureSupplementaires,
-    required this.totalDuHeureSupplementaires,
-    required this.supplementTravailSamediDimancheJoursFerie,
-    required this.prime,
-    required this.divers,
-    required this.joursCongesPaye,
-    required this.tauxCongesPaye,
-    required this.totalDuCongePaye,
-    required this.jourPayeMaladieAccident,
-    required this.tauxJournalierMaladieAccident,
-    required this.totalDuMaladieAccident,
-    required this.pensionDeduction,
-    required this.indemniteCompensatricesDeduction,
-    required this.avancesDeduction,
-    required this.diversDeduction,
-    required this.retenuesFiscalesDeduction,
-    required this.nombreEnfantBeneficaireAllocationsFamiliales,
-    required this.nombreDeJoursAllocationsFamiliales,
-    required this.tauxJoursAllocationsFamiliales,
-    required this.totalAPayerAllocationsFamiliales,
-    required this.netAPayer,
-    required this.montantPrisConsiderationCalculCotisationsINSS,
-    required this.totalDuBrut,
-    required this.signature
-
-  });
+  PaiementSalaireModel(
+      {this.id,
+      required this.nom,
+      required this.postNom,
+      required this.prenom,
+      required this.telephone,
+      required this.adresse,
+      required this.departement,
+      required this.numeroSecuriteSociale,
+      required this.matricule,
+      required this.servicesAffectation,
+      required this.salaire,
+      required this.observation,
+      required this.modePaiement,
+      required this.createdAt,
+      required this.ligneBudgtaire,
+      required this.resources,
+      required this.tauxJourHeureMoisSalaire,
+      required this.joursHeuresPayeA100PourecentSalaire,
+      required this.totalDuSalaire,
+      required this.nombreHeureSupplementaires,
+      required this.tauxHeureSupplementaires,
+      required this.totalDuHeureSupplementaires,
+      required this.supplementTravailSamediDimancheJoursFerie,
+      required this.prime,
+      required this.divers,
+      required this.joursCongesPaye,
+      required this.tauxCongesPaye,
+      required this.totalDuCongePaye,
+      required this.jourPayeMaladieAccident,
+      required this.tauxJournalierMaladieAccident,
+      required this.totalDuMaladieAccident,
+      required this.pensionDeduction,
+      required this.indemniteCompensatricesDeduction,
+      required this.avancesDeduction,
+      required this.diversDeduction,
+      required this.retenuesFiscalesDeduction,
+      required this.nombreEnfantBeneficaireAllocationsFamiliales,
+      required this.nombreDeJoursAllocationsFamiliales,
+      required this.tauxJoursAllocationsFamiliales,
+      required this.totalAPayerAllocationsFamiliales,
+      required this.netAPayer,
+      required this.montantPrisConsiderationCalculCotisationsINSS,
+      required this.totalDuBrut,
+      required this.signature});
 
   factory PaiementSalaireModel.fromSQL(List<dynamic> row) {
     return PaiementSalaireModel(
@@ -139,62 +136,62 @@ class PaiementSalaireModel {
         netAPayer: row[40],
         montantPrisConsiderationCalculCotisationsINSS: row[41],
         totalDuBrut: row[42],
-        signature: row[43]
-    );
+        signature: row[43]);
   }
 
   factory PaiementSalaireModel.fromJson(Map<String, dynamic> json) {
     return PaiementSalaireModel(
-        id: json['id'],
-        nom: json['nom'],
-        postNom: json['postNom'],
-        prenom: json['prenom'],
-        telephone: json['telephone'],
-        adresse: json['adresse'],
-        departement: json['departement'],
-        numeroSecuriteSociale: json['numeroSecuriteSociale'],
-        matricule: json['matricule'],
-        servicesAffectation: json['servicesAffectation'],
-        salaire: json['salaire'],
-        observation: json['observation'],
-        modePaiement: json['modePaiement'],
-        createdAt: DateTime.parse(json['createdAt']),
-        ligneBudgtaire: json['ligneBudgtaire'],
-        resources: json['resources'],
-        tauxJourHeureMoisSalaire: json['tauxJourHeureMoisSalaire'],
-        joursHeuresPayeA100PourecentSalaire: json['joursHeuresPayeA100PourecentSalaire'],
-        totalDuSalaire: json['totalDuSalaire'],
-        nombreHeureSupplementaires: json['nombreHeureSupplementaires'],
-        tauxHeureSupplementaires: json['tauxHeureSupplementaires'],
-        totalDuHeureSupplementaires: json['totalDuHeureSupplementaires'],
-        supplementTravailSamediDimancheJoursFerie:
-            json['supplementTravailSamediDimancheJoursFerie'],
-        prime: json['prime'],
-        divers: json['divers'],
-        joursCongesPaye: json['joursCongesPaye'],
-        tauxCongesPaye: json['tauxCongesPaye'],
-        totalDuCongePaye: json['totalDuCongePaye'],
-        jourPayeMaladieAccident: json['jourPayeMaladieAccident'],
-        tauxJournalierMaladieAccident: json['tauxJournalierMaladieAccident'],
-        totalDuMaladieAccident: json['totalDuMaladieAccident'],
-        pensionDeduction: json['pensionDeduction'],
-        indemniteCompensatricesDeduction:
-            json['indemniteCompensatricesDeduction'],
-        avancesDeduction: json['avancesDeduction'],
-        diversDeduction: json['diversDeduction'],
-        retenuesFiscalesDeduction: json['retenuesFiscalesDeduction'],
-        nombreEnfantBeneficaireAllocationsFamiliales:
-            json['nombreEnfantBeneficaireAllocationsFamiliales'],
-        nombreDeJoursAllocationsFamiliales:
-            json['nombreDeJoursAllocationsFamiliales'],
-        tauxJoursAllocationsFamiliales: json['tauxJoursAllocationsFamiliales'],
-        totalAPayerAllocationsFamiliales:
-            json['totalAPayerAllocationsFamiliales'],
-        netAPayer: json['netAPayer'],
-        montantPrisConsiderationCalculCotisationsINSS:
-            json['montantPrisConsiderationCalculCotisationsINSS'],
-        totalDuBrut: json['totalDuBrut'],
-        signature: json['signature'],
+      id: json['id'],
+      nom: json['nom'],
+      postNom: json['postNom'],
+      prenom: json['prenom'],
+      telephone: json['telephone'],
+      adresse: json['adresse'],
+      departement: json['departement'],
+      numeroSecuriteSociale: json['numeroSecuriteSociale'],
+      matricule: json['matricule'],
+      servicesAffectation: json['servicesAffectation'],
+      salaire: json['salaire'],
+      observation: json['observation'],
+      modePaiement: json['modePaiement'],
+      createdAt: DateTime.parse(json['createdAt']),
+      ligneBudgtaire: json['ligneBudgtaire'],
+      resources: json['resources'],
+      tauxJourHeureMoisSalaire: json['tauxJourHeureMoisSalaire'],
+      joursHeuresPayeA100PourecentSalaire:
+          json['joursHeuresPayeA100PourecentSalaire'],
+      totalDuSalaire: json['totalDuSalaire'],
+      nombreHeureSupplementaires: json['nombreHeureSupplementaires'],
+      tauxHeureSupplementaires: json['tauxHeureSupplementaires'],
+      totalDuHeureSupplementaires: json['totalDuHeureSupplementaires'],
+      supplementTravailSamediDimancheJoursFerie:
+          json['supplementTravailSamediDimancheJoursFerie'],
+      prime: json['prime'],
+      divers: json['divers'],
+      joursCongesPaye: json['joursCongesPaye'],
+      tauxCongesPaye: json['tauxCongesPaye'],
+      totalDuCongePaye: json['totalDuCongePaye'],
+      jourPayeMaladieAccident: json['jourPayeMaladieAccident'],
+      tauxJournalierMaladieAccident: json['tauxJournalierMaladieAccident'],
+      totalDuMaladieAccident: json['totalDuMaladieAccident'],
+      pensionDeduction: json['pensionDeduction'],
+      indemniteCompensatricesDeduction:
+          json['indemniteCompensatricesDeduction'],
+      avancesDeduction: json['avancesDeduction'],
+      diversDeduction: json['diversDeduction'],
+      retenuesFiscalesDeduction: json['retenuesFiscalesDeduction'],
+      nombreEnfantBeneficaireAllocationsFamiliales:
+          json['nombreEnfantBeneficaireAllocationsFamiliales'],
+      nombreDeJoursAllocationsFamiliales:
+          json['nombreDeJoursAllocationsFamiliales'],
+      tauxJoursAllocationsFamiliales: json['tauxJoursAllocationsFamiliales'],
+      totalAPayerAllocationsFamiliales:
+          json['totalAPayerAllocationsFamiliales'],
+      netAPayer: json['netAPayer'],
+      montantPrisConsiderationCalculCotisationsINSS:
+          json['montantPrisConsiderationCalculCotisationsINSS'],
+      totalDuBrut: json['totalDuBrut'],
+      signature: json['signature'],
     );
   }
 

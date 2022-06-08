@@ -1,7 +1,7 @@
 class PresenceModel {
   late int? id;
   late String remarque;
-  late bool finJournee;
+  late String finJournee;
   late String signature; // celui qui fait le document
   late String signatureFermeture; // celui qui cloture la journee
   late DateTime createdRef;
@@ -18,14 +18,13 @@ class PresenceModel {
 
   factory PresenceModel.fromSQL(List<dynamic> row) {
     return PresenceModel(
-      id: row[0],
-      remarque: row[1],
-      finJournee: row[2],
-      signature: row[3],
-      signatureFermeture: row[4],
-      createdRef: row[5],
-      created: row[6]
-    );
+        id: row[0],
+        remarque: row[1],
+        finJournee: row[2],
+        signature: row[3],
+        signatureFermeture: row[4],
+        createdRef: row[5],
+        created: row[6]);
   }
 
   factory PresenceModel.fromJson(Map<String, dynamic> json) {

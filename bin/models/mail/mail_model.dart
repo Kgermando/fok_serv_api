@@ -6,7 +6,7 @@ class MailModel {
   late String objet;
   late String message;
   late String pieceJointe;
-  late bool read;
+  late String read;
   late String fullNameDest;
   late String emailDest;
   late DateTime dateSend;

@@ -21,7 +21,7 @@ class AgentModel {
   late String fonctionOccupe; // Fonction occupé
   late String? competance;
   late String? experience;
-  late bool statutAgent;
+  late String statutAgent;
   late DateTime createdAt;
   late String? photo;
   late String salaire;
@@ -56,73 +56,70 @@ class AgentModel {
       this.photo,
       required this.salaire,
       required this.signature,
-      required this.created
-  });
+      required this.created});
 
   factory AgentModel.fromSQL(List<dynamic> row) {
     return AgentModel(
-      id: row[0],
-      nom: row[1],
-      postNom: row[2],
-      prenom: row[3],
-      email: row[4],
-      telephone: row[5],
-      adresse: row[6],
-      sexe: row[7],
-      role: row[8],
-      matricule: row[9],
-      numeroSecuriteSociale: row[10],
-      dateNaissance: row[11],
-      lieuNaissance: row[12],
-      nationalite: row[13],
-      typeContrat: row[14],
-      departement: row[15],
-      servicesAffectation: row[16],
-      dateDebutContrat: row[17],
-      dateFinContrat: row[18],
-      fonctionOccupe: row[19],
-      competance: row[20],
-      experience: row[21],
-      statutAgent: row[22],
-      createdAt: row[23],
-      photo: row[24],
-      salaire: row[25],
-      signature: row[26],
-      created: row[27]
-    );
+        id: row[0],
+        nom: row[1],
+        postNom: row[2],
+        prenom: row[3],
+        email: row[4],
+        telephone: row[5],
+        adresse: row[6],
+        sexe: row[7],
+        role: row[8],
+        matricule: row[9],
+        numeroSecuriteSociale: row[10],
+        dateNaissance: row[11],
+        lieuNaissance: row[12],
+        nationalite: row[13],
+        typeContrat: row[14],
+        departement: row[15],
+        servicesAffectation: row[16],
+        dateDebutContrat: row[17],
+        dateFinContrat: row[18],
+        fonctionOccupe: row[19],
+        competance: row[20],
+        experience: row[21],
+        statutAgent: row[22],
+        createdAt: row[23],
+        photo: row[24],
+        salaire: row[25],
+        signature: row[26],
+        created: row[27]);
   }
 
   factory AgentModel.fromJson(Map<String, dynamic> json) {
     return AgentModel(
-      id: json["id"],
-      nom: json["nom"],
-      postNom: json["postNom"],
-      prenom: json["prenom"],
-      email: json["email"],
-      telephone: json["telephone"],
-      adresse: json["adresse"],
-      sexe: json["sexe"],
-      role: json["role"],
-      matricule: json["matricule"],
-      numeroSecuriteSociale: json["numeroSecuriteSociale"],
-      dateNaissance: DateTime.parse(json['dateNaissance']),
-      lieuNaissance: json["lieuNaissance"],
-      nationalite: json["nationalite"],
-      typeContrat: json["typeContrat"],
-      departement: json["departement"],
-      servicesAffectation: json["servicesAffectation"],
-      dateDebutContrat: DateTime.parse(json['dateDebutContrat']),
-      dateFinContrat: DateTime.parse(json['dateFinContrat']),
-      fonctionOccupe: json["fonctionOccupe"],
-      competance: json["competance"],
-      experience: json["experience"],
-      statutAgent: json["statutAgent"],
-      createdAt: DateTime.parse(json["createdAt"]),
-      photo: json["photo"],
-      salaire: json["salaire"],
-      signature: json['signature'],
-      created: DateTime.parse(json['created'])
-    );
+        id: json["id"],
+        nom: json["nom"],
+        postNom: json["postNom"],
+        prenom: json["prenom"],
+        email: json["email"],
+        telephone: json["telephone"],
+        adresse: json["adresse"],
+        sexe: json["sexe"],
+        role: json["role"],
+        matricule: json["matricule"],
+        numeroSecuriteSociale: json["numeroSecuriteSociale"],
+        dateNaissance: DateTime.parse(json['dateNaissance']),
+        lieuNaissance: json["lieuNaissance"],
+        nationalite: json["nationalite"],
+        typeContrat: json["typeContrat"],
+        departement: json["departement"],
+        servicesAffectation: json["servicesAffectation"],
+        dateDebutContrat: DateTime.parse(json['dateDebutContrat']),
+        dateFinContrat: DateTime.parse(json['dateFinContrat']),
+        fonctionOccupe: json["fonctionOccupe"],
+        competance: json["competance"],
+        experience: json["experience"],
+        statutAgent: json["statutAgent"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        photo: json["photo"],
+        salaire: json["salaire"],
+        signature: json['signature'],
+        created: DateTime.parse(json['created']));
   }
 
   Map<String, dynamic> toJson() {

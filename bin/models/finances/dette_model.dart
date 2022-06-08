@@ -5,7 +5,7 @@ class DetteModel {
   late String libelle;
   late String montant;
   late String numeroOperation;
-  late bool statutPaie;
+  late String statutPaie;
   late String signature; // celui qui fait le document
   late DateTime createdRef;
   late DateTime created;

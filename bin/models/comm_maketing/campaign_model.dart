@@ -9,7 +9,7 @@ class CampaignModel {
   late String objetctifs;
   late String ligneBudgtaire;
   late String resources;
-  late bool observation;
+  late String observation;
   late String signature;
   late DateTime created;
 
@@ -42,8 +42,7 @@ class CampaignModel {
         resources: row[9],
         observation: row[10],
         signature: row[11],
-        created: row[12]
-    );
+        created: row[12]);
   }
 
   factory CampaignModel.fromJson(Map<String, dynamic> json) {

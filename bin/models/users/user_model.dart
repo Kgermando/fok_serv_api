@@ -49,28 +49,26 @@ class UserModel {
         isOnline: row[11],
         createdAt: row[12],
         passwordHash: row[13],
-        succursale: row[14]
-    );
+        succursale: row[14]);
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json["id"],
-      photo: json["photo"],
-      nom: json["nom"],
-      prenom: json["prenom"],
-      email: json["email"],
-      telephone: json["telephone"],
-      matricule: json["matricule"],
-      departement: json["departement"],
-      servicesAffectation: json["servicesAffectation"],
-      fonctionOccupe: json["fonctionOccupe"],
-      role: json["role"],
-      isOnline: json["isOnline"],
-      createdAt: DateTime.parse(json["createdAt"]),
-      passwordHash: json["passwordHash"],
-      succursale: json["succursale"]
-    );
+        id: json["id"],
+        photo: json["photo"],
+        nom: json["nom"],
+        prenom: json["prenom"],
+        email: json["email"],
+        telephone: json["telephone"],
+        matricule: json["matricule"],
+        departement: json["departement"],
+        servicesAffectation: json["servicesAffectation"],
+        fonctionOccupe: json["fonctionOccupe"],
+        role: json["role"],
+        isOnline: json["isOnline"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        passwordHash: json["passwordHash"],
+        succursale: json["succursale"]);
   }
 
   Map<String, dynamic> toJson() {

@@ -5,7 +5,7 @@ class RestitutionModel {
   late String unite;
   late String firstName;
   late String lastName;
-  late bool accuseReception;
+  late String accuseReception;
   late String accuseReceptionFirstName;
   late String accuseReceptionLastName;
   late String role;

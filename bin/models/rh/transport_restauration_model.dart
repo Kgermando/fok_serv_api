@@ -1,7 +1,7 @@
 class TransportRestaurationModel {
   late int? id;
   late String title;
-  late bool observation;
+  late String observation;
   late String signature; // celui qui fait le document
   late DateTime createdRef;
   late DateTime created;
@@ -21,8 +21,7 @@ class TransportRestaurationModel {
         observation: row[2],
         signature: row[3],
         createdRef: row[4],
-        created: row[5]
-    );
+        created: row[5]);
   }
 
   factory TransportRestaurationModel.fromJson(Map<String, dynamic> json) {
@@ -75,12 +74,12 @@ class TransRestAgentsModel {
 
   factory TransRestAgentsModel.fromJson(Map<String, dynamic> json) {
     return TransRestAgentsModel(
-        id: json['id'],
-        reference: DateTime.parse(json['reference']),
-        nom: json['nom'],
-        prenom: json['prenom'],
-        matricule: json['matricule'],
-        montant: json['montant'],
+      id: json['id'],
+      reference: DateTime.parse(json['reference']),
+      nom: json['nom'],
+      prenom: json['prenom'],
+      matricule: json['matricule'],
+      montant: json['montant'],
     );
   }
 

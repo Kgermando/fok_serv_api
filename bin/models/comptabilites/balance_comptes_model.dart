@@ -2,7 +2,7 @@ class BalanceCompteModel {
   late int? id;
   late String title;
   late List comptes;
-  late bool statut; // A defaut de modifier il vont déclaser le fichier
+  late String statut; // A defaut de modifier il vont déclaser le fichier
 
   late String signature;
   late DateTime created;
@@ -17,13 +17,12 @@ class BalanceCompteModel {
 
   factory BalanceCompteModel.fromSQL(List<dynamic> row) {
     return BalanceCompteModel(
-      id: row[0],
-      title: row[1],
-      comptes: row[2],
-      statut: row[3],
-      signature: row[4],
-      created: row[5]
-    );
+        id: row[0],
+        title: row[1],
+        comptes: row[2],
+        statut: row[3],
+        signature: row[4],
+        created: row[5]);
   }
 
   factory BalanceCompteModel.fromJson(Map<String, dynamic> json) {
@@ -55,12 +54,16 @@ class CompteBalance {
   late double solde;
 
   CompteBalance(
-      {required this.comptes, required this.debit, required this.credit,
+      {required this.comptes,
+      required this.debit,
+      required this.credit,
       required this.solde});
 
   factory CompteBalance.fromJson(Map<String, dynamic> json) {
     return CompteBalance(
-      comptes: json['comptes'], debit: json['debit'], credit: json['credit'],
+        comptes: json['comptes'],
+        debit: json['debit'],
+        credit: json['credit'],
         solde: json['solde']);
   }
 }
