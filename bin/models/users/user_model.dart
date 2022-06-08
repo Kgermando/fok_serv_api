@@ -66,7 +66,7 @@ class UserModel {
         servicesAffectation: json["servicesAffectation"],
         fonctionOccupe: json["fonctionOccupe"],
         role: json["role"],
-        isOnline: bool.hasEnvironment(json["isOnline"]),
+        isOnline: json["isOnline"],
         createdAt: DateTime.parse(json["createdAt"]),
         passwordHash: json["passwordHash"],
         succursale: json["succursale"]);
