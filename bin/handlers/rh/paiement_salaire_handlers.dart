@@ -47,8 +47,6 @@ class PaiementSalaireHandlers {
           observation: input['observation'],
           modePaiement: input['modePaiement'],
           createdAt: DateTime.parse(input['createdAt']),
-          ligneBudgtaire: input['ligneBudgtaire'],
-          resources: input['resources'],
           tauxJourHeureMoisSalaire: input['tauxJourHeureMoisSalaire'],
           joursHeuresPayeA100PourecentSalaire:
               input['joursHeuresPayeA100PourecentSalaire'],
@@ -138,12 +136,6 @@ class PaiementSalaireHandlers {
       }
       if (input['createdAt'] != null) {
         data.createdAt = DateTime.parse(input['createdAt']);
-      }
-      if (input['ligneBudgtaire'] != null) {
-        data.ligneBudgtaire = input['ligneBudgtaire'];
-      }
-      if (input['resources'] != null) {
-        data.resources = input['resources'];
       }
       if (input['tauxJourHeureMoisSalaire'] != null) {
         data.tauxJourHeureMoisSalaire = input['tauxJourHeureMoisSalaire'];

@@ -10,11 +10,9 @@ class PaiementSalaireModel {
   late String matricule;
   late String servicesAffectation;
   late String salaire;
-  late String observation; // Payé ou non Payé  // pour Finance
+  late bool observation; // Payé ou non Payé  // pour Finance
   late String modePaiement; // mode depayement
   late DateTime createdAt;
-  late String ligneBudgtaire;
-  late String resources;
   late String tauxJourHeureMoisSalaire;
   late String joursHeuresPayeA100PourecentSalaire;
   late String totalDuSalaire;
@@ -60,8 +58,6 @@ class PaiementSalaireModel {
       required this.observation,
       required this.modePaiement,
       required this.createdAt,
-      required this.ligneBudgtaire,
-      required this.resources,
       required this.tauxJourHeureMoisSalaire,
       required this.joursHeuresPayeA100PourecentSalaire,
       required this.totalDuSalaire,
@@ -107,36 +103,34 @@ class PaiementSalaireModel {
         observation: row[11],
         modePaiement: row[12],
         createdAt: row[13],
-        ligneBudgtaire: row[14],
-        resources: row[15],
-        tauxJourHeureMoisSalaire: row[16],
-        joursHeuresPayeA100PourecentSalaire: row[17],
-        totalDuSalaire: row[18],
-        nombreHeureSupplementaires: row[19],
-        tauxHeureSupplementaires: row[20],
-        totalDuHeureSupplementaires: row[21],
-        supplementTravailSamediDimancheJoursFerie: row[22],
-        prime: row[23],
-        divers: row[24],
-        joursCongesPaye: row[25],
-        tauxCongesPaye: row[26],
-        totalDuCongePaye: row[27],
-        jourPayeMaladieAccident: row[28],
-        tauxJournalierMaladieAccident: row[29],
-        totalDuMaladieAccident: row[30],
-        pensionDeduction: row[31],
-        indemniteCompensatricesDeduction: row[32],
-        avancesDeduction: row[33],
-        diversDeduction: row[34],
-        retenuesFiscalesDeduction: row[35],
-        nombreEnfantBeneficaireAllocationsFamiliales: row[36],
-        nombreDeJoursAllocationsFamiliales: row[37],
-        tauxJoursAllocationsFamiliales: row[38],
-        totalAPayerAllocationsFamiliales: row[39],
-        netAPayer: row[40],
-        montantPrisConsiderationCalculCotisationsINSS: row[41],
-        totalDuBrut: row[42],
-        signature: row[43]);
+        tauxJourHeureMoisSalaire: row[14],
+        joursHeuresPayeA100PourecentSalaire: row[15],
+        totalDuSalaire: row[16],
+        nombreHeureSupplementaires: row[17],
+        tauxHeureSupplementaires: row[18],
+        totalDuHeureSupplementaires: row[19],
+        supplementTravailSamediDimancheJoursFerie: row[20],
+        prime: row[21],
+        divers: row[22],
+        joursCongesPaye: row[23],
+        tauxCongesPaye: row[24],
+        totalDuCongePaye: row[25],
+        jourPayeMaladieAccident: row[26],
+        tauxJournalierMaladieAccident: row[27],
+        totalDuMaladieAccident: row[28],
+        pensionDeduction: row[29],
+        indemniteCompensatricesDeduction: row[30],
+        avancesDeduction: row[31],
+        diversDeduction: row[32],
+        retenuesFiscalesDeduction: row[33],
+        nombreEnfantBeneficaireAllocationsFamiliales: row[34],
+        nombreDeJoursAllocationsFamiliales: row[35],
+        tauxJoursAllocationsFamiliales: row[36],
+        totalAPayerAllocationsFamiliales: row[37],
+        netAPayer: row[38],
+        montantPrisConsiderationCalculCotisationsINSS: row[39],
+        totalDuBrut: row[40],
+        signature: row[41]);
   }
 
   factory PaiementSalaireModel.fromJson(Map<String, dynamic> json) {
@@ -155,8 +149,6 @@ class PaiementSalaireModel {
       observation: json['observation'],
       modePaiement: json['modePaiement'],
       createdAt: DateTime.parse(json['createdAt']),
-      ligneBudgtaire: json['ligneBudgtaire'],
-      resources: json['resources'],
       tauxJourHeureMoisSalaire: json['tauxJourHeureMoisSalaire'],
       joursHeuresPayeA100PourecentSalaire:
           json['joursHeuresPayeA100PourecentSalaire'],
@@ -211,8 +203,6 @@ class PaiementSalaireModel {
       'observation': observation,
       'modePaiement': modePaiement,
       'createdAt': createdAt.toIso8601String(),
-      'ligneBudgtaire': ligneBudgtaire,
-      'resources': resources,
       'tauxJourHeureMoisSalaire': tauxJourHeureMoisSalaire,
       'joursHeuresPayeA100PourecentSalaire':
           joursHeuresPayeA100PourecentSalaire,
