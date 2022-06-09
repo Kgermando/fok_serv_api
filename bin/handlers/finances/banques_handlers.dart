@@ -117,7 +117,6 @@ class BanqueHandlers {
       if (input['numeroOperation'] != null) {
         data.numeroOperation = input['numeroOperation'];
       }
-     
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }

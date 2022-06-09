@@ -39,7 +39,9 @@ class ImmobilierHandlers {
         superficie: input['superficie'],
         dateAcquisition: DateTime.parse(input['dateAcquisition']), 
         signature: input['signature'],
-        created: DateTime.parse(input['created']));
+        createdRef: DateTime.parse(input['createdRef']),
+        created: DateTime.parse(input['created'])
+      );
 
       try {
         await repos.immobiliers.insertData(immobilierModel);
@@ -52,32 +54,35 @@ class ImmobilierHandlers {
 
     router.put('/update-immobilier/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      ImmobilierModel immobilierModel = await repos.immobiliers.getFromId(int.parse(id!));
+      ImmobilierModel data = await repos.immobiliers.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['typeAllocation'] != null) {
-        immobilierModel.typeAllocation = input['typeAllocation'];
+        data.typeAllocation = input['typeAllocation'];
       }
       if (input['adresse'] != null) {
-        immobilierModel.adresse = input['adresse'];
+        data.adresse = input['adresse'];
       }
       if (input['numeroCertificat'] != null) {
-        immobilierModel.numeroCertificat = input['numeroCertificat'];
+        data.numeroCertificat = input['numeroCertificat'];
       }
       if (input['superficie'] != null) {
-        immobilierModel.superficie = input['superficie'];
+        data.superficie = input['superficie'];
       }
       if (input['dateAcquisition'] != null) {
-        immobilierModel.dateAcquisition = DateTime.parse(input['dateAcquisition']);
+        data.dateAcquisition = DateTime.parse(input['dateAcquisition']);
       }
       if (input['signature'] != null) {
-        immobilierModel.signature = input['signature'];
+        data.signature = input['signature'];
       }
       if (input['created'] != null) {
-        immobilierModel.created = DateTime.parse(input['created']);
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
-      repos.immobiliers.update(immobilierModel);
-      return Response.ok(jsonEncode(immobilierModel.toJson()));
+      if (input['created'] != null) {
+        data.created = DateTime.parse(input['created']);
+      }
+      repos.immobiliers.update(data);
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-immobilier/<id>', (

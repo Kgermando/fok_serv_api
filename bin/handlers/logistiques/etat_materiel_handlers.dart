@@ -46,7 +46,9 @@ class EtatMaterielHandlers {
         typeObjet: input['typeObjet'],
         statut: input['statut'], 
         signature: input['signature'],
-        created: DateTime.parse(input['created']));
+        createdRef: DateTime.parse(input['createdRef']),
+        created: DateTime.parse(input['created'])
+      );
 
       try {
         await repos.etatMateriels.insertData(etatMaterielModel);
@@ -79,6 +81,9 @@ class EtatMaterielHandlers {
       } 
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

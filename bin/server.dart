@@ -32,9 +32,11 @@ import 'handlers/comptabilites/bilans_handlers.dart';
 import 'handlers/comptabilites/compte_actif_handlers.dart';
 import 'handlers/comptabilites/compte_passif_handlers.dart';
 import 'handlers/comptabilites/compte_resultat_handlers.dart';
+import 'handlers/comptabilites/comptes_balance_hanlders.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
 import 'handlers/devis/devis_list_objets_handlers.dart';
+import 'handlers/exploitations/agent_role_hanlders.dart';
 import 'handlers/exploitations/projet_handlers.dart';
 import 'handlers/exploitations/rapport_hanlders.dart';
 import 'handlers/exploitations/tache_handlers.dart';
@@ -51,6 +53,7 @@ import 'handlers/logistiques/entretien_handlers.dart';
 import 'handlers/logistiques/etat_materiel_handlers.dart';
 import 'handlers/logistiques/immobiler_repository.dart';
 import 'handlers/logistiques/mobilier_handlers.dart';
+import 'handlers/logistiques/objets_remplace_handlers.dart';
 import 'handlers/logistiques/trajet_handlers.dart';
 import 'handlers/mails/mails_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
@@ -156,10 +159,7 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(TransRestAgentsHandlers(repos).router));
 
-
-
-
-  // FINANCE
+    // FINANCE
     router.mount(
         '/api/finances/transactions/banques/',
         Pipeline()
@@ -250,6 +250,15 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BalanceComptesHandlers(repos).router));
+    router.mount(
+        '/api/comptabilite/comptes-balance-ref/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ComptesBalanceRefHandlers(repos).router));
+
+
 
     // Budgets
     router.mount(
@@ -283,7 +292,6 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(DevisListObjetsHandlers(repos).router));
 
-
     // EXPLOITATIONS
     router.mount(
         '/api/projets/',
@@ -313,7 +321,15 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(RapportHandlers(repos).router));
+    router.mount(
+        '/api/agents-roles/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(AgentRoleHandlers(repos).router));
 
+    // LOGISTIQUES
     router.mount(
         '/api/anguins/',
         Pipeline()
@@ -363,7 +379,15 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(TrajetHandlers(repos).router));
+    router.mount(
+        '/api/objets-remplaces/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ObjetsRemplaceHandlers(repos).router));
 
+// COMMERCIAL ET MARKETING
     router.mount(
         '/api/produit-models/',
         Pipeline()

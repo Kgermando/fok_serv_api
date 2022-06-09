@@ -22,9 +22,9 @@ class ImmobilierRepository {
   Future<void> insertData(ImmobilierModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, type_allocation, adresse,"
-          "numero_certificat, superficie, date_acquisition, signature, created)"
-          "VALUES (nextval('immobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
+          "INSERT INTO $tableName (id, type_allocation, adresse, numero_certificat,"
+          "superficie, date_acquisition, signature, created_ref, created)"
+          "VALUES (nextval('immobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
           substitutionValues: {
             '1': data.typeAllocation,
             '2': data.adresse,
@@ -32,7 +32,8 @@ class ImmobilierRepository {
             '4': data.superficie,
             '5': data.dateAcquisition,
             '6': data.signature,
-            '7': data.created
+            '7': data.createdRef,
+            '8': data.created
           });
     });
   }
@@ -40,20 +41,21 @@ class ImmobilierRepository {
   Future<void> update(ImmobilierModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET type_allocation = @1, adresse = @2, numero_certificat = @3,"
-          "superficie = @4, date_acquisition = @5,"
-          "signature = @6, created = @7 WHERE id = @8",
-          substitutionValues: {
-            '1': data.typeAllocation,
-            '2': data.adresse,
-            '3': data.numeroCertificat,
-            '4': data.superficie,
-            '5': data.dateAcquisition,
-            '6': data.signature,
-            '7': data.created,
-            '8': data.id
-          });
+        "UPDATE $tableName"
+        "SET type_allocation = @1, adresse = @2, numero_certificat = @3,"
+        "superficie = @4, date_acquisition = @5, signature = @6,"
+        "created_ref = @7, created = @8 WHERE id = @9",
+        substitutionValues: {
+          '1': data.typeAllocation,
+          '2': data.adresse,
+          '3': data.numeroCertificat,
+          '4': data.superficie,
+          '5': data.dateAcquisition,
+          '6': data.signature,
+          '7': data.createdRef,
+          '8': data.created,
+          '9': data.id
+        });
     });
   }
 
@@ -79,8 +81,8 @@ class ImmobilierRepository {
       superficie: data[0][4],
       dateAcquisition: data[0][5],
       signature: data[0][6],
-      created: data[0][7]
-        
+      createdRef: data[0][7],
+      created: data[0][8]
     );
   }
 }

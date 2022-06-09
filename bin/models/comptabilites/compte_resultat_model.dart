@@ -32,6 +32,7 @@ class CompteResulatsModel {
   late String produitExceptionnels;
   late String soldeDebiteur; // Perte
   late String signature;
+  late DateTime createdRef;
   late DateTime created;
 
   CompteResulatsModel(
@@ -62,6 +63,7 @@ class CompteResulatsModel {
       required this.produitExceptionnels,
       required this.soldeDebiteur,
       required this.signature,
+      required this.createdRef,
       required this.created});
 
   factory CompteResulatsModel.fromSQL(List<dynamic> row) {
@@ -93,7 +95,8 @@ class CompteResulatsModel {
         produitExceptionnels: row[24],
         soldeDebiteur: row[25],
         signature: row[26],
-        created: row[27]);
+        createdRef: row[27],
+        created: row[28]);
   }
 
   factory CompteResulatsModel.fromJson(Map<String, dynamic> json) {
@@ -125,6 +128,7 @@ class CompteResulatsModel {
         produitExceptionnels: json['produitExceptionnels'],
         soldeDebiteur: json['soldeDebiteur'],
         signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']));
   }
 
@@ -157,6 +161,7 @@ class CompteResulatsModel {
       'produitfinancieres': produitfinancieres,
       'soldeDebiteur': soldeDebiteur,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

@@ -24,23 +24,21 @@ class CampaignRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, type_produit, date_debut_et_fin,"
-        "agent_affectes, cout_campaign, lieu_cible, promotion, objetctifs,"
-        "ligne_budgtaire,  resources,  observation,  signature, created)"
+        "cout_campaign, lieu_cible, promotion, objectifs,"
+        "observation,  signature, created_ref, created)"
         "VALUES (nextval('campaigns_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11, @12)",
+        "@7, @8, @9, @10)",
         substitutionValues: {
           '1': data.typeProduit,
           '2': data.dateDebutEtFin,
-          '3': data.agentAffectes,
-          '4': data.coutCampaign,
-          '5': data.lieuCible,
-          '6': data.promotion,
-          '7': data.objetctifs,
-          '8': data.ligneBudgtaire,
-          '9': data.resources,
-          '10': data.observation,
-          '11': data.signature,
-          '12': data.created
+          '3': data.coutCampaign,
+          '4': data.lieuCible,
+          '5': data.promotion,
+          '6': data.objectifs,
+          '7': data.observation,
+          '8': data.signature,
+          '9': data.createdRef,
+          '10': data.created
         }
       );
     });
@@ -50,24 +48,21 @@ class CampaignRepository {
     await executor.transaction((conn) async {
       await conn.query(
           "UPDATE $tableName"
-          "SET type_produit = @1, date_debut_et_fin = @2, agent_affectes = @3,"
-          "cout_campaign = @4, lieu_cible = @5, promotion = @6, objetctifs = @7,"
-          "ligne_budgtaire = @8, resources = @9, observation = @10,"
-          "signature = @11, created = @12 WHERE id = @13",
+          "SET type_produit = @1, date_debut_et_fin = @2, cout_campaign = @3"
+          "lieu_cible = @4, promotion = @5, objectifs = @6, observation = @7,"
+          "signature = @8, created_ref = @9, created = @10 WHERE id = @11",
           substitutionValues: {
             '1': data.typeProduit,
             '2': data.dateDebutEtFin,
-            '3': data.agentAffectes,
-            '4': data.coutCampaign,
-            '5': data.lieuCible,
-            '6': data.promotion,
-            '7': data.objetctifs,
-            '8': data.ligneBudgtaire,
-            '9': data.resources,
-            '10': data.observation,
-            '11': data.signature,
-            '12': data.created,
-            '13': data.id
+            '3': data.coutCampaign,
+            '4': data.lieuCible,
+            '5': data.promotion,
+            '6': data.objectifs,
+            '7': data.observation,
+            '8': data.signature,
+            '9': data.createdRef,
+            '10': data.created,
+            '11': data.id
           });
     });
   }
@@ -90,16 +85,14 @@ class CampaignRepository {
       id: data[0][0],
       typeProduit: data[0][1],
       dateDebutEtFin: data[0][2],
-      agentAffectes: data[0][3],
-      coutCampaign: data[0][4],
-      lieuCible: data[0][5],
-      promotion: data[0][6],
-      objetctifs: data[0][7],
-      ligneBudgtaire: data[0][8],
-      resources: data[0][9],
-      observation: data[0][10],
-      signature: data[0][11],
-      created: data[0][12]
+      coutCampaign: data[0][3],
+      lieuCible: data[0][4],
+      promotion: data[0][5],
+      objectifs: data[0][6],
+      observation: data[0][7],
+      signature: data[0][8],
+      createdRef: data[0][8],
+      created: data[0][10]
     );
   } 
 }

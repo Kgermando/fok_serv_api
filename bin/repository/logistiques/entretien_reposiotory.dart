@@ -23,17 +23,17 @@ class EntretienRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, nom, modele,"
-        "marque, etat_objet, objet_remplace, duree_travaux,"
-        "signature, created)"
+        "marque, etat_objet, duree_travaux,"
+        "signature, created_ref, created)"
         "VALUES (nextval('entretiens_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
           '3': data.marque,
           '4': data.etatObjet,
-          '5': data.objetRemplace,
-          '6': data.dureeTravaux,
-          '7': data.signature,
+          '5': data.dureeTravaux,
+          '6': data.signature,
+          '7': data.createdRef,
           '8': data.created
         });
     });
@@ -44,16 +44,16 @@ class EntretienRepository {
       await conn.query(
           "UPDATE $tableName"
           "SET nom = @1, modele = @2, marque = @3,"
-          "etat_objet = @4, objet_remplace = @5, duree_travaux = @6,"
-          "signature = @7, created = @8 WHERE id = @9",
+          "etat_objet = @4, duree_travaux = @5, signature = @6,"
+          "created_ref = @7, created = @8 WHERE id = @9",
           substitutionValues: {
             '1': data.nom,
             '2': data.modele,
             '3': data.marque,
             '4': data.etatObjet,
-            '5': data.objetRemplace,
-            '6': data.dureeTravaux,
-            '7': data.signature,
+            '5': data.dureeTravaux,
+            '6': data.signature,
+            '7': data.createdRef,
             '8': data.created,
             '9': data.id
           });
@@ -80,9 +80,9 @@ class EntretienRepository {
       modele: data[0][2],
       marque: data[0][3],
       etatObjet: data[0][4],
-      objetRemplace: data[0][5],
-      dureeTravaux: data[0][6], 
-      signature: data[0][7],
+      dureeTravaux: data[0][5],
+      signature: data[0][6], 
+      createdRef: data[0][7],
       created: data[0][8]
     );
   }

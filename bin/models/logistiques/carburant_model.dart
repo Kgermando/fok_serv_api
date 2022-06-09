@@ -10,6 +10,7 @@ class CarburantModel {
   late DateTime dateHeureSortieAnguin; 
   late String qtyAchat;
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
   CarburantModel({
@@ -24,7 +25,8 @@ class CarburantModel {
     required this.dateHeureSortieAnguin,
     required this.qtyAchat,
     required this.signature,
-    required this.created
+    required this.createdRef,
+      required this.created
   });
 
   factory CarburantModel.fromSQL(List<dynamic> row) {
@@ -40,7 +42,8 @@ class CarburantModel {
       dateHeureSortieAnguin: row[8],
       qtyAchat: row[9],
       signature: row[10],
-      created: row[11]
+      createdRef: row[11],
+      created: row[12]
         
   );
   }
@@ -58,7 +61,8 @@ class CarburantModel {
       dateHeureSortieAnguin: DateTime.parse(json['dateHeureSortieAnguin']),
       qtyAchat: json['qtyAchat'],
       signature: json['signature'],
-      created: DateTime.parse(json['created'])
+      createdRef: DateTime.parse(json['createdRef']),
+        created: DateTime.parse(json['created'])
     );
   }
 
@@ -75,6 +79,7 @@ class CarburantModel {
       'dateHeureSortieAnguin': dateHeureSortieAnguin.toIso8601String(),
       'qtyAchat': qtyAchat,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

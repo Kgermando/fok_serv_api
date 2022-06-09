@@ -33,14 +33,14 @@ class EntretienHandlers {
     router.post('/insert-new-entretien', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       EntretienModel entretienModel = EntretienModel(
-          nom: input['nom'],
-          modele: input['modele'],
-          marque: input['marque'],
-          etatObjet: input['etatObjet'],
-          objetRemplace: input['objetRemplace'],
-          dureeTravaux: input['dureeTravaux'], 
-          signature: input['signature'],
-          created: DateTime.parse(input['created'])
+        nom: input['nom'],
+        modele: input['modele'],
+        marque: input['marque'],
+        etatObjet: input['etatObjet'], 
+        dureeTravaux: input['dureeTravaux'], 
+        signature: input['signature'],
+        createdRef: DateTime.parse(input['createdRef']),
+        created: DateTime.parse(input['created'])
       );
 
       try {
@@ -68,15 +68,15 @@ class EntretienHandlers {
       }
       if (input['etatObjet'] != null) {
         data.etatObjet = input['etatObjet'];
-      }
-      if (input['objetRemplace'] != null) {
-        data.objetRemplace = input['objetRemplace'];
-      }
+      } 
       if (input['dureeTravaux'] != null) {
         data.dureeTravaux = input['dureeTravaux'];
       } 
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

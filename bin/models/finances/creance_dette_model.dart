@@ -10,7 +10,8 @@ class CreanceDetteModel {
   late DateTime created;
 
   CreanceDetteModel(
-      {this.id,
+      {
+        this.id,
       required this.reference,
       required this.nomComplet,
       required this.pieceJustificative,
@@ -18,20 +19,21 @@ class CreanceDetteModel {
       required this.montant,
       required this.creanceDette,
       required this.signature,
-      required this.created});
+      required this.created
+    }
+  );
 
   factory CreanceDetteModel.fromSQL(List<dynamic> row) {
     return CreanceDetteModel(
-      id: row[0],
-      reference: row[1],
-      nomComplet: row[2],
-      pieceJustificative: row[3],
-      libelle: row[4],
-      montant: row[5],
-      creanceDette: row[6],
-      signature: row[7],
-      created: row[8]
-    );
+        id: row[0],
+        reference: row[1],
+        nomComplet: row[2],
+        pieceJustificative: row[3],
+        libelle: row[4],
+        montant: row[5],
+        creanceDette: row[6],
+        signature: row[7],
+        created: row[8]);
   }
 
   factory CreanceDetteModel.fromJson(Map<String, dynamic> json) {
@@ -44,7 +46,8 @@ class CreanceDetteModel {
         montant: json['montant'],
         creanceDette: json['creanceDette'],
         signature: json['signature'],
-        created: DateTime.parse(json['created']));
+        created: DateTime.parse(json['created'])
+    );
   }
 
   Map<String, dynamic> toJson() {

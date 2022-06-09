@@ -24,9 +24,9 @@ class TrajetRepository {
       await ctx.execute(
           "INSERT INTO $tableName (id, nomero_entreprise, nom_utilisateur,"
           "trajet_de, trajet_a, mission, kilometrage_sorite, kilometrage_retour,"
-          "signature, created)"
+          "signature, created_ref, created)"
           "VALUES (nextval('trajets_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8, @9)",
+          "@7, @8, @9, @10)",
           substitutionValues: {
             '1': data.nomeroEntreprise,
             '2': data.nomUtilisateur,
@@ -36,7 +36,9 @@ class TrajetRepository {
             '6': data.kilometrageSorite,
             '7': data.kilometrageRetour,
             '8': data.signature,
-            '9': data.created
+            '9': data.createdRef,
+            '10': data.created
+
           });
     });
   }
@@ -47,7 +49,7 @@ class TrajetRepository {
           "UPDATE $tableName"
           "SET nomero_entreprise = @1, nom_utilisateur = @2, trajet_de = @3,"
           "trajet_a = @4, mission = @5, kilometrage_sorite = @6, kilometrage_retour = @7,"
-          "signature = @8, created = @9 WHERE id = @10",
+          "signature = @8, created_ref = @9, created = @10 WHERE id = @11",
           substitutionValues: {
             '1': data.nomeroEntreprise,
             '2': data.nomUtilisateur,
@@ -57,8 +59,9 @@ class TrajetRepository {
             '6': data.kilometrageSorite,
             '7': data.kilometrageRetour,
             '8': data.signature,
-            '9': data.created,
-            '10': data.id
+            '9': data.createdRef,
+            '10': data.created,
+            '11': data.id
           });
     });
   }
@@ -87,7 +90,8 @@ class TrajetRepository {
         kilometrageSorite: data[0][6],
         kilometrageRetour: data[0][7], 
         signature: data[0][8],
-        created: data[0][9]
+        createdRef: data[0][9],
+        created: data[0][10]
     );
   }
 }

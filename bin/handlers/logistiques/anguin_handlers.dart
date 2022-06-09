@@ -55,8 +55,8 @@ class AnguinHandlers {
         provenance: input['provenance'],
         typeCaburant: input['typeCaburant'],
         typeMoteur: input['typeMoteur'],
-
         signature: input['signature'],
+        createdRef: DateTime.parse(input['createdRef']),
         created: DateTime.parse(input['created'])
       );
 
@@ -115,6 +115,9 @@ class AnguinHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

@@ -6,6 +6,7 @@ class EtatMaterielModel {
   late String typeObjet;  // anguin , mobilier ou immobilier,
   late String statut;
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
   EtatMaterielModel(
@@ -16,6 +17,7 @@ class EtatMaterielModel {
       required this.typeObjet,
       required this.statut,
       required this.signature,
+      required this.createdRef,
       required this.created
       
     });
@@ -29,7 +31,8 @@ class EtatMaterielModel {
         typeObjet: row[4],
         statut: row[5],
         signature: row[6],
-        created: row[7]
+        createdRef: row[7],
+        created: row[8]
     );
   }
 
@@ -42,6 +45,7 @@ class EtatMaterielModel {
         typeObjet: json['typeObjet'],
         statut: json['statut'],
         signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created'])
         
     );
@@ -56,6 +60,7 @@ class EtatMaterielModel {
       'typeObjet': typeObjet,
       'statut': statut,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

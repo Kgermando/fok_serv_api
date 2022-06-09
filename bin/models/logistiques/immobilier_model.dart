@@ -7,6 +7,7 @@ class ImmobilierModel {
   late DateTime dateAcquisition;
 
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
   ImmobilierModel(
@@ -17,9 +18,8 @@ class ImmobilierModel {
       required this.superficie,
       required this.dateAcquisition,
       required this.signature,
+      required this.createdRef,
       required this.created
-
-      
   });
 
   factory ImmobilierModel.fromSQL(List<dynamic> row) {
@@ -31,7 +31,8 @@ class ImmobilierModel {
         superficie: row[4],
         dateAcquisition: row[5],
         signature: row[6],
-        created: row[7]
+        createdRef: row[7],
+        created: row[8]
     );
   }
 
@@ -44,7 +45,8 @@ class ImmobilierModel {
       superficie: json['superficie'],
       dateAcquisition: DateTime.parse(json['dateAcquisition']),
       signature: json['signature'],
-      created: DateTime.parse(json['created'])
+      createdRef: DateTime.parse(json['createdRef']),
+        created: DateTime.parse(json['created'])
     );
   }
 
@@ -57,6 +59,7 @@ class ImmobilierModel {
       'superficie': superficie,
       'dateAcquisition': dateAcquisition.toIso8601String(),
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
 
     };

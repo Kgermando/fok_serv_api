@@ -15,7 +15,7 @@ class DevisListObjetsModel {
       required this.designation,
       required this.montantUnitaire,
       required this.montantGlobal});
-
+ 
   factory DevisListObjetsModel.fromSQL(List<dynamic> row) {
     return DevisListObjetsModel(
         id: row[0],

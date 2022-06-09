@@ -35,7 +35,6 @@ class CompteResultatHandlers {
 
       CompteResulatsModel data = CompteResulatsModel(
           intitule: input['intitule'],
-
           achatMarchandises: input['achatMarchandises'],
           variationStockMarchandises: input['variationStockMarchandises'],
           achatApprovionnements: input['achatApprovionnements'],
@@ -61,7 +60,9 @@ class CompteResultatHandlers {
           produitExceptionnels: input['produitExceptionnels'],
           soldeDebiteur: input['soldeDebiteur'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          createdRef: DateTime.parse(input['createdRef']),
+          created: DateTime.parse(input['created'])
+        );
       try {
         await repos.comptesResultat.insertData(data);
       } catch (e) {
@@ -157,6 +158,9 @@ class CompteResultatHandlers {
 
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

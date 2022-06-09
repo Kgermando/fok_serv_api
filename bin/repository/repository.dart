@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../models/comptabilites/balance_comptes_model.dart';
 import 'approbation/approbation.repository.dart';
 import 'archives/archive_folder_repository.dart';
 import 'archives/archive_repository.dart';
@@ -25,11 +26,13 @@ import 'comm_marketing/marketing/campaign_repository.dart';
 import 'comptabilites/balance_compte_repository.dart';
 import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/compte_actif_repository.dart';
+import 'comptabilites/compte_balance_ref_repository.dart';
 import 'comptabilites/compte_passif_repository.dart';
 import 'comptabilites/compte_resultat_repository.dart';
 import 'comptabilites/journal_repository.dart';
 import 'devis/devis_ist_objet_repository.dart';
 import 'devis/devis_repository.dart';
+import 'exploitations/agent_role_repository.dart';
 import 'exploitations/projet_repository.dart';
 import 'exploitations/rapport_repository.dart';
 import 'exploitations/tache_repository.dart';
@@ -46,6 +49,7 @@ import 'logistiques/entretien_reposiotory.dart';
 import 'logistiques/etat_materiel_repository.dart';
 import 'logistiques/immobilier_repository.dart';
 import 'logistiques/mobilier_repository.dart';
+import 'logistiques/objet_remplace_reposiotory.dart';
 import 'logistiques/trajet_repository.dart';
 import 'mails/mail_repository.dart';
 import 'rh/agents_repository.dart';
@@ -95,6 +99,7 @@ class Repository {
   late JournalRepository journals;
   late CompteResultatRepository comptesResultat;
   late BalanceCompteRepository balanceComptes;
+  late CompteBalanceRefRepository balanceCompteRef;
 
   // BUDGETS
   late DepartementBudgetRepository departementBudgets;
@@ -105,6 +110,7 @@ class Repository {
   late TacheRepository taches;
   late VersementProjetRepository versementProjets;
   late RapportRepository rapports;
+  late AgentRoleRepository agentsRoles;
 
   // LOGISTIQUE
   late AnguinRepository anguins;
@@ -114,6 +120,7 @@ class Repository {
   late ImmobilierRepository immobiliers;
   late MobilierRepository mobiliers;
   late TrajetRepository trajets;
+  late ObjetRemplaceRepository objetsRemplace;
 
   // COMMERCIAL & MARKETING
   late ProduitModelRepository produitModel;
@@ -140,7 +147,7 @@ class Repository {
 
   // Mails
   late MailRepository mails;
-  
+
   // APPROBATION
   late ApprobationRepository approbations;
 
@@ -177,7 +184,8 @@ class Repository {
     comptePassif = ComptePassifRepository(executor, 'compte_passifs');
     journals = JournalRepository(executor, 'journals');
     comptesResultat = CompteResultatRepository(executor, 'comptes_resultat');
-    balanceComptes = BalanceCompteRepository(executor, 'balance_comptes');
+    balanceComptes = BalanceCompteRepository(executor, 'balance_compte');
+    balanceCompteRef = CompteBalanceRefRepository(executor, 'comptes_balances_ref');
 
     // BUDGETS
     departementBudgets =
@@ -189,6 +197,7 @@ class Repository {
     taches = TacheRepository(executor, 'taches');
     versementProjets = VersementProjetRepository(executor, 'versement_projets');
     rapports = RapportRepository(executor, 'rapports');
+    agentsRoles = AgentRoleRepository(executor, 'agents_roles');
 
     // LOGISTIQUE
     anguins = AnguinRepository(executor, 'anguins');
@@ -198,6 +207,7 @@ class Repository {
     immobiliers = ImmobilierRepository(executor, 'immobiliers');
     mobiliers = MobilierRepository(executor, 'mobiliers');
     trajets = TrajetRepository(executor, 'trajets');
+    objetsRemplace = ObjetRemplaceRepository(executor, 'objets_remplace');
 
     // COMMERCIAL & MARKETING
     produitModel = ProduitModelRepository(executor, 'produits_model');

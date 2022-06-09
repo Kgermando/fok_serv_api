@@ -42,9 +42,9 @@ class AnguinRepository {
         "INSERT INTO $tableName (id, nom, modele, marque, numero_chassie,"
         "couleur, genre, qty_max_reservoir, date_fabrication, nomero_plaque,"
         "nomero_entreprise, kilometrage_initiale, provenance, type_caburant,"
-        "type_moteur, signature, created)"
+        "type_moteur, signature, created_ref, created)"
         "VALUES (nextval('anguins_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16)",
+        "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16 , @17)",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
@@ -61,7 +61,8 @@ class AnguinRepository {
           '13': data.typeCaburant,
           '14': data.typeMoteur,
           '15': data.signature,
-          '16': data.created
+          '16': data.createdRef,
+          '17': data.created  
         });
     });
   }
@@ -75,7 +76,8 @@ class AnguinRepository {
         "SET nom = @1, modele = @2, marque = @3, numero_chassie = @4, couleur = @5,"
         "genre = @6, qty_max_reservoir = @7, date_fabrication = @8, nomero_plaque = @9,"
         "nomero_entreprise = @10, kilometrage_initiale = @11, provenance = @12,"
-        "type_caburant = @13, type_moteur = @14, signature = @15, created = @16 WHERE id = @17",
+        "type_caburant = @13, type_moteur = @14, signature = @15,"
+        "created_ref = @16, created = @17 WHERE id = @18",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
@@ -93,7 +95,8 @@ class AnguinRepository {
           '14': data.typeMoteur,
           '15': data.signature,
           '16': data.created,
-          '17': data.id
+          '17': data.created,
+          '18': data.id
         });
     });
   }
@@ -129,7 +132,8 @@ class AnguinRepository {
       typeCaburant: data[0][13],
       typeMoteur: data[0][14],
       signature: data[0][15],
-      created: data[0][16]
+      createdRef: data[0][16],
+      created: data[0][17]
     );
   }
 }

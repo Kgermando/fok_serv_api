@@ -32,20 +32,18 @@ class CampaignHandlers {
 
     router.post('/insert-new-campaign', (Request request) async {
       var input = jsonDecode(await request.readAsString());
-
       CampaignModel data = CampaignModel(
-          typeProduit: input['typeProduit'],
-          dateDebutEtFin: input['dateDebutEtFin'],
-          agentAffectes: input['agentAffectes'],
-          coutCampaign: input['coutCampaign'],
-          lieuCible: input['lieuCible'],
-          promotion: input['promotion'],
-          objetctifs: input['objetctifs'],
-          ligneBudgtaire: input['ligneBudgtaire'],
-          resources: input['resources'],
-          observation: input['observation'],
-          signature: input['signature'],
-          created: DateTime.parse(input['created']));
+        typeProduit: input['typeProduit'],
+        dateDebutEtFin: input['dateDebutEtFin'],
+        coutCampaign: input['coutCampaign'],
+        lieuCible: input['lieuCible'],
+        promotion: input['promotion'],
+        objectifs: input['objectifs'],
+        observation: input['observation'],
+        signature: input['signature'],
+        createdRef: DateTime.parse(input['createdRef']),
+        created: DateTime.parse(input['created'])
+      );
       try {
         await repos.campaigns.insertData(data);
       } catch (e) {
@@ -66,9 +64,6 @@ class CampaignHandlers {
       if (input['dateDebutEtFin'] != null) {
         data.dateDebutEtFin = input['dateDebutEtFin'];
       }
-      if (input['agentAffectes'] != null) {
-        data.agentAffectes = input['agentAffectes'];
-      }
       if (input['coutCampaign'] != null) {
         data.coutCampaign = input['coutCampaign'];
       }
@@ -78,20 +73,17 @@ class CampaignHandlers {
       if (input['promotion'] != null) {
         data.promotion = input['promotion'];
       }
-      if (input['objetctifs'] != null) {
-        data.objetctifs = input['objetctifs'];
-      }
-      if (input['ligneBudgtaire'] != null) {
-        data.ligneBudgtaire = input['ligneBudgtaire'];
-      }
-      if (input['resources'] != null) {
-        data.resources = input['resources'];
+      if (input['objectifs'] != null) {
+        data.objectifs = input['objectifs'];
       }
       if (input['observation'] != null) {
         data.observation = input['observation'];
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['created'] != null) {
+        data.created = DateTime.parse(input['created']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

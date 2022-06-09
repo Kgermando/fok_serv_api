@@ -30,7 +30,7 @@ class TableName {
   final dettesTable = 'dettes';
   final finExterieursTable = 'fin_exterieurs';
   final creanceDetteTable = 'creance_dettes';
- 
+
   // COMPTABILITE
   final bilansTable = 'bilans';
   final journalsTable = 'journals';
@@ -459,7 +459,7 @@ class TableName {
       ''');
 
       // comptabilite journals
-       await connection.query('''
+      await connection.query('''
         CREATE TABLE IF NOT EXISTS $journalsTable(
           "id" $key,
           "numeroOperation" $vachar,
@@ -483,10 +483,9 @@ class TableName {
           "created" $timestamp
         );
       ''');
-    
 
       // comptabilite Compte resultat
-       await connection.query('''
+      await connection.query('''
         CREATE TABLE IF NOT EXISTS $comptesResultatTable(
           "id" $key,
           "intitule" $vachar,
@@ -533,7 +532,7 @@ class TableName {
       ''');
 
       // comptabilite balance comptes
-       await connection.query('''
+      await connection.query('''
         CREATE TABLE IF NOT EXISTS $balanceComptesTable(
           "id" $key,
           "title" $vachar,
@@ -552,7 +551,6 @@ class TableName {
           "created" $timestamp
         );
       ''');
-     
 
       // Devis
       await connection.query('''
@@ -962,7 +960,7 @@ class TableName {
           "coutCampaign" $vachar,
           "lieuCible" $vachar,
           "promotion" $vachar,
-          "objetctifs" $vachar,
+          "objectifs" $vachar,
           "ligneBudgtaire" $vachar,
           "resources" $vachar,
           "observation" $boolean,
@@ -1199,7 +1197,7 @@ class TableName {
     ''');
 
       // History livraison
-    await connection.query('''
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $historyLivraisonTable(
         "id" $key,
         "idProduct" $vachar,
@@ -1222,7 +1220,7 @@ class TableName {
     ''');
 
       // Archive
-    await connection.query('''
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $archivesTable(
         "id" $key,
         "nomDocument" $vachar,
@@ -1236,7 +1234,7 @@ class TableName {
     ''');
 
       // Mail
-    await connection.query('''
+      await connection.query('''
       CREATE TABLE IF NOT EXISTS $mailsTable(
         "id" $key,
         "fullName" $vachar,

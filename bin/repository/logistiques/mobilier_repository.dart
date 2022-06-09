@@ -23,8 +23,8 @@ class MobilierRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, nom, modele,"
-          "marque, description_mobilier, nombre, signature, created)"
-          "VALUES (nextval('mobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
+          "marque, description_mobilier, nombre, signature, created_ref, created)"
+          "VALUES (nextval('mobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
           substitutionValues: {
             '1': data.nom,
             '2': data.modele,
@@ -32,7 +32,8 @@ class MobilierRepository {
             '4': data.descriptionMobilier,
             '5': data.nombre,
             '6': data.signature,
-            '7': data.created
+            '7': data.createdRef,
+            '8': data.created
           });
     });
   }
@@ -43,7 +44,7 @@ class MobilierRepository {
         "UPDATE $tableName"
         "SET nom = @1, modele = @2, marque = @3,"
         "description_mobilier = @4, nombre = @5,"
-        "signature = @6, created = @7 WHERE id = @8",
+        "signature = @6, created_ref = @7, created = @8 WHERE id = @9",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
@@ -51,8 +52,9 @@ class MobilierRepository {
           '4': data.descriptionMobilier,
           '5': data.nombre,
           '6': data.signature,
-          '7': data.created,
-          '8': data.id
+          '7': data.createdRef,
+          '8': data.created,
+          '9': data.id
         });
     });
   }
@@ -79,7 +81,8 @@ class MobilierRepository {
         descriptionMobilier: data[0][4],
         nombre: data[0][5],
         signature: data[0][6],
-        created: data[0][7]
+        createdRef: data[0][7],
+        created: data[0][8]
     );
   }
 }

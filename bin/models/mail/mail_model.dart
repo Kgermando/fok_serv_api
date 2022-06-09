@@ -7,6 +7,7 @@ class MailModel {
   late String message;
   late String pieceJointe;
   late String read;
+  // Celui qui ecrit le mail
   late String fullNameDest;
   late String emailDest;
   late DateTime dateSend;
@@ -75,10 +76,3 @@ class MailModel {
     };
   }
 }
-
-// class MailColor {
-//   final MailModel mail;
-//   final Color color;
-
-//   MailColor({required this.mail, required this.color});
-// }

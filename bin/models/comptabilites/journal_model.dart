@@ -10,6 +10,7 @@ class JournalModel {
   late String remarque;
 
   late String signature;
+  late DateTime createdRef;
   late DateTime created;
 
   JournalModel(
@@ -23,6 +24,7 @@ class JournalModel {
       required this.tva,
       required this.remarque,
       required this.signature,
+      required this.createdRef,
       required this.created}); 
 
   factory JournalModel.fromSQL(List<dynamic> row) {
@@ -37,7 +39,8 @@ class JournalModel {
         tva: row[7],
         remarque: row[8],
         signature: row[9],
-        created: row[10]);
+        createdRef: row[10],
+        created: row[11]);
   }
 
   factory JournalModel.fromJson(Map<String, dynamic> json) {
@@ -52,6 +55,7 @@ class JournalModel {
         tva: json['tva'],
         remarque: json['remarque'],
         signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']));
   }
 
@@ -67,6 +71,7 @@ class JournalModel {
       'tva': tva,
       'remarque': remarque,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

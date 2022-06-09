@@ -6,6 +6,7 @@ class DepartementBudgetModel {
   late DateTime periodeFin; // Durée de fin
 
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
   DepartementBudgetModel(
@@ -15,6 +16,7 @@ class DepartementBudgetModel {
       required this.periodeDebut,
       required this.periodeFin,
       required this.signature,
+      required this.createdRef,
       required this.created});
 
   factory DepartementBudgetModel.fromSQL(List<dynamic> row) {
@@ -25,7 +27,8 @@ class DepartementBudgetModel {
         periodeDebut: row[3],
         periodeFin: row[4],
         signature: row[5],
-        created: row[6]
+        createdRef: row[6],
+        created: row[7]
     );
   }
 
@@ -37,6 +40,7 @@ class DepartementBudgetModel {
         periodeDebut: DateTime.parse(json['periodeDebut']),
         periodeFin: DateTime.parse(json['periodeFin']),
         signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']));
   }
 
@@ -48,6 +52,7 @@ class DepartementBudgetModel {
       'periodeDebut': periodeDebut.toIso8601String(),
       'periodeFin': periodeFin.toIso8601String(),
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

@@ -26,7 +26,7 @@ class EtaMaterielRepository {
       var data = <PieChartMaterielModel>{};
 
       var querySQL =
-          "SELECT statut, COUNT(statut) FROM $tableName WHERE \"approbationDG\"='Approved' GROUP BY \"statut\";";
+          "SELECT statut, COUNT(statut) FROM $tableName GROUP BY \"statut\";";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(PieChartMaterielModel.fromSQL(row));
@@ -41,15 +41,16 @@ class EtaMaterielRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, nom, modele,"
-          "marque, type_objet, signature, created)"
-          "VALUES (nextval('etat_materiels_id_seq'), @1, @2, @3, @4, @5, @6)",
+          "marque, type_objet, signature, created_ref, created)"
+          "VALUES (nextval('etat_materiels_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
           substitutionValues: {
             '1': data.nom,
             '2': data.modele,
             '3': data.marque,
             '4': data.typeObjet,
             '5': data.signature,
-            '6': data.created
+            '6': data.createdRef,
+            '7': data.created
           });
     });
   }
@@ -58,16 +59,17 @@ class EtaMaterielRepository {
     await executor.transaction((conn) async {
       await conn.query(
           "UPDATE $tableName"
-          "SET nom = @1, modele = @2, marque = @3,"
-          "type_objet = @4, signature = @5, created = @6 WHERE id = @7",
+          "SET nom = @1, modele = @2, marque = @3, type_objet = @4,"
+          "signature = @5, created_ref = @6 , created = @7 WHERE id = @8",
           substitutionValues: {
             '1': data.nom,
             '2': data.modele,
             '3': data.marque,
             '4': data.typeObjet,
             '5': data.signature,
-            '6': data.created,
-            '7': data.id
+            '6': data.createdRef,
+            '7': data.created,
+            '8': data.id
           });
     });
   }
@@ -94,7 +96,8 @@ class EtaMaterielRepository {
         typeObjet: data[0][4],
         statut: data[0][5], 
         signature: data[0][6],
-        created: data[0][7]
+        createdRef: data[0][7],
+        created: data[0][8]
     );
   }
 }

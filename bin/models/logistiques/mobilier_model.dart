@@ -6,6 +6,7 @@ class MobilierModel {
   late String descriptionMobilier;
   late String nombre;
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
   MobilierModel(
@@ -14,23 +15,22 @@ class MobilierModel {
       required this.modele,
       required this.marque,
       required this.descriptionMobilier,
-      required this.nombre, 
+      required this.nombre,
       required this.signature,
-      required this.created
-      
-      });
+      required this.createdRef,
+      required this.created});
 
   factory MobilierModel.fromSQL(List<dynamic> row) {
     return MobilierModel(
-      id: row[0],
-      nom: row[1],
-      modele: row[2],
-      marque: row[3],
-      descriptionMobilier: row[4],
-      nombre: row[5], 
-      signature: row[6],
-      created: row[7]
-    );
+        id: row[0],
+        nom: row[1],
+        modele: row[2],
+        marque: row[3],
+        descriptionMobilier: row[4],
+        nombre: row[5],
+        signature: row[6],
+        createdRef: row[7],
+        created: row[8]);
   }
 
   factory MobilierModel.fromJson(Map<String, dynamic> json) {
@@ -42,9 +42,8 @@ class MobilierModel {
         descriptionMobilier: json['descriptionMobilier'],
         nombre: json['nombre'],
         signature: json['signature'],
-        created: DateTime.parse(json['created'])
-        
-        );
+        createdRef: DateTime.parse(json['createdRef']),
+        created: DateTime.parse(json['created']));
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +55,7 @@ class MobilierModel {
       'descriptionMobilier': descriptionMobilier,
       'nombre': nombre,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

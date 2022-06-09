@@ -22,14 +22,14 @@ class BalanceCompteRepository {
   Future<void> insertData(BalanceCompteModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, title, comptes,"
-          "statut, signature, created)"
+          "INSERT INTO $tableName (id, title,"
+          "statut, signature, created_ref, created)"
           "VALUES (nextval('balance_comptes_id_seq'), @1, @2, @3, @4, @5)",
           substitutionValues: {
             '1': data.title,
-            '2': data.comptes,
-            '3': data.statut,
-            '4': data.signature,
+            '2': data.statut,
+            '3': data.signature,
+            '4': data.createdRef,
             '5': data.created
           });
     });
@@ -39,13 +39,13 @@ class BalanceCompteRepository {
     await executor.transaction((conn) async {
       await conn.query(
         "UPDATE $tableName"
-        "SET title = @1, comptes = @2, statut = @3, signature = @4,"
-        "created = @5 WHERE id = @6",
+        "SET title = @1, statut = @2, signature = @3, created_ref = @4,"
+        "created = @5, WHERE id = @6",
         substitutionValues: {
           '1': data.title,
-          '2': data.comptes,
-          '3': data.statut,
-          '4': data.signature,
+          '2': data.statut,
+          '3': data.signature,
+          '4': data.createdRef,
           '5': data.created,
           '6': data.id
         });
@@ -69,9 +69,9 @@ class BalanceCompteRepository {
     return BalanceCompteModel(
       id: data[0][0],
       title: data[0][1],
-      comptes: data[0][2],
-      statut: data[0][3],
-      signature: data[0][4],
+      statut: data[0][2],
+      signature: data[0][3],
+      createdRef: data[0][4],
       created: data[0][5]
     );
   } 

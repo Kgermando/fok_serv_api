@@ -8,6 +8,7 @@ class TrajetModel {
   late String kilometrageSorite;
   late String kilometrageRetour;
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
   TrajetModel(
@@ -20,6 +21,7 @@ class TrajetModel {
       required this.kilometrageSorite,
       required this.kilometrageRetour, 
       required this.signature,
+      required this.createdRef,
       required this.created
   });
 
@@ -34,7 +36,8 @@ class TrajetModel {
         kilometrageSorite: row[6],
         kilometrageRetour: row[7], 
         signature: row[8],
-        created: row[9]
+        createdRef: row[9],
+        created: row[10]
         
     );
   }
@@ -50,6 +53,7 @@ class TrajetModel {
         kilometrageSorite: json['kilometrageSorite'],
         kilometrageRetour: json['kilometrageRetour'],
         signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created'])
       );
   }
@@ -65,6 +69,7 @@ class TrajetModel {
       'kilometrageSorite': kilometrageSorite,
       'kilometrageRetour': kilometrageRetour,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

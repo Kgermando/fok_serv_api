@@ -87,7 +87,7 @@ class UserModel {
       'isOnline': isOnline,
       'createdAt': createdAt.toIso8601String(),
       'passwordHash': passwordHash,
-      'succursale': succursale
+      'succursale': succursale,
     };
   }
 }

@@ -24,15 +24,16 @@ class DepartementBudgetRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, title, departement, periode_debut, periode_fin,"
-        "signature, created)"
-        "VALUES (nextval('departement_budgets_id_seq'), @1, @2, @3, @4, @5, @6)",
+        "signature, created_ref, created)"
+        "VALUES (nextval('departement_budgets_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
         substitutionValues: {
           '1': data.title,
           '2': data.departement,
           '3': data.periodeDebut,
           '4': data.periodeFin,
           '5': data.signature,
-          '6': data.created
+          '6': data.createdRef,
+          '7': data.created
           }
         );
     });
@@ -43,15 +44,16 @@ class DepartementBudgetRepository {
       await conn.query(
         "UPDATE $tableName"
         "SET title = @1, departement = @2, periode_debut = @3, periode_fin = @4,"
-        "signature = @5, created = @6 WHERE id = @7",
+        "signature = @5, created_ref = @6, created = @7 WHERE id = @8",
         substitutionValues: {
           '1': data.title,
           '2': data.departement,
           '3': data.periodeDebut,
           '4': data.periodeFin,
           '5': data.signature,
-          '6': data.created,
-          '7': data.id
+          '6': data.createdRef,
+          '7': data.created,
+          '8': data.id
         }); 
     });
   }
@@ -77,7 +79,8 @@ class DepartementBudgetRepository {
       periodeDebut: data[0][3],
       periodeFin: data[0][4],
       signature: data[0][5],
-      created: data[0][6]
+      createdRef: data[0][6],
+      created: data[0][7]
     );
   } 
 }

@@ -17,6 +17,7 @@ class AnguinModel {
   late String typeMoteur;
 
   late String signature; // celui qui fait le document
+  late DateTime createdRef;
   late DateTime created;
 
 
@@ -37,6 +38,7 @@ class AnguinModel {
       required this.typeCaburant,
       required this.typeMoteur,
       required this.signature,
+      required this.createdRef,
       required this.created
     });
 
@@ -58,7 +60,8 @@ class AnguinModel {
         typeCaburant: row[13],
         typeMoteur: row[14],
         signature: row[15],
-        created: row[16]
+        createdRef: row[16],
+        created: row[17]
     );
   }
 
@@ -80,6 +83,7 @@ class AnguinModel {
         typeCaburant: json['typeCaburant'],
         typeMoteur: json['typeMoteur'],
         signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created'])
     );
   }
@@ -102,6 +106,7 @@ class AnguinModel {
       'typeCaburant': typeCaburant,
       'typeMoteur': typeMoteur,
       'signature': signature,
+      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

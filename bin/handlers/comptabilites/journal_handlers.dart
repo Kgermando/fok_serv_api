@@ -45,16 +45,18 @@ class JournalHandlers {
       var input = jsonDecode(await request.readAsString());
 
       JournalModel data = JournalModel(
-          numeroOperation: input['numeroOperation'],
-          libele: input['libele'],
-          compteDebit: input['compteDebit'],
-          montantDebit: input['montantDebit'],
-          compteCredit: input['compteCredit'],
-          montantCredit: input['montantCredit'],
-          tva: input['tva'],
-          remarque: input['remarque'],
-          signature: input['signature'],
-          created: DateTime.parse(input['created']));
+        numeroOperation: input['numeroOperation'],
+        libele: input['libele'],
+        compteDebit: input['compteDebit'],
+        montantDebit: input['montantDebit'],
+        compteCredit: input['compteCredit'],
+        montantCredit: input['montantCredit'],
+        tva: input['tva'],
+        remarque: input['remarque'],
+        signature: input['signature'],
+        createdRef: DateTime.parse(input['createdRef']),
+        created: DateTime.parse(input['created'])
+      );
       try {
         await repos.journals.insertData(data);
       } catch (e) {
@@ -95,6 +97,9 @@ class JournalHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

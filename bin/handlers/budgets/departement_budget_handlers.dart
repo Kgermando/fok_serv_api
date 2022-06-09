@@ -40,6 +40,7 @@ class DepartementBudgetHandlers {
         periodeDebut:  DateTime.parse(input['periodeDebut']),
         periodeFin:  DateTime.parse(input['periodeFin']),
         signature: input['signature'],
+        createdRef: DateTime.parse(input['createdRef']),
         created: DateTime.parse(input['created']),
       );
       try {
@@ -70,9 +71,11 @@ class DepartementBudgetHandlers {
       if (input['periodeFin'] != null) {
         data.periodeFin = DateTime.parse(input['periodeFin']);
       }
-
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

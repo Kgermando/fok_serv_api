@@ -25,9 +25,9 @@ class CarburantRepository {
         "INSERT INTO $tableName (id, operation_entre_sortie, type_caburant,"
         "fournisseur, nomero_facture_achat, prix_achat_par_litre,"
         "nom_receptioniste, numero_plaque, date_heure_sortie_anguin,"
-        "qty_achat, signature, created)"
+        "qty_achat, signature, created_ref, created)"
         "VALUES (nextval('carburants_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11)",
+        "@7, @8, @9, @10, @11, @12)",
         substitutionValues: {
           '1': data.operationEntreSortie,
           '2': data.typeCaburant,
@@ -39,7 +39,8 @@ class CarburantRepository {
           '8': data.dateHeureSortieAnguin,
           '9': data.qtyAchat,
           '10': data.signature,
-          '11': data.created
+          '11': data.createdRef,
+          '12': data.created
         });
     });
   }
@@ -51,7 +52,7 @@ class CarburantRepository {
         "SET operation_entre_sortie = @1, type_caburant = @2, fournisseur = @3,"
         "nomero_facture_achat = @4, prix_achat_par_litre = @5, nom_receptioniste = @6,"
         "numero_plaque = @7, date_heure_sortie_anguin = @8, qty_achat = @9,"
-        "signature = @10, created = @11 WHERE id = @12",
+        "signature = @10, created_ref = @11, created = @12 WHERE id = @13",
         substitutionValues: {
           '1': data.operationEntreSortie,
           '2': data.typeCaburant,
@@ -63,8 +64,9 @@ class CarburantRepository {
           '8': data.dateHeureSortieAnguin,
           '9': data.qtyAchat,
           '10': data.signature,
-          '11': data.created,
-          '12': data.id
+          '11': data.createdRef,
+          '12': data.created,
+          '13': data.id
         });
     });
   }
@@ -95,7 +97,8 @@ class CarburantRepository {
       dateHeureSortieAnguin: data[0][8],
       qtyAchat: data[0][9],
       signature: data[0][10],
-      created: data[0][11]
+      createdRef: data[0][11],
+      created: data[0][12]
     );
   }
 
