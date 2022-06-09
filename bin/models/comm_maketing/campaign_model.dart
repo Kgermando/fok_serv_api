@@ -48,7 +48,7 @@ class CampaignModel {
         lieuCible: json['lieuCible'],
         promotion: json['promotion'],
         objectifs: json['objectifs'],
-        observation: json['resources'],
+        observation: json['observation'],
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']));
