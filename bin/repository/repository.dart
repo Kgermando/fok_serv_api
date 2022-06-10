@@ -1,6 +1,5 @@
 import 'package:postgres/postgres.dart';
-
-import '../models/comptabilites/balance_comptes_model.dart';
+ 
 import 'approbation/approbation.repository.dart';
 import 'archives/archive_folder_repository.dart';
 import 'archives/archive_repository.dart';
@@ -184,7 +183,7 @@ class Repository {
     comptePassif = ComptePassifRepository(executor, 'compte_passifs');
     journals = JournalRepository(executor, 'journals');
     comptesResultat = CompteResultatRepository(executor, 'comptes_resultat');
-    balanceComptes = BalanceCompteRepository(executor, 'balance_compte');
+    balanceComptes = BalanceCompteRepository(executor, 'balance_comptes');
     balanceCompteRef = CompteBalanceRefRepository(executor, 'comptes_balances_ref');
 
     // BUDGETS

@@ -23,7 +23,7 @@ class CompteBalanceRefRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, reference, comptes, debit, credit, solde)"
-        "VALUES (nextval('comptes_balances_id_seq'), @1, @2, @3, @4, @5)",
+        "VALUES (nextval('comptes_balances_ref_id_seq'), @1, @2, @3, @4, @5)",
         substitutionValues: {
           '1': data.reference,
           '2': data.comptes,
