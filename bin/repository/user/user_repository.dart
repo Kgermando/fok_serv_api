@@ -48,63 +48,60 @@ class UserRepository {
   }
 
 
-  Future<void> insertData(UserModel user) async {
-    var photo = user.photo;
-    var nom = user.nom;
-    var prenom = user.prenom;
-    var email = user.email;
-    var telephone = user.telephone;
-    var role = user.role;
-    var matricule = user.matricule;
-    var departement = user.departement;
-    var servicesAffectation = user.servicesAffectation;
-    var fonctionOccupe = user.fonctionOccupe;
-    var isOnline = user.isOnline;
-    var createdAt = user.createdAt;
-    var passwordHash = user.passwordHash;
-    var succursale = user.succursale;
-
+  Future<void> insertData(UserModel data) async {
     await executor.transaction((ctx) async {
-      // ignore: unused_local_variable
-      var result = await ctx.execute(
-        "INSERT INTO $tableName VALUES (nextval('users_id_seq'), '$photo', '$nom', '$prenom',"
-        "'$email', '$telephone', '$matricule', '$departement',"
-        "'$servicesAffectation', '$fonctionOccupe', '$role', '$isOnline',"
-        "'$createdAt', '$passwordHash', '$succursale');");
-    });
+      await ctx.execute(
+          "INSERT INTO $tableName (id, photo, nom, prenom, email, telephone,"
+          "role, matricule, departement, services_affectation, fonction_occupe,"
+          "is_online, created_at, password_hash, succursale)"
+          "VALUES (nextval('users_id_seq'), @1, @2, @3, @4, @5, @6, @7,"
+            "@8, @9, @10, @11, @12, @13, @14)",
+          substitutionValues: {
+            '1': data.photo,
+            '2': data.nom,
+            '3': data.prenom,
+            '4': data.email,
+            '5': data.telephone,
+            '6': data.role,
+            '7': data.matricule,
+            '8': data.departement,
+            '9': data.servicesAffectation,
+            '10': data.fonctionOccupe,
+            '11': data.isOnline,
+            '12': data.createdAt,
+            '13': data.passwordHash,
+            '14': data.succursale
+          });
+    });  
 
-  }
+  } 
 
-
-
-
-  Future<void> update(UserModel user) async {
-    var id = user.id;
-    var photo = user.photo;
-    var nom = user.nom;
-    var prenom = user.prenom;
-    var email = user.email;
-    var telephone = user.telephone;
-    var matricule = user.matricule;
-    var departement = user.departement;
-    var servicesAffectation = user.servicesAffectation;
-    var fonctionOccupe = user.fonctionOccupe;
-    var role = user.role;
-    var isOnline = user.isOnline;
-    var createdAt = user.createdAt;
-    var passwordHash = user.passwordHash;
-    var succursale = user.succursale;
-
+  Future<void> update(UserModel data) async {
     await executor.transaction((conn) async {
-      // ignore: unused_local_variable
-      var result = await conn.execute(
-        "UPDATE $tableName SET \"photo\"='$photo', \"nom\"='$nom',"
-        "\"prenom\"='$prenom', \"email\"='$email', \"telephone\"='$telephone',"
-        "\"matricule\"='$matricule', \"departement\"='$departement',"
-        "\"servicesAffectation\"='$servicesAffectation', \"fonctionOccupe\"='$fonctionOccupe', \"role\"='$role',"
-        "\"isOnline\"='$isOnline', \"createdAt\"='$createdAt',"
-        "\"passwordHash\"='$passwordHash' ', \"succursale\"='$succursale' WHERE id=$id;");
-    });
+      await conn.query(
+          "UPDATE $tableName"
+          "SET photo = @1, nom = @2, prenom = @3, email = @4, telephone = @5,"
+          "role = @6, matricule = @7, departement = @8, services_affectation = @9,"
+          "fonction_occupe = @10, is_online = @11, created_at = @12,"
+          "password_hash = @13, succursale = @14 WHERE id = @15",
+          substitutionValues: {
+            '1': data.photo,
+            '2': data.nom,
+            '3': data.prenom,
+            '4': data.email,
+            '5': data.telephone,
+            '6': data.role,
+            '7': data.matricule,
+            '8': data.departement,
+            '9': data.servicesAffectation,
+            '10': data.fonctionOccupe,
+            '11': data.isOnline,
+            '12': data.createdAt,
+            '13': data.passwordHash,
+            '14': data.succursale,
+            '15': data.id
+          });
+    });   
   }
 
   deleteData(int id) async {

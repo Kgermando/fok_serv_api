@@ -25,7 +25,7 @@ class PresenceRepository {
       await ctx.execute(
         "INSERT INTO $tableName (id, remarque, fin_journee, signature,"
         "signature_fermeture, created_ref, created)"
-        "VALUES (nextval('presences_id_seq1'), @1, @2, @3, @4 , @5 , @6)",
+        "VALUES (nextval('presences_id_seq'), @1, @2, @3, @4 , @5 , @6)",
           substitutionValues: {
             '1': data.remarque,
             '2': data.finJournee,
