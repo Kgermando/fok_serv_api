@@ -22,7 +22,7 @@ class AgentsRepository {
 
   Future<void> insertData(AgentModel agentModel) async {
     await executor.transaction((ctx) async {
-      await ctx.query(
+      await ctx.execute(
           "INSERT INTO $tableName (id, nom, postnom, prenom, email, telephone,"
           "adresse, sexe, role, matricule, numero_securite_sociale, date_naissance,"
           "lieu_naissance, nationalite, type_contrat, departement, services_affectation,"
@@ -64,7 +64,7 @@ class AgentsRepository {
 
   Future<void> update(AgentModel agentModel) async {
     await executor.transaction((conn) async {
-      await conn.query(
+      await conn.execute(
         "UPDATE $tableName"
         "SET nom = @1, postnom = @2, prenom = @3, email = @4, telephone = @5,"
         "adresse = @6, sexe = @7, role = @8, matricule = @9, numero_securite_sociale = @10,"
