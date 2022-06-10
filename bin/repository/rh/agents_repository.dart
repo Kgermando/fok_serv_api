@@ -65,7 +65,7 @@ class AgentsRepository {
   Future<void> update(AgentModel agentModel) async {
     await executor.transaction((conn) async {
       await conn.execute(
-        "UPDATE $tableName"
+        "UPDATE '$tableName'"
         "SET nom = @1, postnom = @2, prenom = @3, email = @4, telephone = @5,"
         "adresse = @6, sexe = @7, role = @8, matricule = @9, numero_securite_sociale = @10,"
         "date_naissance = @11, lieu_naissance = @12, nationalite = @13, type_contrat = @14,"
