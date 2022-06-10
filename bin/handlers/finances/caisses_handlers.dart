@@ -60,9 +60,7 @@ class CaissesHandlers {
           pieceJustificative: input['pieceJustificative'],
           libelle: input['libelle'],
           montant: input['montant'],
-          coupureBillet: input['coupureBillet'],
-          ligneBudgtaire: input['ligneBudgtaire'],
-          resources: input['resources'],
+          coupureBillet: input['coupureBillet'], 
           departement: input['departement'],
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'],
@@ -97,13 +95,7 @@ class CaissesHandlers {
       }
       if (input['coupureBillet'] != null) {
         data.coupureBillet = input['coupureBillet'];
-      }
-      if (input['ligneBudgtaire'] != null) {
-        data.ligneBudgtaire = input['ligneBudgtaire'];
-      }
-      if (input['resources'] != null) {
-        data.resources = input['resources'];
-      }
+      } 
       if (input['departement'] != null) {
         data.departement = input['departement'];
       }

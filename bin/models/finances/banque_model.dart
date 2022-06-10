@@ -5,8 +5,6 @@ class BanqueModel {
   late String libelle;
   late String montant;
   late List<dynamic> coupureBillet;
-  late String ligneBudgtaire; // somme d'affectation pour le budget
-  late String resources; // resource mis a disposition pour ce projet
   late String departement;
   late String typeOperation;
   late String numeroOperation;
@@ -14,57 +12,47 @@ class BanqueModel {
   late String signature; // celui qui fait le document
   late DateTime created;
 
-
-  BanqueModel({
-    this.id,
-    required this.nomComplet,
-    required this.pieceJustificative,
-    required this.libelle,
-    required this.montant,
-    required this.coupureBillet,
-    required this.ligneBudgtaire,
-    required this.resources,
-    required this.departement,
-    required this.typeOperation,
-    required this.numeroOperation,
-    required this.signature,
-    required this.created
-  });
+  BanqueModel(
+      {this.id,
+      required this.nomComplet,
+      required this.pieceJustificative,
+      required this.libelle,
+      required this.montant,
+      required this.coupureBillet,
+      required this.departement,
+      required this.typeOperation,
+      required this.numeroOperation,
+      required this.signature,
+      required this.created});
 
   factory BanqueModel.fromSQL(List<dynamic> row) {
     return BanqueModel(
-      id: row[0],
-      nomComplet: row[1],
-      pieceJustificative: row[2],
-      libelle: row[3],
-      montant: row[4],
-      coupureBillet: row[5],
-      ligneBudgtaire: row[6],
-      resources: row[7],
-      departement: row[8],
-      typeOperation: row[9],
-      numeroOperation: row[10],
-      signature: row[11],
-      created: row[12]
-    );
+        id: row[0],
+        nomComplet: row[1],
+        pieceJustificative: row[2],
+        libelle: row[3],
+        montant: row[4],
+        coupureBillet: row[5],
+        departement: row[6],
+        typeOperation: row[7],
+        numeroOperation: row[8],
+        signature: row[9],
+        created: row[10]);
   }
 
   factory BanqueModel.fromJson(Map<String, dynamic> json) {
     return BanqueModel(
-      id: json['id'],
-      nomComplet: json['nomComplet'],
-      pieceJustificative: json['pieceJustificative'],
-      libelle: json['libelle'],
-      montant: json['montant'],
-      coupureBillet: json['coupureBillet'],
-      ligneBudgtaire: json['ligneBudgtaire'],
-      resources: json['resources'],
-      departement: json['departement'],
-      typeOperation: json['typeOperation'],
-      numeroOperation: json['numeroOperation'],
-      signature: json['signature'],
-      created: DateTime.parse(json['created'])
-    );
+        id: json['id'],
+        nomComplet: json['nomComplet'],
+        pieceJustificative: json['pieceJustificative'],
+        libelle: json['libelle'],
+        montant: json['montant'],
+        coupureBillet: json['coupureBillet'],
+        departement: json['departement'],
+        typeOperation: json['typeOperation'],
+        numeroOperation: json['numeroOperation'],
+        signature: json['signature'],
+        created: DateTime.parse(json['created']));
   }
 
   Map<String, dynamic> toJson() {
@@ -75,8 +63,6 @@ class BanqueModel {
       'libelle': libelle,
       'montant': montant,
       'coupureBillet': coupureBillet,
-      'ligneBudgtaire': ligneBudgtaire,
-      'resources': resources,
       'departement': departement,
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,

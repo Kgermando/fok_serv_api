@@ -74,23 +74,21 @@ class CaissesRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
-        "libelle, montant, coupure_billet, ligne_budgetaire, resources,"
+        "libelle, montant, coupure_billet,"
         "departement,  type_operation,  numero_operation, signature, created)"
         "VALUES (nextval('caisses_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11, @12)",
+        "@7, @8, @9, @10)",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
           '3': data.libelle,
           '4': data.montant,
-          '5': data.coupureBillet,
-          '6': data.ligneBudgtaire,
-          '7': data.resources,
-          '8': data.departement,
-          '9': data.typeOperation,
-          '10': data.numeroOperation,
-          '11': data.signature,
-          '12': data.created
+          '5': data.coupureBillet, 
+          '6': data.departement,
+          '7': data.typeOperation,
+          '8': data.numeroOperation,
+          '9': data.signature,
+          '10': data.created
         });
     });
   }
@@ -100,23 +98,21 @@ class CaissesRepository {
        await conn.query(
         "UPDATE $tableName"
         "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
-        "montant = @4, coupure_billet = @5, ligne_budgetaire = @6, resources = @7,"
-        "departement = @8, type_operation = @9, numero_operation = @10,"
-        "signature = @11, created = @12 WHERE id = @13",
+        "montant = @4, coupure_billet = @5,"
+        "departement = @6, type_operation = @7, numero_operation = @8,"
+        "signature = @9, created = @10 WHERE id = @11",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
           '3': data.libelle,
           '4': data.montant,
           '5': data.coupureBillet,
-          '6': data.ligneBudgtaire,
-          '7': data.resources,
-          '8': data.departement,
-          '9': data.typeOperation,
-          '10': data.numeroOperation,
-          '11': data.signature,
-          '12': data.created,
-          '13': data.id
+          '6': data.departement,
+          '7': data.typeOperation,
+          '8': data.numeroOperation,
+          '9': data.signature,
+          '10': data.created,
+          '11': data.id
         });
     });
   }
@@ -142,13 +138,11 @@ class CaissesRepository {
         libelle: data[0][3],
         montant: data[0][4],
         coupureBillet: data[0][5],
-        ligneBudgtaire: data[0][6],
-        resources: data[0][7],
-        departement: data[0][8],
-        typeOperation: data[0][9],
-        numeroOperation: data[0][10],
-        signature: data[0][11],
-        created: data[0][12]
+        departement: data[0][6],
+        typeOperation: data[0][7],
+        numeroOperation: data[0][8],
+        signature: data[0][9],
+        created: data[0][10]
       );
   }
 
