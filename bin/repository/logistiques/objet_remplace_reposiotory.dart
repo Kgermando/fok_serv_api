@@ -37,7 +37,7 @@ class ObjetRemplaceRepository {
 
   Future<void> update(ObjetRemplaceModel data) async {
     await executor.transaction((conn) async {
-      await conn.query(
+      await conn.execute(
           "UPDATE $tableName"
           "SET reference = @1, nom = @2, cout = @3,"
           "caracteristique = @4, observation = @5 WHERE id = @6",

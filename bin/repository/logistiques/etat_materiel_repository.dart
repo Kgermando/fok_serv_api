@@ -57,7 +57,7 @@ class EtaMaterielRepository {
 
   Future<void> update(EtatMaterielModel data) async {
     await executor.transaction((conn) async {
-      await conn.query(
+      await conn.execute(
           "UPDATE $tableName"
           "SET nom = @1, modele = @2, marque = @3, type_objet = @4,"
           "signature = @5, created_ref = @6 , created = @7 WHERE id = @8",

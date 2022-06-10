@@ -40,7 +40,7 @@ class ImmobilierRepository {
 
   Future<void> update(ImmobilierModel data) async {
     await executor.transaction((conn) async {
-      await conn.query(
+      await conn.execute(
         "UPDATE $tableName"
         "SET type_allocation = @1, adresse = @2, numero_certificat = @3,"
         "superficie = @4, date_acquisition = @5, signature = @6,"

@@ -41,7 +41,7 @@ class EntretienRepository {
 
   Future<void> update(EntretienModel data) async {
     await executor.transaction((conn) async {
-      await conn.query(
+      await conn.execute(
           "UPDATE $tableName"
           "SET nom = @1, modele = @2, marque = @3,"
           "etat_objet = @4, duree_travaux = @5, signature = @6,"

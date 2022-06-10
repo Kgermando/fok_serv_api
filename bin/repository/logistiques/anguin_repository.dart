@@ -25,7 +25,7 @@ class AnguinRepository {
       var data = <PieChartEnguinModel>{};
 
       var querySQL =
-          "SELECT genre, COUNT(genre) FROM $tableName WHERE \"approbationDG\"='Approved' GROUP BY \"genre\";";
+          "SELECT genre, COUNT(genre) FROM $tableName GROUP BY \"genre\";";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(PieChartEnguinModel.fromSQL(row));
@@ -71,7 +71,7 @@ class AnguinRepository {
   
   Future<void> update(AnguinModel data) async {
     await executor.transaction((conn) async {
-      await conn.query(
+      await conn.execute(
         "UPDATE $tableName"
         "SET nom = @1, modele = @2, marque = @3, numero_chassie = @4, couleur = @5,"
         "genre = @6, qty_max_reservoir = @7, date_fabrication = @8, nomero_plaque = @9,"
