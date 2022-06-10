@@ -32,7 +32,7 @@ class UserRepository {
   Future<int> getIdFromLoginPassword(
       String matricule, String passwordHash) async {
     var data = await executor.query(
-      "SELECT id FROM $tableName WHERE \"matricule\"='$matricule' AND \"passwordHash\"='$passwordHash'");
+      "SELECT id FROM $tableName WHERE \"matricule\"='$matricule' AND \"password_hash\"='$passwordHash'");
     return data[0][0];
   }
 
