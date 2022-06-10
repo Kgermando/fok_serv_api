@@ -38,8 +38,7 @@ class UserHandlers {
 
     router.put('/update-user/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      UserModel selectUser =
-          await repos.users.getFromId(int.parse(id!));
+      UserModel selectUser = await repos.users.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['photo'] != null) {
@@ -76,7 +75,7 @@ class UserHandlers {
         selectUser.isOnline = input['isOnline'];
       }
       if (input['createdAt'] != null) {
-        selectUser.createdAt = input['createdAt'];
+        selectUser.createdAt = DateTime.parse(input['createdAt']);
       }
       if (input['passwordHash'] != null) {
         selectUser.passwordHash =
