@@ -36,10 +36,12 @@ class UserHandlers {
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
-    router.patch('/', (Request request) async {
+    router.put('/update-user/<id>', (Request request, String id) async {
+      var id = request.params['id'];
       UserModel selectUser =
-          await repos.users.getFromId(request.context['id'] as int);
+          await repos.users.getFromId(int.parse(id!));
       dynamic input = jsonDecode(await request.readAsString());
+
       if (input['photo'] != null) {
         selectUser.matricule = input['photo'];
       }

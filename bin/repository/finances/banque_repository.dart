@@ -92,7 +92,7 @@ class BanqueRepository {
           '9': data.signature,
           '10': data.created
         });
-    });
+    }); 
   }
 
 
