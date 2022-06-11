@@ -75,7 +75,7 @@ class CaissesRepository {
       await ctx.execute(
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
         "libelle, montant,"
-        "departement,  type_operation,  numero_operation, signature,"
+        "departement, type_operation, numero_operation, signature,"
         "created_ref, created)"
         "VALUES (nextval('caisses_id_seq'), @1, @2, @3, @4, @5, @6,"
         "@7, @8, @9, @10)",
