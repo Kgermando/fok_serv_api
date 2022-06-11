@@ -1,5 +1,5 @@
 import 'package:postgres/postgres.dart';
- 
+
 import 'approbation/approbation.repository.dart';
 import 'archives/archive_folder_repository.dart';
 import 'archives/archive_repository.dart';
@@ -38,6 +38,7 @@ import 'exploitations/tache_repository.dart';
 import 'exploitations/versement_projet_repository.dart';
 import 'finances/banque_repository.dart';
 import 'finances/caissses_repository.dart';
+import 'finances/coupure_billet_repository.dart';
 import 'finances/creance_dette_repository.dart';
 import 'finances/creances_repository.dart';
 import 'finances/dettes_repository.dart';
@@ -90,6 +91,7 @@ class Repository {
   late DettesRepository dettes;
   late FinExteRepository finExterieurs;
   late CreanceDetteRepository creanceDette;
+  late CoupureBilletRepository coupureBillets;
 
   // COMPTABILITES
   late BilanRepository bilans;
@@ -176,6 +178,7 @@ class Repository {
     dettes = DettesRepository(executor, 'dettes');
     finExterieurs = FinExteRepository(executor, 'fin_exterieurs');
     creanceDette = CreanceDetteRepository(executor, 'creance_dettes');
+    coupureBillets = CoupureBilletRepository(executor, 'coupure_billets');
 
     // COMPTABILITE
     bilans = BilanRepository(executor, 'bilans');
@@ -184,7 +187,8 @@ class Repository {
     journals = JournalRepository(executor, 'journals');
     comptesResultat = CompteResultatRepository(executor, 'comptes_resultat');
     balanceComptes = BalanceCompteRepository(executor, 'balance_comptes');
-    balanceCompteRef = CompteBalanceRefRepository(executor, 'comptes_balances_ref');
+    balanceCompteRef =
+        CompteBalanceRefRepository(executor, 'comptes_balances_ref');
 
     // BUDGETS
     departementBudgets =

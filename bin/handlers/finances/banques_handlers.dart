@@ -63,12 +63,12 @@ class BanqueHandlers {
           nomComplet: input['nomComplet'],
           pieceJustificative: input['pieceJustificative'],
           libelle: input['libelle'],
-          montant: input['montant'],
-          coupureBillet: input['coupureBillet'], 
+          montant: input['montant'], 
           departement: input['departement'],
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'],
           signature: input['signature'],
+          createdRef: input['createdRef'],
           created: DateTime.parse(input['created']));
       try {
         await repos.banques.insertData(data);
@@ -96,9 +96,6 @@ class BanqueHandlers {
       }
       if (input['montant'] != null) {
         data.montant = input['montant'];
-      }
-      if (input['coupureBillet'] != null) {
-        data.coupureBillet = input['coupureBillet'];
       } 
       if (input['departement'] != null) {
         data.departement = input['departement'];
@@ -111,6 +108,9 @@ class BanqueHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = input['createdRef'];
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

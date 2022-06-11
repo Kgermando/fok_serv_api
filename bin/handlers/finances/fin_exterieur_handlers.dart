@@ -38,13 +38,11 @@ class FinExterieurHandlers {
           nomComplet: input['nomComplet'],
           pieceJustificative: input['pieceJustificative'],
           libelle: input['libelle'],
-          montant: input['montant'],
-          coupureBillet: input['coupureBillet'],
-          ligneBudgtaire: input['ligneBudgtaire'],
+          montant: input['montant'], 
           typeOperation: input['typeOperation'],
-          numeroOperation: input['numeroOperation'],
-          ressourceFin: input['ressourceFin'],
+          numeroOperation: input['numeroOperation'], 
           signature: input['signature'],
+          createdRef: input['createdRef'],
           created: DateTime.parse(input['created']));
       try {
         await repos.finExterieurs.insertData(data);
@@ -73,25 +71,18 @@ class FinExterieurHandlers {
       }
       if (input['montant'] != null) {
         data.montant = input['montant'];
-      }
-      if (input['coupureBillet'] != null) {
-        data.coupureBillet = input['coupureBillet'];
-      }
-      if (input['ligneBudgtaire'] != null) {
-        data.ligneBudgtaire = input['ligneBudgtaire'];
-      }
+      } 
       if (input['typeOperation'] != null) {
         data.typeOperation = input['typeOperation'];
       }
       if (input['numeroOperation'] != null) {
         data.numeroOperation = input['numeroOperation'];
-      }
-      if (input['ressourceFin'] != null) {
-        data.ressourceFin = input['ressourceFin'];
-      }
-
+      } 
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = input['createdRef'];
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

@@ -23,22 +23,20 @@ class FinExteRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
-        "libelle, montant, coupure_billet, ligne_budgetaire, ressource_fin,"
-        "type_operation, numero_operation, signature, created)"
+        "libelle, montant, type_operation, numero_operation, signature,"
+        "created_ref, created)"
         "VALUES (nextval('fin_exterieurs_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11)",
+        "@7, @8, @9)",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
           '3': data.libelle,
           '4': data.montant,
-          '5': data.coupureBillet,
-          '6': data.ligneBudgtaire,
-          '7': data.typeOperation,
-          '8': data.numeroOperation,
-          '9': data.ressourceFin,
-          '10': data.signature,
-          '11': data.created
+          '5': data.typeOperation,
+          '6': data.numeroOperation,
+          '7': data.signature,
+          '8': data.createdRef,
+          '9': data.created
         });
     });
   }
@@ -48,22 +46,19 @@ class FinExteRepository {
       await conn.query(
         "UPDATE $tableName"
         "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
-        "montant = @4, coupure_billet = @5, ligne_budgetaire = @6,"
-        "ressource_fin = @9, type_operation = @7, numero_operation = @8,"
-        "signature = @10, created = @11 WHERE id = @12",
+        "montant = @4, type_operation = @5, numero_operation = @6,"
+        "signature = @7, created_ref = @8, created = @9 WHERE id = @10",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
           '3': data.libelle,
           '4': data.montant,
-          '5': data.coupureBillet,
-          '6': data.ligneBudgtaire,
-          '7': data.typeOperation,
-          '8': data.numeroOperation,
-          '9': data.ressourceFin,
-          '10': data.signature,
-          '11': data.created,
-          '12': data.id
+          '5': data.typeOperation,
+          '6': data.numeroOperation,
+          '7': data.signature,
+          '8': data.createdRef,
+          '9': data.created,
+          '10': data.id
         });
     });
   }
@@ -88,13 +83,11 @@ class FinExteRepository {
         pieceJustificative: data[0][2],
         libelle: data[0][3],
         montant: data[0][4],
-        coupureBillet: data[0][5],
-        ligneBudgtaire: data[0][6],
-        typeOperation: data[0][7],
-        numeroOperation: data[0][8],
-        ressourceFin: data[0][9],
-        signature: data[0][10],
-        created: data[0][11]
+        typeOperation: data[0][5],
+        numeroOperation: data[0][6],
+        signature: data[0][7],
+        createdRef: data[0][8],
+        created: data[0][9]
     );
   } 
   

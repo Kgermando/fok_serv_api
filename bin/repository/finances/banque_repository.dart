@@ -76,8 +76,9 @@ class BanqueRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
-        "libelle, montant, coupure_billet,"
-        "departement, type_operation, numero_operation, signature, created)"
+        "libelle, montant,"
+        "departement, type_operation, numero_operation, signature,"
+        "created_ref, created)"
         "VALUES (nextval('banques_id_seq'), @1, @2, @3, @4, @5, @6,"
         "@7, @8, @9, @10)",
         substitutionValues: {
@@ -85,12 +86,12 @@ class BanqueRepository {
           '2': data.pieceJustificative,
           '3': data.libelle,
           '4': data.montant,
-          '5': data.coupureBillet, 
-          '6': data.departement,
-          '7': data.typeOperation,
-          '8': data.numeroOperation,
-          '9': data.signature,
-          '10': data.created
+          '5': data.departement,
+          '6': data.typeOperation,
+          '7': data.numeroOperation,
+          '8': data.signature,
+          '9': data.createdRef,
+          '10' : data.created
         });
     }); 
   }
@@ -101,20 +102,20 @@ class BanqueRepository {
       await conn.query(
         "UPDATE $tableName"
         "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
-        "montant = @4, coupure_billet = @5,"
-        "departement = @6, type_operation = @7, numero_operation = @8,"
-        "signature = @9, created = @10 WHERE id = @11",
+        "montant = @4, departement = @5,"
+        "type_operation = @6, numero_operation = @7, signature = @8,"
+        "created_ref = @9, created = @10 WHERE id = @11",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
           '3': data.libelle,
           '4': data.montant,
-          '5': data.coupureBillet,
-          '6': data.departement,
-          '7': data.typeOperation,
-          '8': data.numeroOperation,
-          '9': data.signature,
-          '10': data.created,
+          '5': data.departement,
+          '6': data.typeOperation,
+          '7': data.numeroOperation,
+          '8': data.signature,
+          '9': data.createdRef,
+          '10' : data.created,
           '11': data.id
         });
     });
@@ -140,12 +141,12 @@ class BanqueRepository {
         pieceJustificative: data[0][2],
         libelle: data[0][3],
         montant: data[0][4],
-        coupureBillet: data[0][5],
-        departement: data[0][6],
-        typeOperation: data[0][7],
-        numeroOperation: data[0][8],
-        signature: data[0][9],
-        created: data[0][10]
+        departement: data[0][5],
+        typeOperation: data[0][6],
+        numeroOperation: data[0][7],
+        signature: data[0][8],
+        createdRef: data[0][9],
+        created: data[0][10] 
     );
   } 
   

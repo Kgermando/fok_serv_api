@@ -3,29 +3,24 @@ class FinanceExterieurModel {
   late String nomComplet;
   late String pieceJustificative;
   late String libelle;
-  late String montant;
-  late List<dynamic> coupureBillet;
-  late String ligneBudgtaire; // somme d'affectation pour le budget
+  late String montant; 
   late String typeOperation;
   late String numeroOperation;
-  late String ressourceFin; // financement Propre ou financement exterieur
-
   late String signature; // celui qui fait le document
+  late int createdRef;
   late DateTime created;
  
   FinanceExterieurModel( 
     {
-      this.id,
+    this.id,
     required this.nomComplet,
     required this.pieceJustificative,
     required this.libelle,
     required this.montant,
-    required this.coupureBillet,
-    required this.ligneBudgtaire,
     required this.typeOperation,
     required this.numeroOperation,
-    required this.ressourceFin,
     required this.signature,
+    required this.createdRef,
     required this.created
   });
 
@@ -36,13 +31,11 @@ class FinanceExterieurModel {
         pieceJustificative: row[2],
         libelle: row[3],
         montant: row[4],
-        coupureBillet: row[5],
-        ligneBudgtaire: row[6],
-        typeOperation: row[7],
-        numeroOperation: row[8],
-        ressourceFin: row[9],
-        signature: row[10],
-        created: row[11]
+        typeOperation: row[5],
+        numeroOperation: row[6],
+        signature: row[7],
+        createdRef: row[8],
+        created: row[9]
     );
   }
 
@@ -52,13 +45,11 @@ class FinanceExterieurModel {
       nomComplet: json['nomComplet'],
       pieceJustificative: json['pieceJustificative'],
       libelle: json['libelle'],
-      montant: json['montant'],
-      coupureBillet: json['coupureBillet'],
-      ligneBudgtaire: json['ligneBudgtaire'],
+      montant: json['montant'], 
       typeOperation: json['typeOperation'],
-      numeroOperation: json['numeroOperation'],
-      ressourceFin: json['ressourceFin'],
+      numeroOperation: json['numeroOperation'], 
       signature: json['signature'],
+      createdRef: json['createdRef'],
       created: DateTime.parse(json['created'])
     );
   }
@@ -69,13 +60,11 @@ class FinanceExterieurModel {
       'nomComplet': nomComplet,
       'pieceJustificative': pieceJustificative,
       'libelle': libelle,
-      'montant': montant,
-      'coupureBillet': coupureBillet,
-      'ligneBudgtaire': ligneBudgtaire,
+      'montant': montant, 
       'typeOperation': typeOperation,
-      'numeroOperation': numeroOperation,
-      'ressourceFin': ressourceFin,
+      'numeroOperation': numeroOperation, 
       'signature': signature,
+      'createdRef': createdRef,
       'created': created.toIso8601String()
     };
   }

@@ -43,6 +43,7 @@ import 'handlers/exploitations/tache_handlers.dart';
 import 'handlers/exploitations/versement_projet_handlers.dart';
 import 'handlers/finances/banques_handlers.dart';
 import 'handlers/finances/caisses_handlers.dart';
+import 'handlers/finances/coupure_billet_handlers.dart';
 import 'handlers/finances/creance_dette_handlers.dart';
 import 'handlers/finances/creance_handlers.dart';
 import 'handlers/finances/dette_handlers.dart';
@@ -206,6 +207,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CreanceDetteHandlers(repos).router));
+    router.mount(
+        '/api/finances/coupure-billets/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CoupureBilletHandlers(repos).router));
 
 // COMPTABILITE
     router.mount(
