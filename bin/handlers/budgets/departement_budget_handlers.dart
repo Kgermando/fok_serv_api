@@ -37,8 +37,8 @@ class DepartementBudgetHandlers {
       DepartementBudgetModel data = DepartementBudgetModel(
         title: input['title'],
         departement: input['departement'],
-        periodeDebut: DateTime.parse(input['periodeDebut']),
-        periodeFin: DateTime.parse(input['periodeFin']),
+        periodeDebut:  DateTime.parse(input['periodeDebut']),
+        periodeFin:  DateTime.parse(input['periodeFin']),
         signature: input['signature'],
         createdRef: DateTime.parse(input['createdRef']),
         created: DateTime.parse(input['created']),
@@ -53,42 +53,39 @@ class DepartementBudgetHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-departement-budget/', (Request request) async {
-      late var id = request.params['id'];
+    router.put('/update-departement-budget/',
+        (Request request) async {
+      String? id = request.params['id'] ?? '0';
+      DepartementBudgetModel data =
+          await repos.departementBudgets.getFromId(int.parse(id));
       dynamic input = jsonDecode(await request.readAsString());
 
-      if (id != null) {
-        DepartementBudgetModel data = await repos.departementBudgets.getFromId(int.parse(id));
-
-        if (input['title'] != null) {
-          data.title = input['title'];
-        }
-        if (input['departement'] != null) {
-          data.departement = input['departement'];
-        }
-        if (input['periodeDebut'] != null) {
-          data.periodeDebut = DateTime.parse(input['periodeDebut']);
-        }
-        if (input['periodeFin'] != null) {
-          data.periodeFin = DateTime.parse(input['periodeFin']);
-        }
-        if (input['signature'] != null) {
-          data.signature = input['signature'];
-        }
-        if (input['createdRef'] != null) {
-          data.createdRef = DateTime.parse(input['createdRef']);
-        }
-        if (input['created'] != null) {
-          data.created = DateTime.parse(input['created']);
-        }
-        if (input['isSubmit'] != null) {
-          data.isSubmit = input['isSubmit'];
-        }
-        repos.departementBudgets.update(data);
-        return Response.ok(jsonEncode(data.toJson()));
-
-
-      } 
+      if (input['title'] != null) {
+        data.title = input['title'];
+      }
+      if (input['departement'] != null) {
+        data.departement = input['departement'];
+      }
+      if (input['periodeDebut'] != null) {
+        data.periodeDebut = DateTime.parse(input['periodeDebut']);
+      }
+      if (input['periodeFin'] != null) {
+        data.periodeFin = DateTime.parse(input['periodeFin']);
+      }
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
+      if (input['createdRef'] != null) {
+        data.createdRef = DateTime.parse(input['createdRef']);
+      }
+      if (input['created'] != null) {
+        data.created = DateTime.parse(input['created']);
+      }
+      if (input['isSubmit'] != null) {
+        data.isSubmit = input['isSubmit'];
+      }
+      repos.departementBudgets.update(data);
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-departement-budget/<id>',
