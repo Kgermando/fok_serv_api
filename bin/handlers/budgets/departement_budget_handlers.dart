@@ -42,6 +42,7 @@ class DepartementBudgetHandlers {
         signature: input['signature'],
         createdRef: DateTime.parse(input['createdRef']),
         created: DateTime.parse(input['created']),
+        isSubmit: input['isSubmit'],
       );
       try {
         await repos.departementBudgets.insertData(data);
@@ -79,6 +80,9 @@ class DepartementBudgetHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['isSubmit'] != null) {
+        data.isSubmit = input['isSubmit'];
       }
       repos.departementBudgets.update(data);
       return Response.ok(jsonEncode(data.toJson()));
