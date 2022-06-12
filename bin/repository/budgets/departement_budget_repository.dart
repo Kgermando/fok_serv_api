@@ -40,12 +40,12 @@ class DepartementBudgetRepository {
     });
   }
 
-  Future<void> update(DepartementBudgetModel data) async {
+  Future<void> update(int id, DepartementBudgetModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
         "UPDATE $tableName"
         "SET title = @1, departement = @2, periode_debut = @3, periode_fin = @4,"
-        "signature = @5, created_ref = @6, created = @7, is_submit = @8 WHERE id = @9",
+        "signature = @5, created_ref = @6, created = @7, is_submit = @8 WHERE id = $id",
         substitutionValues: {
           '1': data.title,
           '2': data.departement,
@@ -54,8 +54,7 @@ class DepartementBudgetRepository {
           '5': data.signature,
           '6': data.createdRef,
           '7': data.created,
-          '8': data.isSubmit,
-          '9': data.id
+          '8': data.isSubmit
         }); 
     });
   }

@@ -84,7 +84,7 @@ class DepartementBudgetHandlers {
       if (input['isSubmit'] != null) {
         data.isSubmit = input['isSubmit'];
       }
-      repos.departementBudgets.update(data);
+      repos.departementBudgets.update(int.parse(id), data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
