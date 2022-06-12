@@ -1,5 +1,5 @@
 class DepartementBudgetModel {
-  late int? id;
+  late int id;
   late String title;
   late String departement;
   late DateTime periodeDebut; // Durée
@@ -11,7 +11,7 @@ class DepartementBudgetModel {
   late String isSubmit;
 
   DepartementBudgetModel(
-      {this.id,
+      {required this.id,
       required this.title,
       required this.departement,
       required this.periodeDebut,
