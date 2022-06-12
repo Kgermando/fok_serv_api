@@ -32,31 +32,36 @@ class DepartementBudgetHandlers {
     });
 
     router.post('/insert-new-departement-budget', (Request request) async {
-      // var input = jsonDecode(await request.readAsString());
+      var input = jsonDecode(await request.readAsString());
 
-      // DepartementBudgetModel data = DepartementBudgetModel(
-      //   title: input['title'],
-      //   departement: input['departement'],
-      //   periodeDebut:  DateTime.parse(input['periodeDebut']),
-      //   periodeFin:  DateTime.parse(input['periodeFin']),
-      //   signature: input['signature'],
-      //   createdRef: DateTime.parse(input['createdRef']),
-      //   created: DateTime.parse(input['created']),
-      //   isSubmit: input['isSubmit'],
-      // );
-      // try {
-      //   await repos.departementBudgets.insertData(data);
-      // } catch (e) {
-      //   print(e);
-      //   return Response(422);
-      // }
-      // return Response.ok(jsonEncode(data.toJson()));
+      DepartementBudgetModel data = DepartementBudgetModel(
+        title: input['title'],
+        departement: input['departement'],
+        periodeDebut:  DateTime.parse(input['periodeDebut']),
+        periodeFin:  DateTime.parse(input['periodeFin']),
+        signature: input['signature'],
+        createdRef: DateTime.parse(input['createdRef']),
+        created: DateTime.parse(input['created']),
+        isSubmit: input['isSubmit'],
+      );
+      try {
+        await repos.departementBudgets.insertData(data);
+      } catch (e) {
+        print(e);
+        return Response(422);
+      }
+      return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.put('/update-departement-budget/', (Request request) async {
-      var id = request.params['id'];
-      DepartementBudgetModel data =
-          await repos.departementBudgets.getFromId(int.parse(id!));
+      // var id = request.params['id'];
+      // DepartementBudgetModel data =
+      //     await repos.departementBudgets.getFromId(int.parse(id!));
+      // dynamic input = jsonDecode(await request.readAsString());
+
+       DepartementBudgetModel data =
+          await repos.departementBudgets
+          .getFromId(request.context['id'] as int);
       dynamic input = jsonDecode(await request.readAsString());
 
       if (input['title'] != null) {
