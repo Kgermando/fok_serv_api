@@ -53,8 +53,7 @@ class DepartementBudgetHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-departement-budget/<id>',
-        (Request request, String id) async {
+    router.put('/update-departement-budget/', (Request request) async {
       var id = request.params['id'];
       DepartementBudgetModel data =
           await repos.departementBudgets.getFromId(int.parse(id!));
@@ -84,7 +83,7 @@ class DepartementBudgetHandlers {
       if (input['isSubmit'] != null) {
         data.isSubmit = input['isSubmit'];
       }
-      repos.departementBudgets.update(int.parse(id), data);
+      repos.departementBudgets.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 

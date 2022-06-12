@@ -40,7 +40,7 @@ class DepartementBudgetRepository {
     });
   }
 
-  Future<void> update(int id, DepartementBudgetModel data) async {
+  Future<void> update(DepartementBudgetModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
         "UPDATE $tableName"
@@ -55,7 +55,7 @@ class DepartementBudgetRepository {
           'created_ref': data.createdRef,
           'created': data.created,
           'is_submit': data.isSubmit,
-          'id': id
+          'id': data.id
         }); 
     });
   }
