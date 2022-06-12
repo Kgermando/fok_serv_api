@@ -37,8 +37,8 @@ class DepartementBudgetHandlers {
       DepartementBudgetModel data = DepartementBudgetModel(
         title: input['title'],
         departement: input['departement'],
-        periodeDebut:  DateTime.parse(input['periodeDebut']),
-        periodeFin:  DateTime.parse(input['periodeFin']),
+        periodeDebut: DateTime.parse(input['periodeDebut']),
+        periodeFin: DateTime.parse(input['periodeFin']),
         signature: input['signature'],
         createdRef: DateTime.parse(input['createdRef']),
         created: DateTime.parse(input['created']),
@@ -54,15 +54,18 @@ class DepartementBudgetHandlers {
     });
 
     router.put('/update-departement-budget/', (Request request) async {
-      // var id = request.params['id'];
+      late DepartementBudgetModel data;
+      late var id = request.params['id'];
+      if (id != null) {
+        data = await repos.departementBudgets.getFromId(int.parse(id));
+      }
+      dynamic input = jsonDecode(await request.readAsString());
+
+      // late var id = request.params['id'];
+
       // DepartementBudgetModel data =
       //     await repos.departementBudgets.getFromId(int.parse(id!));
       // dynamic input = jsonDecode(await request.readAsString());
-
-       DepartementBudgetModel data =
-          await repos.departementBudgets
-          .getFromId(request.context['id'] as int);
-      dynamic input = jsonDecode(await request.readAsString());
 
       if (input['title'] != null) {
         data.title = input['title'];

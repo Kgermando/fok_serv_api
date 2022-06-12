@@ -73,6 +73,7 @@ class DepartementBudgetRepository {
   }
 
   Future<DepartementBudgetModel> getFromId(int id) async {
+
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return DepartementBudgetModel(
