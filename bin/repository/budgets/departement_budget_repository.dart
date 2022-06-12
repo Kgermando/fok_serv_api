@@ -44,17 +44,18 @@ class DepartementBudgetRepository {
     await executor.transaction((conn) async {
       await conn.query(
         "UPDATE $tableName"
-        "SET title = @1, departement = @2, periode_debut = @3, periode_fin = @4,"
-        "signature = @5, created_ref = @6, created = @7, is_submit = @8 WHERE id = $id",
+        "SET title = @title, departement = @departement, periode_debut = @periode_debut, periode_fin = @periode_fin,"
+        "signature = @signature, created_ref = @created_ref, created = @created, is_submit = @is_submit WHERE id = @id",
         substitutionValues: {
-          '1': data.title,
-          '2': data.departement,
-          '3': data.periodeDebut,
-          '4': data.periodeFin,
-          '5': data.signature,
-          '6': data.createdRef,
-          '7': data.created,
-          '8': data.isSubmit
+          'title': data.title,
+          'departement': data.departement,
+          'periode_debut': data.periodeDebut,
+          'periode_fin': data.periodeFin,
+          'signature': data.signature,
+          'created_ref': data.createdRef,
+          'created': data.created,
+          'is_submit': data.isSubmit,
+          'id': id
         }); 
     });
   }
