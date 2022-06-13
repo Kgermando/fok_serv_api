@@ -54,12 +54,11 @@ class StockGlobalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-stocks-global/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      StocksGlobalMOdel data =
-          await repos.stocksGlobal.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-stocks-global/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = StocksGlobalMOdel.fromJson(input);
+      StocksGlobalMOdel? data =
+          await repos.stocksGlobal.getFromId(editH.id!); 
 
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];

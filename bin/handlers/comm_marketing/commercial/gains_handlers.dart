@@ -58,10 +58,11 @@ class GainsHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-gain/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      GainModel data = await repos.gains.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-gain/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = GainModel.fromJson(input);
+      GainModel? data =
+          await repos.gains.getFromId(editH.id!); 
 
       if (input['sum'] != null) {
         data.sum = input['sum'];

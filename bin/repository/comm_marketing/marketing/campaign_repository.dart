@@ -47,10 +47,10 @@ class CampaignRepository {
   Future<void> update(CampaignModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET type_produit = @1, date_debut_et_fin = @2, cout_campaign = @3"
-          "lieu_cible = @4, promotion = @5, objectifs = @6, observation = @7,"
-          "signature = @8, created_ref = @9, created = @10 WHERE id = @11",
+          """UPDATE $tableName
+          SET type_produit = @1, date_debut_et_fin = @2, cout_campaign = @3
+          lieu_cible = @4, promotion = @5, objectifs = @6, observation = @7,
+          signature = @8, created_ref = @9, created = @10 WHERE id = @11""",
           substitutionValues: {
             '1': data.typeProduit,
             '2': data.dateDebutEtFin,

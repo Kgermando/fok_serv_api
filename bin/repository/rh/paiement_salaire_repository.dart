@@ -90,33 +90,33 @@ class PaiementSalaireRepository {
   Future<void> update(PaiementSalaireModel paiementSalaireModel) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "UPDATE $tableName SET nom = @1, postnom = @2, prenom = @3,"
-          "telephone = @4, adresse = @5, departement = @6,"
-          "numero_securite_sociale = @7, matricule = @8,"
-          "services_affectation = @9, salaire = @10,"
-          "observation = @11, mode_paiement = @12,"
-          "created_at = @13,"
-          "taux_jour_heure_mois_salaire = @14,"
-          "jours_heures_paye_a_100_pourecent_salaire = @15,"
-          "total_du_salaire = @16, nombre_heure_supplementaires = @17,"
-          "taux_heure_supplementaires = @18,"
-          "total_du_heure_supplementaires = @19,"
-          "supplement_travail_samedi_dimanche_jours_ferie = @20,"
-          "prime = @21, divers = @22, jours_conges_paye = @23,"
-          "taux_conges_paye = @24, total_du_conge_paye = @25,"
-          "jour_paye_maladie_accident = @26,"
-          "taux_journalier_maladie_accident = @27,"
-          "total_du_maladie_accident = @28, pension_deduction = @29,"
-          "indemnite_compensatrices_deduction = @30,"
-          "avances_deduction = @31, divers_deduction = @32,"
-          "retenues_fiscalesdeduction = @33,"
-          "nombre_enfant_beneficaire_allocations_familiales = @34,"
-          "nombre_de_jours_allocations_familiales = @35,"
-          "taux_jours_allocations_familiales = @36,"
-          "total_a_payer_allocations_familiales = @37,"
-          "net_a_payer = @38,"
-          "montant_pris_consideration_calcul_cotisationsinss = @39,"
-          "total_du_brut = @40, signature = @41' WHERE id=@42",
+          """UPDATE $tableName SET nom = @1, postnom = @2, prenom = @3,
+          telephone = @4, adresse = @5, departement = @6,
+          numero_securite_sociale = @7, matricule = @8,
+          services_affectation = @9, salaire = @10,
+          observation = @11, mode_paiement = @12,
+          created_at = @13,
+          taux_jour_heure_mois_salaire = @14,
+          jours_heures_paye_a_100_pourecent_salaire = @15,
+          total_du_salaire = @16, nombre_heure_supplementaires = @17,
+          taux_heure_supplementaires = @18,
+          total_du_heure_supplementaires = @19,
+          supplement_travail_samedi_dimanche_jours_ferie = @20,
+          prime = @21, divers = @22, jours_conges_paye = @23,
+          taux_conges_paye = @24, total_du_conge_paye = @25,
+          jour_paye_maladie_accident = @26,
+          taux_journalier_maladie_accident = @27,
+          total_du_maladie_accident = @28, pension_deduction = @29,
+          indemnite_compensatrices_deduction = @30,
+          avances_deduction = @31, divers_deduction = @32,
+          retenues_fiscalesdeduction = @33,
+          nombre_enfant_beneficaire_allocations_familiales = @34,
+          nombre_de_jours_allocations_familiales = @35,
+          taux_jours_allocations_familiales = @36,
+          total_a_payer_allocations_familiales = @37,
+          net_a_payer = @38,
+          montant_pris_consideration_calcul_cotisationsinss = @39,
+          total_du_brut = @40, signature = @41' WHERE id=@42""",
           substitutionValues: {
             '1': paiementSalaireModel.nom,
             '2': paiementSalaireModel.postNom,

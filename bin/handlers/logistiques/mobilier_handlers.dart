@@ -52,11 +52,12 @@ class MobilierHandlers {
       return Response.ok(jsonEncode(mobilierModel.toJson()));
     });
 
-    router.put('/update-mobilier/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      MobilierModel data = await repos.mobiliers.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
-
+    router.put('/update-mobilier/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = MobilierModel.fromJson(input);
+      MobilierModel? data =
+          await repos.mobiliers.getFromId(editH.id!); 
+          
       if (input['nom'] != null) {
         data.nom = input['nom'];
       }

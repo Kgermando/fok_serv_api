@@ -48,14 +48,15 @@ class PresenceEntreHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-presence-entrer/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      PresenceEntrerModel data = await repos.presencesEntrer.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-presence-entrer/', (Request request) async {
+     dynamic input = jsonDecode(await request.readAsString());
+      final editH = PresenceEntrerModel.fromJson(input);
+      PresenceEntrerModel? data =
+          await repos.presencesEntrer.getFromId(editH.id!);  
 
-      // if (input['reference'] != null) {
-      //   data.reference = input['reference'];
-      // }
+      if (input['reference'] != null) {
+        data.reference = input['reference'];
+      }
       if (input['nom'] != null) {
         data.nom = input['nom'];
       }

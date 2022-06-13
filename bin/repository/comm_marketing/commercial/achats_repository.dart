@@ -49,12 +49,11 @@ class AchatsRepository {
   Future<void> update(AchatModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET id_product = @1, quantity = @2, quantity_achat = @3,"
-          "price_achat_unit = @4, prix_vente_unit = @5, unite = @6,"
-          "tva = @7,"
-          "remise = @8, qty_remise = @9, qty_livre = @10, succursale = @11,"
-          "signature = @12, created = @13 WHERE id = @14",
+          """UPDATE $tableName
+          SET id_product = @1, quantity = @2, quantity_achat = @3,
+          price_achat_unit = @4, prix_vente_unit = @5, unite = @6, tva = @7,
+          remise = @8, qty_remise = @9, qty_livre = @10, succursale = @11,
+          signature = @12, created = @13 WHERE id = @14""",
           substitutionValues: {
             '1': data.idProduct,
             '2': data.quantity,

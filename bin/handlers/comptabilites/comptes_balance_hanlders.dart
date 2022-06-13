@@ -48,10 +48,11 @@ class ComptesBalanceRefHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-comptes-balance-ref/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      CompteBalanceRef data = await repos.balanceCompteRef.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-comptes-balance-ref/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CompteBalanceRef.fromJson(input);
+      CompteBalanceRef? data =
+          await repos.balanceCompteRef.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
         data.reference = DateTime.parse(input['reference']);

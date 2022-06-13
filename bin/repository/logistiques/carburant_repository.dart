@@ -48,11 +48,11 @@ class CarburantRepository {
   Future<void> update(CarburantModel data) async {
     await executor.transaction((conn) async {
       await conn.execute(
-        "UPDATE $tableName"
-        "SET operation_entre_sortie = @1, type_caburant = @2, fournisseur = @3,"
-        "nomero_facture_achat = @4, prix_achat_par_litre = @5, nom_receptioniste = @6,"
-        "numero_plaque = @7, date_heure_sortie_anguin = @8, qty_achat = @9,"
-        "signature = @10, created_ref = @11, created = @12 WHERE id = @13",
+        """UPDATE $tableName
+        SET operation_entre_sortie = @1, type_caburant = @2, fournisseur = @3,
+        nomero_facture_achat = @4, prix_achat_par_litre = @5, nom_receptioniste = @6,
+        numero_plaque = @7, date_heure_sortie_anguin = @8, qty_achat = @9,
+        signature = @10, created_ref = @11, created = @12 WHERE id = @13""",
         substitutionValues: {
           '1': data.operationEntreSortie,
           '2': data.typeCaburant,

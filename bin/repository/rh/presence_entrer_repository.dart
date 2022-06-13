@@ -41,9 +41,9 @@ class PresenceEntrerRepository {
   Future<void> update(PresenceEntrerModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET reference = @1, nom = @2, prenom = @3, matricule = @4,"
-          "note = @5, signature = @6, created = @7 WHERE id = @8",
+          """UPDATE $tableName
+          SET reference = @1, nom = @2, prenom = @3, matricule = @4,
+          note = @5, signature = @6, created = @7 WHERE id = @8""",
           substitutionValues: {
             '1': data.reference,
             '2': data.nom,

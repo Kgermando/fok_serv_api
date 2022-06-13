@@ -37,9 +37,9 @@ class NumberFactureRepository {
   Future<void> update(NumberFactureModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET number = @1, succursale = @2,"
-          "signature = @3, created = @4 WHERE id = @5",
+          """UPDATE $tableName
+          SET number = @1, succursale = @2,
+          signature = @3, created = @4 WHERE id = @5""",
           substitutionValues: {
             '1': data.number,
             '2': data.succursale,

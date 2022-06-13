@@ -41,10 +41,11 @@ class PerformenceNoteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-performence-note/<id>', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      PerformenceNoteModel data = await repos.performencesNote.getFromId(int.parse(id!));
+    router.put('/update-performence-note/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = PerformenceNoteModel.fromJson(input);
+      PerformenceNoteModel? data =
+          await repos.performencesNote.getFromId(editH.id!); 
 
       if (input['agent'] != null) {
         data.agent = input['agent'];

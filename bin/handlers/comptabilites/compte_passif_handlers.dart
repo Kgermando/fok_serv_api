@@ -47,10 +47,11 @@ class ComptePassifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-compte-passif/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      ComptePassifModel data = await repos.comptePassif.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-compte-passif/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = ComptePassifModel.fromJson(input);
+      ComptePassifModel? data =
+          await repos.comptePassif.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
         data.reference = DateTime.parse(input['reference']);

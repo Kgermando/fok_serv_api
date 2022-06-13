@@ -47,10 +47,11 @@ class CompteActifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-compte-actif/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      CompteActifModel data = await repos.compteActif.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-compte-actif/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CompteActifModel.fromJson(input);
+      CompteActifModel? data =
+          await repos.compteActif.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
         data.reference = DateTime.parse(input['reference']);

@@ -51,11 +51,11 @@ class CreanceDetteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-creance-dette/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      CreanceDetteModel data = await repos.creanceDette.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-creance-dette/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CreanceDetteModel.fromJson(input);
+      CreanceDetteModel? data =
+          await repos.creanceDette.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
         data.reference =  DateTime.parse(input['reference']);

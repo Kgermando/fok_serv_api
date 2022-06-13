@@ -52,11 +52,12 @@ class EntretienHandlers {
       return Response.ok(jsonEncode(entretienModel.toJson()));
     });
 
-    router.put('/update-entretien/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      EntretienModel data = await repos.entretiens.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
-
+    router.put('/update-entretien/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = EntretienModel.fromJson(input);
+      EntretienModel? data =
+          await repos.entretiens.getFromId(editH.id!); 
+          
       if (input['nom'] != null) {
         data.nom = input['nom'];
       }

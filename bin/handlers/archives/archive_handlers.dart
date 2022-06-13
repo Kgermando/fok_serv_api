@@ -51,10 +51,11 @@ class ArchiveHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-archive/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      ArchiveModel data = await repos.archives.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-archive/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = ArchiveModel.fromJson(input);
+      ArchiveModel? data =
+          await repos.archives.getFromId(editH.id!); 
 
       if (input['departement'] != null) {
         data.departement = input['departement'];

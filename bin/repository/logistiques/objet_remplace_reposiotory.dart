@@ -38,9 +38,9 @@ class ObjetRemplaceRepository {
   Future<void> update(ObjetRemplaceModel data) async {
     await executor.transaction((conn) async {
       await conn.execute(
-          "UPDATE $tableName"
-          "SET reference = @1, nom = @2, cout = @3,"
-          "caracteristique = @4, observation = @5 WHERE id = @6",
+          """"UPDATE $tableName
+          SET reference = @1, nom = @2, cout = @3,
+          caracteristique = @4, observation = @5 WHERE id = @6""",
           substitutionValues: {
             '1': data.reference,
             '2': data.nom,

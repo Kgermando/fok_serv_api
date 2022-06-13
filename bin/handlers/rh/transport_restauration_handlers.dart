@@ -50,11 +50,11 @@ class TransportRestaurantHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transport-restauration/<id>', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      TransportRestaurationModel data =
-          await repos.transportRestauration.getFromId(int.parse(id!));
+    router.put('/update-transport-restauration/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = TransportRestaurationModel.fromJson(input);
+      TransportRestaurationModel? data =
+          await repos.transportRestauration.getFromId(editH.id!); 
 
       if (input['title'] != null) {
         data.title = input['title'];

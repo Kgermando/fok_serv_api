@@ -52,10 +52,12 @@ class ImmobilierHandlers {
       return Response.ok(jsonEncode(immobilierModel.toJson()));
     });
 
-    router.put('/update-immobilier/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      ImmobilierModel data = await repos.immobiliers.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-immobilier/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = ImmobilierModel.fromJson(input);
+      ImmobilierModel? data =
+          await repos.immobiliers.getFromId(editH.id!);
+ 
 
       if (input['typeAllocation'] != null) {
         data.typeAllocation = input['typeAllocation'];

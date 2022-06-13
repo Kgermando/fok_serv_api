@@ -38,9 +38,9 @@ class ArchiveFolderRepository {
   Future<void> update(ArchiveFolderModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-        "SET departement = @1, folder_name = @2,"
-        "signature = @3, created = @4 WHERE id = @5",
+        """UPDATE $tableName
+        SET departement = @1, folder_name = @2,
+        signature = @3, created = @4 WHERE id = @5""",
         substitutionValues: {
           '1': data.departement,
           '2': data.folderName,

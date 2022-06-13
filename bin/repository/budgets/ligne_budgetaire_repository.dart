@@ -49,11 +49,11 @@ class LigneBudgtaireRepository {
   Future<void> update(LigneBudgetaireModel data) async {
     await executor.transaction((ctx) async {
       await ctx.query(
-          "UPDATE $tableName"
-          "SET nom_ligne_budgetaire = @1, departement = @2, periode_budget = @3,"
-          "unite_choisie = @4, nombre_unite = @5, cout_unitaire = @6, cout_total = @7,"
-          "caisse = @8, banque = @9, fin_propre = @10, fin_exterieur = @11,"
-          "signature = @12, created = @13 WHERE id = @14",
+          """UPDATE $tableName
+          SET nom_ligne_budgetaire = @1, departement = @2, periode_budget = @3,
+          unite_choisie = @4, nombre_unite = @5, cout_unitaire = @6, cout_total = @7,
+          caisse = @8, banque = @9, fin_propre = @10, fin_exterieur = @11,
+          signature = @12, created = @13 WHERE id = @14""",
           substitutionValues: {
             '1': data.nomLigneBudgetaire,
             '2': data.departement,

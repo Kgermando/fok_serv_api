@@ -48,10 +48,11 @@ class BilansHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-bilan/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      BilanModel data = await repos.bilans.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-bilan/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = BilanModel.fromJson(input);
+      BilanModel? data =
+          await repos.bilans.getFromId(editH.id!); 
 
       if (input['titleBilan'] != null) {
         data.titleBilan = input['titleBilan'];

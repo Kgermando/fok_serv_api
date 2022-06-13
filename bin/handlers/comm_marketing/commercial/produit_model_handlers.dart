@@ -51,12 +51,12 @@ class ProduitModelHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-produit-model/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      ProductModel data = await repos.produitModel.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
-
+    router.put('/update-produit-model/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = ProductModel.fromJson(input);
+      ProductModel? data =
+          await repos.produitModel.getFromId(editH.id!); 
+          
       if (input['categorie'] != null) {
         data.categorie = input['categorie'];
       }

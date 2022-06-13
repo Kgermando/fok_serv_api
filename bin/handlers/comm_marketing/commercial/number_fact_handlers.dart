@@ -47,11 +47,11 @@ class NumberFactHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-number-fact/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      NumberFactureModel data =
-          await repos.numberFacture.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-number-fact/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = NumberFactureModel.fromJson(input);
+      NumberFactureModel? data =
+          await repos.numberFacture.getFromId(editH.id!); 
 
       if (input['number'] != null) {
         data.number = input['number'];

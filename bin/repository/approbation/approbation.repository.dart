@@ -44,10 +44,10 @@ class ApprobationRepository {
   Future<void> update(ApprobationModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-          "SET reference = @1, title = @2, departement = @3, fontction_occupee = @4,"
-          "ligne_budgtaire = @5, resources = @6, approbation = @7, justification = @8,"
-          "signature = @9, created = @10 WHERE id = @11",
+        """UPDATE $tableName
+          SET reference = @1, title = @2, departement = @3, fontction_occupee = @4,
+          ligne_budgtaire = @5, resources = @6, approbation = @7, justification = @8,
+          signature = @9, created = @10 WHERE id = @11""",
           substitutionValues: {
             '1': data.reference,
             '2': data.title,

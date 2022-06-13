@@ -79,11 +79,11 @@ class BanqueHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-banque/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      BanqueModel data = await repos.banques.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-transaction-banque/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = BanqueModel.fromJson(input);
+      BanqueModel? data =
+          await repos.banques.getFromId(editH.id!); 
 
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];

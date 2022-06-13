@@ -54,10 +54,11 @@ class MailsHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-mail/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      MailModel data = await repos.mails.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-mail/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = MailModel.fromJson(input);
+      MailModel? data =
+          await repos.mails.getFromId(editH.id!); 
 
       if (input['fullName'] != null) {
         data.fullName = input['fullName'];

@@ -48,11 +48,11 @@ class PresenceSortieHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-presence-sortie/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      PresenceSortieModel data = await repos.presencesSortie.getFromId(int.parse(id!));
+    router.put('/update-presence-sortie/', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
-
+      final editH = PresenceSortieModel.fromJson(input);
+      PresenceSortieModel? data =
+          await repos.presencesSortie.getFromId(editH.id!); 
       // if (input['reference'] != null) {
       //   data.reference = input['reference'];
       // }

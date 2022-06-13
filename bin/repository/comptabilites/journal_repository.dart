@@ -70,10 +70,10 @@ class JournalRepository {
   Future<void> update(JournalModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-          "SET numero_operation = @1, libele = @2, compte_debit = @3,"
-          "montant_debit = @4, compte_credit = @5, montant_credit = @6, tva = @7,"
-          "remarque = @8, signature = @9, created_ref = @10, created = @11 WHERE id = @12",
+        """UPDATE $tableName
+          SET numero_operation = @1, libele = @2, compte_debit = @3,
+          montant_debit = @4, compte_credit = @5, montant_credit = @6, tva = @7,
+          remarque = @8, signature = @9, created_ref = @10, created = @11 WHERE id = @12""",
           substitutionValues: {
             '1': data.numeroOperation,
             '2': data.libele,

@@ -41,10 +41,10 @@ class MobilierRepository {
   Future<void> update(MobilierModel data) async {
     await executor.transaction((conn) async {
       await conn.execute(
-        "UPDATE $tableName"
-        "SET nom = @1, modele = @2, marque = @3,"
-        "description_mobilier = @4, nombre = @5,"
-        "signature = @6, created_ref = @7, created = @8 WHERE id = @9",
+        """UPDATE $tableName
+        SET nom = @1, modele = @2, marque = @3,
+        description_mobilier = @4, nombre = @5,
+        signature = @6, created_ref = @7, created = @8 WHERE id = @9""",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,

@@ -52,11 +52,11 @@ class CreanceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-creance/<id>',
-        (Request request, String id) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      CreanceModel data = await repos.creances.getFromId(int.parse(id!));
+    router.put('/update-transaction-creance/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CreanceModel.fromJson(input);
+      CreanceModel? data =
+          await repos.creances.getFromId(editH.id!); 
 
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];

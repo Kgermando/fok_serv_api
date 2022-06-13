@@ -69,10 +69,11 @@ class VenteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-vente/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      VenteCartModel data = await repos.ventes.getFromId(int.parse(id!));
+    router.put('/update-vente/', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
+      final editH = VenteCartModel.fromJson(input);
+      VenteCartModel? data =
+          await repos.ventes.getFromId(editH.id!); 
 
       if (input['idProductCart'] != null) {
         data.idProductCart = input['idProductCart'];

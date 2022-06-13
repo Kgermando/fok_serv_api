@@ -66,10 +66,11 @@ class JournalHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-journal/<id>', (Request request, String id) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      JournalModel data = await repos.journals.getFromId(int.parse(id!));
+    router.put('/update-journal/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = JournalModel.fromJson(input);
+      JournalModel? data =
+          await repos.journals.getFromId(editH.id!); 
 
       if (input['numeroOperation'] != null) {
         data.numeroOperation = input['numeroOperation'];

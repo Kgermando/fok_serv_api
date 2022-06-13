@@ -55,10 +55,11 @@ class CarburantHandlers {
       return Response.ok(jsonEncode(carburantModel.toJson()));
     });
 
-    router.put('/update-carburant/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      CarburantModel data = await repos.carburants.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-carburant/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CarburantModel.fromJson(input);
+      CarburantModel? data =
+          await repos.carburants.getFromId(editH.id!); 
 
       if (input['operationEntreSortie'] != null) {
         data.operationEntreSortie = input['operationEntreSortie'];

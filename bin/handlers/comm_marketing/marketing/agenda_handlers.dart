@@ -48,11 +48,12 @@ class AgendaHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-agenda/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      AgendaModel data = await repos.agendas.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
-
+    router.put('/update-agenda/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = AgendaModel.fromJson(input);
+      AgendaModel? data =
+          await repos.agendas.getFromId(editH.id!); 
+          
       if (input['title'] != null) {
         data.title = input['title'];
       }

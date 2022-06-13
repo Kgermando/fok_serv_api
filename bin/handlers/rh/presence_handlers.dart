@@ -48,11 +48,12 @@ class PresenceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-presence/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      PresenceModel data = await repos.presences.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
-
+    router.put('/update-presence/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = PresenceModel.fromJson(input);
+      PresenceModel? data =
+          await repos.presences.getFromId(editH.id!); 
+          
       if (input['remarque'] != null) {
         data.remarque = input['remarque'];
       }

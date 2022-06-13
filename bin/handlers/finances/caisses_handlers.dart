@@ -75,11 +75,11 @@ class CaissesHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-caisse/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      CaisseModel data = await repos.caisses.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-transaction-caisse/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CaisseModel.fromJson(input);
+      CaisseModel? data =
+          await repos.caisses.getFromId(editH.id!); 
 
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];

@@ -72,12 +72,12 @@ class AnguinRepository {
   Future<void> update(AnguinModel data) async {
     await executor.transaction((conn) async {
       await conn.execute(
-        "UPDATE $tableName"
-        "SET nom = @1, modele = @2, marque = @3, numero_chassie = @4, couleur = @5,"
-        "genre = @6, qty_max_reservoir = @7, date_fabrication = @8, nomero_plaque = @9,"
-        "nomero_entreprise = @10, kilometrage_initiale = @11, provenance = @12,"
-        "type_caburant = @13, type_moteur = @14, signature = @15,"
-        "created_ref = @16, created = @17 WHERE id = @18",
+        """UPDATE $tableName
+        SET nom = @1, modele = @2, marque = @3, numero_chassie = @4, couleur = @5,
+        genre = @6, qty_max_reservoir = @7, date_fabrication = @8, nomero_plaque = @9,
+        nomero_entreprise = @10, kilometrage_initiale = @11, provenance = @12,
+        type_caburant = @13, type_moteur = @14, signature = @15,
+        created_ref = @16, created = @17 WHERE id = @18""",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,

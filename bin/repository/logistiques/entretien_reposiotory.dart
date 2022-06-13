@@ -42,21 +42,21 @@ class EntretienRepository {
   Future<void> update(EntretienModel data) async {
     await executor.transaction((conn) async {
       await conn.execute(
-          "UPDATE $tableName"
-          "SET nom = @1, modele = @2, marque = @3,"
-          "etat_objet = @4, duree_travaux = @5, signature = @6,"
-          "created_ref = @7, created = @8 WHERE id = @9",
-          substitutionValues: {
-            '1': data.nom,
-            '2': data.modele,
-            '3': data.marque,
-            '4': data.etatObjet,
-            '5': data.dureeTravaux,
-            '6': data.signature,
-            '7': data.createdRef,
-            '8': data.created,
-            '9': data.id
-          });
+        """UPDATE $tableName
+        SET nom = @1, modele = @2, marque = @3,
+        etat_objet = @4, duree_travaux = @5, signature = @6,
+        created_ref = @7, created = @8 WHERE id = @9""",
+        substitutionValues: {
+          '1': data.nom,
+          '2': data.modele,
+          '3': data.marque,
+          '4': data.etatObjet,
+          '5': data.dureeTravaux,
+          '6': data.signature,
+          '7': data.createdRef,
+          '8': data.created,
+          '9': data.id
+        });
     });
   }
 

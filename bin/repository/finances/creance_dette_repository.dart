@@ -41,9 +41,9 @@ class CreanceDetteRepository {
   Future<void> update(CreanceDetteModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-        "SET reference = @1, nom_complet = @2, piece_justificative = @3, libelle = @4,"
-        "montant = @5, creance_dette = @6, signature = @7, created = @8 WHERE id = @9",
+        """UPDATE $tableName
+        SET reference = @1, nom_complet = @2, piece_justificative = @3, libelle = @4,
+        montant = @5, creance_dette = @6, signature = @7, created = @8 WHERE id = @9""",
         substitutionValues: {
           '1': data.reference,
           '2': data.nomComplet,

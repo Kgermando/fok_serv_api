@@ -48,10 +48,11 @@ class ArchiveFolderHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-archive-folder/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      ArchiveFolderModel data = await repos.archivesFolders.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-archive-folder/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = ArchiveFolderModel.fromJson(input);
+      ArchiveFolderModel? data =
+          await repos.archivesFolders.getFromId(editH.id!); 
 
       if (input['departement'] != null) {
         data.departement = input['departement'];

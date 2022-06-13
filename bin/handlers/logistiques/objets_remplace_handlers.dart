@@ -50,10 +50,11 @@ class ObjetsRemplaceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-objet-remplace/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      ObjetRemplaceModel data = await repos.objetsRemplace.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-objet-remplace/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = ObjetRemplaceModel.fromJson(input);
+      ObjetRemplaceModel? data =
+          await repos.objetsRemplace.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
         data.reference = input['reference'];

@@ -50,11 +50,12 @@ class DevisListObjetsHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-devis-list-objet/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      DevisListObjetsModel data = await repos.devisListObjets.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
-
+    router.put('/update-devis-list-objet/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = DevisListObjetsModel.fromJson(input);
+      DevisListObjetsModel? data =
+          await repos.devisListObjets.getFromId(editH.id!); 
+          
       if (input['referenceDate'] != null) {
         data.referenceDate = DateTime.parse(input['referenceDate']);  // A ne pas modifier ficher reference
       }

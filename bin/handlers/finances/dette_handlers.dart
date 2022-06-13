@@ -52,12 +52,12 @@ class DetteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-dette/<id>',
-        (Request request, String id) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      DetteModel data = await repos.dettes.getFromId(int.parse(id!));
-
+    router.put('/update-transaction-dette/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = DetteModel.fromJson(input);
+      DetteModel? data =
+          await repos.dettes.getFromId(editH.id!); 
+          
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];
       }

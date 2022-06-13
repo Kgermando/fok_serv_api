@@ -39,10 +39,10 @@ class DevisListObjetRepository {
   Future<void> update(DevisListObjetsModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET reference_date = @1, title = @2, quantity = @3,"
-          "designation = @4, montant_unitaire = @5,"
-          "montant_global = @6 WHERE id = @7",
+          """UPDATE $tableName
+          SET reference_date = @1, title = @2, quantity = @3,
+          designation = @4, montant_unitaire = @5,
+          montant_global = @6 WHERE id = @7""",
           substitutionValues: {
             '1': data.referenceDate,
             '2': data.title,

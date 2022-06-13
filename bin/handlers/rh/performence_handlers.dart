@@ -52,10 +52,11 @@ class PerformenceHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-performence/<id>', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      PerformenceModel data = await repos.performences.getFromId(int.parse(id!));
+    router.put('/update-performence/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = PerformenceModel.fromJson(input);
+      PerformenceModel? data =
+          await repos.performences.getFromId(editH.id!); 
 
       if (input['agent'] != null) {
         data.agent = input['agent'];

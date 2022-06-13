@@ -51,10 +51,11 @@ class TransRestAgentsHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-trans-rest-agent/<id>', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      TransRestAgentsModel data = await repos.transRestAgents.getFromId(int.parse(id!));
+    router.put('/update-trans-rest-agent/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = TransRestAgentsModel.fromJson(input);
+      TransRestAgentsModel? data =
+          await repos.transRestAgents.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
         data.reference = DateTime.parse(input['reference']);

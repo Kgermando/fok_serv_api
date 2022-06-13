@@ -47,11 +47,11 @@ class CartRepository {
   Future<void> update(CartModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET id_product_cart = @1, quantity_cart = @2, price_cart = @3,"
-          "price_achat_unit = @4, unite = @5, tva = @6,"
-          "remise = @7, qty_remise = @8, succursale = @9,"
-          "signature = @10, created = @11 WHERE id = @12",
+          """UPDATE $tableName
+          SET id_product_cart = @1, quantity_cart = @2, price_cart = @3,
+          price_achat_unit = @4, unite = @5, tva = @6,
+          remise = @7, qty_remise = @8, succursale = @9,
+          signature = @10, created = @11 WHERE id = @12""",
           substitutionValues: {
             '1': data.idProductCart,
             '2': data.quantityCart,

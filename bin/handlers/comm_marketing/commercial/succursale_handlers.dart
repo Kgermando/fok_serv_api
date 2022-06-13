@@ -48,10 +48,11 @@ class SuccursaleHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-succursale/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      SuccursaleModel data = await repos.succursales.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-succursale/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = SuccursaleModel.fromJson(input);
+      SuccursaleModel? data =
+          await repos.succursales.getFromId(editH.id!); 
 
       if (input['name'] != null) {
         data.name = input['name'];

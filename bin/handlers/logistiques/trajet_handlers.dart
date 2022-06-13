@@ -54,11 +54,12 @@ class TrajetHandlers {
       return Response.ok(jsonEncode(trajetModel.toJson()));
     });
 
-    router.put('/update-trajet/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      TrajetModel data = await repos.trajets.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
-
+    router.put('/update-trajet/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = TrajetModel.fromJson(input);
+      TrajetModel? data =
+          await repos.trajets.getFromId(editH.id!); 
+          
       if (input['nomeroEntreprise'] != null) {
         data.nomeroEntreprise = input['nomeroEntreprise'];
       }

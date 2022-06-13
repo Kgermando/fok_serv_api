@@ -44,10 +44,10 @@ class FinExteRepository {
   Future<void> update(FinanceExterieurModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-        "SET nom_complet = @1, piece_justificative = @2, libelle = @3,"
-        "montant = @4, type_operation = @5, numero_operation = @6,"
-        "signature = @7, created_ref = @8, created = @9 WHERE id = @10",
+        """UPDATE $tableName
+        SET nom_complet = @1, piece_justificative = @2, libelle = @3,
+        montant = @4, type_operation = @5, numero_operation = @6,
+        signature = @7, created_ref = @8, created = @9 WHERE id = @10""",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,

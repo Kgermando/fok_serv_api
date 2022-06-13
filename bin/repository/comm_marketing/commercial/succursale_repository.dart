@@ -38,9 +38,9 @@ class SuccursaleRepository {
   Future<void> update(SuccursaleModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET name = @1, adresse = @2, province = @3,"
-          "signature = @4, created = @5 WHERE id = @6",
+          """UPDATE $tableName"
+          SET name = @1, adresse = @2, province = @3,
+          signature = @4, created = @5 WHERE id = @6""",
           substitutionValues: {
             '1': data.name,
             '2': data.adresse,

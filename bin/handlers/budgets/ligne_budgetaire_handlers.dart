@@ -58,12 +58,12 @@ class LigneBudgetaireHanlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-ligne-budgetaire/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      LigneBudgetaireModel data =
-          await repos.ligneBudgetaires.getFromId(int.parse(id!));
+    router.put('/update-ligne-budgetaire/', (Request request) async {
+
       dynamic input = jsonDecode(await request.readAsString());
+      final editH = LigneBudgetaireModel.fromJson(input);
+      LigneBudgetaireModel? data =
+        await repos.ligneBudgetaires.getFromId(editH.id!);
 
       if (input['nomLigneBudgetaire'] != null) {
         data.nomLigneBudgetaire = input['nomLigneBudgetaire'];

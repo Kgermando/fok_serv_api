@@ -51,12 +51,12 @@ class HistoryLivraisonRepository {
   Future<void> update(LivraisonHistoryModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET id_product = @1, quantity = @2, quantity_achat = @3,"
-          "price_achat_unit = @4, prix_vente_unit = @5, unite = @6,"
-          "marge_ben = @7, tva = @8, remise = @9, qty_remise = @10,"
-          "marge_ben_remise = @11, qty_livre = @12, succursale = @13,"
-          "signature = @14, created = @15 WHERE id = @16",
+          """UPDATE $tableName
+          SET id_product = @1, quantity = @2, quantity_achat = @3,
+          price_achat_unit = @4, prix_vente_unit = @5, unite = @6,
+          marge_ben = @7, tva = @8, remise = @9, qty_remise = @10,
+          marge_ben_remise = @11, qty_livre = @12, succursale = @13,
+          signature = @14, created = @15 WHERE id = @16""",
           substitutionValues: {
             '1': data.idProduct,
             '2': data.quantity,

@@ -53,10 +53,11 @@ class CampaignHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-campaign/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      CampaignModel data = await repos.campaigns.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-campaign/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CampaignModel.fromJson(input);
+      CampaignModel? data =
+          await repos.campaigns.getFromId(editH.id!); 
 
       if (input['typeProduit'] != null) {
         data.typeProduit = input['typeProduit'];

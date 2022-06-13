@@ -54,10 +54,11 @@ class ApprobationHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-approbation/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      ApprobationModel data = await repos.approbations.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-approbation/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = ApprobationModel.fromJson(input);
+      ApprobationModel? data =
+          await repos.approbations.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
         data.reference = DateTime.parse(input['reference']);

@@ -48,12 +48,11 @@ class CreanceFactureHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-facture-creance/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      CreanceCartModel data =
-          await repos.creancesFacture.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-facture-creance/', (Request request) async {
+           dynamic input = jsonDecode(await request.readAsString());
+      final editH = CreanceCartModel.fromJson(input);
+      CreanceCartModel? data =
+          await repos.creancesFacture.getFromId(editH.id!);
 
       if (input['cart'] != null) {
         data.cart = input['cart'];

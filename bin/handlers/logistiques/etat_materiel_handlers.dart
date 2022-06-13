@@ -59,10 +59,11 @@ class EtatMaterielHandlers {
       return Response.ok(jsonEncode(etatMaterielModel.toJson()));
     });
 
-    router.put('/update-etat-materiel/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      EtatMaterielModel data = await repos.etatMateriels.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-etat-materiel/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = EtatMaterielModel.fromJson(input);
+      EtatMaterielModel? data =
+          await repos.etatMateriels.getFromId(editH.id!); 
 
       if (input['nom'] != null) {
         data.nom = input['nom'];

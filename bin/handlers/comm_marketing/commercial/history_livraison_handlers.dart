@@ -59,12 +59,11 @@ class HistoryLivraisonHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-history_livraison/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      LivraisonHistoryModel data =
-          await repos.historyLivraisons.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-history_livraison/', (Request request) async {
+           dynamic input = jsonDecode(await request.readAsString());
+      final editH = LivraisonHistoryModel.fromJson(input);
+      LivraisonHistoryModel? data =
+          await repos.historyLivraisons.getFromId(editH.id!); 
 
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];

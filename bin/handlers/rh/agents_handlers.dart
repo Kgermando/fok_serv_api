@@ -76,10 +76,11 @@ class AgentsHandlers {
       return Response.ok(jsonEncode(agent.toJson()));
     });
 
-    router.put('/update-agent/<id>', (Request request, String id) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      AgentModel selectUser = await repos.agents.getFromId(int.parse(id!));
+    router.put('/update-agent/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = AgentModel.fromJson(input);
+      AgentModel? selectUser =
+          await repos.agents.getFromId(editH.id!);
 
       if (input['nom'] != null) {
         selectUser.nom = input['nom'];

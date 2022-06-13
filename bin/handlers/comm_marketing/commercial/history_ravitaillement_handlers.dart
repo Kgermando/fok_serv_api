@@ -56,12 +56,11 @@ class HistoryRavitaillementHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-history-ravitaillement/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      HistoryRavitaillementModel data =
-          await repos.historyRavitaillements.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-history-ravitaillement/',(Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = HistoryRavitaillementModel.fromJson(input);
+      HistoryRavitaillementModel? data =
+          await repos.historyRavitaillements.getFromId(editH.id!); 
 
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];

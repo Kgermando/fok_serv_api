@@ -38,17 +38,17 @@ class AgendaRepository {
   Future<void> update(AgendaModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET title = @1, description = @2, date_rappel = @3,"
-          "signature = @4, created = @5 WHERE id = @6",
-          substitutionValues: {
-            '1': data.title,
-            '2': data.description,
-            '3': data.dateRappel,
-            '4': data.signature,
-            '5': data.created,
-            '6': data.id
-          });
+      """UPDATE $tableName
+      SET title = @1, description = @2, date_rappel = @3,
+      signature = @4, created = @5 WHERE id = @6""",
+      substitutionValues: {
+        '1': data.title,
+        '2': data.description,
+        '3': data.dateRappel,
+        '4': data.signature,
+        '5': data.created,
+        '6': data.id
+      });
     });
   }
 

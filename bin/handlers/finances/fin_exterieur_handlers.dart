@@ -53,12 +53,11 @@ class FinExterieurHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-transaction-finExterieur/<id>',
-        (Request request) async {
+    router.put('/update-transaction-finExterieur/', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      FinanceExterieurModel data =
-          await repos.finExterieurs.getFromId(int.parse(id!));
+      final editH = FinanceExterieurModel.fromJson(input);
+      FinanceExterieurModel? data =
+          await repos.finExterieurs.getFromId(editH.id!); 
 
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];

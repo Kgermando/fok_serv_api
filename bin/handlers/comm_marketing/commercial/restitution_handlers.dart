@@ -55,11 +55,11 @@ class RestitutionHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-restitution/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      RestitutionModel data =
-          await repos.restitutions.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-restitution/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = RestitutionModel.fromJson(input);
+      RestitutionModel? data =
+          await repos.restitutions.getFromId(editH.id!); 
 
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];

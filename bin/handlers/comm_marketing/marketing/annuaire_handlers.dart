@@ -55,10 +55,11 @@ class AnnuaireHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-annuaire/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      AnnuaireModel data = await repos.annuaires.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-annuaire/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = AnnuaireModel.fromJson(input);
+      AnnuaireModel? data =
+          await repos.annuaires.getFromId(editH.id!); 
 
       if (input['categorie'] != null) {
         data.categorie = input['categorie'];

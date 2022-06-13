@@ -63,10 +63,11 @@ class DevisHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-devis/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      DevisModel data = await repos.devis.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-devis/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = DevisModel.fromJson(input);
+      DevisModel? data =
+          await repos.devis.getFromId(editH.id!); 
 
       if (input['title'] != null) {
         data.title = input['title'];

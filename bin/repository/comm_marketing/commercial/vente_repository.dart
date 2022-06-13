@@ -84,10 +84,10 @@ class VenteRepository {
   Future<void> update(VenteCartModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET id_product_cart = @1, quantity_cart = @2, price_total_cart = @3,"
-          "unite = @4, tva = @5, remise = @6, qty_remise = @7,"
-          "succursale = @8, signature = @9, created = @10 WHERE id = @11",
+          """UPDATE $tableName
+          SET id_product_cart = @1, quantity_cart = @2, price_total_cart = @3,
+          unite = @4, tva = @5, remise = @6, qty_remise = @7,
+          succursale = @8, signature = @9, created = @10 WHERE id = @11""",
           substitutionValues: {
             '1': data.idProductCart,
             '2': data.quantityCart,

@@ -71,18 +71,18 @@ class CompteResultatRepository {
   Future<void> update(CompteResulatsModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-        "SET intitule = @1, achat_marchandises = @2, variation_stock_marchandises = @3,"
-        "achat_approvionnements = @4, variation_approvionnements = @5,"
-        "autres_charges_externe = @6, impots_taxes_versements_assimiles = @7,"
-        "renumeration_personnel = @8, charges_socialas = @9, dotatiopns_provisions = @10,"
-        "autres_charges = @11, charges_financieres = @12, charges_exptionnelles = @13,"
-        "impot_surbenefices = @14, solde_crediteur = @15, ventes_marchandises = @16,"
-        "production_vendue_bien_et_serices = @17, production_stockee = @18,"
-        "production_immobilisee = @19,"
-        "subvention_exploitation = @20, autre_produits = @21, montant_exportation = @22,"
-        "produit_financieres = @23, produit_exceptionnels = @24, solde_debiteur = @25,"
-        "signature = @26, created_ref = @27 created = @28 WHERE id = @29",
+        """UPDATE $tableName
+        SET intitule = @1, achat_marchandises = @2, variation_stock_marchandises = @3,
+        achat_approvionnements = @4, variation_approvionnements = @5,
+        autres_charges_externe = @6, impots_taxes_versements_assimiles = @7,
+        renumeration_personnel = @8, charges_socialas = @9, dotatiopns_provisions = @10,
+        autres_charges = @11, charges_financieres = @12, charges_exptionnelles = @13,
+        impot_surbenefices = @14, solde_crediteur = @15, ventes_marchandises = @16,
+        production_vendue_bien_et_serices = @17, production_stockee = @18,
+        production_immobilisee = @19,
+        subvention_exploitation = @20, autre_produits = @21, montant_exportation = @22,
+        produit_financieres = @23, produit_exceptionnels = @24, solde_debiteur = @25,
+        signature = @26, created_ref = @27 created = @28 WHERE id = @29""",
         substitutionValues: {
           '1': data.intitule,
           '2': data.achatMarchandises,

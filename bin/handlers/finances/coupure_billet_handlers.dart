@@ -48,11 +48,11 @@ class CoupureBilletHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-coupure-billet/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      CoupureBilletModel data = await repos.coupureBillets.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-coupure-billet/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CoupureBilletModel.fromJson(input);
+      CoupureBilletModel? data =
+          await repos.coupureBillets.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
         data.reference = input['reference'];

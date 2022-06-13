@@ -69,10 +69,11 @@ class AnguinHandlers {
       return Response.ok(jsonEncode(anguinModel.toJson()));
     });
 
-    router.put('/update-anguin/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      AnguinModel data = await repos.anguins.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-anguin/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = AnguinModel.fromJson(input);
+      AnguinModel? data =
+          await repos.anguins.getFromId(editH.id!); 
 
       if (input['nom'] != null) {
         data.nom = input['nom'];

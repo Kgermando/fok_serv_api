@@ -78,9 +78,9 @@ class DevisRepository {
   Future<void> update(DevisModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET title = @1, priority = @2, departement = @3, observation = @4,"
-          "signature = @5, created_ref = @6, created = @7 , is_submit = @8 WHERE id = @9",
+          """UPDATE $tableName
+          SET title = @1, priority = @2, departement = @3, observation = @4,
+          signature = @5, created_ref = @6, created = @7 , is_submit = @8 WHERE id = @9""",
           substitutionValues: {
             '1': data.title,
             '2': data.priority,

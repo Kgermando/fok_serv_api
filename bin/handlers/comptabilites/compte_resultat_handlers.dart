@@ -72,13 +72,11 @@ class CompteResultatHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-compte-resultat/<id>',
-        (Request request, String id) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      CompteResulatsModel data =
-          await repos.comptesResultat.getFromId(int.parse(id!));
-
+    router.put('/update-compte-resultat/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CompteResulatsModel.fromJson(input);
+      CompteResulatsModel? data =
+          await repos.comptesResultat.getFromId(editH.id!); 
       if (input['intitule'] != null) {
         data.intitule = input['intitule'];
       }

@@ -38,9 +38,9 @@ class TasnportRestaurationRepository {
   Future<void> update(TransportRestaurationModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-        "SET title = @1, observation = @2, signature = @3, created_ref = @4,"
-        "created = @5 WHERE id = @6",
+        """UPDATE $tableName
+        SET title = @1, observation = @2, signature = @3, created_ref = @4,
+        created = @5 WHERE id = @6""",
         substitutionValues: {
           '1': data.title,
           '2': data.observation,

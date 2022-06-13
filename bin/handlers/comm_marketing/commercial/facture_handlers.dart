@@ -48,10 +48,11 @@ class FactureHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-facture/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      FactureCartModel data = await repos.factures.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-facture/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = FactureCartModel.fromJson(input);
+      FactureCartModel? data =
+          await repos.factures.getFromId(editH.id!); 
 
       if (input['cart'] != null) {
         data.cart = input['cart'];

@@ -58,10 +58,11 @@ class AchatsHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-achat/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      AchatModel data = await repos.achats.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-achat/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = AchatModel.fromJson(input);
+      AchatModel? data =
+          await repos.achats.getFromId(editH.id!); 
 
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];

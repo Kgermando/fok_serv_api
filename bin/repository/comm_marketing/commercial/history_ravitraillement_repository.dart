@@ -48,12 +48,12 @@ class HistoryRavitaillementRepository {
   Future<void> update(HistoryRavitaillementModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET id_product = @1, quantity = @2, quantity_achat = @3,"
-          "price_achat_unit = @4, prix_vente_unit = @5, unite = @6,"
-          "marge_ben = @7, tva = @8,"
-          "qty_ravitailler = @9, succursale = @10,"
-          "signature = @11, created = @12 WHERE id = @13",
+          """UPDATE $tableName
+          SET id_product = @1, quantity = @2, quantity_achat = @3,
+          price_achat_unit = @4, prix_vente_unit = @5, unite = @6,
+          marge_ben = @7, tva = @8,
+          qty_ravitailler = @9, succursale = @10,
+          signature = @11, created = @12 WHERE id = @13""",
           substitutionValues: {
             '1': data.idProduct,
             '2': data.quantity,

@@ -44,10 +44,10 @@ class MailRepository {
   Future<void> update(MailModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-        "SET full_name = @1, email = @2, cc = @3, objet = @4, message = @5,"
-        "piece_jointe = @6, read = @7, full_name_dest = @8, email_dest = @9,"
-        "date_send = @10, date_read = @11 WHERE id = @12",
+        """UPDATE $tableName
+        SET full_name = @1, email = @2, cc = @3, objet = @4, message = @5,
+        piece_jointe = @6, read = @7, full_name_dest = @8, email_dest = @9,
+        date_send = @10, date_read = @11 WHERE id = @12""",
         substitutionValues: {
           '1': data.fullName,
           '2': data.email,

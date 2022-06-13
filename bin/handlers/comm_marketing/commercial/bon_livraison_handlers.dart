@@ -59,12 +59,11 @@ class BonLivraisonHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-bon-livraison/<id>',
-        (Request request, String id) async {
-      var id = request.params['id'];
-      BonLivraisonModel data =
-          await repos.bonLivraison.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-bon-livraison/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = BonLivraisonModel.fromJson(input);
+      BonLivraisonModel? data =
+          await repos.bonLivraison.getFromId(editH.id!); 
 
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];

@@ -49,11 +49,11 @@ class AnnuaireReposiotry {
   Future<void> update(AnnuaireModel data) async {
      await executor.transaction((conn) async {
       await conn.query(
-          "UPDATE $tableName"
-          "SET categorie = @1, nom_postnom_prenom = @2, email = @3,"
-          "mobile_1 = @4, mobile_2 = @5, secteur_activite = @6, nom_entreprise = @7,"
-          "grade = @8, adresse_entreprise = @9, succursale = @10, signature = @11,"
-          "created = @12 WHERE id = @13",
+          """UPDATE $tableName
+          SET categorie = @1, nom_postnom_prenom = @2, email = @3,
+          mobile_1 = @4, mobile_2 = @5, secteur_activite = @6, nom_entreprise = @7,
+          grade = @8, adresse_entreprise = @9, succursale = @10, signature = @11,
+          created = @12 WHERE id = @13""",
           substitutionValues: {
             '1': data.categorie,
             '2': data.nomPostnomPrenom,

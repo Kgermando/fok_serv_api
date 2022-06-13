@@ -56,10 +56,11 @@ class CartHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-cart/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      CartModel data = await repos.carts.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-cart/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = CartModel.fromJson(input);
+      CartModel? data =
+          await repos.carts.getFromId(editH.id!); 
 
       if (input['idProductCart'] != null) {
         data.idProductCart = input['idProductCart'];

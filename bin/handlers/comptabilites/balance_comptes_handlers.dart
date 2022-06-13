@@ -49,12 +49,11 @@ class BalanceComptesHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-balance-compte/<id>',
-        (Request request, String id) async {
-      dynamic input = jsonDecode(await request.readAsString());
-      var id = request.params['id'];
-      BalanceCompteModel data =
-          await repos.balanceComptes.getFromId(int.parse(id!));
+    router.put('/update-balance-compte/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = BalanceCompteModel.fromJson(input);
+      BalanceCompteModel? data =
+          await repos.balanceComptes.getFromId(editH.id!); 
 
       if (input['title'] != null) {
         data.title = input['title'];
@@ -62,7 +61,6 @@ class BalanceComptesHandlers {
       if (input['statut'] != null) {
         data.statut = input['statut'];
       }
-
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }

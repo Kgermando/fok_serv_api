@@ -38,9 +38,9 @@ class TransRestAgentsRepository {
   Future<void> update(TransRestAgentsModel data) async {
     await executor.transaction((conn) async {
       await conn.query(
-        "UPDATE $tableName"
-        "SET reference = @1, nom = @2, prenom = @3, matricule = @4,"
-        "montant = @5 WHERE id = @6",
+        """UPDATE $tableName
+        SET reference = @1, nom = @2, prenom = @3, matricule = @4,
+        montant = @5 WHERE id = @6""",
         substitutionValues: {
           '1': data.reference,
           '2': data.nom,

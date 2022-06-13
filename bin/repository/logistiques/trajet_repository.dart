@@ -46,10 +46,10 @@ class TrajetRepository {
   Future<void> update(TrajetModel data) async {
     await executor.transaction((conn) async {
       await conn.execute(
-          "UPDATE $tableName"
-          "SET nomero_entreprise = @1, nom_utilisateur = @2, trajet_de = @3,"
-          "trajet_a = @4, mission = @5, kilometrage_sorite = @6, kilometrage_retour = @7,"
-          "signature = @8, created_ref = @9, created = @10 WHERE id = @11",
+          """UPDATE $tableName
+          SET nomero_entreprise = @1, nom_utilisateur = @2, trajet_de = @3,
+          trajet_a = @4, mission = @5, kilometrage_sorite = @6, kilometrage_retour = @7,
+          signature = @8, created_ref = @9, created = @10 WHERE id = @11""",
           substitutionValues: {
             '1': data.nomeroEntreprise,
             '2': data.nomUtilisateur,

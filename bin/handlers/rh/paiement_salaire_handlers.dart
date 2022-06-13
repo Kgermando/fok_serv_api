@@ -92,11 +92,11 @@ class PaiementSalaireHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-paiement/<id>', (Request request, String id) async {
-      var id = request.params['id'];
-      PaiementSalaireModel data =
-          await repos.salaires.getFromId(int.parse(id!));
-      dynamic input = jsonDecode(await request.readAsString());
+    router.put('/update-paiement/', (Request request) async {
+       dynamic input = jsonDecode(await request.readAsString());
+      final editH = PaiementSalaireModel.fromJson(input);
+      PaiementSalaireModel? data =
+          await repos.salaires.getFromId(editH.id!); 
 
       if (input['nom'] != null) {
         data.nom = input['nom'];
