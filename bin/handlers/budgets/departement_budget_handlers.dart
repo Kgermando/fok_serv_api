@@ -57,7 +57,7 @@ class DepartementBudgetHandlers {
 
     router.put('/update-departement-budget/', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
-      
+
       try {
         final editH = DepartementBudgetModel.fromJson(input);
         DepartementBudgetModel? data =
@@ -92,7 +92,7 @@ class DepartementBudgetHandlers {
           data.isSubmit = input['isSubmit'];
         }
 
-        repos.departementBudgets.update(data);
+        repos.departementBudgets.update(data); 
         return Response.ok(data.toJson());
       } catch (e) {
         log(e.toString());
