@@ -79,10 +79,13 @@ class UserHandlers {
         selectUser.createdAt = DateTime.parse(input['createdAt']);
       }
       if (input['passwordHash'] != null) {
-        selectUser.passwordHash =
-            md5.convert(utf8.encode(input['passwordHash'])).toString();
-        repos.refreshTokens.logoutAll(selectUser.id!);
+        selectUser.passwordHash = input['passwordHash']; 
       }
+      // if (input['passwordHash'] != null) {
+      //   selectUser.passwordHash =
+      //       md5.convert(utf8.encode(input['passwordHash'])).toString();
+      //   repos.refreshTokens.logoutAll(selectUser.id!);
+      // }
       if (input['succursale'] != null) {
         selectUser.succursale = input['succursale'];
       }
