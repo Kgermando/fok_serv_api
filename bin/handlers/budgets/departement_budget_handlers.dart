@@ -61,10 +61,6 @@ class DepartementBudgetHandlers {
       DepartementBudgetModel? data =
           await repos.departementBudgets.getFromId(editH.id!);
 
-      // final id = request.params['id'];
-      // DepartementBudgetModel data =
-      //     await repos.departementBudgets.getFromId(int.parse(id!));
-
       if (input['title'] != null) {
         data.title = input['title'];
       }
