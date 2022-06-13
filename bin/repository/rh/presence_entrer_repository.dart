@@ -33,7 +33,7 @@ class PresenceEntrerRepository {
           '4': data.matricule,
           '5': data.note,
           '6': data.signature,
-          '7': data.created,
+          '7': data.created
         });
     });
   }
