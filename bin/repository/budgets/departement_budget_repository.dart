@@ -45,7 +45,9 @@ class DepartementBudgetRepository {
 
   Future<void> update(DepartementBudgetModel data) async {
     await executor.query(
-        "UPDATE $tableName SET title = @title, departement = @departement, periode_debut = @periode_debut, periode_fin = @periode_fin, signature = @signature, created_ref = @created_ref, created = @created, is_submit = @is_submit WHERE id = @id",
+        "UPDATE $tableName"
+      "SET title = @title, departement = @departement, periode_debut = @periode_debut, periode_fin = @periode_fin,"
+      "signature = @signature, created_ref = @created_ref, created = @created, is_submit = @is_submit WHERE id = @id",
       substitutionValues: {
         'title': data.title,
         'departement': data.departement,
