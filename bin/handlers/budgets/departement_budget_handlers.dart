@@ -56,8 +56,8 @@ class DepartementBudgetHandlers {
 
 
     router.put('/update-departement-budget/', (Request request) async {
+      dynamic input = jsonDecode(await request.readAsString());
       try {
-        dynamic input = jsonDecode(await request.readAsString());
         final editH = DepartementBudgetModel.fromJson(input);
         DepartementBudgetModel? data =
             await repos.departementBudgets.getFromId(editH.id!);
