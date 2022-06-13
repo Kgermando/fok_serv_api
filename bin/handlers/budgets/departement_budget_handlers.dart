@@ -59,7 +59,7 @@ class DepartementBudgetHandlers {
       try {
         dynamic input = jsonDecode(await request.readAsString());
         final editH = DepartementBudgetModel.fromJson(input);
-        DepartementBudgetModel data =
+        DepartementBudgetModel? data =
             await repos.departementBudgets.getFromId(editH.id!);
 
         // final id = request.params['id'];
