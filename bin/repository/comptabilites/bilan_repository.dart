@@ -35,18 +35,14 @@ class BilanRepository {
   }
 
   Future<void> update(BilanModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
           SET title_bilan = @1, signature = @2,
-          created_ref = @3, created = @4 WHERE id = @5""",
-          substitutionValues: {
-            '1': data.titleBilan,
-            '2': data.signature,
-            '3': data.createdRef,
-            '4': data.created,
-            '5': data.id
-          });
+          created_ref = @3, created = @4 WHERE id = @5""", substitutionValues: {
+      '1': data.titleBilan,
+      '2': data.signature,
+      '3': data.createdRef,
+      '4': data.created,
+      '5': data.id
     });
   }
 

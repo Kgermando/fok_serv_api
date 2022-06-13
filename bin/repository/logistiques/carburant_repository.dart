@@ -46,9 +46,7 @@ class CarburantRepository {
   }
 
   Future<void> update(CarburantModel data) async {
-    await executor.transaction((conn) async {
-      await conn.execute(
-        """UPDATE $tableName
+    await executor.execute("""UPDATE $tableName
         SET operation_entre_sortie = @1, type_caburant = @2, fournisseur = @3,
         nomero_facture_achat = @4, prix_achat_par_litre = @5, nom_receptioniste = @6,
         numero_plaque = @7, date_heure_sortie_anguin = @8, qty_achat = @9,
@@ -68,7 +66,6 @@ class CarburantRepository {
           '12': data.created,
           '13': data.id
         });
-    });
   }
 
   deleteData(int id) async {

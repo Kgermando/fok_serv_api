@@ -41,9 +41,7 @@ class DettesRepository {
   }
 
   Future<void> update(DetteModel data) async {
-    await executor.transaction((conn) async {
-       await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET nom_complet = @1, piece_justificative = @2, libelle = @3,
         montant = @4, numero_operation = @5, statutPaie = @6,
         signature = @7, created_ref = @8 , created = @9 WHERE id = @10""",
@@ -59,7 +57,6 @@ class DettesRepository {
           '9': data.created,
           '10': data.id
         });
-    });
   }
 
   deleteData(int id) async {

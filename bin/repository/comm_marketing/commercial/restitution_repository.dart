@@ -46,30 +46,27 @@ class RestitutionRepository {
   }
 
   Future<void> update(RestitutionModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
           SET id_product = @1, quantity = @2, unite = @3,
           first_name = @4, last_name = @5, accuse_reception = @6,
           accuse_reception_firstName = @7, accuse_reception_lastName = @8,
           role = @9, succursale = @10,
           signature = @11, created = @12 WHERE id = @13""",
-          substitutionValues: {
-            '1': data.idProduct,
-            '2': data.quantity,
-            '3': data.unite,
-            '4': data.firstName,
-            '5': data.lastName,
-            '6': data.accuseReception,
-            '7': data.accuseReceptionFirstName,
-            '8': data.accuseReceptionLastName,
-            '9': data.role,
-            '10': data.succursale,
-            '11': data.signature,
-            '12': data.created,
-            '13': data.id
-          });
-    });
+        substitutionValues: {
+          '1': data.idProduct,
+          '2': data.quantity,
+          '3': data.unite,
+          '4': data.firstName,
+          '5': data.lastName,
+          '6': data.accuseReception,
+          '7': data.accuseReceptionFirstName,
+          '8': data.accuseReceptionLastName,
+          '9': data.role,
+          '10': data.succursale,
+          '11': data.signature,
+          '12': data.created,
+          '13': data.id
+        });
   }
 
   deleteData(int id) async {

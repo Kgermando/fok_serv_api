@@ -98,26 +98,22 @@ class BanqueRepository {
 
 
   Future<void> update(BanqueModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET nom_complet = @1, piece_justificative = @2, libelle = @3,
         montant = @4, departement = @5,
         type_operation = @6, numero_operation = @7, signature = @8,
-        created_ref = @9, created = @10 WHERE id = @11""",
-        substitutionValues: {
-          '1': data.nomComplet,
-          '2': data.pieceJustificative,
-          '3': data.libelle,
-          '4': data.montant,
-          '5': data.departement,
-          '6': data.typeOperation,
-          '7': data.numeroOperation,
-          '8': data.signature,
-          '9': data.createdRef,
-          '10' : data.created,
-          '11': data.id
-        });
+        created_ref = @9, created = @10 WHERE id = @11""", substitutionValues: {
+      '1': data.nomComplet,
+      '2': data.pieceJustificative,
+      '3': data.libelle,
+      '4': data.montant,
+      '5': data.departement,
+      '6': data.typeOperation,
+      '7': data.numeroOperation,
+      '8': data.signature,
+      '9': data.createdRef,
+      '10': data.created,
+      '11': data.id
     });
   }
 

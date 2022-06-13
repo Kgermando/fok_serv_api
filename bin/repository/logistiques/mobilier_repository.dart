@@ -39,9 +39,7 @@ class MobilierRepository {
   }
 
   Future<void> update(MobilierModel data) async {
-    await executor.transaction((conn) async {
-      await conn.execute(
-        """UPDATE $tableName
+    await executor.execute("""UPDATE $tableName
         SET nom = @1, modele = @2, marque = @3,
         description_mobilier = @4, nombre = @5,
         signature = @6, created_ref = @7, created = @8 WHERE id = @9""",
@@ -56,7 +54,6 @@ class MobilierRepository {
           '8': data.created,
           '9': data.id
         });
-    });
   }
 
   deleteData(int id) async {

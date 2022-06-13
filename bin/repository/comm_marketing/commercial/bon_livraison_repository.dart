@@ -52,35 +52,32 @@ class BonLivraisonRepository {
   }
 
   Future<void> update(BonLivraisonModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          "UPDATE $tableName"
-          "SET id_product = @1, quantity_achat = @2,"
-          "price_achat_unit = @3, prix_vente_unit = @4, unite = @5,"
-          "first_name = @6, last_name = @7, tva = @8,"
-          "remise = @9, qty_remise = @10, accuse_reception = @11,"
-          "accuse_reception_first_name = @12, accuse_reception_last_name = @13,"
-          "succursale = @14, signature = @15, created = @16 WHERE id = @17",
-          substitutionValues: {
-            '1': data.idProduct,
-            '2': data.quantityAchat,
-            '3': data.priceAchatUnit,
-            '4': data.prixVenteUnit,
-            '5': data.unite,
-            '6': data.firstName,
-            '7': data.lastName,
-            '8': data.tva,
-            '9': data.remise,
-            '10': data.qtyRemise,
-            '11': data.accuseReception,
-            '12': data.accuseReceptionFirstName,
-            '13': data.accuseReceptionLastName,
-            '14': data.succursale,
-            '15': data.signature,
-            '16': data.created,
-            '17': data.id
-          });
-    });
+    await executor.query("""UPDATE $tableName
+          SET id_product = @1, quantity_achat = @2,
+          price_achat_unit = @3, prix_vente_unit = @4, unite = @5,
+          first_name = @6, last_name = @7, tva = @8,
+          remise = @9, qty_remise = @10, accuse_reception = @11,
+          accuse_reception_first_name = @12, accuse_reception_last_name = @13,
+          succursale = @14, signature = @15, created = @16 WHERE id = @17""",
+        substitutionValues: {
+          '1': data.idProduct,
+          '2': data.quantityAchat,
+          '3': data.priceAchatUnit,
+          '4': data.prixVenteUnit,
+          '5': data.unite,
+          '6': data.firstName,
+          '7': data.lastName,
+          '8': data.tva,
+          '9': data.remise,
+          '10': data.qtyRemise,
+          '11': data.accuseReception,
+          '12': data.accuseReceptionFirstName,
+          '13': data.accuseReceptionLastName,
+          '14': data.succursale,
+          '15': data.signature,
+          '16': data.created,
+          '17': data.id
+        });
   }
 
   deleteData(int id) async {

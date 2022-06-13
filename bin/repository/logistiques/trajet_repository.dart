@@ -44,26 +44,23 @@ class TrajetRepository {
   }
 
   Future<void> update(TrajetModel data) async {
-    await executor.transaction((conn) async {
-      await conn.execute(
-          """UPDATE $tableName
+     await executor.execute("""UPDATE $tableName
           SET nomero_entreprise = @1, nom_utilisateur = @2, trajet_de = @3,
           trajet_a = @4, mission = @5, kilometrage_sorite = @6, kilometrage_retour = @7,
           signature = @8, created_ref = @9, created = @10 WHERE id = @11""",
-          substitutionValues: {
-            '1': data.nomeroEntreprise,
-            '2': data.nomUtilisateur,
-            '3': data.trajetDe,
-            '4': data.trajetA,
-            '5': data.mission,
-            '6': data.kilometrageSorite,
-            '7': data.kilometrageRetour,
-            '8': data.signature,
-            '9': data.createdRef,
-            '10': data.created,
-            '11': data.id
-          });
-    });
+        substitutionValues: {
+          '1': data.nomeroEntreprise,
+          '2': data.nomUtilisateur,
+          '3': data.trajetDe,
+          '4': data.trajetA,
+          '5': data.mission,
+          '6': data.kilometrageSorite,
+          '7': data.kilometrageRetour,
+          '8': data.signature,
+          '9': data.createdRef,
+          '10': data.created,
+          '11': data.id
+        });
   }
 
   deleteData(int id) async {

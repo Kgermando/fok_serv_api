@@ -42,9 +42,7 @@ class FinExteRepository {
   }
 
   Future<void> update(FinanceExterieurModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET nom_complet = @1, piece_justificative = @2, libelle = @3,
         montant = @4, type_operation = @5, numero_operation = @6,
         signature = @7, created_ref = @8, created = @9 WHERE id = @10""",
@@ -60,7 +58,6 @@ class FinExteRepository {
           '9': data.created,
           '10': data.id
         });
-    });
   }
 
   deleteData(int id) async {

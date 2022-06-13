@@ -45,28 +45,25 @@ class StockGlobalRepository {
   }
 
   Future<void> update(StocksGlobalMOdel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
           SET id_product = @1, quantity = @2, quantity_achat = @3,
           price_achat_unit = @4, prix_vente_unit = @5, unite = @6,
           mode_achat = @7, tva = @8, qty_ravitailler = @9,
           signature = @10, created = @11 WHERE id = @12""",
-          substitutionValues: {
-            '1': data.idProduct,
-            '2': data.quantity,
-            '3': data.quantityAchat,
-            '4': data.priceAchatUnit,
-            '5': data.prixVenteUnit,
-            '6': data.unite,
-            '7': data.modeAchat,
-            '8': data.tva,
-            '9': data.qtyRavitailler,
-            '10': data.signature,
-            '11': data.created,
-            '12': data.id
-          });
-    });
+        substitutionValues: {
+          '1': data.idProduct,
+          '2': data.quantity,
+          '3': data.quantityAchat,
+          '4': data.priceAchatUnit,
+          '5': data.prixVenteUnit,
+          '6': data.unite,
+          '7': data.modeAchat,
+          '8': data.tva,
+          '9': data.qtyRavitailler,
+          '10': data.signature,
+          '11': data.created,
+          '12': data.id
+        });
   }
 
   deleteData(int id) async {

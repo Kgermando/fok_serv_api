@@ -35,19 +35,15 @@ class CompteBalanceRefRepository {
   }
 
   Future<void> update(CompteBalanceRef data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET reference = @1, comptes = @2, debit = @3, credit = @4,
-        solde = @5 WHERE id = @6""",
-        substitutionValues: {
-          '1': data.reference,
-          '2': data.comptes,
-          '3': data.debit,
-          '4': data.credit,
-          '5': data.solde,
-          '6': data.id
-        });
+        solde = @5 WHERE id = @6""", substitutionValues: {
+      '1': data.reference,
+      '2': data.comptes,
+      '3': data.debit,
+      '4': data.credit,
+      '5': data.solde,
+      '6': data.id
     });
   }
 

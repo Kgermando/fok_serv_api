@@ -69,9 +69,7 @@ class CompteResultatRepository {
   }
 
   Future<void> update(CompteResulatsModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET intitule = @1, achat_marchandises = @2, variation_stock_marchandises = @3,
         achat_approvionnements = @4, variation_approvionnements = @5,
         autres_charges_externe = @6, impots_taxes_versements_assimiles = @7,
@@ -114,7 +112,6 @@ class CompteResultatRepository {
           '28': data.created,
           '29': data.id
         });
-    });
   }
 
   deleteData(int id) async {

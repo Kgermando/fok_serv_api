@@ -88,9 +88,8 @@ class PaiementSalaireRepository {
   }
 
   Future<void> update(PaiementSalaireModel paiementSalaireModel) async {
-    await executor.transaction((ctx) async {
-      await ctx.execute(
-          """UPDATE $tableName SET nom = @1, postnom = @2, prenom = @3,
+    await executor
+        .execute("""UPDATE $tableName SET nom = @1, postnom = @2, prenom = @3,
           telephone = @4, adresse = @5, departement = @6,
           numero_securite_sociale = @7, matricule = @8,
           services_affectation = @9, salaire = @10,
@@ -117,54 +116,52 @@ class PaiementSalaireRepository {
           net_a_payer = @38,
           montant_pris_consideration_calcul_cotisationsinss = @39,
           total_du_brut = @40, signature = @41' WHERE id=@42""",
-          substitutionValues: {
-            '1': paiementSalaireModel.nom,
-            '2': paiementSalaireModel.postNom,
-            '3': paiementSalaireModel.prenom,
-            '4': paiementSalaireModel.telephone,
-            '5': paiementSalaireModel.adresse,
-            '6': paiementSalaireModel.departement,
-            '7': paiementSalaireModel.numeroSecuriteSociale,
-            '8': paiementSalaireModel.matricule,
-            '9': paiementSalaireModel.servicesAffectation,
-            '10': paiementSalaireModel.salaire,
-            '11': paiementSalaireModel.observation,
-            '12': paiementSalaireModel.modePaiement,
-            '13': paiementSalaireModel.createdAt,
-            '14': paiementSalaireModel.tauxJourHeureMoisSalaire,
-            '15': paiementSalaireModel.joursHeuresPayeA100PourecentSalaire,
-            '16': paiementSalaireModel.totalDuSalaire,
-            '17': paiementSalaireModel.nombreHeureSupplementaires,
-            '18': paiementSalaireModel.tauxHeureSupplementaires,
-            '19': paiementSalaireModel.totalDuHeureSupplementaires,
-            '20':
-                paiementSalaireModel.supplementTravailSamediDimancheJoursFerie,
-            '21': paiementSalaireModel.prime,
-            '22': paiementSalaireModel.divers,
-            '23': paiementSalaireModel.joursCongesPaye,
-            '24': paiementSalaireModel.tauxCongesPaye,
-            '25': paiementSalaireModel.totalDuCongePaye,
-            '26': paiementSalaireModel.jourPayeMaladieAccident,
-            '27': paiementSalaireModel.tauxJournalierMaladieAccident,
-            '28': paiementSalaireModel.totalDuMaladieAccident,
-            '29': paiementSalaireModel.pensionDeduction,
-            '30': paiementSalaireModel.indemniteCompensatricesDeduction,
-            '31': paiementSalaireModel.avancesDeduction,
-            '32': paiementSalaireModel.diversDeduction,
-            '33': paiementSalaireModel.retenuesFiscalesDeduction,
-            '34': paiementSalaireModel
-                .nombreEnfantBeneficaireAllocationsFamiliales,
-            '35': paiementSalaireModel.nombreDeJoursAllocationsFamiliales,
-            '36': paiementSalaireModel.tauxJoursAllocationsFamiliales,
-            '37': paiementSalaireModel.totalAPayerAllocationsFamiliales,
-            '38': paiementSalaireModel.netAPayer,
-            '39': paiementSalaireModel
-                .montantPrisConsiderationCalculCotisationsINSS,
-            '40': paiementSalaireModel.totalDuBrut,
-            '41': paiementSalaireModel.signature,
-            '42': paiementSalaireModel.id
-          });
-    });
+            substitutionValues: {
+          '1': paiementSalaireModel.nom,
+          '2': paiementSalaireModel.postNom,
+          '3': paiementSalaireModel.prenom,
+          '4': paiementSalaireModel.telephone,
+          '5': paiementSalaireModel.adresse,
+          '6': paiementSalaireModel.departement,
+          '7': paiementSalaireModel.numeroSecuriteSociale,
+          '8': paiementSalaireModel.matricule,
+          '9': paiementSalaireModel.servicesAffectation,
+          '10': paiementSalaireModel.salaire,
+          '11': paiementSalaireModel.observation,
+          '12': paiementSalaireModel.modePaiement,
+          '13': paiementSalaireModel.createdAt,
+          '14': paiementSalaireModel.tauxJourHeureMoisSalaire,
+          '15': paiementSalaireModel.joursHeuresPayeA100PourecentSalaire,
+          '16': paiementSalaireModel.totalDuSalaire,
+          '17': paiementSalaireModel.nombreHeureSupplementaires,
+          '18': paiementSalaireModel.tauxHeureSupplementaires,
+          '19': paiementSalaireModel.totalDuHeureSupplementaires,
+          '20': paiementSalaireModel.supplementTravailSamediDimancheJoursFerie,
+          '21': paiementSalaireModel.prime,
+          '22': paiementSalaireModel.divers,
+          '23': paiementSalaireModel.joursCongesPaye,
+          '24': paiementSalaireModel.tauxCongesPaye,
+          '25': paiementSalaireModel.totalDuCongePaye,
+          '26': paiementSalaireModel.jourPayeMaladieAccident,
+          '27': paiementSalaireModel.tauxJournalierMaladieAccident,
+          '28': paiementSalaireModel.totalDuMaladieAccident,
+          '29': paiementSalaireModel.pensionDeduction,
+          '30': paiementSalaireModel.indemniteCompensatricesDeduction,
+          '31': paiementSalaireModel.avancesDeduction,
+          '32': paiementSalaireModel.diversDeduction,
+          '33': paiementSalaireModel.retenuesFiscalesDeduction,
+          '34':
+              paiementSalaireModel.nombreEnfantBeneficaireAllocationsFamiliales,
+          '35': paiementSalaireModel.nombreDeJoursAllocationsFamiliales,
+          '36': paiementSalaireModel.tauxJoursAllocationsFamiliales,
+          '37': paiementSalaireModel.totalAPayerAllocationsFamiliales,
+          '38': paiementSalaireModel.netAPayer,
+          '39': paiementSalaireModel
+              .montantPrisConsiderationCalculCotisationsINSS,
+          '40': paiementSalaireModel.totalDuBrut,
+          '41': paiementSalaireModel.signature,
+          '42': paiementSalaireModel.id
+        });
   }
 
   deleteData(int id) async {

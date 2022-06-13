@@ -33,9 +33,7 @@ class CoupureBilletRepository {
   }
 
   Future<void> update(CoupureBilletModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET reference = @1, nombre_billet = @2, coupure_billet = @3 WHERE id = @4""",
         substitutionValues: {
           '1': data.reference,
@@ -43,7 +41,6 @@ class CoupureBilletRepository {
           '3': data.coupureBillet,
           '4': data.id
         });
-    });
   }
 
   deleteData(int id) async {

@@ -37,19 +37,15 @@ class FactureRepository {
   }
 
   Future<void> update(FactureCartModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          """UPDATE $tableName
+     await executor.query("""UPDATE $tableName
           SET cart = @1, client = @2, succursale = @3,
-          signature = @4, created = @5 WHERE id = @6""",
-          substitutionValues: {
-            '1': data.cart,
-            '2': data.client,
-            '3': data.succursale,
-            '4': data.signature,
-            '5': data.created,
-            '6': data.id
-          });
+          signature = @4, created = @5 WHERE id = @6""", substitutionValues: {
+      '1': data.cart,
+      '2': data.client,
+      '3': data.succursale,
+      '4': data.signature,
+      '5': data.created,
+      '6': data.id
     });
   }
 

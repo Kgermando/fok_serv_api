@@ -38,21 +38,18 @@ class PresenceRepository {
   }
 
   Future<void> update(PresenceModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-      """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
       SET remarque = @1, fin_journee = @2, signature = @3,
       signature_fermeture = @4, created_ref = @5, created = @6 WHERE id = @7""",
-      substitutionValues: {
-        '1': data.remarque,
-        '2': data.finJournee,
-        '3': data.signature,
-        '4': data.signatureFermeture,
-        '5': data.createdRef,
-        '6': data.created,
-        '7': data.id
-      });
-    });
+        substitutionValues: {
+          '1': data.remarque,
+          '2': data.finJournee,
+          '3': data.signature,
+          '4': data.signatureFermeture,
+          '5': data.createdRef,
+          '6': data.created,
+          '7': data.id
+        });
   }
 
   deleteData(int id) async {

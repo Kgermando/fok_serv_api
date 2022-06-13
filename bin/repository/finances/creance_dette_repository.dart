@@ -21,7 +21,7 @@ class CreanceDetteRepository {
 
   Future<void> insertData(CreanceDetteModel data) async {
     await executor.transaction((ctx) async {
-      await ctx.execute(
+      await executor.execute(
         "INSERT INTO $tableName (id, reference, nom_complet, piece_justificative,"
         "libelle, montant, creance_dette, signature, created)"
         "VALUES (nextval('creance_dettes_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
@@ -39,9 +39,7 @@ class CreanceDetteRepository {
   }
 
   Future<void> update(CreanceDetteModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET reference = @1, nom_complet = @2, piece_justificative = @3, libelle = @4,
         montant = @5, creance_dette = @6, signature = @7, created = @8 WHERE id = @9""",
         substitutionValues: {
@@ -55,7 +53,6 @@ class CreanceDetteRepository {
           '8': data.created,
           '9': data.id
         });
-    });
   }
 
   deleteData(int id) async {

@@ -39,23 +39,19 @@ class ImmobilierRepository {
   }
 
   Future<void> update(ImmobilierModel data) async {
-    await executor.transaction((conn) async {
-      await conn.execute(
-        """UPDATE $tableName
+    await executor.execute("""UPDATE $tableName
         SET type_allocation = @1, adresse = @2, numero_certificat = @3,
         superficie = @4, date_acquisition = @5, signature = @6,
-        created_ref = @7, created = @8 WHERE id = @9""",
-        substitutionValues: {
-          '1': data.typeAllocation,
-          '2': data.adresse,
-          '3': data.numeroCertificat,
-          '4': data.superficie,
-          '5': data.dateAcquisition,
-          '6': data.signature,
-          '7': data.createdRef,
-          '8': data.created,
-          '9': data.id
-        });
+        created_ref = @7, created = @8 WHERE id = @9""", substitutionValues: {
+      '1': data.typeAllocation,
+      '2': data.adresse,
+      '3': data.numeroCertificat,
+      '4': data.superficie,
+      '5': data.dateAcquisition,
+      '6': data.signature,
+      '7': data.createdRef,
+      '8': data.created,
+      '9': data.id
     });
   }
 

@@ -63,9 +63,7 @@ class AgentsRepository {
   }
 
   Future<void> update(AgentModel agentModel) async {
-    await executor.transaction((conn) async {
-      await conn.execute(
-        """UPDATE '$tableName'
+    await executor.execute("""UPDATE '$tableName'
         SET nom = @1, postnom = @2, prenom = @3, email = @4, telephone = @5,
         adresse = @6, sexe = @7, role = @8, matricule = @9, numero_securite_sociale = @10,
         date_naissance = @11, lieu_naissance = @12, nationalite = @13, type_contrat = @14,
@@ -73,7 +71,6 @@ class AgentsRepository {
         date_fin_contrat = @18, fonction_occupe = @19, competance = @20,
         experience = @21, statut_agent = @22, created_at = @23, photo = @24,
         salaire = @25, signature = @26, created = @27 WHERE id = @28""",
-
         substitutionValues: {
           '1': agentModel.nom,
           '2': agentModel.postNom,
@@ -104,7 +101,6 @@ class AgentsRepository {
           '27': agentModel.created,
           '28': agentModel.id
         });
-    });
   }
 
   deleteData(int id) async {

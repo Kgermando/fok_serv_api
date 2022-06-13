@@ -38,11 +38,9 @@ class PerformenceNoteRepository {
   }
 
   Future<void> update(PerformenceNoteModel performenceModel) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName SET agent = @1, hospitalite = @2,
+    await executor.query("""UPDATE $tableName SET agent = @1, hospitalite = @2,
           departement = @3, ponctualite = @4, travaille = @5,
-          note = @6, signature = @7, created = @8 WHERE id=@9""", 
+          note = @6, signature = @7, created = @8 WHERE id=@9""",
         substitutionValues: {
           '1': performenceModel.agent,
           '2': performenceModel.departement,
@@ -54,7 +52,6 @@ class PerformenceNoteRepository {
           '8': performenceModel.created,
           '9': performenceModel.id
         });
-    });
   }
 
   deleteData(int id) async {

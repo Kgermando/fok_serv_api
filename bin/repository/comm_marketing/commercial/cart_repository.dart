@@ -45,28 +45,25 @@ class CartRepository {
   }
 
   Future<void> update(CartModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
           SET id_product_cart = @1, quantity_cart = @2, price_cart = @3,
           price_achat_unit = @4, unite = @5, tva = @6,
           remise = @7, qty_remise = @8, succursale = @9,
           signature = @10, created = @11 WHERE id = @12""",
-          substitutionValues: {
-            '1': data.idProductCart,
-            '2': data.quantityCart,
-            '3': data.priceCart,
-            '4': data.priceAchatUnit,
-            '5': data.unite,
-            '6': data.tva,
-            '7': data.remise,
-            '8': data.qtyRemise,
-            '9': data.succursale,
-            '10': data.signature,
-            '11': data.created,
-            '12': data.id
-          });
-    });
+        substitutionValues: {
+          '1': data.idProductCart,
+          '2': data.quantityCart,
+          '3': data.priceCart,
+          '4': data.priceAchatUnit,
+          '5': data.unite,
+          '6': data.tva,
+          '7': data.remise,
+          '8': data.qtyRemise,
+          '9': data.succursale,
+          '10': data.signature,
+          '11': data.created,
+          '12': data.id
+        });
   }
 
   deleteData(int id) async {

@@ -37,21 +37,17 @@ class PerformenceRepository {
   }
 
   Future<void> update(PerformenceModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET agent = @1, departement = @2, nom = @3, postnom = @4, prenom = @5,
-        signature = @6, created = @7 WHERE id = @8""",
-        substitutionValues: {
-          '1': data.agent,
-          '2': data.departement,
-          '3': data.prenom,
-          '4': data.nom,
-          '5': data.postnom,
-          '6': data.signature,
-          '7': data.created,
-          '8': data.id
-        });
+        signature = @6, created = @7 WHERE id = @8""", substitutionValues: {
+      '1': data.agent,
+      '2': data.departement,
+      '3': data.prenom,
+      '4': data.nom,
+      '5': data.postnom,
+      '6': data.signature,
+      '7': data.created,
+      '8': data.id
     });
   }
 

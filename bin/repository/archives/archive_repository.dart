@@ -39,22 +39,18 @@ class ArchiveRepository {
   }
 
   Future<void> update(ArchiveModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
         SET departement = @1, folder_name = @2, nom_document = @3,
         description = @4, fichier = @5, signature = @6,
-        created = @7 WHERE id = @8""",
-        substitutionValues: {
-          '1': data.departement,
-          '2': data.folderName,
-          '3': data.nomDocument,
-          '4': data.description,
-          '5': data.fichier,
-          '6': data.signature,
-          '7': data.created,
-          '8': data.id
-        });
+        created = @7 WHERE id = @8""", substitutionValues: {
+      '1': data.departement,
+      '2': data.folderName,
+      '3': data.nomDocument,
+      '4': data.description,
+      '5': data.fichier,
+      '6': data.signature,
+      '7': data.created,
+      '8': data.id
     });
   }
 

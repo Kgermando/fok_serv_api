@@ -41,23 +41,19 @@ class ProduitModelRepository {
   }
 
   Future<void> update(ProductModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
           SET categorie = @1, sous_categorie_1 = @2, sous_categorie_2 = @3,
           sous_categorie_3 = @4, sous_categorie_4 = @5, id_product = @6,
-          signature = @7, created = @8 WHERE id = @9""",
-          substitutionValues: {
-            '1': data.categorie,
-            '2': data.sousCategorie1,
-            '3': data.sousCategorie2,
-            '4': data.sousCategorie3,
-            '5': data.sousCategorie4,
-            '6': data.idProduct,
-            '7': data.signature,
-            '8': data.created,
-            '9': data.id
-          });
+          signature = @7, created = @8 WHERE id = @9""", substitutionValues: {
+      '1': data.categorie,
+      '2': data.sousCategorie1,
+      '3': data.sousCategorie2,
+      '4': data.sousCategorie3,
+      '5': data.sousCategorie4,
+      '6': data.idProduct,
+      '7': data.signature,
+      '8': data.created,
+      '9': data.id
     });
   }
 

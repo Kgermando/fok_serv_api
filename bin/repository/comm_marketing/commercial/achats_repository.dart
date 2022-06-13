@@ -47,30 +47,27 @@ class AchatsRepository {
   }
 
   Future<void> update(AchatModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          """UPDATE $tableName
+   await executor.query("""UPDATE $tableName
           SET id_product = @1, quantity = @2, quantity_achat = @3,
           price_achat_unit = @4, prix_vente_unit = @5, unite = @6, tva = @7,
           remise = @8, qty_remise = @9, qty_livre = @10, succursale = @11,
           signature = @12, created = @13 WHERE id = @14""",
-          substitutionValues: {
-            '1': data.idProduct,
-            '2': data.quantity,
-            '3': data.quantityAchat,
-            '4': data.priceAchatUnit,
-            '5': data.prixVenteUnit,
-            '6': data.unite,
-            '7': data.tva,
-            '8': data.remise,
-            '9': data.qtyRemise,
-            '10': data.qtyLivre,
-            '11': data.succursale,
-            '12': data.signature,
-            '13': data.created,
-            '14': data.id
-          });
-    });
+        substitutionValues: {
+          '1': data.idProduct,
+          '2': data.quantity,
+          '3': data.quantityAchat,
+          '4': data.priceAchatUnit,
+          '5': data.prixVenteUnit,
+          '6': data.unite,
+          '7': data.tva,
+          '8': data.remise,
+          '9': data.qtyRemise,
+          '10': data.qtyLivre,
+          '11': data.succursale,
+          '12': data.signature,
+          '13': data.created,
+          '14': data.id
+        });
   }
 
   deleteData(int id) async {

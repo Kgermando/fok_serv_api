@@ -70,9 +70,7 @@ class AnguinRepository {
 
   
   Future<void> update(AnguinModel data) async {
-    await executor.transaction((conn) async {
-      await conn.execute(
-        """UPDATE $tableName
+    await executor.execute("""UPDATE $tableName
         SET nom = @1, modele = @2, marque = @3, numero_chassie = @4, couleur = @5,
         genre = @6, qty_max_reservoir = @7, date_fabrication = @8, nomero_plaque = @9,
         nomero_entreprise = @10, kilometrage_initiale = @11, provenance = @12,
@@ -98,7 +96,6 @@ class AnguinRepository {
           '17': data.created,
           '18': data.id
         });
-    });
   }
 
   deleteData(int id) async {

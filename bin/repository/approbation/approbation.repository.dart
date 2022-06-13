@@ -42,25 +42,21 @@ class ApprobationRepository {
   }
 
   Future<void> update(ApprobationModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-        """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
           SET reference = @1, title = @2, departement = @3, fontction_occupee = @4,
           ligne_budgtaire = @5, resources = @6, approbation = @7, justification = @8,
-          signature = @9, created = @10 WHERE id = @11""",
-          substitutionValues: {
-            '1': data.reference,
-            '2': data.title,
-            '3': data.departement,
-            '4': data.fontctionOccupee,
-            '5': data.ligneBudgtaire,
-            '6': data.resources,
-            '7': data.approbation,
-            '8': data.justification,
-            '9': data.signature,
-            '10': data.created,
-            '11': data.id
-          });
+          signature = @9, created = @10 WHERE id = @11""", substitutionValues: {
+      '1': data.reference,
+      '2': data.title,
+      '3': data.departement,
+      '4': data.fontctionOccupee,
+      '5': data.ligneBudgtaire,
+      '6': data.resources,
+      '7': data.approbation,
+      '8': data.justification,
+      '9': data.signature,
+      '10': data.created,
+      '11': data.id
     });
   }
 

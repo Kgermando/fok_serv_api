@@ -47,30 +47,27 @@ class LigneBudgtaireRepository {
   }
 
   Future<void> update(LigneBudgetaireModel data) async {
-    await executor.transaction((ctx) async {
-      await ctx.query(
-          """UPDATE $tableName
+    await executor.query("""UPDATE $tableName
           SET nom_ligne_budgetaire = @1, departement = @2, periode_budget = @3,
           unite_choisie = @4, nombre_unite = @5, cout_unitaire = @6, cout_total = @7,
           caisse = @8, banque = @9, fin_propre = @10, fin_exterieur = @11,
           signature = @12, created = @13 WHERE id = @14""",
-          substitutionValues: {
-            '1': data.nomLigneBudgetaire,
-            '2': data.departement,
-            '3': data.periodeBudget,
-            '4': data.uniteChoisie,
-            '5': data.nombreUnite,
-            '6': data.coutUnitaire,
-            '7': data.coutTotal,
-            '8': data.caisse,
-            '9': data.banque,
-            '10': data.finPropre,
-            '11': data.finExterieur,
-            '12': data.signature,
-            '13': data.created,
-            '14': data.id
-          });
-    });
+        substitutionValues: {
+          '1': data.nomLigneBudgetaire,
+          '2': data.departement,
+          '3': data.periodeBudget,
+          '4': data.uniteChoisie,
+          '5': data.nombreUnite,
+          '6': data.coutUnitaire,
+          '7': data.coutTotal,
+          '8': data.caisse,
+          '9': data.banque,
+          '10': data.finPropre,
+          '11': data.finExterieur,
+          '12': data.signature,
+          '13': data.created,
+          '14': data.id
+        });
   }
 
   deleteData(int id) async {

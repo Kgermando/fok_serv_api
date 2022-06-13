@@ -34,16 +34,12 @@ class ComptePassifRepository {
   }
 
   Future<void> update(ComptePassifModel data) async {
-    await executor.transaction((conn) async {
-      await conn.query(
-          """UPDATE $tableName SET reference = @1,
-          comptes = @2, montant = @3 WHERE id = @4""",
-          substitutionValues: {
-            '1': data.reference,
-            '2': data.comptes,
-            '3': data.montant,
-            '4': data.id
-          });
+    await executor.query("""UPDATE $tableName SET reference = @1,
+          comptes = @2, montant = @3 WHERE id = @4""", substitutionValues: {
+      '1': data.reference,
+      '2': data.comptes,
+      '3': data.montant,
+      '4': data.id
     });
   }
 
