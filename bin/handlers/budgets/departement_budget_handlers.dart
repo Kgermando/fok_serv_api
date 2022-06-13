@@ -91,7 +91,7 @@ class DepartementBudgetHandlers {
       // }
 
       repos.departementBudgets.update(data);
-      return Response.ok(data.toJson());
+      return Response.ok(jsonEncode(data.toJson()));
 
       // try {
         
