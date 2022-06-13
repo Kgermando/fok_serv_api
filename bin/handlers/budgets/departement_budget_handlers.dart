@@ -61,43 +61,8 @@ class DepartementBudgetHandlers {
       DepartementBudgetModel? data =
           await repos.departementBudgets.getFromId(editH.id!);
 
-      // final id = request.params['id'];
-      // DepartementBudgetModel data =
-      //     await repos.departementBudgets.getFromId(int.parse(id!));
-
-      // if (input['title'] != null) {
-      //   data.title = input['title'];
-      // }
-      // if (input['departement'] != null) {
-      //   data.departement = input['departement'];
-      // }
-      // if (input['periodeDebut'] != null) {
-      //   data.periodeDebut = DateTime.parse(input['periodeDebut']);
-      // }
-      // if (input['periodeFin'] != null) {
-      //   data.periodeFin = DateTime.parse(input['periodeFin']);
-      // }
-      // if (input['signature'] != null) {
-      //   data.signature = input['signature'];
-      // }
-      // if (input['createdRef'] != null) {
-      //   data.createdRef = DateTime.parse(input['createdRef']);
-      // }
-      // if (input['created'] != null) {
-      //   data.created = DateTime.parse(input['created']);
-      // }
-      // if (input['isSubmit'] != null) {
-      //   data.isSubmit = input['isSubmit'];
-      // }
-
       repos.departementBudgets.update(data);
       return Response.ok(jsonEncode(data.toJson()));
-
-      // try {
-        
-      // } catch (e) {
-      //   log(e.toString());
-      // }
     });
 
     router.delete('/delete-departement-budget/<id>',
