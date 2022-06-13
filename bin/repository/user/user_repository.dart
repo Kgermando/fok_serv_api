@@ -79,7 +79,7 @@ class UserRepository {
   Future<void> update(UserModel data) async {
     await executor.transaction((conn) async {
       await conn.execute(
-        """UPDATE '$tableName'
+        """UPDATE '$tableName
         SET photo = @1, nom = @2, prenom = @3, email = @4, telephone = @5,
         role = @6, matricule = @7, departement = @8, services_affectation = @9,
         fonction_occupe = @10, is_online = @11, created_at = @12,
