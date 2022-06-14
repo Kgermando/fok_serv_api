@@ -23,8 +23,7 @@ class PresenceEntrerRepository {
   Future<void> insertData(PresenceEntrerModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-      "INSERT INTO $tableName (id, reference, nom, prenom, matricule, note,"
-      "signature, created)"
+      "INSERT INTO $tableName (id, reference, nom, prenom, matricule, note, signature, created)"
       "VALUES (nextval('presences_entrer_id_seq'), @1, @2, @3, @4, @5, @6 , @7)",
         substitutionValues: {
           '1': data.reference,

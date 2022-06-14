@@ -75,7 +75,7 @@ class CompteBalanceRef {
   factory CompteBalanceRef.fromJson(Map<String, dynamic> json) {
     return CompteBalanceRef(
         id: json['id'],
-        reference: json['reference'],
+        reference: DateTime.parse(json['reference']),
         comptes: json['comptes'],
         debit: json['debit'],
         credit: json['credit'],
@@ -85,7 +85,7 @@ class CompteBalanceRef {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'reference': reference,
+      'reference': reference.toIso8601String(),
       'comptes': comptes,
       'debit': debit,
       'credit': credit,

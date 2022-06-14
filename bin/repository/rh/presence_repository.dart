@@ -53,7 +53,7 @@ class PresenceRepository {
   }
 
   deleteData(int id) async {
-    try {
+    try {  
       await executor.transaction((conn) async {
         // ignore: unused_local_variable
         var result = await conn.execute('DELETE FROM $tableName WHERE id=$id;');
