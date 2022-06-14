@@ -5,6 +5,7 @@ class BalanceCompteModel {
   late String signature;
   late DateTime createdRef;
   late DateTime created;
+  late String isSubmit;
 
   BalanceCompteModel(
       {this.id,
@@ -12,7 +13,8 @@ class BalanceCompteModel {
       required this.statut,
       required this.signature,
       required this.createdRef,
-      required this.created});
+      required this.created,
+      required this.isSubmit});
 
   factory BalanceCompteModel.fromSQL(List<dynamic> row) {
     return BalanceCompteModel(
@@ -21,17 +23,20 @@ class BalanceCompteModel {
         statut: row[2],
         signature: row[3],
         createdRef: row[4],
-        created: row[5]);
+        created: row[5],
+        isSubmit: row[6]);
   }
 
   factory BalanceCompteModel.fromJson(Map<String, dynamic> json) {
     return BalanceCompteModel(
-        id: json['id'],
-        title: json['title'],
-        statut: json['statut'],
-        signature: json['signature'],
-        createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created']));
+      id: json['id'],
+      title: json['title'],
+      statut: json['statut'],
+      signature: json['signature'],
+      createdRef: DateTime.parse(json['createdRef']),
+      created: DateTime.parse(json['created']),
+      isSubmit: json['isSubmit'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -41,7 +46,8 @@ class BalanceCompteModel {
       'statut': statut,
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'isSubmit': isSubmit,
     };
   }
 }

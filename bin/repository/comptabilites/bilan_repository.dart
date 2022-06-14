@@ -23,13 +23,14 @@ class BilanRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, title_bilan,"
-          "signature, created_ref , created)"
-          "VALUES (nextval('bilans_id_seq'), @1, @2, @3, @4)",
+          "signature, created_ref, created, is_submit)"
+          "VALUES (nextval('bilans_id_seq'), @1, @2, @3, @4, @5)",
           substitutionValues: {
             '1': data.titleBilan,
             '2': data.signature,
             '3': data.createdRef,
-            '4': data.created
+            '4': data.created,
+            '5': data.isSubmit
           });
     });
   }
@@ -37,12 +38,14 @@ class BilanRepository {
   Future<void> update(BilanModel data) async {
     await executor.query("""UPDATE $tableName
           SET title_bilan = @1, signature = @2,
-          created_ref = @3, created = @4 WHERE id = @5""", substitutionValues: {
+          created_ref = @3, created = @4, is_submit = @5 WHERE id = @6""", 
+      substitutionValues: {
       '1': data.titleBilan,
       '2': data.signature,
       '3': data.createdRef,
       '4': data.created,
-      '5': data.id
+      '5': data.isSubmit,
+      '6': data.id
     });
   }
 
@@ -65,7 +68,8 @@ class BilanRepository {
       titleBilan: data[0][1],
       signature: data[0][2],
       createdRef: data[0][3],
-      created: data[0][4]
+      created: data[0][4],
+      isSubmit: data[0][5]
     );
   }
   

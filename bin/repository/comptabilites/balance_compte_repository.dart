@@ -23,14 +23,15 @@ class BalanceCompteRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, title,"
-          "statut, signature, created_ref, created)"
-          "VALUES (nextval('balance_comptes_id_seq'), @1, @2, @3, @4, @5)",
+          "statut, signature, created_ref, created, is_submit)"
+          "VALUES (nextval('balance_comptes_id_seq'), @1, @2, @3, @4, @5, @6)",
           substitutionValues: {
             '1': data.title,
             '2': data.statut,
             '3': data.signature,
             '4': data.createdRef,
-            '5': data.created
+            '5': data.created,
+            '6': data.isSubmit
           });
     });
   }
@@ -38,13 +39,14 @@ class BalanceCompteRepository {
   Future<void> update(BalanceCompteModel data) async {
     await executor.query("""UPDATE $tableName
         SET title = @1, statut = @2, signature = @3, created_ref = @4,
-        created = @5, WHERE id = @6""", substitutionValues: {
+        created = @5, is_submit = @6, WHERE id = @7""", substitutionValues: {
       '1': data.title,
       '2': data.statut,
       '3': data.signature,
       '4': data.createdRef,
       '5': data.created,
-      '6': data.id
+      '6': data.isSubmit,
+      '7': data.id
     });
   }
 
@@ -68,7 +70,8 @@ class BalanceCompteRepository {
       statut: data[0][2],
       signature: data[0][3],
       createdRef: data[0][4],
-      created: data[0][5]
+      created: data[0][5],
+      isSubmit: data[0][6]
     );
   } 
 }

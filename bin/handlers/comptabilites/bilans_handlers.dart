@@ -37,7 +37,8 @@ class BilansHandlers {
         titleBilan: input['titleBilan'],
         signature: input['signature'],
         createdRef: DateTime.parse(input['createdRef']),
-        created: DateTime.parse(input['created'])
+        created: DateTime.parse(input['created']),
+        isSubmit: input['isSubmit']
       );
       try {
         await repos.bilans.insertData(data);
@@ -65,6 +66,9 @@ class BilansHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['isSubmit'] != null) {
+        data.isSubmit = input['isSubmit'];
       }
       repos.bilans.update(data);
       return Response.ok(jsonEncode(data.toJson()));

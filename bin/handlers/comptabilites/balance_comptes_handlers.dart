@@ -38,7 +38,8 @@ class BalanceComptesHandlers {
         statut: input['statut'],
         signature: input['signature'],
         createdRef: DateTime.parse(input['createdRef']),
-        created: DateTime.parse(input['created'])
+        created: DateTime.parse(input['created']),
+        isSubmit: input['isSubmit']
       );
       try {
         await repos.balanceComptes.insertData(data);
@@ -69,6 +70,9 @@ class BalanceComptesHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['isSubmit'] != null) {
+        data.isSubmit = input['isSubmit'];
       }
       repos.balanceComptes.update(data);
       return Response.ok(jsonEncode(data.toJson()));
