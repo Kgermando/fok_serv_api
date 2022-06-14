@@ -46,7 +46,7 @@ class BalanceCompteModel {
   }
 }
 
-class CompteBalanceRef {
+class CompteBalanceRefModel {
   late int? id;
   late DateTime reference;
   late String comptes;
@@ -54,7 +54,7 @@ class CompteBalanceRef {
   late String credit;
   late double solde;
 
-  CompteBalanceRef(
+  CompteBalanceRefModel(
       {this.id,
       required this.reference,
       required this.comptes,
@@ -62,8 +62,8 @@ class CompteBalanceRef {
       required this.credit,
       required this.solde});
 
-  factory CompteBalanceRef.fromSQL(List<dynamic> row) {
-    return CompteBalanceRef(
+  factory CompteBalanceRefModel.fromSQL(List<dynamic> row) {
+    return CompteBalanceRefModel(
         id: row[0],
         reference: row[1],
         comptes: row[2],
@@ -72,8 +72,8 @@ class CompteBalanceRef {
         solde: row[5]);
   }
 
-  factory CompteBalanceRef.fromJson(Map<String, dynamic> json) {
-    return CompteBalanceRef(
+  factory CompteBalanceRefModel.fromJson(Map<String, dynamic> json) {
+    return CompteBalanceRefModel(
         id: json['id'],
         reference: DateTime.parse(json['reference']),
         comptes: json['comptes'],

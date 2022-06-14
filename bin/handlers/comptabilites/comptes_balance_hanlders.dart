@@ -15,12 +15,12 @@ class ComptesBalanceRefHandlers {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<CompteBalanceRef> data = await repos.balanceCompteRef.getAllData();
+      List<CompteBalanceRefModel> data = await repos.balanceCompteRef.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late CompteBalanceRef data;
+      late CompteBalanceRefModel data;
       try {
         data = await repos.balanceCompteRef.getFromId(int.parse(id));
       } catch (e) {
@@ -32,7 +32,7 @@ class ComptesBalanceRefHandlers {
 
     router.post('/insert-new-comptes-balance-ref', (Request request) async {
       var input = jsonDecode(await request.readAsString());
-      CompteBalanceRef data = CompteBalanceRef(
+      CompteBalanceRefModel data = CompteBalanceRefModel(
           reference: DateTime.parse(input['reference']),
           comptes: input['comptes'],
           debit: input['debit'],
@@ -50,8 +50,8 @@ class ComptesBalanceRefHandlers {
 
     router.put('/update-comptes-balance-ref/', (Request request) async {
        dynamic input = jsonDecode(await request.readAsString());
-      final editH = CompteBalanceRef.fromJson(input);
-      CompteBalanceRef? data =
+      final editH = CompteBalanceRefModel.fromJson(input);
+      CompteBalanceRefModel? data =
           await repos.balanceCompteRef.getFromId(editH.id!); 
 
       if (input['reference'] != null) {

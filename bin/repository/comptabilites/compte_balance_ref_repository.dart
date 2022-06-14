@@ -8,18 +8,18 @@ class CompteBalanceRefRepository {
 
   CompteBalanceRefRepository(this.executor, this.tableName);
 
-  Future<List<CompteBalanceRef>> getAllData() async {
-    var data = <CompteBalanceRef>{};
+  Future<List<CompteBalanceRefModel>> getAllData() async {
+    var data = <CompteBalanceRefModel>{};
 
     var querySQL = "SELECT * FROM $tableName;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
-      data.add(CompteBalanceRef.fromSQL(row));
+      data.add(CompteBalanceRefModel.fromSQL(row));
     }
     return data.toList();
   }
 
-  Future<void> insertData(CompteBalanceRef data) async {
+  Future<void> insertData(CompteBalanceRefModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, reference, comptes, debit, credit, solde)"
@@ -34,7 +34,7 @@ class CompteBalanceRefRepository {
     });
   }
 
-  Future<void> update(CompteBalanceRef data) async {
+  Future<void> update(CompteBalanceRefModel data) async {
     await executor.query("""UPDATE $tableName
         SET reference = @1, comptes = @2, debit = @3, credit = @4,
         solde = @5 WHERE id = @6""", substitutionValues: {
@@ -59,10 +59,10 @@ class CompteBalanceRefRepository {
     }
   }
 
-  Future<CompteBalanceRef> getFromId(int id) async {
+  Future<CompteBalanceRefModel> getFromId(int id) async {
     var data =
         await executor.query("SELECT * FROM $tableName WHERE \"id\" = '$id'");
-    return CompteBalanceRef(
+    return CompteBalanceRefModel(
       id: data[0][0],
       reference: data[0][1],
       comptes: data[0][2],
