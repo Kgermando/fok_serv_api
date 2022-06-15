@@ -39,7 +39,7 @@ class EntretienHandlers {
         etatObjet: input['etatObjet'], 
         dureeTravaux: input['dureeTravaux'], 
         signature: input['signature'],
-        createdRef: DateTime.parse(input['createdRef']),
+        createdRef: input['createdRef'],
         created: DateTime.parse(input['created'])
       );
 
@@ -77,7 +77,7 @@ class EntretienHandlers {
         data.signature = input['signature'];
       }
       if (input['createdRef'] != null) {
-        data.createdRef = DateTime.parse(input['createdRef']);
+        data.createdRef = input['createdRef'];
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

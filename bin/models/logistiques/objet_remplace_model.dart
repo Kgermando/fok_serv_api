@@ -1,6 +1,6 @@
 class ObjetRemplaceModel {
   late int? id;
-  late DateTime reference;
+  late int reference;
   late String nom;
   late String cout;
   late String caracteristique;
