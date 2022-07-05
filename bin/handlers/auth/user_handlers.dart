@@ -14,6 +14,12 @@ class UserHandlers {
   Router get router {
     final router = Router();
 
+    // router.get('/users/', (Request request) async {
+    //   List<UserModel> data = await repos.users.getAllData();
+    //   return Response.ok(jsonEncode(data));
+    // });
+
+    // Get all users
     router.get('/users/', (Request request) async {
       List<UserModel> data = await repos.users.getAllData();
       return Response.ok(jsonEncode(data));
@@ -36,11 +42,40 @@ class UserHandlers {
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
+    // Add new user
+    router.post('/insert-new-user', (Request request) async {
+      var input = jsonDecode(await request.readAsString());
+      UserModel agent = UserModel(
+          photo: input['photo'],
+          nom: input['nom'],
+          prenom: input['prenom'],
+          email: input['email'],
+          telephone: input['telephone'],
+          matricule: input['matricule'],
+          departement: input['departement'],
+          servicesAffectation: input['servicesAffectation'],
+          fonctionOccupe: input['fonctionOccupe'],
+          role: input['role'],
+          isOnline: input['isOnline'],
+          createdAt: DateTime.parse(input['createdAt']),
+          passwordHash:
+              md5.convert(utf8.encode(input['passwordHash'])).toString(),
+          succursale: input['succursale']);
+
+      try {
+        await repos.users.insertData(agent);
+      } catch (e) {
+        print(e);
+        return Response(422);
+      }
+      return Response.ok(jsonEncode(agent.toJson()));
+    });
+
+
     router.put('/update-user/', (Request request) async {
-       dynamic input = jsonDecode(await request.readAsString());
+      dynamic input = jsonDecode(await request.readAsString());
       final editH = UserModel.fromJson(input);
-      UserModel? selectUser =
-          await repos.users.getFromId(editH.id!); 
+      UserModel? selectUser = await repos.users.getFromId(editH.id!);
 
       if (input['photo'] != null) {
         selectUser.matricule = input['photo'];
@@ -79,7 +114,7 @@ class UserHandlers {
         selectUser.createdAt = DateTime.parse(input['createdAt']);
       }
       if (input['passwordHash'] != null) {
-        selectUser.passwordHash = input['passwordHash']; 
+        selectUser.passwordHash = input['passwordHash'];
       }
       // if (input['passwordHash'] != null) {
       //   selectUser.passwordHash =
@@ -93,40 +128,22 @@ class UserHandlers {
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
-    // Add new user
-    router.post('/insert-new-user', (Request request) async {
-      var input = jsonDecode(await request.readAsString());
-      UserModel agent = UserModel(
-          photo: input['photo'],
-          nom: input['nom'],
-          prenom: input['prenom'],
-          email: input['email'],
-          telephone: input['telephone'],
-          matricule: input['matricule'],
-          departement: input['departement'],
-          servicesAffectation: input['servicesAffectation'],
-          fonctionOccupe: input['fonctionOccupe'],
-          role: input['role'],
-          isOnline: input['isOnline'],
-          createdAt: DateTime.parse(input['createdAt']),
-          passwordHash:
-              md5.convert(utf8.encode(input['passwordHash'])).toString(),
-          succursale: input['succursale']);
 
-      try {
-        await repos.users.insertData(agent);
-      } catch (e) {
-        print(e);
-        return Response(422);
+    
+    router.put('/change-password/', (Request request) async {
+      dynamic input = jsonDecode(await request.readAsString());
+      final editH = UserModel.fromJson(input);
+      UserModel? selectUser = await repos.users.getFromId(editH.id!);
+
+      // Check si le mot de passe par defaut est correct
+      if (input['passwordHash'] != null) {
+        selectUser.passwordHash =
+            md5.convert(utf8.encode(input['passwordHash'])).toString();
       }
-      return Response.ok(jsonEncode(agent.toJson()));
+      repos.users.update(selectUser);
+      return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
-    // Get all users
-    router.get('/users/', (Request request) async {
-      List<UserModel> data = await repos.users.getAllData();
-      return Response.ok(jsonEncode(data));
-    });
 
     router.delete('/delete-user/<id>', (Request request, String id) async {
       var id = request.params['id'];
