@@ -6,6 +6,14 @@ class BalanceCompteModel {
   late DateTime createdRef;
   late DateTime created;
   late String isSubmit;
+    // Approbations DG
+  late String approbationDG;
+  late String motifDG;
+  late String signatureDG;
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
 
   BalanceCompteModel(
       {this.id,
@@ -14,7 +22,13 @@ class BalanceCompteModel {
       required this.signature,
       required this.createdRef,
       required this.created,
-      required this.isSubmit});
+      required this.isSubmit,
+      required this.approbationDG,
+      required this.motifDG,
+      required this.signatureDG,
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD});
 
   factory BalanceCompteModel.fromSQL(List<dynamic> row) {
     return BalanceCompteModel(
@@ -24,18 +38,30 @@ class BalanceCompteModel {
         signature: row[3],
         createdRef: row[4],
         created: row[5],
-        isSubmit: row[6]);
+        isSubmit: row[6],
+        approbationDG: row[7],
+        motifDG: row[8],
+        signatureDG: row[9],
+        approbationDD: row[10],
+        motifDD: row[11],
+        signatureDD: row[12]);
   }
 
   factory BalanceCompteModel.fromJson(Map<String, dynamic> json) {
     return BalanceCompteModel(
-      id: json['id'],
-      title: json['title'],
-      statut: json['statut'],
-      signature: json['signature'],
-      createdRef: DateTime.parse(json['createdRef']),
-      created: DateTime.parse(json['created']),
+        id: json['id'],
+        title: json['title'],
+        statut: json['statut'],
+        signature: json['signature'],
+        createdRef: DateTime.parse(json['createdRef']),
+        created: DateTime.parse(json['created']),
       isSubmit: json['isSubmit'],
+        approbationDG: json['approbationDG'],
+        motifDG: json['motifDG'],
+        signatureDG: json['signatureDG'],
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']
     );
   }
 
@@ -48,6 +74,12 @@ class BalanceCompteModel {
       'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String(),
       'isSubmit': isSubmit,
+      'approbationDG': approbationDG,
+      'motifDG': motifDG,
+      'signatureDG': signatureDG,
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

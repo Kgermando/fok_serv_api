@@ -31,10 +31,11 @@ class CompteResultatRepository {
           "ventes_marchandises, production_vendue_bien_et_serices,"
           "production_stockee, production_immobilisee, subvention_exploitation,"
           "autre_produits, montant_exportation,"
-          "produit_financieres, produit_exceptionnels, solde_debiteur, signature, created_ref, created)"
+          "produit_financieres, produit_exceptionnels, solde_debiteur, signature, created_ref, created,"
+          "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
           "VALUES (nextval('comptes_resultat_id_seq'), @1, @2, @3, @4, @5, @6,"
           "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20,"
-          "@21, @22, @23, @24, @25, @26, @27, @28)",
+          "@21, @22, @23, @24, @25, @26, @27, @28, @29, @30, @31, @32, @33, @34)",
           substitutionValues: {
             '1': data.intitule,
             '2': data.achatMarchandises,
@@ -63,7 +64,13 @@ class CompteResultatRepository {
             '25': data.soldeDebiteur,
             '26': data.signature,
             '27': data.createdRef,
-            '28': data.created
+            '28': data.created,
+            '29': data.approbationDG,
+            '30': data.motifDG,
+            '31': data.signatureDG,
+            '32': data.approbationDD,
+            '33': data.motifDD,
+            '34': data.signatureDD
           });
     });
   }
@@ -80,7 +87,10 @@ class CompteResultatRepository {
         production_immobilisee = @19,
         subvention_exploitation = @20, autre_produits = @21, montant_exportation = @22,
         produit_financieres = @23, produit_exceptionnels = @24, solde_debiteur = @25,
-        signature = @26, created_ref = @27 created = @28 WHERE id = @29""",
+        signature = @26, created_ref = @27 created = @28, approbation_dg = @29, motif_dg = @30,
+        signature_dg = @31, approbation_dd = @32,
+        motif_dd = @33, signature_dd = @34 WHERE id = @35""",
+        
         substitutionValues: {
           '1': data.intitule,
           '2': data.achatMarchandises,
@@ -110,7 +120,13 @@ class CompteResultatRepository {
           '26': data.signature,
           '27': data.createdRef,
           '28': data.created,
-          '29': data.id
+          '29': data.approbationDG,
+          '30': data.motifDG,
+          '31': data.signatureDG,
+          '32': data.approbationDD,
+          '33': data.motifDD,
+          '34': data.signatureDD,
+          '35': data.id
         });
   }
 
@@ -157,7 +173,13 @@ class CompteResultatRepository {
       soldeDebiteur: data[0][25],
       signature: data[0][26],
       createdRef: data[0][27],
-      created: data[0][28]
+      created: data[0][28],
+      approbationDG: data[0][29],
+      motifDG: data[0][30],
+      signatureDG: data[0][31],
+      approbationDD: data[0][32],
+      motifDD: data[0][33],
+      signatureDD: data[0][34]
     );
   } 
 }

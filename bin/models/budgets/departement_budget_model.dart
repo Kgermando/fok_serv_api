@@ -10,6 +10,15 @@ class DepartementBudgetModel {
   late DateTime created;
   late String isSubmit;
 
+  // Approbations DG
+  late String approbationDG;
+  late String motifDG;
+  late String signatureDG;
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
+
   DepartementBudgetModel(
       {this.id,
       required this.title,
@@ -19,7 +28,14 @@ class DepartementBudgetModel {
       required this.signature,
       required this.createdRef,
       required this.created,
-      required this.isSubmit});
+      required this.isSubmit,
+      required this.approbationDG,
+      required this.motifDG,
+      required this.signatureDG,
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD});
+
 
   factory DepartementBudgetModel.fromSQL(List<dynamic> row) {
     return DepartementBudgetModel(
@@ -31,8 +47,13 @@ class DepartementBudgetModel {
         signature: row[5],
         createdRef: row[6],
         created: row[7],
-        isSubmit: row[8]
-    );
+        isSubmit: row[8],
+        approbationDG: row[9],
+        motifDG: row[10],
+        signatureDG: row[11],
+        approbationDD: row[12],
+        motifDD: row[13],
+        signatureDD: row[14]);
   }
 
   factory DepartementBudgetModel.fromJson(Map<String, dynamic> json) {
@@ -45,8 +66,14 @@ class DepartementBudgetModel {
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']),
-        isSubmit: json['isSubmit']);
-  } 
+        isSubmit: json['isSubmit'],
+        approbationDG: json['approbationDG'],
+        motifDG: json['motifDG'],
+        signatureDG: json['signatureDG'],
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']);
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -58,7 +85,13 @@ class DepartementBudgetModel {
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String(),
-      'isSubmit': isSubmit,
+      'isSubmit': isSubmit.toString(),
+      'approbationDG': approbationDG,
+      'motifDG': motifDG,
+      'signatureDG': signatureDG,
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

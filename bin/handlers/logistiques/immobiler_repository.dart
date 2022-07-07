@@ -40,7 +40,13 @@ class ImmobilierHandlers {
         dateAcquisition: DateTime.parse(input['dateAcquisition']), 
         signature: input['signature'],
         createdRef: DateTime.parse(input['createdRef']),
-        created: DateTime.parse(input['created'])
+        created: DateTime.parse(input['created']),
+        approbationDG: input['approbationDG'],
+          motifDG: input['motifDG'],
+          signatureDG: input['signatureDG'],
+          approbationDD: input['approbationDD'],
+          motifDD: input['motifDD'],
+          signatureDD: input['signatureDD']
       );
 
       try {
@@ -82,6 +88,24 @@ class ImmobilierHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['motifDG'] != null) {
+        data.motifDG = input['motifDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
       }
       repos.immobiliers.update(data);
       return Response.ok(jsonEncode(data.toJson()));

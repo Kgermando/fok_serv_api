@@ -3,11 +3,15 @@ class EntretienModel {
   late String nom;
   late String modele;
   late String marque;
-  late String etatObjet;
+  late String etatObjet; // type de Maintenance
   late String dureeTravaux;
   late String signature; // celui qui fait le document
   late int createdRef;
-  late DateTime created;
+  late DateTime created; 
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
 
   EntretienModel(
       {this.id,
@@ -18,7 +22,10 @@ class EntretienModel {
       required this.dureeTravaux,
       required this.signature,
       required this.createdRef,
-      required this.created});
+      required this.created, 
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD});
 
   factory EntretienModel.fromSQL(List<dynamic> row) {
     return EntretienModel(
@@ -30,7 +37,10 @@ class EntretienModel {
         dureeTravaux: row[5],
         signature: row[6],
         createdRef: row[7],
-        created: row[8]);
+        created: row[8], 
+        approbationDD: row[9],
+        motifDD: row[10],
+        signatureDD: row[11]);
   }
 
   factory EntretienModel.fromJson(Map<String, dynamic> json) {
@@ -43,7 +53,10 @@ class EntretienModel {
         dureeTravaux: json['dureeTravaux'],
         signature: json['signature'],
         createdRef: json['createdRef'],
-        created: DateTime.parse(json['created']));
+        created: DateTime.parse(json['created']), 
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']);
   }
 
   Map<String, dynamic> toJson() {
@@ -56,7 +69,10 @@ class EntretienModel {
       'dureeTravaux': dureeTravaux,
       'signature': signature,
       'createdRef': createdRef,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(), 
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

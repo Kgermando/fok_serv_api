@@ -37,6 +37,7 @@ class PaiementSalaireHandlers {
           nom: input['nom'],
           postNom: input['postNom'],
           prenom: input['prenom'],
+          email: input['email'],
           telephone: input['telephone'],
           adresse: input['adresse'],
           departement: input['departement'],
@@ -82,7 +83,23 @@ class PaiementSalaireHandlers {
           montantPrisConsiderationCalculCotisationsINSS:
               input['montantPrisConsiderationCalculCotisationsINSS'],
           totalDuBrut: input['totalDuBrut'],
-          signature: input['signature']);
+          signature: input['signature'],
+          
+          approbationDG: input['approbationDG'],
+          motifDG: input['motifDG'],
+          signatureDG: input['signatureDG'],
+          approbationBudget: input['approbationBudget'],
+          motifBudget: input['motifBudget'],
+          signatureBudget: input['signatureBudget'],
+          approbationFin: input['approbationFin'],
+          motifFin: input['motifFin'],
+          signatureFin: input['signatureFin'],
+          approbationDD: input['approbationDD'],
+          motifDD: input['motifDD'],
+          signatureDD: input['signatureDD'],
+          ligneBudgetaire: input['ligneBudgetaire'],
+          ressource: input['ressource']
+      );
       try {
         await repos.salaires.insertData(data);
       } catch (e) {
@@ -106,6 +123,9 @@ class PaiementSalaireHandlers {
       }
       if (input['prenom'] != null) {
         data.prenom = input['prenom'];
+      }
+      if (input['email'] != null) {
+        data.email = input['email'];
       }
       if (input['telephone'] != null) {
         data.telephone = input['telephone'];
@@ -226,6 +246,48 @@ class PaiementSalaireHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
+      }
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['motifDG'] != null) {
+        data.motifDG = input['motifDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['approbationBudget'] != null) {
+        data.approbationBudget = input['approbationBudget'];
+      }
+      if (input['motifBudget'] != null) {
+        data.motifBudget = input['motifBudget'];
+      }
+      if (input['signatureBudget'] != null) {
+        data.signatureBudget = input['signatureBudget'];
+      }
+      if (input['approbationFin'] != null) {
+        data.approbationFin = input['approbationFin'];
+      }
+      if (input['motifFin'] != null) {
+        data.motifFin = input['motifFin'];
+      }
+      if (input['signatureFin'] != null) {
+        data.signatureFin = input['signatureFin'];
+      }
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
+      }
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
+      }
+      if (input['ligneBudgetaire'] != null) {
+        data.ligneBudgetaire = input['ligneBudgetaire'];
+      }
+      if (input['ressource'] != null) {
+        data.ressource = input['ressource'];
       }
 
       repos.salaires.update(data);

@@ -24,9 +24,9 @@ class TrajetRepository {
       await ctx.execute(
           "INSERT INTO $tableName (id, nomero_entreprise, nom_utilisateur,"
           "trajet_de, trajet_a, mission, kilometrage_sorite, kilometrage_retour,"
-          "signature, created_ref, created)"
+          "signature, created_ref, created, approbation_dd, motif_dd, signature_dd)"
           "VALUES (nextval('trajets_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8, @9, @10)",
+          "@7, @8, @9, @10, @11, @12, @13)",
           substitutionValues: {
             '1': data.nomeroEntreprise,
             '2': data.nomUtilisateur,
@@ -37,7 +37,10 @@ class TrajetRepository {
             '7': data.kilometrageRetour,
             '8': data.signature,
             '9': data.createdRef,
-            '10': data.created
+            '10': data.created,
+            '11': data.approbationDD,
+            '12': data.motifDD,
+            '13': data.signatureDD
 
           });
     });
@@ -47,7 +50,8 @@ class TrajetRepository {
      await executor.execute("""UPDATE $tableName
           SET nomero_entreprise = @1, nom_utilisateur = @2, trajet_de = @3,
           trajet_a = @4, mission = @5, kilometrage_sorite = @6, kilometrage_retour = @7,
-          signature = @8, created_ref = @9, created = @10 WHERE id = @11""",
+          signature = @8, created_ref = @9, created = @10, approbation_dd = @11,
+        motif_dd = @12, signature_dd = @13 WHERE id = @14""",
         substitutionValues: {
           '1': data.nomeroEntreprise,
           '2': data.nomUtilisateur,
@@ -59,7 +63,10 @@ class TrajetRepository {
           '8': data.signature,
           '9': data.createdRef,
           '10': data.created,
-          '11': data.id
+          '11': data.approbationDD,
+          '12': data.motifDD,
+          '13': data.signatureDD,
+          '14': data.id
         });
   }
 
@@ -88,7 +95,10 @@ class TrajetRepository {
         kilometrageRetour: data[0][7], 
         signature: data[0][8],
         createdRef: data[0][9],
-        created: data[0][10]
+        created: data[0][10],
+        approbationDD: data[0][11],
+        motifDD: data[0][12],
+        signatureDD: data[0][13]
     );
   }
 }

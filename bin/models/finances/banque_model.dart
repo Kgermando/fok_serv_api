@@ -26,18 +26,17 @@ class BanqueModel {
 
   factory BanqueModel.fromSQL(List<dynamic> row) {
     return BanqueModel(
-      id: row[0],
-      nomComplet: row[1],
-      pieceJustificative: row[2],
-      libelle: row[3],
-      montant: row[4],
-      departement: row[5],
-      typeOperation: row[6],
-      numeroOperation: row[7],
-      signature: row[8],
-      createdRef: row[9],
-      created: row[10] 
-    );
+        id: row[0],
+        nomComplet: row[1],
+        pieceJustificative: row[2],
+        libelle: row[3],
+        montant: row[4],
+        departement: row[5],
+        typeOperation: row[6],
+        numeroOperation: row[7],
+        signature: row[8],
+        createdRef: row[9],
+        created: row[10]);
   }
 
   factory BanqueModel.fromJson(Map<String, dynamic> json) {
@@ -46,14 +45,13 @@ class BanqueModel {
         nomComplet: json['nomComplet'],
         pieceJustificative: json['pieceJustificative'],
         libelle: json['libelle'],
-        montant: json['montant'], 
+        montant: json['montant'],
         departement: json['departement'],
         typeOperation: json['typeOperation'],
         numeroOperation: json['numeroOperation'],
         signature: json['signature'],
         createdRef: json['createdRef'],
-        created: DateTime.parse(json['created'])
-    );
+        created: DateTime.parse(json['created']));
   }
 
   Map<String, dynamic> toJson() {
@@ -62,7 +60,7 @@ class BanqueModel {
       'nomComplet': nomComplet,
       'pieceJustificative': pieceJustificative,
       'libelle': libelle,
-      'montant': montant, 
+      'montant': montant,
       'departement': departement,
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,

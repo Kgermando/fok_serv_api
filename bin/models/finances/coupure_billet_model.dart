@@ -11,14 +11,12 @@ class CoupureBilletModel {
     required this.coupureBillet,
   });
 
-   factory CoupureBilletModel.fromSQL(List<dynamic> row) {
+  factory CoupureBilletModel.fromSQL(List<dynamic> row) {
     return CoupureBilletModel(
         id: row[0],
         reference: row[1],
         nombreBillet: row[2],
-        coupureBillet: row[3]
-        
-    );
+        coupureBillet: row[3]);
   }
 
   factory CoupureBilletModel.fromJson(Map<String, dynamic> json) {

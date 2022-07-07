@@ -34,14 +34,18 @@ class ProduitModelHandlers {
       var input = jsonDecode(await request.readAsString());
 
       ProductModel data = ProductModel(
-          categorie: input['categorie'],
-          sousCategorie1: input['sousCategorie1'],
-          sousCategorie2: input['sousCategorie2'],
-          sousCategorie3: input['sousCategorie3'],
-          sousCategorie4: input['sousCategorie4'],
-          idProduct: input['idProduct'],
-          signature: input['signature'],
-          created: DateTime.parse(input['created']));
+        categorie: input['categorie'],
+        sousCategorie1: input['sousCategorie1'],
+        sousCategorie2: input['sousCategorie2'],
+        sousCategorie3: input['sousCategorie3'],
+        sousCategorie4: input['sousCategorie4'],
+        idProduct: input['idProduct'],
+        signature: input['signature'],
+        created: DateTime.parse(input['created']),
+        approbationDD: input['approbationDD'],
+        motifDD: input['motifDD'],
+        signatureDD: input['signatureDD']
+      );
       try {
         await repos.produitModel.insertData(data);
       } catch (e) {
@@ -81,6 +85,16 @@ class ProduitModelHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
+      }
+
       repos.produitModel.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });

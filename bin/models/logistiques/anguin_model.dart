@@ -20,6 +20,15 @@ class AnguinModel {
   late DateTime createdRef;
   late DateTime created;
 
+   // Approbations DG
+  late String approbationDG;
+  late String motifDG;
+  late String signatureDG;
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
+
 
   AnguinModel(
       {this.id,
@@ -39,7 +48,13 @@ class AnguinModel {
       required this.typeMoteur,
       required this.signature,
       required this.createdRef,
-      required this.created
+      required this.created,
+      required this.approbationDG,
+      required this.motifDG,
+      required this.signatureDG,
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD
     });
 
   factory AnguinModel.fromSQL(List<dynamic> row) {
@@ -61,7 +76,13 @@ class AnguinModel {
         typeMoteur: row[14],
         signature: row[15],
         createdRef: row[16],
-        created: row[17]
+        created: row[17],
+        approbationDG: row[18],
+        motifDG: row[19],
+        signatureDG: row[20],
+        approbationDD: row[21],
+        motifDD: row[22],
+        signatureDD: row[23]
     );
   }
 
@@ -84,7 +105,13 @@ class AnguinModel {
         typeMoteur: json['typeMoteur'],
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created'])
+        created: DateTime.parse(json['created']),
+        approbationDG: json['approbationDG'],
+        motifDG: json['motifDG'],
+        signatureDG: json['signatureDG'],
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']
     );
   }
 
@@ -107,7 +134,13 @@ class AnguinModel {
       'typeMoteur': typeMoteur,
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'approbationDG': approbationDG,
+      'motifDG': motifDG,
+      'signatureDG': signatureDG,
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

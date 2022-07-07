@@ -24,8 +24,10 @@ class DepartementBudgetRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, title, departement, periode_debut, periode_fin,"
-        "signature, created_ref, created, is_submit)"
-        "VALUES (nextval('departement_budgets_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
+        "signature, created_ref, created, is_submit,"
+        "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
+        "VALUES (nextval('departement_budgets_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10, @11, @12, @13, @14)",
         substitutionValues: {
           '1': data.title,
           '2': data.departement,
@@ -34,30 +36,43 @@ class DepartementBudgetRepository {
           '5': data.signature,
           '6': data.createdRef,
           '7': data.created,
-          '8': data.isSubmit
+          '8': data.isSubmit,
+          '9': data.approbationDG,
+          '10': data.motifDG,
+          '11': data.signatureDG,
+          '12': data.approbationDD,
+          '13': data.motifDD,
+          '14': data.signatureDD
           }
         );
     });
   }
 
-
-
-
   Future<void> update(DepartementBudgetModel data) async {
     await executor.query(
-        """UPDATE $tableName
-      SET title = @title, departement = @departement, periode_debut = @periode_debut, periode_fin = @periode_fin,
-      signature = @signature, created_ref = @created_ref, created = @created, is_submit = @is_submit WHERE id = @id""",
+      """UPDATE $tableName
+      SET title = @1, departement = @2, periode_debut = @3, 
+      periode_fin = @4,
+      signature = @5, created_ref = @6, created = @7, 
+      is_submit = @8, approbation_dg = @9, motif_dg = @10,
+      signature_dg = @11, approbation_dd = @12,
+      motif_dd = @13, signature_dd = @14 WHERE id = @15""",
       substitutionValues: {
-        'title': data.title,
-        'departement': data.departement,
-        'periode_debut': data.periodeDebut,
-        'periode_fin': data.periodeFin,
-        'signature': data.signature,
-        'created_ref': data.createdRef,
-        'created': data.created,
-        'is_submit': data.isSubmit,
-        'id': data.id
+        '1': data.title,
+        '2': data.departement,
+        '3': data.periodeDebut,
+        '4': data.periodeFin,
+        '5': data.signature,
+        '6': data.createdRef,
+        '7': data.created,
+        '8': data.isSubmit,
+        '9': data.approbationDG,
+        '10': data.motifDG,
+        '11': data.signatureDG,
+        '12': data.approbationDD,
+        '13': data.motifDD,
+        '14': data.signatureDD,
+        '15': data.id
       });
   }
 
@@ -85,7 +100,13 @@ class DepartementBudgetRepository {
       signature: data[0][5],
       createdRef: data[0][6],
       created: data[0][7],
-      isSubmit: data[0][8]
+      isSubmit: data[0][8],
+      approbationDG: data[0][9],
+      motifDG: data[0][10],
+      signatureDG: data[0][11],
+      approbationDD: data[0][12],
+      motifDD: data[0][13],
+      signatureDD: data[0][14]
     );
   } 
 }

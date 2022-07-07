@@ -44,7 +44,10 @@ class CarburantHandlers {
         qtyAchat: input['qtyAchat'],
         signature: input['signature'],
         createdRef: DateTime.parse(input['createdRef']),
-        created: DateTime.parse(input['created'])
+        created: DateTime.parse(input['created']), 
+          approbationDD: input['approbationDD'],
+          motifDD: input['motifDD'],
+          signatureDD: input['signatureDD']
       );
       try {
         await repos.carburants.insertData(carburantModel);
@@ -96,6 +99,15 @@ class CarburantHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      } 
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
       }
 
 

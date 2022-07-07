@@ -40,25 +40,11 @@ class EtaMaterielRepository {
   Future<void> insertData(EtatMaterielModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, nom, modele,"
-          "marque, type_objet, signature, created_ref, created)"
-          "VALUES (nextval('etat_materiels_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
-          substitutionValues: {
-            '1': data.nom,
-            '2': data.modele,
-            '3': data.marque,
-            '4': data.typeObjet,
-            '5': data.signature,
-            '6': data.createdRef,
-            '7': data.created
-          });
-    });
-  }
-
-  Future<void> update(EtatMaterielModel data) async {
-    await executor.execute("""UPDATE $tableName
-          SET nom = @1, modele = @2, marque = @3, type_objet = @4,
-          signature = @5, created_ref = @6 , created = @7 WHERE id = @8""",
+        "INSERT INTO $tableName (id, nom, modele,"
+        "marque, type_objet, signature, created_ref, created,"
+        "approbation_dd, motif_dd, signature_dd)"
+        "VALUES (nextval('etat_materiels_id_seq'), @1, @2, @3, @4, @5, @6, @7,"
+        "@8, @9, @10)",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
@@ -67,7 +53,30 @@ class EtaMaterielRepository {
           '5': data.signature,
           '6': data.createdRef,
           '7': data.created,
-          '8': data.id
+          '8': data.approbationDD,
+          '9': data.motifDD,
+          '10': data.signatureDD
+        });
+    });
+  }
+
+  Future<void> update(EtatMaterielModel data) async {
+    await executor.execute("""UPDATE $tableName
+          SET nom = @1, modele = @2, marque = @3, type_objet = @4,
+          signature = @5, created_ref = @6 , created = @7, approbation_dd = @8,
+        motif_dd = @9, signature_dd = @10 WHERE id = @11""",
+        substitutionValues: {
+          '1': data.nom,
+          '2': data.modele,
+          '3': data.marque,
+          '4': data.typeObjet,
+          '5': data.signature,
+          '6': data.createdRef,
+          '7': data.created,
+          '8': data.approbationDD,
+          '9': data.motifDD,
+          '10': data.signatureDD,
+          '11': data.id
         });
   }
 
@@ -94,7 +103,10 @@ class EtaMaterielRepository {
         statut: data[0][5], 
         signature: data[0][6],
         createdRef: data[0][7],
-        created: data[0][8]
+        created: data[0][8],
+        approbationDD: data[0][9],
+        motifDD: data[0][10],
+        signatureDD: data[0][11]
     );
   }
 }

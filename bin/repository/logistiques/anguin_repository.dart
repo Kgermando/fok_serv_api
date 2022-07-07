@@ -42,9 +42,10 @@ class AnguinRepository {
         "INSERT INTO $tableName (id, nom, modele, marque, numero_chassie,"
         "couleur, genre, qty_max_reservoir, date_fabrication, nomero_plaque,"
         "nomero_entreprise, kilometrage_initiale, provenance, type_caburant,"
-        "type_moteur, signature, created_ref, created)"
+        "type_moteur, signature, created_ref, created,"
+        "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
         "VALUES (nextval('anguins_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16 , @17)",
+        "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20, @21, @22, @23)",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
@@ -62,7 +63,13 @@ class AnguinRepository {
           '14': data.typeMoteur,
           '15': data.signature,
           '16': data.createdRef,
-          '17': data.created  
+          '17': data.created,
+          '18': data.approbationDG,
+          '19': data.motifDG,
+          '20': data.signatureDG,
+          '21': data.approbationDD,
+          '22': data.motifDD,
+          '23': data.signatureDD
         });
     });
   }
@@ -75,7 +82,10 @@ class AnguinRepository {
         genre = @6, qty_max_reservoir = @7, date_fabrication = @8, nomero_plaque = @9,
         nomero_entreprise = @10, kilometrage_initiale = @11, provenance = @12,
         type_caburant = @13, type_moteur = @14, signature = @15,
-        created_ref = @16, created = @17 WHERE id = @18""",
+        created_ref = @16, created = @17, approbation_dg = @18, motif_dg = @19,
+        signature_dg = @20, approbation_dd = @21,
+        motif_dd = @22, signature_dd = @23 WHERE id = @24""",
+
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
@@ -94,7 +104,13 @@ class AnguinRepository {
           '15': data.signature,
           '16': data.created,
           '17': data.created,
-          '18': data.id
+          '18': data.approbationDG,
+          '19': data.motifDG,
+          '20': data.signatureDG,
+          '21': data.approbationDD,
+          '22': data.motifDD,
+          '23': data.signatureDD,
+          '24': data.id
         });
   }
 
@@ -130,7 +146,13 @@ class AnguinRepository {
       typeMoteur: data[0][14],
       signature: data[0][15],
       createdRef: data[0][16],
-      created: data[0][17]
+      created: data[0][17],
+      approbationDG: data[0][18],
+      motifDG: data[0][19],
+      signatureDG: data[0][20],
+      approbationDD: data[0][21],
+      motifDD: data[0][22],
+      signatureDD: data[0][23]
     );
   }
 }

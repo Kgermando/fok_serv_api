@@ -2,8 +2,7 @@ import 'package:postgres/postgres.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'db/config_db.dart';
-import 'handlers/approbation/approbation_handlers.dart';
+import 'db/config_db.dart'; 
 import 'handlers/archives/archive_folder_handlers.dart';
 import 'handlers/archives/archive_handlers.dart';
 import 'handlers/auth/auth_handlers.dart';
@@ -537,14 +536,7 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(MailsHandlers(repos).router));
-    router.mount(
-        '/api/approbations/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(ApprobationHandlers(repos).router));
+            .addHandler(MailsHandlers(repos).router)); 
 
     router.all(
       '/<ignored|.*>',

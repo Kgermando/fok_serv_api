@@ -22,21 +22,25 @@ class ProduitModelRepository {
   Future<void> insertData(ProductModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, categorie, sous_categorie_1,"
-          "sous_categorie_2, sous_categorie_3, sous_categorie_4, id_product,"
-          "signature, created)"
-          "VALUES (nextval('produits_model_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8)",
-          substitutionValues: {
-            '1': data.categorie,
-            '2': data.sousCategorie1,
-            '3': data.sousCategorie2,
-            '4': data.sousCategorie3,
-            '5': data.sousCategorie4,
-            '6': data.idProduct,
-            '7': data.signature,
-            '8': data.created
-          });
+        "INSERT INTO $tableName (id, categorie, sous_categorie_1,"
+        "sous_categorie_2, sous_categorie_3, sous_categorie_4, id_product,"
+        "signature, created,"
+        "approbation_dd, motif_dd, signature_dd)"
+        "VALUES (nextval('produits_model_id_seq'), @1, @2, @3, @4, @5, @6,"
+        "@7, @8, @9, @10, @11)",
+        substitutionValues: {
+          '1': data.categorie,
+          '2': data.sousCategorie1,
+          '3': data.sousCategorie2,
+          '4': data.sousCategorie3,
+          '5': data.sousCategorie4,
+          '6': data.idProduct,
+          '7': data.signature,
+          '8': data.created, 
+          '9': data.approbationDD,
+          '10': data.motifDD,
+          '11': data.signatureDD
+        });
     });
   }
 
@@ -44,7 +48,8 @@ class ProduitModelRepository {
     await executor.query("""UPDATE $tableName
           SET categorie = @1, sous_categorie_1 = @2, sous_categorie_2 = @3,
           sous_categorie_3 = @4, sous_categorie_4 = @5, id_product = @6,
-          signature = @7, created = @8 WHERE id = @9""", substitutionValues: {
+          signature = @7, created = @8, approbation_dd = @9,
+        motif_dd = @10, signature_dd = @11 WHERE id = @12""", substitutionValues: {
       '1': data.categorie,
       '2': data.sousCategorie1,
       '3': data.sousCategorie2,
@@ -53,7 +58,10 @@ class ProduitModelRepository {
       '6': data.idProduct,
       '7': data.signature,
       '8': data.created,
-      '9': data.id
+      '9': data.approbationDD,
+      '10': data.motifDD,
+      '11': data.signatureDD,
+      '12': data.id
     });
   }
 
@@ -80,7 +88,10 @@ class ProduitModelRepository {
       sousCategorie4: data[0][5],
       idProduct: data[0][6],
       signature: data[0][7],
-      created: data[0][8]
+      created: data[0][8],
+      approbationDD: data[0][9],
+      motifDD: data[0][10],
+      signatureDD: data[0][11]
     );
   } 
   

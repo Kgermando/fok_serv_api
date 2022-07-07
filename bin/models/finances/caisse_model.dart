@@ -26,18 +26,17 @@ class CaisseModel {
 
   factory CaisseModel.fromSQL(List<dynamic> row) {
     return CaisseModel(
-      id: row[0],
-      nomComplet: row[1],
-      pieceJustificative: row[2],
-      libelle: row[3],
-      montant: row[4],
-      departement: row[5],
-      typeOperation: row[6],
-      numeroOperation: row[7],
-      signature: row[8],
-      createdRef: row[9],
-      created: row[10]
-    );
+        id: row[0],
+        nomComplet: row[1],
+        pieceJustificative: row[2],
+        libelle: row[3],
+        montant: row[4],
+        departement: row[5],
+        typeOperation: row[6],
+        numeroOperation: row[7],
+        signature: row[8],
+        createdRef: row[9],
+        created: row[10]);
   }
 
   factory CaisseModel.fromJson(Map<String, dynamic> json) {

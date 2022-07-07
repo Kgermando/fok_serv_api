@@ -7,7 +7,11 @@ class EtatMaterielModel {
   late String statut;
   late String signature; // celui qui fait le document
   late DateTime createdRef;
-  late DateTime created;
+  late DateTime created; 
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
 
   EtatMaterielModel(
       {this.id,
@@ -18,7 +22,10 @@ class EtatMaterielModel {
       required this.statut,
       required this.signature,
       required this.createdRef,
-      required this.created
+      required this.created, 
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD
       
     });
 
@@ -32,7 +39,10 @@ class EtatMaterielModel {
         statut: row[5],
         signature: row[6],
         createdRef: row[7],
-        created: row[8]
+        created: row[8], 
+        approbationDD: row[9],
+        motifDD: row[10],
+        signatureDD: row[11]
     );
   }
 
@@ -46,7 +56,10 @@ class EtatMaterielModel {
         statut: json['statut'],
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created'])
+        created: DateTime.parse(json['created']), 
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']
         
     );
   }
@@ -61,7 +74,10 @@ class EtatMaterielModel {
       'statut': statut,
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(), 
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

@@ -49,7 +49,8 @@ class UserModel {
         isOnline: row[11],
         createdAt: row[12],
         passwordHash: row[13],
-        succursale: row[14]);
+        succursale: row[14]
+    );
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -84,7 +85,7 @@ class UserModel {
       'servicesAffectation': servicesAffectation,
       'fonctionOccupe': fonctionOccupe,
       'role': role,
-      'isOnline': isOnline,
+      'isOnline': isOnline.toString(),
       'createdAt': createdAt.toIso8601String(),
       'passwordHash': passwordHash,
       'succursale': succursale,

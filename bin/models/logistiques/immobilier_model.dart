@@ -8,7 +8,15 @@ class ImmobilierModel {
 
   late String signature; // celui qui fait le document
   late DateTime createdRef;
-  late DateTime created;
+  late DateTime created; 
+  // Approbations DG
+  late String approbationDG;
+  late String motifDG;
+  late String signatureDG;
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
 
   ImmobilierModel(
       {this.id,
@@ -19,7 +27,13 @@ class ImmobilierModel {
       required this.dateAcquisition,
       required this.signature,
       required this.createdRef,
-      required this.created
+      required this.created,
+      required this.approbationDG,
+      required this.motifDG,
+      required this.signatureDG,
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD
   });
 
   factory ImmobilierModel.fromSQL(List<dynamic> row) {
@@ -32,7 +46,13 @@ class ImmobilierModel {
         dateAcquisition: row[5],
         signature: row[6],
         createdRef: row[7],
-        created: row[8]
+        created: row[8],
+        approbationDG: row[9],
+        motifDG: row[10],
+        signatureDG: row[11],
+        approbationDD: row[12],
+        motifDD: row[13],
+        signatureDD: row[14]
     );
   }
 
@@ -46,7 +66,13 @@ class ImmobilierModel {
       dateAcquisition: DateTime.parse(json['dateAcquisition']),
       signature: json['signature'],
       createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created'])
+      created: DateTime.parse(json['created']),
+      approbationDG: json['approbationDG'],
+        motifDG: json['motifDG'],
+        signatureDG: json['signatureDG'],
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']
     );
   }
 
@@ -60,8 +86,13 @@ class ImmobilierModel {
       'dateAcquisition': dateAcquisition.toIso8601String(),
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
-
+      'created': created.toIso8601String(),
+      'approbationDG': approbationDG,
+      'motifDG': motifDG,
+      'signatureDG': signatureDG,
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

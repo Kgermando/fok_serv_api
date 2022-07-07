@@ -9,7 +9,12 @@ class TrajetModel {
   late String kilometrageRetour;
   late String signature; // celui qui fait le document
   late DateTime createdRef;
-  late DateTime created;
+  late DateTime created; 
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
+
 
   TrajetModel(
       {this.id,
@@ -22,7 +27,10 @@ class TrajetModel {
       required this.kilometrageRetour, 
       required this.signature,
       required this.createdRef,
-      required this.created
+      required this.created, 
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD
   });
 
   factory TrajetModel.fromSQL(List<dynamic> row) {
@@ -37,7 +45,10 @@ class TrajetModel {
         kilometrageRetour: row[7], 
         signature: row[8],
         createdRef: row[9],
-        created: row[10]
+        created: row[10], 
+        approbationDD: row[11],
+        motifDD: row[12],
+        signatureDD: row[13]
         
     );
   }
@@ -54,7 +65,10 @@ class TrajetModel {
         kilometrageRetour: json['kilometrageRetour'],
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created'])
+        created: DateTime.parse(json['created']), 
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']
       );
   }
 
@@ -70,7 +84,10 @@ class TrajetModel {
       'kilometrageRetour': kilometrageRetour,
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(), 
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

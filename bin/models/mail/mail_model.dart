@@ -68,7 +68,7 @@ class MailModel {
       'objet': objet,
       'message': message,
       'pieceJointe': pieceJointe,
-      'read': read,
+      'read': read.toString(),
       'fullNameDest': fullNameDest,
       'emailDest': emailDest,
       'dateSend': dateSend.toIso8601String(),

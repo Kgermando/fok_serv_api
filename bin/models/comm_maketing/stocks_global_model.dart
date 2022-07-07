@@ -67,7 +67,7 @@ class StocksGlobalMOdel {
       'priceAchatUnit': priceAchatUnit,
       'prixVenteUnit': prixVenteUnit,
       'unite': unite,
-      'modeAchat': modeAchat,
+      'modeAchat': modeAchat.toString(),
       "tva": tva,
       "qtyRavitailler": qtyRavitailler,
       'signature': signature,

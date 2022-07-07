@@ -70,7 +70,7 @@ class RestitutionModel {
       'unite': unite,
       "firstName": firstName,
       "lastName": lastName,
-      "accuseReception": accuseReception,
+      "accuseReception": accuseReception.toString(),
       "accuseReceptionFirstName": accuseReceptionFirstName,
       "accuseReceptionLastName": accuseReceptionLastName,
       "role": role,

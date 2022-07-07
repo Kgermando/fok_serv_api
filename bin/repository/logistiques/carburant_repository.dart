@@ -25,9 +25,10 @@ class CarburantRepository {
         "INSERT INTO $tableName (id, operation_entre_sortie, type_caburant,"
         "fournisseur, nomero_facture_achat, prix_achat_par_litre,"
         "nom_receptioniste, numero_plaque, date_heure_sortie_anguin,"
-        "qty_achat, signature, created_ref, created)"
+        "qty_achat, signature, created_ref, created"
+        "approbation_dd, motif_dd, signature_dd)"
         "VALUES (nextval('carburants_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11, @12)",
+        "@7, @8, @9, @10, @11, @12, @13, @14, @15)",
         substitutionValues: {
           '1': data.operationEntreSortie,
           '2': data.typeCaburant,
@@ -40,7 +41,10 @@ class CarburantRepository {
           '9': data.qtyAchat,
           '10': data.signature,
           '11': data.createdRef,
-          '12': data.created
+          '12': data.created, 
+          '13': data.approbationDD,
+          '14': data.motifDD,
+          '15': data.signatureDD
         });
     });
   }
@@ -50,7 +54,8 @@ class CarburantRepository {
         SET operation_entre_sortie = @1, type_caburant = @2, fournisseur = @3,
         nomero_facture_achat = @4, prix_achat_par_litre = @5, nom_receptioniste = @6,
         numero_plaque = @7, date_heure_sortie_anguin = @8, qty_achat = @9,
-        signature = @10, created_ref = @11, created = @12 WHERE id = @13""",
+        signature = @10, created_ref = @11, created = @12, approbation_dd = @13,
+        motif_dd = @14, signature_dd = @15  WHERE id = @16""",
         substitutionValues: {
           '1': data.operationEntreSortie,
           '2': data.typeCaburant,
@@ -63,8 +68,11 @@ class CarburantRepository {
           '9': data.qtyAchat,
           '10': data.signature,
           '11': data.createdRef,
-          '12': data.created,
-          '13': data.id
+          '12': data.created, 
+          '13': data.approbationDD,
+          '14': data.motifDD,
+          '15': data.signatureDD,
+          '16': data.id
         });
   }
 
@@ -95,12 +103,11 @@ class CarburantRepository {
       qtyAchat: data[0][9],
       signature: data[0][10],
       createdRef: data[0][11],
-      created: data[0][12]
+      created: data[0][12], 
+      approbationDD: data[0][13],
+      motifDD: data[0][14],
+      signatureDD: data[0][15]
     );
-  }
-
-
-
-
+  } 
   
 }

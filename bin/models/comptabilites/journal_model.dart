@@ -11,7 +11,14 @@ class JournalModel {
 
   late String signature;
   late DateTime createdRef;
-  late DateTime created;
+  late DateTime created; // Approbations DG
+  late String approbationDG;
+  late String motifDG;
+  late String signatureDG;
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
 
   JournalModel(
       {this.id,
@@ -25,7 +32,13 @@ class JournalModel {
       required this.remarque,
       required this.signature,
       required this.createdRef,
-      required this.created}); 
+      required this.created,
+      required this.approbationDG,
+      required this.motifDG,
+      required this.signatureDG,
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD}); 
 
   factory JournalModel.fromSQL(List<dynamic> row) {
     return JournalModel(
@@ -40,7 +53,13 @@ class JournalModel {
         remarque: row[8],
         signature: row[9],
         createdRef: row[10],
-        created: row[11]);
+        created: row[11],
+        approbationDG: row[12],
+        motifDG: row[13],
+        signatureDG: row[14],
+        approbationDD: row[15],
+        motifDD: row[16],
+        signatureDD: row[17]);
   }
 
   factory JournalModel.fromJson(Map<String, dynamic> json) {
@@ -56,7 +75,13 @@ class JournalModel {
         remarque: json['remarque'],
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created']));
+        created: DateTime.parse(json['created']),
+        approbationDG: json['approbationDG'],
+        motifDG: json['motifDG'],
+        signatureDG: json['signatureDG'],
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']);
   }
 
   Map<String, dynamic> toJson() {
@@ -72,7 +97,13 @@ class JournalModel {
       'remarque': remarque,
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'approbationDG': approbationDG,
+      'motifDG': motifDG,
+      'signatureDG': signatureDG,
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

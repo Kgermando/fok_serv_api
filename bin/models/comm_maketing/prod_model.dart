@@ -7,7 +7,11 @@ class ProductModel {
   late String sousCategorie4;
   late String idProduct;
   late String signature; // celui qui fait le document
-  late DateTime created;
+  late DateTime created; 
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
 
   ProductModel({
     this.id,
@@ -18,7 +22,10 @@ class ProductModel {
     required this.sousCategorie4,
     required this.idProduct,
     required this.signature,
-    required this.created
+    required this.created,
+    required this.approbationDD,
+    required this.motifDD,
+    required this.signatureDD
   });
 
 
@@ -32,7 +39,10 @@ class ProductModel {
       sousCategorie4: row[5],
       idProduct: row[6],
       signature: row[7],
-      created: row[8]
+      created: row[8],
+      approbationDD: row[9],
+      motifDD: row[10],
+      signatureDD: row[11]
     );
   }
 
@@ -47,7 +57,10 @@ class ProductModel {
       sousCategorie4: json['sousCategorie4'],
       idProduct: json['idProduct'],
       signature: json['signature'],
-      created: DateTime.parse(json['created'])
+      created: DateTime.parse(json['created']),
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']
     );
   }
 
@@ -61,7 +74,10 @@ class ProductModel {
       'sousCategorie4': sousCategorie4,
       'idProduct': idProduct,
       'signature': signature,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

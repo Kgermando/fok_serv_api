@@ -34,6 +34,15 @@ class CompteResulatsModel {
   late String signature;
   late DateTime createdRef;
   late DateTime created;
+  
+    // Approbations DG
+  late String approbationDG;
+  late String motifDG;
+  late String signatureDG;
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
 
   CompteResulatsModel(
       {this.id,
@@ -64,7 +73,13 @@ class CompteResulatsModel {
       required this.soldeDebiteur,
       required this.signature,
       required this.createdRef,
-      required this.created});
+      required this.created,
+      required this.approbationDG,
+      required this.motifDG,
+      required this.signatureDG,
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD});
 
   factory CompteResulatsModel.fromSQL(List<dynamic> row) {
     return CompteResulatsModel(
@@ -96,7 +111,13 @@ class CompteResulatsModel {
         soldeDebiteur: row[25],
         signature: row[26],
         createdRef: row[27],
-        created: row[28]);
+        created: row[28],
+        approbationDG: row[29],
+        motifDG: row[30],
+        signatureDG: row[31],
+        approbationDD: row[32],
+        motifDD: row[33],
+        signatureDD: row[34]);
   }
 
   factory CompteResulatsModel.fromJson(Map<String, dynamic> json) {
@@ -129,7 +150,13 @@ class CompteResulatsModel {
         soldeDebiteur: json['soldeDebiteur'],
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created']));
+        created: DateTime.parse(json['created']),
+        approbationDG: json['approbationDG'],
+        motifDG: json['motifDG'],
+        signatureDG: json['signatureDG'],
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD']);
   }
 
   Map<String, dynamic> toJson() {
@@ -162,7 +189,13 @@ class CompteResulatsModel {
       'soldeDebiteur': soldeDebiteur,
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'approbationDG': approbationDG,
+      'motifDG': motifDG,
+      'signatureDG': signatureDG,
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD
     };
   }
 }

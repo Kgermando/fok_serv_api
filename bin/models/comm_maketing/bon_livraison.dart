@@ -93,7 +93,7 @@ class BonLivraisonModel {
       "tva": tva,
       "remise": remise,
       "qtyRemise": qtyRemise,
-      "accuseReception": accuseReception,
+      "accuseReception": accuseReception.toString(),
       "accuseReceptionFirstName": accuseReceptionFirstName,
       "accuseReceptionLastName": accuseReceptionLastName,
       'succursale': succursale,

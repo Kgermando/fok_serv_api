@@ -4,7 +4,7 @@ class ObjetRemplaceModel {
   late String nom;
   late String cout;
   late String caracteristique;
-  late String observation;
+  late String observation;  // Point de vue de fonctionnement de l'objet
 
   ObjetRemplaceModel(
       {this.id,

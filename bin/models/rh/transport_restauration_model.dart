@@ -6,13 +6,51 @@ class TransportRestaurationModel {
   late DateTime createdRef;
   late DateTime created;
 
+   // Approbations DG
+  late String approbationDG;
+  late String motifDG;
+  late String signatureDG; 
+  // Approbations Budget
+  late String approbationBudget;
+  late String motifBudget;
+  late String signatureBudget;
+  // Approbations Finance
+  late String approbationFin;
+  late String motifFin;
+  late String signatureFin;
+  // Approbations DD
+  late String approbationDD;
+  late String motifDD;
+  late String signatureDD;
+
+  // Ligne budgetaire pour reduction des montants
+  late String ligneBudgetaire;
+  late String ressource;
+
   TransportRestaurationModel(
       {this.id,
       required this.title,
       required this.observation,
       required this.signature,
       required this.createdRef,
-      required this.created});
+      required this.created,
+      
+      required this.approbationDG,
+      required this.motifDG,
+      required this.signatureDG,
+      required this.approbationBudget,
+      required this.motifBudget,
+      required this.signatureBudget,
+      required this.approbationFin,
+      required this.motifFin,
+      required this.signatureFin,
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD,
+      required this.ligneBudgetaire,
+      required this.ressource
+    }
+  );
 
   factory TransportRestaurationModel.fromSQL(List<dynamic> row) {
     return TransportRestaurationModel(
@@ -21,7 +59,23 @@ class TransportRestaurationModel {
         observation: row[2],
         signature: row[3],
         createdRef: row[4],
-        created: row[5]);
+        created: row[5],
+
+        approbationDG: row[6],
+        motifDG: row[7],
+        signatureDG: row[8],
+        approbationBudget: row[9],
+        motifBudget: row[10],
+        signatureBudget: row[11],
+        approbationFin: row[12],
+        motifFin: row[13],
+        signatureFin: row[14],
+        approbationDD: row[15],
+        motifDD: row[16],
+        signatureDD: row[17],
+        ligneBudgetaire: row[18],
+        ressource: row[19]
+    );
   }
 
   factory TransportRestaurationModel.fromJson(Map<String, dynamic> json) {
@@ -31,17 +85,48 @@ class TransportRestaurationModel {
         observation: json['observation'],
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created']));
+        created: DateTime.parse(json['created']),
+
+        approbationDG: json['approbationDG'],
+        motifDG: json['motifDG'],
+        signatureDG: json['signatureDG'],
+        approbationBudget: json['approbationBudget'],
+        motifBudget: json['motifBudget'],
+        signatureBudget: json['signatureBudget'],
+        approbationFin: json['approbationFin'],
+        motifFin: json['motifFin'],
+        signatureFin: json['signatureFin'],
+        approbationDD: json['approbationDD'],
+        motifDD: json['motifDD'],
+        signatureDD: json['signatureDD'],
+        ligneBudgetaire: json['ligneBudgetaire'],
+        ressource: json['ressource']
+        );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
-      'observation': observation,
+      'observation': observation.toString(),
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      
+      'approbationDG': approbationDG,
+      'motifDG': motifDG,
+      'signatureDG': signatureDG,
+      'approbationBudget': approbationBudget,
+      'motifBudget': motifBudget,
+      'signatureBudget': signatureBudget,
+      'approbationFin': approbationFin,
+      'motifFin': motifFin,
+      'signatureFin': signatureFin,
+      'approbationDD': approbationDD,
+      'motifDD': motifDD,
+      'signatureDD': signatureDD,
+      'ligneBudgetaire': ligneBudgetaire,
+      'ressource': ressource
     };
   }
 }

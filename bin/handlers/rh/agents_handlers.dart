@@ -65,7 +65,14 @@ class AgentsHandlers {
           photo: input['photo'],
           salaire: input['salaire'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+          approbationDG: input['approbationDG'],
+          motifDG: input['motifDG'],
+          signatureDG: input['signatureDG'],
+          approbationDD: input['approbationDD'],
+          motifDD: input['motifDD'],
+          signatureDD: input['signatureDD']
+      );
 
       try {
         await repos.agents.insertData(agent);
@@ -162,6 +169,24 @@ class AgentsHandlers {
       }
       if (input['created'] != null) {
         selectUser.created = DateTime.parse(input['created']);
+      }
+      if (input['approbationDG'] != null) {
+        selectUser.approbationDG = input['approbationDG'];
+      }
+      if (input['motifDG'] != null) {
+        selectUser.motifDG = input['motifDG'];
+      }
+      if (input['signatureDG'] != null) {
+        selectUser.signatureDG = input['signatureDG'];
+      }
+      if (input['approbationDD'] != null) {
+        selectUser.approbationDD = input['approbationDD'];
+      }
+      if (input['motifDD'] != null) {
+        selectUser.motifDD = input['motifDD'];
+      }
+      if (input['motifDD'] != null) {
+        selectUser.motifDD = input['motifDD'];
       }
 
       repos.agents.update(selectUser);

@@ -43,6 +43,12 @@ class DepartementBudgetHandlers {
         createdRef: DateTime.parse(input['createdRef']),
         created: DateTime.parse(input['created']),
         isSubmit: input['isSubmit'],
+        approbationDG: input['approbationDG'],
+        motifDG: input['motifDG'],
+        signatureDG: input['signatureDG'],
+        approbationDD: input['approbationDD'],
+        motifDD: input['motifDD'],
+        signatureDD: input['signatureDD']
       );
       try {
         await repos.departementBudgets.insertData(data);
@@ -83,6 +89,24 @@ class DepartementBudgetHandlers {
       }
       if (input['isSubmit'] != null) {
         data.isSubmit = input['isSubmit'];
+      }
+      if (input['approbationDG'] != null) {
+        data.approbationDG = input['approbationDG'];
+      }
+      if (input['motifDG'] != null) {
+        data.motifDG = input['motifDG'];
+      }
+      if (input['signatureDG'] != null) {
+        data.signatureDG = input['signatureDG'];
+      }
+      if (input['approbationDD'] != null) {
+        data.approbationDD = input['approbationDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
+      }
+      if (input['motifDD'] != null) {
+        data.motifDD = input['motifDD'];
       }
 
       repos.departementBudgets.update(data);
