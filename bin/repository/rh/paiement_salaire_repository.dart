@@ -135,11 +135,11 @@ class PaiementSalaireRepository {
           total_a_payer_allocations_familiales = @38,
           net_a_payer = @39,
           montant_pris_consideration_calcul_cotisationsinss = @40,
-          total_du_brut = @41, signature = @42',
-          approbation_dg = @43', motif_dg = @44', signature_dg = @45', approbation_budget = @46',
-          motif_budget = @47', signature_budget = @48', approbation_fin = @49', motif_fin = @50',
-          signature_fin = @51', approbation_dd = @52', motif_dd = @53', signature_dd = @54',
-          ligne_budgetaire = @55', ressource = @56' WHERE id=@57""",
+          total_du_brut = @41, signature = @42,
+          approbation_dg = @43, motif_dg = @44, signature_dg = @45, approbation_budget = @46,
+          motif_budget = @47, signature_budget = @48, approbation_fin = @49, motif_fin = @50,
+          signature_fin = @51, approbation_dd = @52, motif_dd = @53, signature_dd = @54,
+          ligne_budgetaire = @55, ressource = @56 WHERE id=@57 """,
 
         substitutionValues: {
             '1': paiementSalaireModel.nom,

@@ -55,12 +55,11 @@ class TasnportRestaurationRepository {
 
   Future<void> update(TransportRestaurationModel data) async {
     await executor.query("""UPDATE $tableName
-        SET title = @1, observation = @2, signature = @3, created_ref = @4,
-        created = @5 
-        approbation_dg = @6', motif_dg = @7', signature_dg = @8', approbation_budget = @9',
-        motif_budget = @10', signature_budget = @11', approbation_fin = @12', motif_fin = @13',
-        signature_fin = @14', approbation_dd = @15', motif_dd = @16', signature_dd = @17',
-        ligne_budgetaire = @18', ressource = @19' WHERE id = @20""", 
+    SET title = @1, observation = @2, signature = @3, created_ref = @4, created = @5, 
+    approbation_dg = @6, motif_dg = @7, signature_dg = @8, approbation_budget = @9,
+    motif_budget = @10, signature_budget = @11, approbation_fin = @12, motif_fin = @13,
+    signature_fin = @14, approbation_dd = @15, motif_dd = @16, signature_dd = @17,
+    ligne_budgetaire = @18, ressource = @19 WHERE id = @20""", 
     substitutionValues: {
       '1': data.title,
       '2': data.observation,

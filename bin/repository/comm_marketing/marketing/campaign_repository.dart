@@ -64,13 +64,13 @@ class CampaignRepository {
 
   Future<void> update(CampaignModel data) async {
     await executor.query("""UPDATE $tableName
-      SET type_produit = @1, date_debut_et_fin = @2, cout_campaign = @3
+      SET type_produit = @1, date_debut_et_fin = @2, cout_campaign = @3,
       lieu_cible = @4, promotion = @5, objectifs = @6, observation = @7,
       signature = @8, created_ref = @9, created = @10, 
-      approbation_dg = @11', motif_dg = @12', signature_dg = @13', approbation_budget = @14',
-      motif_budget = @15', signature_budget = @16', approbation_fin = @17', motif_fin = @18',
-      signature_fin = @19', approbation_dd = @20', motif_dd = @21', signature_dd = @22',
-      ligne_budgetaire = @23', ressource = @24' WHERE id = @25""",
+      approbation_dg = @11, motif_dg = @12, signature_dg = @13, approbation_budget = @14,
+      motif_budget = @15, signature_budget = @16, approbation_fin = @17, motif_fin = @18,
+      signature_fin = @19, approbation_dd = @20, motif_dd = @21, signature_dd = @22,
+      ligne_budgetaire = @23, ressource = @24 WHERE id = @25""",
         substitutionValues: {
           '1': data.typeProduit,
           '2': data.dateDebutEtFin,

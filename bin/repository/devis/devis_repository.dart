@@ -96,11 +96,11 @@ class DevisRepository {
   Future<void> update(DevisModel data) async {
     await executor.query("""UPDATE $tableName
       SET title = @1, priority = @2, departement = @3, observation = @4,
-      signature = @5, created_ref = @6, created = @7 , is_submit = @8,
-      approbation_dg = @9', motif_dg = @10', signature_dg = @11', approbation_budget = @12',
-      motif_budget = @13', signature_budget = @14', approbation_fin = @15', motif_fin = @16',
-      signature_fin = @17', approbation_dd = @18', motif_dd = @19', signature_dd = @20',
-      ligne_budgetaire = @21', ressource = @22' WHERE id = @23""",
+      signature = @5, created_ref = @6, created = @7, is_submit = @8,
+      approbation_dg = @9, motif_dg = @10, signature_dg = @11, approbation_budget = @12,
+      motif_budget = @13, signature_budget = @14, approbation_fin = @15, motif_fin = @16,
+      signature_fin = @17, approbation_dd = @18, motif_dd = @19, signature_dd = @20,
+      ligne_budgetaire = @21, ressource = @22 WHERE id = @23""",
         substitutionValues: {
           '1': data.title,
           '2': data.priority,
