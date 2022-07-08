@@ -1,7 +1,7 @@
 name: server_api
 description: A server app using the shelf package and Docker.
 version: 1.0.0
-# homepage: https://www.example.com
+homepage: https://eventdrc.com
 
 environment:
   sdk: '>=2.16.0 <3.0.0'
@@ -14,7 +14,7 @@ dependencies:
   postgres: ^2.4.3
   dart_jsonwebtoken: ^2.4.1
   yaml: ^3.1.1
-  dotenv: ^4.0.1
+  dotenv: ^4.0.1 
 
 
 dev_dependencies:

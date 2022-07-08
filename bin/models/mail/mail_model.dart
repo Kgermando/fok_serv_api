@@ -2,7 +2,7 @@ class MailModel {
   late int? id;
   late String fullName;
   late String email;
-  late List cc;
+  late String cc;
   late String objet;
   late String message;
   late String pieceJointe;
