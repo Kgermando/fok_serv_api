@@ -7,6 +7,7 @@ class MailModel {
   late String message;
   late String pieceJointe;
   late String read;
+  
   // Celui qui ecrit le mail
   late String fullNameDest;
   late String emailDest;
