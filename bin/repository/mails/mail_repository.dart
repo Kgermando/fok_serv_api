@@ -21,10 +21,10 @@ class MailRepository {
 
   Future<void> insertData(MailModel data) async {
     await executor.transaction((ctx) async {
-      await ctx.execute(
-        "INSERT INTO $tableName (id, full_name, email, cc, objet, message,"
-        "piece_jointe, read, full_name_dest, email_dest, date_send, date_read)"
-        "VALUES (nextval('mails_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11)",
+      await ctx.execute("""
+        INSERT INTO $tableName (id, full_name, email, cc, objet, message,
+        piece_jointe, read, full_name_dest, email_dest, date_send, date_read)
+        VALUES (nextval('mails_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11)""",
         substitutionValues: {
           '1': data.fullName,
           '2': data.email,
