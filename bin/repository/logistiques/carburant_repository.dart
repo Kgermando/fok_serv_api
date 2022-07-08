@@ -25,7 +25,7 @@ class CarburantRepository {
         "INSERT INTO $tableName (id, operation_entre_sortie, type_caburant,"
         "fournisseur, nomero_facture_achat, prix_achat_par_litre,"
         "nom_receptioniste, numero_plaque, date_heure_sortie_anguin,"
-        "qty_achat, signature, created_ref, created"
+        "qty_achat, signature, created_ref, created,"
         "approbation_dd, motif_dd, signature_dd)"
         "VALUES (nextval('carburants_id_seq'), @1, @2, @3, @4, @5, @6,"
         "@7, @8, @9, @10, @11, @12, @13, @14, @15)",
