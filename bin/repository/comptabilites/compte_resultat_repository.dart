@@ -87,8 +87,8 @@ class CompteResultatRepository {
         production_immobilisee = @19,
         subvention_exploitation = @20, autre_produits = @21, montant_exportation = @22,
         produit_financieres = @23, produit_exceptionnels = @24, solde_debiteur = @25,
-        signature = @26, created_ref = @27, created = @28, approbation_dg = @29, motif_dg = @30,
-        signature_dg = @31, approbation_dd = @32,
+        signature = @26, created_ref = @27, created = @28, approbation_dg = @29,
+        motif_dg = @30, signature_dg = @31, approbation_dd = @32,
         motif_dd = @33, signature_dd = @34 WHERE id = @35""",
         
         substitutionValues: {
