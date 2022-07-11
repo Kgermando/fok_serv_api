@@ -10,7 +10,7 @@ class CourbeJournalModel {
     return CourbeJournalModel(
       created: row[0],
       sumDebit: row[1],
-      sumCredit: row[3]
+      sumCredit: row[2]
     );
   }
 
