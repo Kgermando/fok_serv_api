@@ -76,9 +76,11 @@ class JournalRepository {
 
   Future<void> update(JournalModel data) async {
     await executor.query("""UPDATE $tableName
-          SET numero_operation = @1, libele = @2, compte_debit = @3,
-          montant_debit = @4, compte_credit = @5, montant_credit = @6, tva = @7,
-          remarque = @8, signature = @9, created_ref = @10, created = @11 WHERE id = @12""",
+      SET numero_operation = @1, libele = @2, compte_debit = @3,
+      montant_debit = @4, compte_credit = @5, montant_credit = @6, tva = @7,
+      remarque = @8, signature = @9, created_ref = @10, created = @11, 
+      approbation_dg = @12, motif_dg = @13, signature_dg = @14, 
+      approbation_dd = @15, motif_dd = @16, signature_dd = @17 WHERE id = @18""",
         substitutionValues: {
           '1': data.numeroOperation,
           '2': data.libele,
@@ -90,7 +92,7 @@ class JournalRepository {
           '8': data.remarque,
           '9': data.signature,
           '10': data.createdRef,
-          '11': data.createdRef,
+          '11': data.created,
           '12': data.approbationDG,
           '13': data.motifDG,
           '14': data.signatureDG,
