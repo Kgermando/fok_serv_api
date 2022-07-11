@@ -1,5 +1,5 @@
 class CourbeJournalModel {
-  final double created;
+  final DateTime created;
   final double sumDebit;
   final double sumCredit; 
 
@@ -16,7 +16,7 @@ class CourbeJournalModel {
 
   factory CourbeJournalModel.fromJson(Map<String, dynamic> json) {
     return CourbeJournalModel(
-      created: json['created'],
+      created: DateTime.parse(json['created']),
       sumDebit: json['sumDebit'],
       sumCredit: json['sumCredit']
     );
@@ -24,7 +24,7 @@ class CourbeJournalModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'created': created, 
+      'created': created.toIso8601String(), 
       'sumDebit': sumDebit, 
       'sumCredit': sumCredit
     };
