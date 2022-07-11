@@ -35,13 +35,13 @@ class PaiementSalaireRepository {
           "nombre_de_jours_allocations_familiales, taux_jours_allocations_familiales,"
           "total_a_payer_allocations_familiales, net_a_payer,"
           "montant_pris_consideration_calcul_cotisationsinss, total_du_brut, signature,"
-          "approbation_dg, motif_dg, signature_dg, approbation_budget, motif_budget, signature_budget,"
+          "approbation_budget, motif_budget, signature_budget,"
           "approbation_fin, motif_fin, signature_fin, approbation_dd, motif_dd, signature_dd,"
           "ligne_budgetaire, ressource)"
           "VALUES (nextval('salaires_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15,"
           "@16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28, @29, @30,"
           "@31, @32, @33, @34, @35, @36, @37, @38, @39, @40, @41, @42, @43, @44,"
-          "@45, @46, @47, @48, @49, @50, @51, @52, @53, @54, @55, @56)",
+          "@45, @46, @47, @48, @49, @50, @51, @52, @53)",
 
           substitutionValues: {
             '1': paiementSalaireModel.nom,
@@ -89,20 +89,17 @@ class PaiementSalaireRepository {
                 .montantPrisConsiderationCalculCotisationsINSS,
             '41': paiementSalaireModel.totalDuBrut,
             '42': paiementSalaireModel.signature,
-            '43': paiementSalaireModel.approbationDG,
-            '44': paiementSalaireModel.motifDG,
-            '45': paiementSalaireModel.signatureDG,
-            '46': paiementSalaireModel.approbationBudget,
-            '47': paiementSalaireModel.motifBudget,
-            '48': paiementSalaireModel.signatureBudget,
-            '49': paiementSalaireModel.approbationFin,
-            '50': paiementSalaireModel.motifFin,
-            '51': paiementSalaireModel.signatureFin,
-            '52': paiementSalaireModel.approbationDD,
-            '53': paiementSalaireModel.motifDD,
-            '54': paiementSalaireModel.signatureDD,
-            '55': paiementSalaireModel.ligneBudgetaire,
-            '56': paiementSalaireModel.ressource
+            '43': paiementSalaireModel.approbationBudget,
+            '44': paiementSalaireModel.motifBudget,
+            '45': paiementSalaireModel.signatureBudget,
+            '46': paiementSalaireModel.approbationFin,
+            '47': paiementSalaireModel.motifFin,
+            '48': paiementSalaireModel.signatureFin,
+            '49': paiementSalaireModel.approbationDD,
+            '50': paiementSalaireModel.motifDD,
+            '51': paiementSalaireModel.signatureDD,
+            '52': paiementSalaireModel.ligneBudgetaire,
+            '53': paiementSalaireModel.ressource
           });
     });
   }
@@ -136,10 +133,10 @@ class PaiementSalaireRepository {
           net_a_payer = @39,
           montant_pris_consideration_calcul_cotisationsinss = @40,
           total_du_brut = @41, signature = @42,
-          approbation_dg = @43, motif_dg = @44, signature_dg = @45, approbation_budget = @46,
-          motif_budget = @47, signature_budget = @48, approbation_fin = @49, motif_fin = @50,
-          signature_fin = @51, approbation_dd = @52, motif_dd = @53, signature_dd = @54,
-          ligne_budgetaire = @55, ressource = @56 WHERE id=@57 """,
+          approbation_budget = @43,
+          motif_budget = @44, signature_budget = @45, approbation_fin = @46, motif_fin = @47,
+          signature_fin = @48, approbation_dd = @49, motif_dd = @50, signature_dd = @51,
+          ligne_budgetaire = @52, ressource = @53 WHERE id=@54 """,
 
         substitutionValues: {
             '1': paiementSalaireModel.nom,
@@ -186,22 +183,19 @@ class PaiementSalaireRepository {
             '40': paiementSalaireModel
                 .montantPrisConsiderationCalculCotisationsINSS,
             '41': paiementSalaireModel.totalDuBrut,
-            '42': paiementSalaireModel.signature,
-            '43': paiementSalaireModel.approbationDG,
-            '44': paiementSalaireModel.motifDG,
-            '45': paiementSalaireModel.signatureDG,
-            '46': paiementSalaireModel.approbationBudget,
-            '47': paiementSalaireModel.motifBudget,
-            '48': paiementSalaireModel.signatureBudget,
-            '49': paiementSalaireModel.approbationFin,
-            '50': paiementSalaireModel.motifFin,
-            '51': paiementSalaireModel.signatureFin,
-            '52': paiementSalaireModel.approbationDD,
-            '53': paiementSalaireModel.motifDD,
-            '54': paiementSalaireModel.signatureDD,
-            '55': paiementSalaireModel.ligneBudgetaire,
-            '56': paiementSalaireModel.ressource,
-            '57': paiementSalaireModel.id
+            '42': paiementSalaireModel.signature, 
+            '43': paiementSalaireModel.approbationBudget,
+            '44': paiementSalaireModel.motifBudget,
+            '45': paiementSalaireModel.signatureBudget,
+            '46': paiementSalaireModel.approbationFin,
+            '47': paiementSalaireModel.motifFin,
+            '48': paiementSalaireModel.signatureFin,
+            '49': paiementSalaireModel.approbationDD,
+            '50': paiementSalaireModel.motifDD,
+            '51': paiementSalaireModel.signatureDD,
+            '52': paiementSalaireModel.ligneBudgetaire,
+            '53': paiementSalaireModel.ressource,
+            '54': paiementSalaireModel.id
         });
   }
 
@@ -262,21 +256,18 @@ class PaiementSalaireRepository {
         netAPayer: data[0][39],
         montantPrisConsiderationCalculCotisationsINSS: data[0][40],
         totalDuBrut: data[0][41],
-        signature: data[0][42],
-        approbationDG: data[0][43],
-        motifDG: data[0][44],
-        signatureDG: data[0][45],
-        approbationBudget: data[0][46],
-        motifBudget: data[0][47],
-        signatureBudget: data[0][48],
-        approbationFin: data[0][49],
-        motifFin: data[0][50],
-        signatureFin: data[0][51],
-        approbationDD: data[0][52],
-        motifDD: data[0][53],
-        signatureDD: data[0][54],
-        ligneBudgetaire: data[0][55],
-        ressource: data[0][56]
+        signature: data[0][42], 
+        approbationBudget: data[0][43],
+        motifBudget: data[0][44],
+        signatureBudget: data[0][45],
+        approbationFin: data[0][46],
+        motifFin: data[0][47],
+        signatureFin: data[0][48],
+        approbationDD: data[0][49],
+        motifDD: data[0][50],
+        signatureDD: data[0][51],
+        ligneBudgetaire: data[0][52],
+        ressource: data[0][53]
     );
   }
 }

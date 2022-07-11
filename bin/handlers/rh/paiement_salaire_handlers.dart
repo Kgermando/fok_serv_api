@@ -83,11 +83,7 @@ class PaiementSalaireHandlers {
           montantPrisConsiderationCalculCotisationsINSS:
               input['montantPrisConsiderationCalculCotisationsINSS'],
           totalDuBrut: input['totalDuBrut'],
-          signature: input['signature'],
-          
-          approbationDG: input['approbationDG'],
-          motifDG: input['motifDG'],
-          signatureDG: input['signatureDG'],
+          signature: input['signature'], 
           approbationBudget: input['approbationBudget'],
           motifBudget: input['motifBudget'],
           signatureBudget: input['signatureBudget'],
@@ -246,16 +242,7 @@ class PaiementSalaireHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
-      }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
-      }
-      if (input['motifDG'] != null) {
-        data.motifDG = input['motifDG'];
-      }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
+      } 
       if (input['approbationBudget'] != null) {
         data.approbationBudget = input['approbationBudget'];
       }

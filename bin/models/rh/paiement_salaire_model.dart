@@ -13,7 +13,7 @@ class PaiementSalaireModel {
   late String salaire;
   late String observation; // Payé ou non Payé  // pour Finance
   late String modePaiement; // mode depayement
-  late DateTime createdAt; 
+  late DateTime createdAt;
   late String tauxJourHeureMoisSalaire;
   late String joursHeuresPayeA100PourecentSalaire;
   late String totalDuSalaire;
@@ -42,11 +42,7 @@ class PaiementSalaireModel {
   late String montantPrisConsiderationCalculCotisationsINSS;
   late String totalDuBrut;
   late String signature; // celui qui fait ce document
-  
-  // Approbations DG
-  late String approbationDG;
-  late String motifDG;
-  late String signatureDG;
+
   // Approbations Budget
   late String approbationBudget;
   late String motifBudget;
@@ -64,68 +60,61 @@ class PaiementSalaireModel {
   late String ligneBudgetaire;
   late String ressource;
 
-
-  PaiementSalaireModel({
-    this.id,
-    required this.nom,
-    required this.postNom,
-    required this.prenom,
-    required this.email,
-    required this.telephone,
-    required this.adresse,
-    required this.departement,
-    required this.numeroSecuriteSociale,
-    required this.matricule,
-    required this.servicesAffectation,
-    required this.salaire,
-    required this.observation,
-    required this.modePaiement,
-    required this.createdAt, 
-    required this.tauxJourHeureMoisSalaire,
-    required this.joursHeuresPayeA100PourecentSalaire,
-    required this.totalDuSalaire,
-    required this.nombreHeureSupplementaires,
-    required this.tauxHeureSupplementaires,
-    required this.totalDuHeureSupplementaires,
-    required this.supplementTravailSamediDimancheJoursFerie,
-    required this.prime,
-    required this.divers,
-    required this.joursCongesPaye,
-    required this.tauxCongesPaye,
-    required this.totalDuCongePaye,
-    required this.jourPayeMaladieAccident,
-    required this.tauxJournalierMaladieAccident,
-    required this.totalDuMaladieAccident,
-    required this.pensionDeduction,
-    required this.indemniteCompensatricesDeduction,
-    required this.avancesDeduction,
-    required this.diversDeduction,
-    required this.retenuesFiscalesDeduction,
-    required this.nombreEnfantBeneficaireAllocationsFamiliales,
-    required this.nombreDeJoursAllocationsFamiliales,
-    required this.tauxJoursAllocationsFamiliales,
-    required this.totalAPayerAllocationsFamiliales,
-    required this.netAPayer,
-    required this.montantPrisConsiderationCalculCotisationsINSS,
-    required this.totalDuBrut,
-    required this.signature,
-
-    required this.approbationDG,
-    required this.motifDG,
-    required this.signatureDG,
-    required this.approbationBudget,
-    required this.motifBudget,
-    required this.signatureBudget,
-    required this.approbationFin,
-    required this.motifFin,
-    required this.signatureFin,
-    required this.approbationDD,
-    required this.motifDD,
-    required this.signatureDD,
+  PaiementSalaireModel(
+      {this.id,
+      required this.nom,
+      required this.postNom,
+      required this.prenom,
+      required this.email,
+      required this.telephone,
+      required this.adresse,
+      required this.departement,
+      required this.numeroSecuriteSociale,
+      required this.matricule,
+      required this.servicesAffectation,
+      required this.salaire,
+      required this.observation,
+      required this.modePaiement,
+      required this.createdAt,
+      required this.tauxJourHeureMoisSalaire,
+      required this.joursHeuresPayeA100PourecentSalaire,
+      required this.totalDuSalaire,
+      required this.nombreHeureSupplementaires,
+      required this.tauxHeureSupplementaires,
+      required this.totalDuHeureSupplementaires,
+      required this.supplementTravailSamediDimancheJoursFerie,
+      required this.prime,
+      required this.divers,
+      required this.joursCongesPaye,
+      required this.tauxCongesPaye,
+      required this.totalDuCongePaye,
+      required this.jourPayeMaladieAccident,
+      required this.tauxJournalierMaladieAccident,
+      required this.totalDuMaladieAccident,
+      required this.pensionDeduction,
+      required this.indemniteCompensatricesDeduction,
+      required this.avancesDeduction,
+      required this.diversDeduction,
+      required this.retenuesFiscalesDeduction,
+      required this.nombreEnfantBeneficaireAllocationsFamiliales,
+      required this.nombreDeJoursAllocationsFamiliales,
+      required this.tauxJoursAllocationsFamiliales,
+      required this.totalAPayerAllocationsFamiliales,
+      required this.netAPayer,
+      required this.montantPrisConsiderationCalculCotisationsINSS,
+      required this.totalDuBrut,
+      required this.signature,
+      required this.approbationBudget,
+      required this.motifBudget,
+      required this.signatureBudget,
+      required this.approbationFin,
+      required this.motifFin,
+      required this.signatureFin,
+      required this.approbationDD,
+      required this.motifDD,
+      required this.signatureDD,
       required this.ligneBudgetaire,
-      required this.ressource
-
-  });
+      required this.ressource});
 
   factory PaiementSalaireModel.fromSQL(List<dynamic> row) {
     return PaiementSalaireModel(
@@ -143,7 +132,7 @@ class PaiementSalaireModel {
         salaire: row[11],
         observation: row[12],
         modePaiement: row[13],
-        createdAt: row[14], 
+        createdAt: row[14],
         tauxJourHeureMoisSalaire: row[15],
         joursHeuresPayeA100PourecentSalaire: row[16],
         totalDuSalaire: row[17],
@@ -172,25 +161,17 @@ class PaiementSalaireModel {
         montantPrisConsiderationCalculCotisationsINSS: row[40],
         totalDuBrut: row[41],
         signature: row[42],
-        
-        approbationDG: row[43],
-        motifDG: row[44],
-        signatureDG: row[45],
-
-        approbationBudget: row[46],
-        motifBudget: row[47],
-        signatureBudget: row[48],
-
-        approbationFin: row[49],
-        motifFin: row[50],
-        signatureFin: row[51],
-
-        approbationDD: row[52],
-        motifDD: row[53],
-        signatureDD: row[54],
-        ligneBudgetaire: row[55],
-        ressource: row[56]
-    );
+        approbationBudget: row[43],
+        motifBudget: row[44],
+        signatureBudget: row[45],
+        approbationFin: row[46],
+        motifFin: row[47],
+        signatureFin: row[48],
+        approbationDD: row[49],
+        motifDD: row[50],
+        signatureDD: row[51],
+        ligneBudgetaire: row[52],
+        ressource: row[53]);
   }
 
   factory PaiementSalaireModel.fromJson(Map<String, dynamic> json) {
@@ -211,7 +192,8 @@ class PaiementSalaireModel {
         modePaiement: json['modePaiement'],
         createdAt: DateTime.parse(json['createdAt']),
         tauxJourHeureMoisSalaire: json['tauxJourHeureMoisSalaire'],
-        joursHeuresPayeA100PourecentSalaire: json['joursHeuresPayeA100PourecentSalaire'],
+        joursHeuresPayeA100PourecentSalaire:
+            json['joursHeuresPayeA100PourecentSalaire'],
         totalDuSalaire: json['totalDuSalaire'],
         nombreHeureSupplementaires: json['nombreHeureSupplementaires'],
         tauxHeureSupplementaires: json['tauxHeureSupplementaires'],
@@ -244,10 +226,6 @@ class PaiementSalaireModel {
             json['montantPrisConsiderationCalculCotisationsINSS'],
         totalDuBrut: json['totalDuBrut'],
         signature: json['signature'],
-
-        approbationDG: json['approbationDG'],
-        motifDG: json['motifDG'],
-        signatureDG: json['signatureDG'],
         approbationBudget: json['approbationBudget'],
         motifBudget: json['motifBudget'],
         signatureBudget: json['signatureBudget'],
@@ -258,8 +236,7 @@ class PaiementSalaireModel {
         motifDD: json['motifDD'],
         signatureDD: json['signatureDD'],
         ligneBudgetaire: json['ligneBudgetaire'],
-        ressource: json['ressource']
-    );
+        ressource: json['ressource']);
   }
 
   Map<String, dynamic> toJson() {
@@ -311,9 +288,6 @@ class PaiementSalaireModel {
           montantPrisConsiderationCalculCotisationsINSS,
       'totalDuBrut': totalDuBrut,
       'signature': signature,
-      'approbationDG': approbationDG,
-      'motifDG': motifDG,
-      'signatureDG': signatureDG,
       'approbationBudget': approbationBudget,
       'motifBudget': motifBudget,
       'signatureBudget': signatureBudget,
