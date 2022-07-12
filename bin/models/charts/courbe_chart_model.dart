@@ -1,5 +1,5 @@
 class CourbeChartModel {
-  final double created;
+  final String created;
   final double sum;
 
   CourbeChartModel({required this.created, required this.sum});
