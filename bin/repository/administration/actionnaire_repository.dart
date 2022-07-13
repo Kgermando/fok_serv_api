@@ -23,7 +23,7 @@ class ActionnaireRepository {
   Future<void> insertData(ActionnaireModel data) async {
     await executor.transaction((ctx) async {
       await ctx.query(
-        "INSERT INTO $tableName (id, nom, postNom, prenom,"
+        "INSERT INTO $tableName (id, nom, post_nom, prenom,"
         "email, telephone, adresse, sexe, matricule, signature, created_ref, created)"
         "VALUES (nextval('actionnaires_id_seq'), @1, @2, @3, @4, @5, @6,"
         "@7, @8, @9, @10, @11)",
@@ -45,7 +45,7 @@ class ActionnaireRepository {
 
   Future<void> update(ActionnaireModel data) async {
     await executor.query("""UPDATE $tableName
-      SET nom = @1, postNom = @2, prenom = @3, email = @4, telephone = @5, 
+      SET nom = @1, post_nom = @2, prenom = @3, email = @4, telephone = @5, 
       adresse = @6, sexe = @7, matricule = @8, signature = @9, created_ref = @10, 
       created = @11 WHERE id = @12""", 
       substitutionValues: {

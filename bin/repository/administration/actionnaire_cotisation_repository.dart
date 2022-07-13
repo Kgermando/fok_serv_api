@@ -22,7 +22,7 @@ class ActionnaireCotisationRepository {
   Future<void> insertData(ActionnaireCotisationModel data) async {
     await executor.transaction((ctx) async {
       await ctx.query(
-        "INSERT INTO $tableName (id, reference, nom, postNom, prenom,"
+        "INSERT INTO $tableName (id, reference, nom, post_nom, prenom,"
         "matricule, note, moyenPayement, numeroTransaction, signature, created)"
         "VALUES (nextval('actionnaire_cotisations_id_seq'), @1, @2, @3, @4, @5, @6, @7 , @8, @9, @10)",
           substitutionValues: {
@@ -42,7 +42,7 @@ class ActionnaireCotisationRepository {
 
   Future<void> update(ActionnaireCotisationModel data) async {
     await executor.query("""UPDATE $tableName
-      SET reference = @1, nom = @2, postNom = @3, prenom = @4, matricule = @5, 
+      SET reference = @1, nom = @2, post_nom = @3, prenom = @4, matricule = @5, 
         note = @6, moyenPayement = @7, numeroTransaction = @8,
         signature = @9, created = @10 WHERE id = @11""", substitutionValues: {
       '1': data.reference,
