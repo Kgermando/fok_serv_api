@@ -36,7 +36,7 @@ class ActionnaireCotisationHandlers {
 
       ActionnaireCotisationModel data = ActionnaireCotisationModel(
           reference: input['reference'],
-          nom: input['nom;'],
+          nom: input['nom'],
           postNom: input['postNom'],
           prenom: input['prenom'],
           matricule: input['matricule'],
