@@ -1,5 +1,7 @@
 import 'package:postgres/postgres.dart';
- 
+
+import 'administration/actionnaire_cotisation_repository.dart';
+import 'administration/actionnaire_repository.dart';
 import 'archives/archive_folder_repository.dart';
 import 'archives/archive_repository.dart';
 import 'budgets/departement_budget_repository.dart';
@@ -67,6 +69,10 @@ class Repository {
   final PostgreSQLConnection executor;
   late RefreshTokensRepository refreshTokens;
   late UserRepository users;
+
+  // Administration
+  late ActionnaireRepository actionnaires;
+  late ActionnaireCotisationRepository actionnaireCotisations;
 
   // RH
   late AgentsRepository agents;
@@ -146,11 +152,17 @@ class Repository {
   late ArchiveFolderRepository archivesFolders;
 
   // Mails
-  late MailRepository mails; 
+  late MailRepository mails;
 
   Repository(this.executor) {
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
     users = UserRepository(executor, 'users');
+
+    // Administrations
+    actionnaires = ActionnaireRepository(executor, 'actionnaires');
+    actionnaireCotisations =
+        ActionnaireCotisationRepository(executor, 'actionnaire_cotisations');
+
     // RH
     agents = AgentsRepository(executor, 'agents');
     salaires = PaiementSalaireRepository(executor, 'salaires');
@@ -235,6 +247,5 @@ class Repository {
 
     // Mails
     mails = MailRepository(executor, 'mails');
- 
   }
 }
