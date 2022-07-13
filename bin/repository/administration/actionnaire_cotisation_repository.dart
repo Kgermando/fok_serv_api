@@ -23,20 +23,21 @@ class ActionnaireCotisationRepository {
     await executor.transaction((ctx) async {
       await ctx.query(
         "INSERT INTO $tableName (id, reference, nom, post_nom, prenom,"
-        "matricule, note, moyen_payement, numero_transaction, signature, created)"
+        "matricule, montant, note, moyen_payement, numero_transaction, signature, created)"
         "VALUES (nextval('actionnaire_cotisations_id_seq'), @1, @2, @3, @4, @5,"
-          "@6, @7, @8, @9, @10)",
+          "@6, @7, @8, @9, @10, @11)",
           substitutionValues: {
             '1': data.reference,
             '2': data.nom,
             '3': data.postNom,
             '4': data.prenom,
             '5': data.matricule,
-            '6': data.note,
-            '7': data.moyenPayement,
-            '8': data.numeroTransaction, 
-            '9': data.signature,
-            '10': data.created
+            '6': data.montant,
+            '7': data.note,
+            '8': data.moyenPayement,
+            '9': data.numeroTransaction,
+            '10': data.signature,
+            '11': data.created
           });
     });
   }
@@ -44,20 +45,21 @@ class ActionnaireCotisationRepository {
   Future<void> update(ActionnaireCotisationModel data) async {
     await executor.query("""UPDATE $tableName
       SET reference = @1, nom = @2, post_nom = @3, prenom = @4, matricule = @5, 
-      note = @6, moyen_payement = @7, numero_transaction = @8,
-      signature = @9, created = @10 WHERE id = @11""", 
+      montant = @6, note = @7, moyen_payement = @8, numero_transaction = @9,
+      signature = @10, created = @11 WHERE id = @12""", 
       substitutionValues: {
         '1': data.reference,
         '2': data.nom,
         '3': data.postNom,
         '4': data.prenom,
         '5': data.matricule,
-        '6': data.note,
-        '7': data.moyenPayement,
-        '8': data.numeroTransaction,
-        '9': data.signature,
-        '10': data.created,
-        '11': data.id
+        '6': data.montant,
+        '7': data.note,
+        '8': data.moyenPayement,
+        '9': data.numeroTransaction,
+        '10': data.signature,
+        '11': data.created,
+        '12': data.id
       });
   }
 

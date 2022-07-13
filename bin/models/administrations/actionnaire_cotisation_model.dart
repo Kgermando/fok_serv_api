@@ -11,7 +11,7 @@ class ActionnaireCotisationModel {
   late String numeroTransaction; // Pour verifier la transaction
   late String signature;
   late DateTime created;
-
+ 
   ActionnaireCotisationModel(
       {this.id,
       required this.reference,
