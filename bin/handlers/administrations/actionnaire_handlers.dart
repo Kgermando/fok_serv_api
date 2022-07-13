@@ -30,7 +30,7 @@ class ActionnaireHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-archive', (Request request) async {
+    router.post('/insert-new-actionnaire', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
       ActionnaireModel data = ActionnaireModel(
@@ -55,7 +55,7 @@ class ActionnaireHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-archive/', (Request request) async {
+    router.put('/update-actionnaire/', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
       final editH = ActionnaireModel.fromJson(input);
       ActionnaireModel? data = await repos.actionnaires.getFromId(editH.id!);
@@ -98,7 +98,7 @@ class ActionnaireHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-archive/<id>', (Request request, String id) async {
+    router.delete('/delete-actionnaire/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.actionnaires.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -107,7 +107,7 @@ class ActionnaireHandlers {
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page archive n\'est pas trouvé'),
+          Response.notFound('La Page actionnaire n\'est pas trouvé'),
     );
 
     return router;

@@ -3,6 +3,8 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'db/config_db.dart'; 
+import 'handlers/administrations/actionnaire_cotisations_handlers.dart';
+import 'handlers/administrations/actionnaire_handlers.dart';
 import 'handlers/archives/archive_folder_handlers.dart';
 import 'handlers/archives/archive_handlers.dart';
 import 'handlers/auth/auth_handlers.dart';
@@ -84,7 +86,6 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             .addHandler(AuthHandlers(repos, serverSecretKey).router));
-
     router.mount(
         '/api/user/',
         Pipeline()
@@ -92,6 +93,23 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(UserHandlers(repos).router));
+
+    // Actionnaires
+    router.mount(
+        '/api/admin/actionnaires/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ActionnaireHandlers(repos).router));
+    router.mount(
+        '/api/admin/actionnaire-cotisations/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ActionnaireCotisationHandlers(repos).router));
+
 
     router.mount(
         '/api/rh/agents/',
