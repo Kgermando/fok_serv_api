@@ -12,8 +12,8 @@ class SalaireNotifyRepository {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
-        EXTRACT(MONTH FROM "created_at") == EXTRACT(MONTH FROM NOW()) AND
-        EXTRACT(YEAR FROM "created_at") == EXTRACT(YEAR FROM NOW()) AND
+        date_part('MONTH', "created_at") = date_part('MONTH', CURRENT_DATE) AND
+        date_part('YEAR', "created_at") = date_part('YEAR', CURRENT_DATE) AND 
         "approbation_dd" = '-' AND 
         "observation" = 'false';""";
       List<List<dynamic>> results = await executor.query(querySQL);
