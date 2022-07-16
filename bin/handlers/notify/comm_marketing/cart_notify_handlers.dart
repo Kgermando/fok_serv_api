@@ -14,7 +14,7 @@ class CartNotifyHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/get-count/', (Request request, String matricule) async {
+    router.get('/get-count/<matricule>', (Request request, String matricule) async {
       NotifyModel data = await repos.cartCount.getCount(matricule);
       return Response.ok(jsonEncode(data));
     }); 

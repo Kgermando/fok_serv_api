@@ -14,7 +14,7 @@ class MailsNotifyHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/get-count/', (Request request, String email) async {
+    router.get('/get-count/<email>', (Request request, String email) async {
       NotifyModel data = await repos.tacheNotifyCount.getCount(email);
       return Response.ok(jsonEncode(data));
     }); 
