@@ -12,7 +12,7 @@ class BudgetNotifyRepository {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where  
-        NOW() <= "periode_fin"::timestamp AND
+        NOW() <= "periode_fin" AND
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' && 
         "is_submit" = 'true';""";
