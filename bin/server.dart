@@ -59,6 +59,7 @@ import 'handlers/logistiques/objets_remplace_handlers.dart';
 import 'handlers/logistiques/trajet_handlers.dart';
 import 'handlers/mails/mails_handlers.dart';
 import 'handlers/notify/budgets/budget_notify_handlers.dart';
+import 'handlers/notify/comm_marketing/agenda_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/campaign_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/prod_model_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/succursale_notify_handlers.dart';
@@ -124,6 +125,12 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             .addHandler(ProdModelNotifyHandlers(repos).router));
+    router.mount(
+        '/api/counts/agendas/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(AgendaNotifyHandlers(repos).router));
     router.mount(
         '/api/counts/balances/',
         Pipeline()

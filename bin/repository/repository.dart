@@ -54,6 +54,7 @@ import 'logistiques/objet_remplace_reposiotory.dart';
 import 'logistiques/trajet_repository.dart';
 import 'mails/mail_repository.dart';
 import 'notify/budgets/budget_notify_repository.dart';
+import 'notify/comm_marketing/agenda_notify_repository.dart';
 import 'notify/comm_marketing/campaign_notify_repository.dart';
 import 'notify/comm_marketing/prod_model_notify_repository.dart';
 import 'notify/comm_marketing/succursale_notify_repository.dart';
@@ -180,6 +181,7 @@ class Repository {
   late CampaignNotifyRepository campaignNotifyCount;
   late SuccursaleNotifyRepository succursaleNotifyCount;
   late ProdModelNotifyRepository prodModelCount;
+  late AgendaNotifyRepository agendaCount;
   late BalanceNotifyRepository balanceNotifyCount;
   late BilanNotifyRepository bilanNotifyCount;
   late CompteResultatNotifyRepository compteResultatsCount;
@@ -204,6 +206,7 @@ class Repository {
     campaignNotifyCount = CampaignNotifyRepository(executor, 'campaigns');
     succursaleNotifyCount = SuccursaleNotifyRepository(executor, 'succursales');
     prodModelCount = ProdModelNotifyRepository(executor, 'produits_model');
+    agendaCount = AgendaNotifyRepository(executor, 'agendas');
     balanceNotifyCount = BalanceNotifyRepository(executor, 'balance_comptes');
     bilanNotifyCount = BilanNotifyRepository(executor, 'bilans');
     compteResultatsCount =
