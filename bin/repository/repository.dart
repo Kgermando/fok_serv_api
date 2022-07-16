@@ -56,6 +56,7 @@ import 'mails/mail_repository.dart';
 import 'notify/budgets/budget_notify_repository.dart';
 import 'notify/comm_marketing/agenda_notify_repository.dart';
 import 'notify/comm_marketing/campaign_notify_repository.dart';
+import 'notify/comm_marketing/cart_notify_repository.dart';
 import 'notify/comm_marketing/prod_model_notify_repository.dart';
 import 'notify/comm_marketing/succursale_notify_repository.dart';
 import 'notify/comptabilites/balance_notify_repository.dart';
@@ -64,6 +65,7 @@ import 'notify/comptabilites/compte_resultat_notify_repository.dart';
 import 'notify/comptabilites/journal_notify_repository.dart';
 import 'notify/devis/devis_notify_repository.dart';
 import 'notify/exploitations/projet_notify_repository.dart';
+import 'notify/exploitations/taches_notify_repository.dart';
 import 'notify/finances/creance_notify_repository.dart';
 import 'notify/finances/dette_notify_repository.dart';
 import 'notify/logistiques/carburant_notify_repository.dart';
@@ -73,6 +75,7 @@ import 'notify/logistiques/etat_materiel_notify_repository.dart';
 import 'notify/logistiques/immobilier_notity_repository.dart';
 import 'notify/logistiques/mobilier_notify_repository.dart';
 import 'notify/logistiques/trajets_notify_repository.dart';
+import 'notify/mails/mails_notify_repository.dart';
 import 'notify/rh/salaire_notify_repository.dart';
 import 'notify/rh/transport_rest_notify_repository.dart';
 import 'rh/agents_repository.dart';
@@ -182,12 +185,14 @@ class Repository {
   late SuccursaleNotifyRepository succursaleNotifyCount;
   late ProdModelNotifyRepository prodModelCount;
   late AgendaNotifyRepository agendaCount;
+  late CartNotifyRepository cartCount;
   late BalanceNotifyRepository balanceNotifyCount;
   late BilanNotifyRepository bilanNotifyCount;
   late CompteResultatNotifyRepository compteResultatsCount;
   late JournalNotifyRepository journalNotifyCount;
   late DevisNotifyRepository devisNotifyCount;
   late ProjetNotifyRepository projetNotifyCount;
+  late TacheNotifyRepository tacheNotifyCount;
   late CreanceNotifyRepository creanceNotifyCount;
   late DetteNotifyRepository detteNotifyCount;
   late CarburantNotifyRepository carburantNotifyCount;
@@ -199,6 +204,7 @@ class Repository {
   late TrajetNotifyRepository trajetsNotifyCount;
   late SalaireNotifyRepository salaireNotifyCount;
   late TransportRestNotifyRepository transportRestNotifyCount;
+  late MailsNotifyRepository mailsNotifyCount;
 
   Repository(this.executor) {
     // Notifications
@@ -207,6 +213,7 @@ class Repository {
     succursaleNotifyCount = SuccursaleNotifyRepository(executor, 'succursales');
     prodModelCount = ProdModelNotifyRepository(executor, 'produits_model');
     agendaCount = AgendaNotifyRepository(executor, 'agendas');
+    cartCount = CartNotifyRepository(executor, 'carts');
     balanceNotifyCount = BalanceNotifyRepository(executor, 'balance_comptes');
     bilanNotifyCount = BilanNotifyRepository(executor, 'bilans');
     compteResultatsCount =
@@ -214,6 +221,7 @@ class Repository {
     journalNotifyCount = JournalNotifyRepository(executor, 'journals');
     devisNotifyCount = DevisNotifyRepository(executor, 'devis');
     projetNotifyCount = ProjetNotifyRepository(executor, 'projets');
+    tacheNotifyCount = TacheNotifyRepository(executor, 'taches');
     creanceNotifyCount = CreanceNotifyRepository(executor, 'creances');
     detteNotifyCount = DetteNotifyRepository(executor, 'dettes');
     carburantNotifyCount = CarburantNotifyRepository(executor, 'carburants');
@@ -227,7 +235,9 @@ class Repository {
     salaireNotifyCount = SalaireNotifyRepository(executor, 'salaires');
     transportRestNotifyCount =
         TransportRestNotifyRepository(executor, 'transport_restaurations');
+    mailsNotifyCount = MailsNotifyRepository(executor, 'mails');
 
+    // AUTH
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
     users = UserRepository(executor, 'users');
 

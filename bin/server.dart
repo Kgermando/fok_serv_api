@@ -61,6 +61,7 @@ import 'handlers/mails/mails_handlers.dart';
 import 'handlers/notify/budgets/budget_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/agenda_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/campaign_notify_handlers.dart';
+import 'handlers/notify/comm_marketing/cart_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/prod_model_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/succursale_notify_handlers.dart';
 import 'handlers/notify/comptabilites/balance_notify_handlers.dart';
@@ -69,6 +70,7 @@ import 'handlers/notify/comptabilites/compte_resultat_notify_handlers.dart';
 import 'handlers/notify/comptabilites/journal_notify_handlers.dart';
 import 'handlers/notify/devis/devis_notify_handlers.dart';
 import 'handlers/notify/exploitations/projet_notify_handlers.dart';
+import 'handlers/notify/exploitations/tache_notify_handlers.dart';
 import 'handlers/notify/finances/creance_notify_handlers.dart';
 import 'handlers/notify/finances/dette_notify_handlers.dart';
 import 'handlers/notify/logistique/carburant_notify_handlers.dart';
@@ -78,6 +80,7 @@ import 'handlers/notify/logistique/etat_materiel_notify_handlers.dart';
 import 'handlers/notify/logistique/immobilier_notify_handlers.dart';
 import 'handlers/notify/logistique/mobilier_notify_handlers.dart';
 import 'handlers/notify/logistique/trajet_notify_handlers.dart';
+import 'handlers/notify/mails/mails_notify_handlers.dart';
 import 'handlers/notify/rh/salaire_notify_handlers.dart';
 import 'handlers/notify/rh/transport_rest_notify_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
@@ -132,6 +135,12 @@ class Service {
             .addMiddleware(handleErrors())
             .addHandler(AgendaNotifyHandlers(repos).router));
     router.mount(
+        '/api/counts/carts/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(CartNotifyHandlers(repos).router));
+    router.mount(
         '/api/counts/balances/',
         Pipeline()
             .addMiddleware(setJsonHeader())
@@ -167,6 +176,12 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             .addHandler(ProjetNotifyHandlers(repos).router));
+    router.mount(
+        '/api/counts/taches/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(TacheNotifyHandlers(repos).router));
     router.mount(
         '/api/counts/creances/',
         Pipeline()
@@ -233,12 +248,12 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             .addHandler(TransRestNotifyHandlers(repos).router));
-
-
-
-
-
-
+    router.mount(
+        '/api/counts/mails/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(MailsNotifyHandlers(repos).router));
 
 
 
