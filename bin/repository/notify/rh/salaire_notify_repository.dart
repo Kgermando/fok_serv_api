@@ -63,8 +63,6 @@ class SalaireNotifyRepository {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
-        EXTRACT(MONTH FROM "created_at") == EXTRACT(MONTH FROM NOW() - '1 mons' :: INTERVAL) AND
-        EXTRACT(YEAR FROM "created_at") == EXTRACT(YEAR FROM NOW() - '1 years' :: INTERVAL) AND
         "approbation_dd" = 'Approved' AND 
         "approbation_budget" = 'Approved' AND 
         "approbation_fin" = '-' AND 
