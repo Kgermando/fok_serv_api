@@ -11,9 +11,10 @@ class BudgetNotifyRepository {
   Future<NotifyModel> getCountDG() async {
     try {
       var data = <NotifyModel>{};
-      var querySQL = """SELECT COUNT(*) FROM $tableName where  
+      var querySQL = """SELECT COUNT(*) FROM $tableName where 
+        NOW() <= "periode_fin"  AND
         "approbation_dd" = 'Approved' AND
-        "approbation_dg" = '-' && 
+        "approbation_dg" = '-' AND 
         "is_submit" = 'true';""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
@@ -31,7 +32,7 @@ class BudgetNotifyRepository {
       var querySQL =
           """SELECT COUNT(*) FROM $tableName where
           NOW() <= "periode_fin"  AND
-           "approbation_dd" = '-' &&
+           "approbation_dd" = '-' AND
            "is_submit" = 'true';""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
