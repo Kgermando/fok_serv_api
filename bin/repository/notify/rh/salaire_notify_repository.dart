@@ -8,25 +8,11 @@ class SalaireNotifyRepository {
 
   SalaireNotifyRepository(this.executor, this.tableName);
 
-  // Future<NotifyModel> getCountDG() async {
-  //   try {
-  //     var data = <NotifyModel>{};
-  //     var querySQL = "SELECT COUNT(*) FROM $tableName where approbation_dd = 'Approved';";
-  //     List<List<dynamic>> results = await executor.query(querySQL);
-  //     for (var row in results) {
-  //       data.add(NotifyModel.fromSQL(row));
-  //     }
-  //     return data.single;
-  //   } catch (e) {
-  //     throw NotifyModel;
-  //   }
-  // }
-
   Future<NotifyModel> getCountDD() async {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
-        EXTRACT(MONTH FROM "created_at" ::TIMESTAMP) == EXTRACT(MONTH FROM NOW() ::TIMESTAMP) AND
+        EXTRACT(MONTH FROM "created_at") == EXTRACT(MONTH FROM NOW()) AND
         EXTRACT(YEAR FROM "created_at" ::TIMESTAMP) == EXTRACT(YEAR FROM NOW() ::TIMESTAMP) AND
         "approbation_dd" = '-' AND 
         "observation" = 'false';""";
