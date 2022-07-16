@@ -29,6 +29,11 @@ class SalaireNotifyHandlers {
       return Response.ok(jsonEncode(data));
     }); 
 
+    router.get('/get-count-obs/', (Request request) async {
+      NotifyModel data = await repos.campaignNotifyCount.getCountObs();
+      return Response.ok(jsonEncode(data));
+    });
+
     router.all(
       '/<ignored|.*>',
       (Request request) => Response.notFound('La Page salaire count n\'est pas trouvé'),

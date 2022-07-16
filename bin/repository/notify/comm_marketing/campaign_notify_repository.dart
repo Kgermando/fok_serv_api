@@ -77,4 +77,23 @@ class CampaignNotifyRepository {
       throw NotifyModel;
     }
   }
+
+  Future<NotifyModel> getCountObs() async {
+    try {
+      var data = <NotifyModel>{};
+      var querySQL = """SELECT COUNT(*) FROM $tableName where 
+        "approbation_dd" = 'Approved' AND 
+        "approbation_dg" = 'Approved' AND 
+        "approbation_budget" = 'Approved' AND 
+        "approbation_fin" = 'Approved' AND 
+        "observation" = 'false';""";
+      List<List<dynamic>> results = await executor.query(querySQL);
+      for (var row in results) {
+        data.add(NotifyModel.fromSQL(row));
+      }
+      return data.single;
+    } catch (e) {
+      throw NotifyModel;
+    }
+  }
 }

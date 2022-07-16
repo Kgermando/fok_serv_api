@@ -60,6 +60,7 @@ import 'handlers/logistiques/trajet_handlers.dart';
 import 'handlers/mails/mails_handlers.dart';
 import 'handlers/notify/budgets/budget_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/campaign_notify_handlers.dart';
+import 'handlers/notify/comm_marketing/prod_model_notify_handlers.dart';
 import 'handlers/notify/comm_marketing/succursale_notify_handlers.dart';
 import 'handlers/notify/comptabilites/balance_notify_handlers.dart';
 import 'handlers/notify/comptabilites/bilan_notify_handlers.dart';
@@ -76,6 +77,8 @@ import 'handlers/notify/logistique/etat_materiel_notify_handlers.dart';
 import 'handlers/notify/logistique/immobilier_notify_handlers.dart';
 import 'handlers/notify/logistique/mobilier_notify_handlers.dart';
 import 'handlers/notify/logistique/trajet_notify_handlers.dart';
+import 'handlers/notify/rh/salaire_notify_handlers.dart';
+import 'handlers/notify/rh/transport_rest_notify_handlers.dart';
 import 'handlers/rh/agents_handlers.dart';
 import 'handlers/rh/paiement_salaire_handlers.dart';
 import 'handlers/rh/performence_handlers.dart';
@@ -115,6 +118,12 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             .addHandler(SuccursaleNotifyHandlers(repos).router));
+    router.mount(
+        '/api/counts/prod-models/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(ProdModelNotifyHandlers(repos).router));
     router.mount(
         '/api/counts/balances/',
         Pipeline()
@@ -200,11 +209,27 @@ class Service {
             .addMiddleware(handleErrors())
             .addHandler(MobilierNotifyHandlers(repos).router));
     router.mount(
-        '/api/counts/trajet/',
+        '/api/counts/trajets/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             .addHandler(TrajetNotifyHandlers(repos).router));
+    router.mount(
+        '/api/counts/salaires/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(SalaireNotifyHandlers(repos).router));
+    router.mount(
+        '/api/counts/trans-rests/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(TransRestNotifyHandlers(repos).router));
+
+
+
+
 
 
 

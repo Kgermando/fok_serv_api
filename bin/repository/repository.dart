@@ -55,6 +55,7 @@ import 'logistiques/trajet_repository.dart';
 import 'mails/mail_repository.dart';
 import 'notify/budgets/budget_notify_repository.dart';
 import 'notify/comm_marketing/campaign_notify_repository.dart';
+import 'notify/comm_marketing/prod_model_notify_repository.dart';
 import 'notify/comm_marketing/succursale_notify_repository.dart';
 import 'notify/comptabilites/balance_notify_repository.dart';
 import 'notify/comptabilites/bilan_notify_repository.dart';
@@ -178,6 +179,7 @@ class Repository {
   late BudgetNotifyRepository budgetNotifyCount;
   late CampaignNotifyRepository campaignNotifyCount;
   late SuccursaleNotifyRepository succursaleNotifyCount;
+  late ProdModelNotifyRepository prodModelCount;
   late BalanceNotifyRepository balanceNotifyCount;
   late BilanNotifyRepository bilanNotifyCount;
   late CompteResultatNotifyRepository compteResultatsCount;
@@ -201,9 +203,11 @@ class Repository {
     budgetNotifyCount = BudgetNotifyRepository(executor, 'departement_budgets');
     campaignNotifyCount = CampaignNotifyRepository(executor, 'campaigns');
     succursaleNotifyCount = SuccursaleNotifyRepository(executor, 'succursales');
+    prodModelCount = ProdModelNotifyRepository(executor, 'produits_model');
     balanceNotifyCount = BalanceNotifyRepository(executor, 'balance_comptes');
     bilanNotifyCount = BilanNotifyRepository(executor, 'bilans');
-    compteResultatsCount = CompteResultatNotifyRepository(executor, 'comptes_resultat');
+    compteResultatsCount =
+        CompteResultatNotifyRepository(executor, 'comptes_resultat');
     journalNotifyCount = JournalNotifyRepository(executor, 'journals');
     devisNotifyCount = DevisNotifyRepository(executor, 'devis');
     projetNotifyCount = ProjetNotifyRepository(executor, 'projets');
@@ -212,13 +216,14 @@ class Repository {
     carburantNotifyCount = CarburantNotifyRepository(executor, 'carburants');
     enginNotifyCount = EnginNotifyRepository(executor, 'anguins');
     entretienNotifyCount = EntretienNotifyRepository(executor, 'entretiens');
-    etatMaterielNotifyCount = EtatMaterielNotifyRepository(executor, 'etat_materiels');
+    etatMaterielNotifyCount =
+        EtatMaterielNotifyRepository(executor, 'etat_materiels');
     immobilierNotifyCount = ImmobilierNotifyRepository(executor, 'immobiliers');
     mobilierNotifyCount = MobilierNotifyRepository(executor, 'mobiliers');
     trajetsNotifyCount = TrajetNotifyRepository(executor, 'trajets');
     salaireNotifyCount = SalaireNotifyRepository(executor, 'salaires');
-    transportRestNotifyCount = TransportRestNotifyRepository(executor, 'transport_restaurations');
-
+    transportRestNotifyCount =
+        TransportRestNotifyRepository(executor, 'transport_restaurations');
 
     refreshTokens = RefreshTokensRepository(executor, 'refresh_tokens');
     users = UserRepository(executor, 'users');
