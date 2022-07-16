@@ -11,8 +11,8 @@ class BudgetNotifyRepository {
   Future<NotifyModel> getCountDG() async {
     try {
       var data = <NotifyModel>{};
-      var querySQL = """SELECT COUNT(*) FROM $tableName where 
-        NOW() <= "periode_fin"  AND
+      var querySQL = """SELECT COUNT(*) FROM $tableName where  
+        NOW() <= "periode_fin"::timestamp AND
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' && 
         "is_submit" = 'true';""";
