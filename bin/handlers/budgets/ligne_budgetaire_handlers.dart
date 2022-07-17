@@ -44,7 +44,6 @@ class LigneBudgetaireHanlers {
         coutTotal: input['coutTotal'],
         caisse: input['caisse'],
         banque: input['banque'],
-        finPropre: input['finPropre'],
         finExterieur: input['finExterieur'],
         signature: input['signature'],
         created: DateTime.parse(input['created']),
@@ -91,9 +90,6 @@ class LigneBudgetaireHanlers {
       }
       if (input['banque'] != null) {
         data.banque = input['banque'];
-      }
-      if (input['finPropre'] != null) {
-        data.finPropre = input['finPropre'];
       }
       if (input['finExterieur'] != null) {
         data.finExterieur = input['finExterieur'];

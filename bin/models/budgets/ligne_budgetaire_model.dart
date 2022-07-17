@@ -8,8 +8,7 @@ class LigneBudgetaireModel {
   late String coutUnitaire;
   late String coutTotal;
   late String caisse;
-  late String banque;
-  late String finPropre;
+  late String banque; 
   late String finExterieur;  // Reste à trouver
   late String signature;
   late DateTime created;
@@ -24,8 +23,7 @@ class LigneBudgetaireModel {
       required  this.coutUnitaire,
       required  this.coutTotal,
       required  this.caisse,
-      required  this.banque,
-      required  this.finPropre,
+      required  this.banque, 
       required  this.finExterieur,
       required this.signature,
       required this.created
@@ -43,10 +41,9 @@ class LigneBudgetaireModel {
       coutTotal: row[7],
       caisse: row[8],
       banque: row[9],
-      finPropre: row[10],
-      finExterieur: row[11],
-      signature: row[12],
-      created: row[13]
+      finExterieur: row[10],
+      signature: row[11],
+      created: row[12]
     );
   }
 
@@ -61,8 +58,7 @@ class LigneBudgetaireModel {
       coutUnitaire: json['coutUnitaire'],
       coutTotal: json['coutTotal'],
       caisse: json['caisse'],
-      banque: json['banque'],
-      finPropre: json['finPropre'],
+      banque: json['banque'], 
       finExterieur: json['finExterieur'],
       signature: json['signature'],
       created: DateTime.parse(json['created'])
@@ -80,8 +76,7 @@ class LigneBudgetaireModel {
       'coutUnitaire': coutUnitaire,
       'coutTotal': coutTotal,
       'caisse': caisse,
-      'banque': banque,
-      'finPropre': finPropre,
+      'banque': banque, 
       'finExterieur': finExterieur,
       'signature': signature,
       'created': created.toIso8601String()
