@@ -2,7 +2,8 @@ class LigneBudgetaireModel {
   late int? id;
   late String nomLigneBudgetaire;
   late String departement;
-  late DateTime periodeBudget;
+  late DateTime periodeBudgetDebut;
+  late DateTime periodeBudgetFin;
   late String uniteChoisie;
   late String nombreUnite;
   late String coutUnitaire;
@@ -17,7 +18,8 @@ class LigneBudgetaireModel {
       {this.id,
       required this.nomLigneBudgetaire,
       required this.departement,
-      required this.periodeBudget,
+      required this.periodeBudgetDebut,
+      required this.periodeBudgetFin,
       required this.uniteChoisie,
       required this.nombreUnite,
       required this.coutUnitaire,
@@ -33,16 +35,17 @@ class LigneBudgetaireModel {
         id: row[0],
         nomLigneBudgetaire: row[1],
         departement: row[2],
-        periodeBudget: row[3],
-        uniteChoisie: row[4],
-        nombreUnite: row[5],
-        coutUnitaire: row[6],
-        coutTotal: row[7],
-        caisse: row[8],
-        banque: row[9],
-        finExterieur: row[10],
-        signature: row[11],
-        created: row[12]);
+        periodeBudgetDebut: row[3],
+        periodeBudgetFin: row[4],
+        uniteChoisie: row[5],
+        nombreUnite: row[6],
+        coutUnitaire: row[7],
+        coutTotal: row[8],
+        caisse: row[9],
+        banque: row[10],
+        finExterieur: row[11],
+        signature: row[12],
+        created: row[13]);
   }
 
   factory LigneBudgetaireModel.fromJson(Map<String, dynamic> json) {
@@ -50,7 +53,8 @@ class LigneBudgetaireModel {
         id: json['id'],
         nomLigneBudgetaire: json['nomLigneBudgetaire'],
         departement: json['departement'],
-        periodeBudget: DateTime.parse(json['periodeBudget']),
+        periodeBudgetDebut: DateTime.parse(json['periodeBudgetDebut']),
+        periodeBudgetFin: DateTime.parse(json['periodeBudgetFin']),
         uniteChoisie: json['uniteChoisie'],
         nombreUnite: json['nombreUnite'],
         coutUnitaire: json['coutUnitaire'],
@@ -67,7 +71,8 @@ class LigneBudgetaireModel {
       'id': id,
       'nomLigneBudgetaire': nomLigneBudgetaire,
       'departement': departement,
-      'periodeBudget': periodeBudget.toIso8601String(),
+      'periodeBudgetDebut': periodeBudgetDebut.toIso8601String(),
+      'periodeBudgetFin': periodeBudgetFin.toIso8601String(),
       'uniteChoisie': uniteChoisie,
       'nombreUnite': nombreUnite,
       'coutUnitaire': coutUnitaire,

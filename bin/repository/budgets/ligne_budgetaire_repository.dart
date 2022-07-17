@@ -24,47 +24,49 @@ class LigneBudgtaireRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, nom_ligne_budgetaire, departement,"
-          "periode_budget, unite_choisie, nombre_unite, cout_unitaire, cout_total,"
+          "periode_budget_debut, periode_budget_fin, unite_choisie, nombre_unite, cout_unitaire, cout_total,"
           "caisse, banque, fin_exterieur, signature, created)"
           "VALUES (nextval('ligne_budgetaires_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8, @9, @10, @11, @12)",
+          "@7, @8, @9, @10, @11, @12, @13)",
           substitutionValues: {
             '1': data.nomLigneBudgetaire,
             '2': data.departement,
-            '3': data.periodeBudget,
-            '4': data.uniteChoisie,
-            '5': data.nombreUnite,
-            '6': data.coutUnitaire,
-            '7': data.coutTotal,
-            '8': data.caisse,
-            '9': data.banque,
-            '10': data.finExterieur,
-            '11': data.signature,
-            '12': data.created
+            '3': data.periodeBudgetDebut,
+            '4': data.periodeBudgetFin,
+            '5': data.uniteChoisie,
+            '6': data.nombreUnite,
+            '7': data.coutUnitaire,
+            '8': data.coutTotal,
+            '9': data.caisse,
+            '10': data.banque,
+            '11': data.finExterieur,
+            '12': data.signature,
+            '13': data.created
           });
     });
   }
 
   Future<void> update(LigneBudgetaireModel data) async {
     await executor.query("""UPDATE $tableName
-          SET nom_ligne_budgetaire = @1, departement = @2, periode_budget = @3,
-          unite_choisie = @4, nombre_unite = @5, cout_unitaire = @6, cout_total = @7,
-          caisse = @8, banque = @9, fin_exterieur = @10, signature = @11,
-          created = @12 WHERE id = @13""",
+      SET nom_ligne_budgetaire = @1, departement = @2, periode_budget_debut = @3, 
+      periode_budget_fin = @4, unite_choisie = @5, nombre_unite = @6,
+      cout_unitaire = @7, cout_total = @8, caisse = @9, banque = @10, 
+      fin_exterieur = @11, signature = @12, created = @13 WHERE id = @14""",
         substitutionValues: {
           '1': data.nomLigneBudgetaire,
           '2': data.departement,
-          '3': data.periodeBudget,
-          '4': data.uniteChoisie,
-          '5': data.nombreUnite,
-          '6': data.coutUnitaire,
-          '7': data.coutTotal,
-          '8': data.caisse,
-          '9': data.banque,
-          '10': data.finExterieur,
-          '11': data.signature,
-          '12': data.created,
-          '13': data.id
+          '3': data.periodeBudgetDebut,
+          '4': data.periodeBudgetFin,
+          '5': data.uniteChoisie,
+          '6': data.nombreUnite,
+          '7': data.coutUnitaire,
+          '8': data.coutTotal,
+          '9': data.caisse,
+          '10': data.banque,
+          '11': data.finExterieur,
+          '12': data.signature,
+          '13': data.created,
+          '14': data.id
         });
   }
 
@@ -86,16 +88,17 @@ class LigneBudgtaireRepository {
       id: data[0][0],
       nomLigneBudgetaire: data[0][1],
       departement: data[0][2],
-      periodeBudget: data[0][3],
-      uniteChoisie: data[0][4],
-      nombreUnite: data[0][5],
-      coutUnitaire: data[0][6],
-      coutTotal: data[0][7],
-      caisse: data[0][8],
-      banque: data[0][9],
-      finExterieur: data[0][10],
-      signature: data[0][11],
-      created: data[0][12]
+      periodeBudgetDebut: data[0][3],
+      periodeBudgetFin: data[0][4],
+      uniteChoisie: data[0][5],
+      nombreUnite: data[0][6],
+      coutUnitaire: data[0][7],
+      coutTotal: data[0][8],
+      caisse: data[0][9],
+      banque: data[0][10],
+      finExterieur: data[0][11],
+      signature: data[0][12],
+      created: data[0][13]
     );
   } 
 }

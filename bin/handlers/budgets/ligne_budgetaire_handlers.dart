@@ -37,7 +37,8 @@ class LigneBudgetaireHanlers {
       LigneBudgetaireModel data = LigneBudgetaireModel(
         nomLigneBudgetaire: input['nomLigneBudgetaire'],
         departement: input['departement'],
-        periodeBudget: DateTime.parse(input['periodeBudget']),
+        periodeBudgetDebut: DateTime.parse(input['periodeBudgetDebut']),
+        periodeBudgetFin: DateTime.parse(input['periodeBudgetFin']),
         uniteChoisie: input['uniteChoisie'],
         nombreUnite: input['nombreUnite'],
         coutUnitaire: input['coutUnitaire'],
@@ -70,8 +71,11 @@ class LigneBudgetaireHanlers {
       if (input['departement'] != null) {
         data.departement = input['departement'];
       }
-      if (input['periodeBudget'] != null) {
-        data.periodeBudget = DateTime.parse(input['periodeBudget']);
+      if (input['periodeBudgetDebut'] != null) {
+        data.periodeBudgetDebut = DateTime.parse(input['periodeBudgetDebut']);
+      }
+      if (input['periodeBudgetFin'] != null) {
+        data.periodeBudgetFin = DateTime.parse(input['periodeBudgetFin']);
       }
       if (input['uniteChoisie'] != null) {
         data.uniteChoisie = input['uniteChoisie'];
