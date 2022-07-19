@@ -44,21 +44,21 @@ class CarburantModel {
   factory CarburantModel.fromSQL(List<dynamic> row) {
     return CarburantModel(
       id: row[0],
-      operationEntreSortie: row[1],
-      typeCaburant: row[2],
-      fournisseur: row[3],
-      nomeroFactureAchat: row[4],
-      prixAchatParLitre: row[5],
-      nomReceptioniste: row[6],
-      numeroPlaque: row[7],
-      dateHeureSortieAnguin: row[8],
-      qtyAchat: row[9],
-      signature: row[10],
-      createdRef: row[11],
-      created: row[12], 
-      approbationDD: row[16],
-      motifDD: row[17],
-      signatureDD: row[18]
+        operationEntreSortie: row[1],
+        typeCaburant: row[2],
+        fournisseur: row[3],
+        nomeroFactureAchat: row[4],
+        prixAchatParLitre: row[5],
+        nomReceptioniste: row[6],
+        numeroPlaque: row[7],
+        dateHeureSortieAnguin: row[8],
+        qtyAchat: row[9],
+        signature: row[10],
+        createdRef: row[11],
+        created: row[12],
+        approbationDD: row[13],
+        motifDD: row[14],
+        signatureDD: row[15]
     );
   }
 
