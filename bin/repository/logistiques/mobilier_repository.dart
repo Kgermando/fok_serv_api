@@ -46,7 +46,8 @@ class MobilierRepository {
     await executor.execute("""UPDATE $tableName
         SET nom = @1, modele = @2, marque = @3,
         description_mobilier = @4, nombre = @5,
-        signature = @6, created_ref = @7, created = @8 WHERE id = @9""",
+        signature = @6, created_ref = @7, created = @8, approbation_dd = @9, 
+        motif_dd = @10, signature_dd = @11 WHERE id = @12""",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
