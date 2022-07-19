@@ -15,12 +15,12 @@ class EnginNotifyHandlers {
     final router = Router();
 
     router.get('/get-count-dg/', (Request request) async {
-      NotifyModel data = await repos.creanceNotifyCount.getCountDG();
+      NotifyModel data = await repos.enginNotifyCount.getCountDG();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/get-count-dd/', (Request request) async {
-      NotifyModel data = await repos.creanceNotifyCount.getCountDD();
+      NotifyModel data = await repos.enginNotifyCount.getCountDD();
       return Response.ok(jsonEncode(data));
     });
 

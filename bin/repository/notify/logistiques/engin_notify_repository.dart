@@ -14,7 +14,7 @@ class EnginNotifyRepository {
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-';""";
-      List<List<dynamic>> results = await executor.query(querySQL);
+      List<List<dynamic>> results = await executor.query(querySQL);  
       for (var row in results) {
         data.add(NotifyModel.fromSQL(row));
       }
