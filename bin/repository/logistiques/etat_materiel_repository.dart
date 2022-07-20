@@ -62,9 +62,9 @@ class EtaMaterielRepository {
 
   Future<void> update(EtatMaterielModel data) async {
     await executor.execute("""UPDATE $tableName
-          SET nom = @1, modele = @2, marque = @3, type_objet = @4,
-          signature = @5, created_ref = @6 , created = @7, approbation_dd = @8,
-        motif_dd = @9, signature_dd = @10 WHERE id = @11""",
+      SET nom = @1, modele = @2, marque = @3, type_objet = @4,
+      signature = @5, created_ref = @6 , created = @7, approbation_dd = @8,
+      motif_dd = @9, signature_dd = @10 WHERE id = @11""",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,

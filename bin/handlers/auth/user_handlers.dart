@@ -77,50 +77,6 @@ class UserHandlers {
       final editH = UserModel.fromJson(input);
       UserModel? selectUser = await repos.users.getFromId(editH.id!);
 
-      if (input['photo'] != null) {
-        selectUser.matricule = input['photo'];
-      }
-      if (input['nom'] != null) {
-        selectUser.nom = input['nom'];
-      }
-      if (input['prenom'] != null) {
-        selectUser.prenom = input['prenom'];
-      }
-      if (input['email'] != null) {
-        selectUser.email = input['email'];
-      }
-      if (input['telephone'] != null) {
-        selectUser.telephone = input['telephone'];
-      }
-      if (input['matricule'] != null) {
-        selectUser.matricule = input['matricule'];
-      }
-      if (input['departement'] != null) {
-        selectUser.departement = input['departement'];
-      }
-      if (input['servicesAffectation'] != null) {
-        selectUser.servicesAffectation = input['servicesAffectation'];
-      }
-      if (input['fonctionOccupe'] != null) {
-        selectUser.fonctionOccupe = input['fonctionOccupe'];
-      }
-      if (input['role'] != null) {
-        selectUser.role = input['role'];
-      }
-      if (input['isOnline'] != null) {
-        selectUser.isOnline = input['isOnline'];
-      }
-      if (input['createdAt'] != null) {
-        selectUser.createdAt = DateTime.parse(input['createdAt']);
-      }
-      if (input['passwordHash'] != null) {
-        selectUser.passwordHash = input['passwordHash'];
-      }
-      // if (input['passwordHash'] != null) {
-      //   selectUser.passwordHash =
-      //       md5.convert(utf8.encode(input['passwordHash'])).toString();
-      //   repos.refreshTokens.logoutAll(selectUser.id!);
-      // }
       if (input['succursale'] != null) {
         selectUser.succursale = input['succursale'];
       }

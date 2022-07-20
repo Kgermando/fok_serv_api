@@ -22,11 +22,11 @@ class ImmobilierRepository {
   Future<void> insertData(ImmobilierModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, type_allocation, adresse, numero_certificat,"
-          "superficie, date_acquisition, signature, created_ref, created,"
-          "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
-          "VALUES (nextval('immobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7,"
-          "@8, @9, @10, @11, @12, @13, @14)",
+      "INSERT INTO $tableName (id, type_allocation, adresse, numero_certificat,"
+      "superficie, date_acquisition, signature, created_ref, created,"
+      "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
+      "VALUES (nextval('immobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7,"
+      "@8, @9, @10, @11, @12, @13, @14)",
           substitutionValues: {
             '1': data.typeAllocation,
             '2': data.adresse,
@@ -50,8 +50,8 @@ class ImmobilierRepository {
     await executor.execute("""UPDATE $tableName
         SET type_allocation = @1, adresse = @2, numero_certificat = @3,
         superficie = @4, date_acquisition = @5, signature = @6,
-        created_ref = @7, created = @8, approbation_dg = @9, motif_dg = @10,"
-        "signature_dg = @11, approbation_dd = @12,
+        created_ref = @7, created = @8, approbation_dg = @9, motif_dg = @10,
+        signature_dg = @11, approbation_dd = @12,
         motif_dd = @13, signature_dd = @14 WHERE id = @15""", 
     substitutionValues: {
       '1': data.typeAllocation,
