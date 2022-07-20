@@ -76,8 +76,8 @@ class ObjetsRemplaceHandlers {
     });
 
     router.delete('/delete-objet-remplace/<id>', (
-      String id,
       Request request,
+      String id,
     ) async {
       var id = request.params['id'];
       repos.objetsRemplace.deleteData(int.parse(id!));
