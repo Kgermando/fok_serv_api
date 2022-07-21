@@ -26,9 +26,9 @@ class TasnportRestaurationRepository {
           "signature, created_ref, created," 
           "approbation_dg, motif_dg, signature_dg, approbation_budget, motif_budget, signature_budget,"
           "approbation_fin, motif_fin, signature_fin, approbation_dd, motif_dd, signature_dd,"
-          "ligne_budgetaire, ressource)"
+          "ligne_budgetaire, ressource, is_submit)"
           "VALUES (nextval('transport_restaurations_id_seq'), @1, @2, @3, @4, @5,"
-          "@6, @7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19)",
+          "@6, @7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20)",
           substitutionValues: {
             '1': data.title,
             '2': data.observation,
@@ -48,7 +48,8 @@ class TasnportRestaurationRepository {
             '16': data.motifDD,
             '17': data.signatureDD,
             '18': data.ligneBudgetaire,
-            '19': data.ressource
+            '19': data.ressource,
+            '20': data.isSubmit
           });
     });
   }
@@ -59,7 +60,7 @@ class TasnportRestaurationRepository {
     approbation_dg = @6, motif_dg = @7, signature_dg = @8, approbation_budget = @9,
     motif_budget = @10, signature_budget = @11, approbation_fin = @12, motif_fin = @13,
     signature_fin = @14, approbation_dd = @15, motif_dd = @16, signature_dd = @17,
-    ligne_budgetaire = @18, ressource = @19 WHERE id = @20""", 
+    ligne_budgetaire = @18, ressource = @19, is_submit = @20 WHERE id = @21""", 
     substitutionValues: {
       '1': data.title,
       '2': data.observation,
@@ -80,7 +81,8 @@ class TasnportRestaurationRepository {
       '17': data.signatureDD,
       '18': data.ligneBudgetaire,
       '19': data.ressource,
-      '20': data.id
+      '20': data.isSubmit,
+      '21': data.id
     });
     
   }
@@ -119,7 +121,8 @@ class TasnportRestaurationRepository {
         motifDD:  data[0][16],
         signatureDD:  data[0][17],
         ligneBudgetaire:  data[0][18],
-        ressource:  data[0][19]
+        ressource:  data[0][19],
+        isSubmit: data[0][20]
     );
   }
 

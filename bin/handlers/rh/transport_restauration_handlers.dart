@@ -53,7 +53,8 @@ class TransportRestaurantHandlers {
           motifDD: input['motifDD'],
           signatureDD: input['signatureDD'],
           ligneBudgetaire: input['ligneBudgetaire'],
-          ressource: input['ressource']);
+          ressource: input['ressource'],
+          isSubmit: input['isSubmit']);
 
       try {
         await repos.transportRestauration.insertData(data);
@@ -126,6 +127,9 @@ class TransportRestaurantHandlers {
       }
       if (input['ressource'] != null) {
         data.ressource = input['ressource'];
+      }
+      if (input['isSubmit'] != null) {
+        data.isSubmit = input['isSubmit'];
       }
       repos.transportRestauration.update(data);
       return Response.ok(jsonEncode(data.toJson()));

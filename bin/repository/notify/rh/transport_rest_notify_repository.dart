@@ -14,7 +14,7 @@ class TransportRestNotifyRepository {
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
-        "observation" = 'false';""";
+        "observation" = 'false' AND "is_submit" = 'true';""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(NotifyModel.fromSQL(row));
@@ -30,7 +30,7 @@ class TransportRestNotifyRepository {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
         "approbation_dd" = '-' AND 
-        "observation" = 'false';""";
+        "observation" = 'false' AND "is_submit" = 'true';""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(NotifyModel.fromSQL(row));
@@ -48,7 +48,7 @@ class TransportRestNotifyRepository {
         "approbation_dd" = 'Approved' AND 
         "approbation_dg" = 'Approved' AND 
         "approbation_budget" = '-' AND 
-        "observation" = 'false';""";
+        "observation" = 'false' AND "is_submit" = 'true';""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(NotifyModel.fromSQL(row));

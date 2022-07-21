@@ -6,10 +6,10 @@ class TransportRestaurationModel {
   late DateTime createdRef;
   late DateTime created;
 
-   // Approbations DG
+  // Approbations DG
   late String approbationDG;
   late String motifDG;
-  late String signatureDG; 
+  late String signatureDG;
   // Approbations Budget
   late String approbationBudget;
   late String motifBudget;
@@ -27,6 +27,8 @@ class TransportRestaurationModel {
   late String ligneBudgetaire;
   late String ressource;
 
+  late String isSubmit;
+
   TransportRestaurationModel(
       {this.id,
       required this.title,
@@ -34,7 +36,6 @@ class TransportRestaurationModel {
       required this.signature,
       required this.createdRef,
       required this.created,
-      
       required this.approbationDG,
       required this.motifDG,
       required this.signatureDG,
@@ -48,9 +49,8 @@ class TransportRestaurationModel {
       required this.motifDD,
       required this.signatureDD,
       required this.ligneBudgetaire,
-      required this.ressource
-    }
-  );
+      required this.ressource,
+      required this.isSubmit});
 
   factory TransportRestaurationModel.fromSQL(List<dynamic> row) {
     return TransportRestaurationModel(
@@ -60,7 +60,6 @@ class TransportRestaurationModel {
         signature: row[3],
         createdRef: row[4],
         created: row[5],
-
         approbationDG: row[6],
         motifDG: row[7],
         signatureDG: row[8],
@@ -74,8 +73,8 @@ class TransportRestaurationModel {
         motifDD: row[16],
         signatureDD: row[17],
         ligneBudgetaire: row[18],
-        ressource: row[19]
-    );
+        ressource: row[19],
+        isSubmit: row[20]);
   }
 
   factory TransportRestaurationModel.fromJson(Map<String, dynamic> json) {
@@ -86,7 +85,6 @@ class TransportRestaurationModel {
         signature: json['signature'],
         createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']),
-
         approbationDG: json['approbationDG'],
         motifDG: json['motifDG'],
         signatureDG: json['signatureDG'],
@@ -100,8 +98,8 @@ class TransportRestaurationModel {
         motifDD: json['motifDD'],
         signatureDD: json['signatureDD'],
         ligneBudgetaire: json['ligneBudgetaire'],
-        ressource: json['ressource']
-        );
+        ressource: json['ressource'],
+        isSubmit: json['isSubmit']);
   }
 
   Map<String, dynamic> toJson() {
@@ -112,7 +110,6 @@ class TransportRestaurationModel {
       'signature': signature,
       'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String(),
-      
       'approbationDG': approbationDG,
       'motifDG': motifDG,
       'signatureDG': signatureDG,
@@ -126,7 +123,8 @@ class TransportRestaurationModel {
       'motifDD': motifDD,
       'signatureDD': signatureDD,
       'ligneBudgetaire': ligneBudgetaire,
-      'ressource': ressource
+      'ressource': ressource,
+      'isSubmit': isSubmit
     };
   }
 }
