@@ -25,7 +25,7 @@ class FactureRepository {
       await ctx.execute(
           "INSERT INTO $tableName (id, cart, client,"
           "succursale, signature, created)"
-          "VALUES (nextval('creance_factures_id_seq'), @1, @2, @3, @4, @5)",
+          "VALUES (nextval('factures_id_seq'), @1, @2, @3, @4, @5)",
           substitutionValues: {
             '1': data.cart,
             '2': data.client,

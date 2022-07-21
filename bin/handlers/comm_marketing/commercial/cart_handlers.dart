@@ -106,6 +106,7 @@ class CartHandlers {
     });
 
     router.delete('/delete-all-cart/<signature>', (Request request, String signature) async {
+      
       var signature = request.params['signature'];
       repos.carts.deleteAllData(signature!);
       return Response.ok('Panier vide');
