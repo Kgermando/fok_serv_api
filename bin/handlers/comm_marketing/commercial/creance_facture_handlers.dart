@@ -34,7 +34,7 @@ class CreanceFactureHandlers {
       var input = jsonDecode(await request.readAsString());
 
       CreanceCartModel data = CreanceCartModel(
-          cart: input['cart'],
+          cart: input['cart'] as List,
           client: input['client'],
           succursale: input['succursale'],
           signature: input['signature'],
@@ -55,7 +55,7 @@ class CreanceFactureHandlers {
           await repos.creancesFacture.getFromId(editH.id!);
 
       if (input['cart'] != null) {
-        data.cart = input['cart'];
+        data.cart = input['cart'] as List;
       }
       if (input['client'] != null) {
         data.client = input['client'];
