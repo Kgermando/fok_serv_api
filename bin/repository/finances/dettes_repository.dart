@@ -51,7 +51,7 @@ class DettesRepository {
   Future<void> update(DetteModel data) async {
     await executor.query("""UPDATE $tableName
         SET nom_complet = @1, piece_justificative = @2, libelle = @3,
-        montant = @4, numero_operation = @5, statutPaie = @6,
+        montant = @4, numero_operation = @5, statut_paie = @6,
         signature = @7, created_ref = @8 , created = @9,
         approbation_dg = @10, motif_dg = @11, signature_dg = @12, approbation_dd = @13,
         motif_dd = @14, signature_dd = @15 WHERE id = @16""",

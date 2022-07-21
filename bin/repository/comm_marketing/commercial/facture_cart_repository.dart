@@ -23,7 +23,7 @@ class FactureRepository {
   Future<void> insertData(FactureCartModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, cart, client,"
+        "INSERT INTO $tableName (id, cart, client,"
           "succursale, signature, created)"
           "VALUES (nextval('factures_id_seq'), @1, @2, @3, @4, @5)",
           substitutionValues: {
@@ -38,7 +38,7 @@ class FactureRepository {
 
   Future<void> update(FactureCartModel data) async {
      await executor.query("""UPDATE $tableName
-          SET cart = @1, client = @2, succursale = @3,
+      SET cart = @1, client = @2, succursale = @3,
           signature = @4, created = @5 WHERE id = @6""", substitutionValues: {
       '1': data.cart,
       '2': data.client,

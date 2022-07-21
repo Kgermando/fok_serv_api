@@ -47,7 +47,7 @@ class CreanceFactureRepository {
       '5': data.created,
       '6': data.id
     });
-  }
+  } 
 
   deleteData(int id) async {
     try {

@@ -9,7 +9,7 @@ import 'budgets/ligne_budgetaire_repository.dart';
 import 'comm_marketing/commercial/achats_repository.dart';
 import 'comm_marketing/commercial/bon_livraison_repository.dart';
 import 'comm_marketing/commercial/cart_repository.dart';
-import 'comm_marketing/commercial/creance_repository.dart';
+import 'comm_marketing/commercial/creance_cart_repository.dart';
 import 'comm_marketing/commercial/facture_cart_repository.dart';
 import 'comm_marketing/commercial/gain_repository.dart';
 import 'comm_marketing/commercial/history_livraison_repository.dart';
