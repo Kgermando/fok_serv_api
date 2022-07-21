@@ -67,7 +67,7 @@ class TransportRestNotifyRepository {
         "approbation_dg" = 'Approved' AND 
         "approbation_budget" = 'Approved' AND 
         "approbation_fin" = '-' AND 
-        "observation" = 'false';""";
+        "observation" = 'false' AND "is_submit" = 'true';""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(NotifyModel.fromSQL(row));
@@ -86,7 +86,7 @@ class TransportRestNotifyRepository {
         "approbation_dg" = 'Approved' AND 
         "approbation_budget" = 'Approved' AND 
         "approbation_fin" = 'Approved' AND 
-        "observation" = 'false';""";
+        "observation" = 'false' AND "is_submit" = 'true';""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(NotifyModel.fromSQL(row));
