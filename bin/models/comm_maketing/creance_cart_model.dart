@@ -1,6 +1,6 @@
 class CreanceCartModel {
   late int? id;
-  late List cart;
+  late String cart;
   late String client;
   late String succursale;
   late String signature; // celui qui fait le document
