@@ -33,7 +33,7 @@ class FactureRepository {
             '4': data.signature,
             '5': data.created
           });
-    });
+    }); 
   }
 
   Future<void> update(FactureCartModel data) async {
