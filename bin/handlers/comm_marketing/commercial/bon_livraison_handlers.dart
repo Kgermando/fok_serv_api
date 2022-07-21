@@ -81,7 +81,7 @@ class BonLivraisonHandlers {
         data.created = DateTime.parse(input['created']);
       }
       if (input['firstName'] != null) {
-        data.unite = input['firstName'];
+        data.firstName = input['firstName'];
       }
       if (input['lastName'] != null) {
         data.lastName = input['lastName'];
