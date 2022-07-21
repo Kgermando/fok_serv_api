@@ -27,7 +27,7 @@ class FactureCartModel {
   factory FactureCartModel.fromJson(Map<String, dynamic> json) {
     return FactureCartModel(
         id: json['id'],
-        cart: json['cart'],
+        cart: json['cart'] as List,
         client: json['client'],
         succursale: json['succursale'],
         signature: json['signature'],
@@ -37,7 +37,7 @@ class FactureCartModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'cart': cart,
+      'cart': cart.toList(),
       'client': client,
       'succursale': succursale,
       'signature': signature,
