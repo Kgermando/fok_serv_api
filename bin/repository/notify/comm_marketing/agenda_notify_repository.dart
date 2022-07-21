@@ -8,14 +8,14 @@ class AgendaNotifyRepository {
 
   AgendaNotifyRepository(this.executor, this.tableName);
 
-  Future<NotifyModel> getCount() async {
+  Future<NotifyModel> getCount(String matricule) async {
     try {
       var data = <NotifyModel>{};
       var querySQL =
         """SELECT COUNT(*) FROM $tableName where  
         EXTRACT(DAY FROM "date_rappel" ::TIMESTAMP) = EXTRACT(DAY FROM NOW() ::TIMESTAMP) AND
         EXTRACT(MONTH FROM "date_rappel" ::TIMESTAMP) = EXTRACT(MONTH FROM NOW() ::TIMESTAMP) AND
-        EXTRACT(YEAR FROM "date_rappel" ::TIMESTAMP) = EXTRACT(YEAR FROM NOW() ::TIMESTAMP);""";
+        EXTRACT(YEAR FROM "date_rappel" ::TIMESTAMP) = EXTRACT(YEAR FROM NOW() ::TIMESTAMP) AND signature"='$matricule';""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
         data.add(NotifyModel.fromSQL(row));
