@@ -335,6 +335,6 @@ class Repository {
     // Mails
     mails = MailRepository(executor, 'mails');
 
-    updateVersion = UpdateVersionRepository(executor, 'update-verions');
+    updateVersion = UpdateVersionRepository(executor, 'update_versions');
   }
 }

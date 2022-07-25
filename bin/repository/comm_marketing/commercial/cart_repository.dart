@@ -8,11 +8,11 @@ class CartRepository {
 
   CartRepository(this.executor, this.tableName);
 
-
   Future<List<CartModel>> getAllData(String matricule) async {
     var data = <CartModel>{};
 
-    var querySQL = "SELECT * FROM $tableName WHERE \"signature\"='$matricule' ORDER BY \"created\" DESC;";
+    var querySQL =
+        "SELECT * FROM $tableName WHERE \"signature\"='$matricule' ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(CartModel.fromSQL(row));
@@ -80,7 +80,8 @@ class CartRepository {
   deleteAllData(String signature) async {
     try {
       await executor.transaction((conn) async {
-        await conn.execute("DELETE * FROM $tableName WHERE \"signature\"='$signature';");
+        await conn.execute(
+            "DELETE * FROM $tableName WHERE \"signature\"='$signature';");
       });
     } catch (e) {
       'erreur $e';
@@ -89,21 +90,19 @@ class CartRepository {
 
   Future<CartModel> getFromId(int id) async {
     var data =
-        await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
+        await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id';");
     return CartModel(
-      id: data[0][0],
-      idProductCart: data[0][1],
-      quantityCart: data[0][2],
-      priceCart: data[0][3],
-      priceAchatUnit: data[0][4],
-      unite: data[0][5],
-      tva: data[0][6],
-      remise: data[0][7],
-      qtyRemise: data[0][8],
-      succursale: data[0][9],
-      signature: data[0][10],
-      created: data[0][11]
-    );
-  } 
-  
+        id: data[0][0],
+        idProductCart: data[0][1],
+        quantityCart: data[0][2],
+        priceCart: data[0][3],
+        priceAchatUnit: data[0][4],
+        unite: data[0][5],
+        tva: data[0][6],
+        remise: data[0][7],
+        qtyRemise: data[0][8],
+        succursale: data[0][9],
+        signature: data[0][10],
+        created: data[0][11]);
+  }
 }
