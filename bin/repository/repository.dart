@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../models/update/update_model.dart';
 import 'administration/actionnaire_cotisation_repository.dart';
 import 'administration/actionnaire_repository.dart';
 import 'archives/archive_folder_repository.dart';
@@ -87,6 +88,7 @@ import 'rh/presence_repository.dart';
 import 'rh/presence_sortie_repository.dart';
 import 'rh/trans_rest_agents_repository.dart';
 import 'rh/transport_restauration_repository.dart';
+import 'update/update_version_repository.dart';
 import 'user/refresh_token_repository.dart';
 import 'user/user_repository.dart';
 
@@ -178,6 +180,8 @@ class Repository {
 
   // Mails
   late MailRepository mails;
+  // Update version
+  late UpdateVersionRepository updateVersion;
 
   // Notify Count
   late BudgetNotifyRepository budgetNotifyCount;
@@ -330,5 +334,7 @@ class Repository {
 
     // Mails
     mails = MailRepository(executor, 'mails');
+
+    updateVersion = UpdateVersionRepository(executor, 'update-verions');
   }
 }

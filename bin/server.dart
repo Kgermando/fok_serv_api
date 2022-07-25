@@ -92,6 +92,7 @@ import 'handlers/rh/presence_handlers.dart';
 import 'handlers/rh/presence_sortie_handlers.dart';
 import 'handlers/rh/trans_rest_agents_handlers.dart';
 import 'handlers/rh/transport_restauration_handlers.dart';
+import 'handlers/update/upate_handlers.dart';
 import 'middleware/middleware.dart';
 import 'repository/repository.dart';
 
@@ -733,6 +734,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(MailsHandlers(repos).router)); 
+    router.mount(
+        '/api/update-versions/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(UpdateHandlers(repos).router)); 
 
     router.all(
       '/<ignored|.*>',

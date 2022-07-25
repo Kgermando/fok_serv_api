@@ -17,7 +17,7 @@ class MailRepository {
       data.add(MailModel.fromSQL(row));
     }
     return data.toList();
-  }
+  } 
 
   Future<void> insertData(MailModel data) async {
     await executor.transaction((ctx) async {
