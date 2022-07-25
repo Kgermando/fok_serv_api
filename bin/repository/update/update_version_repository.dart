@@ -35,7 +35,7 @@ class UpdateVersionRepository {
 
   Future<void> update(UpdateModel data) async {
     await executor.query("""UPDATE $tableName
-        SET version = @1, url_update = @2,
+      SET version = @1, url_update = @2,
         created = @3 WHERE id = @4""", substitutionValues: {
       '1': data.version,
       '2': data.urlUpdate,
