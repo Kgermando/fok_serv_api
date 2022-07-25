@@ -24,7 +24,7 @@ class UpdateVersionRepository {
     await executor.transaction((ctx) async {
       await ctx.query(
         "INSERT INTO $tableName (id, version, url_update, created)"
-        "VALUES (nextval('update-verions_id_seq'), @1, @2, @3, @4)",
+        "VALUES (nextval('update-verions_id_seq'), @1, @2, @3)",
         substitutionValues: {
           '1': data.version,
           '2': data.urlUpdate,
@@ -36,7 +36,7 @@ class UpdateVersionRepository {
   Future<void> update(UpdateModel data) async {
     await executor.query("""UPDATE $tableName
         SET version = @1, url_update = @2,
-        created = @4 WHERE id = @5""", substitutionValues: {
+        created = @3 WHERE id = @4""", substitutionValues: {
       '1': data.version,
       '2': data.urlUpdate,
       '3': data.created,
