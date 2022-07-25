@@ -42,7 +42,7 @@ class UpdateVersionRepository {
       '3': data.created,
       '4': data.id
     });
-  }
+  } 
 
   deleteData(int id) async {
     try {
