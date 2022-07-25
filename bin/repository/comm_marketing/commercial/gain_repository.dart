@@ -20,7 +20,7 @@ class GainRepository {
     }
     return data.toList();
   }
-
+ 
   Future<List<CourbeGainModel>> getAllDataChartMounth() async {
     var data = <CourbeGainModel>{};
 

@@ -1,5 +1,5 @@
 class CourbeVenteModel {
-  final double created;
+  final String created;
   final double sum;
 
   CourbeVenteModel({required this.created, required this.sum});
@@ -26,7 +26,7 @@ class CourbeVenteModel {
 
 
 class CourbeGainModel {
-  final double created;
+  final String created;
   final double sum;
 
   CourbeGainModel({required this.created, required this.sum});
