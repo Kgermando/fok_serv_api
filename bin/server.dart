@@ -752,8 +752,6 @@ class Service {
 
 
 void main(List<String> args) async {
-  // Use any available host or container IP (usually `0.0.0.0`).
-  // final ip = InternetAddress.anyIPv4;
   final ip = "app";
   final port = 80;
 
