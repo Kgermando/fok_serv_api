@@ -24,7 +24,7 @@ class CampaignNotifyRepository {
       throw NotifyModel;
     }
   }
-
+ 
   Future<NotifyModel> getCountDD() async {
     try {
       var data = <NotifyModel>{};

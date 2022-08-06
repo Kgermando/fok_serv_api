@@ -23,7 +23,7 @@ class DevisNotifyRepository {
     } catch (e) {
       throw NotifyModel;
     }
-  }
+  }  
 
   Future<NotifyModel> getCountDD() async {
     try {

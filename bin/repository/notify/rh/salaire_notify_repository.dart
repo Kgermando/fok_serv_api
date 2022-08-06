@@ -25,8 +25,8 @@ class SalaireNotifyRepository {
     } catch (e) {
       throw NotifyModel;
     }
-  }
-
+  }  
+ 
   Future<NotifyModel> getCountBudget() async {
     try {
       var data = <NotifyModel>{};

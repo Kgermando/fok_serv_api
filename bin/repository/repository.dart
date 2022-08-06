@@ -64,6 +64,14 @@ import 'notify/comptabilites/balance_notify_repository.dart';
 import 'notify/comptabilites/bilan_notify_repository.dart';
 import 'notify/comptabilites/compte_resultat_notify_repository.dart';
 import 'notify/comptabilites/journal_notify_repository.dart';
+import 'notify/departements/administration/admin_departement.dart';
+import 'notify/departements/budgets/budget_departement_.dart';
+import 'notify/departements/comm_marketing/comm_marketing_departement.dart';
+import 'notify/departements/comptabilites/comptabilite_departement.dart';
+import 'notify/departements/exploitations/exploitations_departement.dart';
+import 'notify/departements/finances/finance_departement.dart';
+import 'notify/departements/logistiques/logistique_departement.dart';
+import 'notify/departements/rh/rh_department.dart';
 import 'notify/devis/devis_notify_repository.dart';
 import 'notify/exploitations/projet_notify_repository.dart';
 import 'notify/exploitations/taches_notify_repository.dart';
@@ -210,7 +218,27 @@ class Repository {
   late TransportRestNotifyRepository transportRestNotifyCount;
   late MailsNotifyRepository mailsNotifyCount;
 
+  // Notification SideBar
+  late AdminDepartementRepository adminDepartementRepository;
+  late BudgetDepartementRepository budgetDepartementRepository;
+  late CommMarketingDepartementRepository commMarketingDepartementRepository;
+  late ComptabiliteDepartementRepository comptabiliteDepartementRepository;
+  late ExploitationDepartementRepository exploitationDepartementRepository;
+  late FinanceDepartementRepository financeDepartementRepository;
+  late LogistiqueDepartementRepository logistiqueDepartementRepository;
+  late RhDepartementRepository rhDepartementRepository;
+
   Repository(this.executor) {
+    // Notification SideBar
+    adminDepartementRepository = AdminDepartementRepository(executor);
+    budgetDepartementRepository = BudgetDepartementRepository(executor);
+    commMarketingDepartementRepository = CommMarketingDepartementRepository(executor);
+    comptabiliteDepartementRepository = ComptabiliteDepartementRepository(executor);
+    exploitationDepartementRepository = ExploitationDepartementRepository(executor);
+    financeDepartementRepository = FinanceDepartementRepository(executor);
+    logistiqueDepartementRepository = LogistiqueDepartementRepository(executor);
+    rhDepartementRepository = RhDepartementRepository(executor);
+
     // Notifications
     budgetNotifyCount = BudgetNotifyRepository(executor, 'departement_budgets');
     campaignNotifyCount = CampaignNotifyRepository(executor, 'campaigns');

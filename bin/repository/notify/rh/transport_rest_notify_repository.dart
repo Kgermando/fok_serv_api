@@ -22,7 +22,7 @@ class TransportRestNotifyRepository {
       return data.single;
     } catch (e) {
       throw NotifyModel;
-    }
+    } 
   }
 
   Future<NotifyModel> getCountDD() async {

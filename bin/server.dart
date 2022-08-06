@@ -68,6 +68,14 @@ import 'handlers/notify/comptabilites/balance_notify_handlers.dart';
 import 'handlers/notify/comptabilites/bilan_notify_handlers.dart';
 import 'handlers/notify/comptabilites/compte_resultat_notify_handlers.dart';
 import 'handlers/notify/comptabilites/journal_notify_handlers.dart';
+import 'handlers/notify/departements/admin_departement.dart';
+import 'handlers/notify/departements/budget_departement.dart';
+import 'handlers/notify/departements/comm_marketing_departement.dart';
+import 'handlers/notify/departements/comptabilites_departement.dart';
+import 'handlers/notify/departements/exploitation_departement.dart';
+import 'handlers/notify/departements/finance_departement.dart';
+import 'handlers/notify/departements/logistique_departement.dart';
+import 'handlers/notify/departements/rh_departement.dart';
 import 'handlers/notify/devis/devis_notify_handlers.dart';
 import 'handlers/notify/exploitations/projet_notify_handlers.dart';
 import 'handlers/notify/exploitations/tache_notify_handlers.dart';
@@ -105,6 +113,57 @@ class Service {
 
   Handler get handlers {
     final router = Router();
+      router.mount(
+        '/api/counts/departement-admin/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(AdminDepartementHandlers(repos).router));
+    router.mount(
+        '/api/counts/departement-budgets/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(BudgetDepartementHandlers(repos).router));
+    router.mount(
+        '/api/counts/departement-comm-marketing/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(CommMarketingDepartementHandlers(repos).router));
+    router.mount(
+        '/api/counts/departement-comptabilite/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(ComptabiliteDepartementHandlers(repos).router));
+    router.mount(
+        '/api/counts/departement-exploitations/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(ExploitationDepartementHandlers(repos).router));
+    router.mount(
+        '/api/counts/departement-finances/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(FinanceDepartementHandlers(repos).router));
+    router.mount(
+        '/api/counts/departement-logistique/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(LogistiqueDepartementHandlers(repos).router));
+    router.mount(
+        '/api/counts/departement-rh/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(RhDepartementHandlers(repos).router));
+
+
+
       router.mount(
         '/api/counts/budgets/',
         Pipeline()
