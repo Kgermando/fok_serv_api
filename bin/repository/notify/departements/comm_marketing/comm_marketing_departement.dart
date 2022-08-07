@@ -11,13 +11,13 @@ class CommMarketingDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM campaigns where 
+        (SELECT COUNT(*) FROM "campaigns" where 
         "approbation_dd" = '-' AND 
         "observation" = 'false')
         +
-        (SELECT COUNT(*) FROM produits_model where "approbation_dd" = '-')
+        (SELECT COUNT(*) FROM "produits_model" where "approbation_dd" = '-')
         +
-        (SELECT COUNT(*) FROM succursales where "approbation_dd" = '-')
+        (SELECT COUNT(*) FROM "succursales" where "approbation_dd" = '-')
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {

@@ -12,18 +12,18 @@ class ComptabiliteDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-         (SELECT COUNT(*) FROM balance_comptes where
+         (SELECT COUNT(*) FROM "balance_comptes" where
            "approbation_dd" = '-' AND
            "is_submit" = 'true')
         +
-         (SELECT COUNT(*) FROM bilans where 
+         (SELECT COUNT(*) FROM "bilans" where 
            "approbation_dd" = '-' AND
            "is_submit" = 'true')
         +
-         (SELECT COUNT(*) FROM comptes_resultat where 
+         (SELECT COUNT(*) FROM "comptes_resultat" where 
            "approbation_dd" = '-')
         +
-         (SELECT COUNT(*) FROM journals where 
+         (SELECT COUNT(*) FROM "journals" where 
            "approbation_dd" = '-')
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);

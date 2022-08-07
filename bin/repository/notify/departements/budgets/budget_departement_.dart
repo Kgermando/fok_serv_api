@@ -11,37 +11,37 @@ class BudgetDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT * FROM departement_budgets where
+          (SELECT * FROM "departement_budgets" where
             NOW() <= "periode_fin"  AND
             "approbation_dd" = '-' AND
             "is_submit" = 'true')
         +
-          (SELECT COUNT(*) FROM transport_restaurations where 
+          (SELECT COUNT(*) FROM "transport_restaurations" where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = '-' AND 
             "observation" = 'false' AND "is_submit" = 'true')
         +
-          (SELECT COUNT(*) FROM salaires where 
+          (SELECT COUNT(*) FROM "salaires" where 
             EXTRACT(MONTH FROM "created_at" ::TIMESTAMP) = EXTRACT(MONTH FROM NOW() ::TIMESTAMP) AND
             EXTRACT(YEAR FROM "created_at" ::TIMESTAMP) = EXTRACT(YEAR FROM NOW() ::TIMESTAMP) AND
             "approbation_dd" = 'Approved' AND 
             "approbation_budget" = '-' AND 
             "observation" = 'false')
         +
-          (SELECT COUNT(*) FROM projets where 
+          (SELECT COUNT(*) FROM "projets" where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = '-' AND 
             "observation" = 'false')
         +
-          (SELECT COUNT(*) FROM devis where 
+          (SELECT COUNT(*) FROM "devis" where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = '-' AND 
             "observation" = 'false')
         +
-          (SELECT COUNT(*) FROM campaigns where 
+          (SELECT COUNT(*) FROM "campaigns" where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = '-' AND 

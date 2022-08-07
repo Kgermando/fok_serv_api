@@ -13,7 +13,7 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM departement_budgets where 
+        (SELECT COUNT(*) FROM "departement_budgets" where 
         NOW() <= "periode_fin" AND
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
@@ -33,13 +33,13 @@ class AdminDepartementRepository {
     try {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
-      (
-          (SELECT COUNT(*) FROM campaigns where 
+        (
+          (SELECT COUNT(*) FROM "campaigns" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "observation" = 'false') 
         +
-          (SELECT COUNT(*) FROM succursales where 
+          (SELECT COUNT(*) FROM "succursales" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-')
         
@@ -60,21 +60,21 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM balance_comptes where 
+          (SELECT COUNT(*) FROM "balance_comptes" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "is_submit" = 'true') 
         +
-          (SELECT COUNT(*) FROM bilans where  
+          (SELECT COUNT(*) FROM "bilans" where  
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "is_submit" = 'true')
         +
-          (SELECT COUNT(*) FROM comptes_resultat where  
+          (SELECT COUNT(*) FROM "comptes_resultat" where  
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-')
         +
-          (SELECT COUNT(*) FROM journals where  
+          (SELECT COUNT(*) FROM "journals" where  
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-') 
       );""";
@@ -93,7 +93,7 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM projets where 
+          (SELECT COUNT(*) FROM "projets" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "observation" = 'false') 
@@ -113,12 +113,12 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM creances where 
+          (SELECT COUNT(*) FROM "creances" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND
         "statut_paie" = 'false') 
         +
-          (SELECT COUNT(*) FROM dettes where 
+          (SELECT COUNT(*) FROM "dettes" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND
         "statut_paie" = 'false') 
@@ -138,11 +138,11 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM anguins where 
+          (SELECT COUNT(*) FROM "anguins" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-') 
         +
-          (SELECT COUNT(*) FROM immobiliers where 
+          (SELECT COUNT(*) FROM "immobiliers" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-') 
       );""";
@@ -161,7 +161,7 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM transport_restaurations where 
+        (SELECT COUNT(*) FROM "transport_restaurations" where 
           "approbation_dd" = 'Approved' AND
           "approbation_dg" = '-' AND 
           "observation" = 'false' AND "is_submit" = 'true')  
@@ -181,7 +181,7 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM devis where 
+        (SELECT COUNT(*) FROM "devis" where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "observation" = 'false')
