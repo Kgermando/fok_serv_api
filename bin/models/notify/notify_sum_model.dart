@@ -8,11 +8,11 @@ class NotifySumModel {
   }
 
   factory NotifySumModel.fromJson(Map<String, dynamic> json) {
-    return NotifySumModel(sum: json['count']);
+    return NotifySumModel(sum: json['sum']);
   }
 
   Map<String, dynamic> toJson() {
-    return {'count': sum};
+    return {'sum': sum};
   }
 }
 
