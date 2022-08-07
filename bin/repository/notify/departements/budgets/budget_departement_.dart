@@ -6,42 +6,49 @@ class BudgetDepartementRepository {
   final PostgreSQLConnection executor;
   BudgetDepartementRepository(this.executor);
 
+  static String tableNameBudget = 'departement_budgets';
+  static String tableNameCommMarketingCampaign = 'campaigns';
+  static String tableNameRhTransRest = 'transport_restaurations';
+  static String tableNameRhSalaire = 'salaires';
+  static String tableNameDevis = 'devis';
+  static String tableNameExploitation = 'projets';
+
   Future<NotifySumModel> getCountBudget() async {
     try {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT * FROM "departement_budgets" where
+          (SELECT * FROM $tableNameBudget where
             NOW() <= "periode_fin"  AND
             "approbation_dd" = '-' AND
             "is_submit" = 'true')
         +
-          (SELECT COUNT(*) FROM "transport_restaurations" where 
+          (SELECT COUNT(*) FROM $tableNameRhTransRest where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = '-' AND 
             "observation" = 'false' AND "is_submit" = 'true')
         +
-          (SELECT COUNT(*) FROM "salaires" where 
+          (SELECT COUNT(*) FROM $tableNameRhSalaire where 
             EXTRACT(MONTH FROM "created_at" ::TIMESTAMP) = EXTRACT(MONTH FROM NOW() ::TIMESTAMP) AND
             EXTRACT(YEAR FROM "created_at" ::TIMESTAMP) = EXTRACT(YEAR FROM NOW() ::TIMESTAMP) AND
             "approbation_dd" = 'Approved' AND 
             "approbation_budget" = '-' AND 
             "observation" = 'false')
         +
-          (SELECT COUNT(*) FROM "projets" where 
+          (SELECT COUNT(*) FROM $tableNameExploitation where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = '-' AND 
             "observation" = 'false')
         +
-          (SELECT COUNT(*) FROM "devis" where 
+          (SELECT COUNT(*) FROM $tableNameDevis where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = '-' AND 
             "observation" = 'false')
         +
-          (SELECT COUNT(*) FROM "campaigns" where 
+          (SELECT COUNT(*) FROM $tableNameCommMarketingCampaign where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = '-' AND 
@@ -53,9 +60,7 @@ class BudgetDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
-  
 }
-

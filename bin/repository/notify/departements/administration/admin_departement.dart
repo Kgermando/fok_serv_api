@@ -8,12 +8,27 @@ class AdminDepartementRepository {
   final PostgreSQLConnection executor;
   AdminDepartementRepository(this.executor);
 
+  static String tableNameBudget = 'departement_budgets';
+  static String tableNameCommMarketingCampaign = 'campaigns';
+  static String tableNameComptabiliteSuccurasale = 'succursales';
+  static String tableNameComptBalance = 'balance_comptes';
+  static String tableNameComptBilans = 'bilans';
+  static String tableNameComptComptesResultat = 'comptes_resultat';
+  static String tableNameComptJournals = 'journals';
+  static String tableNameExploitation = 'projets';
+  static String tableNameFinanceCreance = 'creances';
+  static String tableNameFinanceDette = 'dettes';
+  static String tableNameLogistiqueEngin = 'anguins';
+  static String tableNameLogistiqueImmobiliers = 'immobiliers';
+  static String tableNameRh = 'transport_restaurations';
+  static String tableNameDevis = 'devis';
+
   Future<NotifySumModel> getCountBudget() async {
     try {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM 'departement_budgets' where 
+        (SELECT COUNT(*) FROM $tableNameBudget where 
         NOW() <= "periode_fin" AND
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
@@ -25,7 +40,7 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 
@@ -34,12 +49,12 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
         (
-          (SELECT COUNT(*) FROM "campaigns" where 
+          (SELECT COUNT(*) FROM $tableNameCommMarketingCampaign where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "observation" = 'false') 
         +
-          (SELECT COUNT(*) FROM "succursales" where 
+          (SELECT COUNT(*) FROM $tableNameComptabiliteSuccurasale where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-')
         
@@ -51,7 +66,7 @@ class AdminDepartementRepository {
       return data.single;
     } catch (e) {
       log('$e');
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 
@@ -60,21 +75,21 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM "balance_comptes" where 
+          (SELECT COUNT(*) FROM $tableNameComptBalance where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "is_submit" = 'true') 
         +
-          (SELECT COUNT(*) FROM "bilans" where  
+          (SELECT COUNT(*) FROM $tableNameComptBilans where  
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "is_submit" = 'true')
         +
-          (SELECT COUNT(*) FROM "comptes_resultat" where  
+          (SELECT COUNT(*) FROM $tableNameComptComptesResultat where  
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-')
         +
-          (SELECT COUNT(*) FROM "journals" where  
+          (SELECT COUNT(*) FROM $tableNameComptJournals where  
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-') 
       );""";
@@ -84,7 +99,7 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 
@@ -93,7 +108,7 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM "projets" where 
+          (SELECT COUNT(*) FROM $tableNameExploitation where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "observation" = 'false') 
@@ -104,7 +119,7 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 
@@ -113,12 +128,12 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM "creances" where 
+          (SELECT COUNT(*) FROM $tableNameFinanceCreance where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND
         "statut_paie" = 'false') 
         +
-          (SELECT COUNT(*) FROM "dettes" where 
+          (SELECT COUNT(*) FROM $tableNameFinanceDette where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND
         "statut_paie" = 'false') 
@@ -129,7 +144,7 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 
@@ -138,11 +153,11 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM "anguins" where 
+          (SELECT COUNT(*) FROM $tableNameLogistiqueEngin where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-') 
         +
-          (SELECT COUNT(*) FROM "immobiliers" where 
+          (SELECT COUNT(*) FROM $tableNameLogistiqueImmobiliers where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-') 
       );""";
@@ -152,7 +167,7 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 
@@ -161,7 +176,7 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM "transport_restaurations" where 
+        (SELECT COUNT(*) FROM $tableNameRh where 
           "approbation_dd" = 'Approved' AND
           "approbation_dg" = '-' AND 
           "observation" = 'false' AND "is_submit" = 'true')  
@@ -172,7 +187,7 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 
@@ -181,7 +196,7 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM "devis" where 
+        (SELECT COUNT(*) FROM $tableNameDevis where 
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "observation" = 'false')
@@ -192,7 +207,7 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 }

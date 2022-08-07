@@ -6,12 +6,13 @@ class CommMarketingDepartementRepository {
   final PostgreSQLConnection executor;
   CommMarketingDepartementRepository(this.executor);
 
+  static String tableNameCommMarketingCampaign = 'campaigns';
   Future<NotifySumModel> getCountDD() async {
     try {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM "campaigns" where 
+        (SELECT COUNT(*) FROM $tableNameCommMarketingCampaign where 
         "approbation_dd" = '-' AND 
         "observation" = 'false')
         +
@@ -25,7 +26,7 @@ class CommMarketingDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 }

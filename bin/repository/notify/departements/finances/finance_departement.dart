@@ -7,27 +7,35 @@ class FinanceDepartementRepository {
 
   FinanceDepartementRepository(this.executor);
 
+  static String tableNameFinanceCreance = 'creances';
+  static String tableNameFinanceDette = 'dettes';
+  static String tableNameCommMarketingCampaign = 'campaigns';
+  static String tableNameRhTransRest = 'transport_restaurations';
+  static String tableNameRhSalaire = 'salaires';
+  static String tableNameDevis = 'devis';
+  static String tableNameExploitation = 'projets';
+
   Future<NotifySumModel> getCountFin() async {
-     try {
+    try {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM "creances" where 
+          (SELECT COUNT(*) FROM $tableNameFinanceCreance where 
           "approbation_dd" = '-' AND
           "statut_paie" = 'false')
         +
-          (SELECT COUNT(*) FROM "dettes" where 
+          (SELECT COUNT(*) FROM $tableNameFinanceDette where 
           "approbation_dd" = '-' AND
           "statut_paie" = 'false')
         + 
-          (SELECT COUNT(*) FROM "transport_restaurations" where 
+          (SELECT COUNT(*) FROM $tableNameRhTransRest where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = 'Approved' AND 
             "approbation_fin" = '-' AND 
             "observation" = 'false' AND "is_submit" = 'true') 
         + 
-          (SELECT COUNT(*) FROM "salaires" where 
+          (SELECT COUNT(*) FROM $tableNameRhSalaire where 
             EXTRACT(MONTH FROM "created_at" ::TIMESTAMP) = EXTRACT(MONTH FROM NOW() ::TIMESTAMP) AND
             EXTRACT(YEAR FROM "created_at" ::TIMESTAMP) = EXTRACT(YEAR FROM NOW() ::TIMESTAMP) AND
             "approbation_dd" = 'Approved' AND 
@@ -35,21 +43,21 @@ class FinanceDepartementRepository {
             "approbation_fin" = '-' AND 
             "observation" = 'false') 
         + 
-          (SELECT COUNT(*) FROM "devis" where 
+          (SELECT COUNT(*) FROM $tableNameDevis where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = 'Approved' AND 
             "approbation_fin" = '-' AND 
             "observation" = 'false')
         + 
-          (SELECT COUNT(*) FROM "campaigns" where 
+          (SELECT COUNT(*) FROM $tableNameCommMarketingCampaign where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = 'Approved' AND 
             "approbation_fin" = '-' AND 
             "observation" = 'false')
         + 
-          (SELECT COUNT(*) FROM "projets" where 
+          (SELECT COUNT(*) FROM $tableNameExploitation where 
           "approbation_dd" = 'Approved' AND 
           "approbation_dg" = 'Approved' AND 
           "approbation_budget" = 'Approved' AND 
@@ -62,31 +70,30 @@ class FinanceDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
-
 
   Future<NotifySumModel> getCountFinObs() async {
     try {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM "transport_restaurations" where 
+          (SELECT COUNT(*) FROM $tableNameRhTransRest where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = 'Approved' AND 
             "approbation_fin" = 'Approved' AND 
             "observation" = 'false' AND "is_submit" = 'true')
         +
-          (SELECT COUNT(*) FROM "projets" where 
+          (SELECT COUNT(*) FROM $tableNameExploitation where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = 'Approved' AND 
             "approbation_fin" = 'Approved' AND 
             "observation" = 'false')
         + 
-          (SELECT COUNT(*) FROM "salaires" where 
+          (SELECT COUNT(*) FROM $tableNameRhSalaire where 
             EXTRACT(MONTH FROM "created_at" ::TIMESTAMP) = EXTRACT(MONTH FROM NOW() ::TIMESTAMP) AND
             EXTRACT(YEAR FROM "created_at" ::TIMESTAMP) = EXTRACT(YEAR FROM NOW() ::TIMESTAMP) AND
             "approbation_dd" = 'Approved' AND  
@@ -94,14 +101,14 @@ class FinanceDepartementRepository {
             "approbation_fin" = 'Approved' AND 
             "observation" = 'false') 
         + 
-          (SELECT COUNT(*) FROM "devis" where 
+          (SELECT COUNT(*) FROM $tableNameDevis where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = 'Approved' AND 
             "approbation_fin" = 'Approved' AND 
             "observation" = 'false') 
         + 
-          (SELECT COUNT(*) FROM "campaigns" where 
+          (SELECT COUNT(*) FROM $tableNameCommMarketingCampaign where 
             "approbation_dd" = 'Approved' AND 
             "approbation_dg" = 'Approved' AND 
             "approbation_budget" = 'Approved' AND 
@@ -115,7 +122,7 @@ class FinanceDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      throw NotifySumModel;
+      throw Exception('$e');
     }
   }
 }
