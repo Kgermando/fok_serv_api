@@ -13,7 +13,7 @@ class AdminDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-        (SELECT COUNT(*) FROM "departement_budgets" where 
+        (SELECT COUNT(*) FROM 'departement_budgets' where 
         NOW() <= "periode_fin" AND
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
