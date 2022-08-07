@@ -4,7 +4,7 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
 import '../../../repository/repository.dart';
-import '../../../models/notify/notify_model.dart';
+import '../../../models/notify/notify_model.dart'; 
 
 class AdminDepartementHandlers {
   final Repository repos;
