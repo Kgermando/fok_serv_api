@@ -1,14 +1,14 @@
 import 'package:postgres/postgres.dart';
 
-import '../../../../models/notify/notify_model.dart';
+import '../../../../models/notify/notify_sum_model.dart';
 
 class BudgetDepartementRepository {
   final PostgreSQLConnection executor;
   BudgetDepartementRepository(this.executor);
 
-  Future<NotifyModel> getCountBudget() async {
+  Future<NotifySumModel> getCountBudget() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT * FROM departement_budgets where
@@ -49,11 +49,11 @@ class BudgetDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   }
   

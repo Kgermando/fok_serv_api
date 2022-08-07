@@ -1,15 +1,15 @@
 import 'package:postgres/postgres.dart';
 
-import '../../../../models/notify/notify_model.dart';
+import '../../../../models/notify/notify_sum_model.dart';
 
 class LogistiqueDepartementRepository {
   final PostgreSQLConnection executor;
 
   LogistiqueDepartementRepository(this.executor);
 
-  Future<NotifyModel> getCountDD() async {
+  Future<NotifySumModel> getCountDD() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT COUNT(*) FROM carburants where "approbation_dd" = '-')
@@ -29,11 +29,11 @@ class LogistiqueDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   }
 }

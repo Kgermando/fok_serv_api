@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+
 import '../../../repository/repository.dart';
-import '../../../models/notify/notify_model.dart';
+import '../../../models/notify/notify_sum_model.dart';
 
 class RhDepartementHandlers {
   final Repository repos;
@@ -16,7 +17,7 @@ class RhDepartementHandlers {
 
    
     router.get('/get-count-departement-rh/', (Request request) async {
-      NotifyModel data = await repos.rhDepartementRepository.getCountDD();
+      NotifySumModel data = await repos.rhDepartementRepository.getCountDD();
       return Response.ok(jsonEncode(data));
     });
  

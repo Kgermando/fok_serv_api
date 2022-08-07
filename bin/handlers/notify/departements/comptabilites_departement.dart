@@ -4,7 +4,7 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
 import '../../../repository/repository.dart';
-import '../../../models/notify/notify_model.dart';
+import '../../../models/notify/notify_sum_model.dart';
 
 class ComptabiliteDepartementHandlers {
   final Repository repos;
@@ -15,7 +15,7 @@ class ComptabiliteDepartementHandlers {
     final router = Router();
  
     router.get('/get-count-departement-comptabilite/', (Request request) async {
-      NotifyModel data =
+      NotifySumModel data =
           await repos.comptabiliteDepartementRepository.getCountDD();
       return Response.ok(jsonEncode(data));
     });

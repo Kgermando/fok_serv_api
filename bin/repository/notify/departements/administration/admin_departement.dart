@@ -1,14 +1,15 @@
 import 'package:postgres/postgres.dart';
 
-import '../../../../models/notify/notify_model.dart';
+import '../../../../models/notify/notify_sum_model.dart';
+
 
 class AdminDepartementRepository {
   final PostgreSQLConnection executor;
   AdminDepartementRepository(this.executor);
 
-  Future<NotifyModel> getCountBudget() async {
+  Future<NotifySumModel> getCountBudget() async {
      try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
         (SELECT COUNT(*) FROM departement_budgets where 
@@ -19,17 +20,17 @@ class AdminDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   } 
 
-  Future<NotifyModel> getCountCommMarketing() async {
+  Future<NotifySumModel> getCountCommMarketing() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT COUNT(*) FROM campaigns where 
@@ -44,17 +45,17 @@ class AdminDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   } 
 
-  Future<NotifyModel> getCountComptabilite() async {
+  Future<NotifySumModel> getCountComptabilite() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT COUNT(*) FROM balance_comptes where 
@@ -77,17 +78,17 @@ class AdminDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   } 
 
-  Future<NotifyModel> getCountExploitation() async {
+  Future<NotifySumModel> getCountExploitation() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT COUNT(*) FROM projets where 
@@ -97,17 +98,17 @@ class AdminDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   } 
 
-  Future<NotifyModel> getCountFinance() async {
+  Future<NotifySumModel> getCountFinance() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT COUNT(*) FROM creances where 
@@ -122,17 +123,17 @@ class AdminDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   } 
 
-  Future<NotifyModel> getCountLogistique() async {
+  Future<NotifySumModel> getCountLogistique() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT COUNT(*) FROM anguins where 
@@ -145,17 +146,17 @@ class AdminDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   } 
 
-  Future<NotifyModel> getCountRH() async {
+  Future<NotifySumModel> getCountRH() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
         (SELECT COUNT(*) FROM transport_restaurations where 
@@ -165,17 +166,17 @@ class AdminDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   } 
 
-  Future<NotifyModel> getCountDevis() async {
+  Future<NotifySumModel> getCountDevis() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
         (SELECT COUNT(*) FROM devis where 
@@ -185,11 +186,11 @@ class AdminDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   }
 }

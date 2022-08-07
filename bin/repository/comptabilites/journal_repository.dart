@@ -19,7 +19,7 @@ class JournalRepository {
     }
     return data.toList();
   }
-
+ 
   Future<List<CourbeJournalModel>> getAllDataChartMounth() async {
     var data = <CourbeJournalModel>{};
     var querySQL =

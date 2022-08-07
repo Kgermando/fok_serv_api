@@ -15,3 +15,4 @@ class NotifyModel {
     return {'count': count};
   }
 }
+

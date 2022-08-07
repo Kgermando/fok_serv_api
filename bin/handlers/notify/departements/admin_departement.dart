@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
+import '../../../models/notify/notify_sum_model.dart';
 import '../../../repository/repository.dart';
 import '../../../models/notify/notify_model.dart'; 
 
@@ -15,43 +16,43 @@ class AdminDepartementHandlers {
     final router = Router();
 
     router.get('/get-count-admin-departement-budget/', (Request request) async {
-      NotifyModel data = await repos.adminDepartementRepository.getCountBudget();
+      NotifySumModel data = await repos.adminDepartementRepository.getCountBudget();
       return Response.ok(jsonEncode(data));
     }); 
 
     router.get('/get-count-admin-departement-comm-marketing/', (Request request) async {
-      NotifyModel data = await repos.adminDepartementRepository.getCountCommMarketing();
+      NotifySumModel data = await repos.adminDepartementRepository.getCountCommMarketing();
       return Response.ok(jsonEncode(data));
     }); 
 
     router.get('/get-count-admin-departement-comptabilite/', (Request request) async {
-      NotifyModel data = await repos.adminDepartementRepository.getCountComptabilite();
+      NotifySumModel data = await repos.adminDepartementRepository.getCountComptabilite();
       return Response.ok(jsonEncode(data));
     }); 
 
     router.get('/get-count-admin-departement-exploitation/', (Request request) async {
-      NotifyModel data = await repos.adminDepartementRepository.getCountExploitation();
+      NotifySumModel data = await repos.adminDepartementRepository.getCountExploitation();
       return Response.ok(jsonEncode(data));
     }); 
 
     router.get('/get-count-admin-departement-finance/', (Request request) async {
-      NotifyModel data = await repos.adminDepartementRepository.getCountFinance();
+      NotifySumModel data = await repos.adminDepartementRepository.getCountFinance();
       return Response.ok(jsonEncode(data));
     }); 
 
     router.get('/get-count-admin-departement-logistique/', (Request request) async {
-      NotifyModel data = await repos.adminDepartementRepository.getCountLogistique();
+      NotifySumModel data = await repos.adminDepartementRepository.getCountLogistique();
       return Response.ok(jsonEncode(data));
     }); 
 
     router.get('/get-count-admin-departement-rh/', (Request request) async {
-      NotifyModel data = await repos.adminDepartementRepository.getCountRH();
+      NotifySumModel data = await repos.adminDepartementRepository.getCountRH();
       return Response.ok(jsonEncode(data));
     }); 
 
 
     router.get('/get-count-admin-departement-devis/', (Request request) async {
-      NotifyModel data = await repos.adminDepartementRepository.getCountDevis();
+      NotifySumModel data = await repos.adminDepartementRepository.getCountDevis();
       return Response.ok(jsonEncode(data));
     }); 
 

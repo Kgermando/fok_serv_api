@@ -1,15 +1,15 @@
 import 'package:postgres/postgres.dart';
 
-import '../../../../models/notify/notify_model.dart';
+import '../../../../models/notify/notify_sum_model.dart';
 
 class FinanceDepartementRepository {
   final PostgreSQLConnection executor;
 
   FinanceDepartementRepository(this.executor);
 
-  Future<NotifyModel> getCountFin() async {
+  Future<NotifySumModel> getCountFin() async {
      try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT COUNT(*) FROM creances where 
@@ -58,18 +58,18 @@ class FinanceDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   }
 
 
-  Future<NotifyModel> getCountFinObs() async {
+  Future<NotifySumModel> getCountFinObs() async {
     try {
-      var data = <NotifyModel>{};
+      var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
           (SELECT COUNT(*) FROM transport_restaurations where 
@@ -111,11 +111,11 @@ class FinanceDepartementRepository {
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
-        data.add(NotifyModel.fromSQL(row));
+        data.add(NotifySumModel.fromSQL(row));
       }
       return data.single;
     } catch (e) {
-      throw NotifyModel;
+      throw NotifySumModel;
     }
   }
 }
