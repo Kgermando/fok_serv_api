@@ -1,5 +1,5 @@
 class NotifySumModel {
-  final int sum;
+  final String sum;
 
   const NotifySumModel({required this.sum});
 
