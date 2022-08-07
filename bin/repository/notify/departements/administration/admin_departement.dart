@@ -2,13 +2,12 @@ import 'package:postgres/postgres.dart';
 
 import '../../../../models/notify/notify_sum_model.dart';
 
-
 class AdminDepartementRepository {
   final PostgreSQLConnection executor;
   AdminDepartementRepository(this.executor);
 
   Future<NotifySumModel> getCountBudget() async {
-     try {
+    try {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
@@ -26,7 +25,7 @@ class AdminDepartementRepository {
     } catch (e) {
       throw NotifySumModel;
     }
-  } 
+  }
 
   Future<NotifySumModel> getCountCommMarketing() async {
     try {
@@ -49,9 +48,10 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
+      print('$e');
       throw NotifySumModel;
     }
-  } 
+  }
 
   Future<NotifySumModel> getCountComptabilite() async {
     try {
@@ -84,7 +84,7 @@ class AdminDepartementRepository {
     } catch (e) {
       throw NotifySumModel;
     }
-  } 
+  }
 
   Future<NotifySumModel> getCountExploitation() async {
     try {
@@ -104,7 +104,7 @@ class AdminDepartementRepository {
     } catch (e) {
       throw NotifySumModel;
     }
-  } 
+  }
 
   Future<NotifySumModel> getCountFinance() async {
     try {
@@ -129,7 +129,7 @@ class AdminDepartementRepository {
     } catch (e) {
       throw NotifySumModel;
     }
-  } 
+  }
 
   Future<NotifySumModel> getCountLogistique() async {
     try {
@@ -152,7 +152,7 @@ class AdminDepartementRepository {
     } catch (e) {
       throw NotifySumModel;
     }
-  } 
+  }
 
   Future<NotifySumModel> getCountRH() async {
     try {
@@ -172,7 +172,7 @@ class AdminDepartementRepository {
     } catch (e) {
       throw NotifySumModel;
     }
-  } 
+  }
 
   Future<NotifySumModel> getCountDevis() async {
     try {
