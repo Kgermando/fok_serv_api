@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:postgres/postgres.dart';
 
 import '../../../../models/notify/notify_sum_model.dart';
@@ -48,7 +50,7 @@ class AdminDepartementRepository {
       }
       return data.single;
     } catch (e) {
-      print('$e');
+      log('$e');
       throw NotifySumModel;
     }
   }
