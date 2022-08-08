@@ -18,7 +18,7 @@ class FinanceDepartementHandlers {
       NotifySumModel data =
           await repos.financeDepartementRepository.getCountFin();
       return Response.ok(jsonEncode(data));
-    });
+    }); 
 
     router.get('/get-count-departement-finance-obs/', (Request request) async {
       NotifySumModel data =

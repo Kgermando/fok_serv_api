@@ -18,7 +18,7 @@ class BudgetDepartementRepository {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT * FROM $tableNameBudget where
+          (SELECT COUNT(*) FROM $tableNameBudget where
             NOW() <= "periode_fin"  AND
             "approbation_dd" = '-' AND
             "is_submit" = 'true')
