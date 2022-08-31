@@ -1,45 +1,49 @@
 import 'package:postgres/postgres.dart';
 
-import '../../models/comptabilites/compte_passif_model.dart';
+import '../../models/comptabilites/compte_bilan_ref_model.dart';
 
 
-class ComptePassifRepository {
+class CompteBilanRefRepository {
   final PostgreSQLConnection executor;
   final String tableName;
 
-  ComptePassifRepository(this.executor, this.tableName);
+  CompteBilanRefRepository(this.executor, this.tableName);
 
-  Future<List<ComptePassifModel>> getAllData() async {
-    var data = <ComptePassifModel>{};
+  Future<List<CompteBilanRefModel>> getAllData() async {
+    var data = <CompteBilanRefModel>{};
 
     var querySQL = "SELECT * FROM $tableName ORDER BY \"reference\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
-      data.add(ComptePassifModel.fromSQL(row));
+      data.add(CompteBilanRefModel.fromSQL(row));
     }
     return data.toList();
   }
 
-  Future<void> insertData(ComptePassifModel data) async {
+  Future<void> insertData(CompteBilanRefModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, reference, comptes, montant)"
-          "VALUES (nextval('compte_passifs_id_seq'), @1, @2, @3)",
+          "INSERT INTO $tableName (id, reference, comptes, montant, type)"
+          "VALUES (nextval('compte_bilan_ref_id_seq'), @1, @2, @3, @4)",
           substitutionValues: {
             '1': data.reference,
             '2': data.comptes,
-            '3': data.montant
+            '3': data.montant,
+            '4': data.type,
           });
     });
   }
 
-  Future<void> update(ComptePassifModel data) async {
-    await executor.query("""UPDATE $tableName SET reference = @1,
-          comptes = @2, montant = @3 WHERE id = @4""", substitutionValues: {
+  Future<void> update(CompteBilanRefModel data) async {
+    await executor.query("""UPDATE $tableName
+      SET reference = @1, 
+      comptes = @2, montant = @3, 
+      type = @4 WHERE id = @5""", substitutionValues: {
       '1': data.reference,
       '2': data.comptes,
       '3': data.montant,
-      '4': data.id
+      '4': data.type,
+      '5': data.id
     });
   }
 
@@ -54,14 +58,15 @@ class ComptePassifRepository {
     }
   }
 
-  Future<ComptePassifModel> getFromId(int id) async {
+  Future<CompteBilanRefModel> getFromId(int id) async {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
-    return ComptePassifModel(
+    return CompteBilanRefModel(
       id: data[0][0],
       reference: data[0][1],
       comptes: data[0][2],
-      montant: data[0][3]
+      montant: data[0][3],
+      type: data[0][4]
     );
   }
   

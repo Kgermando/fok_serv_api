@@ -1,6 +1,5 @@
 import 'package:postgres/postgres.dart';
 
-import '../../models/charts/pie_chart_model.dart';
 import '../../models/devis/devis_models.dart';
 
 class DevisRepository {
@@ -21,39 +20,7 @@ class DevisRepository {
     return data.toList();
   }
 
-  Future<List<PieChartModel>> getDepartementChartPieMounth() async {
-    try {
-      var data = <PieChartModel>{};
-    var querySQL =
-          "SELECT departement, COUNT(departement) FROM $tableName WHERE \"created\" >= NOW() - '1 mons' :: INTERVAL  GROUP BY \"departement\";";
-      // var querySQL =
-      //     "SELECT departement, COUNT(departement) FROM $tableName GROUP BY \"departement\";";
-      List<List<dynamic>> results = await executor.query(querySQL);
-      for (var row in results) {
-        data.add(PieChartModel.fromSQL(row));
-      }
-      return data.toList();
-    } catch (e) {
-      throw PieChartModel;
-    }
-  }
 
-  Future<List<PieChartModel>> getDepartementChartPieYear() async {
-    try {
-      var data = <PieChartModel>{};
-      var querySQL =
-          "SELECT departement, COUNT(departement) FROM $tableName WHERE \"created\" >= NOW() - '1 years' :: INTERVAL  GROUP BY \"departement\";";
-      // var querySQL =
-      //     "SELECT departement, COUNT(departement) FROM $tableName GROUP BY \"departement\";";
-      List<List<dynamic>> results = await executor.query(querySQL);
-      for (var row in results) {
-        data.add(PieChartModel.fromSQL(row));
-      }
-      return data.toList();
-    } catch (e) {
-      throw PieChartModel;
-    }
-  }
 
   Future<void> insertData(DevisModel data) async {
     await executor.transaction((ctx) async {

@@ -104,16 +104,15 @@ class ImmobilierHandlers {
       if (input['motifDD'] != null) {
         data.motifDD = input['motifDD'];
       }
-      if (input['motifDD'] != null) {
-        data.motifDD = input['motifDD'];
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
       }
       repos.immobiliers.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-immobilier/<id>', (
-      String id,
-      Request request,
+      Request request, String id
     ) async {
       var id = request.params['id'];
       repos.immobiliers.deleteData(int.parse(id!));

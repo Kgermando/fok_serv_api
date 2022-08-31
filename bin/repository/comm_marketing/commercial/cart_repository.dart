@@ -81,7 +81,7 @@ class CartRepository {
     try {
       await executor.transaction((conn) async {
         await conn.execute(
-            "DELETE * FROM $tableName WHERE \"signature\"='$signature';");
+            "DELETE FROM $tableName WHERE \"signature\"='$signature';");
       });
     } catch (e) {
       'erreur $e';

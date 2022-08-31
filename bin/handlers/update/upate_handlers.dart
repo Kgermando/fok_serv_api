@@ -36,7 +36,8 @@ class UpdateHandlers {
       UpdateModel data = UpdateModel(
         version: input['version'],
         urlUpdate: input['urlUpdate'], 
-        created: DateTime.parse(input['created'])
+        created: DateTime.parse(input['created']),
+        isActive: input['isActive'], 
       );
       try {
         await repos.updateVersion.insertData(data);
@@ -61,6 +62,9 @@ class UpdateHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['isActive'] != null) {
+        data.isActive = input['isActive'];
+      } 
 
       repos.updateVersion.update(data);
       return Response.ok(jsonEncode(data.toJson()));

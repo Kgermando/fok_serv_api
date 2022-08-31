@@ -33,11 +33,8 @@ class PresenceHandlers {
       var input = jsonDecode(await request.readAsString());
 
       PresenceModel data = PresenceModel(
-          remarque: input['remarque'],
-          finJournee: input['finJournee'],
-          signature: input['signature'],
-          signatureFermeture: input['signatureFermeture'],
-          createdRef: DateTime.parse(input['createdRef']),
+          title: input['title'], 
+          signature: input['signature'],  
           created: DateTime.parse(input['created']));
       try {
         await repos.presences.insertData(data);
@@ -54,21 +51,12 @@ class PresenceHandlers {
       PresenceModel? data =
           await repos.presences.getFromId(editH.id!); 
           
-      if (input['remarque'] != null) {
-        data.remarque = input['remarque'];
-      }
-      if (input['finJournee'] != null) {
-        data.finJournee = input['finJournee'];
-      }
+      if (input['title'] != null) {
+        data.title = input['title'];
+      } 
       if (input['signature'] != null) {
         data.signature = input['signature'];
-      }
-      if (input['signatureFermeture'] != null) {
-        data.signatureFermeture = input['signatureFermeture'];
-      }
-      if (input['createdRef'] != null) {
-        data.createdRef = DateTime.parse(input['createdRef']);
-      }
+      } 
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
@@ -85,7 +73,7 @@ class PresenceHandlers {
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page presences n\'est pas trouvé'),
+          Response.notFound('La Page presence n\'est pas trouvé'),
     );
 
     return router;

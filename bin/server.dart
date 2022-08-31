@@ -30,14 +30,16 @@ import 'handlers/comm_marketing/marketing/annuaire_handlers.dart';
 import 'handlers/comm_marketing/marketing/campaign_handlers.dart';
 import 'handlers/comptabilites/balance_comptes_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
-import 'handlers/comptabilites/compte_actif_handlers.dart';
-import 'handlers/comptabilites/compte_passif_handlers.dart';
+import 'handlers/comptabilites/compte_bilan_ref_handlers.dart'; 
 import 'handlers/comptabilites/compte_resultat_handlers.dart';
-import 'handlers/comptabilites/comptes_balance_hanlders.dart';
+import 'handlers/comptabilites/comptes_balance_ref_handlers.dart';
+import 'handlers/comptabilites/journal__livre_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
 import 'handlers/devis/devis_list_objets_handlers.dart';
 import 'handlers/exploitations/agent_role_hanlders.dart';
+import 'handlers/exploitations/fournisseur_handlers.dart';
+import 'handlers/exploitations/production_handlers.dart';
 import 'handlers/exploitations/projet_handlers.dart';
 import 'handlers/exploitations/rapport_hanlders.dart';
 import 'handlers/exploitations/tache_handlers.dart';
@@ -48,6 +50,7 @@ import 'handlers/finances/coupure_billet_handlers.dart';
 import 'handlers/finances/creance_dette_handlers.dart';
 import 'handlers/finances/creance_handlers.dart';
 import 'handlers/finances/dette_handlers.dart';
+import 'handlers/finances/depense_handlers.dart';
 import 'handlers/finances/fin_exterieur_handlers.dart';
 import 'handlers/logistiques/anguin_handlers.dart';
 import 'handlers/logistiques/carburant_handlers.dart';
@@ -77,6 +80,7 @@ import 'handlers/notify/departements/finance_departement.dart';
 import 'handlers/notify/departements/logistique_departement.dart';
 import 'handlers/notify/departements/rh_departement.dart';
 import 'handlers/notify/devis/devis_notify_handlers.dart';
+import 'handlers/notify/exploitations/production_notify_handlers.dart';
 import 'handlers/notify/exploitations/projet_notify_handlers.dart';
 import 'handlers/notify/exploitations/tache_notify_handlers.dart';
 import 'handlers/notify/finances/creance_notify_handlers.dart';
@@ -95,9 +99,8 @@ import 'handlers/rh/agents_handlers.dart';
 import 'handlers/rh/paiement_salaire_handlers.dart';
 import 'handlers/rh/performence_handlers.dart';
 import 'handlers/rh/performence_note_handlers.dart';
-import 'handlers/rh/presence_entrer_handlers.dart';
-import 'handlers/rh/presence_handlers.dart';
-import 'handlers/rh/presence_sortie_handlers.dart';
+import 'handlers/rh/presence_personnel_handlers.dart';
+import 'handlers/rh/presence_handlers.dart'; 
 import 'handlers/rh/trans_rest_agents_handlers.dart';
 import 'handlers/rh/transport_restauration_handlers.dart';
 import 'handlers/update/upate_handlers.dart';
@@ -237,6 +240,12 @@ class Service {
             .addMiddleware(handleErrors())
             .addHandler(ProjetNotifyHandlers(repos).router));
     router.mount(
+        '/api/counts/productions/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(ProductionNotifyHandlers(repos).router));
+    router.mount(
         '/api/counts/taches/',
         Pipeline()
             .addMiddleware(setJsonHeader())
@@ -365,19 +374,12 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(PresenceHandlers(repos).router));
     router.mount(
-        '/api/rh/presences-entrers/',
+        '/api/rh/presence-personnels/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(PresenceEntreHandlers(repos).router));
-    router.mount(
-        '/api/rh/presences-sorties/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(PresenceSortieHandlers(repos).router));
+            .addHandler(PresencePersonnelHandlers(repos).router)); 
 
     router.mount(
         '/api/rh/paiement-salaires/',
@@ -469,6 +471,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CoupureBilletHandlers(repos).router));
+    router.mount(
+        '/api/finances/depenses/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(DepenseHandlers(repos).router));
 
 // COMPTABILITE
     router.mount(
@@ -479,19 +488,12 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BilansHandlers(repos).router));
     router.mount(
-        '/api/comptabilite/comptes-actif/',
+        '/api/comptabilite/comptes-bilans-ref/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(CompteActifHandlers(repos).router));
-    router.mount(
-        '/api/comptabilite/comptes-passif/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(ComptePassifHandlers(repos).router));
+            .addHandler(CompteBilanRefHandlers(repos).router)); 
     router.mount(
         '/api/comptabilite/journals/',
         Pipeline()
@@ -499,6 +501,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(JournalHandlers(repos).router));
+    router.mount(
+        '/api/comptabilite/journals-livres/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(JournalLivreHandlers(repos).router));  
     router.mount(
         '/api/comptabilite/comptes_resultat/',
         Pipeline()
@@ -591,6 +600,21 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(AgentRoleHandlers(repos).router));
+    router.mount(
+        '/api/productions/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ProductionHandlers(repos).router));
+    router.mount(
+        '/api/fournisseurs/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(FournisseurHandlers(repos).router));
+
 
     // LOGISTIQUES
     router.mount(
@@ -817,12 +841,9 @@ void main(List<String> args) async {
   PostgreSQLConnection connection = await ConnexionDatabase().connection();
   print("Database it's work...");
 
-  // PostgreSQLConnection creatTable = await TableName().openConnection(connection);
-  // Repository repos = Repository(creatTable);
-
   await connection.open();
   Repository repos = Repository(connection);
-  Service service = Service(repos, "fokadKey");
+  Service service = Service(repos, "astridKey");
 
   final server = await shelf_io.serve(service.handlers, ip, port);
 

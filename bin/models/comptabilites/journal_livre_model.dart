@@ -1,11 +1,12 @@
-class BilanModel {
+class JournalLivreModel {
   late int? id;
-  late String titleBilan;
+  late String intitule;
+  late DateTime debut;
+  late DateTime fin;
+
   late String signature;
   late DateTime created;
-  late String isSubmit;
-  // Approbations DG
-  late String approbationDG;
+  late String approbationDG; // Approbations DG
   late String motifDG;
   late String signatureDG;
   // Approbations DD
@@ -13,12 +14,13 @@ class BilanModel {
   late String motifDD;
   late String signatureDD;
 
-  BilanModel(
-    {this.id,
-      required this.titleBilan,
+  JournalLivreModel(
+      {this.id,
+      required this.intitule,
+      required this.debut,
+      required this.fin,
       required this.signature,
       required this.created,
-      required this.isSubmit,
       required this.approbationDG,
       required this.motifDG,
       required this.signatureDG,
@@ -26,28 +28,30 @@ class BilanModel {
       required this.motifDD,
       required this.signatureDD});
 
-  factory BilanModel.fromSQL(List<dynamic> row) {
-    return BilanModel(
+  factory JournalLivreModel.fromSQL(List<dynamic> row) {
+    return JournalLivreModel(
         id: row[0],
-        titleBilan: row[1],
-        signature: row[2],
-        created: row[3],
-        isSubmit: row[4],
-        approbationDG: row[5],
-        motifDG: row[6],
-        signatureDG: row[7],
-        approbationDD: row[8],
-        motifDD: row[9],
-        signatureDD: row[10]);
+        intitule: row[1],
+        debut: row[2],
+        fin: row[3],
+        signature: row[4],
+        created: row[5],
+        approbationDG: row[6],
+        motifDG: row[7],
+        signatureDG: row[8],
+        approbationDD: row[9],
+        motifDD: row[10],
+        signatureDD: row[11]);
   }
 
-  factory BilanModel.fromJson(Map<String, dynamic> json) {
-    return BilanModel(
+  factory JournalLivreModel.fromJson(Map<String, dynamic> json) {
+    return JournalLivreModel(
         id: json['id'],
-        titleBilan: json['titleBilan'],
+        intitule: json['intitule'],
+        debut: DateTime.parse(json['debut']),
+        fin: DateTime.parse(json['fin']),
         signature: json['signature'],
         created: DateTime.parse(json['created']),
-        isSubmit: json['isSubmit'],
         approbationDG: json['approbationDG'],
         motifDG: json['motifDG'],
         signatureDG: json['signatureDG'],
@@ -59,10 +63,11 @@ class BilanModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'titleBilan': titleBilan,
+      'intitule': intitule,
+      'debut': debut.toIso8601String(),
+      'fin': fin.toIso8601String(),
       'signature': signature,
       'created': created.toIso8601String(),
-      'isSubmit': isSubmit,
       'approbationDG': approbationDG,
       'motifDG': motifDG,
       'signatureDG': signatureDG,

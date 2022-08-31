@@ -23,47 +23,45 @@ class BalanceCompteRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, title,"
-          "statut, signature, created_ref, created, is_submit,"
+          "statut, signature, created, is_submit,"
           "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
           "VALUES (nextval('balance_comptes_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8, @9, @10, @11, @12)",
+          "@7, @8, @9, @10, @11)",
           substitutionValues: {
-            '1': data.title,
+           '1': data.title,
             '2': data.statut,
             '3': data.signature,
-            '4': data.createdRef,
-            '5': data.created,
-            '6': data.isSubmit,
-            '7': data.approbationDG,
-            '8': data.motifDG,
-            '9': data.signatureDG,
-            '10': data.approbationDD,
-            '11': data.motifDD,
-            '12': data.signatureDD
+            '4': data.created,
+            '5': data.isSubmit,
+            '6': data.approbationDG,
+            '7': data.motifDG,
+            '8': data.signatureDG,
+            '9': data.approbationDD,
+            '10': data.motifDD,
+            '11': data.signatureDD
           });
     });
   }
 
   Future<void> update(BalanceCompteModel data) async {
     await executor.query("""UPDATE $tableName
-        SET title = @1, statut = @2, signature = @3, created_ref = @4,
-        created = @5, is_submit = @6, approbation_dg = @7, motif_dg = @8,
-        signature_dg = @9, approbation_dd = @10,
-        motif_dd = @11, signature_dd = @12 WHERE id = @13""", 
+        SET title = @1, statut = @2, signature = @3, created = @4,
+        is_submit = @5, approbation_dg = @6, motif_dg = @7, signature_dg = @8,
+        approbation_dd = @9, motif_dd = @10,
+        signature_dd = @11 WHERE id = @12""", 
     substitutionValues: {
       '1': data.title,
       '2': data.statut,
       '3': data.signature,
-      '4': data.createdRef,
-      '5': data.created,
-      '6': data.isSubmit,
-      '7': data.approbationDG,
-      '8': data.motifDG,
-      '9': data.signatureDG,
-      '10': data.approbationDD,
-      '11': data.motifDD,
-      '12': data.signatureDD,
-      '13': data.id
+      '4': data.created,
+      '5': data.isSubmit,
+      '6': data.approbationDG,
+      '7': data.motifDG,
+      '8': data.signatureDG,
+      '9': data.approbationDD,
+      '10': data.motifDD,
+      '11': data.signatureDD,
+      '12': data.id 
     });
   }
 
@@ -86,15 +84,14 @@ class BalanceCompteRepository {
       title: data[0][1],
       statut: data[0][2],
       signature: data[0][3],
-      createdRef: data[0][4],
-      created: data[0][5],
-      isSubmit: data[0][6],
-      approbationDG: data[0][7],
-      motifDG: data[0][8],
-      signatureDG: data[0][9],
-      approbationDD: data[0][10],
-      motifDD: data[0][11],
-      signatureDD: data[0][12]
+      created: data[0][4],
+      isSubmit: data[0][5],
+      approbationDG: data[0][6],
+      motifDG: data[0][7],
+      signatureDG: data[0][8],
+      approbationDD: data[0][9],
+      motifDD: data[0][10],
+      signatureDD: data[0][11] 
     );
   } 
 }

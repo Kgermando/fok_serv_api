@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
+// ignore: depend_on_referenced_packages
 import 'package:crypto/crypto.dart';
 
 import '../../models/users/user_model.dart';

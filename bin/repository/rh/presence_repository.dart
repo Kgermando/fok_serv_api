@@ -23,32 +23,24 @@ class PresenceRepository {
   Future<void> insertData(PresenceModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, remarque, fin_journee, signature,"
-        "signature_fermeture, created_ref, created)"
-        "VALUES (nextval('presences_id_seq'), @1, @2, @3, @4 , @5 , @6)",
+        "INSERT INTO $tableName (id, title, signature, created)"
+        "VALUES (nextval('presences_id_seq'), @1, @2, @3)",
           substitutionValues: {
-            '1': data.remarque,
-            '2': data.finJournee,
-            '3': data.signature,
-            '4': data.signatureFermeture,
-            '5': data.createdRef,
-            '6': data.created
+            '1': data.title,
+            '2': data.signature,
+            '3': data.created
           });
     });
   }
 
   Future<void> update(PresenceModel data) async {
     await executor.query("""UPDATE $tableName
-      SET remarque = @1, fin_journee = @2, signature = @3,
-      signature_fermeture = @4, created_ref = @5, created = @6 WHERE id = @7""",
+      SET title = @1, signature = @2, created = @3 WHERE id = @4""",
         substitutionValues: {
-          '1': data.remarque,
-          '2': data.finJournee,
-          '3': data.signature,
-          '4': data.signatureFermeture,
-          '5': data.createdRef,
-          '6': data.created,
-          '7': data.id
+          '1': data.title,
+          '2': data.signature,
+          '3': data.created,
+          '4': data.id
         });
   }
 
@@ -68,12 +60,9 @@ class PresenceRepository {
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return PresenceModel(
       id: data[0][0],
-      remarque: data[0][1],
-      finJournee: data[0][2],
-      signature: data[0][3],
-      signatureFermeture: data[0][4],
-      createdRef: data[0][5],
-      created: data[0][6]
+      title: data[0][1],
+      signature: data[0][2],
+      created: data[0][3]
     );
   }
 }

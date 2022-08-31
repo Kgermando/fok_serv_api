@@ -107,8 +107,8 @@ class CreanceHandlers {
       if (input['motifDD'] != null) {
         data.motifDD = input['motifDD'];
       }
-      if (input['motifDD'] != null) {
-        data.motifDD = input['motifDD'];
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
       }
 
       repos.creances.update(data);
@@ -116,7 +116,7 @@ class CreanceHandlers {
     });
 
     router.delete('/delete-transaction-creance/<id>',
-        (String id, Request request) async {
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.creances.deleteData(int.parse(id!));
       return Response.ok('Supprimée');

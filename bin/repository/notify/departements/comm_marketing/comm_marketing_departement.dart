@@ -7,6 +7,8 @@ class CommMarketingDepartementRepository {
   CommMarketingDepartementRepository(this.executor);
 
   static String tableNameCommMarketingCampaign = 'campaigns';
+  static String tableNameCommMarketingProduitsModel = 'produits_model';
+  static String tableNameCommMarketingSuccursales = 'succursales';
   Future<NotifySumModel> getCountDD() async {
     try {
       var data = <NotifySumModel>{};
@@ -16,9 +18,9 @@ class CommMarketingDepartementRepository {
         "approbation_dd" = '-' AND 
         "observation" = 'false')
         +
-        (SELECT COUNT(*) FROM "produits_model" where "approbation_dd" = '-')
+        (SELECT COUNT(*) FROM $tableNameCommMarketingProduitsModel where "approbation_dd" = '-')
         +
-        (SELECT COUNT(*) FROM "succursales" where "approbation_dd" = '-')
+        (SELECT COUNT(*) FROM $tableNameCommMarketingSuccursales where "approbation_dd" = '-')
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {

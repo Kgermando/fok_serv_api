@@ -106,8 +106,8 @@ class CarburantHandlers {
       if (input['motifDD'] != null) {
         data.motifDD = input['motifDD'];
       }
-      if (input['motifDD'] != null) {
-        data.motifDD = input['motifDD'];
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
       }
 
 
@@ -116,8 +116,8 @@ class CarburantHandlers {
     });
 
     router.delete('/delete-carburant/<id>', (
-      String id,
       Request request,
+      String id
     ) async {
       var id = request.params['id'];
       repos.carburants.deleteData(int.parse(id!));

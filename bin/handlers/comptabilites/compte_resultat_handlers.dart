@@ -184,8 +184,8 @@ class CompteResultatHandlers {
       if (input['motifDD'] != null) {
         data.motifDD = input['motifDD'];
       }
-      if (input['motifDD'] != null) {
-        data.motifDD = input['motifDD'];
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
       }
 
       repos.comptesResultat.update(data);

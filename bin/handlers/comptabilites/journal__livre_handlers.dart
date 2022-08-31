@@ -3,26 +3,26 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../../models/comm_maketing/succursale_model.dart';
-import '../../../repository/repository.dart';
+import '../../models/comptabilites/journal_livre_model.dart';
+import '../../repository/repository.dart';
 
-class SuccursaleHandlers {
+class JournalLivreHandlers {
   final Repository repos;
 
-  SuccursaleHandlers(this.repos);
+  JournalLivreHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<SuccursaleModel> data = await repos.succursales.getAllData();
+      List<JournalLivreModel> data = await repos.journalLivres.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late SuccursaleModel data;
+      late JournalLivreModel data;
       try {
-        data = await repos.succursales.getFromId(int.parse(id));
+        data = await repos.journalLivres.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
@@ -30,13 +30,13 @@ class SuccursaleHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.post('/insert-new-succursale', (Request request) async {
+    router.post('/insert-new-journal-livre', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-      SuccursaleModel data = SuccursaleModel(
-          name: input['name'],
-          adresse: input['adresse'],
-          province: input['province'],
+      JournalLivreModel data = JournalLivreModel(
+          intitule: input['intitule'],
+          debut: DateTime.parse(input['debut']),
+          fin: DateTime.parse(input['fin']),
           signature: input['signature'],
           created: DateTime.parse(input['created']),
           approbationDG: input['approbationDG'],
@@ -46,7 +46,7 @@ class SuccursaleHandlers {
           motifDD: input['motifDD'],
           signatureDD: input['signatureDD']);
       try {
-        await repos.succursales.insertData(data);
+        await repos.journalLivres.insertData(data);
       } catch (e) {
         print(e);
         return Response(422);
@@ -54,22 +54,20 @@ class SuccursaleHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-succursale/', (Request request) async {
-       dynamic input = jsonDecode(await request.readAsString());
-      final editH = SuccursaleModel.fromJson(input);
-      SuccursaleModel? data =
-          await repos.succursales.getFromId(editH.id!); 
+    router.put('/update-journal-livre/', (Request request) async {
+      dynamic input = jsonDecode(await request.readAsString());
+      final editH = JournalLivreModel.fromJson(input);
+      JournalLivreModel? data = await repos.journalLivres.getFromId(editH.id!);
 
-      if (input['name'] != null) {
-        data.name = input['name'];
+      if (input['intitule'] != null) {
+        data.intitule = input['intitule'];
       }
-      if (input['adresse'] != null) {
-        data.adresse = input['adresse'];
+      if (input['debut'] != null) {
+        data.debut = DateTime.parse(input['debut']);
       }
-      if (input['province'] != null) {
-        data.province = input['province'];
-      }
-
+      if (input['fin'] != null) {
+        data.fin = DateTime.parse(input['fin']);
+      } 
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
@@ -94,21 +92,21 @@ class SuccursaleHandlers {
       if (input['signatureDD'] != null) {
         data.signatureDD = input['signatureDD'];
       }
-      repos.succursales.update(data);
+
+      repos.journalLivres.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-succursale/<id>',
-        (Request request, String id) async {
+    router.delete('/delete-journal-livre/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      repos.succursales.deleteData(int.parse(id!));
+      repos.journalLivres.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page succursale n\'est pas trouvé'),
+          Response.notFound('La Page journal livre n\'est pas trouvé'),
     );
 
     return router;

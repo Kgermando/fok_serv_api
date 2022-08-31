@@ -33,7 +33,7 @@ class ComptesBalanceRefHandlers {
     router.post('/insert-new-comptes-balance-ref', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       CompteBalanceRefModel data = CompteBalanceRefModel(
-          reference: DateTime.parse(input['reference']),
+          reference: input['reference'],
           comptes: input['comptes'],
           debit: input['debit'],
            credit: input['credit'],
@@ -55,7 +55,7 @@ class ComptesBalanceRefHandlers {
           await repos.balanceCompteRef.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
-        data.reference = DateTime.parse(input['reference']);
+        data.reference = input['reference'];
       }
       if (input['comptes'] != null) {
         data.comptes = input['comptes'];

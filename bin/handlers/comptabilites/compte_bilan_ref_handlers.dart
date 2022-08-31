@@ -2,27 +2,27 @@ import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-
-import '../../models/comptabilites/compte_actif_model.dart';
+ 
+import '../../models/comptabilites/compte_bilan_ref_model.dart';
 import '../../repository/repository.dart';
 
-class CompteActifHandlers {
+class CompteBilanRefHandlers {
   final Repository repos;
 
-  CompteActifHandlers(this.repos);
+  CompteBilanRefHandlers(this.repos);
 
   Router get router {
     final router = Router();
 
     router.get('/', (Request request) async {
-      List<CompteActifModel> data = await repos.compteActif.getAllData();
+      List<CompteBilanRefModel> data = await repos.compteBilanRefRepository.getAllData();
       return Response.ok(jsonEncode(data));
     });
 
     router.get('/<id>', (Request request, String id) async {
-      late CompteActifModel data;
+      late CompteBilanRefModel data;
       try {
-        data = await repos.compteActif.getFromId(int.parse(id));
+        data = await repos.compteBilanRefRepository.getFromId(int.parse(id));
       } catch (e) {
         print(e);
         return Response(404);
@@ -30,16 +30,17 @@ class CompteActifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
  
-    router.post('/insert-new-compte-actif', (Request request) async {
+    router.post('/insert-new-compte-bilan-ref', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
-      CompteActifModel data = CompteActifModel(
-        reference: DateTime.parse(input['reference']),
+      CompteBilanRefModel data = CompteBilanRefModel(
+        reference: input['reference'],
         comptes: input['comptes'],
         montant: input['montant'],
+        type: input['type']
       );
       try {
-        await repos.compteActif.insertData(data);
+        await repos.compteBilanRefRepository.insertData(data);
       } catch (e) {
         print(e);
         return Response(422);
@@ -47,14 +48,14 @@ class CompteActifHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.put('/update-compte-actif/', (Request request) async {
+    router.put('/update-compte-bilan-ref/', (Request request) async {
        dynamic input = jsonDecode(await request.readAsString());
-      final editH = CompteActifModel.fromJson(input);
-      CompteActifModel? data =
-          await repos.compteActif.getFromId(editH.id!); 
+      final editH = CompteBilanRefModel.fromJson(input);
+      CompteBilanRefModel? data =
+          await repos.compteBilanRefRepository.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
-        data.reference = DateTime.parse(input['reference']);
+        data.reference = input['reference'];
       }
       if (input['comptes'] != null) {
         data.comptes = input['comptes'];
@@ -62,20 +63,23 @@ class CompteActifHandlers {
       if (input['montant'] != null) {
         data.montant = input['montant'];
       }
+      if (input['type'] != null) {
+        data.type = input['type'];
+      }
       
-      repos.compteActif.update(data);
+      repos.compteBilanRefRepository.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-compte-actif/<id>', (Request request, String id) async {
+    router.delete('/delete-compte-bilan-ref/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      repos.compteActif.deleteData(int.parse(id!));
+      repos.compteBilanRefRepository.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
 
     router.all(
       '/<ignored|.*>',
-      (Request request) => Response.notFound('La Page comptes n\'est pas trouvé'),
+      (Request request) => Response.notFound('La Page compte Bilan Ref n\'est pas trouvé'),
     );
 
     return router;

@@ -91,16 +91,15 @@ class MobilierHandlers {
       if (input['motifDD'] != null) {
         data.motifDD = input['motifDD'];
       }
-      if (input['motifDD'] != null) {
-        data.motifDD = input['motifDD'];
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
       }
       repos.mobiliers.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
     router.delete('/delete-mobilier/<id>', (
-      String id,
-      Request request,
+      Request request, String id
     ) async {
       var id = request.params['id'];
       repos.mobiliers.deleteData(int.parse(id!));

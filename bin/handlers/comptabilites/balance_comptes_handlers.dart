@@ -37,7 +37,6 @@ class BalanceComptesHandlers {
         title: input['title'], 
         statut: input['statut'],
         signature: input['signature'],
-        createdRef: DateTime.parse(input['createdRef']),
         created: DateTime.parse(input['created']),
         isSubmit: input['isSubmit'],
         approbationDG: input['approbationDG'],
@@ -71,9 +70,6 @@ class BalanceComptesHandlers {
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
-      if (input['createdRef'] != null) {
-        data.createdRef = DateTime.parse(input['createdRef']);
-      }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
@@ -95,8 +91,8 @@ class BalanceComptesHandlers {
       if (input['motifDD'] != null) {
         data.motifDD = input['motifDD'];
       }
-      if (input['motifDD'] != null) {
-        data.motifDD = input['motifDD'];
+      if (input['signatureDD'] != null) {
+        data.signatureDD = input['signatureDD'];
       }
       repos.balanceComptes.update(data);
       return Response.ok(jsonEncode(data.toJson()));

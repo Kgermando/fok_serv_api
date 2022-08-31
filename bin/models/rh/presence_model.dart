@@ -1,51 +1,33 @@
 class PresenceModel {
   late int? id;
-  late String remarque;
-  late String finJournee;
+  late String title;
   late String signature; // celui qui fait le document
-  late String signatureFermeture; // celui qui cloture la journee
-  late DateTime createdRef;
   late DateTime created;
 
   PresenceModel(
       {this.id,
-      required this.remarque,
-      required this.finJournee,
+      required this.title,
       required this.signature,
-      required this.signatureFermeture,
-      required this.createdRef,
       required this.created});
 
   factory PresenceModel.fromSQL(List<dynamic> row) {
     return PresenceModel(
-        id: row[0],
-        remarque: row[1],
-        finJournee: row[2],
-        signature: row[3],
-        signatureFermeture: row[4],
-        createdRef: row[5],
-        created: row[6]);
+        id: row[0], title: row[1], signature: row[2], created: row[3]);
   }
 
   factory PresenceModel.fromJson(Map<String, dynamic> json) {
     return PresenceModel(
         id: json['id'],
-        remarque: json['remarque'],
-        finJournee: json['finJournee'],
+        title: json['title'],
         signature: json['signature'],
-        signatureFermeture: json['signatureFermeture'],
-        createdRef: DateTime.parse(json['createdRef']),
         created: DateTime.parse(json['created']));
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'remarque': remarque,
-      'finJournee': finJournee.toString(),
+      'title': title,
       'signature': signature,
-      'signatureFermeture': signatureFermeture,
-      'createdRef': createdRef.toIso8601String(),
       'created': created.toIso8601String()
     };
   }

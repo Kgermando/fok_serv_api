@@ -10,7 +10,7 @@ class ComptabiliteDepartementRepository {
   static String tableNameComptBalance = 'balance_comptes';
   static String tableNameComptBilans = 'bilans';
   static String tableNameComptComptesResultat = 'comptes_resultat';
-  static String tableNameComptJournals = 'journals';
+  static String tableNameComptJournals = 'journal_livres';
 
   Future<NotifySumModel> getCountDD() async {
     try {

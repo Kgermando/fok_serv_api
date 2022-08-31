@@ -22,12 +22,13 @@ class UpdateVersionRepository {
   Future<void> insertData(UpdateModel data) async {
     await executor.transaction((ctx) async {
       await ctx.query(
-        "INSERT INTO $tableName (id, version, url_update, created)"
-        "VALUES (nextval('update_versions_id_seq'), @1, @2, @3)",
+        "INSERT INTO $tableName (id, version, url_update, created, is_active)"
+        "VALUES (nextval('update_versions_id_seq'), @1, @2, @3, @4)",
         substitutionValues: {
           '1': data.version,
           '2': data.urlUpdate,
-          '3': data.created
+          '3': data.created,
+          '4': data.isActive
         });
     });
   }
@@ -35,11 +36,12 @@ class UpdateVersionRepository {
   Future<void> update(UpdateModel data) async {
     await executor.query("""UPDATE $tableName
       SET version = @1, url_update = @2,
-        created = @3 WHERE id = @4""", substitutionValues: {
+        created = @3, is_active = @4 WHERE id = @5""", substitutionValues: {
       '1': data.version,
       '2': data.urlUpdate,
       '3': data.created,
-      '4': data.id
+      '4': data.isActive,
+      '5': data.id
     });
   }
 
@@ -58,9 +60,11 @@ class UpdateVersionRepository {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id';");
     return UpdateModel(
-        id: data[0][0],
-        version: data[0][1],
-        urlUpdate: data[0][2],
-        created: data[0][3]);
+      id: data[0][0],
+      version: data[0][1],
+      urlUpdate: data[0][2],
+      created: data[0][3],
+      isActive: data[0][4]
+    );
   }
 }

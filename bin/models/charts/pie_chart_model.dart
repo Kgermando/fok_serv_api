@@ -1,22 +1,22 @@
 class PieChartModel {
   final String departement;
-  final int count;
+  final int sum;
 
-  PieChartModel({required this.departement, required this.count});
+  PieChartModel({required this.departement, required this.sum});
 
   factory PieChartModel.fromSQL(List<dynamic> row) {
     return PieChartModel(
       departement: row[0],
-      count: row[1],
+      sum: row[1],
     );
   }
 
   factory PieChartModel.fromJson(Map<String, dynamic> json) {
-    return PieChartModel(departement: json['departement'], count: json['count']);
+    return PieChartModel(departement: json['departement'], sum: json['sum']);
   }
 
   Map<String, dynamic> toJson() {
-    return {'departement': departement, 'count': count};
+    return {'departement': departement, 'sum': sum};
   }
 }
 

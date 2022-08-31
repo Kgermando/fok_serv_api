@@ -75,14 +75,15 @@ class AgendaHandlers {
 
     router.delete('/delete-agenda/<id>', (Request request, String id) async {
       var id = request.params['id'];
-      repos.annuaires.deleteData(int.parse(id!));
+      repos.agendas.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
     });
+
 
     router.all(
       '/<ignored|.*>',
       (Request request) =>
-          Response.notFound('La Page annuaires n\'est pas trouvé'),
+          Response.notFound('La Page agendas n\'est pas trouvé'),
     );
 
     return router;

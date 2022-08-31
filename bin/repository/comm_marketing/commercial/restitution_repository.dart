@@ -24,7 +24,7 @@ class RestitutionRepository {
       await ctx.execute(
           "INSERT INTO $tableName (id, id_product, quantity,"
           "unite, first_name, last_name, accuse_reception,"
-          "accuse_reception_firstName, accuse_reception_lastName, role,"
+          "accuse_reception_first_name, accuse_reception_last_name, role,"
           "succursale, signature, created)"
           "VALUES (nextval('restitutions_id_seq'), @1, @2, @3, @4, @5, @6,"
           "@7, @8, @9, @10, @11, @12)",
@@ -49,7 +49,7 @@ class RestitutionRepository {
     await executor.query("""UPDATE $tableName
           SET id_product = @1, quantity = @2, unite = @3,
           first_name = @4, last_name = @5, accuse_reception = @6,
-          accuse_reception_firstName = @7, accuse_reception_lastName = @8,
+          accuse_reception_first_name = @7, accuse_reception_last_name = @8,
           role = @9, succursale = @10,
           signature = @11, created = @12 WHERE id = @13""",
         substitutionValues: {
