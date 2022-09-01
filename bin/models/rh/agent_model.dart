@@ -181,7 +181,7 @@ class AgentModel {
       'experience': experience,
       'statutAgent': statutAgent.toString(),
       'createdAt': createdAt.toIso8601String(),
-      'phot': photo,
+      'photo': photo,
       'salaire': salaire,
       'signature': signature,
       'created': created.toIso8601String(),
