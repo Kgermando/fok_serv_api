@@ -42,7 +42,7 @@ class ActionnaireCotisationHandlers {
           matricule: input['matricule'],
           montant: input['montant'],
           note: input['note'],
-          moyenPayement: input['moyenPayement'],
+          moyenPaiement: input['moyenPaiement'],
           numeroTransaction: input['numeroTransaction'], 
           signature: input['signature'],
           created: DateTime.parse(input['created']));
@@ -81,8 +81,8 @@ class ActionnaireCotisationHandlers {
       if (input['note'] != null) {
         data.note = input['note'];
       }
-      if (input['moyenPayement'] != null) {
-        data.moyenPayement = input['moyenPayement'];
+      if (input['moyenPaiement'] != null) {
+        data.moyenPaiement = input['moyenPaiement'];
       }
       if (input['numeroTransaction'] != null) {
         data.numeroTransaction = input['numeroTransaction'];

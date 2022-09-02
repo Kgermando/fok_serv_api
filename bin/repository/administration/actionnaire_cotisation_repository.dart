@@ -23,7 +23,7 @@ class ActionnaireCotisationRepository {
     await executor.transaction((ctx) async {
       await ctx.query(
         "INSERT INTO $tableName (id, reference, nom, post_nom, prenom,"
-        "matricule, montant, note, moyen_payement, numero_transaction, signature, created)"
+        "matricule, montant, note, moyen_paiement, numero_transaction, signature, created)"
         "VALUES (nextval('actionnaire_cotisations_id_seq'), @1, @2, @3, @4, @5,"
           "@6, @7, @8, @9, @10, @11)",
           substitutionValues: {
@@ -34,7 +34,7 @@ class ActionnaireCotisationRepository {
             '5': data.matricule,
             '6': data.montant,
             '7': data.note,
-            '8': data.moyenPayement,
+            '8': data.moyenPaiement,
             '9': data.numeroTransaction,
             '10': data.signature,
             '11': data.created
@@ -45,7 +45,7 @@ class ActionnaireCotisationRepository {
   Future<void> update(ActionnaireCotisationModel data) async {
     await executor.query("""UPDATE $tableName
       SET reference = @1, nom = @2, post_nom = @3, prenom = @4, matricule = @5, 
-      montant = @6, note = @7, moyen_payement = @8, numero_transaction = @9,
+      montant = @6, note = @7, moyen_paiement = @8, numero_transaction = @9,
       signature = @10, created = @11 WHERE id = @12""", 
       substitutionValues: {
         '1': data.reference,
@@ -55,7 +55,7 @@ class ActionnaireCotisationRepository {
         '5': data.matricule,
         '6': data.montant,
         '7': data.note,
-        '8': data.moyenPayement,
+        '8': data.moyenPaiement,
         '9': data.numeroTransaction,
         '10': data.signature,
         '11': data.created,
@@ -86,7 +86,7 @@ class ActionnaireCotisationRepository {
         matricule: data[0][5],
         montant: data[0][6],
         note: data[0][7],
-        moyenPayement: data[0][8],
+        moyenPaiement: data[0][8],
         numeroTransaction: data[0][9],
         signature: data[0][10],
         created: data[0][11]
