@@ -38,6 +38,7 @@ class UpdateHandlers {
         urlUpdate: input['urlUpdate'], 
         created: DateTime.parse(input['created']),
         isActive: input['isActive'], 
+        motif: input['motif']
       );
       try {
         await repos.updateVersion.insertData(data);
@@ -64,6 +65,9 @@ class UpdateHandlers {
       }
       if (input['isActive'] != null) {
         data.isActive = input['isActive'];
+      } 
+      if (input['motif'] != null) {
+        data.motif = input['motif'];
       } 
 
       repos.updateVersion.update(data);
