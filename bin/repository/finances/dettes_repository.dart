@@ -24,10 +24,10 @@ class DettesRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
-        "libelle, montant, numero_operation, statut_paie, signature, created_ref, created,"
+        "libelle, montant, numero_operation, statut_paie, signature, created,"
         "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
         "VALUES (nextval('dettes_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9,"
-        "@10, @11, @12, @13, @14, @15)",
+        "@10, @11, @12, @13, @14)",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
@@ -36,14 +36,13 @@ class DettesRepository {
           '5': data.numeroOperation,
           '6': data.statutPaie,
           '7': data.signature,
-          '8': data.createdRef,
-          '9': data.created,
-          '10': data.approbationDG,
-          '11': data.motifDG,
-          '12': data.signatureDG,
-          '13': data.approbationDD,
-          '14': data.motifDD,
-          '15': data.signatureDD
+          '8': data.created,
+          '9': data.approbationDG,
+          '10': data.motifDG,
+          '11': data.signatureDG,
+          '12': data.approbationDD,
+          '13': data.motifDD,
+          '14': data.signatureDD
         });
     });
   }
@@ -52,27 +51,25 @@ class DettesRepository {
     await executor.query("""UPDATE $tableName
         SET nom_complet = @1, piece_justificative = @2, libelle = @3,
         montant = @4, numero_operation = @5, statut_paie = @6,
-        signature = @7, created_ref = @8, created = @9,
-        approbation_dg = @10, motif_dg = @11, signature_dg = @12, approbation_dd = @13,
-        motif_dd = @14, signature_dd = @15 WHERE id = @16""",
-        substitutionValues: {
-          '1': data.nomComplet,
-          '2': data.pieceJustificative,
-          '3': data.libelle,
-          '4': data.montant,
-          '5': data.numeroOperation,
-          '6': data.statutPaie,
-          '7': data.signature,
-          '8': data.createdRef,
-          '9': data.created,
-          '10': data.approbationDG,
-          '11': data.motifDG,
-          '12': data.signatureDG,
-          '13': data.approbationDD,
-          '14': data.motifDD,
-          '15': data.signatureDD,
-          '16': data.id
-        });
+        signature = @7, created = @8 , approbation_dg = @9,
+        motif_dg = @10, signature_dg = @11, approbation_dd = @12, motif_dd = @13,
+        signature_dd = @14 WHERE id = @15""", substitutionValues: {
+      '1': data.nomComplet,
+      '2': data.pieceJustificative,
+      '3': data.libelle,
+      '4': data.montant,
+      '5': data.numeroOperation,
+      '6': data.statutPaie,
+      '7': data.signature,
+      '8': data.created,
+      '9': data.approbationDG,
+      '10': data.motifDG,
+      '11': data.signatureDG,
+      '12': data.approbationDD,
+      '13': data.motifDD,
+      '14': data.signatureDD,
+      '15': data.id
+    });
   }
 
   deleteData(int id) async {
@@ -98,14 +95,13 @@ class DettesRepository {
       numeroOperation: data[0][5],
       statutPaie: data[0][6],
       signature: data[0][7],
-      createdRef: data[0][8],
-      created: data[0][9],
-      approbationDG: data[0][10],
-      motifDG: data[0][11],
-      signatureDG: data[0][12],
-      approbationDD: data[0][13],
-      motifDD: data[0][14],
-      signatureDD: data[0][15]
+      created: data[0][8],
+      approbationDG: data[0][9],
+      motifDG: data[0][10],
+      signatureDG: data[0][11],
+      approbationDD: data[0][12],
+      motifDD: data[0][13],
+      signatureDD: data[0][14]
     );
   }
 

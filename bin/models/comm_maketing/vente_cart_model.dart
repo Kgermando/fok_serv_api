@@ -10,51 +10,52 @@ class VenteCartModel {
   late String succursale;
   late String signature; // celui qui fait le document
   late DateTime created;
+  late DateTime createdAt;
 
-  VenteCartModel({
-    this.id,
-    required this.idProductCart,
-    required this.quantityCart,
-    required this.priceTotalCart,
-    required this.unite,
-    required this.tva,
-    required this.remise,
-    required this.qtyRemise,
+  VenteCartModel(
+      {this.id,
+      required this.idProductCart,
+      required this.quantityCart,
+      required this.priceTotalCart,
+      required this.unite,
+      required this.tva,
+      required this.remise,
+      required this.qtyRemise,
       required this.succursale,
       required this.signature,
-      required this.created
-  });
+      required this.created,
+      required this.createdAt});
 
   factory VenteCartModel.fromSQL(List<dynamic> row) {
     return VenteCartModel(
-      id: row[0],
-      idProductCart: row[1],
-      quantityCart: row[2],
-      priceTotalCart: row[3],
-      unite: row[4],
-      tva: row[5],
-      remise: row[6],
-      qtyRemise: row[7],
-      succursale: row[8],
-      signature: row[9],
-      created: row[10]
-    );
-  } 
- 
+        id: row[0],
+        idProductCart: row[1],
+        quantityCart: row[2],
+        priceTotalCart: row[3],
+        unite: row[4],
+        tva: row[5],
+        remise: row[6],
+        qtyRemise: row[7],
+        succursale: row[8],
+        signature: row[9],
+        created: row[10],
+        createdAt: row[11]);
+  }
+
   factory VenteCartModel.fromJson(Map<String, dynamic> json) {
     return VenteCartModel(
-      id: json['id'],
-      idProductCart: json['idProductCart'],
-      quantityCart: json['quantityCart'],
-      priceTotalCart: json['priceTotalCart'],
-      unite: json['unite'],
-      tva: json["tva"],
-      remise: json["remise"],
-      qtyRemise: json["qtyRemise"],
-      succursale: json['succursale'],
-      signature: json['signature'],
-      created: DateTime.parse(json['created'])
-    );
+        id: json['id'],
+        idProductCart: json['idProductCart'],
+        quantityCart: json['quantityCart'],
+        priceTotalCart: json['priceTotalCart'],
+        unite: json['unite'],
+        tva: json["tva"],
+        remise: json["remise"],
+        qtyRemise: json["qtyRemise"],
+        succursale: json['succursale'],
+        signature: json['signature'],
+        created: DateTime.parse(json['created']),
+        createdAt: DateTime.parse(json['createdAt']));
   }
 
   Map<String, dynamic> toJson() {
@@ -69,7 +70,8 @@ class VenteCartModel {
       "qtyRemise": qtyRemise,
       'succursale': succursale,
       'signature': signature,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'createdAt': createdAt.toIso8601String()
     };
   }
 }

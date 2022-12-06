@@ -131,11 +131,12 @@ class TransportRestaurationModel {
 
 class TransRestAgentsModel {
   late int? id;
-  late DateTime reference;
+  late int reference;
   late String nom;
   late String prenom;
   late String matricule;
   late String montant;
+  late String observation;
 
   TransRestAgentsModel(
       {this.id,
@@ -143,37 +144,41 @@ class TransRestAgentsModel {
       required this.nom,
       required this.prenom,
       required this.matricule,
-      required this.montant});
+      required this.montant,
+      required this.observation});
 
   factory TransRestAgentsModel.fromSQL(List<dynamic> row) {
     return TransRestAgentsModel(
-        id: row[0],
-        reference: row[1],
-        nom: row[2],
-        prenom: row[3],
-        matricule: row[4],
-        montant: row[5]);
+      id: row[0],
+      reference: row[1],
+      nom: row[2],
+      prenom: row[3],
+      matricule: row[4],
+      montant: row[5],
+      observation: row[6]);
   }
 
   factory TransRestAgentsModel.fromJson(Map<String, dynamic> json) {
     return TransRestAgentsModel(
       id: json['id'],
-      reference: DateTime.parse(json['reference']),
+      reference:json['reference'],
       nom: json['nom'],
       prenom: json['prenom'],
       matricule: json['matricule'],
       montant: json['montant'],
+      observation: json['observation'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'reference': reference.toIso8601String(),
+      'reference': reference,
       'nom': nom,
       'prenom': prenom,
       'matricule': matricule,
-      'montant': montant
+      'montant': montant,
+      'observation': observation
     };
   }
 }

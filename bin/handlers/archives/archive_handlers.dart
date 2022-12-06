@@ -40,7 +40,8 @@ class ArchiveHandlers {
         description: input['description'],
         fichier: input['fichier'],
         signature: input['signature'],
-        created: DateTime.parse(input['created'])
+        created: DateTime.parse(input['created']),
+        reference: input['reference'],
       );
       try {
         await repos.archives.insertData(data);
@@ -77,6 +78,9 @@ class ArchiveHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['reference'] != null) {
+        data.reference = input['reference'];
       }
 
       repos.archives.update(data);

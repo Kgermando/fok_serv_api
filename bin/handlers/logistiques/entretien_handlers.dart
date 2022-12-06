@@ -34,16 +34,15 @@ class EntretienHandlers {
       var input = jsonDecode(await request.readAsString());
       EntretienModel entretienModel = EntretienModel(
         nom: input['nom'],
-        modele: input['modele'],
-        marque: input['marque'],
-        etatObjet: input['etatObjet'], 
+        typeObjet: input['typeObjet'],
+        typeMaintenance: input['typeMaintenance'], 
         dureeTravaux: input['dureeTravaux'], 
-        signature: input['signature'],
-        createdRef: input['createdRef'],
+        signature: input['signature'], 
         created: DateTime.parse(input['created']),
-          approbationDD: input['approbationDD'],
-          motifDD: input['motifDD'],
-          signatureDD: input['signatureDD']
+        approbationDD: input['approbationDD'],
+        motifDD: input['motifDD'],
+        signatureDD: input['signatureDD'],
+        isSubmit: input['isSubmit']
       );
 
       try {
@@ -64,24 +63,18 @@ class EntretienHandlers {
       if (input['nom'] != null) {
         data.nom = input['nom'];
       }
-      if (input['modele'] != null) {
-        data.modele = input['modele'];
+      if (input['typeObjet'] != null) {
+        data.typeObjet = input['typeObjet'];
       }
-      if (input['marque'] != null) {
-        data.marque = input['marque'];
-      }
-      if (input['etatObjet'] != null) {
-        data.etatObjet = input['etatObjet'];
+      if (input['typeMaintenance'] != null) {
+        data.typeMaintenance = input['typeMaintenance'];
       } 
       if (input['dureeTravaux'] != null) {
         data.dureeTravaux = input['dureeTravaux'];
       } 
       if (input['signature'] != null) {
         data.signature = input['signature'];
-      }
-      if (input['createdRef'] != null) {
-        data.createdRef = input['createdRef'];
-      }
+      } 
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
@@ -93,6 +86,9 @@ class EntretienHandlers {
       }
       if (input['signatureDD'] != null) {
         data.signatureDD = input['signatureDD'];
+      }
+      if (input['isSubmit'] != null) {
+        data.isSubmit = input['isSubmit'];
       }
 
       

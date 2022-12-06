@@ -85,7 +85,7 @@ class UserModel {
       'servicesAffectation': servicesAffectation,
       'fonctionOccupe': fonctionOccupe,
       'role': role,
-      'isOnline': isOnline.toString(),
+      'isOnline': isOnline,
       'createdAt': createdAt.toIso8601String(),
       'passwordHash': passwordHash,
       'succursale': succursale,

@@ -22,44 +22,41 @@ class EntretienRepository {
   Future<void> insertData(EntretienModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, nom, modele,"
-        "marque, etat_objet, duree_travaux,"
-        "signature, created_ref, created, approbation_dd, motif_dd, signature_dd)"
-        "VALUES (nextval('entretiens_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11)",
+        "INSERT INTO $tableName (id, nom, type_objet,"
+        "type_maintenance, duree_travaux,"
+        "signature, created, approbation_dd, motif_dd, signature_dd, is_submit)"
+        "VALUES (nextval('entretiens_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10)",
         substitutionValues: {
           '1': data.nom,
-          '2': data.modele,
-          '3': data.marque,
-          '4': data.etatObjet,
-          '5': data.dureeTravaux,
-          '6': data.signature,
-          '7': data.createdRef,
-          '8': data.created,
-          '9': data.approbationDD,
-          '10': data.motifDD,
-          '11': data.signatureDD
+          '2': data.typeObjet,
+          '3': data.typeMaintenance,
+          '4': data.dureeTravaux,
+          '5': data.signature,
+          '6': data.created,
+          '7': data.approbationDD,
+          '8': data.motifDD,
+          '9': data.signatureDD,
+          '10': data.isSubmit
         });
     });
   }
 
   Future<void> update(EntretienModel data) async {
     await executor.execute("""UPDATE $tableName
-        SET nom = @1, modele = @2, marque = @3,
-        etat_objet = @4, duree_travaux = @5, signature = @6,
-        created_ref = @7, created = @8, approbation_dd = @9,
-        motif_dd = @10, signature_dd = @11 WHERE id = @12""", substitutionValues: {
+        SET nom = @1, type_objet = @2, type_maintenance = @3,
+        duree_travaux = @4, signature = @5, created = @6,
+        approbation_dd = @7, motif_dd = @8, signature_dd = @9, is_submit = @10 WHERE id = @11""", substitutionValues: {
       '1': data.nom,
-      '2': data.modele,
-      '3': data.marque,
-      '4': data.etatObjet,
-      '5': data.dureeTravaux,
-      '6': data.signature,
-      '7': data.createdRef,
-      '8': data.created,
-      '9': data.approbationDD,
-      '10': data.motifDD,
-      '11': data.signatureDD,
-      '12': data.id
+      '2': data.typeObjet,
+      '3': data.typeMaintenance,
+      '4': data.dureeTravaux,
+      '5': data.signature,
+      '6': data.created,
+      '7': data.approbationDD,
+      '8': data.motifDD,
+      '9': data.signatureDD,
+      '10': data.isSubmit,
+      '11': data.id 
     });
   }
 
@@ -80,16 +77,15 @@ class EntretienRepository {
     return EntretienModel(
       id: data[0][0],
       nom: data[0][1],
-      modele: data[0][2],
-      marque: data[0][3],
-      etatObjet: data[0][4],
-      dureeTravaux: data[0][5],
-      signature: data[0][6], 
-      createdRef: data[0][7],
-      created: data[0][8],
-      approbationDD: data[0][9],
-      motifDD: data[0][10],
-      signatureDD: data[0][11]
+      typeObjet: data[0][2],
+      typeMaintenance: data[0][3],
+      dureeTravaux: data[0][4],
+      signature: data[0][5],
+      created: data[0][6], 
+      approbationDD: data[0][7],
+      motifDD: data[0][8],
+      signatureDD: data[0][9],
+      isSubmit: data[0][10]
     );
   }
 }

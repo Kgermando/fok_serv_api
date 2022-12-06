@@ -23,14 +23,15 @@ class TransRestAgentsRepository {
     await executor.transaction((ctx) async {
       await ctx.query(
           "INSERT INTO $tableName (id, reference, nom,"
-          "prenom, matricule, montant)"
-          "VALUES (nextval('trans_rest_agents_id_seq'), @1, @2, @3, @4, @5)",
+          "prenom, matricule, montant, observation)"
+          "VALUES (nextval('trans_rest_agents_id_seq'), @1, @2, @3, @4, @5, @6)",
           substitutionValues: {
             '1': data.reference,
             '2': data.nom,
             '3': data.prenom,
             '4': data.matricule,
-            '5': data.montant
+            '5': data.montant,
+            '6': data.observation
           });
     });
   }
@@ -38,13 +39,14 @@ class TransRestAgentsRepository {
   Future<void> update(TransRestAgentsModel data) async {
     await executor.query("""UPDATE $tableName
         SET reference = @1, nom = @2, prenom = @3, matricule = @4,
-        montant = @5 WHERE id = @6""", substitutionValues: {
+        montant = @5, observation = @6 WHERE id = @7""", substitutionValues: {
       '1': data.reference,
       '2': data.nom,
       '3': data.prenom,
       '4': data.matricule,
       '5': data.montant,
-      '6': data.id
+      '6': data.observation,
+      '7': data.id
     });
     
   }
@@ -69,7 +71,8 @@ class TransRestAgentsRepository {
         nom: data[0][2],
         prenom: data[0][3],
         matricule: data[0][4],
-        montant: data[0][5]
+        montant: data[0][5],
+        observation: data[0][6]
     );
   }
 

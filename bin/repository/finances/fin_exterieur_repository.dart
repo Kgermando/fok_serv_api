@@ -24,9 +24,9 @@ class FinExteRepository {
       await ctx.execute(
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
         "libelle, montant, type_operation, numero_operation, signature,"
-        "created_ref, created)"
+        "reference, finance_exterieur_name, created)"
         "VALUES (nextval('fin_exterieurs_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9)",
+        "@7, @8, @9, @10)",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
@@ -35,8 +35,9 @@ class FinExteRepository {
           '5': data.typeOperation,
           '6': data.numeroOperation,
           '7': data.signature,
-          '8': data.createdRef,
-          '9': data.created
+          '8': data.reference,
+          '9': data.financeExterieurName,
+          '10': data.created
         });
     });
   }
@@ -45,7 +46,7 @@ class FinExteRepository {
     await executor.query("""UPDATE $tableName
         SET nom_complet = @1, piece_justificative = @2, libelle = @3,
         montant = @4, type_operation = @5, numero_operation = @6,
-        signature = @7, created_ref = @8, created = @9 WHERE id = @10""",
+        signature = @7, reference = @8, finance_exterieur_name = @9, created = @10 WHERE id = @11""",
         substitutionValues: {
           '1': data.nomComplet,
           '2': data.pieceJustificative,
@@ -54,9 +55,10 @@ class FinExteRepository {
           '5': data.typeOperation,
           '6': data.numeroOperation,
           '7': data.signature,
-          '8': data.createdRef,
-          '9': data.created,
-          '10': data.id
+          '8': data.reference,
+          '9': data.financeExterieurName,
+          '10': data.created,
+          '11': data.id
         });
   }
 
@@ -83,8 +85,9 @@ class FinExteRepository {
         typeOperation: data[0][5],
         numeroOperation: data[0][6],
         signature: data[0][7],
-        createdRef: data[0][8],
-        created: data[0][9]
+        reference: data[0][8],
+        financeExterieurName: data[0][9],
+        created: data[0][10]
     );
   } 
   

@@ -34,7 +34,7 @@ class CreanceDetteHandlers {
       var input = jsonDecode(await request.readAsString());
 
       CreanceDetteModel data = CreanceDetteModel(
-          reference: DateTime.parse(input['reference']),
+          reference: input['reference'],
           nomComplet: input['nomComplet'],
           pieceJustificative: input['pieceJustificative'],
           libelle: input['libelle'],
@@ -58,7 +58,7 @@ class CreanceDetteHandlers {
           await repos.creanceDette.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
-        data.reference =  DateTime.parse(input['reference']);
+        data.reference = input['reference'];
       }
       if (input['nomComplet'] != null) {
         data.nomComplet = input['nomComplet'];

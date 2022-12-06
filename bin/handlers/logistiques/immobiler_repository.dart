@@ -38,15 +38,14 @@ class ImmobilierHandlers {
         numeroCertificat: input['numeroCertificat'],
         superficie: input['superficie'],
         dateAcquisition: DateTime.parse(input['dateAcquisition']), 
-        signature: input['signature'],
-        createdRef: DateTime.parse(input['createdRef']),
+        signature: input['signature'], 
         created: DateTime.parse(input['created']),
         approbationDG: input['approbationDG'],
-          motifDG: input['motifDG'],
-          signatureDG: input['signatureDG'],
-          approbationDD: input['approbationDD'],
-          motifDD: input['motifDD'],
-          signatureDD: input['signatureDD']
+        motifDG: input['motifDG'],
+        signatureDG: input['signatureDG'],
+        approbationDD: input['approbationDD'],
+        motifDD: input['motifDD'],
+        signatureDD: input['signatureDD']
       );
 
       try {
@@ -82,10 +81,7 @@ class ImmobilierHandlers {
       }
       if (input['signature'] != null) {
         data.signature = input['signature'];
-      }
-      if (input['created'] != null) {
-        data.createdRef = DateTime.parse(input['createdRef']);
-      }
+      } 
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }

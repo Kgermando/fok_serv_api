@@ -34,14 +34,14 @@ class TrajetHandlers {
       var input = jsonDecode(await request.readAsString());
       TrajetModel trajetModel = TrajetModel(
           nomeroEntreprise: input['nomeroEntreprise'],
-          nomUtilisateur: input['nomUtilisateur'],
+          conducteur: input['conducteur'],
           trajetDe: input['trajetDe'],
           trajetA: input['trajetA'],
           mission: input['mission'],
           kilometrageSorite: input['kilometrageSorite'],
           kilometrageRetour: input['kilometrageRetour'], 
           signature: input['signature'],
-          createdRef: DateTime.parse(input['createdRef']),
+          reference: input['reference'],
           created: DateTime.parse(input['created']),
           approbationDD: input['approbationDD'],
           motifDD: input['motifDD'],
@@ -66,8 +66,8 @@ class TrajetHandlers {
       if (input['nomeroEntreprise'] != null) {
         data.nomeroEntreprise = input['nomeroEntreprise'];
       }
-      if (input['nomUtilisateur'] != null) {
-        data.nomUtilisateur = input['nomUtilisateur'];
+      if (input['conducteur'] != null) {
+        data.conducteur = input['conducteur'];
       }
       if (input['trajetDe'] != null) {
         data.trajetDe = input['trajetDe'];
@@ -83,14 +83,13 @@ class TrajetHandlers {
       }
       if (input['kilometrageRetour'] != null) {
         data.kilometrageRetour = input['kilometrageRetour'];
-      } 
-
+      }  
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
-      if (input['createdRef'] != null) {
-        data.createdRef = DateTime.parse(input['createdRef']);
-      }
+      if (input['reference'] != null) {
+        data.reference = input['reference'];
+      } 
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }

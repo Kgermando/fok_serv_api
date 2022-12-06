@@ -7,22 +7,20 @@ class LogistiqueDepartementRepository {
 
   LogistiqueDepartementRepository(this.executor);
 
-  static String tableNameLogistiqueEngin = 'anguins';
-  static String tableNameLogistiqueImmobiliers = 'immobiliers';
-  static String tableNameLogistiqueCarburants = 'carburants';
+  static String tableNameLogistiqueMateriels = 'materiels'; 
+  static String tableNameLogistiqueImmobiliers = 'immobiliers'; 
   static String tableNameLogistiqueEntretiens = 'entretiens';
   static String tableNameLogistiqueEtatMateriels = 'etat_materiels';
   static String tableNameLogistiqueMobiliers = 'mobiliers';
   static String tableNameLogistiqueTrajets = 'trajets';
+  static String tableNameLogistiqueDevis = 'devis';
 
   Future<NotifySumModel> getCountDD() async {
     try {
       var data = <NotifySumModel>{};
       var querySQL = """SELECT SUM  
       (
-          (SELECT COUNT(*) FROM $tableNameLogistiqueCarburants where "approbation_dd" = '-')
-        +
-          (SELECT COUNT(*) FROM $tableNameLogistiqueEngin where "approbation_dd" = '-')
+        (SELECT COUNT(*) FROM $tableNameLogistiqueMateriels where "approbation_dd" = '-')
         +
           (SELECT COUNT(*) FROM $tableNameLogistiqueEntretiens where "approbation_dd" = '-')
         +
@@ -33,6 +31,8 @@ class LogistiqueDepartementRepository {
           (SELECT COUNT(*) FROM $tableNameLogistiqueMobiliers where "approbation_dd" = '-')
         +
           (SELECT COUNT(*) FROM $tableNameLogistiqueTrajets where "approbation_dd" = '-')
+        +
+          (SELECT COUNT(*) FROM $tableNameLogistiqueDevis where "approbation_dd" = '-')
           
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);

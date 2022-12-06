@@ -35,11 +35,12 @@ class TransRestAgentsHandlers {
       var input = jsonDecode(await request.readAsString());
 
       TransRestAgentsModel data = TransRestAgentsModel(
-          reference: DateTime.parse(input['reference']),
-          nom: input['nom'],
-          prenom: input['prenom'],
-          matricule: input['matricule'],
-          montant: input['montant'],
+        reference: input['reference'],
+        nom: input['nom'],
+        prenom: input['prenom'],
+        matricule: input['matricule'],
+        montant: input['montant'],
+        observation: input['observation'],
       );
 
       try {
@@ -58,7 +59,7 @@ class TransRestAgentsHandlers {
           await repos.transRestAgents.getFromId(editH.id!); 
 
       if (input['reference'] != null) {
-        data.reference = DateTime.parse(input['reference']);
+        data.reference = input['reference'];
       }
       if (input['nom'] != null) {
         data.nom = input['nom'];
@@ -71,6 +72,9 @@ class TransRestAgentsHandlers {
       }
       if (input['montant'] != null) {
         data.montant = input['montant'];
+      }
+      if (input['observation'] != null) {
+        data.observation = input['observation'];
       }
       repos.transRestAgents.update(data);
       return Response.ok(jsonEncode(data.toJson()));

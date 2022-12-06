@@ -1,6 +1,6 @@
 class DevisListObjetsModel {
   late int? id;
-  late DateTime referenceDate;
+  late int reference;
   late String title;
   late String quantity;
   late String designation;
@@ -9,7 +9,7 @@ class DevisListObjetsModel {
 
   DevisListObjetsModel(
       {this.id,
-      required this.referenceDate,
+      required this.reference,
       required this.title,
       required this.quantity,
       required this.designation,
@@ -19,7 +19,7 @@ class DevisListObjetsModel {
   factory DevisListObjetsModel.fromSQL(List<dynamic> row) {
     return DevisListObjetsModel(
         id: row[0],
-        referenceDate: row[1],
+        reference: row[1],
         title: row[2],
         quantity: row[3],
         designation: row[4],
@@ -30,7 +30,7 @@ class DevisListObjetsModel {
   factory DevisListObjetsModel.fromJson(Map<String, dynamic> json) {
     return DevisListObjetsModel(
         id: json['id'],
-        referenceDate: DateTime.parse(json['referenceDate']),
+        reference: json['reference'],
         title: json['title'],
         quantity: json['quantity'],
         designation: json['designation'],
@@ -41,7 +41,7 @@ class DevisListObjetsModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'referenceDate': referenceDate.toIso8601String(),
+      'reference': reference,
       'title': title,
       'quantity': quantity,
       'designation': designation,

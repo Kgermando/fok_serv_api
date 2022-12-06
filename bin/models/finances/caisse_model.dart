@@ -8,7 +8,8 @@ class CaisseModel {
   late String typeOperation;
   late String numeroOperation;
   late String signature; // celui qui fait le document
-  late int createdRef;
+  late int reference;
+  late String caisseName;
   late DateTime created;
 
   CaisseModel(
@@ -21,7 +22,8 @@ class CaisseModel {
       required this.typeOperation,
       required this.numeroOperation,
       required this.signature,
-      required this.createdRef,
+      required this.reference,
+      required this.caisseName,
       required this.created});
 
   factory CaisseModel.fromSQL(List<dynamic> row) {
@@ -35,8 +37,9 @@ class CaisseModel {
         typeOperation: row[6],
         numeroOperation: row[7],
         signature: row[8],
-        createdRef: row[9],
-        created: row[10]);
+        reference: row[9],
+        caisseName: row[10],
+        created: row[11]);
   }
 
   factory CaisseModel.fromJson(Map<String, dynamic> json) {
@@ -50,7 +53,8 @@ class CaisseModel {
         typeOperation: json['typeOperation'],
         numeroOperation: json['numeroOperation'],
         signature: json['signature'],
-        createdRef: json['createdRef'],
+        reference: json['reference'],
+        caisseName: json['caisseName'],
         created: DateTime.parse(json['created']));
   }
 
@@ -65,7 +69,8 @@ class CaisseModel {
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
       'signature': signature,
-      'createdRef': createdRef,
+      'reference': reference,
+      'caisseName': caisseName,
       'created': created.toIso8601String()
     };
   }

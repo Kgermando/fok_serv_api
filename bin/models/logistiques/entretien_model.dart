@@ -1,78 +1,73 @@
 class EntretienModel {
   late int? id;
   late String nom;
-  late String modele;
-  late String marque;
-  late String etatObjet; // type de Maintenance
+  late String typeObjet;
+  late String typeMaintenance; // type de Maintenance
   late String dureeTravaux;
   late String signature; // celui qui fait le document
-  late int createdRef;
-  late DateTime created; 
+  late DateTime created;
   // Approbations DD
   late String approbationDD;
   late String motifDD;
   late String signatureDD;
+  late String isSubmit;
 
   EntretienModel(
       {this.id,
       required this.nom,
-      required this.modele,
-      required this.marque,
-      required this.etatObjet,
+      required this.typeObjet,
+      required this.typeMaintenance,
       required this.dureeTravaux,
       required this.signature,
-      required this.createdRef,
-      required this.created, 
+      required this.created,
       required this.approbationDD,
       required this.motifDD,
-      required this.signatureDD});
+      required this.signatureDD,
+      required this.isSubmit});
 
   factory EntretienModel.fromSQL(List<dynamic> row) {
     return EntretienModel(
         id: row[0],
         nom: row[1],
-        modele: row[2],
-        marque: row[3],
-        etatObjet: row[4],
-        dureeTravaux: row[5],
-        signature: row[6],
-        createdRef: row[7],
-        created: row[8], 
-        approbationDD: row[9],
-        motifDD: row[10],
-        signatureDD: row[11]);
+        typeObjet: row[2],
+        typeMaintenance: row[3],
+        dureeTravaux: row[4],
+        signature: row[5],
+        created: row[6],
+        approbationDD: row[7],
+        motifDD: row[8],
+        signatureDD: row[9],
+        isSubmit: row[10]);
   }
 
   factory EntretienModel.fromJson(Map<String, dynamic> json) {
     return EntretienModel(
         id: json['id'],
         nom: json['nom'],
-        modele: json['modele'],
-        marque: json['marque'],
-        etatObjet: json['etatObjet'],
+        typeObjet: json['typeObjet'],
+        typeMaintenance: json['typeMaintenance'],
         dureeTravaux: json['dureeTravaux'],
         signature: json['signature'],
-        createdRef: json['createdRef'],
-        created: DateTime.parse(json['created']), 
+        created: DateTime.parse(json['created']),
         approbationDD: json['approbationDD'],
         motifDD: json['motifDD'],
-        signatureDD: json['signatureDD']);
+        signatureDD: json['signatureDD'],
+        isSubmit: json['isSubmit']);
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'nom': nom,
-      'modele': modele,
-      'marque': marque,
-      'etatObjet': etatObjet,
+      'typeObjet': typeObjet,
+      'typeMaintenance': typeMaintenance,
       'dureeTravaux': dureeTravaux,
       'signature': signature,
-      'createdRef': createdRef,
-      'created': created.toIso8601String(), 
+      'created': created.toIso8601String(),
       'approbationDD': approbationDD,
       'motifDD': motifDD,
-      'signatureDD': signatureDD
+      'signatureDD': signatureDD,
+      'isSubmit': isSubmit
     };
   }
 }

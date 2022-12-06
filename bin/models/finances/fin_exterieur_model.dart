@@ -7,7 +7,8 @@ class FinanceExterieurModel {
   late String typeOperation;
   late String numeroOperation;
   late String signature; // celui qui fait le document
-  late int createdRef;
+  late int reference;
+  late String financeExterieurName;
   late DateTime created;
 
   FinanceExterieurModel(
@@ -19,7 +20,8 @@ class FinanceExterieurModel {
       required this.typeOperation,
       required this.numeroOperation,
       required this.signature,
-      required this.createdRef,
+      required this.reference,
+      required this.financeExterieurName,
       required this.created});
 
   factory FinanceExterieurModel.fromSQL(List<dynamic> row) {
@@ -32,8 +34,9 @@ class FinanceExterieurModel {
         typeOperation: row[5],
         numeroOperation: row[6],
         signature: row[7],
-        createdRef: row[8],
-        created: row[9]);
+        reference: row[8],
+        financeExterieurName: row[9],
+        created: row[10]);
   }
 
   factory FinanceExterieurModel.fromJson(Map<String, dynamic> json) {
@@ -46,7 +49,8 @@ class FinanceExterieurModel {
         typeOperation: json['typeOperation'],
         numeroOperation: json['numeroOperation'],
         signature: json['signature'],
-        createdRef: json['createdRef'],
+        reference: json['reference'],
+        financeExterieurName: json['financeExterieurName'],
         created: DateTime.parse(json['created']));
   }
 
@@ -60,7 +64,8 @@ class FinanceExterieurModel {
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
       'signature': signature,
-      'createdRef': createdRef,
+      'reference': reference,
+      'financeExterieurName': financeExterieurName,
       'created': created.toIso8601String()
     };
   }

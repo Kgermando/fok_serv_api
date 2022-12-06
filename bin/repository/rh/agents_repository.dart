@@ -27,11 +27,9 @@ class AgentsRepository {
           "adresse, sexe, role, matricule, numero_securite_sociale, date_naissance,"
           "lieu_naissance, nationalite, type_contrat, departement, services_affectation,"
           "date_debut_contrat, date_fin_contrat, fonction_occupe, competance, experience,"
-          "statut_agent, created_at, photo, salaire, signature, created,"
-          "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
+          "statut_agent, created_at, photo, salaire, signature, created)"
           "VALUES (nextval('agents_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12,"
-          "@13, @14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27,"
-          "@28, @29, @30, @31, @32, @33)",
+          "@13, @14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27)",
           substitutionValues: {
             '1': agentModel.nom,
             '2': agentModel.postNom,
@@ -59,13 +57,7 @@ class AgentsRepository {
             '24': agentModel.photo,
             '25': agentModel.salaire,
             '26': agentModel.signature,
-            '27': agentModel.created,
-            '28': agentModel.approbationDG,
-            '29': agentModel.motifDG,
-            '30': agentModel.signatureDG,
-            '31': agentModel.approbationDD,
-            '32': agentModel.motifDD,
-            '33': agentModel.signatureDD
+            '27': agentModel.created
           });
     });
   }
@@ -79,9 +71,7 @@ class AgentsRepository {
         departement = @15, services_affectation = @16, date_debut_contrat = @17,
         date_fin_contrat = @18, fonction_occupe = @19, competance = @20,
         experience = @21, statut_agent = @22, created_at = @23, photo = @24,
-        salaire = @25, signature = @26, created = @27,
-        approbation_dg = @28, motif_dg = @29, signature_dg = @30, approbation_dd = @31,
-        motif_dd = @32, signature_dd = @33 WHERE id = @34""",
+        salaire = @25, signature = @26, created = @27 WHERE id = @28""",
 
         substitutionValues: {
           '1': agentModel.nom,
@@ -111,13 +101,7 @@ class AgentsRepository {
           '25': agentModel.salaire,
           '26': agentModel.signature,
           '27': agentModel.created,
-          '28': agentModel.approbationDG,
-          '29': agentModel.motifDG,
-          '30': agentModel.signatureDG,
-          '31': agentModel.approbationDD,
-          '32': agentModel.motifDD,
-          '33': agentModel.signatureDD,
-          '34': agentModel.id
+          '28': agentModel.id
         });
   }
 
@@ -163,13 +147,7 @@ class AgentsRepository {
         photo: data[0][24],
         salaire: data[0][25],
         signature: data[0][26],
-        created: data[0][27],
-        approbationDG: data[0][28],
-        motifDG: data[0][29],
-        signatureDG: data[0][30],
-        approbationDD: data[0][31],
-        motifDD: data[0][32],
-        signatureDD: data[0][33]
+        created: data[0][27]
       );
   }
 

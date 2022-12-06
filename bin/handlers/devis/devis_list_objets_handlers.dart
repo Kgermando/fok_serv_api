@@ -34,7 +34,7 @@ class DevisListObjetsHandlers {
       var input = jsonDecode(await request.readAsString());
 
       DevisListObjetsModel data = DevisListObjetsModel(
-          referenceDate: DateTime.parse(input['referenceDate']),
+          reference: input['reference'],
           title: input['title'],
           quantity: input['quantity'],
           designation: input['designation'],
@@ -57,7 +57,7 @@ class DevisListObjetsHandlers {
           await repos.devisListObjets.getFromId(editH.id!); 
           
       if (input['referenceDate'] != null) {
-        data.referenceDate = DateTime.parse(input['referenceDate']);  // A ne pas modifier ficher reference
+        data.reference = input['reference'];  // A ne pas modifier ficher reference
       }
       // if (input['title'] != null) {   // A ne pas modifier ficher reference
       //   data.title = input['title'];

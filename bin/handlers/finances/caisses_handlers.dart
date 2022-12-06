@@ -64,7 +64,8 @@ class CaissesHandlers {
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'],
           signature: input['signature'],
-          createdRef: input['createdRef'],
+          reference: input['reference'],
+          caisseName: input['caisseName'],
           created: DateTime.parse(input['created']));
       try {
         await repos.caisses.insertData(data);
@@ -105,8 +106,11 @@ class CaissesHandlers {
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
-      if (input['createdRef'] != null) {
-        data.createdRef = input['createdRef'];
+      if (input['reference'] != null) {
+        data.reference = input['reference'];
+      }
+      if (input['caisseName'] != null) {
+        data.caisseName = input['caisseName'];
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

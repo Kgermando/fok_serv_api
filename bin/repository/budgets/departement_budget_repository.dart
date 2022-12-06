@@ -45,7 +45,7 @@ class DepartementBudgetRepository {
           '14': data.signatureDD
           }
         );
-    });
+    }); 
   }
 
   Future<void> update(DepartementBudgetModel data) async {

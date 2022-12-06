@@ -1,6 +1,6 @@
 import 'package:postgres/postgres.dart';
  
-import '../../models/comptabilites/journal_model.dart';
+import '../../models/comptabilites/journal_model.dart'; 
 
 class JournalRepository {
   final PostgreSQLConnection executor;
@@ -18,7 +18,9 @@ class JournalRepository {
     }
     return data.toList();
   }
- 
+
+
+
   // Future<List<CourbeJournalModel>> getAllDataChartMounth() async {
   //   var data = <CourbeJournalModel>{};
   //   var querySQL =
@@ -45,41 +47,42 @@ class JournalRepository {
   Future<void> insertData(JournalModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, reference, numero_operation, libele,"
-        "compte, montant_debit, montant_credit, tva, type, created)"
-        "VALUES (nextval('journals_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9)",
+        "INSERT INTO $tableName (id, numero_operation, libele,"
+        "compte_debit, montant_debit, compte_credit, montant_credit,"
+        "signature, created, locker)"
+        "VALUES (nextval('journals_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9)",
         substitutionValues: {
-          '1': data.reference,
-          '2': data.numeroOperation,
-          '3': data.libele,
-          '4': data.compte,
-          '5': data.montantDebit,
+          '1': data.numeroOperation,
+          '2': data.libele,
+          '3': data.compteDebit,
+          '4': data.montantDebit,
+          '5': data.compteCredit,
           '6': data.montantCredit,
-          '7': data.tva,
-          '8': data.type,
-          '9': data.created
+          '7': data.signature,
+          '8': data.created,
+          '9': data.locker
         });
     });
   }
 
   Future<void> update(JournalModel data) async {
     await executor.query("""UPDATE $tableName
-      SET reference = @1, numero_operation = @2, libele = @3, compte = @4,
-      montant_debit = @5, montant_credit = @6, tva = @7,
-      type = @8, created = @9 WHERE id = @10""",
-        substitutionValues: {
-          '1': data.reference,
-          '2': data.numeroOperation,
-          '3': data.libele,
-          '4': data.compte,
-          '5': data.montantDebit,
-          '6': data.montantCredit,
-          '7': data.tva,
-          '8': data.type,
-          '9': data.created,
-          '10': data.id
-        });
+      SET numero_operation = @1, libele = @2, compte_debit = @3, montant_debit = @4,  
+      compte_credit = @5, montant_credit = @6,
+      signature = @7, created = @8, locker = @9 WHERE id = @10""",
+      substitutionValues: {
+        '1': data.numeroOperation,
+        '2': data.libele,
+        '3': data.compteDebit,
+        '4': data.montantDebit,
+        '5': data.compteCredit,
+        '6': data.montantCredit,
+        '7': data.signature,
+        '8': data.created,
+        '9': data.locker,
+        '10': data.id
+      }
+    );
   }
 
   deleteData(int id) async {
@@ -98,15 +101,15 @@ class JournalRepository {
       await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return JournalModel(
       id: data[0][0],
-      reference: data[0][1],
-      numeroOperation: data[0][2],
-      libele: data[0][3],
-      compte: data[0][4],
-      montantDebit: data[0][5],
+      numeroOperation: data[0][1],
+      libele: data[0][2],
+      compteDebit: data[0][3],
+      montantDebit: data[0][4],
+      compteCredit: data[0][5],
       montantCredit: data[0][6],
-      tva: data[0][7],
-      type: data[0][8],
-      created: data[0][9]
+      signature: data[0][7],
+      created: data[0][8],
+      locker: data[0][9]
     );
   }
 }

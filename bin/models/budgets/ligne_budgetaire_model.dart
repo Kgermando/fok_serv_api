@@ -13,6 +13,10 @@ class LigneBudgetaireModel {
   late String finExterieur; // Reste à trouver
   late String signature;
   late DateTime created;
+  late int reference;
+  late double caisseSortie;
+  late double banqueSortie;
+  late double finExterieurSortie;
 
   LigneBudgetaireModel(
       {this.id,
@@ -28,7 +32,11 @@ class LigneBudgetaireModel {
       required this.banque,
       required this.finExterieur,
       required this.signature,
-      required this.created});
+      required this.created,
+      required this.reference,
+      required this.caisseSortie,
+      required this.banqueSortie,
+      required this.finExterieurSortie});
 
   factory LigneBudgetaireModel.fromSQL(List<dynamic> row) {
     return LigneBudgetaireModel(
@@ -45,25 +53,34 @@ class LigneBudgetaireModel {
         banque: row[10],
         finExterieur: row[11],
         signature: row[12],
-        created: row[13]);
+        created: row[13],
+        reference: row[14],
+        caisseSortie: row[15],
+        banqueSortie: row[16],
+        finExterieurSortie: row[17]);
   }
 
   factory LigneBudgetaireModel.fromJson(Map<String, dynamic> json) {
     return LigneBudgetaireModel(
-        id: json['id'],
-        nomLigneBudgetaire: json['nomLigneBudgetaire'],
-        departement: json['departement'],
-        periodeBudgetDebut: DateTime.parse(json['periodeBudgetDebut']),
-        periodeBudgetFin: DateTime.parse(json['periodeBudgetFin']),
-        uniteChoisie: json['uniteChoisie'],
-        nombreUnite: json['nombreUnite'],
-        coutUnitaire: json['coutUnitaire'],
-        coutTotal: json['coutTotal'],
-        caisse: json['caisse'],
-        banque: json['banque'],
-        finExterieur: json['finExterieur'],
-        signature: json['signature'],
-        created: DateTime.parse(json['created']));
+      id: json['id'],
+      nomLigneBudgetaire: json['nomLigneBudgetaire'],
+      departement: json['departement'],
+      periodeBudgetDebut: DateTime.parse(json['periodeBudgetDebut']),
+      periodeBudgetFin: DateTime.parse(json['periodeBudgetFin']),
+      uniteChoisie: json['uniteChoisie'],
+      nombreUnite: json['nombreUnite'],
+      coutUnitaire: json['coutUnitaire'],
+      coutTotal: json['coutTotal'],
+      caisse: json['caisse'],
+      banque: json['banque'],
+      finExterieur: json['finExterieur'],
+      signature: json['signature'],
+      created: DateTime.parse(json['created']),
+      reference: json['reference'],
+      caisseSortie: json['caisseSortie'],
+      banqueSortie: json['banqueSortie'],
+      finExterieurSortie: json['finExterieurSortie'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -81,7 +98,11 @@ class LigneBudgetaireModel {
       'banque': banque,
       'finExterieur': finExterieur,
       'signature': signature,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'reference': reference,
+      'caisseSortie': caisseSortie,
+      'banqueSortie': banqueSortie,
+      'finExterieurSortie': finExterieurSortie,
     };
   }
 }

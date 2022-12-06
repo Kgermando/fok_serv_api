@@ -12,6 +12,7 @@ class DevisNotifyRepository {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
+        "is_submit" = 'true' AND
         "approbation_dd" = 'Approved' AND
         "approbation_dg" = '-' AND 
         "observation" = 'false';""";
@@ -29,6 +30,7 @@ class DevisNotifyRepository {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
+       "is_submit" = 'true' AND
         "approbation_dd" = '-' AND 
         "observation" = 'false';""";
       List<List<dynamic>> results = await executor.query(querySQL);
@@ -45,6 +47,7 @@ class DevisNotifyRepository {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
+        "is_submit" = 'true' AND
         "approbation_dd" = 'Approved' AND 
         "approbation_dg" = 'Approved' AND 
         "approbation_budget" = '-' AND 
@@ -63,6 +66,7 @@ class DevisNotifyRepository {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
+       "is_submit" = 'true' AND
         "approbation_dd" = 'Approved' AND 
         "approbation_dg" = 'Approved' AND 
         "approbation_budget" = 'Approved' AND 
@@ -82,6 +86,7 @@ class DevisNotifyRepository {
     try {
       var data = <NotifyModel>{};
       var querySQL = """SELECT COUNT(*) FROM $tableName where 
+        "is_submit" = 'true' AND
         "approbation_dd" = 'Approved' AND 
         "approbation_dg" = 'Approved' AND 
         "approbation_budget" = 'Approved' AND 

@@ -3,11 +3,7 @@ class BilanModel {
   late String titleBilan;
   late String signature;
   late DateTime created;
-  late String isSubmit;
-  // Approbations DG
-  late String approbationDG;
-  late String motifDG;
-  late String signatureDG;
+  late String isSubmit; 
   // Approbations DD
   late String approbationDD;
   late String motifDD;
@@ -18,10 +14,7 @@ class BilanModel {
       required this.titleBilan,
       required this.signature,
       required this.created,
-      required this.isSubmit,
-      required this.approbationDG,
-      required this.motifDG,
-      required this.signatureDG,
+      required this.isSubmit, 
       required this.approbationDD,
       required this.motifDD,
       required this.signatureDD});
@@ -33,12 +26,9 @@ class BilanModel {
         signature: row[2],
         created: row[3],
         isSubmit: row[4],
-        approbationDG: row[5],
-        motifDG: row[6],
-        signatureDG: row[7],
-        approbationDD: row[8],
-        motifDD: row[9],
-        signatureDD: row[10]);
+        approbationDD: row[5],
+        motifDD: row[6],
+        signatureDD: row[7] );
   }
 
   factory BilanModel.fromJson(Map<String, dynamic> json) {
@@ -47,10 +37,7 @@ class BilanModel {
         titleBilan: json['titleBilan'],
         signature: json['signature'],
         created: DateTime.parse(json['created']),
-        isSubmit: json['isSubmit'],
-        approbationDG: json['approbationDG'],
-        motifDG: json['motifDG'],
-        signatureDG: json['signatureDG'],
+        isSubmit: json['isSubmit'], 
         approbationDD: json['approbationDD'],
         motifDD: json['motifDD'],
         signatureDD: json['signatureDD']);
@@ -62,10 +49,7 @@ class BilanModel {
       'titleBilan': titleBilan,
       'signature': signature,
       'created': created.toIso8601String(),
-      'isSubmit': isSubmit,
-      'approbationDG': approbationDG,
-      'motifDG': motifDG,
-      'signatureDG': signatureDG,
+      'isSubmit': isSubmit, 
       'approbationDD': approbationDD,
       'motifDD': motifDD,
       'signatureDD': signatureDD

@@ -42,7 +42,8 @@ class FinExterieurHandlers {
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'], 
           signature: input['signature'],
-          createdRef: input['createdRef'],
+          reference: input['reference'],
+          financeExterieurName: input['financeExterieurName'],
           created: DateTime.parse(input['created']));
       try {
         await repos.finExterieurs.insertData(data);
@@ -80,8 +81,11 @@ class FinExterieurHandlers {
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }
-      if (input['createdRef'] != null) {
-        data.createdRef = input['createdRef'];
+      if (input['reference'] != null) {
+        data.reference = input['reference'];
+      }
+      if (input['financeExterieurName'] != null) {
+        data.financeExterieurName = input['financeExterieurName'];
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);

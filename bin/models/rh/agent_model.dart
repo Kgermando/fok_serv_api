@@ -28,91 +28,67 @@ class AgentModel {
   late String signature; // celui qui fait le document
   late DateTime created;
 
-  // Approbations DG
-  late String approbationDG;
-  late String motifDG;
-  late String signatureDG;
-  // Approbations DD
-  late String approbationDD;
-  late String motifDD; 
-  late String signatureDD;
-
-  AgentModel(
-      {this.id,
-      required this.nom,
-      required this.postNom,
-      required this.prenom,
-      required this.email,
-      required this.telephone,
-      required this.adresse,
-      required this.sexe,
-      required this.role,
-      required this.matricule,
-      required this.numeroSecuriteSociale,
-      required this.dateNaissance,
-      required this.lieuNaissance,
-      required this.nationalite,
-      required this.typeContrat,
-      required this.departement,
-      required this.servicesAffectation,
-      required this.dateDebutContrat,
-      required this.dateFinContrat,
-      required this.fonctionOccupe,
-      this.competance,
-      this.experience,
-      required this.statutAgent,
-      required this.createdAt,
-      this.photo,
-      required this.salaire,
-      required this.signature,
-      required this.created,
-
-      required this.approbationDG,
-      required this.motifDG,
-      required this.signatureDG,
-      required this.approbationDD,
-      required this.motifDD,
-      required this.signatureDD
+  AgentModel({
+    this.id,
+    required this.nom,
+    required this.postNom,
+    required this.prenom,
+    required this.email,
+    required this.telephone,
+    required this.adresse,
+    required this.sexe,
+    required this.role,
+    required this.matricule,
+    required this.numeroSecuriteSociale,
+    required this.dateNaissance,
+    required this.lieuNaissance,
+    required this.nationalite,
+    required this.typeContrat,
+    required this.departement,
+    required this.servicesAffectation,
+    required this.dateDebutContrat,
+    required this.dateFinContrat,
+    required this.fonctionOccupe,
+    this.competance,
+    this.experience,
+    required this.statutAgent,
+    required this.createdAt,
+    this.photo,
+    required this.salaire,
+    required this.signature,
+    required this.created,
   });
 
   factory AgentModel.fromSQL(List<dynamic> row) {
     return AgentModel(
-      id: row[0],
-      nom: row[1],
-      postNom: row[2],
-      prenom: row[3],
-      email: row[4],
-      telephone: row[5],
-      adresse: row[6],
-      sexe: row[7],
-      role: row[8],
-      matricule: row[9],
-      numeroSecuriteSociale: row[10],
-      dateNaissance: row[11],
-      lieuNaissance: row[12],
-      nationalite: row[13],
-      typeContrat: row[14],
-      departement: row[15],
-      servicesAffectation: row[16],
-      dateDebutContrat: row[17],
-      dateFinContrat: row[18],
-      fonctionOccupe: row[19],
-      competance: row[20],
-      experience: row[21],
-      statutAgent: row[22],
-      createdAt: row[23],
-      photo: row[24],
-      salaire: row[25],
-      signature: row[26],
-      created: row[27],
-
-      approbationDG: row[28],
-      motifDG: row[29],
-      signatureDG: row[30],
-      approbationDD: row[31],
-      motifDD: row[32],
-      signatureDD: row[33]
-    );
+        id: row[0],
+        nom: row[1],
+        postNom: row[2],
+        prenom: row[3],
+        email: row[4],
+        telephone: row[5],
+        adresse: row[6],
+        sexe: row[7],
+        role: row[8],
+        matricule: row[9],
+        numeroSecuriteSociale: row[10],
+        dateNaissance: row[11],
+        lieuNaissance: row[12],
+        nationalite: row[13],
+        typeContrat: row[14],
+        departement: row[15],
+        servicesAffectation: row[16],
+        dateDebutContrat: row[17],
+        dateFinContrat: row[18],
+        fonctionOccupe: row[19],
+        competance: row[20],
+        experience: row[21],
+        statutAgent: row[22],
+        createdAt: row[23],
+        photo: row[24],
+        salaire: row[25],
+        signature: row[26],
+        created: row[27]);
   }
 
   factory AgentModel.fromJson(Map<String, dynamic> json) {
@@ -145,13 +121,6 @@ class AgentModel {
       salaire: json["salaire"],
       signature: json['signature'],
       created: DateTime.parse(json['created']),
-      
-      approbationDG: json['approbationDG'],
-      motifDG: json['motifDG'],
-      signatureDG: json['signatureDG'],
-      approbationDD: json['approbationDD'],
-      motifDD: json['motifDD'],
-      signatureDD: json['signatureDD']
     );
   }
 
@@ -185,13 +154,6 @@ class AgentModel {
       'salaire': salaire,
       'signature': signature,
       'created': created.toIso8601String(),
-
-      'approbationDG': approbationDG,
-      'motifDG': motifDG,
-      'signatureDG': signatureDG,
-      'approbationDD': approbationDD,
-      'motifDD': motifDD,
-      'signatureDD': signatureDD
     };
   }
 }

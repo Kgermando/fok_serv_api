@@ -24,19 +24,16 @@ class BilanRepository {
       await ctx.execute(
           "INSERT INTO $tableName (id, title_bilan,"
           "signature, created, is_submit,"
-          "approbation_dg, motif_dg, signature_dg, approbation_dd, motif_dd, signature_dd)"
-          "VALUES (nextval('bilans_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10)",
+          "approbation_dd, motif_dd, signature_dd)"
+          "VALUES (nextval('bilans_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
           substitutionValues: {
             '1': data.titleBilan,
             '2': data.signature,
             '3': data.created,
             '4': data.isSubmit,
-            '5': data.approbationDG,
-            '6': data.motifDG,
-            '7': data.signatureDG,
-            '8': data.approbationDD,
-            '9': data.motifDD,
-            '10': data.signatureDD
+            '5': data.approbationDD,
+            '6': data.motifDD,
+            '7': data.signatureDD 
           });
     });
   }
@@ -44,21 +41,16 @@ class BilanRepository {
   Future<void> update(BilanModel data) async {
     await executor.query("""UPDATE $tableName
       SET title_bilan = @1, signature = @2,
-      created = @3, is_submit = @4, approbation_dg = @5, motif_dg = @6, signature_dg = @7,
-        approbation_dd = @8, approbation_dd = @9,
-        signature_dd = @10 WHERE id = @11""", 
+      created = @3, is_submit = @4, approbation_dd = @5, motif_dd = @6, signature_dd = @7 WHERE id = @8""", 
       substitutionValues: {
       '1': data.titleBilan,
       '2': data.signature,
       '3': data.created,
       '4': data.isSubmit,
-      '5': data.approbationDG,
-      '6': data.motifDG,
-      '7': data.signatureDG,
-      '8': data.approbationDD,
-      '9': data.motifDD,
-      '10': data.signatureDD,
-      '11': data.id
+      '5': data.approbationDD,
+      '6': data.motifDD,
+      '7': data.signatureDD,
+      '8': data.id 
     });
   }
 
@@ -82,12 +74,9 @@ class BilanRepository {
       signature: data[0][2],
       created: data[0][3],
       isSubmit: data[0][4],
-      approbationDG: data[0][5],
-      motifDG: data[0][6],
-      signatureDG: data[0][7],
-      approbationDD: data[0][8],
-      motifDD: data[0][9],
-      signatureDD: data[0][10] 
+      approbationDD: data[0][5],
+      motifDD: data[0][6],
+      signatureDD: data[0][7] 
     );
   }
   

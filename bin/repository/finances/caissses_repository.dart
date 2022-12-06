@@ -76,9 +76,9 @@ class CaissesRepository {
         "INSERT INTO $tableName (id, nom_complet, piece_justificative,"
         "libelle, montant,"
         "departement, type_operation, numero_operation, signature,"
-        "created_ref, created)"
+        "reference, caisse_name, created)"
         "VALUES (nextval('caisses_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10)",
+        "@7, @8, @9, @10, @11)",
         substitutionValues: {
            '1': data.nomComplet,
             '2': data.pieceJustificative,
@@ -88,8 +88,9 @@ class CaissesRepository {
             '6': data.typeOperation,
             '7': data.numeroOperation,
             '8': data.signature,
-            '9': data.createdRef,
-            '10': data.created
+            '9': data.reference,
+            '10': data.caisseName,
+            '11': data.created
         });
     });
   }
@@ -99,7 +100,7 @@ class CaissesRepository {
         SET nom_complet = @1, piece_justificative = @2, libelle = @3,
         montant = @4, departement = @5,
         type_operation = @6, numero_operation = @7, signature = @8,
-        created_ref = @9, created = @10 WHERE id = @11""", substitutionValues: {
+        reference = @9, caisse_name = @10, created = @11 WHERE id = @12""", substitutionValues: {
       '1': data.nomComplet,
       '2': data.pieceJustificative,
       '3': data.libelle,
@@ -108,9 +109,10 @@ class CaissesRepository {
       '6': data.typeOperation,
       '7': data.numeroOperation,
       '8': data.signature,
-      '9': data.createdRef,
+      '9': data.reference,
       '10': data.created,
-      '11': data.id
+      '11': data.caisseName,
+      '12': data.id
     });
   }
 
@@ -138,8 +140,9 @@ class CaissesRepository {
         typeOperation: data[0][6],
         numeroOperation: data[0][7],
         signature: data[0][8],
-        createdRef: data[0][9],
-        created: data[0][10] 
+        reference: data[0][9],
+        caisseName: data[0][10],
+        created: data[0][11] 
       );
   }
 

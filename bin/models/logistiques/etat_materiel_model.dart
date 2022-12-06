@@ -3,11 +3,10 @@ class EtatMaterielModel {
   late String nom;
   late String modele;
   late String marque;
-  late String typeObjet;  // anguin , mobilier ou immobilier,
+  late String typeObjet; // anguin , mobilier ou immobilier,
   late String statut;
   late String signature; // celui qui fait le document
-  late DateTime createdRef;
-  late DateTime created; 
+  late DateTime created;
   // Approbations DD
   late String approbationDD;
   late String motifDD;
@@ -21,13 +20,10 @@ class EtatMaterielModel {
       required this.typeObjet,
       required this.statut,
       required this.signature,
-      required this.createdRef,
-      required this.created, 
+      required this.created,
       required this.approbationDD,
       required this.motifDD,
-      required this.signatureDD
-      
-    });
+      required this.signatureDD});
 
   factory EtatMaterielModel.fromSQL(List<dynamic> row) {
     return EtatMaterielModel(
@@ -38,12 +34,10 @@ class EtatMaterielModel {
         typeObjet: row[4],
         statut: row[5],
         signature: row[6],
-        createdRef: row[7],
-        created: row[8], 
-        approbationDD: row[9],
-        motifDD: row[10],
-        signatureDD: row[11]
-    );
+        created: row[7],
+        approbationDD: row[8],
+        motifDD: row[9],
+        signatureDD: row[10]);
   }
 
   factory EtatMaterielModel.fromJson(Map<String, dynamic> json) {
@@ -55,13 +49,10 @@ class EtatMaterielModel {
         typeObjet: json['typeObjet'],
         statut: json['statut'],
         signature: json['signature'],
-        createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created']), 
+        created: DateTime.parse(json['created']),
         approbationDD: json['approbationDD'],
         motifDD: json['motifDD'],
-        signatureDD: json['signatureDD']
-        
-    );
+        signatureDD: json['signatureDD']);
   }
 
   Map<String, dynamic> toJson() {
@@ -73,8 +64,7 @@ class EtatMaterielModel {
       'typeObjet': typeObjet,
       'statut': statut,
       'signature': signature,
-      'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String(), 
+      'created': created.toIso8601String(),
       'approbationDD': approbationDD,
       'motifDD': motifDD,
       'signatureDD': signatureDD

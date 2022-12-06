@@ -22,21 +22,21 @@ class TrajetRepository {
   Future<void> insertData(TrajetModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, nomero_entreprise, nom_utilisateur,"
+          "INSERT INTO $tableName (id, nomero_entreprise, conducteur,"
           "trajet_de, trajet_a, mission, kilometrage_sorite, kilometrage_retour,"
-          "signature, created_ref, created, approbation_dd, motif_dd, signature_dd)"
+          "signature, reference, created, approbation_dd, motif_dd, signature_dd)"
           "VALUES (nextval('trajets_id_seq'), @1, @2, @3, @4, @5, @6,"
           "@7, @8, @9, @10, @11, @12, @13)",
           substitutionValues: {
             '1': data.nomeroEntreprise,
-            '2': data.nomUtilisateur,
+            '2': data.conducteur,
             '3': data.trajetDe,
             '4': data.trajetA,
             '5': data.mission,
             '6': data.kilometrageSorite,
             '7': data.kilometrageRetour,
             '8': data.signature,
-            '9': data.createdRef,
+            '9': data.reference,
             '10': data.created,
             '11': data.approbationDD,
             '12': data.motifDD,
@@ -48,20 +48,20 @@ class TrajetRepository {
 
   Future<void> update(TrajetModel data) async {
      await executor.execute("""UPDATE $tableName
-          SET nomero_entreprise = @1, nom_utilisateur = @2, trajet_de = @3,
+          SET nomero_entreprise = @1, conducteur = @2, trajet_de = @3,
           trajet_a = @4, mission = @5, kilometrage_sorite = @6, kilometrage_retour = @7,
-          signature = @8, created_ref = @9, created = @10, approbation_dd = @11,
+          signature = @8, reference = @9, created = @10, approbation_dd = @11,
         motif_dd = @12, signature_dd = @13 WHERE id = @14""",
         substitutionValues: {
           '1': data.nomeroEntreprise,
-          '2': data.nomUtilisateur,
+          '2': data.conducteur,
           '3': data.trajetDe,
           '4': data.trajetA,
           '5': data.mission,
           '6': data.kilometrageSorite,
           '7': data.kilometrageRetour,
           '8': data.signature,
-          '9': data.createdRef,
+          '9': data.reference,
           '10': data.created,
           '11': data.approbationDD,
           '12': data.motifDD,
@@ -87,14 +87,14 @@ class TrajetRepository {
     return TrajetModel(
         id: data[0][0],
         nomeroEntreprise: data[0][1],
-        nomUtilisateur: data[0][2],
+        conducteur: data[0][2],
         trajetDe: data[0][3],
         trajetA: data[0][4],
         mission: data[0][5],
         kilometrageSorite: data[0][6],
         kilometrageRetour: data[0][7], 
         signature: data[0][8],
-        createdRef: data[0][9],
+        reference: data[0][9],
         created: data[0][10],
         approbationDD: data[0][11],
         motifDD: data[0][12],

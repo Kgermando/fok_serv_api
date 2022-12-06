@@ -1,6 +1,6 @@
 class CreanceDetteModel {
   late int? id;
-  late DateTime reference;
+  late int reference;
   late String nomComplet;
   late String pieceJustificative;
   late String libelle;
@@ -39,7 +39,7 @@ class CreanceDetteModel {
   factory CreanceDetteModel.fromJson(Map<String, dynamic> json) {
     return CreanceDetteModel(
         id: json['id'],
-        reference: DateTime.parse(json['reference']),
+        reference: json['reference'],
         nomComplet: json['nomComplet'],
         pieceJustificative: json['pieceJustificative'],
         libelle: json['libelle'],
@@ -53,7 +53,7 @@ class CreanceDetteModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'reference': reference.toIso8601String(),
+      'reference': reference,
       'nomComplet': nomComplet,
       'pieceJustificative': pieceJustificative,
       'libelle': libelle,

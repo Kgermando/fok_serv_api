@@ -37,5 +37,5 @@ class ImmobilierNotifyRepository {
     } catch (e) {
       throw NotifyModel;
     }
-  } 
+  }
 }

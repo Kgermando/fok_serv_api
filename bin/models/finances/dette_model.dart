@@ -7,8 +7,7 @@ class DetteModel {
   late String numeroOperation;
   late String statutPaie;
 
-  late String signature; // celui qui fait le document
-  late DateTime createdRef;
+  late String signature; // celui qui fait le document 
   late DateTime created;
   // Approbations DG
   late String approbationDG;
@@ -27,8 +26,7 @@ class DetteModel {
       required this.montant,
       required this.numeroOperation,
       required this.statutPaie,
-      required this.signature,
-      required this.createdRef,
+      required this.signature, 
       required this.created,
       required this.approbationDG,
       required this.motifDG,
@@ -47,14 +45,13 @@ class DetteModel {
         numeroOperation: row[5],
         statutPaie: row[6],
         signature: row[7],
-        createdRef: row[8],
-        created: row[9],
-        approbationDG: row[10],
-        motifDG: row[11],
-        signatureDG: row[12], 
-        approbationDD: row[13],
-        motifDD: row[14],
-        signatureDD: row[15]);
+        created: row[8],
+        approbationDG: row[9],
+        motifDG: row[10],
+        signatureDG: row[11],
+        approbationDD: row[12],
+        motifDD: row[13],
+        signatureDD: row[14]);
   }
 
   factory DetteModel.fromJson(Map<String, dynamic> json) {
@@ -66,8 +63,7 @@ class DetteModel {
         montant: json['montant'],
         numeroOperation: json['numeroOperation'],
         statutPaie: json['statutPaie'],
-        signature: json['signature'],
-        createdRef: DateTime.parse(json['createdRef']),
+        signature: json['signature'], 
         created: DateTime.parse(json['created']),
         approbationDG: json['approbationDG'],
         motifDG: json['motifDG'],
@@ -86,8 +82,7 @@ class DetteModel {
       'montant': montant,
       'numeroOperation': numeroOperation,
       'statutPaie': statutPaie.toString(),
-      'signature': signature,
-      'createdRef': createdRef.toIso8601String(),
+      'signature': signature, 
       'created': created.toIso8601String(),
       'approbationDG': approbationDG,
       'motifDG': motifDG,

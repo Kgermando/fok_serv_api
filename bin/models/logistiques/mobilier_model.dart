@@ -6,13 +6,11 @@ class MobilierModel {
   late String descriptionMobilier;
   late String nombre;
   late String signature; // celui qui fait le document
-  late DateTime createdRef;
-  late DateTime created; 
+  late DateTime created;
   // Approbations DD
   late String approbationDD;
   late String motifDD;
   late String signatureDD;
-
 
   MobilierModel(
       {this.id,
@@ -22,8 +20,7 @@ class MobilierModel {
       required this.descriptionMobilier,
       required this.nombre,
       required this.signature,
-      required this.createdRef,
-      required this.created, 
+      required this.created,
       required this.approbationDD,
       required this.motifDD,
       required this.signatureDD});
@@ -37,11 +34,10 @@ class MobilierModel {
         descriptionMobilier: row[4],
         nombre: row[5],
         signature: row[6],
-        createdRef: row[7],
-        created: row[8], 
-        approbationDD: row[9],
-        motifDD: row[10],
-        signatureDD: row[11]);
+        created: row[7],
+        approbationDD: row[8],
+        motifDD: row[9],
+        signatureDD: row[10]);
   }
 
   factory MobilierModel.fromJson(Map<String, dynamic> json) {
@@ -53,8 +49,7 @@ class MobilierModel {
         descriptionMobilier: json['descriptionMobilier'],
         nombre: json['nombre'],
         signature: json['signature'],
-        createdRef: DateTime.parse(json['createdRef']),
-        created: DateTime.parse(json['created']), 
+        created: DateTime.parse(json['created']),
         approbationDD: json['approbationDD'],
         motifDD: json['motifDD'],
         signatureDD: json['signatureDD']);
@@ -69,8 +64,7 @@ class MobilierModel {
       'descriptionMobilier': descriptionMobilier,
       'nombre': nombre,
       'signature': signature,
-      'createdRef': createdRef.toIso8601String(),
-      'created': created.toIso8601String(), 
+      'created': created.toIso8601String(),
       'approbationDD': approbationDD,
       'motifDD': motifDD,
       'signatureDD': signatureDD

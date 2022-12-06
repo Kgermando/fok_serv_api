@@ -40,8 +40,7 @@ class CreanceHandlers {
           montant: input['montant'],
           numeroOperation: input['numeroOperation'],
           statutPaie: input['statutPaie'],
-          signature: input['signature'],
-          createdRef: DateTime.parse(input['createdRef']),
+          signature: input['signature'], 
           created: DateTime.parse(input['created']),
           approbationDG: input['approbationDG'],
           motifDG: input['motifDG'],
@@ -85,10 +84,7 @@ class CreanceHandlers {
 
       if (input['signature'] != null) {
         data.signature = input['signature'];
-      }
-      if (input['createdRef'] != null) {
-        data.createdRef = DateTime.parse(input['createdRef']);
-      }
+      } 
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }

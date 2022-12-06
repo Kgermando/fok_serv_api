@@ -2,49 +2,56 @@ import 'package:postgres/postgres.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'db/config_db.dart'; 
-import 'handlers/administrations/actionnaire_cotisations_handlers.dart';
-import 'handlers/administrations/actionnaire_handlers.dart';
+import 'db/config_db.dart';
+import 'handlers/actionnaire/actionnaire_cotisations_handlers.dart';
+import 'handlers/actionnaire/actionnaire_handlers.dart';
+import 'handlers/actionnaire/actionnaire_transfert_handlers.dart';
 import 'handlers/archives/archive_folder_handlers.dart';
 import 'handlers/archives/archive_handlers.dart';
 import 'handlers/auth/auth_handlers.dart';
 import 'handlers/auth/user_handlers.dart';
 import 'handlers/budgets/departement_budget_handlers.dart';
 import 'handlers/budgets/ligne_budgetaire_handlers.dart';
-import 'handlers/comm_marketing/commercial/achats_handlers.dart';
-import 'handlers/comm_marketing/commercial/bon_livraison_handlers.dart';
-import 'handlers/comm_marketing/commercial/cart_handlers.dart';
-import 'handlers/comm_marketing/commercial/creance_facture_handlers.dart';
-import 'handlers/comm_marketing/commercial/facture_handlers.dart';
-import 'handlers/comm_marketing/commercial/gains_handlers.dart';
-import 'handlers/comm_marketing/commercial/history_livraison_handlers.dart';
-import 'handlers/comm_marketing/commercial/history_ravitaillement_handlers.dart';
-import 'handlers/comm_marketing/commercial/number_fact_handlers.dart';
-import 'handlers/comm_marketing/commercial/produit_model_handlers.dart';
-import 'handlers/comm_marketing/commercial/restitution_handlers.dart';
-import 'handlers/comm_marketing/commercial/stocks_global_handlers.dart';
-import 'handlers/comm_marketing/commercial/succursale_handlers.dart';
-import 'handlers/comm_marketing/commercial/ventes_handlers.dart';
-import 'handlers/comm_marketing/marketing/agenda_handlers.dart';
-import 'handlers/comm_marketing/marketing/annuaire_handlers.dart';
-import 'handlers/comm_marketing/marketing/campaign_handlers.dart';
-import 'handlers/comptabilites/balance_comptes_handlers.dart';
+import 'handlers/commercial/achats_handlers.dart';
+import 'handlers/commercial/bon_livraison_handlers.dart';
+import 'handlers/commercial/cart_handlers.dart';
+import 'handlers/commercial/creance_facture_handlers.dart';
+import 'handlers/commercial/facture_handlers.dart';
+import 'handlers/commercial/gains_handlers.dart';
+import 'handlers/commercial/history_livraison_handlers.dart';
+import 'handlers/commercial/history_ravitaillement_handlers.dart';
+import 'handlers/commercial/number_fact_handlers.dart';
+import 'handlers/commercial/produit_model_handlers.dart';
+import 'handlers/commercial/restitution_handlers.dart';
+import 'handlers/commercial/stocks_global_handlers.dart';
+import 'handlers/commercial/succursale_handlers.dart';
+import 'handlers/commercial/ventes_handlers.dart';
+import 'handlers/marketing/agenda_handlers.dart';
+import 'handlers/marketing/annuaire_handlers.dart';
+import 'handlers/marketing/campaign_handlers.dart';
 import 'handlers/comptabilites/bilans_handlers.dart';
-import 'handlers/comptabilites/compte_bilan_ref_handlers.dart'; 
+import 'handlers/comptabilites/compte_bilan_ref_handlers.dart';
 import 'handlers/comptabilites/compte_resultat_handlers.dart';
-import 'handlers/comptabilites/comptes_balance_ref_handlers.dart';
-import 'handlers/comptabilites/journal__livre_handlers.dart';
+import 'handlers/comptabilites/balance_handlers.dart';
 import 'handlers/comptabilites/journal_handlers.dart';
 import 'handlers/devis/devis_handlers.dart';
 import 'handlers/devis/devis_list_objets_handlers.dart';
-import 'handlers/exploitations/agent_role_hanlders.dart';
+import 'handlers/logistiques/approvision_reception_handlers.dart';
+import 'handlers/logistiques/approvisionnenement_handlers.dart';
+import 'handlers/notify/departements/marketing_departement.dart';
+import 'handlers/personnels_roles/agent_role_hanlders.dart';
 import 'handlers/exploitations/fournisseur_handlers.dart';
 import 'handlers/exploitations/production_handlers.dart';
 import 'handlers/exploitations/projet_handlers.dart';
-import 'handlers/exploitations/rapport_hanlders.dart';
-import 'handlers/exploitations/tache_handlers.dart';
+import 'handlers/suivis_controles/abonnement_client_handlers.dart';
+import 'handlers/suivis_controles/entreprise_info_handlers.dart';
+import 'handlers/suivis_controles/suivi_handlers.dart';
+import 'handlers/taches/rapport_hanlders.dart';
+import 'handlers/taches/tache_handlers.dart';
 import 'handlers/exploitations/versement_projet_handlers.dart';
+import 'handlers/finances/banque_names_handlers.dart';
 import 'handlers/finances/banques_handlers.dart';
+import 'handlers/finances/caisse_names_handlers.dart';
 import 'handlers/finances/caisses_handlers.dart';
 import 'handlers/finances/coupure_billet_handlers.dart';
 import 'handlers/finances/creance_dette_handlers.dart';
@@ -52,8 +59,8 @@ import 'handlers/finances/creance_handlers.dart';
 import 'handlers/finances/dette_handlers.dart';
 import 'handlers/finances/depense_handlers.dart';
 import 'handlers/finances/fin_exterieur_handlers.dart';
-import 'handlers/logistiques/anguin_handlers.dart';
-import 'handlers/logistiques/carburant_handlers.dart';
+import 'handlers/finances/fin_exterieur_names_handlers.dart';
+import 'handlers/logistiques/materiel_handlers.dart';
 import 'handlers/logistiques/entretien_handlers.dart';
 import 'handlers/logistiques/etat_materiel_handlers.dart';
 import 'handlers/logistiques/immobiler_repository.dart';
@@ -62,18 +69,16 @@ import 'handlers/logistiques/objets_remplace_handlers.dart';
 import 'handlers/logistiques/trajet_handlers.dart';
 import 'handlers/mails/mails_handlers.dart';
 import 'handlers/notify/budgets/budget_notify_handlers.dart';
-import 'handlers/notify/comm_marketing/agenda_notify_handlers.dart';
-import 'handlers/notify/comm_marketing/campaign_notify_handlers.dart';
-import 'handlers/notify/comm_marketing/cart_notify_handlers.dart';
-import 'handlers/notify/comm_marketing/prod_model_notify_handlers.dart';
-import 'handlers/notify/comm_marketing/succursale_notify_handlers.dart';
-import 'handlers/notify/comptabilites/balance_notify_handlers.dart';
+import 'handlers/notify/marketing/agenda_notify_handlers.dart';
+import 'handlers/notify/marketing/campaign_notify_handlers.dart';
+import 'handlers/notify/commercial/cart_notify_handlers.dart';
+import 'handlers/notify/commercial/prod_model_notify_handlers.dart';
+import 'handlers/notify/commercial/succursale_notify_handlers.dart';
 import 'handlers/notify/comptabilites/bilan_notify_handlers.dart';
 import 'handlers/notify/comptabilites/compte_resultat_notify_handlers.dart';
-import 'handlers/notify/comptabilites/journal_notify_handlers.dart';
 import 'handlers/notify/departements/admin_departement.dart';
 import 'handlers/notify/departements/budget_departement.dart';
-import 'handlers/notify/departements/comm_marketing_departement.dart';
+import 'handlers/notify/departements/comm_departement.dart';
 import 'handlers/notify/departements/comptabilites_departement.dart';
 import 'handlers/notify/departements/exploitation_departement.dart';
 import 'handlers/notify/departements/finance_departement.dart';
@@ -85,8 +90,7 @@ import 'handlers/notify/exploitations/projet_notify_handlers.dart';
 import 'handlers/notify/exploitations/tache_notify_handlers.dart';
 import 'handlers/notify/finances/creance_notify_handlers.dart';
 import 'handlers/notify/finances/dette_notify_handlers.dart';
-import 'handlers/notify/logistique/carburant_notify_handlers.dart';
-import 'handlers/notify/logistique/engin_notify_handlers.dart';
+import 'handlers/notify/logistique/materiel_notify_handlers.dart';
 import 'handlers/notify/logistique/entretien_notify_handlers.dart';
 import 'handlers/notify/logistique/etat_materiel_notify_handlers.dart';
 import 'handlers/notify/logistique/immobilier_notify_handlers.dart';
@@ -100,7 +104,7 @@ import 'handlers/rh/paiement_salaire_handlers.dart';
 import 'handlers/rh/performence_handlers.dart';
 import 'handlers/rh/performence_note_handlers.dart';
 import 'handlers/rh/presence_personnel_handlers.dart';
-import 'handlers/rh/presence_handlers.dart'; 
+import 'handlers/rh/presence_handlers.dart';
 import 'handlers/rh/trans_rest_agents_handlers.dart';
 import 'handlers/rh/transport_restauration_handlers.dart';
 import 'handlers/update/upate_handlers.dart';
@@ -116,7 +120,7 @@ class Service {
 
   Handler get handlers {
     final router = Router();
-      router.mount(
+    router.mount(
         '/api/counts/departement-admin/',
         Pipeline()
             .addMiddleware(setJsonHeader())
@@ -129,11 +133,17 @@ class Service {
             .addMiddleware(handleErrors())
             .addHandler(BudgetDepartementHandlers(repos).router));
     router.mount(
-        '/api/counts/departement-comm-marketing/',
+        '/api/counts/departement-marketing/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            .addHandler(CommMarketingDepartementHandlers(repos).router));
+            .addHandler(MarketingDepartementHandlers(repos).router));
+    router.mount(
+        '/api/counts/departement-commmercials/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            .addHandler(CommDepartementHandlers(repos).router));
     router.mount(
         '/api/counts/departement-comptabilite/',
         Pipeline()
@@ -165,13 +175,11 @@ class Service {
             .addMiddleware(handleErrors())
             .addHandler(RhDepartementHandlers(repos).router));
 
-
-
-      router.mount(
+    router.mount(
         '/api/counts/budgets/',
         Pipeline()
             .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors()) 
+            .addMiddleware(handleErrors())
             .addHandler(BudgetNotifyHandlers(repos).router));
     router.mount(
         '/api/counts/campaigns/',
@@ -204,12 +212,6 @@ class Service {
             .addMiddleware(handleErrors())
             .addHandler(CartNotifyHandlers(repos).router));
     router.mount(
-        '/api/counts/balances/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            .addHandler(BalanceNotifyHandlers(repos).router));
-    router.mount(
         '/api/counts/bilans/',
         Pipeline()
             .addMiddleware(setJsonHeader())
@@ -221,12 +223,6 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             .addHandler(CompteResultatNotifyHandlers(repos).router));
-    router.mount(
-        '/api/counts/journals/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            .addHandler(JournalNotifyHandlers(repos).router));
     router.mount(
         '/api/counts/devis/',
         Pipeline()
@@ -264,17 +260,11 @@ class Service {
             .addMiddleware(handleErrors())
             .addHandler(DetteNotifyHandlers(repos).router));
     router.mount(
-        '/api/counts/carburants/',
+        '/api/counts/materiels/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
-            .addHandler(CarburantNotifyHandlers(repos).router));
-    router.mount(
-        '/api/counts/engins/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            .addHandler(EnginNotifyHandlers(repos).router));
+            .addHandler(MaterielNotifyHandlers(repos).router));
     router.mount(
         '/api/counts/entretiens/',
         Pipeline()
@@ -324,8 +314,6 @@ class Service {
             .addMiddleware(handleErrors())
             .addHandler(MailsNotifyHandlers(repos).router));
 
-
-
     // AUTH
     router.mount(
         '/api/auth/',
@@ -356,7 +344,13 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ActionnaireCotisationHandlers(repos).router));
-
+    router.mount(
+        '/api/admin/actionnaire-transferts/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ActionnaireTransfertHandlers(repos).router));
 
     router.mount(
         '/api/rh/agents/',
@@ -379,7 +373,7 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(PresencePersonnelHandlers(repos).router)); 
+            .addHandler(PresencePersonnelHandlers(repos).router));
 
     router.mount(
         '/api/rh/paiement-salaires/',
@@ -419,13 +413,34 @@ class Service {
 
     // FINANCE
     router.mount(
+        '/api/finances/transactions/banques-name/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(BanqueNameHandlers(repos).router));
+    router.mount(
+        '/api/finances/transactions/caisses-name/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(CaisseNameHandlers(repos).router));
+    router.mount(
+        '/api/finances/transactions/fin-exterieur-name/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(FinExterieurNameHandlers(repos).router));
+
+    router.mount(
         '/api/finances/transactions/banques/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BanqueHandlers(repos).router));
-
     router.mount(
         '/api/finances/transactions/caisses/',
         Pipeline()
@@ -493,7 +508,7 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(CompteBilanRefHandlers(repos).router)); 
+            .addHandler(CompteBilanRefHandlers(repos).router));
     router.mount(
         '/api/comptabilite/journals/',
         Pipeline()
@@ -502,13 +517,6 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(JournalHandlers(repos).router));
     router.mount(
-        '/api/comptabilite/journals-livres/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(JournalLivreHandlers(repos).router));  
-    router.mount(
         '/api/comptabilite/comptes_resultat/',
         Pipeline()
             .addMiddleware(setJsonHeader())
@@ -516,21 +524,12 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(CompteResultatHandlers(repos).router));
     router.mount(
-        '/api/comptabilite/balance_comptes/',
+        '/api/comptabilite/balances/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(BalanceComptesHandlers(repos).router));
-    router.mount(
-        '/api/comptabilite/comptes-balance-ref/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(ComptesBalanceRefHandlers(repos).router));
-
-
+            .addHandler(BalanceHandlers(repos).router));
 
     // Budgets
     router.mount(
@@ -578,7 +577,7 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(TacheHanlers(repos).router));
+            .addHandler(TacheHandlers(repos).router));
     router.mount(
         '/api/versements-projets/',
         Pipeline()
@@ -615,22 +614,14 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(FournisseurHandlers(repos).router));
 
-
     // LOGISTIQUES
     router.mount(
-        '/api/anguins/',
+        '/api/materiels/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(AnguinHandlers(repos).router));
-    router.mount(
-        '/api/carburants/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(CarburantHandlers(repos).router));
+            .addHandler(MaterielHandlers(repos).router));
     router.mount(
         '/api/entretiens/',
         Pipeline()
@@ -673,6 +664,20 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ObjetsRemplaceHandlers(repos).router));
+    router.mount(
+        '/api/approvisionnements/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ApprovisionnementHandlers(repos).router));
+    router.mount(
+        '/api/approvision-receptions/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ApprovisionReceptionHandlers(repos).router));
 
 // COMMERCIAL ET MARKETING
     router.mount(
@@ -816,14 +821,37 @@ class Service {
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(MailsHandlers(repos).router)); 
+            .addHandler(MailsHandlers(repos).router));
     router.mount(
         '/api/update-versions/',
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(UpdateHandlers(repos).router)); 
+            .addHandler(UpdateHandlers(repos).router));
+
+    // Suivis & Controlle
+    router.mount(
+        '/api/abonnement-clients/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(AbonnementClientHandlers(repos).router));
+    router.mount(
+        '/api/entreprise-infos/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(EntrepriseInfoHandlers(repos).router));
+    router.mount(
+        '/api/suivis/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(SuiviHandlers(repos).router));
 
     router.all(
       '/<ignored|.*>',
@@ -832,7 +860,6 @@ class Service {
     return router;
   }
 }
-
 
 void main(List<String> args) async {
   final ip = "app";
@@ -843,7 +870,7 @@ void main(List<String> args) async {
 
   await connection.open();
   Repository repos = Repository(connection);
-  Service service = Service(repos, "astridKey");
+  Service service = Service(repos, "work_management_Key");
 
   final server = await shelf_io.serve(service.handlers, ip, port);
 

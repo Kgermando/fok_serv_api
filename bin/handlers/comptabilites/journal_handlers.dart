@@ -14,10 +14,11 @@ class JournalHandlers {
   Router get router {
     final router = Router();
 
+    
     router.get('/', (Request request) async {
       List<JournalModel> data = await repos.journals.getAllData();
       return Response.ok(jsonEncode(data));
-    }); 
+    });
 
     router.get('/<id>', (Request request, String id) async {
       late JournalModel data;
@@ -34,15 +35,15 @@ class JournalHandlers {
       var input = jsonDecode(await request.readAsString());
 
       JournalModel data = JournalModel(
-        reference: input['reference'],
         numeroOperation: input['numeroOperation'],
         libele: input['libele'],
-        compte: input['compte'],
-        montantDebit: input['montantDebit'], 
+        compteDebit: input['compteDebit'],
+        montantDebit: input['montantDebit'],
+        compteCredit: input['compteCredit'],
         montantCredit: input['montantCredit'],
-        tva: input['tva'], 
-        type: input['type'], 
-        created: DateTime.parse(input['created']), 
+        signature: input['signature'],
+        created: DateTime.parse(input['created']),
+        locker: input['locker'],
       );
       try {
         await repos.journals.insertData(data);
@@ -54,43 +55,43 @@ class JournalHandlers {
     });
 
     router.put('/update-journal/', (Request request) async {
-       dynamic input = jsonDecode(await request.readAsString());
+      dynamic input = jsonDecode(await request.readAsString());
       final editH = JournalModel.fromJson(input);
-      JournalModel? data =
-          await repos.journals.getFromId(editH.id!); 
+      JournalModel? data = await repos.journals.getFromId(editH.id!);
 
-      if (input['reference'] != null) {
-        data.reference = input['reference'];
-      }
       if (input['numeroOperation'] != null) {
         data.numeroOperation = input['numeroOperation'];
       }
       if (input['libele'] != null) {
         data.libele = input['libele'];
       }
-      if (input['compte'] != null) {
-        data.compte = input['compte'];
+      if (input['compteDebit'] != null) {
+        data.compteDebit = input['compteDebit'];
       }
       if (input['montantDebit'] != null) {
         data.montantDebit = input['montantDebit'];
-      } 
+      }
+      if (input['compteCredit'] != null) {
+        data.compteCredit = input['compteCredit'];
+      }
       if (input['montantCredit'] != null) {
         data.montantCredit = input['montantCredit'];
       }
-      if (input['tva'] != null) {
-        data.tva = input['tva'];
-      } 
-      if (input['type'] != null) {
-        data.type = input['type'];
-      }  
+      if (input['signature'] != null) {
+        data.signature = input['signature'];
+      }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
-      } 
+      }
+      if (input['locker'] != null) {
+        data.locker = input['locker'];
+      }
       repos.journals.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.delete('/delete-journal/<id>', (Request request, String id) async {
+    router.delete('/delete-journal/<id>',
+        (Request request, String id) async {
       var id = request.params['id'];
       repos.journals.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
@@ -101,7 +102,6 @@ class JournalHandlers {
       (Request request) =>
           Response.notFound('La Page journal n\'est pas trouvé'),
     );
-
     return router;
   }
 }

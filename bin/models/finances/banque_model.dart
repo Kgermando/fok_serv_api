@@ -8,7 +8,8 @@ class BanqueModel {
   late String typeOperation;
   late String numeroOperation;
   late String signature; // celui qui fait le document
-  late int createdRef;
+  late int reference;
+  late String banqueName;
   late DateTime created;
 
   BanqueModel(
@@ -21,7 +22,8 @@ class BanqueModel {
       required this.typeOperation,
       required this.numeroOperation,
       required this.signature,
-      required this.createdRef,
+      required this.reference,
+      required this.banqueName,
       required this.created});
 
   factory BanqueModel.fromSQL(List<dynamic> row) {
@@ -35,8 +37,9 @@ class BanqueModel {
         typeOperation: row[6],
         numeroOperation: row[7],
         signature: row[8],
-        createdRef: row[9],
-        created: row[10]);
+        reference: row[9],
+        banqueName: row[10],
+        created: row[11]);
   }
 
   factory BanqueModel.fromJson(Map<String, dynamic> json) {
@@ -50,7 +53,8 @@ class BanqueModel {
         typeOperation: json['typeOperation'],
         numeroOperation: json['numeroOperation'],
         signature: json['signature'],
-        createdRef: json['createdRef'],
+        reference: json['reference'],
+        banqueName: json['banqueName'],
         created: DateTime.parse(json['created']));
   }
 
@@ -65,7 +69,8 @@ class BanqueModel {
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
       'signature': signature,
-      'createdRef': createdRef,
+      'reference': reference,
+      'banqueName': banqueName,
       'created': created.toIso8601String()
     };
   }

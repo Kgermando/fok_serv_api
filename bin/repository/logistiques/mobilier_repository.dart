@@ -22,23 +22,22 @@ class MobilierRepository {
   Future<void> insertData(MobilierModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, nom, modele,"
-          "marque, description_mobilier, nombre, signature, created_ref, created,"
-          "approbation_dd, motif_dd, signature_dd)"
-          "VALUES (nextval('mobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11)",
-          substitutionValues: {
-            '1': data.nom,
-            '2': data.modele,
-            '3': data.marque,
-            '4': data.descriptionMobilier,
-            '5': data.nombre,
-            '6': data.signature,
-            '7': data.createdRef,
-            '8': data.created,
-            '9': data.approbationDD,
-            '10': data.motifDD,
-            '11': data.signatureDD
-          });
+      "INSERT INTO $tableName (id, nom, modele,"
+      "marque, description_mobilier, nombre, signature,  created,"
+      "approbation_dd, motif_dd, signature_dd)"
+      "VALUES (nextval('mobiliers_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10)",
+      substitutionValues: {
+        '1': data.nom,
+        '2': data.modele,
+        '3': data.marque,
+        '4': data.descriptionMobilier,
+        '5': data.nombre,
+        '6': data.signature,
+        '7': data.created,
+        '8': data.approbationDD,
+        '9': data.motifDD,
+        '10': data.signatureDD 
+      });
     });
   }
 
@@ -46,8 +45,8 @@ class MobilierRepository {
     await executor.execute("""UPDATE $tableName
         SET nom = @1, modele = @2, marque = @3,
         description_mobilier = @4, nombre = @5,
-        signature = @6, created_ref = @7, created = @8, approbation_dd = @9, 
-        motif_dd = @10, signature_dd = @11 WHERE id = @12""",
+        signature = @6, created = @7, approbation_dd = @8, motif_dd = @9, 
+        signature_dd = @10 WHERE id = @11""",
         substitutionValues: {
           '1': data.nom,
           '2': data.modele,
@@ -55,12 +54,11 @@ class MobilierRepository {
           '4': data.descriptionMobilier,
           '5': data.nombre,
           '6': data.signature,
-          '7': data.createdRef,
-          '8': data.created,
-          '9': data.approbationDD,
-          '10': data.motifDD,
-          '11': data.signatureDD,
-          '12': data.id
+          '7': data.created,
+          '8': data.approbationDD,
+          '9': data.motifDD,
+          '10': data.signatureDD,
+          '11': data.id
         });
   }
 
@@ -86,11 +84,10 @@ class MobilierRepository {
         descriptionMobilier: data[0][4],
         nombre: data[0][5],
         signature: data[0][6],
-        createdRef: data[0][7],
-        created: data[0][8],
-        approbationDD: data[0][9],
-        motifDD: data[0][10],
-        signatureDD: data[0][11]
+        created: data[0][7],
+        approbationDD: data[0][8],
+        motifDD: data[0][9],
+        signatureDD: data[0][10] 
     );
   }
 }
