@@ -175,7 +175,7 @@ packages:
       name: lints
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "1.0.1"
   logging:
     dependency: transitive
     description:
@@ -281,13 +281,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
-  shelf_multipart:
-    dependency: "direct main"
-    description:
-      name: shelf_multipart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   shelf_packages_handler:
     dependency: transitive
     description:
@@ -386,6 +379,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.20"
+  test_process:
+    dependency: "direct dev"
+    description:
+      name: test_process
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
   typed_data:
     dependency: transitive
     description:
@@ -436,4 +436,4 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.2 <3.0.0"
+  dart: ">=2.18.0 <3.0.0"
