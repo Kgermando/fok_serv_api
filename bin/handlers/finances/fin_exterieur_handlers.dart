@@ -38,13 +38,15 @@ class FinExterieurHandlers {
           nomComplet: input['nomComplet'],
           pieceJustificative: input['pieceJustificative'],
           libelle: input['libelle'],
-          montant: input['montant'], 
+          montantDepot: input['montantDepot'], 
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'], 
           signature: input['signature'],
           reference: input['reference'],
           financeExterieurName: input['financeExterieurName'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        montantRetrait: input['montantRetrait'],
+      );
       try {
         await repos.finExterieurs.insertData(data);
       } catch (e) {
@@ -69,8 +71,8 @@ class FinExterieurHandlers {
       if (input['libelle'] != null) {
         data.libelle = input['libelle'];
       }
-      if (input['montant'] != null) {
-        data.montant = input['montant'];
+      if (input['montantDepot'] != null) {
+        data.montantDepot = input['montantDepot'];
       } 
       if (input['typeOperation'] != null) {
         data.typeOperation = input['typeOperation'];
@@ -90,6 +92,9 @@ class FinExterieurHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['montantRetrait'] != null) {
+        data.montantRetrait = input['montantRetrait'];
+      } 
       repos.finExterieurs.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });

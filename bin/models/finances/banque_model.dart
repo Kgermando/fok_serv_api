@@ -3,7 +3,7 @@ class BanqueModel {
   late String nomComplet;
   late String pieceJustificative;
   late String libelle;
-  late String montant;
+  late String montantDepot;
   late String departement;
   late String typeOperation;
   late String numeroOperation;
@@ -11,20 +11,23 @@ class BanqueModel {
   late int reference;
   late String banqueName;
   late DateTime created;
+  late String montantRetrait;
 
   BanqueModel(
       {this.id,
-      required this.nomComplet,
-      required this.pieceJustificative,
-      required this.libelle,
-      required this.montant,
-      required this.departement,
-      required this.typeOperation,
-      required this.numeroOperation,
-      required this.signature,
-      required this.reference,
-      required this.banqueName,
-      required this.created});
+    required this.nomComplet,
+    required this.pieceJustificative,
+    required this.libelle,
+    required this.montantDepot,
+    required this.departement,
+    required this.typeOperation,
+    required this.numeroOperation,
+    required this.signature,
+    required this.reference,
+    required this.banqueName,
+    required this.created,
+    required this.montantRetrait,
+  });
 
   factory BanqueModel.fromSQL(List<dynamic> row) {
     return BanqueModel(
@@ -32,14 +35,16 @@ class BanqueModel {
         nomComplet: row[1],
         pieceJustificative: row[2],
         libelle: row[3],
-        montant: row[4],
+        montantDepot: row[4],
         departement: row[5],
         typeOperation: row[6],
         numeroOperation: row[7],
         signature: row[8],
         reference: row[9],
         banqueName: row[10],
-        created: row[11]);
+        created: row[11],
+      montantRetrait: row[12]
+    );
   }
 
   factory BanqueModel.fromJson(Map<String, dynamic> json) {
@@ -48,14 +53,16 @@ class BanqueModel {
         nomComplet: json['nomComplet'],
         pieceJustificative: json['pieceJustificative'],
         libelle: json['libelle'],
-        montant: json['montant'],
+        montantDepot: json['montantDepot'],
         departement: json['departement'],
         typeOperation: json['typeOperation'],
         numeroOperation: json['numeroOperation'],
         signature: json['signature'],
         reference: json['reference'],
         banqueName: json['banqueName'],
-        created: DateTime.parse(json['created']));
+        created: DateTime.parse(json['created']),
+      montantRetrait: json['montantRetrait'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -64,14 +71,15 @@ class BanqueModel {
       'nomComplet': nomComplet,
       'pieceJustificative': pieceJustificative,
       'libelle': libelle,
-      'montant': montant,
+      'montantDepot': montantDepot,
       'departement': departement,
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
       'signature': signature,
       'reference': reference,
       'banqueName': banqueName,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'montantRetrait': montantRetrait
     };
   }
 }

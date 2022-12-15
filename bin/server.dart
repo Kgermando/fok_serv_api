@@ -26,6 +26,7 @@ import 'handlers/commercial/restitution_handlers.dart';
 import 'handlers/commercial/stocks_global_handlers.dart';
 import 'handlers/commercial/succursale_handlers.dart';
 import 'handlers/commercial/ventes_handlers.dart';
+import 'handlers/exploitations/section_projet_handlers.dart';
 import 'handlers/marketing/agenda_handlers.dart';
 import 'handlers/marketing/annuaire_handlers.dart';
 import 'handlers/marketing/campaign_handlers.dart';
@@ -43,6 +44,7 @@ import 'handlers/personnels_roles/agent_role_hanlders.dart';
 import 'handlers/exploitations/fournisseur_handlers.dart';
 import 'handlers/exploitations/production_handlers.dart';
 import 'handlers/exploitations/projet_handlers.dart';
+import 'handlers/settings/monnaie_handlers.dart';
 import 'handlers/suivis_controles/abonnement_client_handlers.dart';
 import 'handlers/suivis_controles/entreprise_info_handlers.dart';
 import 'handlers/suivis_controles/suivi_handlers.dart';
@@ -120,6 +122,7 @@ class Service {
 
   Handler get handlers {
     final router = Router();
+
     router.mount(
         '/api/counts/departement-admin/',
         Pipeline()
@@ -572,6 +575,13 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(ProjetHandlers(repos).router));
     router.mount(
+        '/api/section-projets/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(SectionProjetHandlers(repos).router));
+    router.mount(
         '/api/taches/',
         Pipeline()
             .addMiddleware(setJsonHeader())
@@ -852,6 +862,15 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(SuiviHandlers(repos).router));
+
+    // Settings
+    router.mount(
+        '/api/settings/monnaies/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(MonnaieHandlers(repos).router));
 
     router.all(
       '/<ignored|.*>',

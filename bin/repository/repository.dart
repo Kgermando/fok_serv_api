@@ -21,6 +21,7 @@ import 'commercial/restitution_repository.dart';
 import 'commercial/stocks_global_repository.dart';
 import 'commercial/succursale_repository.dart';
 import 'commercial/vente_repository.dart';
+import 'exploitations/section_projet_repository.dart';
 import 'marketing/agenda_repository.dart';
 import 'marketing/annuaire_repository.dart';
 import 'marketing/campaign_repository.dart';
@@ -38,6 +39,7 @@ import 'personnel_role/agent_role_repository.dart';
 import 'exploitations/fournisseur_repository.dart';
 import 'exploitations/production_repository.dart';
 import 'exploitations/projet_repository.dart';
+import 'settings/monnaie_repository.dart';
 import 'suivi_controle/abonnement_client_repository.dart';
 import 'suivi_controle/entreprise_info_repository.dart';
 import 'suivi_controle/suivi_repository.dart';
@@ -111,6 +113,9 @@ class Repository {
   late RefreshTokensRepository refreshTokens;
   late UserRepository users;
 
+  // Settings
+  late MonnaieRepository monnaies;
+
   // Actiionnaire
   late ActionnaireRepository actionnaires;
   late ActionnaireCotisationRepository actionnaireCotisations;
@@ -156,6 +161,7 @@ class Repository {
 
   // EXPLOITATIONS
   late ProjetRepository projets;
+  late SectionProjetRepository sectionProjets;
   late TacheRepository taches;
   late VersementProjetRepository versementProjets;
   late RapportRepository rapports;
@@ -342,6 +348,7 @@ class Repository {
 
     // EXPLOITAIONS
     projets = ProjetRepository(executor, 'projets');
+    sectionProjets = SectionProjetRepository(executor, 'section_projets');
     taches = TacheRepository(executor, 'taches');
     versementProjets = VersementProjetRepository(executor, 'versement_projets');
     rapports = RapportRepository(executor, 'rapports');

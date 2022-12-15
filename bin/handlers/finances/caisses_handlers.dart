@@ -59,14 +59,16 @@ class CaissesHandlers {
           nomComplet: input['nomComplet'],
           pieceJustificative: input['pieceJustificative'],
           libelle: input['libelle'],
-          montant: input['montant'], 
+          montantEncaissement: input['montantEncaissement'], 
           departement: input['departement'],
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'],
           signature: input['signature'],
           reference: input['reference'],
           caisseName: input['caisseName'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        montantDecaissement: input['montantDecaissement'],
+      );
       try {
         await repos.caisses.insertData(data);
       } catch (e) {
@@ -91,8 +93,8 @@ class CaissesHandlers {
       if (input['libelle'] != null) {
         data.libelle = input['libelle'];
       }
-      if (input['montant'] != null) {
-        data.montant = input['montant'];
+      if (input['montantEncaissement'] != null) {
+        data.montantEncaissement = input['montantEncaissement'];
       } 
       if (input['departement'] != null) {
         data.departement = input['departement'];
@@ -115,6 +117,9 @@ class CaissesHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
+      if (input['montantDecaissement'] != null) {
+        data.montantDecaissement = input['montantDecaissement'];
+      } 
       repos.caisses.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });

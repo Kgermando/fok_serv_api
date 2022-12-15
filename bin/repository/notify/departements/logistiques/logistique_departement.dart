@@ -33,7 +33,6 @@ class LogistiqueDepartementRepository {
           (SELECT COUNT(*) FROM $tableNameLogistiqueTrajets where "approbation_dd" = '-')
         +
           (SELECT COUNT(*) FROM $tableNameLogistiqueDevis where "approbation_dd" = '-')
-          
       );""";
       List<List<dynamic>> results = await executor.query(querySQL);
       for (var row in results) {
