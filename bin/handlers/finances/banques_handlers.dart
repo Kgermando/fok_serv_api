@@ -63,15 +63,14 @@ class BanqueHandlers {
           nomComplet: input['nomComplet'],
           pieceJustificative: input['pieceJustificative'],
           libelle: input['libelle'],
-          montantDepot: input['montantDepot'], 
+          montant: input['montant'], 
           departement: input['departement'],
           typeOperation: input['typeOperation'],
           numeroOperation: input['numeroOperation'],
           signature: input['signature'],
           reference: input['reference'],
           banqueName: input['banqueName'],
-          created: DateTime.parse(input['created']),
-        montantRetrait: input['montantRetrait'],
+          created: DateTime.parse(input['created']) 
       );
       try {
         await repos.banques.insertData(data);
@@ -97,8 +96,8 @@ class BanqueHandlers {
       if (input['libelle'] != null) {
         data.libelle = input['libelle'];
       }
-      if (input['montantDepot'] != null) {
-        data.montantDepot = input['montantDepot'];
+      if (input['montant'] != null) {
+        data.montant = input['montant'];
       } 
       if (input['departement'] != null) {
         data.departement = input['departement'];
@@ -120,10 +119,7 @@ class BanqueHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
-      }
-      if (input['montantRetrait'] != null) {
-        data.montantRetrait = input['montantRetrait'];
-      }
+      } 
       repos.banques.update(data);
       return Response.ok(jsonEncode(data.toJson()));
     });

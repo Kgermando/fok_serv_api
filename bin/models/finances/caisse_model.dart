@@ -3,30 +3,28 @@ class CaisseModel {
   late String nomComplet;
   late String pieceJustificative;
   late String libelle;
-  late String montantEncaissement;
+  late String montant;
   late String departement;
   late String typeOperation;
   late String numeroOperation;
   late String signature; // celui qui fait le document
   late int reference;
   late String caisseName;
-  late DateTime created;
-  late String montantDecaissement;
+  late DateTime created; 
 
   CaisseModel(
       {this.id,
       required this.nomComplet,
       required this.pieceJustificative,
       required this.libelle,
-      required this.montantEncaissement,
+      required this.montant,
       required this.departement,
       required this.typeOperation,
       required this.numeroOperation,
       required this.signature,
       required this.reference,
       required this.caisseName,
-      required this.created,
-    required this.montantDecaissement,
+      required this.created, 
   });
 
   factory CaisseModel.fromSQL(List<dynamic> row) {
@@ -35,15 +33,14 @@ class CaisseModel {
         nomComplet: row[1],
         pieceJustificative: row[2],
         libelle: row[3],
-        montantEncaissement: row[4],
+        montant: row[4],
         departement: row[5],
         typeOperation: row[6],
         numeroOperation: row[7],
         signature: row[8],
         reference: row[9],
         caisseName: row[10],
-        created: row[11],
-      montantDecaissement: row[12],
+        created: row[11] 
     );
   }
 
@@ -53,15 +50,14 @@ class CaisseModel {
       nomComplet: json['nomComplet'],
       pieceJustificative: json['pieceJustificative'],
       libelle: json['libelle'],
-      montantEncaissement: json['montantEncaissement'],
+      montant: json['montant'],
       departement: json['departement'],
       typeOperation: json['typeOperation'],
       numeroOperation: json['numeroOperation'],
       signature: json['signature'],
       reference: json['reference'],
       caisseName: json['caisseName'],
-      created: DateTime.parse(json['created']),
-      montantDecaissement: json['montantDecaissement'],
+      created: DateTime.parse(json['created']) 
     );
   }
 
@@ -71,15 +67,14 @@ class CaisseModel {
       'nomComplet': nomComplet,
       'pieceJustificative': pieceJustificative,
       'libelle': libelle,
-      'montantEncaissement': montantEncaissement,
+      'montant': montant,
       'departement': departement,
       'typeOperation': typeOperation,
       'numeroOperation': numeroOperation,
       'signature': signature,
       'reference': reference,
       'caisseName': caisseName,
-      'created': created.toIso8601String(),
-      'montantDecaissement': montantDecaissement,
+      'created': created.toIso8601String() 
     };
   }
 }
