@@ -169,14 +169,12 @@ class AgentsHandlers {
       return Response.ok(jsonEncode(selectUser.toJson()));
     });
 
-    router.delete('/delete-agent/<id>', (
-      String id,
-      Request request,
-    ) async {
+    router.delete('/delete-agent/<id>', (Request request, String id) async {
       var id = request.params['id'];
       repos.agents.deleteData(int.parse(id!));
-      return Response.ok('Agent supprimée');
+      return Response.ok('Supprimée');
     });
+
 
     router.get('/chart-pie-sexe/', (Request request) async {
       List<AgentPieChartModel> data = await repos.agents.getAgentChartPie();

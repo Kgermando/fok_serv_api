@@ -10,7 +10,7 @@ class ActionnaireModel {
   late String matricule;
   late String signature; // celui qui fait le document
   late DateTime created;
-  late double cotisations;
+  late String cotisations;
 
   ActionnaireModel(
       {this.id,

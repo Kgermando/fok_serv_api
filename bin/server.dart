@@ -334,7 +334,7 @@ class Service {
 
     // Actionnaires
     router.mount(
-        '/api/admin/actionnaires/',
+        '/api/admin/actionnaires/', 
         Pipeline()
             .addMiddleware(setJsonHeader())
             .addMiddleware(handleErrors())
