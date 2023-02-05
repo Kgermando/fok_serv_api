@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-
+ 
 import '../../models/comm_maketing/courbe_vente_gain_model.dart';
 import '../../models/comm_maketing/vente_cart_model.dart';
 import '../../models/comm_maketing/vente_chart_model.dart';
@@ -37,6 +37,11 @@ class VenteHandlers {
       return Response.ok(jsonEncode(data));
     });
 
+    router.get('/vente-chart-day/', (Request request) async {
+      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartDay();
+      return Response.ok(jsonEncode(data));
+    });
+
     router.get('/vente-chart-month/', (Request request) async {
       List<CourbeVenteModel> data = await repos.ventes.getAllDataChartMounth();
       return Response.ok(jsonEncode(data));
@@ -60,8 +65,7 @@ class VenteHandlers {
           succursale: input['succursale'],
           signature: input['signature'],
           created: DateTime.parse(input['created']),
-          createdAt: DateTime.parse(input['createdAt'])
-        );
+          createdAt: DateTime.parse(input['createdAt']));
       try {
         await repos.ventes.insertData(data);
       } catch (e) {
@@ -74,8 +78,7 @@ class VenteHandlers {
     router.put('/update-vente/', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
       final editH = VenteCartModel.fromJson(input);
-      VenteCartModel? data =
-          await repos.ventes.getFromId(editH.id!); 
+      VenteCartModel? data = await repos.ventes.getFromId(editH.id!);
 
       if (input['idProductCart'] != null) {
         data.idProductCart = input['idProductCart'];
