@@ -12,7 +12,7 @@ class CartRepository {
     var data = <CartModel>{};
 
     var querySQL =
-        "SELECT * FROM $tableName WHERE WHERE \"business\"='$business' AND \"signature\"='$matricule' ORDER BY \"created\" DESC;";
+        "SELECT * FROM $tableName WHERE \"business\"='$business' AND \"signature\"='$matricule' ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(CartModel.fromSQL(row));
