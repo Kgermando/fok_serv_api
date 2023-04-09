@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/courbe_vente_gain_model.dart'; 
-import '../../models/comm_maketing/gain_model.dart';
+import '../../models/commercial/courbe_vente_gain_model.dart';
+import '../../models/commercial/gain_model.dart';
 import '../../repository/repository.dart';
 
 class GainsHandlers {
@@ -15,23 +15,23 @@ class GainsHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<GainModel> data = await repos.gains.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<GainModel> data = await repos.gains.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
-    router.get('/gain-chart-day/', (Request request) async {
-      List<CourbeGainModel> data = await repos.gains.getAllDataChartDay();
+    router.get('/gain-chart-day/<business>', (Request request, String business) async {
+      List<CourbeGainModel> data = await repos.gains.getAllDataChartDay(business);
       return Response.ok(jsonEncode(data));
     });
 
-    router.get('/gain-chart-month/', (Request request) async {
-      List<CourbeGainModel> data = await repos.gains.getAllDataChartMounth();
+    router.get('/gain-chart-month/<business>', (Request request, String business) async {
+      List<CourbeGainModel> data = await repos.gains.getAllDataChartMounth(business);
       return Response.ok(jsonEncode(data));
     });
 
-    router.get('/gain-chart-year/', (Request request) async {
-      List<CourbeGainModel> data = await repos.gains.getAllDataChartYear();
+    router.get('/gain-chart-year/<business>', (Request request, String business) async {
+      List<CourbeGainModel> data = await repos.gains.getAllDataChartYear(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -53,7 +53,11 @@ class GainsHandlers {
           sum: input['sum'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.gains.insertData(data);
       } catch (e) {
@@ -64,9 +68,10 @@ class GainsHandlers {
     });
 
     router.put('/update-gain/', (Request request) async {
-      dynamic input = jsonDecode(await request.readAsString());
+       dynamic input = jsonDecode(await request.readAsString());
       final editH = GainModel.fromJson(input);
-      GainModel? data = await repos.gains.getFromId(editH.id!);
+      GainModel? data =
+          await repos.gains.getFromId(editH.id!); 
 
       if (input['sum'] != null) {
         data.sum = input['sum'];
@@ -79,6 +84,15 @@ class GainsHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.gains.update(data);
       return Response.ok(jsonEncode(data.toJson()));

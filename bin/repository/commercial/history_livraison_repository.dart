@@ -1,18 +1,18 @@
 import 'package:postgres/postgres.dart';
 
-import '../../models/comm_maketing/livraiason_history_model.dart';
+import '../../models/commercial/livraiason_history_model.dart';
 
 class HistoryLivraisonRepository {
-    final PostgreSQLConnection executor;
+  final PostgreSQLConnection executor;
   final String tableName;
 
   HistoryLivraisonRepository(this.executor, this.tableName);
 
-
-  Future<List<LivraisonHistoryModel>> getAllData() async {
+  Future<List<LivraisonHistoryModel>> getAllData(String business) async {
     var data = <LivraisonHistoryModel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
+    var querySQL =
+        "SELECT * FROM $tableName WHERE \"business\"='$business' ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(LivraisonHistoryModel.fromSQL(row));
@@ -23,28 +23,32 @@ class HistoryLivraisonRepository {
   Future<void> insertData(LivraisonHistoryModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, id_product, quantity,"
-        "quantity_achat, price_achat_unit, prix_vente_unit, unite, marge_ben,"
-        "tva, remise, qty_remise, marge_ben_remise, qty_livre, succursale, signature, created)"
-        "VALUES (nextval('history_livraisons_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11, @12, @13, @14, @15)",
-        substitutionValues: {
-          '1': data.idProduct,
-          '2': data.quantity,
-          '3': data.quantityAchat,
-          '4': data.priceAchatUnit,
-          '5': data.prixVenteUnit,
-          '6': data.unite,
-          '7': data.margeBen,
-          '8': data.tva,
-          '9': data.remise,
-          '10': data.qtyRemise,
-          '11': data.margeBenRemise,
-          '12': data.qtyLivre,
-          '13': data.succursale,
-          '14': data.signature,
-          '15': data.created
-        });
+          "INSERT INTO $tableName (id, id_product, quantity,"
+          "quantity_achat, price_achat_unit, prix_vente_unit, unite, marge_ben,"
+          "tva, remise, qty_remise, marge_ben_remise, qty_livre,"
+          "succursale, signature, created, business, sync, async)"
+          "VALUES (nextval('history_livraisons_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18)",
+          substitutionValues: {
+            '1': data.idProduct,
+            '2': data.quantity,
+            '3': data.quantityAchat,
+            '4': data.priceAchatUnit,
+            '5': data.prixVenteUnit,
+            '6': data.unite,
+            '7': data.margeBen,
+            '8': data.tva,
+            '9': data.remise,
+            '10': data.qtyRemise,
+            '11': data.margeBenRemise,
+            '12': data.qtyLivre,
+            '13': data.succursale,
+            '14': data.signature,
+            '15': data.created,
+            '16': data.business,
+            '17': data.sync,
+            '18': data.async,
+          });
     });
   }
 
@@ -54,25 +58,28 @@ class HistoryLivraisonRepository {
           price_achat_unit = @4, prix_vente_unit = @5, unite = @6,
           marge_ben = @7, tva = @8, remise = @9, qty_remise = @10,
           marge_ben_remise = @11, qty_livre = @12, succursale = @13,
-          signature = @14, created = @15 WHERE id = @16""",
-        substitutionValues: {
-          '1': data.idProduct,
-          '2': data.quantity,
-          '3': data.quantityAchat,
-          '4': data.priceAchatUnit,
-          '5': data.prixVenteUnit,
-          '6': data.unite,
-          '7': data.margeBen,
-          '8': data.tva,
-          '9': data.remise,
-          '10': data.qtyRemise,
-          '11': data.margeBenRemise,
-          '12': data.qtyLivre,
-          '13': data.succursale,
-          '14': data.signature,
-          '15': data.created,
-          '16': data.id
-        });
+          signature = @14, created = @15, business = @16, 
+          sync = @17, async = @18 WHERE id = @19""", substitutionValues: {
+      '1': data.idProduct,
+      '2': data.quantity,
+      '3': data.quantityAchat,
+      '4': data.priceAchatUnit,
+      '5': data.prixVenteUnit,
+      '6': data.unite,
+      '7': data.margeBen,
+      '8': data.tva,
+      '9': data.remise,
+      '10': data.qtyRemise,
+      '11': data.margeBenRemise,
+      '12': data.qtyLivre,
+      '13': data.succursale,
+      '14': data.signature,
+      '15': data.created,
+      '16': data.business,
+      '17': data.sync,
+      '18': data.async,
+      '19': data.id
+    });
   }
 
   deleteData(int id) async {
@@ -105,7 +112,10 @@ class HistoryLivraisonRepository {
       qtyLivre: data[0][12],
       succursale: data[0][13],
       signature: data[0][14],
-      created: data[0][15]
+      created: data[0][15],
+      business: data[0][16],
+      sync: data[0][6],
+      async: data[0][7],
     );
-  } 
+  }
 }

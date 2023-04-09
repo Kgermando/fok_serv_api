@@ -1,6 +1,6 @@
 import 'package:postgres/postgres.dart';
 
-import '../../models/comm_maketing/bon_livraison.dart';
+import '../../models/commercial/bon_livraison.dart';
 
 class BonLivraisonRepository {
   final PostgreSQLConnection executor;
@@ -8,11 +8,11 @@ class BonLivraisonRepository {
 
   BonLivraisonRepository(this.executor, this.tableName);
 
-
-  Future<List<BonLivraisonModel>> getAllData() async {
+  Future<List<BonLivraisonModel>> getAllData(String business) async {
     var data = <BonLivraisonModel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
+    var querySQL =
+        "SELECT * FROM $tableName WHERE \"business\"='$business' ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(BonLivraisonModel.fromSQL(row));
@@ -23,31 +23,34 @@ class BonLivraisonRepository {
   Future<void> insertData(BonLivraisonModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, id_product,"
-        "quantity_achat, price_achat_unit, prix_vente_unit, unite,"
-        "first_name, last_name, tva,"
-        "remise, qty_remise, accuse_reception, accuse_reception_first_name,"
-        "accuse_reception_last_name, succursale, signature, created)"
-        "VALUES (nextval('bon_livraisons_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12,"
-          "@13, @14, @15, @16)",
-        substitutionValues: {
-          '1': data.idProduct,
-          '2': data.quantityAchat,
-          '3': data.priceAchatUnit,
-          '4': data.prixVenteUnit,
-          '5': data.unite,
-          '6': data.firstName,
-          '7': data.lastName,
-          '8': data.tva,
-          '9': data.remise,
-          '10': data.qtyRemise,
-          '11': data.accuseReception,
-          '12': data.accuseReceptionFirstName,
-          '13': data.accuseReceptionLastName,
-          '14': data.succursale,
-          '15': data.signature,
-          '16': data.created
-        });
+          "INSERT INTO $tableName (id, id_product,"
+          "quantity_achat, price_achat_unit, prix_vente_unit, unite,"
+          "first_name, last_name, tva,"
+          "remise, qty_remise, accuse_reception, accuse_reception_first_name,"
+          "accuse_reception_last_name, succursale, signature, created, business, sync, async)"
+          "VALUES (nextval('bon_livraisons_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12,"
+          "@13, @14, @15, @16, @17, @18, @19)",
+          substitutionValues: {
+            '1': data.idProduct,
+            '2': data.quantityAchat,
+            '3': data.priceAchatUnit,
+            '4': data.prixVenteUnit,
+            '5': data.unite,
+            '6': data.firstName,
+            '7': data.lastName,
+            '8': data.tva,
+            '9': data.remise,
+            '10': data.qtyRemise,
+            '11': data.accuseReception,
+            '12': data.accuseReceptionFirstName,
+            '13': data.accuseReceptionLastName,
+            '14': data.succursale,
+            '15': data.signature,
+            '16': data.created,
+            '17': data.business,
+            '18': data.sync,
+            '19': data.async,
+          });
     });
   }
 
@@ -58,26 +61,29 @@ class BonLivraisonRepository {
         first_name = @6, last_name = @7, tva = @8,
         remise = @9, qty_remise = @10, accuse_reception = @11,
         accuse_reception_first_name = @12, accuse_reception_last_name = @13,
-        succursale = @14, signature = @15, created = @16 WHERE id = @17""",
-      substitutionValues: {
-        '1': data.idProduct,
-        '2': data.quantityAchat,
-        '3': data.priceAchatUnit,
-        '4': data.prixVenteUnit,
-        '5': data.unite,
-        '6': data.firstName,
-        '7': data.lastName,
-        '8': data.tva,
-        '9': data.remise,
-        '10': data.qtyRemise,
-        '11': data.accuseReception,
-        '12': data.accuseReceptionFirstName,
-        '13': data.accuseReceptionLastName,
-        '14': data.succursale,
-        '15': data.signature,
-        '16': data.created,
-        '17': data.id
-      });
+        succursale = @14, signature = @15, created = @16, business = @17,
+        sync = @18, async = @19 WHERE id = @20""", substitutionValues: {
+      '1': data.idProduct,
+      '2': data.quantityAchat,
+      '3': data.priceAchatUnit,
+      '4': data.prixVenteUnit,
+      '5': data.unite,
+      '6': data.firstName,
+      '7': data.lastName,
+      '8': data.tva,
+      '9': data.remise,
+      '10': data.qtyRemise,
+      '11': data.accuseReception,
+      '12': data.accuseReceptionFirstName,
+      '13': data.accuseReceptionLastName,
+      '14': data.succursale,
+      '15': data.signature,
+      '16': data.created,
+      '17': data.business,
+      '18': data.sync,
+      '19': data.async,
+      '20': data.id
+    });
   }
 
   deleteData(int id) async {
@@ -111,7 +117,10 @@ class BonLivraisonRepository {
       accuseReceptionLastName: data[0][13],
       succursale: data[0][14],
       signature: data[0][15],
-      created: data[0][16]
+      created: data[0][16],
+      business: data[0][17],
+      sync: data[0][18],
+      async: data[0][19],
     );
-  } 
+  }
 }

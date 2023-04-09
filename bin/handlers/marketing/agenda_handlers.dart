@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-
-import '../../models/maketing/agenda_model.dart';
+ 
+import '../../models/marketing/agenda_model.dart';
 import '../../repository/repository.dart';
 
 class AgendaHandlers {
@@ -14,8 +14,8 @@ class AgendaHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<AgendaModel> data = await repos.agendas.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<AgendaModel> data = await repos.agendas.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -38,7 +38,11 @@ class AgendaHandlers {
           description: input['description'],
           dateRappel: DateTime.parse(input['dateRappel']),
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.agendas.insertData(data);
       } catch (e) {
@@ -68,6 +72,15 @@ class AgendaHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.agendas.update(data);
       return Response.ok(jsonEncode(data.toJson()));

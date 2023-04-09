@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/facture_cart_model.dart';
+import '../../models/commercial/facture_cart_model.dart';
 import '../../repository/repository.dart';
 
 class FactureHandlers {
@@ -14,8 +14,8 @@ class FactureHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<FactureCartModel> data = await repos.factures.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<FactureCartModel> data = await repos.factures.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -36,9 +36,15 @@ class FactureHandlers {
       FactureCartModel data = FactureCartModel(
           cart: input['cart'],
           client: input['client'],
+          nomClient: input['nomClient'],
+          telephone: input['telephone'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.factures.insertData(data);
       } catch (e) {
@@ -60,6 +66,12 @@ class FactureHandlers {
       if (input['client'] != null) {
         data.client = input['client'];
       }
+      if (input['nomClient'] != null) {
+        data.nomClient = input['nomClient'];
+      }
+      if (input['telephone'] != null) {
+        data.telephone = input['telephone'];
+      }
       if (input['succursale'] != null) {
         data.succursale = input['succursale'];
       }
@@ -68,6 +80,15 @@ class FactureHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
 
       repos.factures.update(data);

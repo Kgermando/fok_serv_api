@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/cart_model.dart';
+import '../../models/commercial/cart_model.dart';
 import '../../repository/repository.dart';
 
 class CartHandlers {
@@ -15,8 +15,8 @@ class CartHandlers {
     final router = Router();
 
 
-    router.get('/<matricule>', (Request request, String matricule) async {
-      List<CartModel> data = await repos.carts.getAllData(matricule);
+    router.get('/<business>/<matricule>/', (Request request, String business, String matricule) async {
+      List<CartModel> data = await repos.carts.getAllData(business, matricule);
       return Response.ok(jsonEncode(data));
     });
 
@@ -46,7 +46,10 @@ class CartHandlers {
           succursale: input['succursale'],
           signature: input['signature'],
           created: DateTime.parse(input['created']),
-          createdAt: DateTime.parse(input['createdAt'])
+          createdAt: DateTime.parse(input['createdAt']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
         );
       try {
         await repos.carts.insertData(data);
@@ -98,6 +101,15 @@ class CartHandlers {
       }
       if (input['createdAt'] != null) {
         data.createdAt = DateTime.parse(input['createdAt']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.carts.update(data);
       return Response.ok(jsonEncode(data.toJson()));

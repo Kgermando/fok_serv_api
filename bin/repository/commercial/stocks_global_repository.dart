@@ -1,6 +1,6 @@
 import 'package:postgres/postgres.dart';
 
-import '../../models/comm_maketing/stocks_global_model.dart';
+import '../../models/commercial/stocks_global_model.dart';
 
 class StockGlobalRepository {
   final PostgreSQLConnection executor;
@@ -9,10 +9,12 @@ class StockGlobalRepository {
   StockGlobalRepository(this.executor, this.tableName);
 
 
-  Future<List<StocksGlobalMOdel>> getAllData() async {
+  Future<List<StocksGlobalMOdel>> getAllData(
+    String business
+  ) async {
     var data = <StocksGlobalMOdel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
+    var querySQL = "SELECT * FROM $tableName WHERE \"business\"='$business' ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(StocksGlobalMOdel.fromSQL(row));
@@ -25,31 +27,9 @@ class StockGlobalRepository {
       await ctx.execute(
         "INSERT INTO $tableName (id, id_product, quantity,"
         "quantity_achat, price_achat_unit, prix_vente_unit, unite, mode_achat,"
-        "tva, qty_ravitailler, signature, created)"
+        "tva, qty_ravitailler, signature, created, business, sync, async)"
         "VALUES (nextval('stocks_global_id_seq'), @1, @2, @3, @4, @5, @6,"
-        "@7, @8, @9, @10, @11)",
-        substitutionValues: {
-          '1': data.idProduct,
-          '2': data.quantity,
-          '3': data.quantityAchat,
-          '4': data.priceAchatUnit,
-          '5': data.prixVenteUnit,
-          '6': data.unite,
-          '7': data.modeAchat,
-          '8': data.tva,
-          '9': data.qtyRavitailler,
-          '10': data.signature,
-          '11': data.created
-        });
-    });
-  }
-
-  Future<void> update(StocksGlobalMOdel data) async {
-    await executor.query("""UPDATE $tableName
-          SET id_product = @1, quantity = @2, quantity_achat = @3,
-          price_achat_unit = @4, prix_vente_unit = @5, unite = @6,
-          mode_achat = @7, tva = @8, qty_ravitailler = @9,
-          signature = @10, created = @11 WHERE id = @12""",
+        "@7, @8, @9, @10, @11, @12, @13, @14)",
         substitutionValues: {
           '1': data.idProduct,
           '2': data.quantity,
@@ -62,7 +42,36 @@ class StockGlobalRepository {
           '9': data.qtyRavitailler,
           '10': data.signature,
           '11': data.created,
-          '12': data.id
+          '12': data.business,
+          '13': data.sync,
+          '14': data.async
+        });
+    });
+  }
+
+  Future<void> update(StocksGlobalMOdel data) async {
+    await executor.query("""UPDATE $tableName
+          SET id_product = @1, quantity = @2, quantity_achat = @3,
+          price_achat_unit = @4, prix_vente_unit = @5, unite = @6,
+          mode_achat = @7, tva = @8, qty_ravitailler = @9,
+          signature = @10, created = @11, business = @12,
+          sync = @13, async = @14 WHERE id = @15""",
+        substitutionValues: {
+          '1': data.idProduct,
+          '2': data.quantity,
+          '3': data.quantityAchat,
+          '4': data.priceAchatUnit,
+          '5': data.prixVenteUnit,
+          '6': data.unite,
+          '7': data.modeAchat,
+          '8': data.tva,
+          '9': data.qtyRavitailler,
+          '10': data.signature,
+          '11': data.created,
+          '12': data.business,
+          '13': data.sync,
+          '14': data.async,
+          '15': data.id
         });
   }
 
@@ -92,7 +101,10 @@ class StockGlobalRepository {
       tva: data[0][8],
       qtyRavitailler: data[0][9],
       signature: data[0][10],
-      created: data[0][11]
+      created: data[0][11],
+      business: data[0][12],
+      sync: data[0][13],
+      async: data[0][14],
     );
   } 
 }

@@ -1,8 +1,9 @@
-class VenteCartModel {
+class CartModel {
   late int? id;
   late String idProductCart;
   late String quantityCart;
-  late String priceTotalCart;
+  late String priceCart;
+  late String priceAchatUnit;
   late String unite;
   late String tva;
   late String remise;
@@ -11,12 +12,17 @@ class VenteCartModel {
   late String signature; // celui qui fait le document
   late DateTime created;
   late DateTime createdAt;
+  late String business;
+  late String sync; // new, update, sync
+  late String async;
 
-  VenteCartModel(
+
+  CartModel(
       {this.id,
       required this.idProductCart,
       required this.quantityCart,
-      required this.priceTotalCart,
+      required this.priceCart,
+      required this.priceAchatUnit,
       required this.unite,
       required this.tva,
       required this.remise,
@@ -24,30 +30,39 @@ class VenteCartModel {
       required this.succursale,
       required this.signature,
       required this.created,
-      required this.createdAt});
+      required this.createdAt,
+      required this.business,
+    required this.sync,
+    required this.async,
+  });
 
-  factory VenteCartModel.fromSQL(List<dynamic> row) {
-    return VenteCartModel(
+  factory CartModel.fromSQL(List<dynamic> row) {
+    return CartModel(
         id: row[0],
         idProductCart: row[1],
         quantityCart: row[2],
-        priceTotalCart: row[3],
-        unite: row[4],
-        tva: row[5],
-        remise: row[6],
-        qtyRemise: row[7],
-        succursale: row[8],
-        signature: row[9],
-        created: row[10],
-        createdAt: row[11]);
+        priceCart: row[3],
+        priceAchatUnit: row[4],
+        unite: row[5],
+        tva: row[6],
+        remise: row[7],
+        qtyRemise: row[8],
+        succursale: row[9],
+        signature: row[10],
+        created: row[11],
+        createdAt: row[12],
+        business: row[13],
+        sync: row[14],
+        async: row[15]);
   }
 
-  factory VenteCartModel.fromJson(Map<String, dynamic> json) {
-    return VenteCartModel(
+  factory CartModel.fromJson(Map<String, dynamic> json) {
+    return CartModel(
         id: json['id'],
         idProductCart: json['idProductCart'],
         quantityCart: json['quantityCart'],
-        priceTotalCart: json['priceTotalCart'],
+        priceCart: json['priceCart'],
+        priceAchatUnit: json['priceAchatUnit'],
         unite: json['unite'],
         tva: json["tva"],
         remise: json["remise"],
@@ -55,7 +70,11 @@ class VenteCartModel {
         succursale: json['succursale'],
         signature: json['signature'],
         created: DateTime.parse(json['created']),
-        createdAt: DateTime.parse(json['createdAt']));
+        createdAt: DateTime.parse(json['createdAt']),
+        business: json['business'],
+      sync: json['sync'],
+      async: json['async'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -63,7 +82,8 @@ class VenteCartModel {
       'id': id,
       'idProductCart': idProductCart,
       'quantityCart': quantityCart,
-      'priceTotalCart': priceTotalCart,
+      'priceCart': priceCart,
+      'priceAchatUnit': priceAchatUnit,
       'unite': unite,
       "tva": tva,
       "remise": remise,
@@ -71,7 +91,12 @@ class VenteCartModel {
       'succursale': succursale,
       'signature': signature,
       'created': created.toIso8601String(),
-      'createdAt': createdAt.toIso8601String()
+      'createdAt': createdAt.toIso8601String(),
+      'business': business,
+      'sync': sync,
+      'async': async,
     };
   }
+
+  
 }

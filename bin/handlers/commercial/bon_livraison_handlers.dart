@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-
-import '../../models/comm_maketing/bon_livraison.dart';
+ 
+import '../../models/commercial/bon_livraison.dart';
 import '../../repository/repository.dart';
 
 class BonLivraisonHandlers {
@@ -14,8 +14,8 @@ class BonLivraisonHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<BonLivraisonModel> data = await repos.bonLivraison.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<BonLivraisonModel> data = await repos.bonLivraison.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -49,7 +49,11 @@ class BonLivraisonHandlers {
           accuseReceptionLastName: input['accuseReceptionLastName'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.bonLivraison.insertData(data);
       } catch (e) {
@@ -71,14 +75,14 @@ class BonLivraisonHandlers {
       if (input['quantityAchat'] != null) {
         data.quantityAchat = input['quantityAchat'];
       }
+      if (input['priceAchatUnit'] != null) {
+        data.priceAchatUnit = input['priceAchatUnit'];
+      }
       if (input['prixVenteUnit'] != null) {
         data.prixVenteUnit = input['prixVenteUnit'];
       }
       if (input['unite'] != null) {
         data.unite = input['unite'];
-      }
-      if (input['created'] != null) {
-        data.created = DateTime.parse(input['created']);
       }
       if (input['firstName'] != null) {
         data.firstName = input['firstName'];
@@ -109,6 +113,15 @@ class BonLivraisonHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
 
       repos.bonLivraison.update(data);

@@ -1,6 +1,6 @@
 import 'package:postgres/postgres.dart';
 
-import '../../models/comm_maketing/facture_cart_model.dart';
+import '../../models/commercial/facture_cart_model.dart';
 
 class FactureRepository {
   final PostgreSQLConnection executor;
@@ -9,10 +9,10 @@ class FactureRepository {
   FactureRepository(this.executor, this.tableName);
 
 
-  Future<List<FactureCartModel>> getAllData() async {
+  Future<List<FactureCartModel>> getAllData(String business) async {
     var data = <FactureCartModel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
+    var querySQL = "SELECT * FROM $tableName WHERE \"business\"='$business' ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(FactureCartModel.fromSQL(row));
@@ -24,28 +24,41 @@ class FactureRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
         "INSERT INTO $tableName (id, cart, client,"
-          "succursale, signature, created)"
-          "VALUES (nextval('factures_id_seq'), @1, @2, @3, @4, @5)",
+          "nom_client, telephone,"
+          "succursale, signature, created, business, sync, async)"
+          "VALUES (nextval('factures_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10)",
           substitutionValues: {
             '1': data.cart,
             '2': data.client,
-            '3': data.succursale,
-            '4': data.signature,
-            '5': data.created
+            '3': data.nomClient,
+            '4': data.telephone,
+            '5': data.succursale,
+            '6': data.signature,
+            '7': data.created,
+            '8': data.business,
+            '9': data.sync,
+            '10': data.async,
           });
     }); 
   }
 
   Future<void> update(FactureCartModel data) async {
      await executor.query("""UPDATE $tableName
-      SET cart = @1, client = @2, succursale = @3,
-          signature = @4, created = @5 WHERE id = @6""", substitutionValues: {
+      SET cart = @1, client = @2, nom_client = @3,
+        telephone = @4, succursale = @5,
+          signature = @6, created = @7, business = @8, 
+          sync = @9, async = @10 WHERE id = @11""", substitutionValues: {
       '1': data.cart,
       '2': data.client,
-      '3': data.succursale,
-      '4': data.signature,
-      '5': data.created,
-      '6': data.id
+      '3': data.nomClient,
+      '4': data.telephone,
+      '5': data.succursale,
+      '6': data.signature,
+      '7': data.created,
+      '8': data.business,
+      '9': data.sync,
+      '10': data.async,
+      '11': data.id
     });
   }
 
@@ -64,11 +77,17 @@ class FactureRepository {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return FactureCartModel(
-        id: data[0][0],
-        cart: data[0][1],
-        client: data[0][2],
-        succursale: data[0][3],
-        signature: data[0][4],
-        created: data[0][5]);
+      id: data[0][0],
+      cart: data[0][1],
+      client: data[0][2],
+      nomClient: data[0][3],
+      telephone: data[0][4],
+      succursale: data[0][5],
+      signature: data[0][6],
+      created: data[0][7],
+      business: data[0][8],
+      sync: data[0][9],
+      async: data[0][10],
+    );
   } 
 }

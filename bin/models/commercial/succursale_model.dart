@@ -5,14 +5,10 @@ class SuccursaleModel {
   late String province;
   late String signature; // celui qui fait le document
   late DateTime created;
-    // Approbations DG
-  late String approbationDG;
-  late String motifDG;
-  late String signatureDG;
-  // Approbations DD
-  late String approbationDD;
-  late String motifDD;
-  late String signatureDD;
+  late String business;
+  late String sync; // new, update, sync
+  late String async;
+
 
   SuccursaleModel({
     this.id, 
@@ -21,12 +17,9 @@ class SuccursaleModel {
     required this.province,
     required this.signature,
     required this.created,
-      required this.approbationDG,
-      required this.motifDG,
-      required this.signatureDG,
-      required this.approbationDD,
-      required this.motifDD,
-      required this.signatureDD
+      required this.business,
+    required this.sync,
+    required this.async,
   });
 
   factory SuccursaleModel.fromSQL(List<dynamic> row) {
@@ -37,12 +30,9 @@ class SuccursaleModel {
       province: row[3],
       signature: row[4],
       created: row[5],
-        approbationDG: row[6],
-        motifDG: row[7],
-        signatureDG: row[8],
-        approbationDD: row[9],
-        motifDD: row[10],
-        signatureDD: row[11]
+      business: row[6],
+      sync: row[7],
+      async: row[8]
     );
   }
 
@@ -54,12 +44,9 @@ class SuccursaleModel {
       province: json['province'],
       signature: json['signature'],
       created: DateTime.parse(json['created']),
-        approbationDG: json['approbationDG'],
-        motifDG: json['motifDG'],
-        signatureDG: json['signatureDG'],
-        approbationDD: json['approbationDD'],
-        motifDD: json['motifDD'],
-        signatureDD: json['signatureDD']
+        business: json['business'],
+      sync: json['sync'],
+      async: json['async'],
     );
   }
 
@@ -71,12 +58,9 @@ class SuccursaleModel {
       'province': province,
       'signature': signature,
       'created': created.toIso8601String(),
-      'approbationDG': approbationDG,
-      'motifDG': motifDG,
-      'signatureDG': signatureDG,
-      'approbationDD': approbationDD,
-      'motifDD': motifDD,
-      'signatureDD': signatureDD
+      'business': business,
+      'sync': sync,
+      'async': async,
     };
   }
 }

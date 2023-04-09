@@ -24,7 +24,6 @@ import 'commercial/vente_repository.dart';
 import 'exploitations/section_projet_repository.dart';
 import 'marketing/agenda_repository.dart';
 import 'marketing/annuaire_repository.dart';
-import 'marketing/campaign_repository.dart';
 import 'comptabilites/bilan_repository.dart';
 import 'comptabilites/compte_bilan_ref_repository.dart';
 import 'comptabilites/balance_repository.dart';
@@ -195,7 +194,6 @@ class Repository {
   late RestitutionRepository restitutions;
   late AgendaRepository agendas;
   late AnnuaireReposiotry annuaires;
-  late CampaignRepository campaigns;
   late HistoryRavitaillementRepository historyRavitaillements;
   late HistoryLivraisonRepository historyLivraisons;
 
@@ -369,11 +367,8 @@ class Repository {
     approvisionReceptionRepository =
         ApprovisionReceptionRepository(executor, 'approvision_receptions');
 
-    // COMMERCIAL & MARKETING
+    // COMMERCIAL
     produitModel = ProduitModelRepository(executor, 'produits_model');
-    stocksGlobal = StockGlobalRepository(executor, 'stocks_global');
-    succursales = SuccursaleRepository(executor, 'succursales');
-    bonLivraison = BonLivraisonRepository(executor, 'bon_livraisons');
     achats = AchatsRepository(executor, 'achats');
     carts = CartRepository(executor, 'carts');
     factures = FactureRepository(executor, 'factures');
@@ -381,14 +376,17 @@ class Repository {
     numberFacture = NumberFactureRepository(executor, 'number_factures');
     ventes = VenteRepository(executor, 'ventes');
     gains = GainRepository(executor, 'gains');
-    restitutions = RestitutionRepository(executor, 'restitutions');
-    agendas = AgendaRepository(executor, 'agendas');
-    annuaires = AnnuaireReposiotry(executor, 'annuaires');
-    campaigns = CampaignRepository(executor, 'campaigns');
     historyRavitaillements =
         HistoryRavitaillementRepository(executor, 'history_ravitaillements');
+    succursales = SuccursaleRepository(executor, 'succursales');
+    bonLivraison = BonLivraisonRepository(executor, 'bon_livraisons');
+    restitutions = RestitutionRepository(executor, 'restitutions');
     historyLivraisons =
         HistoryLivraisonRepository(executor, 'history_livraisons');
+    
+    // MARKETING
+    agendas = AgendaRepository(executor, 'agendas');
+    annuaires = AnnuaireReposiotry(executor, 'annuaires');
 
     // ARCHIVE
     archives = ArchiveRepository(executor, 'archives');

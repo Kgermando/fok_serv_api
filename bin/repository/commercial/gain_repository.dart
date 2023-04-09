@@ -1,7 +1,7 @@
 import 'package:postgres/postgres.dart';
 
-import '../../models/comm_maketing/courbe_vente_gain_model.dart';
-import '../../models/comm_maketing/gain_model.dart';
+import '../../models/commercial/courbe_vente_gain_model.dart';
+import '../../models/commercial/gain_model.dart';
 
 class GainRepository {
   final PostgreSQLConnection executor;
@@ -9,11 +9,11 @@ class GainRepository {
 
   GainRepository(this.executor, this.tableName);
 
-
-  Future<List<GainModel>> getAllData() async {
+  Future<List<GainModel>> getAllData(String business) async {
     var data = <GainModel>{};
 
-    var querySQL = "SELECT * FROM $tableName ORDER BY \"created\" DESC;";
+    var querySQL =
+        "SELECT * FROM $tableName WHERE \"business\"='$business' ORDER BY \"created\" DESC;";
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(GainModel.fromSQL(row));
@@ -21,24 +21,16 @@ class GainRepository {
     return data.toList();
   }
 
-  Future<List<CourbeGainModel>> getAllDataChartDay() async {
+  Future<List<CourbeGainModel>> getAllDataChartDay(String business) async {
     var data = <CourbeGainModel>{};
 
-    var querySQL =
-        "SELECT EXTRACT(HOUR FROM \"created\" ::TIMESTAMP), SUM(\"sum\"::FLOAT) FROM $tableName WHERE DATE(\"created\") >= CURRENT_DATE AND DATE(\"created\") < CURRENT_DATE + INTERVAL '1 DAY'  GROUP BY EXTRACT(HOUR FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(HOUR FROM \"created\" ::TIMESTAMP) ASC ;";
-
-    List<List<dynamic>> results = await executor.query(querySQL);
-    for (var row in results) {
-      data.add(CourbeGainModel.fromSQL(row));
-    }
-    return data.toList();
-  }
- 
-  Future<List<CourbeGainModel>> getAllDataChartMounth() async {
-    var data = <CourbeGainModel>{};
-
-    var querySQL =
-        "SELECT EXTRACT(MONTH FROM \"created\" ::TIMESTAMP), SUM(sum::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 mons' :: INTERVAL  GROUP BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(MONTH FROM \"created\" ::TIMESTAMP) ASC ;";
+    var querySQL = """SELECT EXTRACT(HOUR FROM "created" ::TIMESTAMP), 
+        SUM("sum"::FLOAT) 
+        FROM $tableName WHERE "business"='$business' AND
+        DATE("created") >= CURRENT_DATE AND 
+        DATE("created") < CURRENT_DATE + INTERVAL '1 DAY'  
+        GROUP BY EXTRACT(HOUR FROM "created" ::TIMESTAMP) 
+        ORDER BY EXTRACT(HOUR FROM "created" ::TIMESTAMP) ASC;""";
 
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
@@ -47,11 +39,33 @@ class GainRepository {
     return data.toList();
   }
 
-  Future<List<CourbeGainModel>> getAllDataChartYear() async {
+  Future<List<CourbeGainModel>> getAllDataChartMounth(String business) async {
     var data = <CourbeGainModel>{};
+    var querySQL = """SELECT EXTRACT(DAY FROM "created" ::TIMESTAMP), 
+          SUM(sum::FLOAT) 
+        FROM $tableName WHERE "business"='$business' AND
+        EXTRACT(MONTH FROM "created" ::TIMESTAMP) = EXTRACT(MONTH FROM CURRENT_DATE ::TIMESTAMP) AND
+        EXTRACT(YEAR FROM "created" ::TIMESTAMP) = EXTRACT(YEAR FROM CURRENT_DATE ::TIMESTAMP)
+        GROUP BY EXTRACT(DAY FROM "created" ::TIMESTAMP) 
+        ORDER BY EXTRACT(DAY FROM "created" ::TIMESTAMP) ASC;
+      """;
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(CourbeGainModel.fromSQL(row));
+    }
+    return data.toList();
+  }
 
-    var querySQL =
-        "SELECT EXTRACT(YEAR FROM \"created\" ::TIMESTAMP), SUM(sum::FLOAT) FROM $tableName WHERE \"created\" >= NOW() - '1 years' :: INTERVAL  GROUP BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ORDER BY EXTRACT(YEAR FROM \"created\" ::TIMESTAMP) ASC ;";
+  Future<List<CourbeGainModel>> getAllDataChartYear(String business) async {
+    var data = <CourbeGainModel>{};
+    // Filtre est egal à l'année actuel
+    var querySQL = """SELECT EXTRACT(MONTH FROM "created" ::TIMESTAMP), 
+        SUM(sum::FLOAT)
+      FROM $tableName WHERE "business"='$business' AND
+      EXTRACT(YEAR FROM "created" ::TIMESTAMP) = EXTRACT(YEAR FROM CURRENT_DATE ::TIMESTAMP)
+      GROUP BY EXTRACT(MONTH FROM "created" ::TIMESTAMP) 
+      ORDER BY EXTRACT(MONTH FROM "created" ::TIMESTAMP) ASC;
+    """;
     List<List<dynamic>> results = await executor.query(querySQL);
     for (var row in results) {
       data.add(CourbeGainModel.fromSQL(row));
@@ -63,13 +77,16 @@ class GainRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, sum,"
-          "succursale, signature, created)"
-          "VALUES (nextval('gains_id_seq'), @1, @2, @3, @4)",
+          "succursale, signature, created, business, sync, async)"
+          "VALUES (nextval('gains_id_seq'), @1, @2, @3, @4, @5, @6, @7)",
           substitutionValues: {
             '1': data.sum,
             '2': data.succursale,
             '3': data.signature,
-            '4': data.created
+            '4': data.created,
+            '5': data.business,
+            '6': data.sync,
+            '7': data.async,
           });
     });
   }
@@ -77,12 +94,16 @@ class GainRepository {
   Future<void> update(GainModel data) async {
     await executor.query("""UPDATE $tableName
           SET sum = @1, succursale = @2,
-          signature = @3, created = @4 WHERE id = @5""", substitutionValues: {
+          signature = @3, created = @4, business = @5, 
+          sync = @6, async = @7 WHERE id = @8""", substitutionValues: {
       '1': data.sum,
       '2': data.succursale,
       '3': data.signature,
       '4': data.created,
-      '5': data.id
+      '5': data.business,
+      '6': data.sync,
+      '7': data.async,
+      '8': data.id
     });
   }
 
@@ -103,9 +124,12 @@ class GainRepository {
     return GainModel(
       id: data[0][0],
       sum: data[0][1],
-        signature: data[0][2],
-        succursale: data[0][3],
-        created: data[0][4]
+      signature: data[0][2],
+      succursale: data[0][3],
+      created: data[0][4],
+      business: data[0][5],
+      sync: data[0][6],
+      async: data[0][7],
     );
-  } 
+  }
 }

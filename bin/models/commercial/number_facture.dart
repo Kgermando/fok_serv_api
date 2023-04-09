@@ -4,13 +4,19 @@ class NumberFactureModel {
   late String succursale;
   late String signature; // celui qui fait le document
   late DateTime created;
+  late String business;
+  late String sync; // new, update, sync
+  late String async;
 
   NumberFactureModel(
-    {this.id,
-    required this.number,
-    required this.succursale,
-    required this.signature,
-    required this.created
+      {this.id,
+      required this.number,
+      required this.succursale,
+      required this.signature,
+      required this.created,
+      required this.business,
+    required this.sync,
+    required this.async,
   });
 
   factory NumberFactureModel.fromSQL(List<dynamic> row) {
@@ -19,8 +25,10 @@ class NumberFactureModel {
         number: row[1],
         succursale: row[2],
         signature: row[3],
-        created: row[4]
-    );
+        created: row[4],
+        business: row[5],
+        sync: row[6],
+        async: row[7]);
   }
 
   factory NumberFactureModel.fromJson(Map<String, dynamic> json) {
@@ -29,7 +37,10 @@ class NumberFactureModel {
         number: json['number'],
         succursale: json['succursale'],
         signature: json['signature'],
-        created: DateTime.parse(json['created'])
+        created: DateTime.parse(json['created']),
+        business: json['business'],
+      sync: json['sync'],
+      async: json['async'],
     );
   }
 
@@ -39,7 +50,11 @@ class NumberFactureModel {
       'number': number,
       'succursale': succursale,
       'signature': signature,
-      'created': created.toIso8601String()
+      'created': created.toIso8601String(),
+      'business': business,
+      'sync': sync,
+      'async': async,
     };
   }
+
 }

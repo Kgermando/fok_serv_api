@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-
-import '../../models/maketing/annuaire_model.dart';
+ 
+import '../../models/marketing/annuaire_model.dart';
 import '../../repository/repository.dart';
 
 class AnnuaireHandlers {
@@ -14,8 +14,8 @@ class AnnuaireHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<AnnuaireModel> data = await repos.annuaires.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<AnnuaireModel> data = await repos.annuaires.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -45,7 +45,11 @@ class AnnuaireHandlers {
           adresseEntreprise: input['adresseEntreprise'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.annuaires.insertData(data);
       } catch (e) {
@@ -96,6 +100,15 @@ class AnnuaireHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.annuaires.update(data);
       return Response.ok(jsonEncode(data.toJson()));

@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
- 
-import '../../models/comm_maketing/courbe_vente_gain_model.dart';
-import '../../models/comm_maketing/vente_cart_model.dart';
-import '../../models/comm_maketing/vente_chart_model.dart';
+
+import '../../models/commercial/courbe_vente_gain_model.dart';
+import '../../models/commercial/vente_cart_model.dart';
+import '../../models/commercial/vente_chart_model.dart';
 import '../../repository/repository.dart';
 
 class VenteHandlers {
@@ -16,8 +16,8 @@ class VenteHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<VenteCartModel> data = await repos.ventes.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<VenteCartModel> data = await repos.ventes.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -32,23 +32,23 @@ class VenteHandlers {
       return Response.ok(jsonEncode(data.toJson()));
     });
 
-    router.get('/vente-chart/', (Request request) async {
-      List<VenteChartModel> data = await repos.ventes.getAllDataChart();
+    router.get('/vente-chart/<business>', (Request request, String business) async {
+      List<VenteChartModel> data = await repos.ventes.getAllDataChart(business);
       return Response.ok(jsonEncode(data));
     });
 
-    router.get('/vente-chart-day/', (Request request) async {
-      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartDay();
+    router.get('/vente-chart-day/<business>', (Request request, String business) async {
+      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartDay(business);
       return Response.ok(jsonEncode(data));
     });
 
-    router.get('/vente-chart-month/', (Request request) async {
-      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartMounth();
+    router.get('/vente-chart-month/<business>', (Request request, String business) async {
+      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartMounth(business);
       return Response.ok(jsonEncode(data));
     });
 
-    router.get('/vente-chart-year/', (Request request) async {
-      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartYear();
+    router.get('/vente-chart-year/<business>', (Request request, String business) async {
+      List<CourbeVenteModel> data = await repos.ventes.getAllDataChartYear(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -65,7 +65,11 @@ class VenteHandlers {
           succursale: input['succursale'],
           signature: input['signature'],
           created: DateTime.parse(input['created']),
-          createdAt: DateTime.parse(input['createdAt']));
+          createdAt: DateTime.parse(input['createdAt']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+        );
       try {
         await repos.ventes.insertData(data);
       } catch (e) {
@@ -78,7 +82,8 @@ class VenteHandlers {
     router.put('/update-vente/', (Request request) async {
       dynamic input = jsonDecode(await request.readAsString());
       final editH = VenteCartModel.fromJson(input);
-      VenteCartModel? data = await repos.ventes.getFromId(editH.id!);
+      VenteCartModel? data =
+          await repos.ventes.getFromId(editH.id!); 
 
       if (input['idProductCart'] != null) {
         data.idProductCart = input['idProductCart'];
@@ -112,6 +117,15 @@ class VenteHandlers {
       }
       if (input['createdAt'] != null) {
         data.createdAt = DateTime.parse(input['createdAt']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.ventes.update(data);
       return Response.ok(jsonEncode(data.toJson()));

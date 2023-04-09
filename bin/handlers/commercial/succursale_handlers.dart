@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/succursale_model.dart';
+import '../../models/commercial/courbe_vente_gain_model.dart';
+import '../../models/commercial/succursale_model.dart';
+import '../../models/commercial/vente_chart_model.dart';
 import '../../repository/repository.dart';
 
 class SuccursaleHandlers {
@@ -14,8 +16,43 @@ class SuccursaleHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<SuccursaleModel> data = await repos.succursales.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<SuccursaleModel> data = await repos.succursales.getAllData(business);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/vente-chart/<business>/<name>', (Request request, String business, String name) async {
+      List<VenteChartModel> data = await repos.succursales.getAllDataChart(business, name);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/vente-chart-day/<business>/<name>', (Request request, String business, String name) async {
+      List<CourbeVenteModel> data = await repos.succursales.getVenteChartDay(business, name);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/vente-chart-month/<business>/<name>', (Request request, String business, String name) async {
+      List<CourbeVenteModel> data = await repos.succursales.getVenteChartMounth(business, name);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/vente-chart-year/<business>/<name>', (Request request, String business, String name) async {
+      List<CourbeVenteModel> data = await repos.succursales.getVenteChartYear(business, name);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/gain-chart-day/<business>/<name>', (Request request, String business, String name) async {
+      List<CourbeGainModel> data = await repos.succursales.getGainChartDay(business, name);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/gain-chart-month/<business>/<name>', (Request request, String business, String name) async {
+      List<CourbeGainModel> data = await repos.succursales.getGainChartMounth(business, name);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/gain-chart-year/<business>/<name>', (Request request, String business, String name) async {
+      List<CourbeGainModel> data = await repos.succursales.getGainChartYear(business, name);
       return Response.ok(jsonEncode(data));
     });
 
@@ -39,12 +76,10 @@ class SuccursaleHandlers {
           province: input['province'],
           signature: input['signature'],
           created: DateTime.parse(input['created']),
-          approbationDG: input['approbationDG'],
-          motifDG: input['motifDG'],
-          signatureDG: input['signatureDG'],
-          approbationDD: input['approbationDD'],
-          motifDD: input['motifDD'],
-          signatureDD: input['signatureDD']);
+          business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.succursales.insertData(data);
       } catch (e) {
@@ -76,23 +111,14 @@ class SuccursaleHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
-      if (input['approbationDG'] != null) {
-        data.approbationDG = input['approbationDG'];
+      if (input['business'] != null) {
+        data.business = input['business'];
       }
-      if (input['motifDG'] != null) {
-        data.motifDG = input['motifDG'];
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
       }
-      if (input['signatureDG'] != null) {
-        data.signatureDG = input['signatureDG'];
-      }
-      if (input['approbationDD'] != null) {
-        data.approbationDD = input['approbationDD'];
-      }
-      if (input['motifDD'] != null) {
-        data.motifDD = input['motifDD'];
-      }
-      if (input['signatureDD'] != null) {
-        data.signatureDD = input['signatureDD'];
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.succursales.update(data);
       return Response.ok(jsonEncode(data.toJson()));

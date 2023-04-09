@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/achat_model.dart';
+import '../../models/commercial/achat_model.dart';
 import '../../repository/repository.dart';
 
 class AchatsHandlers {
@@ -15,8 +15,8 @@ class AchatsHandlers {
     final router = Router();
 
 
-    router.get('/', (Request request) async {
-      List<AchatModel> data = await repos.achats.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<AchatModel> data = await repos.achats.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -47,7 +47,10 @@ class AchatsHandlers {
         qtyLivre: input['qtyLivre'],
         succursale: input['succursale'],
         signature: input['signature'],
-        created: DateTime.parse(input['created'])
+        created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
       );
       try {
         await repos.achats.insertData(data);
@@ -59,10 +62,10 @@ class AchatsHandlers {
     });
 
     router.put('/update-achat/', (Request request) async {
-       dynamic input = jsonDecode(await request.readAsString());
+      dynamic input = jsonDecode(await request.readAsString());
       final editH = AchatModel.fromJson(input);
       AchatModel? data =
-          await repos.achats.getFromId(editH.id!); 
+          await repos.achats.getFromId(editH.id!);
 
       if (input['idProduct'] != null) {
         data.idProduct = input['idProduct'];
@@ -103,7 +106,21 @@ class AchatsHandlers {
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
       }
-      repos.achats.update(data);
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
+      }
+      try {
+        await repos.achats.update(data);
+      } catch (e) {
+        print(e);
+        return Response(422);
+      }
       return Response.ok(jsonEncode(data.toJson()));
     });
 

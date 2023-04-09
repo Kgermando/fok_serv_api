@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/livraiason_history_model.dart';
+import '../../models/commercial/livraiason_history_model.dart';
 import '../../repository/repository.dart';
 
 class HistoryLivraisonHandlers {
@@ -14,9 +14,9 @@ class HistoryLivraisonHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
+    router.get('/<business>/', (Request request, String business) async {
       List<LivraisonHistoryModel> data =
-          await repos.historyLivraisons.getAllData();
+          await repos.historyLivraisons.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -49,7 +49,11 @@ class HistoryLivraisonHandlers {
           qtyLivre: input['qtyLivre'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.historyLivraisons.insertData(data);
       } catch (e) {
@@ -109,6 +113,15 @@ class HistoryLivraisonHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.historyLivraisons.update(data);
       return Response.ok(jsonEncode(data.toJson()));

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/history_ravitaillement_model.dart';
+import '../../models/commercial/history_ravitaillement_model.dart';
 import '../../repository/repository.dart';
 
 class HistoryRavitaillementHandlers {
@@ -14,9 +14,9 @@ class HistoryRavitaillementHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
+    router.get('/<business>/', (Request request, String business) async {
       List<HistoryRavitaillementModel> data =
-          await repos.historyRavitaillements.getAllData();
+          await repos.historyRavitaillements.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -46,7 +46,11 @@ class HistoryRavitaillementHandlers {
           qtyRavitailler: input['qtyRavitailler'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.historyRavitaillements.insertData(data);
       } catch (e) {
@@ -97,6 +101,15 @@ class HistoryRavitaillementHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.historyRavitaillements.update(data);
       return Response.ok(jsonEncode(data.toJson()));

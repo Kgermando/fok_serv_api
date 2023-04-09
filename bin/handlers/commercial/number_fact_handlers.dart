@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/number_facture.dart';
+import '../../models/commercial/number_facture.dart';
 import '../../repository/repository.dart';
 
 class NumberFactHandlers {
@@ -14,8 +14,8 @@ class NumberFactHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<NumberFactureModel> data = await repos.numberFacture.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<NumberFactureModel> data = await repos.numberFacture.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -37,7 +37,11 @@ class NumberFactHandlers {
           number: input['number'],
           succursale: input['succursale'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.numberFacture.insertData(data);
       } catch (e) {
@@ -64,6 +68,15 @@ class NumberFactHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.numberFacture.update(data);
       return Response.ok(jsonEncode(data.toJson()));

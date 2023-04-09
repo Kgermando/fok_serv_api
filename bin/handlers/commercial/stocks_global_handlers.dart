@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../../models/comm_maketing/stocks_global_model.dart';
+import '../../models/commercial/stocks_global_model.dart';
 import '../../repository/repository.dart';
 
 class StockGlobalHandlers {
@@ -14,8 +14,8 @@ class StockGlobalHandlers {
   Router get router {
     final router = Router();
 
-    router.get('/', (Request request) async {
-      List<StocksGlobalMOdel> data = await repos.stocksGlobal.getAllData();
+    router.get('/<business>/', (Request request, String business) async {
+      List<StocksGlobalMOdel> data = await repos.stocksGlobal.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -44,7 +44,11 @@ class StockGlobalHandlers {
           tva: input['tva'],
           qtyRavitailler: input['qtyRavitailler'],
           signature: input['signature'],
-          created: DateTime.parse(input['created']));
+          created: DateTime.parse(input['created']),
+        business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
+      );
       try {
         await repos.stocksGlobal.insertData(data);
       } catch (e) {
@@ -92,6 +96,15 @@ class StockGlobalHandlers {
       }
       if (input['created'] != null) {
         data.created = DateTime.parse(input['created']);
+      }
+      if (input['business'] != null) {
+        data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.stocksGlobal.update(data);
       return Response.ok(jsonEncode(data.toJson()));
