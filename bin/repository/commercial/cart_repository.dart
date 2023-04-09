@@ -25,9 +25,9 @@ class CartRepository {
       await ctx.execute(
           "INSERT INTO $tableName (id, id_product_cart, quantity_cart,"
           "price_cart, price_achat_unit, unite, tva,"
-          "remise, qty_remise, succursale, signature, created, created_at, business)"
+          "remise, qty_remise, succursale, signature, created, created_at, business, sync, async)"
           "VALUES (nextval('carts_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8, @9, @10, @11, @12, @13, @14, @15)",
+          "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17)",
           substitutionValues: {
             '1': data.idProductCart,
             '2': data.quantityCart,
