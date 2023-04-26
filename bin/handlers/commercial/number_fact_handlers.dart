@@ -15,7 +15,8 @@ class NumberFactHandlers {
     final router = Router();
 
     router.get('/<business>/', (Request request, String business) async {
-      List<NumberFactureModel> data = await repos.numberFacture.getAllData(business);
+      List<NumberFactureModel> data =
+          await repos.numberFacture.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -34,10 +35,10 @@ class NumberFactHandlers {
       var input = jsonDecode(await request.readAsString());
 
       NumberFactureModel data = NumberFactureModel(
-          number: input['number'],
-          succursale: input['succursale'],
-          signature: input['signature'],
-          created: DateTime.parse(input['created']),
+        number: input['number'],
+        succursale: input['succursale'],
+        signature: input['signature'],
+        created: DateTime.parse(input['created']),
         business: input['business'],
         sync: input['sync'],
         async: input['async'],
@@ -52,10 +53,9 @@ class NumberFactHandlers {
     });
 
     router.put('/update-number-fact/', (Request request) async {
-       dynamic input = jsonDecode(await request.readAsString());
+      dynamic input = jsonDecode(await request.readAsString());
       final editH = NumberFactureModel.fromJson(input);
-      NumberFactureModel? data =
-          await repos.numberFacture.getFromId(editH.id!); 
+      NumberFactureModel? data = await repos.numberFacture.getFromId(editH.id!);
 
       if (input['number'] != null) {
         data.number = input['number'];
