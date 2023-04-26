@@ -53,6 +53,7 @@ class HistoryLivraisonHandlers {
         business: input['business'],
         sync: input['sync'],
         async: input['async'],
+         qtyDefectue: input['qtyDefectue'],
       );
       try {
         await repos.historyLivraisons.insertData(data);
@@ -122,6 +123,9 @@ class HistoryLivraisonHandlers {
       }
       if (input['async'] != null) {
         data.async = input['async'];
+      }
+      if (input['qtyDefectue'] != null) {
+        data.qtyDefectue = input['qtyDefectue'];
       }
       repos.historyLivraisons.update(data);
       return Response.ok(jsonEncode(data.toJson()));

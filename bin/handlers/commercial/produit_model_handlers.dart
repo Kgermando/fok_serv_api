@@ -72,6 +72,9 @@ class ProduitModelHandlers {
       if (input['price'] != null) {
         data.price = input['price'];
       }
+      if (input['idProduct'] != null) {
+        data.idProduct = input['idProduct'];
+      }
       if (input['signature'] != null) {
         data.signature = input['signature'];
       }

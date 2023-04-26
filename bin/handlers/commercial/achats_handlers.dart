@@ -51,6 +51,7 @@ class AchatsHandlers {
         business: input['business'],
         sync: input['sync'],
         async: input['async'],
+        qtyDefectue: input['qtyDefectue'],
       );
       try {
         await repos.achats.insertData(data);
@@ -114,6 +115,9 @@ class AchatsHandlers {
       }
       if (input['async'] != null) {
         data.async = input['async'];
+      }
+      if (input['qtyDefectue'] != null) {
+        data.qtyDefectue = input['qtyDefectue'];
       }
       try {
         await repos.achats.update(data);

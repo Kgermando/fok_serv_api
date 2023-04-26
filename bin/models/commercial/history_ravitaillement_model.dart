@@ -15,6 +15,7 @@ class HistoryRavitaillementModel {
   late String business;
   late String sync; // new, update, sync
   late String async;
+  late String qtyDefectue;
 
 
   HistoryRavitaillementModel(
@@ -34,6 +35,7 @@ class HistoryRavitaillementModel {
       required this.business,
     required this.sync,
     required this.async,
+    required this.qtyDefectue,
   });
 
   factory HistoryRavitaillementModel.fromSQL(List<dynamic> row) {
@@ -53,7 +55,7 @@ class HistoryRavitaillementModel {
         created: row[12],
         business: row[13],
         sync: row[14],
-        async: row[15]);
+        async: row[15],qtyDefectue: row[16],);
   }
 
   factory HistoryRavitaillementModel.fromJson(Map<String, dynamic> json) {
@@ -74,6 +76,7 @@ class HistoryRavitaillementModel {
         business: json['business'],
       sync: json['sync'],
       async: json['async'],
+      qtyDefectue: json['qtyDefectue'],
     );
   }
 
@@ -95,6 +98,7 @@ class HistoryRavitaillementModel {
       'business': business,
       'sync': sync,
       'async': async,
+      'qtyDefectue': qtyDefectue,
     };
   }
 

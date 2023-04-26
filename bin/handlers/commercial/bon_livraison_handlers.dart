@@ -53,6 +53,7 @@ class BonLivraisonHandlers {
         business: input['business'],
         sync: input['sync'],
         async: input['async'],
+         qtyDefectue: input['qtyDefectue'],
       );
       try {
         await repos.bonLivraison.insertData(data);
@@ -122,6 +123,9 @@ class BonLivraisonHandlers {
       }
       if (input['async'] != null) {
         data.async = input['async'];
+      }
+      if (input['qtyDefectue'] != null) {
+        data.qtyDefectue = input['qtyDefectue'];
       }
 
       repos.bonLivraison.update(data);

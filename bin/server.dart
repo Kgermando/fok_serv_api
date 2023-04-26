@@ -22,8 +22,6 @@ import 'handlers/commercial/history_livraison_handlers.dart';
 import 'handlers/commercial/history_ravitaillement_handlers.dart';
 import 'handlers/commercial/number_fact_handlers.dart';
 import 'handlers/commercial/produit_model_handlers.dart';
-import 'handlers/commercial/restitution_handlers.dart';
-import 'handlers/commercial/stocks_global_handlers.dart';
 import 'handlers/commercial/succursale_handlers.dart';
 import 'handlers/commercial/ventes_handlers.dart';
 import 'handlers/exploitations/section_projet_handlers.dart';
@@ -690,13 +688,6 @@ class Service {
 
     // COMMERCIAL
     router.mount(
-        '/api/stocks-global/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(StockGlobalHandlers(repos).router));
-    router.mount(
         '/api/succursales/',
         Pipeline()
             .addMiddleware(setJsonHeader())
@@ -710,13 +701,6 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(BonLivraisonHandlers(repos).router));
-    router.mount(
-        '/api/restitutions/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(RestitutionHandlers(repos).router));
     router.mount(
         '/api/history-livraisons/',
         Pipeline()

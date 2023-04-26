@@ -23,38 +23,11 @@ class CartRepository {
   Future<void> insertData(CartModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, id_product_cart, quantity_cart,"
-          "price_cart, price_achat_unit, unite, tva,"
-          "remise, qty_remise, succursale, signature, created, created_at, business, sync, async)"
-          "VALUES (nextval('carts_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17)",
-          substitutionValues: {
-            '1': data.idProductCart,
-            '2': data.quantityCart,
-            '3': data.priceCart,
-            '4': data.priceAchatUnit,
-            '5': data.unite,
-            '6': data.tva,
-            '7': data.remise,
-            '8': data.qtyRemise,
-            '9': data.succursale,
-            '10': data.signature,
-            '11': data.created,
-            '12': data.createdAt,
-            '13': data.business,
-            '14': data.sync,
-            '15': data.async,
-          });
-    });
-  }
-
-  Future<void> update(CartModel data) async {
-    await executor.query("""UPDATE $tableName
-          SET id_product_cart = @1, quantity_cart = @2, price_cart = @3,
-          price_achat_unit = @4, unite = @5, tva = @6,
-          remise = @7, qty_remise = @8, succursale = @9,
-          signature = @10, created = @11, created_at = @12, business = @13, 
-          sync = @14, async = @15 WHERE id = @16""",
+        "INSERT INTO $tableName (id, id_product_cart, quantity_cart,"
+        "price_cart, price_achat_unit, unite, tva,"
+        "remise, qty_remise, succursale, signature, created, created_at, business, sync, async)"
+        "VALUES (nextval('carts_id_seq'), @1, @2, @3, @4, @5, @6,"
+          "@7, @8, @9, @10, @11, @12, @13, @14, @15)",
         substitutionValues: {
           '1': data.idProductCart,
           '2': data.quantityCart,
@@ -71,8 +44,37 @@ class CartRepository {
           '13': data.business,
           '14': data.sync,
           '15': data.async,
-          '16': data.id
-        });
+        }
+      );
+    });
+  }
+
+  Future<void> update(CartModel data) async {
+    await executor.query("""UPDATE $tableName
+      SET id_product_cart = @1, quantity_cart = @2, price_cart = @3,
+      price_achat_unit = @4, unite = @5, tva = @6,
+      remise = @7, qty_remise = @8, succursale = @9,
+      signature = @10, created = @11, created_at = @12, business = @13, 
+      sync = @14, async = @15 WHERE id = @16""",
+      substitutionValues: {
+        '1': data.idProductCart,
+        '2': data.quantityCart,
+        '3': data.priceCart,
+        '4': data.priceAchatUnit,
+        '5': data.unite,
+        '6': data.tva,
+        '7': data.remise,
+        '8': data.qtyRemise,
+        '9': data.succursale,
+        '10': data.signature,
+        '11': data.created,
+        '12': data.createdAt,
+        '13': data.business,
+        '14': data.sync,
+        '15': data.async,
+        '16': data.id
+      }
+    );
   }
 
   deleteData(int id) async {

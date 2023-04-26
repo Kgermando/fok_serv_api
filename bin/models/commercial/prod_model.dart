@@ -1,6 +1,6 @@
 class ProductModel {
   late int? id;
-  late String service;
+  late String service;  // Commercial, restaurant, ...
   late String identifiant;
   late String unite; // Unité
   late String price;

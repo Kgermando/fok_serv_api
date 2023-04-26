@@ -17,8 +17,6 @@ import 'commercial/history_livraison_repository.dart';
 import 'commercial/history_ravitraillement_repository.dart';
 import 'commercial/number_facture_repository.dart';
 import 'commercial/produit_model_repository.dart';
-import 'commercial/restitution_repository.dart';
-import 'commercial/stocks_global_repository.dart';
 import 'commercial/succursale_repository.dart';
 import 'commercial/vente_repository.dart';
 import 'exploitations/section_projet_repository.dart';
@@ -181,7 +179,6 @@ class Repository {
 
   // COMMERCIAL & MARKETING
   late ProduitModelRepository produitModel;
-  late StockGlobalRepository stocksGlobal;
   late SuccursaleRepository succursales;
   late BonLivraisonRepository bonLivraison;
   late AchatsRepository achats;
@@ -191,7 +188,6 @@ class Repository {
   late NumberFactureRepository numberFacture;
   late VenteRepository ventes;
   late GainRepository gains;
-  late RestitutionRepository restitutions;
   late AgendaRepository agendas;
   late AnnuaireReposiotry annuaires;
   late HistoryRavitaillementRepository historyRavitaillements;
@@ -380,7 +376,6 @@ class Repository {
         HistoryRavitaillementRepository(executor, 'history_ravitaillements');
     succursales = SuccursaleRepository(executor, 'succursales');
     bonLivraison = BonLivraisonRepository(executor, 'bon_livraisons');
-    restitutions = RestitutionRepository(executor, 'restitutions');
     historyLivraisons =
         HistoryLivraisonRepository(executor, 'history_livraisons');
     

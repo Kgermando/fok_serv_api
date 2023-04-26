@@ -27,9 +27,9 @@ class BonLivraisonRepository {
           "quantity_achat, price_achat_unit, prix_vente_unit, unite,"
           "first_name, last_name, tva,"
           "remise, qty_remise, accuse_reception, accuse_reception_first_name,"
-          "accuse_reception_last_name, succursale, signature, created, business, sync, async)"
+          "accuse_reception_last_name, succursale, signature, created, business, sync, async, qty_defectue)"
           "VALUES (nextval('bon_livraisons_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12,"
-          "@13, @14, @15, @16, @17, @18, @19)",
+          "@13, @14, @15, @16, @17, @18, @19, @20)",
           substitutionValues: {
             '1': data.idProduct,
             '2': data.quantityAchat,
@@ -50,19 +50,21 @@ class BonLivraisonRepository {
             '17': data.business,
             '18': data.sync,
             '19': data.async,
+            '20': data.qtyDefectue,
           });
     });
   }
 
   Future<void> update(BonLivraisonModel data) async {
     await executor.query("""UPDATE $tableName
-      SET id_product = @1, quantity_achat = @2,
-        price_achat_unit = @3, prix_vente_unit = @4, unite = @5,
-        first_name = @6, last_name = @7, tva = @8,
-        remise = @9, qty_remise = @10, accuse_reception = @11,
-        accuse_reception_first_name = @12, accuse_reception_last_name = @13,
-        succursale = @14, signature = @15, created = @16, business = @17,
-        sync = @18, async = @19 WHERE id = @20""", substitutionValues: {
+    SET id_product = @1, quantity_achat = @2,
+      price_achat_unit = @3, prix_vente_unit = @4, unite = @5,
+      first_name = @6, last_name = @7, tva = @8,
+      remise = @9, qty_remise = @10, accuse_reception = @11,
+      accuse_reception_first_name = @12, accuse_reception_last_name = @13,
+      succursale = @14, signature = @15, created = @16, business = @17,
+      sync = @18, async = @19, qty_defectue = @20 WHERE id = @21""", 
+    substitutionValues: {
       '1': data.idProduct,
       '2': data.quantityAchat,
       '3': data.priceAchatUnit,
@@ -82,7 +84,8 @@ class BonLivraisonRepository {
       '17': data.business,
       '18': data.sync,
       '19': data.async,
-      '20': data.id
+      '20': data.qtyDefectue,
+      '21': data.id
     });
   }
 
@@ -121,6 +124,7 @@ class BonLivraisonRepository {
       business: data[0][17],
       sync: data[0][18],
       async: data[0][19],
+      qtyDefectue: data[0][20],
     );
   }
 }

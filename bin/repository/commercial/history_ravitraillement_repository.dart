@@ -26,9 +26,9 @@ class HistoryRavitaillementRepository {
           "INSERT INTO $tableName (id, id_product, quantity,"
           "quantity_achat, price_achat_unit, prix_vente_unit, unite, marge_ben,"
           "tva, qty_ravitailler, succursale, signature, created,"
-          "business, sync, async)"
+          "business, sync, async, qty_defectue)"
           "VALUES (nextval('history_ravitaillements_id_seq'), @1, @2, @3, @4,"
-          "@5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15)",
+          "@5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15, @16)",
           substitutionValues: {
             '1': data.idProduct,
             '2': data.quantity,
@@ -45,6 +45,7 @@ class HistoryRavitaillementRepository {
             '13': data.business,
             '14': data.sync,
             '15': data.async,
+            '16': data.qtyDefectue,
           });
     });
   }
@@ -56,7 +57,7 @@ class HistoryRavitaillementRepository {
           marge_ben = @7, tva = @8,
           qty_ravitailler = @9, succursale = @10,
           signature = @11, created = @12, 
-          business = @13, sync = @14, async = @15 WHERE id = @16""",
+          business = @13, sync = @14, async = @15, qty_defectue = @19 WHERE id = @17""",
         substitutionValues: {
           '1': data.idProduct,
           '2': data.quantity,
@@ -73,7 +74,8 @@ class HistoryRavitaillementRepository {
           '13': data.business,
           '14': data.sync,
           '15': data.async,
-          '16': data.id
+          '16': data.qtyDefectue,
+          '17': data.id
         });
   }
 
@@ -108,6 +110,7 @@ class HistoryRavitaillementRepository {
       business: data[0][13],
       sync: data[0][14],
       async: data[0][15],
+      qtyDefectue: data[0][16],
     );
   } 
 }

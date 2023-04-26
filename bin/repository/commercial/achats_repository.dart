@@ -26,9 +26,9 @@ class AchatsRepository {
           "INSERT INTO $tableName (id, id_product, quantity,"
           "quantity_achat, price_achat_unit, prix_vente_unit, unite, tva,"
           "remise, qty_remise, qty_livre, succursale, signature, created,"
-          "business, sync, async)"
+          "business, sync, async, qty_defectue)"
           "VALUES (nextval('achats_id_seq'), @1, @2, @3, @4, @5, @6,"
-          "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16)",
+          "@7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17)",
           substitutionValues: {
             '1': data.idProduct,
             '2': data.quantity,
@@ -46,6 +46,7 @@ class AchatsRepository {
             '14': data.business,
             '15': data.sync,
             '16': data.async,
+            '17': data.qtyDefectue,
           });
     });
   }
@@ -56,7 +57,7 @@ class AchatsRepository {
           price_achat_unit = @4, prix_vente_unit = @5, unite = @6, tva = @7,
           remise = @8, qty_remise = @9, qty_livre = @10, succursale = @11,
           signature = @12, created = @13, business = @14, sync = @15, 
-          async = @16 WHERE id = @17""",
+          async = @16, qty_defectue = @17 WHERE id = @18""",
         substitutionValues: {
           '1': data.idProduct,
           '2': data.quantity,
@@ -74,7 +75,8 @@ class AchatsRepository {
           '14': data.business,
           '15': data.sync,
           '16': data.async,
-          '17': data.id
+          '17': data.qtyDefectue,
+          '18': data.id
         });
   }
 
@@ -110,6 +112,7 @@ class AchatsRepository {
       business: data[0][14],
       sync: data[0][15],
       async: data[0][16],
+      qtyDefectue: data[0][17],
     );
   } 
 }

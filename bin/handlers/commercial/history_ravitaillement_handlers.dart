@@ -50,6 +50,7 @@ class HistoryRavitaillementHandlers {
         business: input['business'],
         sync: input['sync'],
         async: input['async'],
+         qtyDefectue: input['qtyDefectue'],
       );
       try {
         await repos.historyRavitaillements.insertData(data);
@@ -110,6 +111,9 @@ class HistoryRavitaillementHandlers {
       }
       if (input['async'] != null) {
         data.async = input['async'];
+      }
+      if (input['qtyDefectue'] != null) {
+        data.qtyDefectue = input['qtyDefectue'];
       }
       repos.historyRavitaillements.update(data);
       return Response.ok(jsonEncode(data.toJson()));
