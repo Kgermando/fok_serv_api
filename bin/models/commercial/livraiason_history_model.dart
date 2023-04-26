@@ -93,7 +93,7 @@ class LivraisonHistoryModel {
     );
   }
 
-  Map<String, dynamic> toJson({int? id}) {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'idProduct': idProduct,
