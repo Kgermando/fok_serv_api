@@ -37,7 +37,7 @@ class AchatModel {
     required this.sync,
     required this.async,
     required this.qtyDefectue,
-  });
+  }); 
 
   factory AchatModel.fromSQL(List<dynamic> row) {
     return AchatModel(
@@ -85,7 +85,7 @@ class AchatModel {
     );
   }
 
-  Map<String, dynamic> toJson({int? id}) {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'idProduct': idProduct,
